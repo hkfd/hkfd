@@ -10,7 +10,7 @@ import { Service } from './service';
 import { CaseStudy } from './case-study';
 
 @Injectable()
-export class ServerService {
+export class ApiService {
   pages = 'api/pages.json';
   services = 'api/services.json';
   caseStudies = 'api/case-studies.json';

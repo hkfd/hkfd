@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HeaderComponent } from './header/header.component';
-import { ServerService } from './server.service';
+import { ApiService } from './api.service';
 
 export { HeaderComponent } from './header/header.component';
-export { ServerService } from './server.service';
+export { ApiService } from './api.service';
 export { Page } from './page';
 export { Service } from './service';
 export { CaseStudy } from './case-study';
@@ -14,6 +14,6 @@ export { CaseStudy } from './case-study';
   imports: [CommonModule],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
-  providers: [ServerService]
+  providers: [ApiService]
 })
 export class SharedModule {}

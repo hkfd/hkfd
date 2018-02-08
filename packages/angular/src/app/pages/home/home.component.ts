@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
-import { ServerService } from '../../shared/shared.module';
+import { ApiService } from '../../shared/shared.module';
 import { Page, Service, CaseStudy } from '../../shared/shared.module';
 
 @Component({
@@ -18,15 +18,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   services$: Observable<Service[]>;
   caseStudies$: Observable<CaseStudy[]>;
 
-  constructor(private serverService: ServerService) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.page$ = this.serverService
+    this.page$ = this.apiService
       .getPage('home')
       .subscribe((page: Page) => (this.page = page));
 
-    this.services$ = this.serverService.getServices();
-    this.caseStudies$ = this.serverService.getCaseStudies();
+    this.services$ = this.apiService.getServices();
+    this.caseStudies$ = this.apiService.getCaseStudies();
   }
 
   ngOnDestroy() {
