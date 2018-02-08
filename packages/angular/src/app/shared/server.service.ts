@@ -7,11 +7,13 @@ import { of } from 'rxjs/observable/of';
 
 import { Page } from './page';
 import { Service } from './service';
+import { CaseStudy } from './case-study';
 
 @Injectable()
 export class ServerService {
   pages = 'api/pages.json';
   services = 'api/services.json';
+  caseStudies = 'api/case-studies.json';
 
   constructor(private http: HttpClient) {}
 
@@ -54,6 +56,29 @@ export class ServerService {
         retry(3),
         tap((services: Service[]) => console.log('getServices', services)),
         catchError(this.handleError<Service[]>('getServices', []))
+      );
+  }
+
+  getCaseStudy(id: string): Observable<CaseStudy> {
+    return this.http
+      .get<CaseStudy>(this.caseStudies)
+      .pipe(
+        retry(3),
+        filter((caseStudy: CaseStudy) => caseStudy.id === id),
+        tap((caseStudy: CaseStudy) => console.log('getCaseStudy', caseStudy)),
+        catchError(this.handleError<CaseStudy>('getCaseStudy'))
+      );
+  }
+
+  getCaseStudies(): Observable<CaseStudy[]> {
+    return this.http
+      .get<CaseStudy[]>(this.caseStudies)
+      .pipe(
+        retry(3),
+        tap((caseStudies: CaseStudy[]) =>
+          console.log('getCaseStudies', caseStudies)
+        ),
+        catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
       );
   }
 

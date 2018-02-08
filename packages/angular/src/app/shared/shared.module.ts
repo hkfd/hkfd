@@ -8,6 +8,7 @@ export { HeaderComponent } from './header/header.component';
 export { ServerService } from './server.service';
 export { Page } from './page';
 export { Service } from './service';
+export { CaseStudy } from './case-study';
 
 @NgModule({
   imports: [CommonModule],

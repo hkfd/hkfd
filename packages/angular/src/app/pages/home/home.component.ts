@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import { ServerService } from '../../shared/shared.module';
-import { Page, Service } from '../../shared/shared.module';
+import { Page, Service, CaseStudy } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   page: Page;
 
   services$: Observable<Service[]>;
+  caseStudies$: Observable<CaseStudy[]>;
 
   constructor(private serverService: ServerService) {}
 
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((page: Page) => (this.page = page));
 
     this.services$ = this.serverService.getServices();
+    this.caseStudies$ = this.serverService.getCaseStudies();
   }
 
   ngOnDestroy() {

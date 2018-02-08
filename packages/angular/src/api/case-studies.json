@@ -1,0 +1,38 @@
+[
+  {
+    "id": "wigan-council",
+    "title": "WIGAN COUNCIL",
+    "sector": "Local Authorities",
+    "featured": true
+  },
+  {
+    "id": "wainhomes",
+    "title": "WAINHOMES",
+    "sector": "Construction",
+    "featured": true
+  },
+  {
+    "id": "priestley-college",
+    "title": "PRIESTLEY COLLEGE",
+    "sector": "Education",
+    "featured": true
+  },
+  {
+    "id": "sandcastle",
+    "title": "SANDCASTLE",
+    "sector": "Leisure",
+    "featured": true
+  },
+  {
+    "id": "lutron",
+    "title": "Lutron",
+    "sector": "Manufacturing",
+    "featured": true
+  },
+  {
+    "id": "winfields-outdoors",
+    "title": "WINFIELDS OUTDOORS",
+    "sector": "Retail",
+    "featured": true
+  }
+]
