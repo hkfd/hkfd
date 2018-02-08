@@ -9,7 +9,7 @@
     </span>
   </button>
 
-  <div id="nav-links">
+  <div id="nav-links" [@linkState]="mobileShow">
     <a *ngFor="let page of pages" class="nav-link" routerLink="{{ page?.url }}">{{ page?.title }}</a>
   </div>
 </nav>

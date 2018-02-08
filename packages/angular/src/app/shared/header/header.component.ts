@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 
+import { HeaderAnimations } from './header.animations';
+
 @Component({
   selector: 'header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations: HeaderAnimations
 })
 export class HeaderComponent {
   pages = [
