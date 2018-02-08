@@ -1,0 +1,56 @@
+[
+  {
+    "id": "3d-cgi",
+    "title": "3D & CGI",
+    "intro":
+      "Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life."
+  },
+  {
+    "id": "exhibitions",
+    "title": "EXHIBITIONS",
+    "intro":
+      "Creating the right impression for your business. Inspire your customers to use your services and stand out from your competitors."
+  },
+  {
+    "id": "design-print",
+    "title": "DESIGN & PRINT",
+    "intro":
+      "The ultimate combination, creative design and cost effective print. Providing cost effective solutions, on time and on budget."
+  },
+  {
+    "id": "digital",
+    "title": "DIGITAL",
+    "intro":
+      "Taking your message to the world, with imaginative, highly measureable and effective online marketing."
+  },
+  {
+    "id": "advertising",
+    "title": "ADVERTISING",
+    "intro":
+      "In the right place, at the right time, a good idea is made great with effective advertising campaigns."
+  },
+  {
+    "id": "illustration",
+    "title": "ILLUSTRATION",
+    "intro":
+      "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photo realism."
+  },
+  {
+    "id": "signage",
+    "title": "SIGNAGE",
+    "intro":
+      "Let’s get you turning heads with our efficient and effective range of interior or exterior signage solutions."
+  },
+  {
+    "id": "ppc-adwords",
+    "title": "PPC / ADWORDS",
+    "intro":
+      "We have Google AdWords Certified Professionals creating compelling and effective campaigns that maximise your ROI."
+  },
+  {
+    "id": "photography",
+    "title": "PHOTOGRAPHY",
+    "intro":
+      "Our experienced photographers are dedicated to creating outstanding studio or location images for every use."
+  }
+]

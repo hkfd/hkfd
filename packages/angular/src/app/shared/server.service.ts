@@ -6,10 +6,12 @@ import { catchError, retry, tap, filter } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { Page } from './page';
+import { Service } from './service';
 
 @Injectable()
 export class ServerService {
   pages = 'api/pages.json';
+  services = 'api/services.json';
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +33,27 @@ export class ServerService {
         retry(3),
         tap((pages: Page[]) => console.log('getPages', pages)),
         catchError(this.handleError<Page[]>('getPages', []))
+      );
+  }
+
+  getService(id: string): Observable<Service> {
+    return this.http
+      .get<Service>(this.services)
+      .pipe(
+        retry(3),
+        filter((service: Service) => service.id === id),
+        tap((service: Service) => console.log('getService', service)),
+        catchError(this.handleError<Service>('getService'))
+      );
+  }
+
+  getServices(): Observable<Service[]> {
+    return this.http
+      .get<Service[]>(this.services)
+      .pipe(
+        retry(3),
+        tap((services: Service[]) => console.log('getServices', services)),
+        catchError(this.handleError<Service[]>('getServices', []))
       );
   }
 
