@@ -18,6 +18,13 @@ nav {
 #nav-logo {
   position: relative;
   z-index: 1;
+  fill: #fff;
+  transition: fill 150ms ease;
+
+  &:hover,
+  &:active {
+    fill: $blue-dark;
+  }
 }
 
 #nav-links {
@@ -38,6 +45,12 @@ nav {
     @include lg {
       margin: 0 10px;
     }
+    transition: color 150ms ease;
+
+    &:hover,
+    &:active {
+      color: $blue-dark;
+    }
   }
 }
 
@@ -54,6 +67,15 @@ nav {
   @include md {
     display: none;
   }
+
+  transition: background-color 150ms ease;
+
+  &:hover,
+  &:active {
+    #button-inner {
+      background: $blue-dark;
+    }
+  }
 }
 
 #button-container {
@@ -68,6 +90,7 @@ nav {
   top: 50%;
   transition-duration: 0.075s;
   transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  background-color: #fff;
 
   &,
   &::after,
@@ -77,23 +100,24 @@ nav {
     position: absolute;
     width: 20px;
     height: 2px;
-    background-color: #fff;
     transition: transform 0.15s ease;
   }
 
   &::before {
     top: -7px;
+    background: inherit;
     transition: top 0.075s 0.12s ease, opacity 0.075s ease;
   }
 
   &::after {
     bottom: -7px;
+    background: inherit;
     transition: bottom 0.075s 0.12s ease,
       transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
 }
 
-nav.active {
+nav.open {
   #nav-links {
     display: flex;
     flex-direction: column;

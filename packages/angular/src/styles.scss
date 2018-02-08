@@ -1,6 +1,7 @@
 @import 'sass/font', 'sass/reset', 'sass/grid';
 
 $blue: #0591d2;
+$blue-dark: #054a79;
 
 @font-face {
   font-family: 'Montserrat Regular';
@@ -57,7 +58,7 @@ body {
 }
 
 .logo {
-  width: 120px;
+  width: 125px;
   @include md {
     width: 135px;
   }
