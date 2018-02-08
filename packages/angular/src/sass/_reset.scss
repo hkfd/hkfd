@@ -1,0 +1,101 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+article,
+aside,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
+}
+
+img,
+video,
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+li,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0.25em 0;
+}
+
+a {
+  display: inline-block;
+  overflow: hidden;
+  color: inherit;
+}
+
+a,
+button,
+label {
+  cursor: pointer;
+  text-decoration: none;
+  padding: 3px 5px;
+}
+
+address {
+  font-style: normal;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea,
+fieldset {
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  border: 0;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+input[type='checkbox'] {
+  display: none;
+}

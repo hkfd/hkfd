@@ -1,1 +1,156 @@
+@import '../../../styles';
 
+:host {
+  position: relative;
+  @extend %container-full;
+  background: $blue;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  @extend %font-heading;
+  color: #fff;
+}
+
+#nav-logo {
+  position: relative;
+  z-index: 1;
+}
+
+#nav-links {
+  display: none;
+  background: $blue;
+
+  @include md {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    @include md {
+      align-self: center;
+      margin: 0 7px;
+    }
+    @include lg {
+      margin: 0 10px;
+    }
+  }
+}
+
+#nav-button {
+  display: inline-block;
+  position: relative;
+  height: 25px;
+  background: none;
+  z-index: 1;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  @include md {
+    display: none;
+  }
+}
+
+#button-container {
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 100%;
+}
+
+#button-inner {
+  display: block;
+  top: 50%;
+  transition-duration: 0.075s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  &,
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    transition: transform 0.15s ease;
+  }
+
+  &::before {
+    top: -7px;
+    transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+  }
+
+  &::after {
+    bottom: -7px;
+    transition: bottom 0.075s 0.12s ease,
+      transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+}
+
+nav.active {
+  #nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @extend %padding;
+    padding-top: 10vh;
+
+    .nav-link {
+      @extend %font-display;
+    }
+
+    li {
+      transform: translateY(200%);
+
+      &:nth-of-type(1) {
+        animation: slideUp 0.4s ease forwards;
+      }
+
+      &:nth-of-type(2) {
+        animation: slideUp 0.4s 50ms ease forwards;
+      }
+
+      &:nth-of-type(3) {
+        animation: slideUp 0.4s 100ms ease forwards;
+      }
+
+      &:nth-of-type(4) {
+        animation: slideUp 0.4s 150ms ease forwards;
+      }
+    }
+  }
+
+  #nav-button {
+    display: inline-block;
+  }
+
+  #button-inner {
+    transform: rotate(45deg);
+    transition-delay: 0.12s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    &::before {
+      top: 0;
+      opacity: 0;
+      transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+    }
+
+    &::after {
+      bottom: 0;
+      transform: rotate(-90deg);
+      transition: bottom 0.075s ease,
+        transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+}

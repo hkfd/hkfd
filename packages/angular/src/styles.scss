@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'sass/font', 'sass/reset', 'sass/grid';
+
+$blue: #0591d2;
+
+@font-face {
+  font-family: 'Montserrat Regular';
+  @include font-src('/assets/fonts/montserrat-regular', ('ttf', 'woff', 'woff2'));
+}
+
+@font-face {
+  font-family: 'League Gothic Regular';
+  @include font-src('/assets/fonts/leaguegothic-regular', ('ttf', 'eot', 'svg', 'woff'));
+}
+
+%font-heading {
+  font-family: 'League Gothic Regular', sans-serif;
+  font-weight: normal;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+}
+
+%font-body {
+  font-family: 'Montserrat Regular', sans-serif;
+  font-weight: normal;
+}
+
+body {
+  @extend %font-body;
+  @extend %font-normal;
+}
+
+%font-normal {
+  @include font-size(1rem, 1.05rem, 1.1rem);
+}
+
+%font-small {
+  @include font-size(1.05rem, 1.15rem, 1.25rem, 1.3rem);
+}
+
+%font-medium {
+  @include font-size(1.05rem, 1.25rem, 1.35rem, 1.45rem);
+}
+
+%font-large {
+  @include font-size(1.2rem, 1.5rem, 1.6rem, 1.85rem);
+  line-height: 1.4;
+}
+
+%font-extralarge {
+  @include font-size(1.5rem, 2.2rem, 2.8rem, 3rem);
+  line-height: 1.4;
+}
+
+%font-display {
+  @include font-size(2rem, 2.8rem, 3.5rem, 4rem, 5rem);
+  line-height: 1.1;
+}
+
+.logo {
+  width: 120px;
+  @include md {
+    width: 135px;
+  }
+  @include lg {
+    width: 150px;
+  }
+}
