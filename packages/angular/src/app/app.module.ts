@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
@@ -7,7 +8,7 @@ import { HomeModule } from './pages/home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HomeModule, RoutingModule],
+  imports: [BrowserModule, HttpClientModule, HomeModule, RoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })

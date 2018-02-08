@@ -1,0 +1,8 @@
+{
+  "id": "home",
+  "elements": {
+    "slider": {
+      "images": [{ "url": "1.jpg" }]
+    }
+  }
+}
