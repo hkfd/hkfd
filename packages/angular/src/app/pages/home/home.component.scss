@@ -16,7 +16,7 @@
   }
 }
 
-#we-can-help-you {
+#help {
   overflow: hidden;
   @extend %padding;
   padding-top: 5vh;
@@ -27,5 +27,33 @@
   h2 {
     @extend %font-extralarge;
     color: #fff;
+  }
+}
+
+#services {
+  overflow: hidden;
+  @extend %container-full;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  background: $grey-light;
+
+  .text {
+    text-align: center;
+  }
+
+  #services-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .service {
+      overflow: hidden;
+      @include width($xs: 12, $sm: 6, $md: 6, $lg: 4) margin: ($gutter / 2) 0;
+      background: #fff;
+      background-clip: content-box;
+
+      .service-info {
+        margin: 1em;
+      }
+    }
   }
 }

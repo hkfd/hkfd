@@ -4,7 +4,7 @@
 
 <slider [images]="imagesIntro" [autoplay]="true"></slider>
 
-<section id="we-can-help-you">
+<section id="help">
   <div class="text">
     <h2>WE CAN HELP YOU</h2>
     <p>We’re a creative agency based in Lancashire. For over 40 years our team have worked with organisations of all sizes and types. We focus on one thing: delivering creative that works.</p>
@@ -12,9 +12,22 @@
   </div>
 </section>
 
-<div *ngFor="let service of services$ | async">
-  <h2>{{ service?.title }}</h2>
-</div>
+<section id="services">
+  <div class="text">
+    <h2>OUR SERVICES</h2>
+    <p>Our team provides you with a complete range of corporate marketing services, including advertising, design & print, digital, illustration, 3D CGI, exhibitions and signage.</p>
+  </div>
+
+  <div id="services-list">
+    <div class="service" *ngFor="let service of services$ | async">
+      <img src="{{ service?.thumbnail?.url }}" alt="{{ service?.thumbnail?.alt }}">
+      <div class="service-info">
+        <h2>{{ service?.title }}</h2>
+        <p>{{ service?.intro }}</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div *ngFor="let caseStudy of caseStudies$ | async">
   <h2>{{ caseStudy?.title }}</h2>

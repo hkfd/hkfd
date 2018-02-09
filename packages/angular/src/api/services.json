@@ -3,54 +3,99 @@
     "id": "3d-cgi",
     "title": "3D & CGI",
     "intro":
-      "Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life."
+      "Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "3D & CGI"
+    }
   },
   {
     "id": "exhibitions",
     "title": "EXHIBITIONS",
     "intro":
-      "Creating the right impression for your business. Inspire your customers to use your services and stand out from your competitors."
+      "Creating the right impression for your business. Inspire your customers to use your services and stand out from your competitors.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Exhibitions"
+    }
   },
   {
     "id": "design-print",
     "title": "DESIGN & PRINT",
     "intro":
-      "The ultimate combination, creative design and cost effective print. Providing cost effective solutions, on time and on budget."
+      "The ultimate combination, creative design and cost effective print. Providing cost effective solutions, on time and on budget.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Design & Print"
+    }
   },
   {
     "id": "digital",
     "title": "DIGITAL",
     "intro":
-      "Taking your message to the world, with imaginative, highly measureable and effective online marketing."
+      "Taking your message to the world, with imaginative, highly measureable and effective online marketing.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Digital"
+    }
   },
   {
     "id": "advertising",
     "title": "ADVERTISING",
     "intro":
-      "In the right place, at the right time, a good idea is made great with effective advertising campaigns."
+      "In the right place, at the right time, a good idea is made great with effective advertising campaigns.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Advertising"
+    }
   },
   {
     "id": "illustration",
     "title": "ILLUSTRATION",
     "intro":
-      "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photo realism."
+      "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photo realism.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Illustration"
+    }
   },
   {
     "id": "signage",
     "title": "SIGNAGE",
     "intro":
-      "Let’s get you turning heads with our efficient and effective range of interior or exterior signage solutions."
+      "Let’s get you turning heads with our efficient and effective range of interior or exterior signage solutions.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Signage"
+    }
   },
   {
     "id": "ppc-adwords",
     "title": "PPC / ADWORDS",
     "intro":
-      "We have Google AdWords Certified Professionals creating compelling and effective campaigns that maximise your ROI."
+      "We have Google AdWords Certified Professionals creating compelling and effective campaigns that maximise your ROI.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "PPC / Adwords"
+    }
   },
   {
     "id": "photography",
     "title": "PHOTOGRAPHY",
     "intro":
-      "Our experienced photographers are dedicated to creating outstanding studio or location images for every use."
+      "Our experienced photographers are dedicated to creating outstanding studio or location images for every use.",
+    "thumbnail": {
+      "url":
+        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "alt": "Photography"
+    }
   }
 ]

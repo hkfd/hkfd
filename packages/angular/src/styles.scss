@@ -3,6 +3,7 @@
 $blue: #0591d2;
 $blue-dark: #054a79;
 $grey: #828282;
+$grey-light: #dedfde;
 $black: #1a1919;
 
 @font-face {
@@ -48,7 +49,7 @@ body {
 }
 
 %font-large {
-  @include font-size(1.2rem, 1.5rem, 1.6rem, 1.85rem);
+  @include font-size(1.4rem, 1.6rem, 1.8rem, 2rem);
   line-height: 1.1;
 }
 
