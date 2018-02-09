@@ -1,4 +1,4 @@
-<button (click)="changeImage('next')">next</button>
-<button (click)="changeImage('prev')">prev</button>
+<button (click)="changeImage(1)">next</button>
+<button (click)="changeImage(-1)">prev</button>
 
-<img *ngFor="let image of images" [class.active]="image?.active" src="{{ image?.url }}" alt="{{ image?.alt }}">
+<img *ngFor="let image of images" [@imageState]="{ value: image?.active, params: { direction: directionOffset }}" src="{{ image?.url }}" alt="{{ image?.alt }}">

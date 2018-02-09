@@ -1,14 +1,17 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
+import { SliderAnimations } from './slider.animations';
 import { Slider } from '../shared.module';
 
 @Component({
   selector: 'slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrls: ['./slider.component.scss'],
+  animations: SliderAnimations
 })
 export class SliderComponent implements OnChanges {
   private _images: Slider[];
+  directionOffset: number = 1;
   currentIndex: number;
 
   @Input()
@@ -24,8 +27,11 @@ export class SliderComponent implements OnChanges {
     return this._images;
   }
 
-  changeImage(direction: string) {
-    console.log('changeImage', `direction: ${direction}`);
+  changeImage(offset: number) {
+    console.log('changeImage', `direction: ${offset}`);
+
+    this.directionOffset = offset;
+    const direction = offset === 1 ? 'next' : 'prev';
 
     this.images[this.currentIndex].active = false;
 
