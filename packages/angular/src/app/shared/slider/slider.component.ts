@@ -1,4 +1,10 @@
-import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  Input
+} from '@angular/core';
 
 import { SliderAnimations } from './slider.animations';
 import { Slider } from '../shared.module';
@@ -10,9 +16,13 @@ import { Slider } from '../shared.module';
   animations: SliderAnimations
 })
 export class SliderComponent implements OnChanges {
+  private timer;
   private _images: Slider[];
   directionOffset: number = 1;
   currentIndex: number;
+
+  @Input() autoplay: boolean = false;
+  @Input() delay: number = 3000;
 
   @Input()
   set images(images: Slider[]) {
@@ -27,9 +37,7 @@ export class SliderComponent implements OnChanges {
     return this._images;
   }
 
-  changeImage(offset: number) {
-    console.log('changeImage', `direction: ${offset}`);
-
+  changeImage(offset: number = 1) {
     this.directionOffset = offset;
     const direction = offset === 1 ? 'next' : 'prev';
 
@@ -47,5 +55,12 @@ export class SliderComponent implements OnChanges {
 
     this.currentIndex = randomInt(0, this.images.length);
     this.images[this.currentIndex].active = true;
+
+    if (this.autoplay)
+      this.timer = setInterval(this.changeImage.bind(this), this.delay);
+  }
+
+  ngOnDestroy() {
+    if (this.timer) clearInterval(this.timer);
   }
 }

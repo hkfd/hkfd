@@ -1,4 +1,4 @@
-<slider [images]="imagesIntro"></slider>
+<slider [images]="imagesIntro" [autoplay]="true"></slider>
 
 <div *ngFor="let service of services$ | async">
 <h2>{{ service?.title }}</h2>
