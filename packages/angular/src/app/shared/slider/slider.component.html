@@ -1,0 +1,4 @@
+<button (click)="changeImage('next')">next</button>
+<button (click)="changeImage('prev')">prev</button>
+
+<img *ngFor="let image of images" [class.active]="image?.active" src="{{ image?.url }}" alt="{{ image?.alt }}">

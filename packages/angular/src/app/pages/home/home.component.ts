@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from '../../shared/shared.module';
-import { Page, Service, CaseStudy } from '../../shared/shared.module';
+import { Page, Service, CaseStudy, Image } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +17,21 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   services$: Observable<Service[]>;
   caseStudies$: Observable<CaseStudy[]>;
+
+  imagesIntro: Image[] = [
+    {
+      url:
+        'https://hkfd.co.uk/wp-content/uploads/2017/05/New-Watermouth-logos.jpg'
+    },
+    {
+      url: 'https://hkfd.co.uk/wp-content/uploads/2017/05/map-illustration.jpg'
+    },
+    { url: 'https://hkfd.co.uk/wp-content/uploads/2017/05/map-watermouth.jpg' },
+    {
+      url:
+        'https://hkfd.co.uk/wp-content/uploads/2017/05/Apple-Devices-watermouth.jpg'
+    }
+  ];
 
   constructor(private apiService: ApiService) {}
 
