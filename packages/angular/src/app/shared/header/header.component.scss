@@ -17,7 +17,7 @@ nav {
 
 #nav-logo {
   position: relative;
-  z-index: 1;
+  z-index: 9;
   fill: #fff;
   transition: fill 150ms ease;
 
@@ -59,7 +59,7 @@ nav {
   position: relative;
   height: 25px;
   background: none;
-  z-index: 1;
+  z-index: 9;
   cursor: pointer;
   transition-property: opacity, filter;
   transition-duration: 0.15s;
@@ -129,6 +129,7 @@ nav.open {
     bottom: 0;
     @extend %padding;
     padding-top: 10vh;
+    z-index: 8;
 
     .nav-link {
       @extend %font-display;

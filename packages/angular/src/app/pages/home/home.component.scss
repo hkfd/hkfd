@@ -1,1 +1,17 @@
+@import '../../../styles';
 
+#intro {
+  overflow: hidden;
+  @extend %container-full;
+  padding-top: 7vh;
+  padding-bottom: 7vh;
+  background: $blue;
+  color: #fff;
+
+  span {
+    display: block;
+    @extend %font-body;
+    @extend %font-medium;
+    letter-spacing: normal;
+  }
+}

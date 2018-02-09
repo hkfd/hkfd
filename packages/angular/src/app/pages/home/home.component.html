@@ -1,10 +1,14 @@
+<section id="intro">
+  <h1>LANCASHIRE'S LARGEST<span>Independent advertising &amp; marketing agency</span></h1>
+</section>
+
 <slider [images]="imagesIntro" [autoplay]="true"></slider>
 
 <div *ngFor="let service of services$ | async">
-<h2>{{ service?.title }}</h2>
+  <h2>{{ service?.title }}</h2>
 </div>
 
 <div *ngFor="let caseStudy of caseStudies$ | async">
-<h2>{{ caseStudy?.title }}</h2>
-{{ caseStudy?.sector }}
+  <h2>{{ caseStudy?.title }}</h2>
+  {{ caseStudy?.sector }}
 </div>
