@@ -14,7 +14,7 @@ export const HeaderAnimations = [
       '* => *',
       query('a', [
         style({ transform: 'translateY(250%)' }),
-        stagger(60, [animate('0.4s ease', style({ transform: 'none' }))])
+        stagger(50, [animate('0.4s ease', style({ transform: 'none' }))])
       ])
     )
   ])
