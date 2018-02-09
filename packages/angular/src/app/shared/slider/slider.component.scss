@@ -11,3 +11,21 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+.slide-nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  background: none;
+
+  &#left {
+    left: 0;
+    right: 50%;
+  }
+
+  &#right {
+    right: 0;
+    left: 50%;
+  }
+}
