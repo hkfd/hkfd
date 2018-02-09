@@ -15,3 +15,17 @@
     letter-spacing: normal;
   }
 }
+
+#we-can-help-you {
+  overflow: hidden;
+  @extend %padding;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  background: $black;
+  color: $grey;
+
+  h2 {
+    @extend %font-extralarge;
+    color: #fff;
+  }
+}
