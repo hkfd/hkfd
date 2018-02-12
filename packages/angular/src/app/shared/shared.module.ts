@@ -6,6 +6,7 @@ import { ApiService } from './api.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
+import { CloudinaryPipe } from './pipes/cloudinary.pipe';
 
 export { ApiService } from './api.service';
 export { Page } from './page';
@@ -15,8 +16,13 @@ export { Image, Slider } from './images';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [HeaderComponent, FooterComponent, SliderComponent],
-  exports: [HeaderComponent, FooterComponent, SliderComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SliderComponent,
+    CloudinaryPipe
+  ],
+  exports: [HeaderComponent, FooterComponent, SliderComponent, CloudinaryPipe],
   providers: [ApiService]
 })
 export class SharedModule {}
