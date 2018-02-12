@@ -14,6 +14,7 @@ export { Page } from './page';
 export { Service } from './service';
 export { CaseStudy } from './case-study';
 export { Image, Slider } from './images';
+export { Team } from './team';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
