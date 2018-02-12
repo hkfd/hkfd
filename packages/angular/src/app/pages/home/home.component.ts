@@ -3,8 +3,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiService } from '../../shared/shared.module';
-import { Page, Service, CaseStudy, Image } from '../../shared/shared.module';
+import {
+  ApiService,
+  Page,
+  Service,
+  CaseStudy,
+  Image
+} from '../../shared/shared.module';
 
 @Component({
   selector: 'app-home',

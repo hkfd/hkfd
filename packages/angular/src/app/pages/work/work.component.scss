@@ -1,0 +1,9 @@
+@import '../../../styles';
+
+:host {
+  display: block;
+  overflow: hidden;
+  @extend %container;
+  background: $black;
+  color: #fff;
+}

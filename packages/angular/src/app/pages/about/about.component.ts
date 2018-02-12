@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { ApiService } from '../../shared/shared.module';
-import { Team, Image } from '../../shared/shared.module';
+import { ApiService, Team, Image } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-about',

@@ -9,11 +9,8 @@
 }
 
 #intro {
-  margin: 10vh 0;
-
   .text {
     @extend %container;
-    color: $grey;
   }
 
   image {

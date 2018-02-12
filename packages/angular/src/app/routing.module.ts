@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'about',
     loadChildren: 'app/pages/about/about.module#AboutModule'
   },
+  {
+    path: 'work',
+    loadChildren: 'app/pages/work/work.module#WorkModule'
+  },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
