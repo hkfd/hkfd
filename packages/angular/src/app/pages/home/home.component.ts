@@ -20,16 +20,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   imagesIntro: Image[] = [
     {
-      url:
-        'https://hkfd.co.uk/wp-content/uploads/2017/05/New-Watermouth-logos.jpg'
+      name: 'New-Watermouth-logos.jpg'
     },
     {
-      url: 'https://hkfd.co.uk/wp-content/uploads/2017/05/map-illustration.jpg'
+      name: 'map-illustration.jpg'
     },
-    { url: 'https://hkfd.co.uk/wp-content/uploads/2017/05/map-watermouth.jpg' },
+    { name: 'map-watermouth.jpg' },
     {
-      url:
-        'https://hkfd.co.uk/wp-content/uploads/2017/05/Apple-Devices-watermouth.jpg'
+      name: 'Apple-Devices-watermouth.jpg'
     }
   ];
 
