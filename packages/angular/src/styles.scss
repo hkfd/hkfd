@@ -93,7 +93,8 @@ h4 {
 }
 
 .text {
-  max-width: 750px;
+  overflow: hidden;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -111,4 +112,9 @@ h4 {
     background: $black;
     color: #fff;
   }
+}
+
+#intro {
+  @extend %font-medium;
+  line-height: 1.4;
 }

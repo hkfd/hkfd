@@ -1,6 +1,6 @@
 export interface Image {
   name: string;
-  alt?: string;
+  alt: string;
 }
 
 export interface Slider extends Image {

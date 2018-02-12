@@ -20,14 +20,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   imagesIntro: Image[] = [
     {
-      name: 'New-Watermouth-logos.jpg'
+      name: 'New-Watermouth-logos.jpg',
+      alt: null
     },
     {
-      name: 'map-illustration.jpg'
+      name: 'map-illustration.jpg',
+      alt: null
     },
-    { name: 'map-watermouth.jpg' },
     {
-      name: 'Apple-Devices-watermouth.jpg'
+      name: 'map-watermouth.jpg',
+      alt: null
+    },
+    {
+      name: 'Apple-Devices-watermouth.jpg',
+      alt: null
     }
   ];
 

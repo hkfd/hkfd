@@ -1,1 +1,53 @@
+@import '../../../styles';
 
+:host {
+  display: block;
+  overflow: hidden;
+  background: $black;
+  text-align: center;
+  color: #fff;
+}
+
+#intro {
+  margin: 10vh 0;
+
+  .text {
+    @extend %container;
+    color: $grey;
+  }
+
+  image {
+    margin: 5vh 0;
+  }
+}
+
+#team {
+  @extend %container;
+  margin: 5vh 0;
+}
+
+#people {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  text-align: left;
+
+  .person {
+    @include width($xs: 6, $sm: 4, $md: 3) margin: ($gutter / 2) 0;
+
+    .person-container {
+      position: relative;
+    }
+
+    .person-info {
+      position: absolute;
+      top: 0;
+      padding: 0.5em;
+
+      h3 {
+        line-height: 1.4;
+        margin: 0;
+      }
+    }
+  }
+}
