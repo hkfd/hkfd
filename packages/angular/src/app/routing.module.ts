@@ -6,6 +6,10 @@ const routes: Routes = [
     path: '',
     loadChildren: 'app/pages/home/home.module#HomeModule'
   },
+  {
+    path: 'about',
+    loadChildren: 'app/pages/about/about.module#AboutModule'
+  },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
