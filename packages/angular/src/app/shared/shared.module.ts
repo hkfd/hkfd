@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
+import { ImageComponent } from './image/image.component';
 
 export { ApiService } from './api.service';
 export { Page } from './page';
@@ -20,9 +21,16 @@ export { Image, Slider } from './images';
     HeaderComponent,
     FooterComponent,
     SliderComponent,
+    ImageComponent,
     CloudinaryPipe
   ],
-  exports: [HeaderComponent, FooterComponent, SliderComponent, CloudinaryPipe],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SliderComponent,
+    ImageComponent,
+    CloudinaryPipe
+  ],
   providers: [ApiService]
 })
 export class SharedModule {}
