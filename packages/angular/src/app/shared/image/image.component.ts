@@ -27,9 +27,9 @@ const Sizes = [
 })
 export class ImageComponent implements OnInit, OnChanges, OnDestroy {
   @Input() image: Image;
-  private src: string;
-  private srcset: string[];
-  private lazy: any;
+  private lazyLoad: any;
+  src: string;
+  srcset: string[];
 
   constructor(private cloudinary: CloudinaryPipe) {}
 
@@ -44,11 +44,11 @@ export class ImageComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    if (!this.lazy) this.lazy = new LazyLoad();
-    this.lazy.update();
+    if (!this.lazyLoad) this.lazyLoad = new LazyLoad();
+    this.lazyLoad.update();
   }
 
   ngOnDestroy() {
-    if (this.lazy) this.lazy.destroy();
+    if (this.lazyLoad) this.lazyLoad.destroy();
   }
 }
