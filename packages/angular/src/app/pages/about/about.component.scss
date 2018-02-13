@@ -14,6 +14,7 @@
   }
 
   image {
+    height: 100vh;
     margin: 5vh 0;
   }
 }
@@ -21,6 +22,10 @@
 #team {
   @extend %container;
   margin: 5vh 0;
+
+  .text {
+    color: $grey;
+  }
 }
 
 #people {

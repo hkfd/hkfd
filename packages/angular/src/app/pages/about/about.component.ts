@@ -14,7 +14,7 @@ export class AboutComponent implements OnInit, OnDestroy {
   team: Team[];
 
   introImage: Image = {
-    name: '',
+    name: 'heckford-studio',
     alt: 'Heckford studio'
   };
 

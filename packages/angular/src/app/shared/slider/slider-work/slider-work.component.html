@@ -3,5 +3,5 @@
 
 <div class="slide" *ngFor="let case of caseStudies" [@imageState]="{ value: case?.thumbnail?.active, params: { direction: directionOffset }}">
   <a [routerLink]="['/work', case?.id]" [style.color]="case?.titleColour">{{ case?.title }}</a>
-  <image [image]="case?.thumbnail"></image>
+  <image full-height [image]="case?.thumbnail"></image>
 </div>

@@ -6,16 +6,6 @@
   @include md {
     justify-content: flex-start;
   }
-
-  image {
-    ::ng-deep img {
-      object-position: top center;
-
-      @include md {
-        object-position: center center;
-      }
-    }
-  }
 }
 
 a {
