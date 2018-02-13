@@ -13,10 +13,10 @@ import { CloudinaryPipe } from '../pipes/cloudinary.pipe';
 import { Image } from '../shared.module';
 
 const Sizes = [
-  { width: '800', height: '533' },
-  { width: '1200', height: '800' },
-  { width: '1800', height: '1200' },
-  { width: '2400', height: '1600' }
+  { width: 800, height: 533 },
+  { width: 1200, height: 800 },
+  { width: 1800, height: 1200 },
+  { width: 2400, height: 1600 }
 ];
 
 @Component({
@@ -39,7 +39,8 @@ export class ImageComponent implements OnInit, OnChanges, OnDestroy {
     this.src = this.cloudinary.transform(this.image.name, { width: '64' });
     this.srcset = Sizes.map(
       size =>
-        this.cloudinary.transform(this.image.name, size) + ` ${size.width}w`
+        this.cloudinary.transform(this.image.name, size) +
+        ` ${size.width - 400}w`
     );
   }
 

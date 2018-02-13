@@ -30,8 +30,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   page$: Subscription;
   page: Page;
 
+  caseStudies$: Subscription;
+  caseStudies: CaseStudy[];
+
   services$: Observable<Service[]>;
-  caseStudies$: Observable<CaseStudy[]>;
 
   imagesIntro: Image[] = [
     {
@@ -63,8 +65,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getPage('home')
       .subscribe((page: Page) => (this.page = page));
 
+    this.caseStudies$ = this.apiService
+      .getCaseStudies()
+      .subscribe(
+        (caseStudies: CaseStudy[]) =>
+          (this.caseStudies = caseStudies.filter(
+            (caseStudy: CaseStudy) => caseStudy.featured
+          ))
+      );
+
     this.services$ = this.apiService.getServices();
-    this.caseStudies$ = this.apiService.getCaseStudies();
   }
 
   ngOnDestroy() {

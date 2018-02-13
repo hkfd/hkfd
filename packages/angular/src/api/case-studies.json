@@ -6,7 +6,7 @@
     "featured": true,
     "titleColour": "#000",
     "thumbnail": {
-      "name": "wigan-council-thumb.jpg",
+      "name": "wigan-council-thumb",
       "alt": "Wigan Council"
     }
   },
@@ -17,7 +17,7 @@
     "featured": true,
     "titleColour": "#fff",
     "thumbnail": {
-      "name": "wainhomes-thumb.jpg",
+      "name": "wainhomes-thumb",
       "alt": "Wainhomes"
     }
   },
@@ -28,7 +28,7 @@
     "featured": true,
     "titleColour": "#fff",
     "thumbnail": {
-      "name": "priestley-college-thumb.jpg",
+      "name": "priestley-college-thumb",
       "alt": "Priestley College"
     }
   },
@@ -39,7 +39,7 @@
     "featured": true,
     "titleColour": "#000",
     "thumbnail": {
-      "name": "sandcastle-thumb.jpg",
+      "name": "sandcastle-thumb",
       "alt": "Sandcastle"
     }
   },
@@ -50,7 +50,7 @@
     "featured": true,
     "titleColour": "#fff",
     "thumbnail": {
-      "name": "lutron-thumb.jpg",
+      "name": "lutron-thumb",
       "alt": "Lutron"
     }
   },
@@ -61,7 +61,7 @@
     "featured": true,
     "titleColour": "#fff",
     "thumbnail": {
-      "name": "winfields-outdoors-thumb.jpg",
+      "name": "winfields-outdoors-thumb",
       "alt": "Winfields Outdoors"
     }
   }

@@ -7,8 +7,8 @@ const URL = `https://res.cloudinary.com/${
 }/image/upload`;
 
 interface args {
-  width?: string;
-  height?: string;
+  width?: string | number;
+  height?: string | number;
   crop?: string;
 }
 

@@ -11,7 +11,7 @@
   span {
     display: block;
     @extend %font-body;
-    @extend %font-medium;
+    @extend %font-large;
     letter-spacing: normal;
   }
 }
