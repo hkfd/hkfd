@@ -5,8 +5,8 @@
   </div>
 </div>
 
-<div *ngFor="let case of caseStudies">
-  <a routerLink="{{ case?.id }}">
-    <h2>{{ case?.title }}</h2>
-  </a>
-</div>
+<a class="case-study {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies" routerLink="{{ caseStudy?.id }}">
+  <h2>{{ caseStudy?.title }}</h2>
+  <span class="button">READ MORE</span>
+  <image [image]="caseStudy?.thumbnail"></image>
+</a>

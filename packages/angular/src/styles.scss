@@ -112,6 +112,25 @@ h4 {
     background: $black;
     color: #fff;
   }
+
+  .black & {
+    background: #000;
+    color: #fff;
+
+    &:hover,
+    &:active {
+      background: #fff;
+      color: #000;
+    }
+  }
+}
+
+.black {
+  color: #000;
+}
+
+.white {
+  color: #fff;
 }
 
 #page-intro {

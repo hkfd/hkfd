@@ -1,11 +1,11 @@
 <button class="slide-nav" id="left" type="button" (click)="changeImage(-1)"></button>
 <button class="slide-nav" id="right" type="button" (click)="changeImage(1)"></button>
 
-<div class="slide {{ case?.colour }}" *ngFor="let case of caseStudies" [@imageState]="{ value: case?.thumbnail?.active, params: { direction: directionOffset }}">
+<div class="slide {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies" [@imageState]="{ value: caseStudy?.thumbnail?.active, params: { direction: directionOffset }}">
   <div class="slide-info">
-    <a [routerLink]="['/work', case?.id]">{{ case?.title }}</a>
-    <span>{{ case?.sector }}</span>
+    <a [routerLink]="['/work', caseStudy?.id]">{{ caseStudy?.title }}</a>
+    <span>{{ caseStudy?.sector }}</span>
   </div>
-  <a class="button" [routerLink]="['/work', case?.id]">SEE THE CASE STUDY</a>
-  <image full-height [image]="case?.thumbnail"></image>
+  <a class="button" [routerLink]="['/work', caseStudy?.id]">SEE THE CASE STUDY</a>
+  <image full-height [image]="caseStudy?.thumbnail"></image>
 </div>

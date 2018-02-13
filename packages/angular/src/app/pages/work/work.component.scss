@@ -3,7 +3,26 @@
 :host {
   display: block;
   overflow: hidden;
-  @extend %container;
+  @extend %padding;
   background: $black;
   color: #fff;
+}
+
+.case-study {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 0;
+
+  h2 {
+    position: absolute;
+    @extend %font-extralarge;
+  }
+
+  .button {
+    position: absolute;
+    right: 1em;
+    bottom: 0.5em;
+  }
 }

@@ -8,13 +8,6 @@
   }
 }
 
-.black {
-  color: #000;
-}
-.white {
-  color: #fff;
-}
-
 .slide-info {
   position: absolute;
   align-self: top;
@@ -45,26 +38,4 @@
   z-index: 3;
   bottom: 0.5em;
   left: 1em;
-
-  .black & {
-    background: #000;
-    color: #fff;
-
-    &:hover,
-    &:active {
-      background: #fff;
-      color: #000;
-    }
-  }
-
-  .white & {
-    background: #fff;
-    color: #000;
-
-    &:hover,
-    &:active {
-      background: #000;
-      color: #fff;
-    }
-  }
 }
