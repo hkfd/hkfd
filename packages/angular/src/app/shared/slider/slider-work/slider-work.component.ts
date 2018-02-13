@@ -17,6 +17,8 @@ export class SliderWorkComponent extends SliderComponent {
   set caseStudies(caseStudies: CaseStudy[]) {
     if (!caseStudies) return;
 
+    this._caseStudies = caseStudies;
+
     this.images = caseStudies.map(
       (caseStudy: CaseStudy) => caseStudy.thumbnail
     );

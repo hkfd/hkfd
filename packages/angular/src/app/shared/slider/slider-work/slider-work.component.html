@@ -1,6 +1,7 @@
 <button class="slide-nav" id="left" type="button" (click)="changeImage(-1)"></button>
 <button class="slide-nav" id="right" type="button" (click)="changeImage(1)"></button>
 
-<div class="slide" *ngFor="let image of images" [@imageState]="{ value: image?.active, params: { direction: directionOffset }}">
-  <image [image]="image"></image>
+<div class="slide" *ngFor="let case of caseStudies" [@imageState]="{ value: case?.thumbnail?.active, params: { direction: directionOffset }}">
+  <a [routerLink]="['/work', case?.id]" [style.color]="case?.titleColour">{{ case?.title }}</a>
+  <image [image]="case?.thumbnail"></image>
 </div>

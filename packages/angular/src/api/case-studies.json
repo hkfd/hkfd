@@ -4,9 +4,10 @@
     "title": "WIGAN COUNCIL",
     "sector": "Local Authorities",
     "featured": true,
+    "titleColour": "#000",
     "thumbnail": {
-      "name": "1.jpg",
-      "alt": ""
+      "name": "wigan-council-thumb.jpg",
+      "alt": "Wigan Council"
     }
   },
   {
@@ -14,9 +15,10 @@
     "title": "WAINHOMES",
     "sector": "Construction",
     "featured": true,
+    "titleColour": "#fff",
     "thumbnail": {
-      "name": "1.jpg",
-      "alt": ""
+      "name": "wainhomes-thumb.jpg",
+      "alt": "Wainhomes"
     }
   },
   {
@@ -24,9 +26,10 @@
     "title": "PRIESTLEY COLLEGE",
     "sector": "Education",
     "featured": true,
+    "titleColour": "#fff",
     "thumbnail": {
-      "name": "1.jpg",
-      "alt": ""
+      "name": "priestley-college-thumb.jpg",
+      "alt": "Priestley College"
     }
   },
   {
@@ -34,9 +37,10 @@
     "title": "SANDCASTLE",
     "sector": "Leisure",
     "featured": true,
+    "titleColour": "#000",
     "thumbnail": {
-      "name": "1.jpg",
-      "alt": ""
+      "name": "sandcastle-thumb.jpg",
+      "alt": "Sandcastle"
     }
   },
   {
@@ -44,9 +48,10 @@
     "title": "LUTRON",
     "sector": "Manufacturing",
     "featured": true,
+    "titleColour": "#fff",
     "thumbnail": {
-      "name": "1.jpg",
-      "alt": ""
+      "name": "lutron-thumb.jpg",
+      "alt": "Lutron"
     }
   },
   {
@@ -54,9 +59,10 @@
     "title": "WINFIELDS OUTDOORS",
     "sector": "Retail",
     "featured": true,
+    "titleColour": "#fff",
     "thumbnail": {
-      "name": "1.jpg",
-      "alt": ""
+      "name": "winfields-outdoors-thumb.jpg",
+      "alt": "Winfields Outdoors"
     }
   }
 ]

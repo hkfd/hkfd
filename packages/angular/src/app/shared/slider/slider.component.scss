@@ -30,11 +30,6 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  justify-content: center;
-
-  @include md {
-    justify-content: flex-start;
-  }
 
   image {
     position: absolute;
@@ -46,23 +41,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top center;
-
-      @include md {
-        object-position: center center;
-      }
     }
-  }
-}
-
-h3 {
-  position: absolute;
-  align-self: top;
-  margin: 0.5em 0;
-  z-index: 1;
-
-  @include md {
-    align-self: center;
-    margin: 0 1em;
   }
 }

@@ -2,7 +2,7 @@
   <h1>LANCASHIRE'S LARGEST<span>Independent advertising &amp; marketing agency</span></h1>
 </section>
 
-<slider-work [caseStudies]="caseStudies$ | async" [autoplay]="true"></slider-work>
+<slider [images]="imagesIntro" [autoplay]="true"></slider>
 
 <section id="help">
   <div class="text">
@@ -29,9 +29,4 @@
   </div>
 </section>
 
-<div *ngFor="let caseStudy of caseStudies$ | async">
-  <h2>{{ caseStudy?.title }}</h2>
-  {{ caseStudy?.sector }}
-</div>
-
-<image [image]="imagesIntro[0]"></image>
+<slider-work [caseStudies]="caseStudies$ | async" [autoplay]="true"></slider-work>
