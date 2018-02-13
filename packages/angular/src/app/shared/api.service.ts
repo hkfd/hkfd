@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { catchError, retry, tap, filter } from 'rxjs/operators';
+import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { Page } from './page';
@@ -21,10 +21,11 @@ export class ApiService {
 
   getPage(id: string): Observable<Page> {
     return this.http
-      .get<Page>(this.pages)
+      .get<Page[]>(this.pages)
       .pipe(
         retry(3),
-        filter((page: Page) => page.id === id),
+        flatMap((pages: Page[]) => pages),
+        find((page: Page) => page.id === id),
         tap((page: Page) => console.log('getPage', page)),
         catchError(this.handleError<Page>('getPage'))
       );
@@ -40,17 +41,6 @@ export class ApiService {
       );
   }
 
-  getService(id: string): Observable<Service> {
-    return this.http
-      .get<Service>(this.services)
-      .pipe(
-        retry(3),
-        filter((service: Service) => service.id === id),
-        tap((service: Service) => console.log('getService', service)),
-        catchError(this.handleError<Service>('getService'))
-      );
-  }
-
   getServices(): Observable<Service[]> {
     return this.http
       .get<Service[]>(this.services)
@@ -63,10 +53,11 @@ export class ApiService {
 
   getCaseStudy(id: string): Observable<CaseStudy> {
     return this.http
-      .get<CaseStudy>(this.caseStudies)
+      .get<CaseStudy[]>(this.caseStudies)
       .pipe(
         retry(3),
-        filter((caseStudy: CaseStudy) => caseStudy.id === id),
+        flatMap((caseStudies: CaseStudy[]) => caseStudies),
+        find((caseStudy: CaseStudy) => caseStudy.id === id),
         tap((caseStudy: CaseStudy) => console.log('getCaseStudy', caseStudy)),
         catchError(this.handleError<CaseStudy>('getCaseStudy'))
       );

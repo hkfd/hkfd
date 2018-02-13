@@ -6,5 +6,7 @@
 </div>
 
 <div *ngFor="let case of caseStudies">
-  <h2>{{ case?.title }}</h2>
+  <a routerLink="{{ case?.id }}">
+    <h2>{{ case?.title }}</h2>
+  </a>
 </div>
