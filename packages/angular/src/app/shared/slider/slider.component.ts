@@ -3,7 +3,8 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChanges,
-  Input
+  Input,
+  HostListener
 } from '@angular/core';
 
 import { SliderAnimations } from './slider.animations';
@@ -37,6 +38,15 @@ export class SliderComponent implements OnChanges {
     return this._images;
   }
 
+  @HostListener('mouseenter')
+  mouseEnter() {
+    this.endTimer();
+  }
+  @HostListener('mouseleave')
+  mouseLeave() {
+    if (this.images) this.startTimer();
+  }
+
   changeImage(offset: number = 1) {
     this.directionOffset = offset;
     const direction = offset === 1 ? 'next' : 'prev';
@@ -47,6 +57,15 @@ export class SliderComponent implements OnChanges {
     this.images[this.currentIndex].active = true;
   }
 
+  startTimer() {
+    if (this.autoplay)
+      this.timer = setInterval(this.changeImage.bind(this), this.delay);
+  }
+
+  endTimer() {
+    if (this.timer) clearInterval(this.timer);
+  }
+
   sliderInit() {
     const randomInt = (min, max) =>
       Math.floor(Math.random() * (max - min) + min);
@@ -54,8 +73,7 @@ export class SliderComponent implements OnChanges {
     this.currentIndex = randomInt(0, this.images.length);
     this.images[this.currentIndex].active = true;
 
-    if (this.autoplay)
-      this.timer = setInterval(this.changeImage.bind(this), this.delay);
+    this.startTimer();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -63,6 +81,6 @@ export class SliderComponent implements OnChanges {
   }
 
   ngOnDestroy() {
-    if (this.timer) clearInterval(this.timer);
+    this.endTimer();
   }
 }
