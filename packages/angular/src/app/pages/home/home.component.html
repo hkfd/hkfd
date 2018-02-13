@@ -2,7 +2,7 @@
   <h1>LANCASHIRE'S LARGEST<span>Independent advertising &amp; marketing agency</span></h1>
 </section>
 
-<slider [images]="imagesIntro" [autoplay]="true"></slider>
+<slider-work [caseStudies]="caseStudies$ | async" [autoplay]="true"></slider-work>
 
 <section id="help">
   <div class="text">

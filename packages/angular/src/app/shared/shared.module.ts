@@ -6,8 +6,9 @@ import { ApiService } from './api.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
-import { CloudinaryPipe } from './pipes/cloudinary.pipe';
+import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
+import { CloudinaryPipe } from './pipes/cloudinary.pipe';
 
 export { ApiService } from './api.service';
 export { Page } from './page';
@@ -22,6 +23,7 @@ export { Team } from './team';
     HeaderComponent,
     FooterComponent,
     SliderComponent,
+    SliderWorkComponent,
     ImageComponent,
     CloudinaryPipe
   ],
@@ -29,6 +31,7 @@ export { Team } from './team';
     HeaderComponent,
     FooterComponent,
     SliderComponent,
+    SliderWorkComponent,
     ImageComponent,
     CloudinaryPipe
   ],

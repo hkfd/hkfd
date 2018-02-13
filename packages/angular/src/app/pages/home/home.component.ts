@@ -4,6 +4,16 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  query,
+  stagger
+} from '@angular/animations';
+
+import {
   ApiService,
   Page,
   Service,
@@ -25,19 +35,23 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   imagesIntro: Image[] = [
     {
-      name: 'New-Watermouth-logos.jpg',
+      name: 'LARGE-sandcasle-logo-on-LIME.jpg',
       alt: null
     },
     {
-      name: 'map-illustration.jpg',
+      name: 'LUTRON-lightbulb.jpg',
       alt: null
     },
     {
-      name: 'map-watermouth.jpg',
+      name: 'Priestley-College-MORE-TOP.jpg',
       alt: null
     },
     {
-      name: 'Apple-Devices-watermouth.jpg',
+      name: 'regatta-image.jpg',
+      alt: null
+    },
+    {
+      name: 'Wigan-College-gym-girl.jpg',
       alt: null
     }
   ];

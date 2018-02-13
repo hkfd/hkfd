@@ -3,36 +3,60 @@
     "id": "wigan-council",
     "title": "WIGAN COUNCIL",
     "sector": "Local Authorities",
-    "featured": true
+    "featured": true,
+    "thumbnail": {
+      "name": "1.jpg",
+      "alt": ""
+    }
   },
   {
     "id": "wainhomes",
     "title": "WAINHOMES",
     "sector": "Construction",
-    "featured": true
+    "featured": true,
+    "thumbnail": {
+      "name": "1.jpg",
+      "alt": ""
+    }
   },
   {
     "id": "priestley-college",
     "title": "PRIESTLEY COLLEGE",
     "sector": "Education",
-    "featured": true
+    "featured": true,
+    "thumbnail": {
+      "name": "1.jpg",
+      "alt": ""
+    }
   },
   {
     "id": "sandcastle",
     "title": "SANDCASTLE",
     "sector": "Leisure",
-    "featured": true
+    "featured": true,
+    "thumbnail": {
+      "name": "1.jpg",
+      "alt": ""
+    }
   },
   {
     "id": "lutron",
     "title": "LUTRON",
     "sector": "Manufacturing",
-    "featured": true
+    "featured": true,
+    "thumbnail": {
+      "name": "1.jpg",
+      "alt": ""
+    }
   },
   {
     "id": "winfields-outdoors",
     "title": "WINFIELDS OUTDOORS",
     "sector": "Retail",
-    "featured": true
+    "featured": true,
+    "thumbnail": {
+      "name": "1.jpg",
+      "alt": ""
+    }
   }
 ]

@@ -47,9 +47,7 @@ export class SliderComponent implements OnChanges {
     this.images[this.currentIndex].active = true;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (!changes.images.currentValue) return;
-
+  sliderInit() {
     const randomInt = (min, max) =>
       Math.floor(Math.random() * (max - min) + min);
 
@@ -58,6 +56,10 @@ export class SliderComponent implements OnChanges {
 
     if (this.autoplay)
       this.timer = setInterval(this.changeImage.bind(this), this.delay);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.images && changes.images.currentValue) this.sliderInit();
   }
 
   ngOnDestroy() {
