@@ -5,5 +5,6 @@ export interface CaseStudy {
   title: string;
   sector: string;
   featured: boolean;
+  colour: string;
   thumbnail: Image;
 }

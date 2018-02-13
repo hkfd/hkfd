@@ -37,24 +37,36 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   imagesIntro: Image[] = [
     {
-      name: 'LARGE-sandcasle-logo-on-LIME.jpg',
-      alt: null
+      name: 'heckford-building',
+      alt: 'Heckford – Preston'
     },
     {
-      name: 'LUTRON-lightbulb.jpg',
-      alt: null
+      name: 'heckford-reception1',
+      alt: 'Heckford reception'
     },
     {
-      name: 'Priestley-College-MORE-TOP.jpg',
-      alt: null
+      name: 'heckford-reception3',
+      alt: 'Heckford reception'
     },
     {
-      name: 'regatta-image.jpg',
-      alt: null
+      name: 'heckford-accounts',
+      alt: 'Heckford accounts'
     },
     {
-      name: 'Wigan-College-gym-girl.jpg',
-      alt: null
+      name: 'heckford-print1',
+      alt: 'Heckford printing'
+    },
+    {
+      name: 'heckford-reception2',
+      alt: 'Heckford reception'
+    },
+    {
+      name: 'heckford-print2',
+      alt: 'Heckford printing'
+    },
+    {
+      name: 'heckford-studio',
+      alt: 'Heckford studio'
     }
   ];
 

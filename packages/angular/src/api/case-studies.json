@@ -4,7 +4,7 @@
     "title": "WIGAN COUNCIL",
     "sector": "Local Authorities",
     "featured": true,
-    "titleColour": "#000",
+    "colour": "black",
     "thumbnail": {
       "name": "wigan-council-thumb",
       "alt": "Wigan Council"
@@ -15,7 +15,7 @@
     "title": "WAINHOMES",
     "sector": "Construction",
     "featured": true,
-    "titleColour": "#fff",
+    "colour": "white",
     "thumbnail": {
       "name": "wainhomes-thumb",
       "alt": "Wainhomes"
@@ -26,7 +26,7 @@
     "title": "PRIESTLEY COLLEGE",
     "sector": "Education",
     "featured": true,
-    "titleColour": "#fff",
+    "colour": "black",
     "thumbnail": {
       "name": "priestley-college-thumb",
       "alt": "Priestley College"
@@ -37,7 +37,7 @@
     "title": "SANDCASTLE",
     "sector": "Leisure",
     "featured": true,
-    "titleColour": "#000",
+    "colour": "black",
     "thumbnail": {
       "name": "sandcastle-thumb",
       "alt": "Sandcastle"
@@ -48,7 +48,7 @@
     "title": "LUTRON",
     "sector": "Manufacturing",
     "featured": true,
-    "titleColour": "#fff",
+    "colour": "white",
     "thumbnail": {
       "name": "lutron-thumb",
       "alt": "Lutron"
@@ -59,7 +59,7 @@
     "title": "WINFIELDS OUTDOORS",
     "sector": "Retail",
     "featured": true,
-    "titleColour": "#fff",
+    "colour": "white",
     "thumbnail": {
       "name": "winfields-outdoors-thumb",
       "alt": "Winfields Outdoors"
