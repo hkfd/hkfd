@@ -1,6 +1,8 @@
 <button class="slide-nav" id="left" type="button" (click)="changeImage(-1)"></button>
 <button class="slide-nav" id="right" type="button" (click)="changeImage(1)"></button>
 
+<ng-content></ng-content>
+
 <div class="slide" *ngFor="let image of images" [@imageState]="{ value: image?.active, params: { direction: directionOffset }}">
   <image full-height [image]="image"></image>
 </div>
