@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   OnChanges,
   SimpleChanges,
   AfterViewInit,
@@ -27,8 +26,7 @@ const Sizes = [
   styleUrls: ['./image.component.scss'],
   providers: [CloudinaryPipe]
 })
-export class ImageComponent
-  implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ImageComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() image: Image;
   @ViewChild('img') img: ElementRef;
   private observer: IntersectionObserver;
@@ -67,11 +65,8 @@ export class ImageComponent
   }
 
   ngAfterViewInit() {
-    if (this.img && this.img.nativeElement)
-      this.observer.observe(this.img.nativeElement);
-  }
+    if (!this.img && !this.img.nativeElement) return;
 
-  ngOnInit() {
     const options = {
       root: null,
       rootMargin: '0px',
@@ -81,6 +76,8 @@ export class ImageComponent
       this.intersectionCallback.bind(this),
       options
     );
+
+    this.observer.observe(this.img.nativeElement);
   }
 
   ngOnDestroy() {
