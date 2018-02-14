@@ -64,5 +64,125 @@
       "name": "winfields-outdoors-thumb",
       "alt": "Winfields Outdoors"
     }
+  },
+  {
+    "id": "tomy",
+    "title": "TOMY",
+    "featured": false,
+    "colour": "black",
+    "thumbnail": {
+      "name": "tomy-thumb",
+      "alt": "Tomy"
+    }
+  },
+  {
+    "id": "vimto",
+    "title": "VIMTO",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "vimto-thumb",
+      "alt": "Vimto"
+    }
+  },
+  {
+    "id": "galliford-try",
+    "title": "GALLIFORD TRY",
+    "featured": false,
+    "colour": "black",
+    "thumbnail": {
+      "name": "galliford-try-thumb",
+      "alt": "Galliford Try"
+    }
+  },
+  {
+    "id": "lloyd-motor-group",
+    "title": "LLOYD MOTOR GROUP",
+    "featured": false,
+    "colour": "black",
+    "thumbnail": {
+      "name": "lloyd-motor-group-thumb",
+      "alt": "Lloyd Motor Group"
+    }
+  },
+  {
+    "id": "healthy-heroes",
+    "title": "HEALTHY HEROES",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "healthy-heroes-thumb",
+      "alt": "Healthy Heroes"
+    }
+  },
+  {
+    "id": "cruden-group",
+    "title": "CRUDEN GROUP",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "cruden-group-thumb",
+      "alt": "Cruden Group"
+    }
+  },
+  {
+    "id": "haven-funeral-services",
+    "title": "HAVEN FUNERAL SERVICES",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "haven-funeral-services-thumb",
+      "alt": "Haven Funeral Services"
+    }
+  },
+  {
+    "id": "watermouth-castle",
+    "title": "WATERMOUTH CASTLE",
+    "featured": false,
+    "colour": "black",
+    "thumbnail": {
+      "name": "watermouth-castle-thumb",
+      "alt": "Watermouth Castle"
+    }
+  },
+  {
+    "id": "panaz",
+    "title": "PANAZ",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "panaz-thumb",
+      "alt": "Panaz"
+    }
+  },
+  {
+    "id": "helston-garages-group",
+    "title": "HELSTON GARAGES GROUP",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "helston-garages-group-thumb",
+      "alt": "Helston Garages Group"
+    }
+  },
+  {
+    "id": "chorley-remembers",
+    "title": "CHORLEY REMEMBERS",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "chorley-remembers-thumb",
+      "alt": "Chorley Remembers"
+    }
+  },
+  {
+    "id": "crealy",
+    "title": "CREALY",
+    "featured": false,
+    "colour": "white",
+    "thumbnail": {
+      "name": "crealy-thumb",
+      "alt": "Crealy"
+    }
   }
 ]

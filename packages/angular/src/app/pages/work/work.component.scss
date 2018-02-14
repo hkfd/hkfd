@@ -13,8 +13,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 40vh;
+  height: 40vh;
   margin: 1em 0;
+
+  @include sm {
+    height: 50vh;
+  }
+
+  @include md {
+    height: 60vh;
+  }
 
   h2 {
     position: absolute;

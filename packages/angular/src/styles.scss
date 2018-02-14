@@ -54,7 +54,7 @@ body {
 }
 
 %font-extralarge {
-  @include font-size(1.7rem, 2.2rem, 2.6rem, 2.8rem);
+  @include font-size(2rem, 2.6rem, 3.2rem, 4rem, 5rem);
   line-height: 1.1;
 }
 

@@ -21,7 +21,10 @@ export class WorkComponent implements OnInit, OnDestroy {
     this.caseStudies$ = this.apiService
       .getCaseStudies()
       .subscribe(
-        (caseStudies: CaseStudy[]) => (this.caseStudies = caseStudies)
+        (caseStudies: CaseStudy[]) =>
+          (this.caseStudies = caseStudies.filter(
+            (caseStudy: CaseStudy) => !caseStudy.featured
+          ))
       );
   }
 
