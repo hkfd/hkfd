@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { HeaderAnimations } from './header.animations';
 
@@ -19,6 +20,14 @@ export class HeaderComponent {
   ];
 
   mobileShow: boolean = false;
+
+  constructor(private router: Router) {}
+
+  navClick(url: string) {
+    if (!url) return;
+
+    this.router.navigate([url]).then(_ => (this.mobileShow = false));
+  }
 
   toggleMobile() {
     this.mobileShow = this.mobileShow === true ? false : true;
