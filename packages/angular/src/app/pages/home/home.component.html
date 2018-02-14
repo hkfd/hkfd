@@ -20,7 +20,7 @@
 
   <div id="services-list">
     <div class="service" *ngFor="let service of services$ | async">
-      <img src="{{ service?.thumbnail?.url }}" alt="{{ service?.thumbnail?.alt }}">
+      <image [image]="service?.thumbnail"></image>
       <div class="service-info">
         <h2>{{ service?.title }}</h2>
         <p>{{ service?.intro }}</p>

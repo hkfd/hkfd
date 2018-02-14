@@ -9,10 +9,6 @@
 }
 
 #page-intro {
-  .text {
-    @extend %container;
-  }
-
   image {
     height: 100vh;
     margin: 5vh 0;
@@ -20,7 +16,6 @@
 }
 
 #team {
-  @extend %container;
   margin: 5vh auto;
 
   .text {
@@ -31,6 +26,7 @@
 #people {
   display: flex;
   flex-wrap: wrap;
+  @extend %container;
   margin: 20px 0;
   text-align: left;
 

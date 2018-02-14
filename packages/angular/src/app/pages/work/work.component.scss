@@ -3,9 +3,12 @@
 :host {
   display: block;
   overflow: hidden;
-  @extend %padding;
   background: $black;
   color: #fff;
+}
+
+#case-studies {
+  @extend %container;
 }
 
 .case-study {

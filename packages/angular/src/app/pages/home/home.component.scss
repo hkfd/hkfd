@@ -11,7 +11,7 @@
   span {
     display: block;
     @extend %font-body;
-    @extend %font-large;
+    @extend %font-medium;
     letter-spacing: normal;
   }
 }
@@ -30,7 +30,6 @@
 
 #help {
   overflow: hidden;
-  @extend %padding;
   padding-top: 5vh;
   padding-bottom: 5vh;
   background: $black;
@@ -44,18 +43,20 @@
 
 #services {
   overflow: hidden;
-  @extend %container-full;
   padding-top: 5vh;
   padding-bottom: 5vh;
   background: $grey-light;
 
   .text {
     text-align: center;
+    padding-left: $gutter / 2;
+    padding-right: $gutter / 2;
   }
 
   #services-list {
     display: flex;
     flex-wrap: wrap;
+    @extend %container;
 
     .service {
       overflow: hidden;

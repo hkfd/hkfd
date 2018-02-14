@@ -39,17 +39,17 @@ body {
 }
 
 %font-small {
-  @include font-size(1.05rem, 1.15rem, 1.25rem, 1.3rem);
-  line-height: 1;
-}
-
-%font-medium {
   @include font-size(1.05rem, 1.25rem, 1.35rem, 1.45rem);
   line-height: 1;
 }
 
-%font-large {
+%font-medium {
   @include font-size(1.4rem, 1.6rem, 1.8rem, 2rem);
+  line-height: 1;
+}
+
+%font-large {
+  @include font-size(1.4rem, 2rem, 2.5rem, 3rem);
   line-height: 1.1;
 }
 
@@ -75,7 +75,7 @@ h1 {
 }
 
 h2 {
-  @extend %font-large;
+  @extend %font-medium;
 }
 
 h4 {
@@ -96,6 +96,8 @@ h4 {
   overflow: hidden;
   max-width: 700px;
   margin: 0 auto;
+  padding-left: $gutter / 2;
+  padding-right: $gutter / 2;
 }
 
 .button {
@@ -135,7 +137,7 @@ h4 {
 
 #page-intro {
   margin: 10vh 0;
-  @extend %font-medium;
+  @extend %font-small;
   text-align: center;
   line-height: 1.4;
 

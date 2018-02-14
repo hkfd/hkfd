@@ -5,8 +5,7 @@
     "intro":
       "Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "3d-cgi-thumb",
       "alt": "3D & CGI"
     }
   },
@@ -16,8 +15,7 @@
     "intro":
       "Creating the right impression for your business. Inspire your customers to use your services and stand out from your competitors.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "exhibitions-thumb",
       "alt": "Exhibitions"
     }
   },
@@ -27,8 +25,7 @@
     "intro":
       "The ultimate combination, creative design and cost effective print. Providing cost effective solutions, on time and on budget.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "design-print-thumb",
       "alt": "Design & Print"
     }
   },
@@ -38,8 +35,7 @@
     "intro":
       "Taking your message to the world, with imaginative, highly measureable and effective online marketing.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "digital-thumb",
       "alt": "Digital"
     }
   },
@@ -49,8 +45,7 @@
     "intro":
       "In the right place, at the right time, a good idea is made great with effective advertising campaigns.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "advertising-thumb",
       "alt": "Advertising"
     }
   },
@@ -60,8 +55,7 @@
     "intro":
       "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photo realism.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "illustration-thumb",
       "alt": "Illustration"
     }
   },
@@ -71,8 +65,7 @@
     "intro":
       "Let’s get you turning heads with our efficient and effective range of interior or exterior signage solutions.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "signage-thumb",
       "alt": "Signage"
     }
   },
@@ -82,8 +75,7 @@
     "intro":
       "We have Google AdWords Certified Professionals creating compelling and effective campaigns that maximise your ROI.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "ppc-adwords-thumb",
       "alt": "PPC / Adwords"
     }
   },
@@ -93,8 +85,7 @@
     "intro":
       "Our experienced photographers are dedicated to creating outstanding studio or location images for every use.",
     "thumbnail": {
-      "name":
-        "https://hkfd.co.uk/wp-content/uploads/2017/05/Screen-Shot-2017-05-15-at-12.36.47.png",
+      "name": "photography-thumb",
       "alt": "Photography"
     }
   }
