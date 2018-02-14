@@ -3,11 +3,13 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
+  AfterViewInit,
   OnDestroy,
-  Input
+  Input,
+  ViewChild,
+  Renderer2,
+  ElementRef
 } from '@angular/core';
-
-import * as LazyLoad from 'vanilla-lazyload';
 
 import { CloudinaryPipe } from '../pipes/cloudinary.pipe';
 import { Image } from '../shared.module';
@@ -25,13 +27,19 @@ const Sizes = [
   styleUrls: ['./image.component.scss'],
   providers: [CloudinaryPipe]
 })
-export class ImageComponent implements OnInit, OnChanges, OnDestroy {
+export class ImageComponent
+  implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() image: Image;
-  private lazyLoad: any;
+  @ViewChild('img') img: ElementRef;
+  private observer: IntersectionObserver;
   src: string;
   srcset: string[];
 
-  constructor(private cloudinary: CloudinaryPipe) {}
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private cloudinary: CloudinaryPipe
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.image.currentValue) return;
@@ -44,12 +52,38 @@ export class ImageComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  intersectionCallback([entry, ...rest]) {
+    if (!entry.isIntersecting) return;
+
+    this.image.loaded = true;
+    this.renderer.setAttribute(
+      this.img.nativeElement,
+      'srcset',
+      this.srcset.join()
+    );
+    this.renderer.removeAttribute(this.img.nativeElement, 'data-srcset');
+
+    this.observer.disconnect();
+  }
+
+  ngAfterViewInit() {
+    if (this.img && this.img.nativeElement)
+      this.observer.observe(this.img.nativeElement);
+  }
+
   ngOnInit() {
-    if (!this.lazyLoad) this.lazyLoad = new LazyLoad();
-    this.lazyLoad.update();
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0
+    };
+    this.observer = new IntersectionObserver(
+      this.intersectionCallback.bind(this),
+      options
+    );
   }
 
   ngOnDestroy() {
-    if (this.lazyLoad) this.lazyLoad.destroy();
+    if (this.observer) this.observer.disconnect();
   }
 }

@@ -10,14 +10,15 @@ import {
 
 export const WorkAnimations = [
   trigger('caseStudyList', [
-    transition('* => *', [
-      query(
-        ':enter',
-        [
-          style({ opacity: 0 }),
-          stagger(200, [animate('0.5s', style({ opacity: 1 }))])
-        ],
-        { optional: true }
+    transition('* => 1', [
+      style({
+        transform: 'scale(0.9) translateY(40%)'
+      }),
+      animate(
+        '400ms ease',
+        style({
+          transform: 'scale(1) translateY(0)'
+        })
       )
     ])
   ])

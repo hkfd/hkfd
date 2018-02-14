@@ -5,8 +5,8 @@
   </div>
 </section>
 
-<section id="case-studies" [@caseStudyList]="caseStudies.length">
-  <a class="case-study {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies" routerLink="{{ caseStudy?.id }}">
+<section id="case-studies">
+  <a class="case-study {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies" [@caseStudyList]="caseStudy?.thumbnail?.loaded" routerLink="{{ caseStudy?.id }}">
     <h2>{{ caseStudy?.title }}</h2>
     <span class="button">READ MORE</span>
     <image full-height [image]="caseStudy?.thumbnail"></image>

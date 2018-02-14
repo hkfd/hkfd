@@ -29,7 +29,6 @@
     "css-spring": "^4.1.0",
     "intersection-observer": "^0.5.0",
     "rxjs": "^5.5.6",
-    "vanilla-lazyload": "^10.4.2",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.19"
   },
