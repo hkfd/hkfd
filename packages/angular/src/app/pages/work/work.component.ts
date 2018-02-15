@@ -3,7 +3,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { WorkAnimations } from './work.animations';
-import { ApiService, CaseStudy } from '../../shared/shared.module';
+import {
+  TitleService,
+  ApiService,
+  CaseStudy
+} from '../../shared/shared.module';
 
 @Component({
   selector: 'app-work',
@@ -15,9 +19,14 @@ export class WorkComponent implements OnInit, OnDestroy {
   caseStudies$: Subscription;
   caseStudies: CaseStudy[] = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private titleService: TitleService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Our Work');
+
     this.caseStudies$ = this.apiService
       .getCaseStudies()
       .subscribe(

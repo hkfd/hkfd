@@ -25,6 +25,9 @@
 
   .text {
     color: $grey;
+    @extend %font-small;
+    line-height: 1.3;
+    max-width: $max-width;
   }
 }
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { ApiService } from './api.service';
+import { TitleService } from './title.service';
 import { LoggerService } from './logger.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -12,6 +13,8 @@ import { ImageComponent } from './image/image.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
 
 export { ApiService } from './api.service';
+export { TitleService } from './title.service';
+export { LoggerService } from './logger.service';
 export { Page } from './page';
 export { Service } from './service';
 export { CaseStudy } from './case-study';
@@ -36,6 +39,6 @@ export { Team } from './team';
     ImageComponent,
     CloudinaryPipe
   ],
-  providers: [ApiService, LoggerService]
+  providers: [ApiService, TitleService, LoggerService]
 })
 export class SharedModule {}

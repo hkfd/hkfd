@@ -39,7 +39,7 @@ body {
 }
 
 %font-small {
-  @include font-size(1.05rem, 1.25rem, 1.35rem, 1.45rem);
+  @include font-size(1.1rem, 1.2rem, 1.4rem, 1.6rem);
   line-height: 1;
 }
 
@@ -95,7 +95,7 @@ h4 {
     width: 170px;
   }
   @include xl {
-    width: 200px;
+    width: 220px;
   }
 }
 

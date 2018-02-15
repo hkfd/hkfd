@@ -14,6 +14,7 @@ import {
 } from '@angular/animations';
 
 import {
+  TitleService,
   ApiService,
   Page,
   Service,
@@ -70,9 +71,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private titleService: TitleService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit() {
+    this.titleService.setTitle();
+
     this.page$ = this.apiService
       .getPage('home')
       .subscribe((page: Page) => (this.page = page));

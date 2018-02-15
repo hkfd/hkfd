@@ -12,6 +12,9 @@
     display: block;
     @extend %font-body;
     @extend %font-medium;
+    @include xl {
+      font-size: 3vw;
+    }
     letter-spacing: normal;
   }
 }

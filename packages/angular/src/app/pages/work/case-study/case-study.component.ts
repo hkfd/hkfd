@@ -4,7 +4,11 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 
-import { ApiService, CaseStudy } from '../../../shared/shared.module';
+import {
+  TitleService,
+  ApiService,
+  CaseStudy
+} from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-case-study',
@@ -18,6 +22,7 @@ export class CaseStudyComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private titleService: TitleService,
     private apiService: ApiService
   ) {}
 
@@ -26,7 +31,10 @@ export class CaseStudyComponent implements OnInit, OnDestroy {
       .switchMap((params: ParamMap) =>
         this.apiService.getCaseStudy(params.get('id'))
       )
-      .subscribe((caseStudy: CaseStudy) => (this.caseStudy = caseStudy));
+      .subscribe((caseStudy: CaseStudy) => {
+        this.caseStudy = caseStudy;
+        this.titleService.setTitle(caseStudy.title);
+      });
   }
 
   ngOnDestroy() {
