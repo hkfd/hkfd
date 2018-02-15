@@ -119,13 +119,13 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "tomy-exhibitions-1" },
-              { "name": "tomy-exhibitions-2" },
-              { "name": "tomy-exhibitions-3" },
-              { "name": "tomy-exhibitions-4" },
-              { "name": "tomy-exhibitions-5" },
-              { "name": "tomy-exhibitions-6" },
-              { "name": "tomy-exhibitions-7" }
+              { "name": "tomy-exhibitions1" },
+              { "name": "tomy-exhibitions2" },
+              { "name": "tomy-exhibitions3" },
+              { "name": "tomy-exhibitions4" },
+              { "name": "tomy-exhibitions5" },
+              { "name": "tomy-exhibitions6" },
+              { "name": "tomy-exhibitions7" }
             ]
           }
         ]
@@ -159,13 +159,12 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "tomy-showroom-1" },
-              { "name": "tomy-showroom-2" },
-              { "name": "tomy-showroom-3" },
-              { "name": "tomy-showroom-4" },
-              { "name": "tomy-showroom-5" },
-              { "name": "tomy-showroom-6" },
-              { "name": "tomy-showroom-7" }
+              { "name": "tomy-showroom1" },
+              { "name": "tomy-showroom2" },
+              { "name": "tomy-showroom3" },
+              { "name": "tomy-showroom4" },
+              { "name": "tomy-showroom5" },
+              { "name": "tomy-showroom6" }
             ]
           }
         ]

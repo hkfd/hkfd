@@ -13,6 +13,7 @@ import { ImageComponent } from './image/image.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
 import { ContentComponent } from './content/content.component';
 import { TextBlockComponent } from './content/text/text-block.component';
+import { GalleryBlockComponent } from './content/gallery/gallery-block.component';
 
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
@@ -34,7 +35,8 @@ export { Team } from './team';
     ContentComponent,
     ImageComponent,
     CloudinaryPipe,
-    TextBlockComponent
+    TextBlockComponent,
+    GalleryBlockComponent
   ],
   exports: [
     HeaderComponent,
