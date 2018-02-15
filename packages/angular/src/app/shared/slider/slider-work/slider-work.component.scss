@@ -9,16 +9,29 @@
 }
 
 .slide-info {
+  display: flex;
+  justify-content: center;
   position: absolute;
+  height: 100%;
+  width: 100%;
+  @extend %padding;
+
+  @include md {
+    justify-content: flex-start;
+  }
+}
+
+.info-meta {
+  position: relative;
   align-self: top;
-  margin: 1em 0;
   text-align: center;
+  margin: 1em 0;
   z-index: 3;
 
   @include md {
     align-self: center;
     text-align: left;
-    margin: 0 1em;
+    margin: 0;
   }
 
   a {
@@ -33,9 +46,8 @@
   }
 }
 
-.button {
+.info-more {
   position: absolute;
-  z-index: 3;
   bottom: 0.5em;
-  left: 1em;
+  z-index: 3;
 }

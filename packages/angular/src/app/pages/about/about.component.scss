@@ -9,14 +9,19 @@
 }
 
 #page-intro {
-  image {
-    height: 100vh;
-    margin: 5vh 0;
+  p {
+    color: $grey;
   }
+}
+
+#intro-image {
+  height: 100vh;
+  margin: 5vh 0;
 }
 
 #team {
   margin: 5vh auto;
+  @extend %padding;
 
   .text {
     color: $grey;
@@ -26,12 +31,12 @@
 #people {
   display: flex;
   flex-wrap: wrap;
-  @extend %container;
   margin: 20px 0;
   text-align: left;
 
   .person {
-    @include width($xs: 6, $sm: 4, $md: 3) margin: ($gutter / 2) 0;
+    @include width($xs: 6, $sm: 4, $md: 3, $xl: 2);
+    margin: ($gutter / 2) 0;
 
     .person-container {
       position: relative;
@@ -43,7 +48,7 @@
       padding: 0.5em;
 
       h3 {
-        line-height: 1.4;
+        line-height: 1;
         margin: 0;
       }
     }

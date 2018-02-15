@@ -3,7 +3,7 @@
     "name": "Steve",
     "position": "Chairman",
     "image": {
-      "name": "steve-scurr",
+      "name": "steve.jpg",
       "alt": "Steve"
     }
   },
@@ -11,7 +11,7 @@
     "name": "Paula",
     "position": "Director",
     "image": {
-      "name": "paula-scurr",
+      "name": "paula-scurr.jpg",
       "alt": "Paula"
     }
   },
@@ -19,7 +19,7 @@
     "name": "Mark",
     "position": "Managing Director",
     "image": {
-      "name": "mark",
+      "name": "mark.jpg",
       "alt": "Mark"
     }
   },
@@ -27,7 +27,7 @@
     "name": "Rob",
     "position": "Finance Director",
     "image": {
-      "name": "rob-holcroft",
+      "name": "rob-holcroft.jpg",
       "alt": "Rob"
     }
   },
@@ -35,7 +35,7 @@
     "name": "Ian",
     "position": "Account Director",
     "image": {
-      "name": "ian",
+      "name": "ian.jpg",
       "alt": "Ian"
     }
   },
@@ -43,7 +43,7 @@
     "name": "Abi",
     "position": "Account Manager",
     "image": {
-      "name": "abi",
+      "name": "abi.jpg",
       "alt": "Abi"
     }
   },
@@ -51,7 +51,7 @@
     "name": "Gary",
     "position": "Account Manager",
     "image": {
-      "name": "gary",
+      "name": "gary.jpg",
       "alt": "Gary"
     }
   },
@@ -59,7 +59,7 @@
     "name": "Thomas",
     "position": "Account Manager",
     "image": {
-      "name": "thomas",
+      "name": "thomas.jpg",
       "alt": "Thomas"
     }
   },
@@ -67,7 +67,7 @@
     "name": "Stu",
     "position": "Studio Manager",
     "image": {
-      "name": "stu",
+      "name": "stu.jpg",
       "alt": "Stu"
     }
   },
@@ -75,7 +75,7 @@
     "name": "Phil",
     "position": "Senior Creative",
     "image": {
-      "name": "phil",
+      "name": "phil.jpg",
       "alt": "Phil"
     }
   },
@@ -83,7 +83,7 @@
     "name": "George",
     "position": "Creative",
     "image": {
-      "name": "george",
+      "name": "george.jpg",
       "alt": "George"
     }
   },
@@ -91,7 +91,7 @@
     "name": "Wendy",
     "position": "Creative",
     "image": {
-      "name": "wendy",
+      "name": "wendy.jpg",
       "alt": "Wendy"
     }
   },
@@ -99,7 +99,7 @@
     "name": "Martin",
     "position": "Illustrator",
     "image": {
-      "name": "martin",
+      "name": "martin.jpg",
       "alt": "Martin"
     }
   },
@@ -107,7 +107,7 @@
     "name": "Geoff",
     "position": "3D & CGI",
     "image": {
-      "name": "geoff",
+      "name": "geoff.jpg",
       "alt": "Geoff"
     }
   },
@@ -115,7 +115,7 @@
     "name": "Kev",
     "position": "Graphics",
     "image": {
-      "name": "kev",
+      "name": "kev.jpg",
       "alt": "Kev"
     }
   },
@@ -123,7 +123,7 @@
     "name": "Rachel",
     "position": "Graphics",
     "image": {
-      "name": "rachel",
+      "name": "rachel.jpg",
       "alt": "Rachel"
     }
   },
@@ -131,7 +131,7 @@
     "name": "Moses",
     "position": "Senior Feline",
     "image": {
-      "name": "moses",
+      "name": "moses.jpg",
       "alt": "Moses"
     }
   },
@@ -139,7 +139,7 @@
     "name": "Rob",
     "position": "Web Developer",
     "image": {
-      "name": "rob",
+      "name": "rob.jpg",
       "alt": "Rob"
     }
   },
@@ -147,7 +147,7 @@
     "name": "Raj",
     "position": "Web Developer",
     "image": {
-      "name": "raj",
+      "name": "raj.jpg",
       "alt": "Raj"
     }
   },
@@ -155,7 +155,7 @@
     "name": "Paula",
     "position": "Media",
     "image": {
-      "name": "paula",
+      "name": "paula.jpg",
       "alt": "Paula"
     }
   },
@@ -163,7 +163,7 @@
     "name": "Rohanna",
     "position": "Media",
     "image": {
-      "name": "rohanna",
+      "name": "rohanna.jpg",
       "alt": "Rohanna"
     }
   },
@@ -171,7 +171,7 @@
     "name": "Mary",
     "position": "Media",
     "image": {
-      "name": "mary",
+      "name": "mary.jpg",
       "alt": "Mary"
     }
   },
@@ -179,7 +179,7 @@
     "name": "Mike",
     "position": "Digital Production",
     "image": {
-      "name": "mike",
+      "name": "mike.jpg",
       "alt": "Mike"
     }
   },
@@ -187,7 +187,7 @@
     "name": "Pawel",
     "position": "Digital Production",
     "image": {
-      "name": "pawel",
+      "name": "pawel.jpg",
       "alt": "Pawel"
     }
   },
@@ -195,7 +195,7 @@
     "name": "Mick",
     "position": "Digital Production",
     "image": {
-      "name": "mick",
+      "name": "mick.jpg",
       "alt": "Mick"
     }
   },
@@ -203,7 +203,7 @@
     "name": "Rik",
     "position": "Digital Production",
     "image": {
-      "name": "rik",
+      "name": "rik.jpg",
       "alt": "Rik"
     }
   },
@@ -211,7 +211,7 @@
     "name": "Dave",
     "position": "Digital Production",
     "image": {
-      "name": "dave",
+      "name": "dave.jpg",
       "alt": "Dave"
     }
   },
@@ -219,7 +219,7 @@
     "name": "Kane",
     "position": "Digital Production",
     "image": {
-      "name": "kane",
+      "name": "kane.jpg",
       "alt": "Kane"
     }
   },
@@ -227,7 +227,7 @@
     "name": "John",
     "position": "Digital Production",
     "image": {
-      "name": "john",
+      "name": "john.jpg",
       "alt": "John"
     }
   },
@@ -235,7 +235,7 @@
     "name": "Rachael",
     "position": "Account Manager",
     "image": {
-      "name": "rachael",
+      "name": "rachael.jpg",
       "alt": "Rachael"
     }
   },
@@ -243,7 +243,7 @@
     "name": "Kelly",
     "position": "SW Admin",
     "image": {
-      "name": "kelly",
+      "name": "kelly.jpg",
       "alt": "Kelly"
     }
   }
