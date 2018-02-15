@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
+import { LoggerService } from './logger.service';
 import { Page } from './page';
 import { Service } from './service';
 import { CaseStudy } from './case-study';
@@ -17,7 +18,7 @@ export class ApiService {
   caseStudies = 'api/case-studies.json';
   team = 'api/team.json';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private logger: LoggerService) {}
 
   getPage(id: string): Observable<Page> {
     return this.http
@@ -26,7 +27,7 @@ export class ApiService {
         retry(3),
         flatMap((pages: Page[]) => pages),
         find((page: Page) => page.id === id),
-        tap((page: Page) => console.log('getPage', page)),
+        tap((page: Page) => this.logger.log('getPage', page)),
         catchError(this.handleError<Page>('getPage'))
       );
   }
@@ -36,7 +37,7 @@ export class ApiService {
       .get<Page[]>(this.pages)
       .pipe(
         retry(3),
-        tap((pages: Page[]) => console.log('getPages', pages)),
+        tap((pages: Page[]) => this.logger.log('getPages', pages)),
         catchError(this.handleError<Page[]>('getPages', []))
       );
   }
@@ -46,7 +47,7 @@ export class ApiService {
       .get<Service[]>(this.services)
       .pipe(
         retry(3),
-        tap((services: Service[]) => console.log('getServices', services)),
+        tap((services: Service[]) => this.logger.log('getServices', services)),
         catchError(this.handleError<Service[]>('getServices', []))
       );
   }
@@ -58,7 +59,9 @@ export class ApiService {
         retry(3),
         flatMap((caseStudies: CaseStudy[]) => caseStudies),
         find((caseStudy: CaseStudy) => caseStudy.id === id),
-        tap((caseStudy: CaseStudy) => console.log('getCaseStudy', caseStudy)),
+        tap((caseStudy: CaseStudy) =>
+          this.logger.log('getCaseStudy', caseStudy)
+        ),
         catchError(this.handleError<CaseStudy>('getCaseStudy'))
       );
   }
@@ -69,7 +72,7 @@ export class ApiService {
       .pipe(
         retry(3),
         tap((caseStudies: CaseStudy[]) =>
-          console.log('getCaseStudies', caseStudies)
+          this.logger.log('getCaseStudies', caseStudies)
         ),
         catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
       );
@@ -80,14 +83,14 @@ export class ApiService {
       .get<Team[]>(this.team)
       .pipe(
         retry(3),
-        tap((team: Team[]) => console.log('getTeam', team)),
+        tap((team: Team[]) => this.logger.log('getTeam', team)),
         catchError(this.handleError<Team[]>('getTeam', []))
       );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(operation, error);
+      this.logger.error(operation, error);
       return of(result as T);
     };
   }
