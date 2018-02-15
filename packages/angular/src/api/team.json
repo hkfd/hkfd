@@ -24,16 +24,16 @@
     }
   },
   {
-    "name": "Robert",
+    "name": "Rob",
     "position": "Finance Director",
     "image": {
-      "name": "robert",
-      "alt": "Robert"
+      "name": "rob-holcroft",
+      "alt": "Rob"
     }
   },
   {
     "name": "Ian",
-    "position": "Sales Director",
+    "position": "Account Director",
     "image": {
       "name": "ian",
       "alt": "Ian"
@@ -41,18 +41,18 @@
   },
   {
     "name": "Abi",
-    "position": "Account/Media Manager",
+    "position": "Account Manager",
     "image": {
       "name": "abi",
       "alt": "Abi"
     }
   },
   {
-    "name": "Stu",
-    "position": "Studio Manager",
+    "name": "Gary",
+    "position": "Account Manager",
     "image": {
-      "name": "stu",
-      "alt": "Stu"
+      "name": "gary",
+      "alt": "Gary"
     }
   },
   {
@@ -64,27 +64,11 @@
     }
   },
   {
-    "name": "Rachael",
-    "position": "Account Manager",
+    "name": "Stu",
+    "position": "Studio Manager",
     "image": {
-      "name": "rachael",
-      "alt": "Rachael"
-    }
-  },
-  {
-    "name": "Geoff",
-    "position": "3D & CGI",
-    "image": {
-      "name": "geoff",
-      "alt": "Geoff"
-    }
-  },
-  {
-    "name": "George",
-    "position": "Senior Creative",
-    "image": {
-      "name": "george",
-      "alt": "George"
+      "name": "stu",
+      "alt": "Stu"
     }
   },
   {
@@ -96,8 +80,16 @@
     }
   },
   {
+    "name": "George",
+    "position": "Creative",
+    "image": {
+      "name": "george",
+      "alt": "George"
+    }
+  },
+  {
     "name": "Wendy",
-    "position": "Senior Creative",
+    "position": "Creative",
     "image": {
       "name": "wendy",
       "alt": "Wendy"
@@ -112,11 +104,19 @@
     }
   },
   {
-    "name": "Kevin",
+    "name": "Geoff",
+    "position": "3D & CGI",
+    "image": {
+      "name": "geoff",
+      "alt": "Geoff"
+    }
+  },
+  {
+    "name": "Kev",
     "position": "Graphics",
     "image": {
-      "name": "kevin",
-      "alt": "Kevin"
+      "name": "kev",
+      "alt": "Kev"
     }
   },
   {
@@ -137,7 +137,7 @@
   },
   {
     "name": "Rob",
-    "position": "Head of Digital",
+    "position": "Web Developer",
     "image": {
       "name": "rob",
       "alt": "Rob"
@@ -152,48 +152,40 @@
     }
   },
   {
-    "name": "Emily",
-    "position": "Digital/Media",
-    "image": {
-      "name": "emily",
-      "alt": "Emily"
-    }
-  },
-  {
-    "name": "Mary",
-    "position": "Digital/Media",
-    "image": {
-      "name": "mary",
-      "alt": "Mary"
-    }
-  },
-  {
-    "name": "Rohanna",
-    "position": "Digital/Media",
-    "image": {
-      "name": "rohanna",
-      "alt": "Rohanna"
-    }
-  },
-  {
     "name": "Paula",
-    "position": "Digital/Media",
+    "position": "Media",
     "image": {
       "name": "paula",
       "alt": "Paula"
     }
   },
   {
-    "name": "Michael",
-    "position": "Print Room",
+    "name": "Rohanna",
+    "position": "Media",
     "image": {
-      "name": "michael",
-      "alt": "Michael"
+      "name": "rohanna",
+      "alt": "Rohanna"
+    }
+  },
+  {
+    "name": "Mary",
+    "position": "Media",
+    "image": {
+      "name": "mary",
+      "alt": "Mary"
+    }
+  },
+  {
+    "name": "Mike",
+    "position": "Digital Production",
+    "image": {
+      "name": "mike",
+      "alt": "Mike"
     }
   },
   {
     "name": "Pawel",
-    "position": "Print Room",
+    "position": "Digital Production",
     "image": {
       "name": "pawel",
       "alt": "Pawel"
@@ -201,23 +193,31 @@
   },
   {
     "name": "Mick",
-    "position": "Production/Fitter",
+    "position": "Digital Production",
     "image": {
       "name": "mick",
       "alt": "Mick"
     }
   },
   {
-    "name": "Ricky",
-    "position": "Production/Fitter",
+    "name": "Rik",
+    "position": "Digital Production",
     "image": {
-      "name": "ricky",
-      "alt": "Ricky"
+      "name": "rik",
+      "alt": "Rik"
+    }
+  },
+  {
+    "name": "Dave",
+    "position": "Digital Production",
+    "image": {
+      "name": "dave",
+      "alt": "Dave"
     }
   },
   {
     "name": "Kane",
-    "position": "Print Room",
+    "position": "Digital Production",
     "image": {
       "name": "kane",
       "alt": "Kane"
@@ -225,10 +225,26 @@
   },
   {
     "name": "John",
-    "position": "Print Room",
+    "position": "Digital Production",
     "image": {
       "name": "john",
       "alt": "John"
+    }
+  },
+  {
+    "name": "Rachael",
+    "position": "Account Manager",
+    "image": {
+      "name": "rachael",
+      "alt": "Rachael"
+    }
+  },
+  {
+    "name": "Kelly",
+    "position": "SW Admin",
+    "image": {
+      "name": "kelly",
+      "alt": "Kelly"
     }
   }
 ]

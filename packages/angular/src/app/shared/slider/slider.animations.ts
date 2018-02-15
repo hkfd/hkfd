@@ -29,7 +29,7 @@ export const SliderAnimations = [
         style({ visibility: 'visible' }),
         animate(
           '0.5s cubic-bezier(0.075, 0.82, 0.165, 1)',
-          style({ transform: 'translateX({{ direction }}*-100%)' })
+          style({ transform: 'translateX( calc( -1 * {{ direction }}%) )' })
         )
       ],
       {
@@ -42,7 +42,7 @@ export const SliderAnimations = [
       [
         style({
           visibility: 'visible',
-          transform: 'translateX({{ direction }}*100%)'
+          transform: 'translateX( {{ direction }}% )'
         }),
         animate(
           '0.5s cubic-bezier(0.075, 0.82, 0.165, 1)',

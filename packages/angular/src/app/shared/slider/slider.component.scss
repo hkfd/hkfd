@@ -17,12 +17,14 @@
   &#left {
     left: 0;
     right: 50%;
+    width: 50%;
     cursor: w-resize;
   }
 
   &#right {
     right: 0;
     left: 50%;
+    width: 50%;
     cursor: e-resize;
   }
 }

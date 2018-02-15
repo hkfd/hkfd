@@ -3,6 +3,6 @@
 
 <ng-content></ng-content>
 
-<div class="slide" *ngFor="let image of images" [@imageState]="{ value: image?.active, params: { direction: directionOffset }}">
+<div class="slide" *ngFor="let image of images" [@imageState]="{ value: image?.active, params: { direction: (directionOffset * 100) }}">
   <image full-height [image]="image"></image>
 </div>
