@@ -12,6 +12,7 @@ import { SliderWorkComponent } from './slider/slider-work/slider-work.component'
 import { ImageComponent } from './image/image.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
 import { ContentComponent } from './content/content.component';
+import { TextBlockComponent } from './content/text/text-block.component';
 
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
@@ -19,7 +20,7 @@ export { LoggerService } from './logger.service';
 export { Page } from './page';
 export { Service } from './service';
 export { CaseStudy } from './case-study';
-export { Content } from './content';
+export { Content, Data, TextBlock, ImageBlock, GalleryBlock } from './content';
 export { Image, Slider } from './images';
 export { Team } from './team';
 
@@ -32,7 +33,8 @@ export { Team } from './team';
     SliderWorkComponent,
     ContentComponent,
     ImageComponent,
-    CloudinaryPipe
+    CloudinaryPipe,
+    TextBlockComponent
   ],
   exports: [
     HeaderComponent,

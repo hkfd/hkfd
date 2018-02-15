@@ -1,7 +1,9 @@
 <div *ngFor="let section of content">
   <h2>{{ section?.title }}</h2>
 
-  <ng-container *ngFor="let block of section?.data">
-    {{ block?.type }}
+  <ng-container *ngFor="let block of section?.data">    
+    <div [ngSwitch]="block?.type">
+      <text-block *ngSwitchCase="'text'" [data]="block"></text-block>
+    </div>
   </ng-container>
 </div>

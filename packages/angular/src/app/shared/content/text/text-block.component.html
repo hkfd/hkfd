@@ -1,0 +1,17 @@
+<ng-container *ngFor="let block of data?.data">
+
+  <ng-template #default><p *ngIf="!block?.attributes">{{ block?.text }}</p></ng-template>
+
+  <ng-container *ngIf="block?.attributes?.link">
+    <ng-template #defaultLink>
+      <a href="{{ block?.url }}" target="_blank" rel="nofollow">{{ block?.text }}</a>
+    </ng-template>
+
+    <a *ngIf="block?.attributes?.bold" href="{{ block?.url }}" target="_blank" rel="nofollow"><b>{{ block?.text }}</b></a>
+    <a *ngIf="block?.attributes?.italic; else defaultLink" href="{{ block?.url }}" target="_blank" rel="nofollow"><i>{{ block?.text }}</i></a>
+  </ng-container>
+
+  <b *ngIf="block?.attributes?.bold">{{ block?.text }}</b>
+  <i *ngIf="block?.attributes?.italic; else default">{{ block?.text }}</i>
+
+</ng-container>

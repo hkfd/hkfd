@@ -12,15 +12,15 @@ export interface Text {
   attributes?: TextAttributes;
 }
 
-export interface Text extends Data {
+export interface TextBlock extends Data {
   data: Text[];
 }
 
-export interface Image extends Data {
+export interface ImageBlock extends Data {
   image: Image;
 }
 
-export interface Gallery extends Data {
+export interface GalleryBlock extends Data {
   images: Image[];
 }
 
