@@ -1,4 +1,5 @@
 import { Image } from './shared.module';
+import { Content } from './shared.module';
 
 export interface CaseStudy {
   id: string;
@@ -7,4 +8,6 @@ export interface CaseStudy {
   featured: boolean;
   colour: string;
   thumbnail: Image;
+  overview: string[];
+  content: Content[];
 }
