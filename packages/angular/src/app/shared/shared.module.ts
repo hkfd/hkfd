@@ -11,6 +11,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
+import { ContentComponent } from './content/content.component';
 
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
@@ -29,6 +30,7 @@ export { Team } from './team';
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
+    ContentComponent,
     ImageComponent,
     CloudinaryPipe
   ],
@@ -37,6 +39,7 @@ export { Team } from './team';
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
+    ContentComponent,
     ImageComponent,
     CloudinaryPipe
   ],

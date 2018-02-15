@@ -9,7 +9,7 @@ export interface TextAttributes {
 export interface Text {
   text: string;
   url?: string;
-  attributes: TextAttributes;
+  attributes?: TextAttributes;
 }
 
 export interface Text extends Data {
