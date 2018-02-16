@@ -1035,7 +1035,61 @@
     "thumbnail": {
       "name": "cruden-group-thumb",
       "alt": "Cruden Group"
-    }
+    },
+    "overview": ["Website Design and Build"],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Construction, repairs & maintenance, mechanical, electrical and renewable energy contractor operating within North West England.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Because of their extensive experience and high-quality level of service, they needed a professional website that reflected their company ethos and style."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "cruden1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "cruden2"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "cruden3"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "cruden4"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "haven-funeral-services",
