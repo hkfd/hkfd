@@ -1223,7 +1223,158 @@
     "thumbnail": {
       "name": "illustration-thumb",
       "alt": "Illustration"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Creating illustrations for advertising and publishing, from the visualisation of an abstract concept to a quirky character that brings a product to life, can be the perfect answer to a variety of challenges.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We consider ourselves truly lucky to have such an extremely talented in-house team; from freehand to computer graphics, our illustrators produce exceptional imagery to enhance any project from photo-realistic art to cartoon characters, company logos to technical plans."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Take a look at our case studies and examples to see our talented team’s work, and check out our show reel below:"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Traditional",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Traditional illustration never grows old. It’s great to go back to the fundamentals to communicate your ideas and thought processes, taking you on a visual journey to the final product."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our highly skilled illustrators are fanatical about the details, making extra sure the art reinforces the brand."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-illustration-traditional1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Hand Drawn",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Sketches can inject character and personality into a design, conveying a sense of fun and friendliness. The freedom offered by a hand drawn brief sets our creativity free."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-illustration-hand1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Technical",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "If there’s a message you need to convey, buried under a confusing list of data or measurements, we offer precision drafting to help you and others visualise the information."
+                  },
+                  {
+                    "text":
+                      "Whether it’s infographics or detailed technical plans, our team of talented illustrators are available to communicate information either by hand or using the latest computer graphics software."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-illustration-technical1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Digital",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "For projects with many applications, prints of all shapes and sizes, alongside web, there is no alternative. Digital illustration is the best option."
+                  },
+                  {
+                    "text":
+                      "Our studio produce contemporary imagery, logos, typography and technical illustrations. We work with well-defined lines, shapes and patterns to bring your ideas to life."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-illustration-digital1" },
+              { "name": "service-illustration-digital2" },
+              { "name": "service-illustration-digital3" },
+              { "name": "service-illustration-digital4" }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "signage",
