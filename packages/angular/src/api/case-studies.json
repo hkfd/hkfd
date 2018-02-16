@@ -1515,7 +1515,151 @@
     "thumbnail": {
       "name": "chorley-remembers-thumb",
       "alt": "Chorley Remembers"
-    }
+    },
+    "overview": ["Design", "Print", "Exhibition", "Character Development"],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Chorley Remembers is a major heritage project devised, managed and delivered by Trustees behind the Chorley Pals Memorial, a registered charity no. 1121707, based in the Lancashire market town.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford Exhibitions was appointed by charity Chorley Remembers to design and create an interactive exhibition commemorating local residents who fought in con icts since 1914."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The permanent exhibition, on display at Astley Hall in Chorley uses the latest technology to illustrate what life was like for the Chorley Pals, who were on the front line of the battle of the Somme in 1916. Visitors are able to use touch-screen technology to go on a journey through history, discovering the stories of the war heroes, as well as exploring a detailed recreation of what life was like in the trenches through realistic sets."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "chorley-remembers1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "chorley-remembers2"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Illustration",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Sketches and illustrations were made to size using measurements and photos taken from Astley Hall."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Charley Pal, the project’s mascot, aimed at educating a younger audience."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "chorley-remembers-illustration1" },
+              { "name": "chorley-remembers-illustration2" },
+              { "name": "chorley-remembers-illustration3" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Design & Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Large interpretation panels, cover everything from the First World War, trench life, the Second World War, the local Royal Ordnance Factory (1938 – 2007) up to modern times."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "chorley-remembers-design1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "chorley-remembers-design2"
+            }
+          }
+        ]
+      },
+      {
+        "title": "3D & CGI",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With the use of 3D visuals, the layout design was agreed before any prints were made."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "chorley-remembers-3d1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "chorley-remembers-3d2"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "crealy",
