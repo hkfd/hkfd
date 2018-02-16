@@ -613,7 +613,375 @@
     "thumbnail": {
       "name": "digital-thumb",
       "alt": "Digital"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Digital marketing is a highly measurable and interactive strategy that has become an essential tool for businesses to reach and convert leads.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We build up relevant and impressive online content that will not only improve your SEO, but let your social network platforms become worthwhile, successful marketing tools."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With the ability to write for any tone of voice, we can create attention-grabbing content in a way that will increase the visibility of your business on the web."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As a full-service digital design agency, we can build your website from scratch, optimise your current site to ensure you are getting the best out of it, and introduce you to the latest digital technology such as Mobile App building."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Have no time for social media? We can take care of that too. Our digital marketing executives can keep your online feeds up to date with great content and explore advertising options to target the people you need."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford are proud Google Partners with fully certified Google Adwords specialists that will manage your Pay-Per-Click campaigns daily and report back to the highest standard."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "After a free consultation, we will create a bespoke package for the services you need, helping you get the best out of your budget."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-digital1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-digital2"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Social Media",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Managing social media platforms can be very time consuming. If you’re serious about your brand, you need to be part of it."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "This must-have digital marketing strategy creates brand awareness, builds relationships, gains website traffic and boosts your ROI."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "There isn’t a platform we don’t know. Whether you’re on Facebook, Twitter, Google+, Instagram, YouTube, Pinterest, Tumblr, LinkedIn or Snapchat our experts will keep your online profiles current by publishing content, sharing comments, providing customer care, as well as interacting and engaging directly to potential consumers."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Don’t worry, if you’re completely in the dark, we can explore what works best for your business and set those profiles up for you."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With platforms clamping down on organic reach, it’s important to boost and optimise your posts for maximum impact and interaction. By implementing social media advertising campaigns, we can use our skilled knowledge of targeting methods to attract your desired audience and gain the most relevant results."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As well as receiving meaningful feedback from your customers and fulfilling your marketing objectives, we will provide detailed analytical reports, so you will have a complete understanding of your investment and how you can best utilise the data to optimise future strategies."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Let’s kickstart your social media marketing strategy today."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Website Design and Development",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text": "One website, many devices."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The online buying process has changed dramatically in recent years as more people than ever are choosing to search and shop online. The first thing they see is your website, first impressions really do count."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Whether your objective is to gain leads or make online sales, getting your visitors from A to B needs to be a seamless journey – especially to lockdown those impulse buyers."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our experts at Heckford can build your website completely from scratch or develop existing sites, so you can provide an easy and enjoyable user experience."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Why is responsive design so important? It’s vital for your website to work across a wide range of devices in order to drive traffic and achieve sales easily. As smartphone and tablet usage increases, so does the importance of mobile friendly websites."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The progression of technology is constantly moving. Let us ensure your online presence is clear to read, easy to navigate and compatible with all screen sizes."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Take a look at the websites we have already created and get in touch to see what we can do for you."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "SEO",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Search engine optimisation is an extremely important part of online marketing, helping to drive relevant traffic to your website, increase authority, and boost site visibility within search engines. SEO is no longer about ranking the highest amongst your competitors, but about driving the most relevant traffic that is more likely to convert."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our great team of SEO specialists will create great content that is interesting, relevant and authoritative. Having content like this is not just about style, it also leads to search engine success. Google, Yahoo and Bing only show web pages that deserve to be shown in its search results."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Using a range of clever methods and tactics, SEO is much more cost effective compared to other forms of online marketing to drive your online presence."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Your business needs to have an SEO strategy, as it is one of the most crucial factors in online branding and presence."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Email Campaigns / MMS Campaigns",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Email marketing campaigns are the perfect way of drawing in more website traffic, without weeks of preparation and board meetings."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Through email, you can keep your most valuable users in the loop, from exclusive offers, to announcing a launch day, or requesting feedback."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "It is imperative that your emails target the right audience in a clever and creative way to ensure that it is opened, read, and receives a successful click-through rate. We produce brilliant designs that entice and excite your customers, giving them more reason to click through to your website or enter a competition."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Email is still one of the most effective and consistent ways to reach a select audience with a direct message. Our talented team will work together to manage your contacts, design, send emails and track results, so that you can quickly reap the rewards."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We also take care of SMS / MMS messaging campaigns. Your business can explore marketing solutions and distribute multimedia content such as music, video or animations. This marketing strategy is great for reaching a large number of people in such a short time. The nature of mobile means messages can be forwarded on, expanding the value and reach of your latest promotion."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Blogging and Content Marketing",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "You don’t have long to make the right impression, it’s important to give your audience creative and engaging content to make sure they stick around and explore what you have to offer."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Content marketing isn’t just limited to your blog or news section; you need to ensure that your entire website is consistent and helpful throughout."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Here at Heckford, we realise the significance of adhering to the search engines’ algorithms, to ensure that your website gains the most relevant traffic possible."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Blogging is a great way for your brand to connect with your audience. Blog articles are proven to boost traffic to sites, increase brand awareness, and encourage others to share your message to a much wider network."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "People enjoy seeing what goes on in the inner workings of companies and venturing behind the scenes. Whether you are developing a new product, celebrating an achievement, welcoming a new member of staff or having a bit of fun, your audience will feel part of your brand’s journey and develop a personal connection."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "Not sure how to achieve this?"
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We can help you update your blog regularly with high quality, relevant content. This gives you the opportunity to become visible for search terms that your static pages may not target."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "advertising",
