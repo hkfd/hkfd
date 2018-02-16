@@ -1505,7 +1505,220 @@
     "thumbnail": {
       "name": "helston-garages-group-thumb",
       "alt": "Helston Garages Group"
-    }
+    },
+    "overview": [
+      "Video",
+      "Pay Per Click (PPC)",
+      "Email",
+      "Social Media",
+      "Outdoor Advertising",
+      "Direct Mail"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Starting out as a filling station and repairs workshop back in 1960, Helston Motor Group is now one of the 25 largest in Britain, and its 37 franchise dealerships provide customers throughout Cornwall, Devon, Somerset and Dorset with high-quality new and used cars and vans from thirteen different manufacturers; including BMW and MINI.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford have created and implemented a range of innovative campaigns for their Westerly BMW and Westerly MINI dealerships in Barnstaple, Bridgwater, Dorchester, Exeter and Yeovil."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our team have had the pleasure of working on Direct Mail, Email, MMS, Outdoor Advertising, Pay Per Click, Social Media and Video projects for Westerly Group; see examples of our projects below."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Video",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our video editors created a video compilation to promote a sales event at Westerly MINI Barnstaple, to be used in social media campaigns. The advert embraces the retro style of the iconic MINI, whilst portraying the modern technology and design of their newest models."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Pay Per Click (PPC)",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our team of Google Adwords Certified Specialists have been busy creating and managing Search and Remarketing Display campaigns for Westerly BMW and Westerly MINI."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "They used their expertise and brand knowledge to create awareness of the new BMW 5 series saloon, the new MINI Countryman, and the release of the 17 plate for both brands across the Google Display Network and making sure that both Westerly BMW and Westerly MINI competitively appear on a Google search for relevant keywords/terms. See examples of our Google Display artwork below."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "helston-payperclick1" },
+              { "name": "helston-payperclick2" },
+              { "name": "helston-payperclick3" },
+              { "name": "helston-payperclick4" },
+              { "name": "helston-payperclick5" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Email",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With the average office worker receiving 121 emails per day, it is important for your email campaigns to stand out amongst the crowd."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford designed and built two campaigns for Westerly to promote the launch of the new BMW 5 series saloons and new MINI Countryman."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "helston-email1" },
+              { "name": "helston-email2" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Social Media",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Running alongside other digital media, Heckford also created numerous paid social media campaigns for the company."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our social media experts created highly targeted Facebook and Twitter campaigns; including successful video view and GIF campaigns for awareness, carousel ads for website clicks and lead generation adverts for collecting data and direct leads."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "helston-social1" },
+              { "name": "helston-social2" },
+              { "name": "helston-social3" },
+              { "name": "helston-social4" },
+              { "name": "helston-social5" },
+              { "name": "helston-social6" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Outdoor Advertising",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford recently designed a 48 sheet billboard for Westerly MINI Exeter to advertise the spacious MINI Clubman, which was posted in several prime locations across the city."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "helston-outdoor1" }]
+          }
+        ]
+      },
+      {
+        "title": "Direct Mail",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "An “eye-catching” invite was created by our studio and sent out to approximately 3,000 addresses across Exeter, Barnstaple, Bridgwater, Yeovil and Dorchester to raise awareness of Westerly BMW’s i Range event, which took place in May 2017."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "helston-directmail1" }]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "chorley-remembers",
@@ -1669,6 +1882,313 @@
     "thumbnail": {
       "name": "crealy-thumb",
       "alt": "Crealy"
-    }
+    },
+    "overview": [
+      "Design and Print",
+      "Outdoor Advertising",
+      "Social Media",
+      "Pay Per Click",
+      "Email Marketing",
+      "Vehicle Wraps",
+      "CGI Video",
+      "Website Takeover"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Being highly experienced in the Travel and Tourism sector, Heckford were entrusted with Crealy Adventure Parks’ advertising needs.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Crealy Adventure Parks consisted of two award-winning family attractions, Devon’s Crealy Adventure Park in Exeter and Cornwall’s Crealy Adverture Park in Wadebridge, as well as camping and glamping site, Crealy Meadows."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We provided a wide range of services for Crealy, including; design, print, map illustration, signage, brochures, leaflets, posters, indoor and outdoor advertising, vehicle wraps, website design and maintenance, SEO, pay per click, social media, character creation and CGI video."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Design & Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Bright colours, compelling text and attractive imagery; all components in the creation of fun, family-friendly magazine and newspaper adverts for Crealy Adventure Park."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "crealy-design1" }]
+          }
+        ]
+      },
+      {
+        "title": "Outdoor & Advertising",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We know how to make a statement; and what better way to make one, than with large format billboard ads!"
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our media buyers know a fantastic opportunity when they see one. The petrol-pump adverts we designed for Devon’s Crealy Adventure Park were a real success, with the perfectly relatable tagline “…Are We There Yet?”."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "crealy-outdoor1" },
+              { "name": "crealy-outdoor2" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Social Media",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Family-friendly social media strategies were installed to create a prominent buzz amongst followers; running competitions, games, sharing photographs and gathering user-generated content."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "It was our responsibility to help produce fully integrated digital campaigns in order to increase awareness and excitement surrounding events, ride launches and national holidays."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Facebook and Twitter cover photos were often drawn up to mirror the website takeovers and advertising campaigns."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "crealy-social1" },
+              { "name": "crealy-social2" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Pay Per Click",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Search and Display campaigns were set up to attract potential visitors to Devon’s Crealy’s website. We used placements, keywords and interest targeting to appear in front of the right people on relevant websites; we also added remarketing to target those who had visited the website in the past."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "crealy-payperclick1" }]
+          }
+        ]
+      },
+      {
+        "title": "Email Marketing",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We created weekly email campaigns for the adventure parks. Each was fully bespoke and precisely targeted; advertising member exclusive offers, events, news, promotions and special launches."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "crealy-emailmarketing1" }]
+          }
+        ]
+      },
+      {
+        "title": "Vehicle Wraps",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Not your standard work transportation! Our Crealy van wraps are the perfect way to brighten up rush hour…"
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "If your company has transport, it is prime advertising space for you to promote your brand message. Heckford can help to utilise this space by creating bespoke designs that make vehicles stand out on the road."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "crealy-vehiclewraps1" }]
+          }
+        ]
+      },
+      {
+        "title": "Illustration",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The reputation of our talented illustrators preceded us; as we were asked to redesign, and install some life back into, Crealy’s park maps. Bursting with colour, the technical designs have been used in brochures, leaflets, signage and online."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "crealy-illustration1" },
+              { "name": "crealy-illustration2" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "CGI Video",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Having seen our previous CGI work, Crealy asked us to create a thrilling trailer that would make a huge impact on their target audience prior to the launch of their new ride – Dino Jeeps."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Working to an exceptionally tight deadline of just 10 days, our talented 3d and CGI specialists managed to pull out all the stops and deliver on time!"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [{ "name": "crealy-cgi1" }]
+          }
+        ]
+      },
+      {
+        "title": "Website Takeover",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our digital team produced an impressive, prehistoric web takeover ahead of the Dino Jeeps launch to ensure all visitors knew; the dinosaurs have arrived!"
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our Crealy Christmas takeovers never failed to get website visitors in the festive spirit! The attractive takeovers helped promote special events surrounding the season, and boost ticket sales during the holidays."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "crealy-websitetakeover1" },
+              { "name": "crealy-websitetakeover2" },
+              { "name": "crealy-websitetakeover3" },
+              { "name": "crealy-websitetakeover4" }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
