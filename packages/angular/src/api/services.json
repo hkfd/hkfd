@@ -7,7 +7,195 @@
     "thumbnail": {
       "name": "3d-cgi-thumb",
       "alt": "3D & CGI"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Not only can we produce images and videos in motion, our skilled professionals can take our 3d designs and produce a real, physical object using 3D printing."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Whatever the size and scope of your budget, we’re certain we can produce digital creations that will help you to stand out against the rest."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-3d-cgi1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Computer Generated Imagery",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "CGI is a fantastic way to create high quality, realistic illustrations and animations to visualise any concept."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "These digital creations can be animated and used in art, printed media, video gaming, films, television programmes, commercials, promotional videos, and simulators."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-3d-cgi-cgi1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Characters",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Digital characters can be used for videos, websites, promotional literature. Our computer design services allow us to create everything needed to bring your company mascots or characters to life for story telling."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-3d-cgi-characters1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Construction",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The most effective way to encourage prospective buyers is to offer them a striking preview of your future developments. Our visualisations can also aid planning applications."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "At Heckford, we create technically accurate 3D models of your development, including landscape visualisation, giving a real sense of the final outcome. We can develop the models to produce animated walkthroughs and take virtual ‘photographs’ before any actual construction work has begun."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-3d-cgi-construction1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Animation",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Whether for television advertising, in-house training presentations, or YouTube, Heckford have years of experience developing the most effective animations, designing and developing storyboards and scripts, and incorporating voice overs and incredible audio treatment."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Concepts",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "A concept is often the most important asset in your possession. We have the tools and knowledge to develop your initial thoughts into something amazing."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We have a large team of artists and designers, with a range of skills and differing knowledge bases, which allows us to utilise each and every person on a number of different projects."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Got an idea in mind? Contact us today to see how we can develop your concept even further."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-3d-cgi-concepts1"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "exhibitions",

@@ -1,5 +1,5 @@
 <div *ngFor="let section of content">
-  <h2>{{ section?.title }}</h2>
+  <h2 *ngIf="section?.title">{{ section?.title }}</h2>
 
   <ng-container *ngFor="let block of section?.data">
     <div [ngSwitch]="block?.type">
