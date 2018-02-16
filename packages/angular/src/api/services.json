@@ -447,7 +447,163 @@
     "thumbnail": {
       "name": "design-print-thumb",
       "alt": "Design & Print"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As a full-service agency, we deliver all your creative design & print needs.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our talented team of designers are focused on creating seamless concepts, whilst our skilled print-room team make use of our state of the art printers and routers to produce quality end products, from pocket-sized brochures to large-scale signage."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Graphic Design",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our graphic designers have the ability to communicate your message through the use of type, space and imagery."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our specialists produce attention grabbing and beautifully designed advertisements and publications."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We have a wide range of sectors that we’ve worked with from automotive to zoos; check out our case studies to see some of the graphic design work we’ve completed."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-design-print-design1" },
+              { "name": "service-design-print-design2" },
+              { "name": "service-design-print-design3" },
+              { "name": "service-design-print-design4" },
+              { "name": "service-design-print-design5" },
+              { "name": "service-design-print-design6" },
+              { "name": "service-design-print-design7" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Creative Concepts",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "It is a remarkable thing to see the journey a creative design takes from the initial visuals right through to a commercially viable design."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our creatives sometimes have to be “mental athletes” – creating concepts across a range of sectors as diverse as tourism, education, construction and local authorities."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-design-print-concepts1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Typography",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The design and arrangement of type is a vital component in getting your message and brand identity across to your audience."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Layout of type is a specialised discipline involving the design, letter spacing and use of typefaces, from calligraphy to the ever-developing use of digital type."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Corporate Identity",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The consistent use of visual elements including imagery, typeface and colour can influence the perception of a brand, and by applying our creative principals to your corporate identity, we ensure that your brand creates the maximum impact across every print and advertising media."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-design-print-identity1"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "digital",
