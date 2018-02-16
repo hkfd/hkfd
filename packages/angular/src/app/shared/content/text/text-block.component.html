@@ -1,17 +1,12 @@
-<ng-container *ngFor="let block of data?.data">
+<p *ngFor="let paragraph of data?.data">
+  <ng-container *ngFor="let text of paragraph?.paragraph">
 
-  <ng-template #default><p *ngIf="!block?.attributes">{{ block?.text }}</p></ng-template>
-
-  <ng-container *ngIf="block?.attributes?.link">
-    <ng-template #defaultLink>
-      <a href="{{ block?.url }}" target="_blank" rel="nofollow">{{ block?.text }}</a>
-    </ng-template>
-
-    <a *ngIf="block?.attributes?.bold" href="{{ block?.url }}" target="_blank" rel="nofollow"><b>{{ block?.text }}</b></a>
-    <a *ngIf="block?.attributes?.italic; else defaultLink" href="{{ block?.url }}" target="_blank" rel="nofollow"><i>{{ block?.text }}</i></a>
+    <ng-container [ngSwitch]="true">
+      <ng-template [ngSwitchCase]="text?.url?.length > 0"><a href="{{ text?.url }}" target="_blank" rel="nofollow">{{ text?.text }}</a></ng-template>
+      <ng-template [ngSwitchCase]="text?.attributes?.bold"><b>{{ text?.text }}</b></ng-template>
+      <ng-template [ngSwitchCase]="text?.attributes?.italic"><i>{{ text?.text }}</i></ng-template>
+      <ng-template ngSwitchDefault>{{ text?.text }}</ng-template>
+    </ng-container>
+    
   </ng-container>
-
-  <b *ngIf="block?.attributes?.bold">{{ block?.text }}</b>
-  <i *ngIf="block?.attributes?.italic; else default">{{ block?.text }}</i>
-
-</ng-container>
+</p>

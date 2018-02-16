@@ -3,17 +3,20 @@ import { Image } from './shared.module';
 export interface TextAttributes {
   bold?: boolean;
   italic?: boolean;
-  link?: boolean;
 }
 
-export interface Text {
+export interface Sentence {
   text: string;
   url?: string;
   attributes?: TextAttributes;
 }
 
+export interface Paragraph {
+  paragraph: Sentence[];
+}
+
 export interface TextBlock extends Data {
-  data: Text[];
+  data: Paragraph[];
 }
 
 export interface ImageBlock extends Data {

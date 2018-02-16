@@ -88,13 +88,21 @@
             "type": "text",
             "data": [
               {
-                "text":
-                  "TOMY is a leading Japanese entertainment company that makes children’s toys and merchandise.",
-                "attributes": { "bold": true }
+                "paragraph": [
+                  {
+                    "text":
+                      "TOMY is a leading Japanese entertainment company that makes children’s toys and merchandise.",
+                    "attributes": { "bold": true }
+                  }
+                ]
               },
               {
-                "text":
-                  "Back in 2010, TOMY invited Heckford to tender against four other companies for their exhibition work. Thanks to our expertise and innovative ideas; we were successful!"
+                "paragraph": [
+                  {
+                    "text":
+                      "Back in 2010, TOMY invited Heckford to tender against four other companies for their exhibition work. Thanks to our expertise and innovative ideas; we were successful!"
+                  }
+                ]
               }
             ]
           }
@@ -107,12 +115,20 @@
             "type": "text",
             "data": [
               {
-                "text":
-                  "Since then, we have developed a long standing relationship and have thoroughly enjoyed designing and building TOMY’s exhibition stands on five different occasions; including exhibitions for Toy Fair in London and Nuremberg."
+                "paragraph": [
+                  {
+                    "text":
+                      "Since then, we have developed a long standing relationship and have thoroughly enjoyed designing and building TOMY’s exhibition stands on five different occasions; including exhibitions for Toy Fair in London and Nuremberg."
+                  }
+                ]
               },
               {
-                "text":
-                  "Pleased with Heckford’s creative minds, experience and professionalism; TOMY have chosen Heckford to produce their exhibition for this year’s British Toy and Hobby Association Fair at Olympia – where their stand is the biggest it has ever been at 126m2!"
+                "paragraph": [
+                  {
+                    "text":
+                      "Pleased with Heckford’s creative minds, experience and professionalism; TOMY have chosen Heckford to produce their exhibition for this year’s British Toy and Hobby Association Fair at Olympia – where their stand is the biggest it has ever been at 126m2!"
+                  }
+                ]
               }
             ]
           },
@@ -137,8 +153,12 @@
             "type": "text",
             "data": [
               {
-                "text":
-                  "We have also had the pleasure of producing Point of Sale print, and supplying POS display solutions and logistics for TOMY goods to be shipped around the world!"
+                "paragraph": [
+                  {
+                    "text":
+                      "We have also had the pleasure of producing Point of Sale print, and supplying POS display solutions and logistics for TOMY goods to be shipped around the world!"
+                  }
+                ]
               }
             ]
           }
@@ -151,8 +171,12 @@
             "type": "text",
             "data": [
               {
-                "text":
-                  "A particularly exciting project was undertaking the design of their brand new Hong Kong show room back in 2013; seeing the potential in their space, our CGI & 3D specialists created contemporary concepts to bring ideas to life."
+                "paragraph": [
+                  {
+                    "text":
+                      "A particularly exciting project was undertaking the design of their brand new Hong Kong show room back in 2013; seeing the potential in their space, our CGI & 3D specialists created contemporary concepts to bring ideas to life."
+                  }
+                ]
               }
             ]
           },
@@ -179,7 +203,205 @@
     "thumbnail": {
       "name": "vimto-thumb",
       "alt": "Vimto"
-    }
+    },
+    "overview": ["Design and Print", "Exhibitions", "Portable Stands"],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Nichols plc is an international soft drinks business reaching sales in over 85 countries. Vimto was the first iconic brand, not just extremely popular in the UK, but around the world. Since 1908, the range of drinks has expanded greatly with 100% natural Feel Good, Levi Roots, Frozen Beverages such as Starslush and Icecream Shake, Panda and Sunkist.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text": "Heckford gave Vimto the ‘Feel Good’ factor",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "The Feel Good brand was developed in July 2015."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "There is a huge demand for drinks made from natural resources that are healthier options, which is exactly what the Feel Good factor brings to the market, a tasty drink with 100% natural ingredients and no added sugar!"
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We designed and created the below pull-up banners that generate a large display area for brand awareness and maximum exposure of the ‘Feel Good’ drinks range. Catering for all sizes and with a quick turnaround, these roll up banners provide portable exhibition or retail display units that are cost effective and efficient, taking up limited floor space!"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-print1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Exhibitions",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford were extremely pleased to be approached by"
+                  },
+                  {
+                    "text": "Vimto",
+                    "url": "http://www.vimto.co.uk/"
+                  },
+                  {
+                    "text":
+                      "Soft Drinks and asked to design and build them a new trade stand for use at exhibitions, trades shows and conferences taking place around the UK this year."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "Showcased at Nisaway in Coventry and"
+                  },
+                  {
+                    "text": "P&H Pro Retail Show",
+                    "url": "http://www.pro-retail.co.uk/index.asp"
+                  },
+                  {
+                    "text":
+                      "in Telford, the fully branded stand featured customised cool boxes, t.v. surroundings and oversize cans."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Will Woodward from Marketing at Vimto Soft Drinks commented, “A great improvement on [our] previous years and all who attended were impressed. It has most certainly been an adaptable solution which we will continue to use for future events.”"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-exhibitions1"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Leaping from our printers (pardon the pun) is Vimto’s newest addition to their summer campaign, Vimtoad."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-exhibitions2"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Vimto entrusted Heckford with the print and build of their latest exhibition stand due to excellent past experiences and the assurance of a high quality finish; which we think is “fan-flipping-tastic”!"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-exhibitions3"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Pull Up Banners",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We have recently produced a series of pop-up banners to brand and advertise a new milkshake drink, supplied to 9 different individual retail outlets across the North West."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-banners1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-banners2"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto-banners3"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "galliford-try",
