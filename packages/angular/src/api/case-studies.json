@@ -552,7 +552,415 @@
     "thumbnail": {
       "name": "lloyd-motor-group-thumb",
       "alt": "Lloyd Motor Group"
-    }
+    },
+    "overview": [
+      "Design and Print",
+      "Direct Mail",
+      "National and Local Press Advertising",
+      "Online Marketing",
+      "Social Media",
+      "E-Shots",
+      "Digital Brochure",
+      "Video Production",
+      "Photography",
+      "Exhibitions"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Lloyd Motor Group represents prestige brands, such as BMW, Alfa Romeo, Fiat, Honda, Jaguar, Land Rover, MINI and Volvo.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford have created and implemented a range of innovative campaigns for Lloyd BMW and MINI in Blackpool, Carlisle, Cockermouth, Colne, Newcastle and South Lakes."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As always, our team had some great ideas and were raring to go with the various projects Lloyd needed; which included advertising, digital, direct mail, an exhibition stand and SMS/MMS."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Digital Brochures",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Lloyd Group asked Heckford to design a digital brochure for their 6 MINI dealerships and their BMW dealerships. The clean and attractive design includes interactive elements; making the brochure fun and appealing to its audience."
+                  },
+                  {
+                    "text": "Click here to view the BMW brochure",
+                    "url": "http://joom.ag/vZ0p"
+                  },
+                  {
+                    "text": "and"
+                  },
+                  {
+                    "text": "here to view MINI’s",
+                    "url": "http://joom.ag/Rt0p"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "lloyd-brochure1" },
+              { "name": "lloyd-brochure2" },
+              { "name": "lloyd-brochure3" },
+              { "name": "lloyd-brochure4" },
+              { "name": "lloyd-brochure5" },
+              { "name": "lloyd-brochure6" },
+              { "name": "lloyd-brochure7" },
+              { "name": "lloyd-brochure8" },
+              { "name": "lloyd-brochure9" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "E-Shots",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Lloyd BMW and MINI asked Heckford to create an email campaign for their exclusive"
+                  },
+                  {
+                    "text": "Twelve Hour Opportunity",
+                    "attributes": { "italic": true }
+                  },
+                  {
+                    "text":
+                      "event. The sleek design and build mirrored their direct mail campaign for brand and campaign consistency."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-eshot1"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "An email campaign for Lloyd MINI’s Clubman launch managed to enhance the integration of other platforms; ensuring the appropriate calls to action were implemented to engage users. This included prominent social media links to exclusive launch content, such as photos and video."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-eshot2"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Direct Mail",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With their Christmas Markets fast approaching, Lloyd BMW Blackpool and Colne asked us to create a jovial direct mail campaign to invite customers and locals to attend."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Disguised as a present, the cross-brochure invitation opened up to reveal a merry masterpiece detailing the event’s festivities."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-mail1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-mail2"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Alongside the email campaign for their Twelve Hour Opportunity, Lloyd BMW and Lloyd MINI in Blackpool and Newcastle wanted to target customers and potential customers in their local area through direct mail."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With a super fast turn around, Heckford designed a cut-out pocket envelope containing a leaflet and organised both print and postage."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-mail3"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-mail4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "MMS/SMS Messages",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "An impressive MMS campaign to advertise the BMW 3 Series was created and sent out to existing and potential customers of Lloyd BMW Colne and Lloyd BMW Blackpool. The concept was designed with the aim of creating something a little bit different; not just capturing the attention of their direct audience, but encouraged them to show their friends and family."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-mms1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Social Media",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford were asked to head-up Lloyd’s Facebook campaigns for Lloyd BMW Blackpool and Lloyd BMW Colne’s Christmas Markets. Taking the Christmas season by storm, we created festive cover photos, post images, event pages, advertisements and paid boosts."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-social1"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Attractive artwork was created in anticipation of the New MINI Clubman launch, which was used to implement Facebook advertisements, boosted posts, competitions, cover photos and event pages as part of a fully-integrated online campaign; in which Heckford had the pleasure of managing."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "lloyd-social2" },
+              { "name": "lloyd-social3" },
+              { "name": "lloyd-social4" },
+              { "name": "lloyd-social5" },
+              { "name": "lloyd-social6" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Advertising",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "To introduce the Lloyd name across the South Lakes, and promote their new MINI and BMW dealerships, we designed a range of full-page and half-page adverts to be featured in numerous print publications across the local area, such as Lancashire Life."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-advertising1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Video",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "46% of users take some sort of action after viewing a video ad, according to Online publishers association."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Following corporate guidelines, we created a slideshow video to coincide with Lloyd MINI’s online Clubman campaign."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The footage was distributed on the Facebook pages and email campaigns for Lloyd MINI Blackpool, Carlisle, Cockermouth, Colne, Newcastle and South Lakes."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Photography",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford attended Lloyd MINI Blackpool’s 1oth annual Halloween MINI Drive out; which coincided with an exclusive first look at the new MINI Clubman."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our photographer snapped some of the best MINI moments and captured the spooky scene – great assets for using across social media, email marketing and direct mail for years to come."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "lloyd-photography1" },
+              { "name": "lloyd-photography2" },
+              { "name": "lloyd-photography3" },
+              { "name": "lloyd-photography4" },
+              { "name": "lloyd-photography5" },
+              { "name": "lloyd-photography6" },
+              { "name": "lloyd-photography7" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Exhibition",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Lloyd BMW Blackpool used our expertise in designing and constructing a promotional stand to advertise the new BMW 7 Series in the wake of its launch. Enabling the range to embrace its exclusivity, the car was concealed within the booth – enticing customers in for the big reveal."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "lloyd-exhibition1" },
+              { "name": "lloyd-exhibition2" },
+              { "name": "lloyd-exhibition3" },
+              { "name": "lloyd-exhibition4" }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "healthy-heroes",
