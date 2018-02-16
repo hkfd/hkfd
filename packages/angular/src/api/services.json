@@ -400,6 +400,12 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-exhibitions-installation1"
+            }
           }
         ]
       },
@@ -1633,7 +1639,72 @@
     "thumbnail": {
       "name": "ppc-adwords-thumb",
       "alt": "PPC / Adwords"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Pay-Per-Click (PPC) advertising is online marketing designed to deliver targeted traffic, focusing on those who are actively searching or considering to purchase your company’s products or services."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Imagine only paying for a poster campaign per customer that walks through your businesses door. A huge benefit of using PPC is that you will only pay when someone clicks on your advert, making it one of the most effective marketing methods available."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Google AdWords allows you to formulate carefully targeted campaigns across the Google Network. By choosing the right keywords, phrases, locations, demographics and placements, we can attract the best audience for your adverts on desktop, mobile and tablet."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As well as those text based adverts, which you will no doubt have seen during a Google Search, we take things a step further by planning and creating rich media campaigns. These typically involve images, animations and videos which then generate enormous exposure for your brand on popular websites and apps within the Google Display Network."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We can also help your online advertising efforts reach various platforms and outlets, such as YouTube, Gmail Sponsored Promotions (GSP) and more."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford have Google AdWords Certified Professionals who understand every aspect of the AdWords & PPC management process. They will work with you to create compelling and effective online campaigns, which will continue to maximise your ROI. As part of our service, we produce analytical reports that will provide insights to traffic sources, how visitors behave on your site, and goals so you can measure your campaign’s ROI."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-ppc-adwords1"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "photography",
