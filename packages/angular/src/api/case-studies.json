@@ -1099,7 +1099,168 @@
     "thumbnail": {
       "name": "haven-funeral-services-thumb",
       "alt": "Haven Funeral Services"
-    }
+    },
+    "overview": [
+      "Design and Print",
+      "Local, National and Trade Press Advertising",
+      "Outdoor Advertising",
+      "Direct Mail",
+      "Point of Sale"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Haven Funeral Services is an independent company, operating funeral homes in West London and Hillingdon with an international business that provides funeral services throughout the UK.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We have recently built a strong relationship with Fred Hamer, a subsidiary company to Haven, that have been providing families in the North West with the best funeral care for almost 100 years. This prestige, family run business, put together bespoke packages from a wide range of services, such as floral arrangements, funeral vehicles, coffins and caskets, bereavement counselling and catering, to the highest standard."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We recently refreshed the brand personality of Haven Funeral Services, taking an alternative approach by introducing imagery that focused on people enjoying life. This uplifting feel indicates Haven have your future plans in control so you can concentrate on experiencing the now."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "haven1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "haven2"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford designed and built a series of sales/promotional point of sale stands which were placed in a number of garden centres and retail stores, one of which was Winfields Outdoors."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "This ‘letter box’ style display stand allowed passers-by and potential customers to fill in a form in their own time, which allowed them to receive more information about the services Fred Hamer provides. This style of stand didn’t just promote the company name, it also built up a customer database of potential consumers who were interested in the company."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our bold and fun design grabbed customers’ attention, without the need of present staff."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "haven3"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "haven4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford have helped Fred Hamer Funeral Services target numerous audiences across a range of different mediums, one of which being local press."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Each newspaper/press advert has been designed and printed to suit each individual client’s style and requirements; which has enabled our studio to get their creative juices flowing."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "haven-print1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Media Buying",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "At Heckford, we are responsible for booking around 18 press/media bookings per week for a variety of funeral service companies under Hamer Funeral Care. These include Fred Hamer, Hillside Memorials, Gibson House Funerals and Booth and Wolstenholme Funeral Service amongst many others."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As well as the creation, we also take full responsibility in booking the adverts to be placed in a number of well known established newspapers, such as the Lancashire Telegraph, The Bolton News and The Bury News."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "haven-media1"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "watermouth-castle",
