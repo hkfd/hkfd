@@ -991,7 +991,229 @@
     "thumbnail": {
       "name": "advertising-thumb",
       "alt": "Advertising"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As one of the biggest leading agencies in Lancashire, when businesses hear the name ‘Heckford’, they know they’re in the right hands when it comes to advertising. ",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Advertising is still one of the most effective methods of relaying your message and it’s buried deep in the foundations of everything we do; it’s where we started four decades ago and, thanks to the excellent reputation we have built, it’s where we’ve continued to grow."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-advertising1" },
+              { "name": "service-advertising2" },
+              { "name": "service-advertising3" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Newspapers and Magazines",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We are exceptionally experienced when it comes to negotiating the best advertising rates for our clients."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From local press to the nationals, trade publications to mainstream magazines, our media buyers work tirelessly to make sure you get the best deals, appear in the best positions, and develop media strategies that really generate results."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-advertising-newspapers1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Recruitment",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "It might seem easy to attract candidates to a job, but you don’t just want any candidate."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford can provide everything you need to attract the highest quality candidates – from LinkedIn advertising, carefully targeted social media campaigns and posts on online newspapers, to the more traditional route of printed press and magazines – whether they are in local, national or specialist business publications."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From a single vacancy to a factory to fill, we can help you get the best people for the job, for the best price."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-advertising-recruitment1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Outdoor",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "There is always a huge sense of pride when you spot your company’s advertisement in public; we know because we feel it too."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From posters to digital billboards, we are committed to providing top quality designs and unparalleled value for our clients."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-advertising-outdoor1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Television Campaign",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From live TV to catch-up, our media buying team have the knowledge, experience and statistics to place your advertisements in the best place at the right time for your target audience."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-advertising-tv1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Radio Campaigns",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Just like remembering the lyrics to a pop song, radio advertisements have the ability to subconsciously imprint on a person’s mind."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From writing a script to buying air space, we can guide you through the makings of a catchy radio ad and make sure it is heard."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Direct Mail",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Direct mail takes your business’ offers, values and branding right to your potential customers’ doorsteps."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We have talented artists at hand who manage to turn the briefest of ideas into an impressive reality. Put them to the test with your next direct mail campaign."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-advertising-mail1"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "illustration",
