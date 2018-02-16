@@ -12,7 +12,6 @@ import { HeaderAnimations } from './header.animations';
 export class HeaderComponent {
   pages = [
     { title: 'ABOUT', url: '/about' },
-    { title: 'SERVICES', url: '/services' },
     { title: 'OUR WORK', url: '/work' },
     { title: 'NEWS', url: '/news' },
     { title: 'CAREERS', url: '/careers' },

@@ -19,7 +19,7 @@
   </div>
 
   <div id="services-list">
-    <div class="service" *ngFor="let service of services$ | async">
+    <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]">
       <image full-height [image]="service?.thumbnail"></image>
       <div class="service-info">
         <h3>{{ service?.title }}</h3>
@@ -28,10 +28,8 @@
       <div class="service-more">
         <span class="button">READ MORE</span>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
 <slider-work [caseStudies]="caseStudies" [autoplay]="true"></slider-work>
-
-<img src="/assets/logos.png">
