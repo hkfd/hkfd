@@ -1270,7 +1270,169 @@
     "thumbnail": {
       "name": "watermouth-castle-thumb",
       "alt": "Watermouth Castle"
-    }
+    },
+    "overview": [
+      "Design and Print",
+      "Brand Development",
+      "Illustration",
+      "Website Design and Build"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Watermouth Family Castle and Theme Park offers a fun and magical experience for all the family, based in Ilfracombe, North Devon. As well as the light, music and fountain displays at the underground Water Show Extravaganza, there is an array of rides and attractions such as Castle Treasures and Gnome Land.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "After seeing the illustration and design work Heckford completed for other theme parks, Watermouth contacted us for help with their branding."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Design and Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "At Heckford, we have produced a range of park maps for the tourism industry and after admiring our recent project for Crealy Adventure Park, also based down south in Devon, Watermouth approached us to give their branding a refresh."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our task was to re-design the park’s logos, including rides and attractions, injecting bold imagery and bright colours to bring the magical and fantasy theme to life."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "In order for the new brochure to enhance the personality of theme park, our team of talented illustrators travelled down to take images, so the attractions and park characters could be visualised and illustrated into a full resort brochure and map."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Watermouth were extremely pleased with the results. The brighter colours, typeface and character illustrations attract your attention and the visuals of the rides on the map make it easier for customers to navigate their way round. The overall aim was to show how appealing the park is to young children and their parents. We certainly think that has been achieved!"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "watermouth-design-print1"
+            }
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "watermouth-design-print2" },
+              { "name": "watermouth-design-print3" },
+              { "name": "watermouth-design-print4" },
+              { "name": "watermouth-design-print5" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Illustration",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Park maps give customers an opportunity to plan their route for the day. The aim was to use large recognisable illustrations to ease customers experience of navigation through the park, especially with a handful of children! Check out this before and after; from initial illustration, to the finished product. The new map is bursting with bright colours, fun imagery and important attraction information."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "After seeing the illustration and design work Heckford completed for other theme parks, Watermouth contacted us for help with their branding."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "watermouth-illustration1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "watermouth-illustration2"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Website Design and Build",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Impressed with the exceptional level of skill shown for the brochure and map, we were thrilled to undertake the redesign of the attraction’s website. With it being a an e-commerce website, it was vital to use the same bright colours and imagery to entice users to buy tickets online. Our talented web design team animated the original character illustrations to give the website an interactive feel. The overall web design is fun, inviting, memorable and certainly appealing to parents of those with young children."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The website has been optimised to successfully work on desktop, tablet and mobile, so users can easily read the attraction information, look up opening times and most importantly, book tickets."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "watermouth-website1"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "panaz",
