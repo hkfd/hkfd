@@ -1442,7 +1442,60 @@
     "thumbnail": {
       "name": "panaz-thumb",
       "alt": "Panaz"
-    }
+    },
+    "overview": ["Exhibition Stand Design and Build"],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Panaz is one of Europe’s leading suppliers of high-quality decorative fabrics and wall coverings for the Hospitality, Healthcare and Corporate sectors. For more than 25 years as UK fabric suppliers, Panaz has focused on design excellence and differentiation through technical innovation resulting in a diverse and comprehensive range of beautiful, exclusive and durable fire retardant furnishing fabrics.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Exhibition",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford were extremely pleased when approached by Panaz Contract Fabrics to support them in the design, supply and construction of their exhibition stands for two large-scale events. These events were Architect@Work in Kortrijk and the British Contract Furnishing Association at the Old Truman brewery in London, both of which were a huge success."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "panaz-exhibition1" },
+              { "name": "panaz-exhibition2" },
+              { "name": "panaz-exhibition3" },
+              { "name": "panaz-exhibition4" },
+              { "name": "panaz-exhibition5" },
+              { "name": "panaz-exhibition6" },
+              { "name": "panaz-exhibition7" },
+              { "name": "panaz-exhibition8" }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "helston-garages-group",
