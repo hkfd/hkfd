@@ -205,7 +205,239 @@
     "thumbnail": {
       "name": "exhibitions-thumb",
       "alt": "Exhibitions"
-    }
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We’re one of the UK’s leading providers of exhibition stands, with an award-winning track record in design, build, and event management for leading brands across the UK, Europe and the United States.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From initial design, print and build, right through to the exhibition day, our highly skilled and dedicated print team are reliable, and with over 4 decades of experience, they have a reputation for the quality of their workmanship. Our committed account managers and installers work hand in hand closely with clients to get the look, structure and layout intended."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our digital marketing executives can also utilise the event on your social media platforms for maximum exposure."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From portable exhibition equipment, through to modular and custom build stands, from start-up companies to multi-nation businesses, we can provide you with the guidance and solution you need. Get in touch and let’s get creative!"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Bespoke Exhibitions",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "First impressions are the most lasting. The perception of your company at exhibition and trade shows starts at around 10 metres away, with only a few seconds to attract key perspective buyers."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Visitors of exhibitions attend with the intention of discovering your brand and services. If your exhibition space attracts consumers, that’s half of the job ticked off."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We are continually investing in the latest technology to attract visitors and encourage them to interact with your display."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-exhibitions-bespoke1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Modular Exhibitions",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Modular exhibition stands, otherwise known as modular trade show displays, are a more affordable alternative to custom built stands, whilst still providing a great return of investment."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Modular stands can be configured to your specifications and fit numerous different layouts from one set of components."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our range of modular display systems consists of a series of unique frame profiles, components and accessories. These have been designed to offer the most flexible display configurations."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-exhibitions-modular1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Banners and Popup Stands",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our banners and pop up stands provide you with a large display area for maximum exposure. They can be seen from a distance and offer the simplicity of assembly and transport."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our range of banner stands cater for all sizes from 600mm to 1200mm wide and are very competitively priced, along with our 48 hour turnaround time to help cater for the most demanding situation."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "New to this? We also have exhibition starter kits in place, offering great value deals on banner stands, pop ups, plinths and leaflet dispensers."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-exhibitions-banners1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Site Installation",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford have travelled the world installing bespoke exhibition stands; from Amsterdam and Dubai, to Glasgow and Guernsey. There’s nowhere we won’t travel to install."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With over 35 years of production experience, we ensure our clients receive the very best personal service. Our expert installation teams are fully trained with PASMA and CSCS certifications, ensuring that your new installation is built safely and on time."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our creative design team, build team and manufacturing facilities are all in-house, meaning the process is smooth from concept to completion."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Event Management",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Co-ordinating creation, direction and planning are what make clients keep returning to Heckford for their exhibition needs."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "From initial stages, right through to the event day, we are there to make sure everything runs smoothly."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We can even guide you through the promotion of your exhibition stand via social media campaigns – creating a buzz and networking with attendees and fellow exhibitioners for maximum impact and exposure."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "design-print",
