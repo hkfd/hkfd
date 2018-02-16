@@ -970,7 +970,62 @@
     "thumbnail": {
       "name": "healthy-heroes-thumb",
       "alt": "Healthy Heroes"
-    }
+    },
+    "overview": [
+      "Creative Concepts",
+      "Illustration",
+      "Design and Print",
+      "Animation",
+      "Teaching Resources",
+      "Online Marketing"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The Healthy Heroes resource was developed by the Lancashire Healthy Schools Programme with the aim to raise awareness of healthy eating and physical activity.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With a brief to raise awareness of healthy eating and physical exercise, our talented team of creatives set to work conceptualising a team of healthy superheroes in order to appeal to the imaginations of the county’s children."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "The cartoon illustration and bright colours is designed to be eye catching and fun."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "healthy-heroes1" },
+              { "name": "healthy-heroes2" },
+              { "name": "healthy-heroes3" },
+              { "name": "healthy-heroes4" },
+              { "name": "healthy-heroes5" }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "cruden-group",
