@@ -52,6 +52,18 @@ export class ApiService {
       );
   }
 
+  getService(id: string): Observable<Service> {
+    return this.http
+      .get<Service[]>(this.services)
+      .pipe(
+        retry(3),
+        flatMap((services: Service[]) => services),
+        find((service: Service) => service.id === id),
+        tap((service: Service) => this.logger.log('getService', service)),
+        catchError(this.handleError<Service>('getService'))
+      );
+  }
+
   getCaseStudy(id: string): Observable<CaseStudy> {
     return this.http
       .get<CaseStudy[]>(this.caseStudies)

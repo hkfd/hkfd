@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'work',
     loadChildren: 'app/pages/work/work.module#WorkModule'
   },
+  {
+    path: 'service/:id',
+    loadChildren: 'app/pages/services/services.module#ServicesModule'
+  },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
