@@ -1,0 +1,14 @@
+<div id="intro-info">
+  <div id="info-text">
+    <h1>{{ content?.title }}</h1>
+    <div class="text">
+      <p *ngFor="let text of content?.intro">{{ text }}</p>
+    </div>
+  </div>
+  <div id="info-overview" *ngIf="content?.overview">
+    <span>WHAT WE DID FOR {{ content?.title }}</span>
+    <ul>
+      <li *ngFor="let service of content?.overview">{{ service }}</li>
+    </ul>
+  </div>
+</div>

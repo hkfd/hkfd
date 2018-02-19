@@ -1,0 +1,55 @@
+@import '../../../../styles';
+
+:host {
+  display: block;
+  @extend %container;
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+}
+
+h1 {
+  margin: 0;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+}
+
+#intro-info {
+  display: block;
+
+  @include sm {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #info-text {
+    margin: 0;
+
+    @include sm {
+      margin-right: 5%;
+    }
+
+    p:first-of-type {
+      margin-top: 0;
+      @extend %font-medium;
+      line-height: 1.4;
+    }
+  }
+
+  #info-overview {
+    margin: 0;
+
+    @include sm {
+      margin-left: 5%;
+      padding-left: 1em;
+      border-left: 1px solid $grey;
+    }
+
+    span {
+      @extend %font-heading;
+      @extend %font-small;
+    }
+  }
+}

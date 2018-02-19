@@ -40,8 +40,15 @@ figure {
 li,
 ul {
   list-style: none;
-  margin: 0;
   padding: 0;
+}
+
+ul {
+  margin: 0.5em 0;
+}
+
+li {
+  margin: 0.25em 0;
 }
 
 h1,
