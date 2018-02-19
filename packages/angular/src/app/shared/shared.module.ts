@@ -24,7 +24,8 @@ export {
   TextBlock,
   ImageBlock,
   GalleryBlock,
-  VideoBlock
+  VideoBlock,
+  AudioBlock
 } from './content';
 export { Image, Slider } from './images';
 export { Team } from './team';

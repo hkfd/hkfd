@@ -1,0 +1,12 @@
+@import '../../../../styles';
+
+:host {
+  display: block;
+  @extend %container;
+  margin: 5vh 0;
+}
+
+audio {
+  display: block;
+  width: 100%;
+}

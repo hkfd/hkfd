@@ -8,6 +8,7 @@ import { TextBlockComponent } from './text-block/text-block.component';
 import { GalleryBlockComponent } from './gallery-block/gallery-block.component';
 import { ImageBlockComponent } from './image-block/image-block.component';
 import { VideoBlockComponent } from './video-block/video-block.component';
+import { AudioBlockComponent } from './audio-block/audio-block.component';
 
 const routes: Routes = [{ path: '', component: PostComponent }];
 
@@ -18,7 +19,8 @@ const routes: Routes = [{ path: '', component: PostComponent }];
     TextBlockComponent,
     GalleryBlockComponent,
     ImageBlockComponent,
-    VideoBlockComponent
+    VideoBlockComponent,
+    AudioBlockComponent
   ]
 })
 export class PostModule {}

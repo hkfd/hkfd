@@ -14,6 +14,9 @@ export class VideoBlockComponent implements OnChanges {
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  // TODO: csp
+  // TODO: iframe security
+
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.data.currentValue || !changes.data.currentValue.id) return;
 

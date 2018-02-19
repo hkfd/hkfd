@@ -32,8 +32,12 @@ export interface VideoBlock extends Data {
   id: string;
 }
 
+export interface AudioBlock extends Data {
+  url: string;
+}
+
 export interface Data {
-  type: 'text' | 'image' | 'gallery' | 'video';
+  type: 'text' | 'image' | 'gallery' | 'video' | 'audio';
 }
 
 export interface Content {
