@@ -52,29 +52,19 @@ export class ApiService {
       );
   }
 
-  getService(id: string): Observable<Service> {
-    return this.http
-      .get<Service[]>(this.services)
-      .pipe(
-        retry(3),
-        flatMap((services: Service[]) => services),
-        find((service: Service) => service.id === id),
-        tap((service: Service) => this.logger.log('getService', service)),
-        catchError(this.handleError<Service>('getService'))
-      );
-  }
+  getPost(type: string, id: string): Observable<CaseStudy | Service> {
+    let url;
+    if (type === 'service') url = this.services;
+    if (type === 'work') url = this.caseStudies;
 
-  getCaseStudy(id: string): Observable<CaseStudy> {
     return this.http
-      .get<CaseStudy[]>(this.caseStudies)
+      .get<CaseStudy[] | Service[]>(url)
       .pipe(
         retry(3),
-        flatMap((caseStudies: CaseStudy[]) => caseStudies),
-        find((caseStudy: CaseStudy) => caseStudy.id === id),
-        tap((caseStudy: CaseStudy) =>
-          this.logger.log('getCaseStudy', caseStudy)
-        ),
-        catchError(this.handleError<CaseStudy>('getCaseStudy'))
+        flatMap((posts: any) => posts),
+        find((post: CaseStudy | Service) => post.id === id),
+        tap((post: CaseStudy | Service) => this.logger.log('getPost', post)),
+        catchError(this.handleError<CaseStudy | Service>('getPost'))
       );
   }
 

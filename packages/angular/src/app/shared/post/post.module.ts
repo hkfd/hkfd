@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../../shared/shared.module';
-import { ServiceComponent } from './service/service.component';
+import { PostComponent } from './post.component';
 
-const routes: Routes = [{ path: '', component: ServiceComponent }];
+const routes: Routes = [{ path: '', component: PostComponent }];
 
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
-  declarations: [ServiceComponent]
+  declarations: [PostComponent]
 })
-export class ServicesModule {}
+export class PostModule {}

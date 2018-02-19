@@ -15,8 +15,8 @@ const routes: Routes = [
     loadChildren: 'app/pages/work/work.module#WorkModule'
   },
   {
-    path: 'service/:id',
-    loadChildren: 'app/pages/services/services.module#ServicesModule'
+    path: ':type/:id',
+    loadChildren: 'app/shared/post/post.module#PostModule'
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
