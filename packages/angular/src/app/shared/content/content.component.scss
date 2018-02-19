@@ -1,10 +1,27 @@
 @import '../../../styles';
 
+$grey-light: #d7d8d6;
+$grey-dark: #5d5d5d;
+
 h2 {
   @extend %container;
   @extend %text;
 }
 
 .section {
-  margin: 5vh 0;
+  padding: 5vh 0;
+}
+
+@for $i from 1 through 3 {
+  :host(.layout-#{$i}) {
+    .section:nth-of-type(3n + #{$i + 2}) {
+      background: #fff;
+    }
+    .section:nth-of-type(3n + #{$i + 1}) {
+      background: $grey-light;
+    }
+    .section:nth-of-type(3n + #{$i}) {
+      background: $grey-dark;
+    }
+  }
 }

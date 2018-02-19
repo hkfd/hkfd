@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 import { Content } from '../shared.module';
 
@@ -9,4 +9,12 @@ import { Content } from '../shared.module';
 })
 export class ContentComponent {
   @Input() content: Content;
+  @HostBinding('class') layout: string;
+
+  ngOnInit() {
+    const randomInt = (min, max) =>
+      Math.floor(Math.random() * (max - min) + min);
+
+    this.layout = `layout-${randomInt(1, 3)}`;
+  }
 }

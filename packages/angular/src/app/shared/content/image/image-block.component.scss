@@ -1,5 +1,9 @@
 @import '../../../../styles';
 
+:host {
+  margin: 5vh 0;
+}
+
 :host:not([full-bleed]) {
   display: block;
   @extend %container;
