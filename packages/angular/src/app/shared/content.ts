@@ -28,8 +28,12 @@ export interface GalleryBlock extends Data {
   images: Image[];
 }
 
+export interface VideoBlock extends Data {
+  id: string;
+}
+
 export interface Data {
-  type: 'text' | 'image' | 'gallery';
+  type: 'text' | 'image' | 'gallery' | 'video';
 }
 
 export interface Content {

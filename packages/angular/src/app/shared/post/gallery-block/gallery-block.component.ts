@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Data } from '../../shared.module';
+import { GalleryBlock } from '../../shared.module';
 
 @Component({
   selector: 'gallery-block',
@@ -8,5 +8,5 @@ import { Data } from '../../shared.module';
   styleUrls: ['./gallery-block.component.scss']
 })
 export class GalleryBlockComponent {
-  @Input() data: Data;
+  @Input() data: GalleryBlock;
 }

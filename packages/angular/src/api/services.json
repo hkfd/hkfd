@@ -130,6 +130,10 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "video",
+            "id": "BW5eYEowNB4"
           }
         ]
       },
@@ -1090,6 +1094,14 @@
       "Take a look at our case studies and examples to see our talented team’s work, and check out our show reel below:"
     ],
     "content": [
+      {
+        "data": [
+          {
+            "type": "video",
+            "id": "kcd8L4fe28o"
+          }
+        ]
+      },
       {
         "title": "Traditional",
         "data": [

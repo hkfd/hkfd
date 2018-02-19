@@ -23,6 +23,7 @@
       <text-block *ngSwitchCase="'text'" [data]="block"></text-block>
       <image-block *ngSwitchCase="'image'" [data]="block" [attr.full-bleed]="block?.fullBleed"></image-block>
       <gallery-block *ngSwitchCase="'gallery'" [data]="block"></gallery-block>
+      <video-block *ngSwitchCase="'video'" [data]="block"></video-block>
     </ng-container>
   </ng-container>
 </section>

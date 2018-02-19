@@ -18,7 +18,14 @@ export { LoggerService } from './logger.service';
 export { Page } from './page';
 export { Service } from './service';
 export { CaseStudy } from './case-study';
-export { Content, Data, TextBlock, ImageBlock, GalleryBlock } from './content';
+export {
+  Content,
+  Data,
+  TextBlock,
+  ImageBlock,
+  GalleryBlock,
+  VideoBlock
+} from './content';
 export { Image, Slider } from './images';
 export { Team } from './team';
 

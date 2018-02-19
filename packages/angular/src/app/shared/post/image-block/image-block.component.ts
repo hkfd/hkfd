@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Data } from '../../shared.module';
+import { ImageBlock } from '../../shared.module';
 
 @Component({
   selector: 'image-block',
@@ -8,5 +8,5 @@ import { Data } from '../../shared.module';
   styleUrls: ['./image-block.component.scss']
 })
 export class ImageBlockComponent {
-  @Input() data: Data;
+  @Input() data: ImageBlock;
 }
