@@ -14,6 +14,7 @@ import { CloudinaryPipe } from '../pipes/cloudinary.pipe';
 import { Image } from '../shared.module';
 
 const Sizes = [
+  { width: 550, height: 300 },
   { width: 800, height: 533 },
   { width: 1200, height: 800 },
   { width: 1800, height: 1200 },

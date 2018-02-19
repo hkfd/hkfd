@@ -10,16 +10,9 @@ import {
 
 export const WorkAnimations = [
   trigger('caseStudyList', [
-    transition('* => 1', [
-      style({
-        transform: 'scale(0.9) translateY(40%)'
-      }),
-      animate(
-        '400ms ease',
-        style({
-          transform: 'scale(1) translateY(0)'
-        })
-      )
-    ])
+    state('1', style({ transform: 'none' })),
+    state('*', style({ transform: 'scale(0.9) translateY(40%)' })),
+
+    transition('* => 1', animate('400ms ease'))
   ])
 ];
