@@ -24,7 +24,7 @@
         <img src="{{ person?.image?.name | cloudinary: { width: 300 } }}" alt="{{ person?.image?.alt }}">
 
         <div class="person-info">
-          <h3>{{ person?.name }}</h3>
+          <h3>{{ person?.name | uppercase }}</h3>
           <span>{{ person?.position }}</span>
         </div>
       </div>

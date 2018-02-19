@@ -22,7 +22,7 @@
     <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]">
       <image full-height [image]="service?.thumbnail"></image>
       <div class="service-info">
-        <h3>{{ service?.title }}</h3>
+        <h3>{{ service?.title | uppercase }}</h3>
         <p>{{ service?.description }}</p>
       </div>
       <div class="service-more">

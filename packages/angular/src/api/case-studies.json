@@ -1,7 +1,7 @@
 [
   {
     "id": "wigan-council",
-    "title": "WIGAN COUNCIL",
+    "title": "Wigan Council",
     "sector": "Local Authorities",
     "featured": true,
     "colour": "black",
@@ -510,7 +510,7 @@
   },
   {
     "id": "wainhomes",
-    "title": "WAINHOMES",
+    "title": "Wainhomes",
     "sector": "Construction",
     "featured": true,
     "colour": "white",
@@ -771,7 +771,7 @@
 
   {
     "id": "priestley-college",
-    "title": "PRIESTLEY COLLEGE",
+    "title": "Priestley College",
     "sector": "Education",
     "featured": true,
     "colour": "black",
@@ -905,7 +905,7 @@
   },
   {
     "id": "sandcastle",
-    "title": "SANDCASTLE",
+    "title": "Sandcastle",
     "sector": "Leisure",
     "featured": true,
     "colour": "black",
@@ -1089,7 +1089,7 @@
   },
   {
     "id": "lutron",
-    "title": "LUTRON",
+    "title": "Lutron",
     "sector": "Manufacturing",
     "featured": true,
     "colour": "white",
@@ -1228,7 +1228,7 @@
   },
   {
     "id": "winfields-outdoors",
-    "title": "WINFIELDS OUTDOORS",
+    "title": "Winfields Outdoors",
     "sector": "Retail",
     "featured": true,
     "colour": "white",
@@ -1376,7 +1376,7 @@
   },
   {
     "id": "tomy",
-    "title": "TOMY",
+    "title": "Tomy",
     "featured": false,
     "colour": "black",
     "thumbnail": {
@@ -1483,7 +1483,7 @@
   },
   {
     "id": "vimto",
-    "title": "VIMTO",
+    "title": "Vimto",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -1666,7 +1666,7 @@
   },
   {
     "id": "galliford-try",
-    "title": "GALLIFORD TRY",
+    "title": "Galliford Try",
     "featured": false,
     "colour": "black",
     "thumbnail": {
@@ -1787,7 +1787,7 @@
   },
   {
     "id": "lloyd-motor-group",
-    "title": "LLOYD MOTOR GROUP",
+    "title": "Lloyd Motor Group",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2177,7 +2177,7 @@
   },
   {
     "id": "healthy-heroes",
-    "title": "HEALTHY HEROES",
+    "title": "Healthy Heroes",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2216,7 +2216,7 @@
   },
   {
     "id": "cruden-group",
-    "title": "CRUDEN GROUP",
+    "title": "Cruden Group",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2262,7 +2262,7 @@
   },
   {
     "id": "haven-funeral-services",
-    "title": "HAVEN FUNERAL SERVICES",
+    "title": "Haven Funeral Services",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2409,7 +2409,7 @@
   },
   {
     "id": "watermouth-castle",
-    "title": "WATERMOUTH CASTLE",
+    "title": "Watermouth Castle",
     "featured": false,
     "colour": "black",
     "thumbnail": {
@@ -2559,7 +2559,7 @@
   },
   {
     "id": "panaz",
-    "title": "PANAZ",
+    "title": "Panaz",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2606,7 +2606,7 @@
   },
   {
     "id": "helston-garages-group",
-    "title": "HELSTON GARAGES GROUP",
+    "title": "Helston Garages Group",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2799,7 +2799,7 @@
   },
   {
     "id": "chorley-remembers",
-    "title": "CHORLEY REMEMBERS",
+    "title": "Chorley Remembers",
     "featured": false,
     "colour": "white",
     "thumbnail": {
@@ -2929,7 +2929,7 @@
   },
   {
     "id": "crealy",
-    "title": "CREALY",
+    "title": "Crealy",
     "featured": false,
     "colour": "white",
     "thumbnail": {

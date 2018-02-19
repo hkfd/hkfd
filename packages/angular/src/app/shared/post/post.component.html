@@ -1,13 +1,13 @@
 <section id="intro">
   <div id="intro-info">
     <div id="info-text">
-      <h1>{{ post?.title }}</h1>
+      <h1>{{ post?.title | uppercase }}</h1>
       <div class="text">
         <p *ngFor="let text of post?.intro">{{ text }}</p>
       </div>
     </div>
     <div id="info-overview" *ngIf="post?.overview">
-      <span>WHAT WE DID FOR {{ post?.title }}</span>
+      <span>WHAT WE DID FOR {{ post?.title | uppercase }}</span>
       <ul>
         <li *ngFor="let service of post?.overview">{{ service }}</li>
       </ul>
