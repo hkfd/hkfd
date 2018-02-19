@@ -22,26 +22,10 @@
       "Video Production",
       "Merchandise"
     ],
+    "intro": [
+      "Inspiring Healthy Lifestyles is a social enterprise and charitable trust working in Wigan, Selby and Cannock Chase. They aim to provide the very best in leisure and culture, offering superb facilities for the public."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Inspiring Healthy Lifestyles is a social enterprise and charitable trust working in Wigan, Selby and Cannock Chase. They aim to provide the very best in leisure and culture, offering superb facilities for the public.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Print",
         "data": [
@@ -544,32 +528,13 @@
       "Email Marketing",
       "Promotional Items"
     ],
+    "intro": [
+      "Wainhomes is a market leading residential property development company in the United Kingdom. They offer homes in both the North West and South West.",
+      "Heckford have a very long and established working relationship with Wainhomes Group; and due to our excellent service on an endless number of projects, we have recently won a contract to redesign their North West Marketing Suites."
+    ],
     "content": [
       {
-        "title": "Overview",
         "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Wainhomes is a market leading residential property development company in the United Kingdom. They offer homes in both the North West and South West.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford have a very long and established working relationship with Wainhomes Group; and due to our excellent service on an endless number of projects, we have recently won a contract to redesign their North West Marketing Suites."
-                  }
-                ]
-              }
-            ]
-          },
           {
             "type": "gallery",
             "images": [
@@ -821,26 +786,10 @@
       "Internal Signage",
       "Photography"
     ],
+    "intro": [
+      "Priestley College is situated south of Warrington near Stockton Heath, offering a range of A-Levels, BTEC courses, vocational programmes and adult courses. In the last few years, we have worked closely with the college to achieve a fresh new branding approach, encouraging students to challenge themselves to achieve their goals."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Priestley College is situated south of Warrington near Stockton Heath, offering a range of A-Levels, BTEC courses, vocational programmes and adult courses. In the last few years, we have worked closely with the college to achieve a fresh new branding approach, encouraging students to challenge themselves to achieve their goals.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Print",
         "data": [
@@ -974,34 +923,11 @@
       "Email Marketing",
       "TV and Radio"
     ],
+    "intro": [
+      "Located in the famous seaside resort of Blackpool, Sandcastle Waterpark is the UK’s largest indoor waterpark with over 18 slides and attractions set in a tropical climate.",
+      "Heckford has proudly provided services for Sandcastle for the past 18 years. Over this period Sandcastle has won awards for Heckford’s design and production of brochures, billboards, TV commercials and signage for the UK’s no.1 waterpark."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Located in the famous seaside resort of Blackpool, Sandcastle Waterpark is the UK’s largest indoor waterpark with over 18 slides and attractions set in a tropical climate.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford has proudly provided services for Sandcastle for the past 18 years. Over this period Sandcastle has won awards for Heckford’s design and production of brochures, billboards, TV commercials and signage for the UK’s no.1 waterpark."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Logo Design",
         "data": [
@@ -1172,42 +1098,12 @@
       "alt": "Lutron"
     },
     "overview": ["ARCHITECT@WORK 2016", "Light + Building 2016", "ISE"],
+    "intro": [
+      "Lutron is the leader in the lighting control industry, providing over 15,000 products to their global customers.",
+      "Heckford started working with Lutron 5 years ago to produce modular stands for a product launch in London.",
+      "Now, due to our excellent working knowledge of technical stands, Heckford have been responsible for the design and build of many stands featured in large exhibitions across the world."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Lutron is the leader in the lighting control industry, providing over 15,000 products to their global customers.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford started working with Lutron 5 years ago to produce modular stands for a product launch in London."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Now, due to our excellent working knowledge of technical stands, Heckford have been responsible for the design and build of many stands featured in large exhibitions across the world."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "ARCHITECT@WORK 2016",
         "data": [
@@ -1346,34 +1242,11 @@
       "Cinematic Adverts",
       "Media Booking"
     ],
+    "intro": [
+      "Winfields Outdoors cater for excellent outdoor products such as tents, camping gear, footwear and waterproof clothing.",
+      "Heckford provide a range of services for the company to help increase brand awareness and seasonal promotions across their 8 stores in Barrow, Chester, Feckenham, Garforth, Haslingden, Hull, Keswick and Measham."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Winfields Outdoors cater for excellent outdoor products such as tents, camping gear, footwear and waterproof clothing.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford provide a range of services for the company to help increase brand awareness and seasonal promotions across their 8 stores in Barrow, Chester, Feckenham, Garforth, Haslingden, Hull, Keswick and Measham."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Design & Print",
         "data": [
@@ -1516,34 +1389,11 @@
       "Showroom Design",
       "CGI Visualisations"
     ],
+    "intro": [
+      "TOMY is a leading Japanese entertainment company that makes children’s toys and merchandise.",
+      "Back in 2010, TOMY invited Heckford to tender against four other companies for their exhibition work. Thanks to our expertise and innovative ideas; we were successful!"
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "TOMY is a leading Japanese entertainment company that makes children’s toys and merchandise.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Back in 2010, TOMY invited Heckford to tender against four other companies for their exhibition work. Thanks to our expertise and innovative ideas; we were successful!"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Exhibitions",
         "data": [
@@ -1641,26 +1491,10 @@
       "alt": "Vimto"
     },
     "overview": ["Design and Print", "Exhibitions", "Portable Stands"],
+    "intro": [
+      "Nichols plc is an international soft drinks business reaching sales in over 85 countries. Vimto was the first iconic brand, not just extremely popular in the UK, but around the world. Since 1908, the range of drinks has expanded greatly with 100% natural Feel Good, Levi Roots, Frozen Beverages such as Starslush and Icecream Shake, Panda and Sunkist."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Nichols plc is an international soft drinks business reaching sales in over 85 countries. Vimto was the first iconic brand, not just extremely popular in the UK, but around the world. Since 1908, the range of drinks has expanded greatly with 100% natural Feel Good, Levi Roots, Frozen Beverages such as Starslush and Icecream Shake, Panda and Sunkist.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Print",
         "data": [
@@ -1845,42 +1679,12 @@
       "Internal Signage",
       "External and Site Signage"
     ],
+    "intro": [
+      "Galliford Try is a FTSE 250 Business and one of the UK’s leading housebuilding and construction groups.",
+      "Top 10 housebuilder, Linden Homes is a subsidiary of Galliford Try; offering a distinctive range of new homes and properties throughout the UK.",
+      "Heckford have undertaken numerous projects for Galliford Try and Linden Homes, such as signage, media bookings, design and print; covering the North West, South West and Wales."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Galliford Try is a FTSE 250 Business and one of the UK’s leading housebuilding and construction groups.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Top 10 housebuilder, Linden Homes is a subsidiary of Galliford Try; offering a distinctive range of new homes and properties throughout the UK."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford have undertaken numerous projects for Galliford Try and Linden Homes, such as signage, media bookings, design and print; covering the North West, South West and Wales."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Internal Signage",
         "data": [
@@ -2002,42 +1806,12 @@
       "Photography",
       "Exhibitions"
     ],
+    "intro": [
+      "Lloyd Motor Group represents prestige brands, such as BMW, Alfa Romeo, Fiat, Honda, Jaguar, Land Rover, MINI and Volvo.",
+      "Heckford have created and implemented a range of innovative campaigns for Lloyd BMW and MINI in Blackpool, Carlisle, Cockermouth, Colne, Newcastle and South Lakes.",
+      "As always, our team had some great ideas and were raring to go with the various projects Lloyd needed; which included advertising, digital, direct mail, an exhibition stand and SMS/MMS."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Lloyd Motor Group represents prestige brands, such as BMW, Alfa Romeo, Fiat, Honda, Jaguar, Land Rover, MINI and Volvo.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford have created and implemented a range of innovative campaigns for Lloyd BMW and MINI in Blackpool, Carlisle, Cockermouth, Colne, Newcastle and South Lakes."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "As always, our team had some great ideas and were raring to go with the various projects Lloyd needed; which included advertising, digital, direct mail, an exhibition stand and SMS/MMS."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Digital Brochures",
         "data": [
@@ -2418,40 +2192,14 @@
       "Teaching Resources",
       "Online Marketing"
     ],
+    "intro": [
+      "The Healthy Heroes resource was developed by the Lancashire Healthy Schools Programme with the aim to raise awareness of healthy eating and physical activity.",
+      "With a brief to raise awareness of healthy eating and physical exercise, our talented team of creatives set to work conceptualising a team of healthy superheroes in order to appeal to the imaginations of the county’s children.",
+      "The cartoon illustration and bright colours is designed to be eye catching and fun."
+    ],
     "content": [
       {
-        "title": "Overview",
         "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "The Healthy Heroes resource was developed by the Lancashire Healthy Schools Programme with the aim to raise awareness of healthy eating and physical activity.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "With a brief to raise awareness of healthy eating and physical exercise, our talented team of creatives set to work conceptualising a team of healthy superheroes in order to appeal to the imaginations of the county’s children."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "The cartoon illustration and bright colours is designed to be eye catching and fun."
-                  }
-                ]
-              }
-            ]
-          },
           {
             "type": "gallery",
             "images": [
@@ -2476,32 +2224,13 @@
       "alt": "Cruden Group"
     },
     "overview": ["Website Design and Build"],
+    "intro": [
+      "Construction, repairs & maintenance, mechanical, electrical and renewable energy contractor operating within North West England.",
+      "Because of their extensive experience and high-quality level of service, they needed a professional website that reflected their company ethos and style."
+    ],
     "content": [
       {
-        "title": "Overview",
         "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Construction, repairs & maintenance, mechanical, electrical and renewable energy contractor operating within North West England.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Because of their extensive experience and high-quality level of service, they needed a professional website that reflected their company ethos and style."
-                  }
-                ]
-              }
-            ]
-          },
           {
             "type": "image",
             "image": {
@@ -2547,40 +2276,14 @@
       "Direct Mail",
       "Point of Sale"
     ],
+    "intro": [
+      "Haven Funeral Services is an independent company, operating funeral homes in West London and Hillingdon with an international business that provides funeral services throughout the UK.",
+      "We have recently built a strong relationship with Fred Hamer, a subsidiary company to Haven, that have been providing families in the North West with the best funeral care for almost 100 years. This prestige, family run business, put together bespoke packages from a wide range of services, such as floral arrangements, funeral vehicles, coffins and caskets, bereavement counselling and catering, to the highest standard.",
+      "We recently refreshed the brand personality of Haven Funeral Services, taking an alternative approach by introducing imagery that focused on people enjoying life. This uplifting feel indicates Haven have your future plans in control so you can concentrate on experiencing the now."
+    ],
     "content": [
       {
-        "title": "Overview",
         "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Haven Funeral Services is an independent company, operating funeral homes in West London and Hillingdon with an international business that provides funeral services throughout the UK.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "We have recently built a strong relationship with Fred Hamer, a subsidiary company to Haven, that have been providing families in the North West with the best funeral care for almost 100 years. This prestige, family run business, put together bespoke packages from a wide range of services, such as floral arrangements, funeral vehicles, coffins and caskets, bereavement counselling and catering, to the highest standard."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "We recently refreshed the brand personality of Haven Funeral Services, taking an alternative approach by introducing imagery that focused on people enjoying life. This uplifting feel indicates Haven have your future plans in control so you can concentrate on experiencing the now."
-                  }
-                ]
-              }
-            ]
-          },
           {
             "type": "image",
             "image": {
@@ -2719,34 +2422,11 @@
       "Illustration",
       "Website Design and Build"
     ],
+    "intro": [
+      "Watermouth Family Castle and Theme Park offers a fun and magical experience for all the family, based in Ilfracombe, North Devon. As well as the light, music and fountain displays at the underground Water Show Extravaganza, there is an array of rides and attractions such as Castle Treasures and Gnome Land.",
+      "After seeing the illustration and design work Heckford completed for other theme parks, Watermouth contacted us for help with their branding."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Watermouth Family Castle and Theme Park offers a fun and magical experience for all the family, based in Ilfracombe, North Devon. As well as the light, music and fountain displays at the underground Water Show Extravaganza, there is an array of rides and attractions such as Castle Treasures and Gnome Land.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "After seeing the illustration and design work Heckford completed for other theme parks, Watermouth contacted us for help with their branding."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Design and Print",
         "data": [
@@ -2887,26 +2567,10 @@
       "alt": "Panaz"
     },
     "overview": ["Exhibition Stand Design and Build"],
+    "intro": [
+      "Panaz is one of Europe’s leading suppliers of high-quality decorative fabrics and wall coverings for the Hospitality, Healthcare and Corporate sectors. For more than 25 years as UK fabric suppliers, Panaz has focused on design excellence and differentiation through technical innovation resulting in a diverse and comprehensive range of beautiful, exclusive and durable fire retardant furnishing fabrics."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Panaz is one of Europe’s leading suppliers of high-quality decorative fabrics and wall coverings for the Hospitality, Healthcare and Corporate sectors. For more than 25 years as UK fabric suppliers, Panaz has focused on design excellence and differentiation through technical innovation resulting in a diverse and comprehensive range of beautiful, exclusive and durable fire retardant furnishing fabrics.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Exhibition",
         "data": [
@@ -2957,42 +2621,12 @@
       "Outdoor Advertising",
       "Direct Mail"
     ],
+    "intro": [
+      "Starting out as a filling station and repairs workshop back in 1960, Helston Motor Group is now one of the 25 largest in Britain, and its 37 franchise dealerships provide customers throughout Cornwall, Devon, Somerset and Dorset with high-quality new and used cars and vans from thirteen different manufacturers; including BMW and MINI.",
+      "Heckford have created and implemented a range of innovative campaigns for their Westerly BMW and Westerly MINI dealerships in Barnstaple, Bridgwater, Dorchester, Exeter and Yeovil.",
+      "Our team have had the pleasure of working on Direct Mail, Email, MMS, Outdoor Advertising, Pay Per Click, Social Media and Video projects for Westerly Group; see examples of our projects below."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Starting out as a filling station and repairs workshop back in 1960, Helston Motor Group is now one of the 25 largest in Britain, and its 37 franchise dealerships provide customers throughout Cornwall, Devon, Somerset and Dorset with high-quality new and used cars and vans from thirteen different manufacturers; including BMW and MINI.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford have created and implemented a range of innovative campaigns for their Westerly BMW and Westerly MINI dealerships in Barnstaple, Bridgwater, Dorchester, Exeter and Yeovil."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Our team have had the pleasure of working on Direct Mail, Email, MMS, Outdoor Advertising, Pay Per Click, Social Media and Video projects for Westerly Group; see examples of our projects below."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Video",
         "data": [
@@ -3173,40 +2807,15 @@
       "alt": "Chorley Remembers"
     },
     "overview": ["Design", "Print", "Exhibition", "Character Development"],
+    "intro": [
+      "Chorley Remembers is a major heritage project devised, managed and delivered by Trustees behind the Chorley Pals Memorial, a registered charity no. 1121707, based in the Lancashire market town.",
+      "Heckford Exhibitions was appointed by charity Chorley Remembers to design and create an interactive exhibition commemorating local residents who fought in con icts since 1914.",
+      "The permanent exhibition, on display at Astley Hall in Chorley uses the latest technology to illustrate what life was like for the Chorley Pals, who were on the front line of the battle of the Somme in 1916. Visitors are able to use touch-screen technology to go on a journey through history, discovering the stories of the war heroes, as well as exploring a detailed recreation of what life was like in the trenches through realistic sets."
+    ],
     "content": [
       {
         "title": "Overview",
         "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Chorley Remembers is a major heritage project devised, managed and delivered by Trustees behind the Chorley Pals Memorial, a registered charity no. 1121707, based in the Lancashire market town.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford Exhibitions was appointed by charity Chorley Remembers to design and create an interactive exhibition commemorating local residents who fought in con icts since 1914."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "The permanent exhibition, on display at Astley Hall in Chorley uses the latest technology to illustrate what life was like for the Chorley Pals, who were on the front line of the battle of the Somme in 1916. Visitors are able to use touch-screen technology to go on a journey through history, discovering the stories of the war heroes, as well as exploring a detailed recreation of what life was like in the trenches through realistic sets."
-                  }
-                ]
-              }
-            ]
-          },
           {
             "type": "image",
             "image": {
@@ -3337,42 +2946,12 @@
       "CGI Video",
       "Website Takeover"
     ],
+    "intro": [
+      "Being highly experienced in the Travel and Tourism sector, Heckford were entrusted with Crealy Adventure Parks’ advertising needs.",
+      "Crealy Adventure Parks consisted of two award-winning family attractions, Devon’s Crealy Adventure Park in Exeter and Cornwall’s Crealy Adverture Park in Wadebridge, as well as camping and glamping site, Crealy Meadows.",
+      "We provided a wide range of services for Crealy, including; design, print, map illustration, signage, brochures, leaflets, posters, indoor and outdoor advertising, vehicle wraps, website design and maintenance, SEO, pay per click, social media, character creation and CGI video."
+    ],
     "content": [
-      {
-        "title": "Overview",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Being highly experienced in the Travel and Tourism sector, Heckford were entrusted with Crealy Adventure Parks’ advertising needs.",
-                    "attributes": { "bold": true }
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Crealy Adventure Parks consisted of two award-winning family attractions, Devon’s Crealy Adventure Park in Exeter and Cornwall’s Crealy Adverture Park in Wadebridge, as well as camping and glamping site, Crealy Meadows."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "We provided a wide range of services for Crealy, including; design, print, map illustration, signage, brochures, leaflets, posters, indoor and outdoor advertising, vehicle wraps, website design and maintenance, SEO, pay per click, social media, character creation and CGI video."
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         "title": "Design & Print",
         "data": [

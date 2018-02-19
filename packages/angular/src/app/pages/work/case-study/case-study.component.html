@@ -1,3 +1,9 @@
-<h1>{{ caseStudy?.title }}</h1>
+<section id="intro">
+
+  <h1>{{ caseStudy?.title }}</h1>
+
+  {{ caseStudy?.intro | json }}
+
+</section>
 
 <content [content]="caseStudy?.content"></content>

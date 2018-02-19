@@ -9,5 +9,6 @@ export interface CaseStudy {
   colour: string;
   thumbnail: Image;
   overview: string[];
+  intro: string[];
   content: Content[];
 }
