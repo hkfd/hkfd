@@ -1,1 +1,18 @@
-<content [content]="post"></content>
+<section id="intro">
+  <div id="intro-info">
+    <div id="info-text">
+      <h1>{{ post?.title }}</h1>
+      <div class="text">
+        <p *ngFor="let text of post?.intro">{{ text }}</p>
+      </div>
+    </div>
+    <div id="info-overview" *ngIf="post?.overview">
+      <span>WHAT WE DID FOR {{ post?.title }}</span>
+      <ul>
+        <li *ngFor="let service of post?.overview">{{ service }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<content [content]="post?.content"></content>

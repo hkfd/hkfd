@@ -1,8 +1,4 @@
-<section>
-  <intro [content]="content"></intro>
-</section>
-
-<section *ngFor="let section of content?.content">
+<section *ngFor="let section of content">
   <h2 *ngIf="section?.title">{{ section?.title }}</h2>
 
   <ng-container *ngFor="let block of section?.data">
