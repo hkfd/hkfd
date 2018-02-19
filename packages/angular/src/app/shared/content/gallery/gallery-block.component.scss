@@ -1,3 +1,16 @@
 :host {
-  display: flex;
+  overflow: hidden;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: auto;
+  white-space: nowrap;
+  height: 70vh;
+}
+
+image {
+  display: inline-block;
+  height: 100%;
+  min-width: 300px;
+  max-width: 70vw;
 }

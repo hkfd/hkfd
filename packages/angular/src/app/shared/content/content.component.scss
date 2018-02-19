@@ -1,1 +1,9 @@
+@import '../../../styles';
 
+h2 {
+  @extend %text;
+}
+
+.section {
+  margin: 5vh 0;
+}

@@ -1,1 +1,6 @@
+@import '../../../../styles';
 
+:host {
+  display: block;
+  @extend %text;
+}

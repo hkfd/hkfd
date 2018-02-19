@@ -99,12 +99,16 @@ h4 {
   }
 }
 
-.text {
+%text {
   overflow: hidden;
   max-width: 900px;
   margin: 0 auto;
   padding-left: $gutter / 2;
   padding-right: $gutter / 2;
+}
+
+.text {
+  @extend %text;
 }
 
 .button {
