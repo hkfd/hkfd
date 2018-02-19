@@ -8,7 +8,520 @@
     "thumbnail": {
       "name": "wigan-council-thumb",
       "alt": "Wigan Council"
-    }
+    },
+    "overview": [
+      "Design and Print",
+      "Local, National and Trade Press Advertising",
+      "Pay-Per-Click",
+      "Online Marketing",
+      "Social Media",
+      "Website Design and Build",
+      "Internal Signage",
+      "External Signage",
+      "Photography",
+      "Video Production",
+      "Merchandise"
+    ],
+    "content": [
+      {
+        "title": "Overview",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Inspiring Healthy Lifestyles is a social enterprise and charitable trust working in Wigan, Selby and Cannock Chase. They aim to provide the very best in leisure and culture, offering superb facilities for the public.",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Inspiring healthy lifestyles believe everyone can live a healthier, happier life through greater activity and creativity. That’s why since 2003 Inspiring healthy lifestyles has worked hard to inspire people to make better lifestyle choices and life changing products and services."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "A social enterprise and charitable trust working in Wigan (Greater Manchester), Selby (Yorkshire) and Cannock Chase, (Staffordshire), they aim to provide the very best in leisure and culture, creating opportunities for people to change their lives, investing in facilities and adding value for public benefit through fantastic facilities and innovative community programmes."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Their philosophy is simple: Be active, creative and healthy."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Because if everyone starts well, lives well and ages well, the quality of all our lives, and society in general, will be enriched. They manage 10 leisure centres, a museum and theatre, and parks on behalf of our council partners as well as hundreds of community projects to inspire people of all ages to be active whatever their ability."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "Heckford pitched to design and print"
+                  },
+                  {
+                    "text": "Inspiring Healthy Lifestyles",
+                    "url": "http://www.wlct.org/"
+                  },
+                  {
+                    "text": "latest publications."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-print1" },
+              { "name": "wigan-council-print2" },
+              { "name": "wigan-council-print3" },
+              { "name": "wigan-council-print4" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Social Media",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Social media platforms are ideal for short-term promotional offers, driving punchy messages and reaching a high number of potential customers. We recently and continue to provide Facebook and Instagram campaigns to introduce offers and incentives available at the various Inspiring Healthy Lifestyles gym sites. Our paid Facebook campaigns are targeted efficiently to ensure the adverts are reaching the right people to achieve the best results."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "After each campaign has run, we provided extensive reports, outlining the most popular demographics, reach and click through rate. This information is then utilised in future campaigns as we learn more about the audience we are targeting."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-social1"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Facebook campaigns are a great way to drive traffic to booking pages on your websites and increase your online conversions. Below are some examples of this in practice with a ‘Learn to Swim’ initiative from Inspiring Healthy Lifestyles and a FootGolf campaign that was a huge success, reaching around 36,000 users in just 10 days."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-social2"
+            }
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Below is an Instagram campaign to advertise the new skate park that opened at Howe Bridge Leisure Centre."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-social3"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Website",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We create unique landing pages as a destination for our social media campaigns, tailor made to help promote the latest offers and membership options available. Unique URL’s are a a great way to advertise new equipment, classes and deals."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-website1"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Photography",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Haigh High Ropes is a brilliant new adventure parks for adults and children with a head for heights. Our digital team have an eye for a good shot and spent the opening of this obstacle course taking high quality images to use in promotional material and social media campaigns. Image is everything and certainly helps make an impact when opening a new public attraction."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-photography1" },
+              { "name": "wigan-council-photography2" },
+              { "name": "wigan-council-photography3" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "PPC",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Google Adwords is perfect online advertising technique as it targets users who are physically searching for your services or industry."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We used a Google Remarketing campaign to show display/image adverts to past visitors of the various Inspiring Healthy Lifestyle leisure centre websites as well as targeting certain post codes around the area. These adverts then showed up when users browsed the internet and visited other websites."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Choosing a gym membership ideal for you can take time, especially when you are signing up for a contract, so showing potential customers compelling messages and words of encouragement will remind them of the offer in place and that they do need to act upon it."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-ppc1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-ppc2"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Video",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our digital team was approached by Inspiring Healthy Lifestyle for online marketing advice in the awakening of"
+                  },
+                  {
+                    "text": "Howe Bridge Leisure Centre",
+                    "url": "http://www.howebridge.org/"
+                  },
+                  {
+                    "text": "‘s new"
+                  },
+                  {
+                    "text": "indoor skate park",
+                    "url": "http://www.howebridge.org/ride/"
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Using our expertise, we put forward a full branding and digital media strategy for the campaign. Suggesting a fully integrated social and web campaign, using captivating videos and attractive imagery. Being a full-service agency, we are fortunate to have fantastic resources in order to create everything in-house, from concept to completion."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "It took no time at all to recruit local skating and biking enthusiasts to be the first to experience the new indoor skate park at Howe Bridge Leisure Centre. Our team conducted a professional photo and video shoot with the purpose of wowing their key audience across Instagram and Twitter. The video and photos went live across various platforms and both were a huge success."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "This was the first time the brand had tested the water with Instagram advertising; and together with a carefully targeted Twitter campaign. It was an experiment that not only helped them achieve an extremely successful launch but has continued to attract footfall to their new skate park."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Internal Signage",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Cannock Leisure Centre approached Heckford to refresh the branding within the reception area as well as wall vinyls and large format print to keep the ‘Be Yourself’ message consistent throughout."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "Cannock Leisure Centre Internal Signage",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-internal-signage-cannock1" },
+              { "name": "wigan-council-internal-signage-cannock2" },
+              { "name": "wigan-council-internal-signage-cannock3" }
+            ]
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We also produced the internal signage for the Haigh Woodland Park Courtyard Cafe & Tea Room, including wall vinyls and menu boards throughout."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-internal-signage-cannock4" },
+              { "name": "wigan-council-internal-signage-cannock5" },
+              { "name": "wigan-council-internal-signage-cannock6" },
+              { "name": "wigan-council-internal-signage-cannock7" }
+            ]
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "This dance and fitness studio revamp for Hindley Leisure Centre included large format print and internal poster casing with inspirational messages on, offering words of encouragement to members participating at the gym."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "Hindley Leisure Centre Internal Signage",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-internal-signage-hindley1" },
+              { "name": "wigan-council-internal-signage-hindley2" },
+              { "name": "wigan-council-internal-signage-hindley3" }
+            ]
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford took over all the internal signage for Howe Bridge Leisure Centre. This refit included banner stands, portable display systems, large format print, internal poster cases and mesh banners. We also produced digital wall vinyls for the spinning class studio, an alternative internal signage solution that looked incredibly effective in the dark."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text": "Howe Bridge Internal Signage",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-internal-signage-howe1" },
+              { "name": "wigan-council-internal-signage-howe2" },
+              { "name": "wigan-council-internal-signage-howe3" },
+              { "name": "wigan-council-internal-signage-howe4" },
+              { "name": "wigan-council-internal-signage-howe5" },
+              { "name": "wigan-council-internal-signage-howe6" },
+              { "name": "wigan-council-internal-signage-howe7" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "External Signage",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text": "Howe Bridge External Signage",
+                    "attributes": { "bold": true }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-external-signage-howe1" },
+              { "name": "wigan-council-external-signage-howe2" },
+              { "name": "wigan-council-external-signage-howe3" }
+            ]
+          },
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Haigh Woodland Park recently opened an outdoor adventure course ‘Haigh High Ropes’ for adults and children alike. As well as covering the launch of this attraction through online advertising and print, we also supplied a range of external signage for the course highlighting what is involved, safety messages as well as terms and conditions."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "wigan-council-external-signage-howe4" },
+              { "name": "wigan-council-external-signage-howe5" },
+              { "name": "wigan-council-external-signage-howe6" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Merchandise",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We provide branded merchandise for all promotional items throughout the gyms. Here we supplied branded disposables such as hot drink cups, cold drink cups, food labels and food packaging for the ‘Subs Bench’ Cafe at Howe Bridge Leisure Centre."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-merchandise1"
+            }
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "wigan-council-merchandise2"
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "wainhomes",
