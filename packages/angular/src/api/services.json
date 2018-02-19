@@ -45,7 +45,8 @@
             "type": "image",
             "image": {
               "name": "service-3d-cgi1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -77,7 +78,8 @@
             "type": "image",
             "image": {
               "name": "service-3d-cgi-cgi1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -133,7 +135,8 @@
             "type": "image",
             "image": {
               "name": "service-3d-cgi-construction1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -325,7 +328,8 @@
             "type": "image",
             "image": {
               "name": "service-exhibitions-modular1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -555,7 +559,8 @@
             "type": "image",
             "image": {
               "name": "service-design-print-concepts1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1061,7 +1066,8 @@
             "type": "image",
             "image": {
               "name": "service-advertising-newspapers1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1133,7 +1139,8 @@
             "type": "image",
             "image": {
               "name": "service-advertising-outdoor1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1215,7 +1222,8 @@
             "type": "image",
             "image": {
               "name": "service-advertising-mail1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       }
@@ -1293,7 +1301,8 @@
             "type": "image",
             "image": {
               "name": "service-illustration-traditional1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1452,7 +1461,8 @@
             "type": "image",
             "image": {
               "name": "service-signage-car1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },

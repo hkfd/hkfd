@@ -173,7 +173,8 @@
             "type": "image",
             "image": {
               "name": "wigan-council-social3"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -755,7 +756,8 @@
             "type": "image",
             "image": {
               "name": "wainhomes-emailmarketing1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
@@ -1109,7 +1111,8 @@
           },
           {
             "type": "image",
-            "image": { "name": "sandcastle-illustration2" }
+            "image": { "name": "sandcastle-illustration2" },
+            "fullBleed": true
           }
         ]
       },
@@ -1117,18 +1120,23 @@
         "title": "Social Media",
         "data": [
           {
-            "paragraph": [
+            "type": "text",
+            "data": [
               {
-                "text":
-                  "Heckford were responsible for running Sandcastle’s Social Media accounts. We created innovative social media posts and competitions for implementation across multiple platforms, which included bespoke artwork."
-              }
-            ]
-          },
-          {
-            "paragraph": [
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford were responsible for running Sandcastle’s Social Media accounts. We created innovative social media posts and competitions for implementation across multiple platforms, which included bespoke artwork."
+                  }
+                ]
+              },
               {
-                "text":
-                  "We developed several strategies such as the ‘Facebook Fan of the Week’ competitions which led to huge increases in viral spread with plenty of new and existing users getting involved by submitting their own photos and leaving positive comments, which in turn caused ripples far and wide across the social platforms."
+                "paragraph": [
+                  {
+                    "text":
+                      "We developed several strategies such as the ‘Facebook Fan of the Week’ competitions which led to huge increases in viral spread with plenty of new and existing users getting involved by submitting their own photos and leaving positive comments, which in turn caused ripples far and wide across the social platforms."
+                  }
+                ]
               }
             ]
           },
@@ -1751,7 +1759,8 @@
             "type": "image",
             "image": {
               "name": "vimto-exhibitions1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "text",
@@ -2151,7 +2160,8 @@
             "type": "image",
             "image": {
               "name": "lloyd-mail1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
@@ -2214,7 +2224,8 @@
             "type": "image",
             "image": {
               "name": "lloyd-mms1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -2507,7 +2518,8 @@
             "type": "image",
             "image": {
               "name": "cruden3"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
@@ -2573,7 +2585,8 @@
             "type": "image",
             "image": {
               "name": "haven1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
@@ -2684,7 +2697,8 @@
             "type": "image",
             "image": {
               "name": "haven-media1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       }
@@ -2824,7 +2838,8 @@
             "type": "image",
             "image": {
               "name": "watermouth-illustration2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -3202,7 +3217,8 @@
             "type": "image",
             "image": {
               "name": "chorley-remembers2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -3406,8 +3422,9 @@
           {
             "type": "image",
             "image": {
-              "name": "crealyoutdoor1"
-            }
+              "name": "crealy-outdoor1"
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
@@ -3557,7 +3574,8 @@
             "type": "image",
             "image": {
               "name": "crealy-illustration1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",

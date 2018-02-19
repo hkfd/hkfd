@@ -4,7 +4,7 @@
   <ng-container *ngFor="let block of section?.data">
     <div [ngSwitch]="block?.type">
       <text-block *ngSwitchCase="'text'" [data]="block"></text-block>
-      <image-block *ngSwitchCase="'image'" [data]="block"></image-block>
+      <image-block *ngSwitchCase="'image'" [data]="block" [attr.full-bleed]="block?.fullBleed"></image-block>
       <gallery-block *ngSwitchCase="'gallery'" [data]="block"></gallery-block>
     </div>
   </ng-container>

@@ -21,6 +21,7 @@ export interface TextBlock extends Data {
 
 export interface ImageBlock extends Data {
   image: Image;
+  fullBleed?: boolean;
 }
 
 export interface GalleryBlock extends Data {

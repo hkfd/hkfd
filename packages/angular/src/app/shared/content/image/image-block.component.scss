@@ -1,1 +1,6 @@
+@import '../../../../styles';
 
+:host:not([full-bleed]) {
+  display: block;
+  @extend %container;
+}

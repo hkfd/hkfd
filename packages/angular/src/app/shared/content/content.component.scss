@@ -1,6 +1,7 @@
 @import '../../../styles';
 
 h2 {
+  @extend %container;
   @extend %text;
 }
 
