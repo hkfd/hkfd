@@ -11,10 +11,6 @@ import { SliderComponent } from './slider/slider.component';
 import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
-import { ContentComponent } from './content/content.component';
-import { TextBlockComponent } from './content/text/text-block.component';
-import { GalleryBlockComponent } from './content/gallery/gallery-block.component';
-import { ImageBlockComponent } from './content/image/image-block.component';
 
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
@@ -33,19 +29,14 @@ export { Team } from './team';
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
-    ContentComponent,
     ImageComponent,
-    CloudinaryPipe,
-    TextBlockComponent,
-    GalleryBlockComponent,
-    ImageBlockComponent
+    CloudinaryPipe
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
-    ContentComponent,
     ImageComponent,
     CloudinaryPipe
   ],

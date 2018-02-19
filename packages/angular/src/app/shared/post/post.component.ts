@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -20,6 +20,8 @@ export class PostComponent implements OnInit {
   post$: Subscription;
   post: CaseStudy | Service;
 
+  @HostBinding('class') layout: string;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -36,6 +38,11 @@ export class PostComponent implements OnInit {
         this.post = post;
         this.titleService.setTitle(post.title);
       });
+
+    const randomInt = (min, max) =>
+      Math.floor(Math.random() * (max - min) + min);
+
+    this.layout = `layout-${randomInt(1, 3)}`;
   }
 
   ngOnDestroy() {
