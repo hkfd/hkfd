@@ -2,7 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { TitleService, ApiService, Career } from '../../shared/shared.module';
+import {
+  TitleService,
+  ApiService,
+  Career,
+  Image
+} from '../../shared/shared.module';
 
 @Component({
   selector: 'app-careers',
@@ -12,6 +17,11 @@ import { TitleService, ApiService, Career } from '../../shared/shared.module';
 export class CareersComponent implements OnInit, OnDestroy {
   careers$: Subscription;
   careers: Career[];
+
+  imageIntro: Image = {
+    name: '',
+    alt: ''
+  };
 
   constructor(
     private titleService: TitleService,

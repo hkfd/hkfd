@@ -1,1 +1,56 @@
+@import '../../../styles';
 
+:host {
+  display: block;
+  overflow: hidden;
+  background: $grey-light;
+}
+
+#intro {
+  margin: 10vh 0;
+  @extend %padding;
+  @extend %font-medium;
+  line-height: 1.4;
+
+  .text {
+    padding: 0;
+  }
+}
+
+#hiring {
+  @extend %container;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  background: #fff;
+}
+
+#careers {
+  overflow: hidden;
+  background: $black;
+  @extend %padding;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+
+  .career {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    margin: 1em 0;
+
+    @include sm {
+      height: 50vh;
+    }
+
+    @include md {
+      height: 60vh;
+    }
+
+    h3 {
+      position: absolute;
+      @extend %font-extralarge;
+      margin: 0;
+    }
+  }
+}

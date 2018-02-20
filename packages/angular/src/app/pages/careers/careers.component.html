@@ -1,3 +1,21 @@
-<div *ngFor="let career of careers">
-  {{ career?.title }}
-</div>
+<section id="intro">
+  <h1>FANCY JOINING THE TEAM?</h1>
+  <div class="text">
+    <p>Life was very different back in 1978. Whilst the tools of our trade have changed over the last four decades, the creativity behind our work hasn’t. It’s what drives us on. As an experienced full-service agency, our in-house team strives to create innovative ideas that really work. Nothing feels better than seeing results.</p>
+  </div>
+</section>
+
+<image full-height [image]="imageIntro"></image>
+
+<section id="hiring">
+  <h2>WE'RE CURRENTLY HIRING&hellip;</h2>
+  <p>If you talk to anyone on the Heckford team, we’re pretty sure that they’ll agree on Heckford being a pretty cool place to work. We’re definitely not your standard agency. You’ve obviously read over our site and seen who we work with, what we do and had a gander at what we get up to on a regular basis.</p>
+  <p>The next step is to view our current job vacancies (listed below)&hellip; but don’t worry, if you can’t see one that suits you please drop us an email at <a href="mailto:hello@heckford-advertising.co.uk">hello@heckford-advertising.co.uk</a> and we’ll keep you on file in case something pops up for you in the future.</p>
+</section>
+
+<section id="careers">
+  <a class="career" *ngFor="let career of careers" [routerLink]="['/career', career?.id]">
+    <h3>{{ career?.title | uppercase }}</h3>
+    <image full-height [image]="career?.thumbnail"></image>
+  </a>
+</section>
