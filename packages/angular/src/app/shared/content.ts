@@ -3,6 +3,7 @@ import { Image } from './shared.module';
 export interface TextAttributes {
   bold?: boolean;
   italic?: boolean;
+  heading?: boolean;
 }
 
 export interface Sentence {

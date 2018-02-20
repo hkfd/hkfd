@@ -14,7 +14,6 @@ export interface Service extends Post {
 export interface Post {
   id: string;
   title: string;
-  description: string;
   intro: TextBlock;
   thumbnail: Image;
   content: Content[];

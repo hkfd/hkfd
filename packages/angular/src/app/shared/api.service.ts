@@ -16,6 +16,7 @@ export class ApiService {
   services = 'api/services.json';
   caseStudies = 'api/case-studies.json';
   team = 'api/team.json';
+  careers = 'api/careers.json';
 
   constructor(private http: HttpClient, private logger: LoggerService) {}
 
@@ -55,6 +56,7 @@ export class ApiService {
     let url;
     if (type === 'service') url = this.services;
     if (type === 'work') url = this.caseStudies;
+    if (type === 'career') url = this.careers;
 
     return this.http
       .get<Post[]>(url)
