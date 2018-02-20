@@ -1294,7 +1294,35 @@
                 "paragraph": [
                   {
                     "text":
-                      "As well as an in-house winning design team at your disposal, we have; print ready artwork that can be turned around in only 24hrs, printers capable of printing on substrate (including wallpaper, canvas and even hubcaps!), free delivery within a 10 mile radius, 7 top of the range large format printers, 3 in-house laminators, we can cater for all print sizes, we have our own in-house delivery and installation service if required."
+                      "As well as an in-house winning design team at your disposal, we have;"
+                  }
+                ]
+              },
+              {
+                "list": [
+                  {
+                    "text":
+                      "Print ready artwork that can be turned around in only 24hrs"
+                  },
+                  {
+                    "text":
+                      "Printers capable of printing on substrate; including wallpaper, canvas and even hubcaps!"
+                  },
+                  {
+                    "text": "Free delivery within a 10 mile radius"
+                  },
+                  {
+                    "text": "7 top of the range large format printers"
+                  },
+                  {
+                    "text": "3 in-house laminators"
+                  },
+                  {
+                    "text": "We can cater for all print sizes"
+                  },
+                  {
+                    "text":
+                      "We have our own in-house delivery and installation service if required"
                   }
                 ]
               }
@@ -1340,10 +1368,26 @@
                 ]
               },
               {
-                "paragraph": [
+                "list": [
+                  {
+                    "text": "Free site survey"
+                  },
                   {
                     "text":
-                      "We offer; free site survey, bespoke design and build facilities for individual requirements, state of the art high quality print and finishing service, building wrap capabilities, specialist hoarding department, and fully qualified and experienced fitters"
+                      "Bespoke design and build facilities for individual requirements"
+                  },
+                  {
+                    "text":
+                      "State of the art high quality print and finishing service"
+                  },
+                  {
+                    "text": "Building wrap capabilities"
+                  },
+                  {
+                    "text": "Specialist hoarding department"
+                  },
+                  {
+                    "text": "Fully qualified and experienced fitters"
                   }
                 ]
               }
@@ -1390,10 +1434,24 @@
                 ]
               },
               {
-                "paragraph": [
+                "list": [
+                  {
+                    "text": "Catering for one-off prints to full shop fitting"
+                  },
                   {
                     "text":
-                      "We supply; catering for one-off prints to full shop fitting, bespoke design and build facilities for individual requirements, wallpaper printing and specialist canvas printing available, state of the art high quality print and finishing service, and fully qualified and experienced fitters"
+                      "Bespoke design and build facilities for individual requirements"
+                  },
+                  {
+                    "text":
+                      "Wallpaper printing and specialist canvas printing available"
+                  },
+                  {
+                    "text":
+                      "State of the art high quality print and finishing service"
+                  },
+                  {
+                    "text": "Fully qualified and experienced fitters"
                   }
                 ]
               }

@@ -1,12 +1,21 @@
-<p *ngFor="let paragraph of data?.data">
-  <ng-container *ngFor="let text of paragraph?.paragraph">
+<ng-container *ngFor="let content of data?.data">
+  <ng-container [ngSwitch]="true">
 
-    <ng-container [ngSwitch]="true">
-      <ng-template [ngSwitchCase]="text?.url?.length > 0"><a href="{{ text?.url }}" target="_blank" rel="nofollow">{{ text?.text }}</a></ng-template>
-      <ng-template [ngSwitchCase]="text?.attributes?.bold"><b>{{ text?.text }}</b></ng-template>
-      <ng-template [ngSwitchCase]="text?.attributes?.italic"><i>{{ text?.text }}</i></ng-template>
-      <ng-template ngSwitchDefault>{{ text?.text }}</ng-template>
-    </ng-container>
-    
+    <ng-template [ngSwitchCase]="!!content.list">
+      <ul>
+        <li *ngFor="let text of content?.list">
+          <text [text]="text"></text>
+        </li>
+      </ul>
+    </ng-template>
+
+    <ng-template ngSwitchDefault>
+      <p>
+        <ng-container *ngFor="let text of content?.paragraph">
+          <text [text]="text"></text>
+        </ng-container>
+       </p>
+    </ng-template>
+
   </ng-container>
-</p>
+</ng-container>

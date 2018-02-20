@@ -86,6 +86,11 @@ h4 {
   @extend %font-medium;
 }
 
+li {
+  list-style: disc;
+  margin-left: 1em;
+}
+
 .logo {
   width: 125px;
   @include md {

@@ -11,12 +11,13 @@ export interface Sentence {
   attributes?: TextAttributes;
 }
 
-export interface Paragraph {
-  paragraph: Sentence[];
+export interface TextData {
+  paragraph?: Sentence[];
+  list?: Sentence[];
 }
 
 export interface TextBlock extends Data {
-  data: Paragraph[];
+  data: TextData[];
 }
 
 export interface ImageBlock extends Data {
