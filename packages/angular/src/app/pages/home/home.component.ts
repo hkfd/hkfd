@@ -71,6 +71,41 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
+  imagesClients: Image[] = [
+    {
+      name: 'client-aston-martin',
+      alt: 'Aston Martin'
+    },
+    {
+      name: 'client-wainhomes',
+      alt: 'Wainhomes'
+    },
+    {
+      name: 'client-vimto',
+      alt: 'Vimto'
+    },
+    {
+      name: 'client-bmw',
+      alt: 'BMW'
+    },
+    {
+      name: 'client-lancashire-county-council',
+      alt: 'Lancashire County Council'
+    },
+    {
+      name: 'client-blackpool-council',
+      alt: 'Blackpool Council'
+    },
+    {
+      name: 'client-tomy',
+      alt: 'Tomy'
+    },
+    {
+      name: 'client-galliford-try',
+      alt: 'Galliford Try'
+    }
+  ];
+
   constructor(
     private titleService: TitleService,
     private apiService: ApiService

@@ -97,3 +97,27 @@
     }
   }
 }
+
+#clients {
+  margin: 5vh 0;
+
+  .text {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .button {
+    margin: 0;
+  }
+
+  #client-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @extend %container;
+
+    .client {
+      @include width($xs: 6, $sm: 4, $md: 3);
+    }
+  }
+}

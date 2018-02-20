@@ -33,3 +33,14 @@
 </section>
 
 <slider-work [caseStudies]="caseStudies" [autoplay]="true"></slider-work>
+
+<section id="clients">
+  <div class="text">
+    <h2>OUR CLIENTS</h2>
+    <p>Just a few of the brands that we have been privileged to work with over the years <a class="button" routerLink="/about">SEE MORE</a></p>
+  </div>
+
+  <div id="client-list">
+    <image class="client" *ngFor="let image of imagesClients" [image]="image"></image>
+  </div>
+</section>
