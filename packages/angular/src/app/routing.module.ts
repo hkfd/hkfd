@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: 'app/pages/work/work.module#WorkModule'
   },
   {
+    path: 'careers',
+    loadChildren: 'app/pages/careers/careers.module#CareersModule'
+  },
+  {
     path: ':type/:id',
     loadChildren: 'app/shared/post/post.module#PostModule'
   },
