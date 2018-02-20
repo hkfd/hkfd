@@ -16,7 +16,7 @@ export { ApiService } from './api.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
 export { Page } from './page';
-export { Post, Service, CaseStudy } from './post';
+export { Post, Service, CaseStudy, Career } from './post';
 export {
   Content,
   Data,

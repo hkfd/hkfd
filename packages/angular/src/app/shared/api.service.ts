@@ -7,7 +7,7 @@ import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
 import { Page } from './page';
-import { Post, Service, CaseStudy } from './post';
+import { Post, Service, CaseStudy, Career } from './post';
 import { Team } from './team';
 
 @Injectable()
@@ -49,6 +49,16 @@ export class ApiService {
         retry(3),
         tap((services: Service[]) => this.logger.log('getServices', services)),
         catchError(this.handleError<Service[]>('getServices', []))
+      );
+  }
+
+  getCareers(): Observable<Career[]> {
+    return this.http
+      .get<Career[]>(this.careers)
+      .pipe(
+        retry(3),
+        tap((careers: Career[]) => this.logger.log('getCareers', careers)),
+        catchError(this.handleError<Career[]>('getCareers', []))
       );
   }
 
