@@ -41,12 +41,6 @@ section {
       @include sm {
         margin-right: 5%;
       }
-
-      p:first-of-type {
-        margin-top: 0;
-        @extend %font-medium;
-        line-height: 1.4;
-      }
     }
 
     #info-overview {
@@ -56,6 +50,11 @@ section {
         margin-left: 5%;
         padding-left: 1em;
         border-left: 1px solid $grey;
+      }
+
+      li {
+        list-style: none;
+        margin-left: 0;
       }
 
       span {

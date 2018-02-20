@@ -1,5 +1,4 @@
-import { Image } from './shared.module';
-import { Content } from './shared.module';
+import { Image, Content, TextBlock } from './shared.module';
 
 export interface CaseStudy {
   id: string;
@@ -9,6 +8,6 @@ export interface CaseStudy {
   colour: string;
   thumbnail: Image;
   overview: string[];
-  intro: string[];
+  intro: TextBlock;
   content: Content[];
 }

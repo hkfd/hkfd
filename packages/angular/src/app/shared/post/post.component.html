@@ -2,9 +2,7 @@
   <div id="intro-info">
     <div id="info-text">
       <h1>{{ post?.title | uppercase }}</h1>
-      <div class="text">
-        <p *ngFor="let text of post?.intro">{{ text }}</p>
-      </div>
+      <text-block intro [data]="post?.intro"></text-block>
     </div>
     <div id="info-overview" *ngIf="post?.overview">
       <span>WHAT WE DID FOR {{ post?.title | uppercase }}</span>
