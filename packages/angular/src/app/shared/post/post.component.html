@@ -16,7 +16,7 @@
 </section>
 
 <section *ngFor="let section of post?.content">
-  <h2 *ngIf="section?.title">{{ section?.title }}</h2>
+  <h2 *ngIf="section?.title">{{ section?.title | uppercase }}</h2>
 
   <ng-container *ngFor="let block of section?.data">
     <ng-container [ngSwitch]="block?.type">

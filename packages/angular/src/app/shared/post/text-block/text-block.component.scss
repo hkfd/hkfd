@@ -2,6 +2,7 @@
 
 :host {
   display: block;
-  @extend %container;
+  @extend %padding;
   @extend %text;
+  margin-bottom: 1em;
 }

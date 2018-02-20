@@ -8,4 +8,5 @@ export interface Service {
   intro: string;
   thumbnail: Image;
   content: Content[];
+  overview: string; // Property not used, for AOT only
 }

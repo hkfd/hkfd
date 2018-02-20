@@ -1,19 +1,19 @@
 @import '../../../styles';
 
 $grey-light: #d7d8d6;
-$grey-dark: #5d5d5d;
+$grey-dark: #404040;
 
 h2 {
-  @extend %container;
+  padding-top: 1em;
+  @extend %padding;
   @extend %text;
 }
 
 section {
-  padding: 5vh 0;
+  overflow: hidden;
 }
 
 #intro {
-  @extend %container;
   padding-top: 15vh;
   padding-bottom: 5vh;
 
@@ -28,6 +28,7 @@ section {
 
   #intro-info {
     display: block;
+    @extend %padding;
 
     @include sm {
       display: flex;
@@ -35,7 +36,7 @@ section {
     }
 
     #info-text {
-      margin: 0;
+      margin: 20px 0;
 
       @include sm {
         margin-right: 5%;
@@ -49,7 +50,7 @@ section {
     }
 
     #info-overview {
-      margin: 0;
+      margin: 20px 0;
 
       @include sm {
         margin-left: 5%;
@@ -75,6 +76,7 @@ section {
     }
     section:nth-of-type(3n + #{$i}) {
       background: $grey-dark;
+      color: #fff;
     }
   }
 }

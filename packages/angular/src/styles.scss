@@ -95,14 +95,13 @@ h4 {
     width: 170px;
   }
   @include xl {
-    width: 220px;
+    width: 12vw;
   }
 }
 
 %text {
   overflow: hidden;
   max-width: 900px;
-  margin: 0 auto;
 }
 
 .text {
@@ -156,5 +155,9 @@ h4 {
   #intro-container {
     max-width: $max-width;
     margin: 0 auto;
+  }
+
+  p {
+    color: $grey;
   }
 }
