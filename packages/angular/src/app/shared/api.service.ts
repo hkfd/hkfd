@@ -7,8 +7,7 @@ import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
 import { Page } from './page';
-import { Service } from './service';
-import { CaseStudy } from './case-study';
+import { Post, Service, CaseStudy } from './post';
 import { Team } from './team';
 
 @Injectable()
@@ -52,19 +51,19 @@ export class ApiService {
       );
   }
 
-  getPost(type: string, id: string): Observable<CaseStudy | Service> {
+  getPost(type: string, id: string): Observable<Post> {
     let url;
     if (type === 'service') url = this.services;
     if (type === 'work') url = this.caseStudies;
 
     return this.http
-      .get<CaseStudy[] | Service[]>(url)
+      .get<Post[]>(url)
       .pipe(
         retry(3),
-        flatMap((posts: any) => posts),
-        find((post: CaseStudy | Service) => post.id === id),
-        tap((post: CaseStudy | Service) => this.logger.log('getPost', post)),
-        catchError(this.handleError<CaseStudy | Service>('getPost'))
+        flatMap((posts: Post[]) => posts),
+        find((post: Post) => post.id === id),
+        tap((post: Post) => this.logger.log('getPost', post)),
+        catchError(this.handleError<Post>('getPost'))
       );
   }
 

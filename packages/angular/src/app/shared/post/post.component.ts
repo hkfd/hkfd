@@ -4,12 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 
-import {
-  TitleService,
-  ApiService,
-  CaseStudy,
-  Service
-} from '../../shared/shared.module';
+import { TitleService, ApiService, Post } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-post',
@@ -18,7 +13,7 @@ import {
 })
 export class PostComponent implements OnInit {
   post$: Subscription;
-  post: CaseStudy | Service;
+  post: Post;
 
   @HostBinding('class') layout: string;
 
@@ -34,7 +29,7 @@ export class PostComponent implements OnInit {
       .switchMap((params: ParamMap) =>
         this.apiService.getPost(params.get('type'), params.get('id'))
       )
-      .subscribe((post: CaseStudy | Service) => {
+      .subscribe((post: Post) => {
         this.post = post;
         this.titleService.setTitle(post.title);
       });

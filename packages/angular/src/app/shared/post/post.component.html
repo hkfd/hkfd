@@ -4,7 +4,7 @@
       <h1>{{ post?.title | uppercase }}</h1>
       <text-block intro [data]="post?.intro"></text-block>
     </div>
-    <div id="info-overview" *ngIf="post?.overview">
+    <div id="info-overview" *ngIf="$any(post)?.overview">
       <span>WHAT WE DID FOR {{ post?.title | uppercase }}</span>
       <ul>
         <li *ngFor="let service of post?.overview">{{ service }}</li>
