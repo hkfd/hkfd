@@ -1,1 +1,1 @@
-<iframe *ngIf="url" type="text/html" [src]="url" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>
+<iframe type="text/html" [src]="url" lazy (loaded)="videoShow()" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>

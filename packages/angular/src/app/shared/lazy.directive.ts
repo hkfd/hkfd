@@ -9,7 +9,7 @@ import {
   ElementRef
 } from '@angular/core';
 
-import { Lazy } from './shared.module';
+import { Lazy } from './images';
 
 @Directive({
   selector: '[lazy]'
@@ -24,15 +24,16 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   intersectionCallback([entry, ...rest]) {
     if (!entry.isIntersecting) return;
 
+    this.loaded.emit(true);
+    this.observer.disconnect();
+
+    if (!this.data) return;
+
     this.renderer.setAttribute(
       this.el.nativeElement,
       this.data.attr,
       this.data.value.join()
     );
-
-    this.loaded.emit(true);
-
-    this.observer.disconnect();
   }
 
   ngAfterViewInit() {

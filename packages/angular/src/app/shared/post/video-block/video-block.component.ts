@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { VideoBlock } from '../../shared.module';
@@ -8,21 +8,21 @@ import { VideoBlock } from '../../shared.module';
   templateUrl: './video-block.component.html',
   styleUrls: ['./video-block.component.scss']
 })
-export class VideoBlockComponent implements OnChanges {
+export class VideoBlockComponent {
   @Input() data: VideoBlock;
   url: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl('');
+  }
 
   // TODO: csp
-  // TODO: iframe security
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (!changes.data.currentValue || !changes.data.currentValue.id) return;
-
+  videoShow() {
     const url = `https://www.youtube.com/embed/${
       this.data.id
     }?&origin=https://hkfd.co.uk`;
+
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }

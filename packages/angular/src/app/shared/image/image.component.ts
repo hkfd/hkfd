@@ -25,6 +25,8 @@ export class ImageComponent implements OnChanges {
   constructor(private cloudinary: CloudinaryPipe) {}
 
   imageLoaded() {
+    if (!this.image) return;
+
     this.image.loaded = true;
   }
 
