@@ -3,7 +3,7 @@
     "id": "administrator",
     "title": "Administrator",
     "thumbnail": {
-      "name": "3d-cgi-thumb",
+      "name": "Unknown-1",
       "alt": "3D & CGI"
     },
     "intro": {
@@ -40,7 +40,7 @@
           {
             "type": "image",
             "image": {
-              "name": "service-3d-cgi1"
+              "name": "Unknown-1"
             },
             "fullBleed": true
           }
@@ -187,7 +187,7 @@
     "id": "personal-assistant",
     "title": "Personal Assistant to Managing Director",
     "thumbnail": {
-      "name": "3d-cgi-thumb",
+      "name": "Unknown-3",
       "alt": "3D & CGI"
     },
     "intro": {
@@ -232,7 +232,7 @@
           {
             "type": "image",
             "image": {
-              "name": "service-3d-cgi1"
+              "name": "Unknown-3"
             },
             "fullBleed": true
           }
@@ -350,7 +350,7 @@
     "id": "digital-marketing-executive",
     "title": "Digital Marketing Executive",
     "thumbnail": {
-      "name": "3d-cgi-thumb",
+      "name": "Unknown-4",
       "alt": "3D & CGI"
     },
     "intro": {
@@ -395,7 +395,7 @@
           {
             "type": "image",
             "image": {
-              "name": "service-3d-cgi1"
+              "name": "Unknown-4"
             },
             "fullBleed": true
           }
@@ -557,7 +557,7 @@
     "id": "telesales-executive",
     "title": "Telesales Executive",
     "thumbnail": {
-      "name": "3d-cgi-thumb",
+      "name": "Unknown-5",
       "alt": "3D & CGI"
     },
     "intro": {
@@ -594,7 +594,7 @@
           {
             "type": "image",
             "image": {
-              "name": "service-3d-cgi1"
+              "name": "Unknown-5"
             },
             "fullBleed": true
           }
@@ -739,7 +739,7 @@
     "id": "agency-sales-representative",
     "title": "Agency Sales Representative",
     "thumbnail": {
-      "name": "3d-cgi-thumb",
+      "name": "Unknown-2",
       "alt": "3D & CGI"
     },
     "intro": {
@@ -776,7 +776,7 @@
           {
             "type": "image",
             "image": {
-              "name": "service-3d-cgi1"
+              "name": "Unknown-2"
             },
             "fullBleed": true
           }

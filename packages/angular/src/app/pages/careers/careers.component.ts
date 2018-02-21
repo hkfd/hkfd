@@ -19,7 +19,7 @@ export class CareersComponent implements OnInit, OnDestroy {
   careers: Career[];
 
   imageIntro: Image = {
-    name: '',
+    name: 'Unknown',
     alt: ''
   };
 

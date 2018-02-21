@@ -129,7 +129,8 @@
             "type": "image",
             "image": {
               "name": "wigan-council-social1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "text",
@@ -148,7 +149,8 @@
             "type": "image",
             "image": {
               "name": "wigan-council-social2"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "text",
@@ -192,7 +194,8 @@
             "type": "image",
             "image": {
               "name": "wigan-council-website1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -258,13 +261,15 @@
             "type": "image",
             "image": {
               "name": "wigan-council-ppc1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
             "image": {
               "name": "wigan-council-ppc2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -689,7 +694,8 @@
             "type": "image",
             "image": {
               "name": "wainhomes-website1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -729,13 +735,15 @@
             "type": "image",
             "image": {
               "name": "wainhomes-social1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
             "image": {
               "name": "wainhomes-social2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1026,7 +1034,8 @@
             "type": "image",
             "image": {
               "name": "sandcastle-logodesign1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1138,7 +1147,8 @@
           },
           {
             "type": "image",
-            "image": { "name": "sandcastle-social1" }
+            "image": { "name": "sandcastle-social1" },
+            "fullBleed": true
           }
         ]
       },
@@ -2092,7 +2102,8 @@
             "type": "image",
             "image": {
               "name": "lloyd-eshot1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "text",
@@ -2111,7 +2122,8 @@
             "type": "image",
             "image": {
               "name": "lloyd-eshot2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -2279,7 +2291,8 @@
             "type": "image",
             "image": {
               "name": "lloyd-advertising1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -2577,7 +2590,8 @@
             "type": "image",
             "image": {
               "name": "haven2"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "text",
@@ -2770,7 +2784,8 @@
             "type": "image",
             "image": {
               "name": "watermouth-design-print1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "gallery",
@@ -2811,7 +2826,8 @@
             "type": "image",
             "image": {
               "name": "watermouth-illustration1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
@@ -2850,7 +2866,8 @@
             "type": "image",
             "image": {
               "name": "watermouth-website1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       }
@@ -3359,7 +3376,8 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-design1" }
+            "image": { "name": "crealy-design1" },
+            "fullBleed": true
           }
         ]
       },
@@ -3438,13 +3456,15 @@
             "type": "image",
             "image": {
               "name": "crealy-social1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
             "image": {
               "name": "crealy-social2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -3466,7 +3486,8 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-payperclick1" }
+            "image": { "name": "crealy-payperclick1" },
+            "fullBleed": true
           }
         ]
       },

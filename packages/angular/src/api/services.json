@@ -603,7 +603,8 @@
             "type": "image",
             "image": {
               "name": "service-design-print-identity1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       }
@@ -686,13 +687,15 @@
             "type": "image",
             "image": {
               "name": "service-digital1"
-            }
+            },
+            "fullBleed": true
           },
           {
             "type": "image",
             "image": {
               "name": "service-digital2"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1348,7 +1351,8 @@
             "type": "image",
             "image": {
               "name": "service-illustration-technical1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
