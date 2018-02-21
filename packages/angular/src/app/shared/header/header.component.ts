@@ -13,7 +13,6 @@ export class HeaderComponent {
   pages = [
     { title: 'ABOUT', url: '/about' },
     { title: 'OUR WORK', url: '/work' },
-    { title: 'NEWS', url: '/news' },
     { title: 'CAREERS', url: '/careers' },
     { title: 'CONTACT', url: '/contact' }
   ];

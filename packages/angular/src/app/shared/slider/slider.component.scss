@@ -26,15 +26,15 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
 }
 
 .slider-prev,
 .slider-next {
-  width: 50%;
+  position: relative;
   height: 100%;
   padding: 8px;
   background: none;
+  z-index: 2;
 }
 
 .slider-prev {

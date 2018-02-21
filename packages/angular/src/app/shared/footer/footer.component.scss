@@ -47,15 +47,14 @@
 
     .location {
       margin: 10px 0;
-      font-weight: bold;
       color: $grey;
 
       @include sm {
-        align-self: flex-end;
         padding: 0 ($gutter / 2);
       }
 
       a {
+        @extend %font-bold;
         transition: color 150ms ease;
 
         &:hover,
@@ -65,7 +64,6 @@
       }
 
       address {
-        font-weight: normal;
         margin: 20px 0;
 
         @include sm {
