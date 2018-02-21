@@ -1,5 +1,11 @@
 @import '../../../styles';
 
+h1,
+h2 {
+  @extend %font-display;
+  margin-bottom: 0;
+}
+
 #intro {
   overflow: hidden;
   @extend %container-full;
@@ -46,7 +52,6 @@
   }
 
   h2 {
-    @extend %font-display;
     margin: 0.25em 0;
     color: #fff;
   }
@@ -104,10 +109,6 @@
   .text {
     text-align: center;
     margin: 0 auto;
-  }
-
-  .button {
-    margin: 0;
   }
 
   #client-list {

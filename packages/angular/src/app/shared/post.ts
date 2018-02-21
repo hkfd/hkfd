@@ -11,8 +11,6 @@ export interface Service extends Post {
   description: string;
 }
 
-export interface Career extends Post {}
-
 export interface Post {
   id: string;
   title: string;

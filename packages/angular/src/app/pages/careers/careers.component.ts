@@ -19,8 +19,13 @@ export class CareersComponent implements OnInit, OnDestroy {
   careers: Career[];
 
   imageIntro: Image = {
-    name: 'Unknown',
-    alt: ''
+    name: 'careers-intro',
+    alt: 'Careers'
+  };
+
+  imageCareer: Image = {
+    name: 'career',
+    alt: 'Heckford studio'
   };
 
   constructor(

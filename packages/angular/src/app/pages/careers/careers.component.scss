@@ -18,39 +18,53 @@
 }
 
 #hiring {
-  @extend %container;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  background: #fff;
-}
-
-#careers {
-  overflow: hidden;
-  background: $black;
   @extend %padding;
   padding-top: 5vh;
   padding-bottom: 5vh;
+  background: #fff;
+  text-align: center;
+
+  .text {
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+#careers {
+  display: flex;
+  flex-wrap: wrap;
+  background: $black;
+  color: #fff;
 
   .career {
-    position: relative;
     display: flex;
+    align-content: center;
     align-items: center;
-    justify-content: center;
-    height: 40vh;
-    margin: 1em 0;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
 
     @include sm {
-      height: 50vh;
+      width: 50%;
     }
 
-    @include md {
-      height: 60vh;
+    .career-info {
+      position: relative;
+      margin: 8vh 5vw;
+      z-index: 1;
+
+      h3 {
+        @extend %font-extralarge;
+        margin: 0;
+      }
     }
 
-    h3 {
+    image {
       position: absolute;
-      @extend %font-extralarge;
-      margin: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
   }
 }

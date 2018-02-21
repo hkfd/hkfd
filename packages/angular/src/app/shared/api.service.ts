@@ -7,8 +7,9 @@ import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
 import { Page } from './page';
-import { Post, Service, CaseStudy, Career } from './post';
+import { Post, Service, CaseStudy } from './post';
 import { Team } from './team';
+import { Career } from './career';
 
 @Injectable()
 export class ApiService {
@@ -66,7 +67,6 @@ export class ApiService {
     let url;
     if (type === 'service') url = this.services;
     if (type === 'work') url = this.caseStudies;
-    if (type === 'career') url = this.careers;
 
     return this.http
       .get<Post[]>(url)

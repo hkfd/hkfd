@@ -31,29 +31,46 @@
     @include sm {
       display: flex;
       justify-content: space-between;
+      margin: 0 -($gutter / 2);
     }
   }
 
-  #info-contact {
-    margin: 10px 0;
-    font-weight: bold;
-    color: $grey;
+  #info-locations {
+    display: block;
 
-    a {
-      transition: color 150ms ease;
-
-      &:hover,
-      &:active {
-        color: #000;
-      }
+    @include sm {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 -($gutter / 2);
+      padding: 0 ($gutter / 2);
     }
 
-    address {
-      font-weight: normal;
-      margin: 20px 0;
+    .location {
+      margin: 10px 0;
+      font-weight: bold;
+      color: $grey;
 
       @include sm {
-        margin: 20px 0 0;
+        align-self: flex-end;
+        padding: 0 ($gutter / 2);
+      }
+
+      a {
+        transition: color 150ms ease;
+
+        &:hover,
+        &:active {
+          color: #000;
+        }
+      }
+
+      address {
+        font-weight: normal;
+        margin: 20px 0;
+
+        @include sm {
+          margin: 20px 0 0;
+        }
       }
     }
   }
@@ -63,6 +80,10 @@
     align-items: flex-end;
     justify-content: space-between;
     margin: 10px 0;
+
+    @include sm {
+      padding: 0 ($gutter / 2);
+    }
 
     a {
       @include sm {
