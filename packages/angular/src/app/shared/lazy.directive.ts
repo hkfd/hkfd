@@ -3,6 +3,8 @@ import {
   AfterViewInit,
   OnDestroy,
   Input,
+  Output,
+  EventEmitter,
   Renderer2,
   ElementRef
 } from '@angular/core';
@@ -14,6 +16,7 @@ import { Lazy } from './shared.module';
 })
 export class LazyDirective implements AfterViewInit, OnDestroy {
   @Input('lazy') data: Lazy;
+  @Output() loaded: EventEmitter<boolean> = new EventEmitter();
   private observer: IntersectionObserver;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
@@ -26,6 +29,8 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
       this.data.attr,
       this.data.value.join()
     );
+
+    this.loaded.emit(true);
 
     this.observer.disconnect();
   }

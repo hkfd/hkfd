@@ -24,6 +24,10 @@ export class ImageComponent implements OnChanges {
 
   constructor(private cloudinary: CloudinaryPipe) {}
 
+  imageLoaded() {
+    this.image.loaded = true;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.image.currentValue) return;
 
