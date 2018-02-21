@@ -9,3 +9,8 @@ export interface Slider extends Image {
   prev?: number;
   next?: number;
 }
+
+export interface Lazy {
+  attr: string;
+  value: string[];
+}

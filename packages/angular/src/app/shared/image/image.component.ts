@@ -1,17 +1,7 @@
-import {
-  Component,
-  OnChanges,
-  SimpleChanges,
-  AfterViewInit,
-  OnDestroy,
-  Input,
-  ViewChild,
-  Renderer2,
-  ElementRef
-} from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 import { CloudinaryPipe } from '../pipes/cloudinary.pipe';
-import { Image } from '../shared.module';
+import { Image, Lazy } from '../shared.module';
 
 const Sizes = [
   { width: 550, height: 300 },
@@ -27,61 +17,24 @@ const Sizes = [
   styleUrls: ['./image.component.scss'],
   providers: [CloudinaryPipe]
 })
-export class ImageComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class ImageComponent implements OnChanges {
   @Input() image: Image;
-  @ViewChild('img') img: ElementRef;
-  private observer: IntersectionObserver;
   src: string;
-  srcset: string[];
+  srcset: Lazy;
 
-  constructor(
-    private renderer: Renderer2,
-    private el: ElementRef,
-    private cloudinary: CloudinaryPipe
-  ) {}
+  constructor(private cloudinary: CloudinaryPipe) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.image.currentValue) return;
 
     this.src = this.cloudinary.transform(this.image.name, { width: '64' });
-    this.srcset = Sizes.map(
-      size =>
-        this.cloudinary.transform(this.image.name, size) +
-        ` ${size.width - 400}w`
-    );
-  }
-
-  intersectionCallback([entry, ...rest]) {
-    if (!entry.isIntersecting) return;
-
-    this.image.loaded = true;
-    this.renderer.setAttribute(
-      this.img.nativeElement,
-      'srcset',
-      this.srcset.join()
-    );
-    this.renderer.removeAttribute(this.img.nativeElement, 'data-srcset');
-
-    this.observer.disconnect();
-  }
-
-  ngAfterViewInit() {
-    if (!this.img && !this.img.nativeElement) return;
-
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0
+    this.srcset = {
+      attr: 'srcset',
+      value: Sizes.map(
+        size =>
+          this.cloudinary.transform(this.image.name, size) +
+          ` ${size.width - 400}w`
+      )
     };
-    this.observer = new IntersectionObserver(
-      this.intersectionCallback.bind(this),
-      options
-    );
-
-    this.observer.observe(this.img.nativeElement);
-  }
-
-  ngOnDestroy() {
-    if (this.observer) this.observer.disconnect();
   }
 }

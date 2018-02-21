@@ -11,6 +11,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
 import { CloudinaryPipe } from './pipes/cloudinary.pipe';
+import { LazyDirective } from './lazy.directive';
 
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
@@ -28,7 +29,7 @@ export {
   Sentence,
   DuoBlock
 } from './content';
-export { Image, Slider } from './images';
+export { Image, Slider, Lazy } from './images';
 export { Team } from './team';
 export { Career } from './career';
 
@@ -40,7 +41,8 @@ export { Career } from './career';
     SliderComponent,
     SliderWorkComponent,
     ImageComponent,
-    CloudinaryPipe
+    CloudinaryPipe,
+    LazyDirective
   ],
   exports: [
     HeaderComponent,
