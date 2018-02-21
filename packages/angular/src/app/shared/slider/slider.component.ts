@@ -23,7 +23,7 @@ export class SliderComponent implements OnChanges {
   currentIndex: number;
 
   @Input() autoplay: boolean = false;
-  @Input() delay: number = 4000;
+  @Input() delay: number = 2000;
 
   @Input()
   set images(images: Slider[]) {

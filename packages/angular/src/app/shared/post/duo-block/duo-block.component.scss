@@ -1,0 +1,10 @@
+@import '../../../../styles';
+
+:host {
+  display: block;
+
+  @include sm {
+    display: flex;
+    height: 70vh;
+  }
+}

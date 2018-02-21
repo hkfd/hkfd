@@ -38,8 +38,12 @@ export interface AudioBlock extends Data {
   url: string;
 }
 
+export interface DuoBlock extends Data {
+  images: Image[];
+}
+
 export interface Data {
-  type: 'text' | 'image' | 'gallery' | 'video' | 'audio';
+  type: 'text' | 'image' | 'gallery' | 'video' | 'audio' | 'duo';
 }
 
 export interface Content {

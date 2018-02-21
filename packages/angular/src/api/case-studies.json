@@ -126,40 +126,24 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "wigan-council-social1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "text",
-            "data": [
+            "type": "duo",
+            "images": [
               {
-                "paragraph": [
-                  {
-                    "text":
-                      "Facebook campaigns are a great way to drive traffic to booking pages on your websites and increase your online conversions. Below are some examples of this in practice with a ‘Learn to Swim’ initiative from Inspiring Healthy Lifestyles and a FootGolf campaign that was a huge success, reaching around 36,000 users in just 10 days."
-                  }
-                ]
+                "name": "wigan-council-social1"
+              },
+              {
+                "name": "wigan-council-social2"
               }
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "wigan-council-social2"
-            },
-            "fullBleed": true
-          },
-          {
             "type": "text",
             "data": [
               {
                 "paragraph": [
                   {
                     "text":
-                      "Below is an Instagram campaign to advertise the new skate park that opened at Howe Bridge Leisure Centre."
+                      "Facebook campaigns are a great way to drive traffic to booking pages on your websites and increase your online conversions. Above are some examples of this in practice with a ‘Learn to Swim’ initiative from Inspiring Healthy Lifestyles and a FootGolf campaign that was a huge success, reaching around 36,000 users in just 10 days. Below is an Instagram campaign to advertise the new skate park that opened at Howe Bridge Leisure Centre."
                   }
                 ]
               }
@@ -258,18 +242,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "wigan-council-ppc1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "wigan-council-ppc2"
-            },
-            "fullBleed": true
+            "type": "duo",
+            "images": [
+              {
+                "name": "wigan-council-ppc1"
+              },
+              {
+                "name": "wigan-council-ppc2"
+              }
+            ]
           }
         ]
       },

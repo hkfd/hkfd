@@ -25,7 +25,8 @@ export {
   GalleryBlock,
   VideoBlock,
   AudioBlock,
-  Sentence
+  Sentence,
+  DuoBlock
 } from './content';
 export { Image, Slider } from './images';
 export { Team } from './team';

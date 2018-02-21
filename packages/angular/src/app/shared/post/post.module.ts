@@ -10,6 +10,7 @@ import { ImageBlockComponent } from './image-block/image-block.component';
 import { VideoBlockComponent } from './video-block/video-block.component';
 import { AudioBlockComponent } from './audio-block/audio-block.component';
 import { TextComponent } from './text-block/text/text.component';
+import { DuoBlockComponent } from './duo-block/duo-block.component';
 
 const routes: Routes = [{ path: '', component: PostComponent }];
 
@@ -22,7 +23,8 @@ const routes: Routes = [{ path: '', component: PostComponent }];
     ImageBlockComponent,
     VideoBlockComponent,
     AudioBlockComponent,
-    TextComponent
+    TextComponent,
+    DuoBlockComponent
   ]
 })
 export class PostModule {}
