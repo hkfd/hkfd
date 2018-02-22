@@ -1,0 +1,62 @@
+[
+  {
+    "name": "client-alexander-dennis",
+    "alt": "Alexander Dennis"
+  },
+  {
+    "name": "client-bch",
+    "alt": "Blackpool Coastal Housing"
+  },
+  {
+    "name": "client-blackpool-council",
+    "alt": "Blackpool Council"
+  },
+  {
+    "name": "client-bolton-school",
+    "alt": "Bolton School"
+  },
+  {
+    "name": "client-churchwood-finance-group",
+    "alt": "Churchwood Finance Group"
+  },
+  {
+    "name": "client-cobble",
+    "alt": "Cobble"
+  },
+  {
+    "name": "client-cruden",
+    "alt": "Cruden"
+  },
+  {
+    "name": "client-espirit",
+    "alt": "Espirit"
+  },
+  {
+    "name": "client-evan",
+    "alt": "Evan"
+  },
+  {
+    "name": "client-melrose",
+    "alt": "Melrose"
+  },
+  {
+    "name": "client-mini",
+    "alt": "MINI"
+  },
+  {
+    "name": "client-myerscough",
+    "alt": "Myerscough College"
+  },
+  {
+    "name": "client-priestley-college",
+    "alt": "Priestley College"
+  },
+  {
+    "name": "client-ribble-valley",
+    "alt": "Ribble Valley Borough Council"
+  },
+  {
+    "name": "client-uclan",
+    "alt": "University of Central Lancashire"
+  }
+]

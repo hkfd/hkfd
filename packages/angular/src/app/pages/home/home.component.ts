@@ -4,16 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-  query,
-  stagger
-} from '@angular/animations';
-
-import {
   TitleService,
   ApiService,
   Page,
@@ -35,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   caseStudies: CaseStudy[];
 
   services$: Observable<Service[]>;
+  clients$: Observable<Image[]>;
 
   imagesIntro: Image[] = [
     {
@@ -71,41 +62,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  imagesClients: Image[] = [
-    {
-      name: 'client-aston-martin',
-      alt: 'Aston Martin'
-    },
-    {
-      name: 'client-wainhomes',
-      alt: 'Wainhomes'
-    },
-    {
-      name: 'client-vimto',
-      alt: 'Vimto'
-    },
-    {
-      name: 'client-bmw',
-      alt: 'BMW'
-    },
-    {
-      name: 'client-lancashire-county-council',
-      alt: 'Lancashire County Council'
-    },
-    {
-      name: 'client-blackpool-council',
-      alt: 'Blackpool Council'
-    },
-    {
-      name: 'client-tomy',
-      alt: 'Tomy'
-    },
-    {
-      name: 'client-galliford-try',
-      alt: 'Galliford Try'
-    }
-  ];
-
   constructor(
     private titleService: TitleService,
     private apiService: ApiService
@@ -128,6 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       );
 
     this.services$ = this.apiService.getServices();
+    this.clients$ = this.apiService.getClients();
   }
 
   ngOnDestroy() {

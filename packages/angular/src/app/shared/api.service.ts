@@ -10,6 +10,7 @@ import { Page } from './page';
 import { Post, Service, CaseStudy } from './post';
 import { Team } from './team';
 import { Career } from './career';
+import { Image } from './images';
 
 @Injectable()
 export class ApiService {
@@ -18,6 +19,7 @@ export class ApiService {
   caseStudies = 'api/case-studies.json';
   team = 'api/team.json';
   careers = 'api/careers.json';
+  clients = 'api/clients.json';
 
   constructor(private http: HttpClient, private logger: LoggerService) {}
 
@@ -98,6 +100,16 @@ export class ApiService {
         retry(3),
         tap((team: Team[]) => this.logger.log('getTeam', team)),
         catchError(this.handleError<Team[]>('getTeam', []))
+      );
+  }
+
+  getClients(): Observable<Image[]> {
+    return this.http
+      .get<Image[]>(this.clients)
+      .pipe(
+        retry(3),
+        tap((clients: Image[]) => this.logger.log('getClients', clients)),
+        catchError(this.handleError<Image[]>('getClients', []))
       );
   }
 

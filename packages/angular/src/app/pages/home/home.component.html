@@ -41,6 +41,6 @@
   </div>
 
   <div id="client-list">
-    <image class="client" *ngFor="let image of imagesClients" [image]="image"></image>
+    <image class="client" *ngFor="let image of clients$ | async" [image]="image"></image>
   </div>
 </section>
