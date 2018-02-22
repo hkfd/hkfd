@@ -7,36 +7,20 @@ import {
   HostListener
 } from '@angular/core';
 
-import { SliderAnimations } from './slider.animations';
-import { Slider } from '../shared.module';
+import { Image } from '../shared.module';
 
 @Component({
   selector: 'slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss'],
-  animations: SliderAnimations
+  styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnChanges {
   private timer;
-  private _images: Slider[];
-  directionOffset: number = 1;
-  currentIndex: number;
+  currentIndex: number = 0;
 
   @Input() autoplay: boolean = false;
   @Input() delay: number = 2000;
-
-  @Input()
-  set images(images: Slider[]) {
-    this._images = images.map((image: Slider, index, { length }) => {
-      image.prev = index === 0 ? length - 1 : index - 1;
-      image.next = index === length - 1 ? 0 : index + 1;
-
-      return image;
-    });
-  }
-  get images(): Slider[] {
-    return this._images;
-  }
+  @Input() images: Image[];
 
   @HostListener('mouseenter')
   mouseEnter() {
@@ -48,13 +32,12 @@ export class SliderComponent implements OnChanges {
   }
 
   changeImage(offset: number = 1) {
-    this.directionOffset = offset;
-    const direction = offset === 1 ? 'next' : 'prev';
+    const index = this.currentIndex + offset;
 
-    this.images[this.currentIndex].active = false;
+    if (index < 0) return (this.currentIndex = this.images.length - 1);
+    if (index >= this.images.length) return (this.currentIndex = 0);
 
-    this.currentIndex = this.images[this.currentIndex][direction];
-    this.images[this.currentIndex].active = true;
+    this.currentIndex = index;
   }
 
   startTimer() {
@@ -71,8 +54,6 @@ export class SliderComponent implements OnChanges {
       Math.floor(Math.random() * (max - min) + min);
 
     this.currentIndex = randomInt(0, this.images.length);
-    this.images[this.currentIndex].active = true;
-
     this.startTimer();
   }
 

@@ -5,6 +5,8 @@
 
 <ng-content></ng-content>
 
-<div class="slide" *ngFor="let image of images" [@imageState]="{ value: image?.active, params: { direction: (directionOffset * 100) }}">
-  <image full-height [image]="image"></image>
+<div id="slide-container" [style.transform]="'translateX(' + (this.currentIndex * -100) + '%)'">
+  <div class="slide" *ngFor="let image of images">
+    <image full-height [image]="image"></image>
+  </div>
 </div>

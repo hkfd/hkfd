@@ -29,7 +29,7 @@ export {
   Sentence,
   DuoBlock
 } from './content';
-export { Image, Slider, Lazy } from './images';
+export { Image, Lazy } from './images';
 export { Team } from './team';
 export { Career } from './career';
 
