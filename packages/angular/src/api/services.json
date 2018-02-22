@@ -1776,6 +1776,44 @@
     "thumbnail": {
       "name": "photography-thumb",
       "alt": "Photography"
-    }
+    },
+    "intro": {
+      "type": "text",
+      "data": [
+        {
+          "paragraph": [
+            {
+              "text":
+                "Creative photography for products, advertising, merchandising, fashion, food, brochures, on line & social media, the list goes on and on."
+            }
+          ]
+        },
+        {
+          "paragraph": [
+            {
+              "text":
+                "Heckford are proud to provide our clients with a wide variety of expert commercial photography services, combining creative thinking with attention to detail to create high quality and original photography solutions in the studio or on location."
+            }
+          ]
+        }
+      ]
+    },
+    "content": [
+      {
+        "data": [
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-photography1" },
+              { "name": "service-photography2" },
+              { "name": "service-photography3" },
+              { "name": "service-photography4" },
+              { "name": "service-photography5" },
+              { "name": "service-photography6" }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]

@@ -41,7 +41,7 @@
     @include sm {
       display: flex;
       justify-content: space-between;
-      margin: 0 -($gutter / 2);
+      margin: 0 -2em;
       padding: 0 ($gutter / 2);
     }
 
@@ -50,7 +50,11 @@
       color: $grey;
 
       @include sm {
-        padding: 0 ($gutter / 2);
+        padding: 0 2em;
+      }
+
+      h5 {
+        color: #000;
       }
 
       a {

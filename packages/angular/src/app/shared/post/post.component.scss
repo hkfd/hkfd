@@ -4,9 +4,10 @@ $grey-light: #d7d8d6;
 $grey-dark: #404040;
 
 h2 {
-  padding-top: 1em;
   @extend %padding;
   @extend %text;
+  margin: 7vh auto -5vh;
+  text-align: center;
 }
 
 section {
@@ -19,11 +20,6 @@ section {
 
   h1 {
     margin: 0;
-  }
-
-  .text {
-    margin: 0;
-    padding: 0;
   }
 
   #intro-info {
@@ -40,6 +36,10 @@ section {
 
       @include sm {
         margin-right: 5%;
+      }
+
+      text-block {
+        text-align: left;
       }
     }
 

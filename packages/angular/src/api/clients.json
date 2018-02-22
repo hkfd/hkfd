@@ -1,5 +1,33 @@
 [
   {
+    "name": "client-aston-martin",
+    "alt": "Aston Martin"
+  },
+  {
+    "name": "client-bmw",
+    "alt": "BMW"
+  },
+  {
+    "name": "client-galliford-try",
+    "alt": "Galliford Try"
+  },
+  {
+    "name": "client-lancashire-county-council",
+    "alt": "Lancashire County Council"
+  },
+  {
+    "name": "client-tomy",
+    "alt": "Tomy"
+  },
+  {
+    "name": "client-vimto",
+    "alt": "Vimto"
+  },
+  {
+    "name": "client-wainhomes",
+    "alt": "Wainhomes"
+  },
+  {
     "name": "client-alexander-dennis",
     "alt": "Alexander Dennis"
   },
