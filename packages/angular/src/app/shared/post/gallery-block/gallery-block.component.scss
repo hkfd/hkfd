@@ -1,6 +1,7 @@
 :host {
   overflow: hidden;
   display: block;
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   width: auto;
@@ -14,4 +15,37 @@ image {
   min-width: 275px;
   max-width: 70vw;
   margin: 0 0.5em;
+}
+
+#swipe {
+  position: absolute;
+  top: 50%;
+  top: calc(50% - 1em);
+  left: 50%;
+  background: #fff;
+  width: 2em;
+  height: 2em;
+  z-index: 4;
+  border-radius: 50%;
+  animation: swipe 1.7s linear infinite;
+  transform-origin: left;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translateX(150%) scaleX(1);
+  }
+  20% {
+    transform: translateX(0) scaleX(1.2);
+  }
+  40% {
+    transform: translateX(-150%) scaleX(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
