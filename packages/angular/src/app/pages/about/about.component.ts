@@ -2,12 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import {
-  TitleService,
-  ApiService,
-  Team,
-  Image
-} from '../../shared/shared.module';
+import { TitleService, ApiService, Team } from '../../shared/shared.module';
+import { AboutImages } from './about.images';
 
 @Component({
   selector: 'app-about',
@@ -18,10 +14,7 @@ export class AboutComponent implements OnInit, OnDestroy {
   team$: Subscription;
   team: Team[];
 
-  introImage: Image = {
-    name: 'heckford-studio',
-    alt: 'Heckford studio'
-  };
+  images = AboutImages;
 
   constructor(
     private titleService: TitleService,

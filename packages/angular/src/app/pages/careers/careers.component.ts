@@ -2,12 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import {
-  TitleService,
-  ApiService,
-  Career,
-  Image
-} from '../../shared/shared.module';
+import { TitleService, ApiService, Career } from '../../shared/shared.module';
+import { CareersImages } from './careers.images';
 
 @Component({
   selector: 'app-careers',
@@ -18,15 +14,7 @@ export class CareersComponent implements OnInit, OnDestroy {
   careers$: Subscription;
   careers: Career[];
 
-  imageIntro: Image = {
-    name: 'careers-intro',
-    alt: 'Careers'
-  };
-
-  imageCareer: Image = {
-    name: 'career',
-    alt: 'Heckford studio'
-  };
+  images = CareersImages;
 
   constructor(
     private titleService: TitleService,

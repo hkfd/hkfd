@@ -11,6 +11,7 @@ import {
   CaseStudy,
   Image
 } from '../../shared/shared.module';
+import { HomeImages } from './home.images';
 
 @Component({
   selector: 'app-home',
@@ -27,40 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   services$: Observable<Service[]>;
   clients$: Observable<Image[]>;
 
-  imagesIntro: Image[] = [
-    {
-      name: 'heckford-building',
-      alt: 'Heckford – Preston'
-    },
-    {
-      name: 'heckford-reception1',
-      alt: 'Heckford reception'
-    },
-    {
-      name: 'heckford-reception3',
-      alt: 'Heckford reception'
-    },
-    {
-      name: 'heckford-accounts',
-      alt: 'Heckford accounts'
-    },
-    {
-      name: 'heckford-print1',
-      alt: 'Heckford printing'
-    },
-    {
-      name: 'heckford-reception2',
-      alt: 'Heckford reception'
-    },
-    {
-      name: 'heckford-print2',
-      alt: 'Heckford printing'
-    },
-    {
-      name: 'heckford-studio',
-      alt: 'Heckford studio'
-    }
-  ];
+  images = HomeImages;
 
   constructor(
     private titleService: TitleService,
