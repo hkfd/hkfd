@@ -11,8 +11,6 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 10vh;
-  @extend %font-heading;
-  @extend %font-small;
   color: #fff;
 }
 
@@ -39,7 +37,11 @@ nav {
   }
 
   .nav-link {
+    @extend %font-heading;
+    @extend %font-small;
     white-space: nowrap;
+    opacity: 1;
+
     @include md {
       align-self: center;
       margin: 0 0.5em;

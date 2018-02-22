@@ -22,6 +22,13 @@ h1 {
   justify-content: center;
   height: 40vh;
   margin: 1em 0;
+  opacity: 1;
+
+  &:hover,
+  &:active {
+    transition: transform 200ms ease;
+    transform: scale(0.99);
+  }
 
   @include sm {
     height: 50vh;

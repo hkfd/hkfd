@@ -85,6 +85,13 @@ h2 {
       margin: ($gutter / 2) 0;
       background: #fff;
       background-clip: content-box;
+      opacity: 1;
+      transition: transform 200ms ease;
+
+      &:hover,
+      &:active {
+        transform: scale(0.99);
+      }
 
       image {
         max-height: 25vh;
@@ -94,6 +101,11 @@ h2 {
         height: 100%;
         margin: 1em;
         margin-bottom: 0;
+        @extend %font-body;
+
+        h3 {
+          margin: 0.5em 0;
+        }
       }
 
       .service-more {

@@ -107,6 +107,27 @@ li {
   margin-left: 1em;
 }
 
+a {
+  @extend %font-bold;
+  opacity: 0.85;
+  transition: opacity 150ms ease;
+
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
+}
+
+button {
+  opacity: 0.85;
+  transition: opacity 150ms ease;
+
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
+}
+
 b {
   @extend %font-bold;
 }

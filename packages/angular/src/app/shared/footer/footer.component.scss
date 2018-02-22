@@ -57,16 +57,6 @@
         color: #000;
       }
 
-      a {
-        @extend %font-bold;
-        transition: color 150ms ease;
-
-        &:hover,
-        &:active {
-          color: #000;
-        }
-      }
-
       address {
         margin: 20px 0;
 
@@ -88,12 +78,13 @@
     }
 
     a {
+      opacity: 0.5;
       @include sm {
         margin: 0.5em;
       }
 
-      &:hover img,
-      &:active img {
+      &:hover,
+      &:active {
         opacity: 1;
       }
     }
@@ -101,8 +92,6 @@
     img {
       height: 15px;
       width: auto;
-      opacity: 0.5;
-      transition: opacity 150ms ease;
     }
   }
 }
