@@ -47,38 +47,3 @@
   float: right;
   text-align: right;
 }
-
-.arrow {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  color: #fff;
-  width: 2em;
-  height: 2em;
-  border-width: 3px 3px 0 0;
-  border-style: solid;
-  margin: 10px;
-  padding: 5px;
-  pointer-events: none;
-
-  &:before {
-    content: '';
-    right: 0;
-    top: -3px;
-    position: absolute;
-    height: 3px;
-    box-shadow: inset 0 0 0 32px;
-    transform: rotate(-45deg);
-    width: 3em;
-    transform-origin: right top;
-    cursor: pointer;
-  }
-
-  &.left {
-    transform: rotate(-135deg);
-  }
-
-  &.right {
-    transform: rotate(45deg);
-  }
-}

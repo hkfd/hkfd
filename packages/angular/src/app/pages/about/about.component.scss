@@ -24,35 +24,45 @@
     color: $grey;
     line-height: 1.3;
   }
-}
 
-#people {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px 0;
-  text-align: left;
+  #people {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    text-align: left;
 
-  .person {
-    @include width($xs: 6, $sm: 4, $md: 3, $xl: 2);
-    margin: ($gutter / 2) 0;
+    .person {
+      @include width($xs: 6, $sm: 4, $md: 3, $xl: 2);
+      margin: ($gutter / 2) 0;
 
-    .person-container {
-      position: relative;
-    }
+      .person-container {
+        position: relative;
+      }
 
-    .person-info {
-      position: absolute;
-      top: 0;
-      padding: 0.5em;
+      .person-info {
+        position: absolute;
+        top: 0;
+        padding: 0.5em;
 
-      h3 {
-        line-height: 1;
-        margin: 0;
+        h4 {
+          line-height: 1;
+          margin: 0;
+        }
+      }
+
+      .button {
+        margin: 0.25em 0;
       }
     }
+  }
 
-    .button {
-      margin: 0.25em 0;
+  #join {
+    @extend %font-large;
+    text-align: left;
+
+    h3 {
+      @extend %font-extralarge;
+      margin: 0;
     }
   }
 }

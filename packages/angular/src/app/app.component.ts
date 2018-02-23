@@ -20,7 +20,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router$ = this.router.events.subscribe(event => {
       if (!(event instanceof NavigationEnd)) return;
 
-      this.renderer.setProperty(document.body, 'scrollTop', 0);
+      const scrollEl = document.scrollingElement || document.documentElement;
+      this.renderer.setProperty(scrollEl, 'scrollTop', 0);
 
       ga('set', 'title', 'Heckford');
       ga('set', 'page', event.urlAfterRedirects);

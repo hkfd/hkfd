@@ -24,21 +24,16 @@
         <img src="{{ person?.image?.name | cloudinary: { width: 300 } }}" alt="{{ person?.image?.alt }}">
 
         <div class="person-info">
-          <h3>{{ person?.name | uppercase }}</h3>
+          <h4>{{ person?.name | uppercase }}</h4>
           <span>{{ person?.position }}</span>
         </div>
       </div>
     </div>
-
-    <a class="person" routerLink="/contact">
-      <div class="person-container">
-        <img src="{{ 'person' | cloudinary: { width: 300 } }}" alt="Person">
-        <div class="person-info">
-          <h3>JOIN OUR TEAM</h3>
-          <span class="button">VIEW OUR VACANCIES</span>
-        </div>
-      </div>
-    </a>
-
   </div>
+
+  <div id="join">
+    <h3>JOIN OUR TEAM</h3>
+    <a class="button" routerLink="/careers">VIEW OUR VACANCIES</a>
+  </div>
+  
 </section>

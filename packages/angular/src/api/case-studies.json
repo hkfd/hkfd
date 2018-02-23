@@ -1,13 +1,13 @@
 [
   {
-    "id": "wigan-council",
-    "title": "Wigan Council",
+    "id": "inspiring-healthy-lifestyles",
+    "title": "Inspiring Healthy Lifestyles",
     "sector": "Local Authorities",
     "featured": true,
     "colour": "black",
     "thumbnail": {
-      "name": "wigan-council-thumb",
-      "alt": "Wigan Council"
+      "name": "inspiring-healthy-lifestyles-thumb",
+      "alt": "Inspiring Healthy Lifestyles"
     },
     "overview": [
       "Design and Print",
@@ -93,10 +93,10 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-print1" },
-              { "name": "wigan-council-print2" },
-              { "name": "wigan-council-print3" },
-              { "name": "wigan-council-print4" }
+              { "name": "inspiring-healthy-lifestyles-print1" },
+              { "name": "inspiring-healthy-lifestyles-print2" },
+              { "name": "inspiring-healthy-lifestyles-print3" },
+              { "name": "inspiring-healthy-lifestyles-print4" }
             ]
           }
         ]
@@ -129,10 +129,10 @@
             "type": "duo",
             "images": [
               {
-                "name": "wigan-council-social1"
+                "name": "inspiring-healthy-lifestyles-social1"
               },
               {
-                "name": "wigan-council-social2"
+                "name": "inspiring-healthy-lifestyles-social2"
               }
             ]
           },
@@ -152,7 +152,7 @@
           {
             "type": "image",
             "image": {
-              "name": "wigan-council-social3"
+              "name": "inspiring-healthy-lifestyles-social3"
             },
             "fullBleed": true
           }
@@ -177,7 +177,7 @@
           {
             "type": "image",
             "image": {
-              "name": "wigan-council-website1"
+              "name": "inspiring-healthy-lifestyles-website1"
             },
             "fullBleed": true
           }
@@ -202,9 +202,9 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-photography1" },
-              { "name": "wigan-council-photography2" },
-              { "name": "wigan-council-photography3" }
+              { "name": "inspiring-healthy-lifestyles-photography1" },
+              { "name": "inspiring-healthy-lifestyles-photography2" },
+              { "name": "inspiring-healthy-lifestyles-photography3" }
             ]
           }
         ]
@@ -245,10 +245,10 @@
             "type": "duo",
             "images": [
               {
-                "name": "wigan-council-ppc1"
+                "name": "inspiring-healthy-lifestyles-ppc1"
               },
               {
-                "name": "wigan-council-ppc2"
+                "name": "inspiring-healthy-lifestyles-ppc2"
               }
             ]
           }
@@ -338,9 +338,15 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-internal-signage-cannock1" },
-              { "name": "wigan-council-internal-signage-cannock2" },
-              { "name": "wigan-council-internal-signage-cannock3" }
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock1"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock2"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock3"
+              }
             ]
           },
           {
@@ -359,23 +365,23 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-internal-signage-cannock4" },
-              { "name": "wigan-council-internal-signage-cannock5" },
-              { "name": "wigan-council-internal-signage-cannock6" },
-              { "name": "wigan-council-internal-signage-cannock7" }
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock4"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock5"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock6"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-cannock7"
+              }
             ]
           },
           {
             "type": "text",
             "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "This dance and fitness studio revamp for Hindley Leisure Centre included large format print and internal poster casing with inspirational messages on, offering words of encouragement to members participating at the gym."
-                  }
-                ]
-              },
               {
                 "paragraph": [
                   {
@@ -383,15 +389,29 @@
                     "attributes": { "bold": true }
                   }
                 ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "This dance and fitness studio revamp for Hindley Leisure Centre included large format print and internal poster casing with inspirational messages on, offering words of encouragement to members participating at the gym."
+                  }
+                ]
               }
             ]
           },
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-internal-signage-hindley1" },
-              { "name": "wigan-council-internal-signage-hindley2" },
-              { "name": "wigan-council-internal-signage-hindley3" }
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-hindley1"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-hindley2"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-internal-signage-hindley3"
+              }
             ]
           },
           {
@@ -400,16 +420,16 @@
               {
                 "paragraph": [
                   {
-                    "text":
-                      "Heckford took over all the internal signage for Howe Bridge Leisure Centre. This refit included banner stands, portable display systems, large format print, internal poster cases and mesh banners. We also produced digital wall vinyls for the spinning class studio, an alternative internal signage solution that looked incredibly effective in the dark."
+                    "text": "Howe Bridge Internal Signage",
+                    "attributes": { "bold": true }
                   }
                 ]
               },
               {
                 "paragraph": [
                   {
-                    "text": "Howe Bridge Internal Signage",
-                    "attributes": { "bold": true }
+                    "text":
+                      "Heckford took over all the internal signage for Howe Bridge Leisure Centre. This refit included banner stands, portable display systems, large format print, internal poster cases and mesh banners. We also produced digital wall vinyls for the spinning class studio, an alternative internal signage solution that looked incredibly effective in the dark."
                   }
                 ]
               }
@@ -418,13 +438,13 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-internal-signage-howe1" },
-              { "name": "wigan-council-internal-signage-howe2" },
-              { "name": "wigan-council-internal-signage-howe3" },
-              { "name": "wigan-council-internal-signage-howe4" },
-              { "name": "wigan-council-internal-signage-howe5" },
-              { "name": "wigan-council-internal-signage-howe6" },
-              { "name": "wigan-council-internal-signage-howe7" }
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe1" },
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe2" },
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe3" },
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe4" },
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe5" },
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe6" },
+              { "name": "inspiring-healthy-lifestyles-internal-signage-howe7" }
             ]
           }
         ]
@@ -448,9 +468,9 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-external-signage-howe1" },
-              { "name": "wigan-council-external-signage-howe2" },
-              { "name": "wigan-council-external-signage-howe3" }
+              { "name": "inspiring-healthy-lifestyles-external-signage-howe1" },
+              { "name": "inspiring-healthy-lifestyles-external-signage-howe2" },
+              { "name": "inspiring-healthy-lifestyles-external-signage-howe3" }
             ]
           },
           {
@@ -469,9 +489,9 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "wigan-council-external-signage-howe4" },
-              { "name": "wigan-council-external-signage-howe5" },
-              { "name": "wigan-council-external-signage-howe6" }
+              { "name": "inspiring-healthy-lifestyles-external-signage-howe4" },
+              { "name": "inspiring-healthy-lifestyles-external-signage-howe5" },
+              { "name": "inspiring-healthy-lifestyles-external-signage-howe6" }
             ]
           }
         ]
@@ -493,16 +513,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "wigan-council-merchandise1"
-            }
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "wigan-council-merchandise2"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "inspiring-healthy-lifestyles-merchandise1"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-merchandise2"
+              }
+            ]
           }
         ]
       }
@@ -558,7 +577,29 @@
     },
     "content": [
       {
+        "title": "Signage",
         "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Signage is at the forefront of any housebuilder’s brand. It is the first thing that people see when driving/walking past a new plot, and can often represent a development long before the foundations are even created – therefore it must speak volumes of their quality."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford, first-class signage providers, have been producing signage for Wainhomes North West and South West for decades; including outdoor and indoor signage, banner signs, flags, marketing suite fascias, acrylic signs, pylons and more."
+                  }
+                ]
+              }
+            ]
+          },
           {
             "type": "gallery",
             "images": [
@@ -745,17 +786,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "wainhomes-emailmarketing1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "wainhomes-emailmarketing2"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "wainhomes-emailmarketing1"
+              },
+              {
+                "name": "wainhomes-emailmarketing2"
+              }
+            ]
           }
         ]
       },
@@ -1263,8 +1302,7 @@
               { "name": "lutron-lightbuilding8" },
               { "name": "lutron-lightbuilding9" },
               { "name": "lutron-lightbuilding10" },
-              { "name": "lutron-lightbuilding11" },
-              { "name": "lutron-lightbuilding12" }
+              { "name": "lutron-lightbuilding11" }
             ]
           }
         ]
@@ -1402,7 +1440,7 @@
         ]
       },
       {
-        "title": "Outdoor Signage",
+        "title": "Signage/POS",
         "data": [
           {
             "type": "text",
@@ -1755,36 +1793,22 @@
                 "paragraph": [
                   {
                     "text":
-                      "Leaping from our printers (pardon the pun) is Vimto’s newest addition to their summer campaign, Vimtoad."
+                      "Leaping from our printers (pardon the pun) is Vimto’s newest addition to their summer campaign, Vimtoad. Vimto entrusted Heckford with the print and build of their latest exhibition stand due to excellent past experiences and the assurance of a high quality finish; which we think is “fan-flipping-tastic”!"
                   }
                 ]
               }
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "vimto-exhibitions2"
-            }
-          },
-          {
-            "type": "text",
-            "data": [
+            "type": "duo",
+            "images": [
               {
-                "paragraph": [
-                  {
-                    "text":
-                      "Vimto entrusted Heckford with the print and build of their latest exhibition stand due to excellent past experiences and the assurance of a high quality finish; which we think is “fan-flipping-tastic”!"
-                  }
-                ]
+                "name": "vimto-exhibitions2"
+              },
+              {
+                "name": "vimto-exhibitions3"
               }
             ]
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "vimto-exhibitions3"
-            }
           }
         ]
       },
@@ -2167,16 +2191,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "lloyd-mail3"
-            }
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "lloyd-mail4"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "lloyd-mail3"
+              },
+              {
+                "name": "lloyd-mail4"
+              }
+            ]
           }
         ]
       },
@@ -2604,16 +2627,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "haven3"
-            }
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "haven4"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "haven3"
+              },
+              {
+                "name": "haven4"
+              }
+            ]
           }
         ]
       },
@@ -3042,7 +3064,7 @@
             ]
           },
           {
-            "type": "gallery",
+            "type": "duo",
             "images": [
               { "name": "helston-email1" },
               { "name": "helston-email2" }
@@ -3105,7 +3127,7 @@
           },
           {
             "type": "image",
-            "images": [{ "name": "helston-outdoor1" }]
+            "image": { "name": "helston-outdoor1" }
           }
         ]
       },
@@ -3275,16 +3297,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "chorley-remembers-3d1"
-            }
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "chorley-remembers-3d2"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "chorley-remembers-3d1"
+              },
+              {
+                "name": "chorley-remembers-3d2"
+              }
+            ]
           }
         ]
       }
@@ -3434,18 +3455,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "crealy-social1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "crealy-social2"
-            },
-            "fullBleed": true
+            "type": "duo",
+            "images": [
+              {
+                "name": "crealy-social1"
+              },
+              {
+                "name": "crealy-social2"
+              }
+            ]
           }
         ]
       },
@@ -3519,7 +3537,7 @@
             ]
           },
           {
-            "type": "gallery",
+            "type": "image",
             "image": { "name": "crealy-vehiclewraps1" }
           }
         ]
@@ -3541,17 +3559,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "crealy-illustration1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "crealy-illustration2"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "crealy-illustration1"
+              },
+              {
+                "name": "crealy-illustration2"
+              }
+            ]
           }
         ]
       },

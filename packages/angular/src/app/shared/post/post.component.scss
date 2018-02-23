@@ -6,7 +6,7 @@ $grey-dark: #404040;
 h2 {
   @extend %padding;
   @extend %text;
-  margin: 7vh auto -5vh;
+  margin: 7vh auto 0.5em;
   text-align: center;
 }
 
@@ -40,6 +40,8 @@ section {
 
       text-block {
         text-align: left;
+        margin-left: 0;
+        margin-right: 0;
       }
     }
 

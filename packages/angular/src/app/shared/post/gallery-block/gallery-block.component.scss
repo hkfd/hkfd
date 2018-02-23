@@ -1,3 +1,5 @@
+@import '../../../../styles';
+
 :host {
   overflow: hidden;
   display: block;
@@ -29,6 +31,22 @@ image {
   border-radius: 50%;
   animation: swipe 1.7s linear infinite;
   transform-origin: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .arrow {
+    margin: 0;
+    padding: 0;
+    color: $blue;
+    width: 0.65em;
+    height: 0.65em;
+    margin-left: -0.35em;
+
+    &::before {
+      width: 1em;
+    }
+  }
 }
 
 @keyframes swipe {
