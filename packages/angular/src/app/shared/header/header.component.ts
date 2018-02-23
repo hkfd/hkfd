@@ -21,10 +21,8 @@ export class HeaderComponent {
 
   constructor(private router: Router) {}
 
-  navClick(url: string) {
-    if (!url) return;
-
-    this.router.navigate([url]).then(_ => (this.mobileShow = false));
+  navClick() {
+    this.mobileShow = false;
   }
 
   toggleMobile() {

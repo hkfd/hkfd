@@ -41,12 +41,16 @@ nav {
     @extend %font-small;
     white-space: nowrap;
     opacity: 1;
+    transition: color 150ms ease;
 
     @include md {
       align-self: center;
       margin: 0 0.5em;
     }
-    transition: color 150ms ease;
+
+    &:not(.active) {
+      opacity: 0.8;
+    }
 
     &:hover,
     &:active {
