@@ -30,6 +30,8 @@ export class PostComponent implements OnInit {
         this.apiService.getPost(params.get('type'), params.get('id'))
       )
       .subscribe((post: Post) => {
+        if (!post) return this.router.navigateByUrl('/');
+
         this.post = post;
         this.titleService.setTitle(post.title);
       });
