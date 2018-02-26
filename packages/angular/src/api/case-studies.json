@@ -1434,7 +1434,20 @@
               { "name": "winfields-designprint4" },
               { "name": "winfields-designprint5" },
               { "name": "winfields-designprint6" },
-              { "name": "winfields-designprint7" }
+              { "name": "winfields-designprint7" },
+              { "name": "winfields-designprint8" },
+              { "name": "winfields-designprint9" },
+              { "name": "winfields-designprint10" },
+              { "name": "winfields-designprint11" },
+              { "name": "winfields-designprint12" },
+              { "name": "winfields-designprint13" },
+              { "name": "winfields-designprint14" },
+              { "name": "winfields-designprint15" },
+              { "name": "winfields-designprint16" },
+              { "name": "winfields-designprint17" },
+              { "name": "winfields-designprint18" },
+              { "name": "winfields-designprint19" },
+              { "name": "winfields-designprint20" }
             ]
           }
         ]
@@ -1725,10 +1738,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "vimto-print1"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "vimto-print1"
+              },
+              {
+                "name": "vimto-print2"
+              }
+            ]
           }
         ]
       },
@@ -1800,14 +1818,25 @@
             ]
           },
           {
-            "type": "duo",
+            "type": "gallery",
             "images": [
-              {
-                "name": "vimto-exhibitions2"
-              },
-              {
-                "name": "vimto-exhibitions3"
-              }
+              { "name": "vimto-exhibitions2" },
+              { "name": "vimto-exhibitions3" },
+              { "name": "vimto-exhibitions4" },
+              { "name": "vimto-exhibitions5" },
+              { "name": "vimto-exhibitions6" },
+              { "name": "vimto-exhibitions7" },
+              { "name": "vimto-exhibitions8" },
+              { "name": "vimto-exhibitions9" },
+              { "name": "vimto-exhibitions10" },
+              { "name": "vimto-exhibitions11" },
+              { "name": "vimto-exhibitions12" },
+              { "name": "vimto-exhibitions13" },
+              { "name": "vimto-exhibitions14" },
+              { "name": "vimto-exhibitions15" },
+              { "name": "vimto-exhibitions16" },
+              { "name": "vimto-exhibitions17" },
+              { "name": "vimto-exhibitions18" }
             ]
           }
         ]
@@ -2598,6 +2627,12 @@
             "fullBleed": true
           },
           {
+            "type": "image",
+            "image": {
+              "name": "haven3"
+            }
+          },
+          {
             "type": "text",
             "data": [
               {
@@ -2630,10 +2665,10 @@
             "type": "duo",
             "images": [
               {
-                "name": "haven3"
+                "name": "haven4"
               },
               {
-                "name": "haven4"
+                "name": "haven5"
               }
             ]
           }
@@ -3377,9 +3412,19 @@
             ]
           },
           {
-            "type": "image",
-            "image": { "name": "crealy-design1" },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "crealy-design1" },
+              { "name": "crealy-design2" },
+              { "name": "crealy-design3" },
+              { "name": "crealy-design4" },
+              { "name": "crealy-design5" },
+              { "name": "crealy-design6" },
+              { "name": "crealy-design7" },
+              { "name": "crealy-design8" },
+              { "name": "crealy-design9" },
+              { "name": "crealy-design10" }
+            ]
           }
         ]
       },
@@ -3408,17 +3453,13 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "crealy-outdoor1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "crealy-outdoor2"
-            }
+            "type": "gallery",
+            "images": [
+              { "name": "crealy-outdoor1" },
+              { "name": "crealy-outdoor2" },
+              { "name": "crealy-outdoor3" },
+              { "name": "crealy-outdoor4" }
+            ]
           }
         ]
       },
@@ -3507,8 +3548,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": { "name": "crealy-emailmarketing1" }
+            "type": "duo",
+            "images": [
+              {
+                "name": "crealy-email-marketing1"
+              },
+              {
+                "name": "crealy-email-marketing2"
+              }
+            ]
           }
         ]
       },

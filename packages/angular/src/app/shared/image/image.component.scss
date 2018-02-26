@@ -12,3 +12,10 @@
     object-fit: cover;
   }
 }
+
+:host([gallery]) {
+  img {
+    width: auto;
+    height: 100%;
+  }
+}
