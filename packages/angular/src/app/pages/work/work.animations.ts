@@ -3,9 +3,7 @@ import {
   state,
   style,
   animate,
-  transition,
-  query,
-  stagger
+  transition
 } from '@angular/animations';
 
 export const WorkAnimations = [

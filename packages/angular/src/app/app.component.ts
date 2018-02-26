@@ -4,15 +4,25 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { environment } from '../environments/environment';
+import { AppAnimations } from './app.animations';
 
 @Component({
   selector: 'app-root',
-  template: '<header></header><router-outlet></router-outlet><footer></footer>'
+  template: `<header></header>
+  <main [@routeTransition]="getState(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+  </main>
+  <footer></footer>`,
+  animations: AppAnimations
 })
 export class AppComponent implements OnInit, OnDestroy {
   router$: Subscription;
 
   constructor(private router: Router, private renderer: Renderer2) {}
+
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
+  }
 
   ngOnInit() {
     ga('create', environment.analyticsId, 'auto');
