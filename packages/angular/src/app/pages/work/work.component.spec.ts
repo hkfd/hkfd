@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -8,18 +9,18 @@ import {
 } from '../../../testing/testing.module';
 
 import { TitleService, ApiService } from '../../shared/shared.module';
-import { HomeComponent } from './home.component';
+import { WorkComponent } from './work.component';
 
-let comp: HomeComponent;
-let fixture: ComponentFixture<HomeComponent>;
+let comp: WorkComponent;
+let fixture: ComponentFixture<WorkComponent>;
 let page: Page;
 
-describe('HomeComponent', () => {
+describe('WorkComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [HomeComponent],
+        imports: [RouterTestingModule, NoopAnimationsModule],
+        declarations: [WorkComponent],
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService }
@@ -35,8 +36,10 @@ describe('HomeComponent', () => {
     expect(page.titleService.setTitleSpy).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with no argument', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith();
+  it('should call TitleService setTitle with argument', () => {
+    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith(
+      jasmine.any(String)
+    );
   });
 
   it('should call ApiService getCaseStudies', () => {
@@ -48,22 +51,14 @@ describe('HomeComponent', () => {
     expect(comp.caseStudies.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('should set only featured case studies', () =>
+  it('should set only non featured case studies', () =>
     comp.caseStudies.forEach(caseStudy =>
-      expect(caseStudy).toEqual(jasmine.objectContaining({ featured: true }))
+      expect(caseStudy).toEqual(jasmine.objectContaining({ featured: false }))
     ));
-
-  it('should call ApiService getServices', () => {
-    expect(page.apiService.getServicesSpy).toHaveBeenCalled();
-  });
-
-  it('should call ApiService getClients', () => {
-    expect(page.apiService.getClientsSpy).toHaveBeenCalled();
-  });
 });
 
 function createComponent() {
-  fixture = TestBed.createComponent(HomeComponent);
+  fixture = TestBed.createComponent(WorkComponent);
   comp = fixture.componentInstance;
   page = new Page();
 
