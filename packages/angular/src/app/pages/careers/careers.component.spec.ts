@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -8,18 +9,18 @@ import {
 } from '../../../testing/testing.module';
 
 import { TitleService, ApiService } from '../../shared/shared.module';
-import { HomeComponent } from './home.component';
+import { CareersComponent } from './careers.component';
 
-let comp: HomeComponent;
-let fixture: ComponentFixture<HomeComponent>;
+let comp: CareersComponent;
+let fixture: ComponentFixture<CareersComponent>;
 let page: Page;
 
-describe('HomeComponent', () => {
+describe('CareersComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [HomeComponent],
+        imports: [RouterTestingModule, NoopAnimationsModule],
+        declarations: [CareersComponent],
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService }
@@ -35,35 +36,24 @@ describe('HomeComponent', () => {
     expect(page.titleService.setTitleSpy).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with no argument', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith();
+  it('should call TitleService setTitle with argument', () => {
+    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith(
+      jasmine.any(String)
+    );
   });
 
-  it('should call ApiService getCaseStudies', () => {
-    expect(page.apiService.getCaseStudiesSpy).toHaveBeenCalledWith();
+  it('should call ApiService getCareers', () => {
+    expect(page.apiService.getCareersSpy).toHaveBeenCalledWith();
   });
 
-  it('should set caseStudies', () => {
-    expect(comp.caseStudies).toBeDefined();
-    expect(comp.caseStudies.length).toBe(1);
-  });
-
-  it('should set only featured case studies', () =>
-    comp.caseStudies.forEach(caseStudy =>
-      expect(caseStudy).toEqual(jasmine.objectContaining({ featured: true }))
-    ));
-
-  it('should call ApiService getServices', () => {
-    expect(page.apiService.getServicesSpy).toHaveBeenCalled();
-  });
-
-  it('should call ApiService getClients', () => {
-    expect(page.apiService.getClientsSpy).toHaveBeenCalled();
+  it('should set careers', () => {
+    expect(comp.careers).toBeDefined();
+    expect(comp.careers.length).toBe(3);
   });
 });
 
 function createComponent() {
-  fixture = TestBed.createComponent(HomeComponent);
+  fixture = TestBed.createComponent(CareersComponent);
   comp = fixture.componentInstance;
   page = new Page();
 

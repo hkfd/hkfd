@@ -48,7 +48,7 @@ describe('WorkComponent', () => {
 
   it('should set caseStudies', () => {
     expect(comp.caseStudies).toBeDefined();
-    expect(comp.caseStudies.length).toBeGreaterThanOrEqual(1);
+    expect(comp.caseStudies.length).toBe(2);
   });
 
   it('should set only non featured case studies', () =>

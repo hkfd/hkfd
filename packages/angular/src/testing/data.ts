@@ -136,6 +136,39 @@ export const casestudies: CaseStudy[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'case-study-3',
+    title: 'Case Study 3',
+    featured: false,
+    colour: 'white',
+    thumbnail: {
+      name: '',
+      alt: ''
+    },
+    overview: ['deliverable'],
+    intro: {
+      type: 'text',
+      data: [
+        {
+          paragraph: [
+            {
+              text: 'Case Study 3 intro'
+            }
+          ]
+        }
+      ]
+    },
+    content: [
+      {
+        title: 'Title',
+        data: [
+          {
+            type: 'text'
+          }
+        ]
+      }
+    ]
   }
 ];
 
@@ -147,5 +180,17 @@ export const clients: Image[] = [
   {
     name: 'client-2',
     alt: ''
+  }
+];
+
+export const careers: Career[] = [
+  {
+    title: 'Career 1'
+  },
+  {
+    title: 'Career 2'
+  },
+  {
+    title: 'Career 3'
   }
 ];
