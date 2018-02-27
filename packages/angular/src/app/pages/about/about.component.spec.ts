@@ -7,19 +7,23 @@ import {
   MockApiService
 } from '../../../testing/testing.module';
 
-import { TitleService, ApiService } from '../../shared/shared.module';
-import { CareersComponent } from './careers.component';
+import {
+  TitleService,
+  ApiService,
+  CloudinaryPipe
+} from '../../shared/shared.module';
+import { AboutComponent } from './about.component';
 
-let comp: CareersComponent;
-let fixture: ComponentFixture<CareersComponent>;
+let comp: AboutComponent;
+let fixture: ComponentFixture<AboutComponent>;
 let page: Page;
 
-describe('CareersComponent', () => {
+describe('AboutComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
-        declarations: [CareersComponent],
+        declarations: [AboutComponent, CloudinaryPipe],
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService }
@@ -41,18 +45,18 @@ describe('CareersComponent', () => {
     );
   });
 
-  it('should call ApiService getCareers', () => {
-    expect(page.apiService.getCareersSpy).toHaveBeenCalledWith();
+  it('should call ApiService getTeam', () => {
+    expect(page.apiService.getTeamSpy).toHaveBeenCalledWith();
   });
 
-  it('should set careers', () => {
-    expect(comp.careers).toBeDefined();
-    expect(comp.careers.length).toBe(3);
+  it('should set team', () => {
+    expect(comp.team).toBeDefined();
+    expect(comp.team.length).toBe(5);
   });
 });
 
 function createComponent() {
-  fixture = TestBed.createComponent(CareersComponent);
+  fixture = TestBed.createComponent(AboutComponent);
   comp = fixture.componentInstance;
   page = new Page();
 

@@ -16,6 +16,7 @@ import { LazyDirective } from './lazy.directive';
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
+export { CloudinaryPipe } from './pipes/cloudinary.pipe';
 export { Post, Service, CaseStudy } from './post';
 export {
   Content,
@@ -49,7 +50,6 @@ export { Career } from './career';
     SliderComponent,
     SliderWorkComponent,
     ImageComponent,
-    CloudinaryPipe,
     LazyDirective
   ],
   providers: [ApiService, TitleService, LoggerService]

@@ -21,7 +21,7 @@
     <div class="person" *ngFor="let person of team">
       <div class="person-container">
 
-        <img src="{{ person?.image?.name | cloudinary: { width: 300 } }}" alt="{{ person?.image?.alt }}">
+        <img src="{{ person?.image?.name | cloudinary: { width: 64 } }}" srcset="{{ person?.image?.name | cloudinary: { width: 300 } }} 64w" alt="{{ person?.image?.alt }}">
 
         <div class="person-info">
           <h4>{{ person?.name | uppercase }}</h4>

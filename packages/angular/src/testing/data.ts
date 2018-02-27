@@ -194,3 +194,46 @@ export const careers: Career[] = [
     title: 'Career 3'
   }
 ];
+
+export const team: Team[] = [
+  {
+    name: 'Person 1',
+    position: 'Position 1',
+    image: {
+      name: '',
+      alt: ''
+    }
+  },
+  {
+    name: 'Person 2',
+    position: 'Position 2',
+    image: {
+      name: '',
+      alt: ''
+    }
+  },
+  {
+    name: 'Person 3',
+    position: 'Position 3',
+    image: {
+      name: '',
+      alt: ''
+    }
+  },
+  {
+    name: 'Person 4',
+    position: 'Position 4',
+    image: {
+      name: '',
+      alt: ''
+    }
+  },
+  {
+    name: 'Person 5',
+    position: 'Position 5',
+    image: {
+      name: '',
+      alt: ''
+    }
+  }
+];

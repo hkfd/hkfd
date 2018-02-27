@@ -9,19 +9,21 @@ import {
   Team,
   Image
 } from '../app/shared/shared.module';
-import { services, casestudies, clients, careers } from './data';
+import { services, casestudies, clients, careers, team } from './data';
 
 export class MockApiService {
   getServicesSpy: jasmine.Spy;
   getCaseStudiesSpy: jasmine.Spy;
   getClientsSpy: jasmine.Spy;
   getCareersSpy: jasmine.Spy;
+  getTeamSpy: jasmine.Spy;
 
   constructor() {
     this.getServicesSpy = spyOn(this, 'getServices').and.callThrough();
     this.getCaseStudiesSpy = spyOn(this, 'getCaseStudies').and.callThrough();
     this.getClientsSpy = spyOn(this, 'getClients').and.callThrough();
     this.getCareersSpy = spyOn(this, 'getCareers').and.callThrough();
+    this.getTeamSpy = spyOn(this, 'getTeam').and.callThrough();
   }
 
   getServices(): Observable<Service[]> {
@@ -38,5 +40,9 @@ export class MockApiService {
 
   getCareers(): Observable<Career[]> {
     return Observable.of(careers);
+  }
+
+  getTeam(): Observable<Team[]> {
+    return Observable.of(team);
   }
 }
