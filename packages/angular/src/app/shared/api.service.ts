@@ -35,16 +35,6 @@ export class ApiService {
       );
   }
 
-  getPages(): Observable<Page[]> {
-    return this.http
-      .get<Page[]>(this.pages)
-      .pipe(
-        retry(3),
-        tap((pages: Page[]) => this.logger.log('getPages', pages)),
-        catchError(this.handleError<Page[]>('getPages', []))
-      );
-  }
-
   getServices(): Observable<Service[]> {
     return this.http
       .get<Service[]>(this.services)

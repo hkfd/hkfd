@@ -1,7 +1,7 @@
 import { Image, Content, TextBlock } from './shared.module';
 
 export interface CaseStudy extends Post {
-  sector: string;
+  sector?: string;
   featured: boolean;
   colour: string;
   overview: string[];
