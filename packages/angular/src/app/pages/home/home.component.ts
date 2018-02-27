@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import {
   TitleService,
   ApiService,
-  Page,
   Service,
   CaseStudy,
   Image
@@ -19,9 +18,6 @@ import { HomeImages } from './home.images';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  page$: Subscription;
-  page: Page;
-
   caseStudies$: Subscription;
   caseStudies: CaseStudy[];
 
@@ -38,10 +34,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.titleService.setTitle();
 
-    this.page$ = this.apiService
-      .getPage('home')
-      .subscribe((page: Page) => (this.page = page));
-
     this.caseStudies$ = this.apiService
       .getCaseStudies()
       .subscribe(
@@ -56,7 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.page$.unsubscribe();
     this.caseStudies$.unsubscribe();
   }
 }

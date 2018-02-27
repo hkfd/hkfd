@@ -6,7 +6,6 @@ import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
-import { Page } from './page';
 import { Post, Service, CaseStudy } from './post';
 import { Team } from './team';
 import { Career } from './career';
@@ -14,7 +13,6 @@ import { Image } from './images';
 
 @Injectable()
 export class ApiService {
-  pages = 'api/pages.json';
   services = 'api/services.json';
   caseStudies = 'api/case-studies.json';
   team = 'api/team.json';
@@ -22,18 +20,6 @@ export class ApiService {
   clients = 'api/clients.json';
 
   constructor(private http: HttpClient, private logger: LoggerService) {}
-
-  getPage(id: string): Observable<Page> {
-    return this.http
-      .get<Page[]>(this.pages)
-      .pipe(
-        retry(3),
-        flatMap((pages: Page[]) => pages),
-        find((page: Page) => page.id === id),
-        tap((page: Page) => this.logger.log('getPage', page)),
-        catchError(this.handleError<Page>('getPage'))
-      );
-  }
 
   getServices(): Observable<Service[]> {
     return this.http

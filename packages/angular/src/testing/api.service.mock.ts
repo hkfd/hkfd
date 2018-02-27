@@ -2,7 +2,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import {
-  Page,
   Service,
   Career,
   Post,
@@ -10,23 +9,17 @@ import {
   Team,
   Image
 } from '../app/shared/shared.module';
-import { page, services, casestudies, clients } from './data';
+import { services, casestudies, clients } from './data';
 
 export class MockApiService {
-  getPageSpy: jasmine.Spy;
   getServicesSpy: jasmine.Spy;
   getCaseStudiesSpy: jasmine.Spy;
   getClientsSpy: jasmine.Spy;
 
   constructor() {
-    this.getPageSpy = spyOn(this, 'getPage').and.callThrough();
     this.getServicesSpy = spyOn(this, 'getServices').and.callThrough();
     this.getCaseStudiesSpy = spyOn(this, 'getCaseStudies').and.callThrough();
     this.getClientsSpy = spyOn(this, 'getClients').and.callThrough();
-  }
-
-  getPage(id: string): Observable<Page> {
-    return Observable.of(page);
   }
 
   getServices(): Observable<Service[]> {

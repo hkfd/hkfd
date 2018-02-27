@@ -16,7 +16,6 @@ import { LazyDirective } from './lazy.directive';
 export { ApiService } from './api.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
-export { Page } from './page';
 export { Post, Service, CaseStudy } from './post';
 export {
   Content,

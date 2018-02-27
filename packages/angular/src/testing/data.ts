@@ -1,5 +1,4 @@
 import {
-  Page,
   Service,
   Career,
   Post,
@@ -7,11 +6,6 @@ import {
   Team,
   Image
 } from '../app/shared/shared.module';
-
-export const page: Page = {
-  id: 'page',
-  title: 'Page'
-};
 
 export const services: Service[] = [
   {

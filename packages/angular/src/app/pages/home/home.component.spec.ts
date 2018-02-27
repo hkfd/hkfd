@@ -33,7 +33,33 @@ describe('HomeComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call TitleService setTitle', () => {
-    expect(page.titleService.setTitleSpy.calls.any()).toBe(true);
+    expect(page.titleService.setTitleSpy).toHaveBeenCalled();
+  });
+
+  it('should call TitleService setTitle with no argument', () => {
+    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith();
+  });
+
+  it('should call ApiService getCaseStudies', () => {
+    expect(page.apiService.getCaseStudiesSpy).toHaveBeenCalledWith();
+  });
+
+  it('should set caseStudies', () => {
+    expect(comp.caseStudies).toBeDefined();
+    expect(comp.caseStudies.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('should set only featured case studies', () =>
+    comp.caseStudies.forEach(caseStudy =>
+      expect(caseStudy).toEqual(jasmine.objectContaining({ featured: true }))
+    ));
+
+  it('should call ApiService getServices', () => {
+    expect(page.apiService.getServicesSpy).toHaveBeenCalled();
+  });
+
+  it('should call ApiService getClients', () => {
+    expect(page.apiService.getClientsSpy).toHaveBeenCalled();
   });
 });
 
@@ -45,7 +71,6 @@ function createComponent() {
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
     fixture.detectChanges();
-    page.addElements();
   });
 }
 
@@ -53,15 +78,8 @@ class Page {
   titleService: MockTitleService;
   apiService: MockApiService;
 
-  pageServices: DebugElement[];
-
   constructor() {
     (<any>this.titleService) = fixture.debugElement.injector.get(TitleService);
     (<any>this.apiService) = fixture.debugElement.injector.get(ApiService);
-  }
-
-  addElements() {
-    if (!comp.page) return;
-    this.pageServices = fixture.debugElement.queryAll(By.css('.services'));
   }
 }
