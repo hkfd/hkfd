@@ -50,7 +50,8 @@ export { Career } from './career';
     SliderComponent,
     SliderWorkComponent,
     ImageComponent,
-    LazyDirective
+    LazyDirective,
+    CloudinaryPipe
   ],
   providers: [ApiService, TitleService, LoggerService]
 })

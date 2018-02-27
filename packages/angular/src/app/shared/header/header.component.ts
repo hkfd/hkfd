@@ -11,6 +11,7 @@ import { HeaderAnimations } from './header.animations';
 })
 export class HeaderComponent {
   pages = [
+    { url: '/' },
     { title: 'ABOUT', url: '/about' },
     { title: 'OUR WORK', url: '/work' },
     { title: 'CAREERS', url: '/careers' },
@@ -21,11 +22,16 @@ export class HeaderComponent {
 
   constructor(private router: Router) {}
 
-  navClick() {
+  linkActive(url: string): boolean {
+    return this.router.isActive(url, true);
+  }
+
+  navClick(url: string) {
     this.mobileShow = false;
+    this.router.navigateByUrl(url);
   }
 
   toggleMobile() {
-    this.mobileShow = this.mobileShow === true ? false : true;
+    this.mobileShow = !this.mobileShow;
   }
 }
