@@ -237,3 +237,26 @@ export const team: Team[] = [
     }
   }
 ];
+
+export const images: Image[] = [
+  {
+    name: 'image-1',
+    alt: ''
+  },
+  {
+    name: 'image-2',
+    alt: ''
+  },
+  {
+    name: 'image-3',
+    alt: ''
+  },
+  {
+    name: 'image-4',
+    alt: ''
+  },
+  {
+    name: 'image-5',
+    alt: ''
+  }
+];

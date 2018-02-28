@@ -15,7 +15,7 @@ import { Image } from '../shared.module';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnChanges {
-  private timer;
+  private timer: number;
   currentIndex: number = 0;
 
   @Input() autoplay: boolean = false;
@@ -46,7 +46,7 @@ export class SliderComponent implements OnChanges {
   }
 
   endTimer() {
-    if (this.timer) clearInterval(this.timer);
+    clearInterval(this.timer);
   }
 
   sliderInit() {
