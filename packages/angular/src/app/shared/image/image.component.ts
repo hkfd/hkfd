@@ -25,15 +25,13 @@ export class ImageComponent implements OnChanges {
   constructor(private cloudinary: CloudinaryPipe) {}
 
   imageLoaded() {
-    if (!this.image) return;
-
-    this.image.loaded = true;
+    if (this.image) this.image.loaded = true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.image.currentValue) return;
 
-    this.src = this.cloudinary.transform(this.image.name, { width: '64' });
+    this.src = this.cloudinary.transform(this.image.name, { width: 64 });
     this.srcset = {
       attr: 'srcset',
       value: Sizes.map(

@@ -17,6 +17,7 @@ export { ApiService } from './api.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
 export { CloudinaryPipe } from './pipes/cloudinary.pipe';
+export { LazyDirective } from './lazy.directive';
 export { Post, Service, CaseStudy } from './post';
 export {
   Content,
