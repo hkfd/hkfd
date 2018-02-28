@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { flatMap, find, catchError } from 'rxjs/operators';
 
 import {
   Service,
@@ -17,6 +18,7 @@ export class MockApiService {
   getClientsSpy: jasmine.Spy;
   getCareersSpy: jasmine.Spy;
   getTeamSpy: jasmine.Spy;
+  getPostSpy: jasmine.Spy;
 
   constructor() {
     this.getServicesSpy = spyOn(this, 'getServices').and.callThrough();
@@ -24,6 +26,7 @@ export class MockApiService {
     this.getClientsSpy = spyOn(this, 'getClients').and.callThrough();
     this.getCareersSpy = spyOn(this, 'getCareers').and.callThrough();
     this.getTeamSpy = spyOn(this, 'getTeam').and.callThrough();
+    this.getPostSpy = spyOn(this, 'getPost').and.callThrough();
   }
 
   getServices(): Observable<Service[]> {
@@ -44,5 +47,17 @@ export class MockApiService {
 
   getTeam(): Observable<Team[]> {
     return Observable.of(team);
+  }
+
+  getPost(type: string, id: string): Observable<Post> {
+    let url;
+    if (type === 'service') url = services;
+    if (type === 'work') url = casestudies;
+
+    return Observable.of(<Post[]>url).pipe(
+      flatMap((posts: Post[]) => posts),
+      find((post: Post) => post.id === id),
+      catchError(err => Observable.of(null))
+    );
   }
 }

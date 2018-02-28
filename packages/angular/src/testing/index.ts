@@ -1,2 +1,3 @@
-export { MockApiService } from './api.service.mock';
-export { MockTitleService } from './title.service.mock';
+export * from './api.service.mock';
+export * from './title.service.mock';
+export * from './router';
