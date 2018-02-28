@@ -16,7 +16,7 @@ let comp: SliderComponent;
 let fixture: ComponentFixture<SliderComponent>;
 let page: Page;
 
-fdescribe('SliderComponent', () => {
+describe('SliderComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
