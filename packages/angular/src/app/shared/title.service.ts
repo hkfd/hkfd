@@ -6,6 +6,6 @@ export class TitleService {
   constructor(private title: Title) {}
 
   setTitle(title?: string) {
-    this.title.setTitle(`Heckford ${title ? ` – ${title}` : ''}`);
+    this.title.setTitle(`Heckford${title ? ` – ${title}` : ''}`);
   }
 }
