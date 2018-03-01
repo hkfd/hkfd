@@ -21,13 +21,13 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
-  intersectionCallback([entry, ...rest]) {
+  intersectionCallback([entry, ...rest]: [IntersectionObserverEntry, any[]]) {
     if (!entry.isIntersecting) return;
 
     this.loaded.emit(true);
     this.observer.disconnect();
 
-    if (!this.data) return;
+    if (!this.data || !this.data.attr || !this.data.value) return;
 
     this.renderer.setAttribute(
       this.el.nativeElement,
@@ -37,6 +37,8 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    if (!this.el || !this.el.nativeElement) return;
+
     const options = {
       root: null,
       rootMargin: '0px',
