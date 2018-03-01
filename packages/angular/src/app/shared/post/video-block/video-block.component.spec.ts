@@ -9,7 +9,7 @@ let comp: VideoBlockComponent;
 let fixture: ComponentFixture<VideoBlockComponent>;
 let page: Page;
 
-fdescribe('VideoBlockComponent', () => {
+describe('VideoBlockComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
