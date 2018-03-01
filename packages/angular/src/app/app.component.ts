@@ -1,5 +1,10 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {
+  Router,
+  RouterOutlet,
+  RouterEvent,
+  NavigationEnd
+} from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -20,14 +25,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private renderer: Renderer2) {}
 
-  getState(outlet) {
+  getState(outlet: RouterOutlet) {
     return outlet.activatedRouteData.state;
   }
 
   ngOnInit() {
     ga('create', environment.analyticsId, 'auto');
 
-    this.router$ = this.router.events.subscribe(event => {
+    this.router$ = this.router.events.subscribe((event: RouterEvent) => {
       if (!(event instanceof NavigationEnd)) return;
 
       const scrollEl = document.scrollingElement || document.documentElement;
