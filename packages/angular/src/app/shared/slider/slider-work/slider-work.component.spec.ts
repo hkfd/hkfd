@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { casestudies } from '../../../../testing';
+import { RouterTestingModule, casestudies } from '../../../../testing';
 import { SliderWorkComponent } from './slider-work.component';
 
 let comp: SliderWorkComponent;

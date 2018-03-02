@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
-import { Renderer2 } from '../testing';
+import { Router, RouterTestingModule, Renderer2 } from '../testing';
+
 import { AppComponent } from './app.component';
 
 const app = <any>window;

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import {
   Router,
+  RouterTestingModule,
   MockTitleService,
   MockApiService,
   ActivatedRoute,

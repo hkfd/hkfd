@@ -1,9 +1,12 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 
-import { MockTitleService, MockApiService } from '../../../testing';
+import {
+  RouterTestingModule,
+  MockTitleService,
+  MockApiService
+} from '../../../testing';
 
 import { TitleService, ApiService } from '../../shared/shared.module';
 import { WorkComponent } from './work.component';

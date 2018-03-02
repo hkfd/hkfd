@@ -1,8 +1,11 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
 
-import { MockTitleService, MockApiService } from '../../../testing';
+import {
+  RouterTestingModule,
+  MockTitleService,
+  MockApiService
+} from '../../../testing';
 
 import { TitleService, ApiService } from '../../shared/shared.module';
 import { CareersComponent } from './careers.component';

@@ -1,4 +1,5 @@
 export { Router, ActivatedRoute } from '@angular/router';
+export { RouterTestingModule } from '@angular/router/testing';
 
 import { Injectable } from '@angular/core';
 
