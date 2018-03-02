@@ -13,20 +13,13 @@ import {
 import { services, casestudies, clients, careers, team } from './data';
 
 export class MockApiService {
-  getServicesSpy: jasmine.Spy;
-  getCaseStudiesSpy: jasmine.Spy;
-  getClientsSpy: jasmine.Spy;
-  getCareersSpy: jasmine.Spy;
-  getTeamSpy: jasmine.Spy;
-  getPostSpy: jasmine.Spy;
-
   constructor() {
-    this.getServicesSpy = spyOn(this, 'getServices').and.callThrough();
-    this.getCaseStudiesSpy = spyOn(this, 'getCaseStudies').and.callThrough();
-    this.getClientsSpy = spyOn(this, 'getClients').and.callThrough();
-    this.getCareersSpy = spyOn(this, 'getCareers').and.callThrough();
-    this.getTeamSpy = spyOn(this, 'getTeam').and.callThrough();
-    this.getPostSpy = spyOn(this, 'getPost').and.callThrough();
+    this.getServices = spyOn(this, 'getServices').and.callThrough();
+    this.getCaseStudies = spyOn(this, 'getCaseStudies').and.callThrough();
+    this.getClients = spyOn(this, 'getClients').and.callThrough();
+    this.getCareers = spyOn(this, 'getCareers').and.callThrough();
+    this.getTeam = spyOn(this, 'getTeam').and.callThrough();
+    this.getPost = spyOn(this, 'getPost').and.callThrough();
   }
 
   getServices(): Observable<Service[]> {

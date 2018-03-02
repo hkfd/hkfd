@@ -33,17 +33,17 @@ describe('WorkComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call TitleService setTitle', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalled();
+    expect(page.titleService.setTitle).toHaveBeenCalled();
   });
 
   it('should call TitleService setTitle with argument', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith(
+    expect(page.titleService.setTitle).toHaveBeenCalledWith(
       jasmine.any(String)
     );
   });
 
   it('should call ApiService getCaseStudies', () => {
-    expect(page.apiService.getCaseStudiesSpy).toHaveBeenCalledWith();
+    expect(page.apiService.getCaseStudies).toHaveBeenCalledWith();
   });
 
   it('should set caseStudies', () => {

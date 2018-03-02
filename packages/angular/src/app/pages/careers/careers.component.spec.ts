@@ -32,17 +32,17 @@ describe('CareersComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call TitleService setTitle', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalled();
+    expect(page.titleService.setTitle).toHaveBeenCalled();
   });
 
   it('should call TitleService setTitle with argument', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith(
+    expect(page.titleService.setTitle).toHaveBeenCalledWith(
       jasmine.any(String)
     );
   });
 
   it('should call ApiService getCareers', () => {
-    expect(page.apiService.getCareersSpy).toHaveBeenCalledWith();
+    expect(page.apiService.getCareers).toHaveBeenCalledWith();
   });
 
   it('should set careers', () => {

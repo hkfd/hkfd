@@ -32,15 +32,15 @@ describe('HomeComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call TitleService setTitle', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalled();
+    expect(page.titleService.setTitle).toHaveBeenCalled();
   });
 
   it('should call TitleService setTitle with no argument', () => {
-    expect(page.titleService.setTitleSpy).toHaveBeenCalledWith();
+    expect(page.titleService.setTitle).toHaveBeenCalledWith();
   });
 
   it('should call ApiService getCaseStudies', () => {
-    expect(page.apiService.getCaseStudiesSpy).toHaveBeenCalledWith();
+    expect(page.apiService.getCaseStudies).toHaveBeenCalledWith();
   });
 
   it('should set caseStudies', () => {
@@ -54,11 +54,11 @@ describe('HomeComponent', () => {
     ));
 
   it('should call ApiService getServices', () => {
-    expect(page.apiService.getServicesSpy).toHaveBeenCalled();
+    expect(page.apiService.getServices).toHaveBeenCalled();
   });
 
   it('should call ApiService getClients', () => {
-    expect(page.apiService.getClientsSpy).toHaveBeenCalled();
+    expect(page.apiService.getClients).toHaveBeenCalled();
   });
 });
 

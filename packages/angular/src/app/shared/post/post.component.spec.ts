@@ -69,13 +69,11 @@ describe('PostComponent', () => {
     });
 
     it('should call TitleService setTitle', () => {
-      expect(page.titleService.setTitleSpy).toHaveBeenCalled();
+      expect(page.titleService.setTitle).toHaveBeenCalled();
     });
 
     it('should call TitleService setTitle with post title', () => {
-      expect(page.titleService.setTitleSpy).toHaveBeenCalledWith(
-        'Case Study 1'
-      );
+      expect(page.titleService.setTitle).toHaveBeenCalledWith('Case Study 1');
     });
 
     it('should set layout', () => {
