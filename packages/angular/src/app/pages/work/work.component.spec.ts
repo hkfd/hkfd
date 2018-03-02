@@ -48,6 +48,8 @@ describe('WorkComponent', () => {
   it('should call ApiService getCaseStudies with false arg', () => {
     expect(apiService.getCaseStudies).toHaveBeenCalledWith(false);
   });
+
+  xit('should set case study class colour', () => {});
 });
 
 function createComponent() {
