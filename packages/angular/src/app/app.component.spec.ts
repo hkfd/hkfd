@@ -85,7 +85,7 @@ describe('AppComponent', () => {
 
   describe('OnInit', () => {
     it('should set up Google Analytics', () => {
-      expect(app.ga).toHaveBeenCalledWith('create', 'abc', 'auto');
+      expect(app.ga).toHaveBeenCalledWith('create', 'def', 'auto');
     });
 
     it('should subscribe to Router events', () => {

@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  cloudinaryName: null,
-  analyticsId: 'abc'
+  cloudinaryName: 'abc',
+  analyticsId: 'def'
 };
