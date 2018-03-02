@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 
-import { services, careers, casestudies, team, clients } from '../../testing';
+import { services, careers, caseStudies, team, clients } from '../../testing';
 import { LoggerService } from './shared.module';
 import { ApiService } from './api.service';
 
@@ -120,7 +120,7 @@ describe('ApiService', () => {
       async(() => {
         apiService.getCaseStudies().subscribe();
 
-        mockHttp.expectOne(apiService.caseStudies).flush(casestudies);
+        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
     );
 
@@ -130,7 +130,7 @@ describe('ApiService', () => {
         apiService.getCaseStudies().subscribe();
 
         mockHttp.expectOne(apiService.caseStudies).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.caseStudies).flush(casestudies);
+        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
     );
 
@@ -139,9 +139,9 @@ describe('ApiService', () => {
       async(() => {
         apiService
           .getCaseStudies()
-          .subscribe(res => expect(res).toEqual(casestudies));
+          .subscribe(res => expect(res).toEqual(caseStudies));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(casestudies);
+        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
     );
 
@@ -284,7 +284,7 @@ describe('ApiService', () => {
           .getPost('work', 'case-study-1')
           .subscribe(res => expect(res.title).toBe('Case Study 1'));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(casestudies);
+        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
     );
 
@@ -304,7 +304,7 @@ describe('ApiService', () => {
           .getPost('work', null)
           .subscribe(res => expect(res).toBe(undefined));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(casestudies);
+        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
     );
 

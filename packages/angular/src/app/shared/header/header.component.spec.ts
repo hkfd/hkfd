@@ -108,12 +108,11 @@ class RouterStub {
   isActive: jasmine.Spy;
 
   constructor() {
+    const noop = () => undefined;
     const router = fixture.debugElement.injector.get(Router);
 
-    this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(
-      () => undefined
-    );
-    this.isActive = spyOn(router, 'isActive').and.callFake(() => undefined);
+    this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(noop);
+    this.isActive = spyOn(router, 'isActive').and.callFake(noop);
   }
 }
 

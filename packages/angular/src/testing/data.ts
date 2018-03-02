@@ -70,7 +70,7 @@ export const services: Service[] = [
   }
 ];
 
-export const casestudies: CaseStudy[] = [
+export const caseStudies: CaseStudy[] = [
   {
     id: 'case-study-1',
     title: 'Case Study 1',

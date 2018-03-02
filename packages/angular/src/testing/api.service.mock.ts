@@ -10,7 +10,7 @@ import {
   Team,
   Image
 } from '../app/shared/shared.module';
-import { services, casestudies, clients, careers, team } from './data';
+import { services, caseStudies, clients, careers, team } from './data';
 
 export class MockApiService {
   constructor() {
@@ -27,7 +27,7 @@ export class MockApiService {
   }
 
   getCaseStudies(): Observable<CaseStudy[]> {
-    return Observable.of(casestudies);
+    return Observable.of(caseStudies);
   }
 
   getClients(): Observable<Image[]> {
@@ -45,7 +45,7 @@ export class MockApiService {
   getPost(type: string, id: string): Observable<Post> {
     let url;
     if (type === 'service') url = services;
-    if (type === 'work') url = casestudies;
+    if (type === 'work') url = caseStudies;
 
     return Observable.of(<Post[]>url).pipe(
       flatMap((posts: Post[]) => posts),

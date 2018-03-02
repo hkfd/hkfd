@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { RouterTestingModule, casestudies } from '../../../../testing';
+import { RouterTestingModule, caseStudies } from '../../../../testing';
 import { SliderWorkComponent } from './slider-work.component';
 
 let comp: SliderWorkComponent;
@@ -57,6 +57,6 @@ class Page {
   constructor() {
     this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
 
-    comp.caseStudies = casestudies;
+    comp.caseStudies = caseStudies;
   }
 }
