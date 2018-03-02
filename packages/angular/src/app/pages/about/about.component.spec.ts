@@ -16,7 +16,8 @@ import { AboutComponent } from './about.component';
 
 let comp: AboutComponent;
 let fixture: ComponentFixture<AboutComponent>;
-let page: Page;
+let titleService: TitleService;
+let apiService: ApiService;
 
 describe('AboutComponent', () => {
   beforeEach(
@@ -36,17 +37,15 @@ describe('AboutComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call TitleService setTitle', () => {
-    expect(page.titleService.setTitle).toHaveBeenCalled();
+    expect(titleService.setTitle).toHaveBeenCalled();
   });
 
   it('should call TitleService setTitle with argument', () => {
-    expect(page.titleService.setTitle).toHaveBeenCalledWith(
-      jasmine.any(String)
-    );
+    expect(titleService.setTitle).toHaveBeenCalledWith(jasmine.any(String));
   });
 
   it('should call ApiService getTeam', () => {
-    expect(page.apiService.getTeam).toHaveBeenCalledWith();
+    expect(apiService.getTeam).toHaveBeenCalledWith();
   });
 
   it('should set team', () => {
@@ -58,20 +57,11 @@ describe('AboutComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(AboutComponent);
   comp = fixture.componentInstance;
-  page = new Page();
+  titleService = fixture.debugElement.injector.get(TitleService);
+  apiService = fixture.debugElement.injector.get(ApiService);
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
     fixture.detectChanges();
   });
-}
-
-class Page {
-  titleService: MockTitleService;
-  apiService: MockApiService;
-
-  constructor() {
-    (<any>this.titleService) = fixture.debugElement.injector.get(TitleService);
-    (<any>this.apiService) = fixture.debugElement.injector.get(ApiService);
-  }
 }

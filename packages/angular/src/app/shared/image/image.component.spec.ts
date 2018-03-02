@@ -7,6 +7,7 @@ import { ImageComponent } from './image.component';
 let comp: ImageComponent;
 let fixture: ComponentFixture<ImageComponent>;
 let page: Page;
+let cloudinaryPipe: CloudinaryPipeStub;
 
 describe('ImageComponent', () => {
   beforeEach(
@@ -19,10 +20,10 @@ describe('ImageComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should not call CloudinaryPipe without image', () => {
+  it('should not call CloudinaryPipe transform without image', () => {
     comp.ngOnChanges({ image: new SimpleChange(null, null, null) });
 
-    expect(page.cloudinaryPipe).not.toHaveBeenCalled();
+    expect(cloudinaryPipe.transform).not.toHaveBeenCalled();
   });
 
   describe('OnChanges', () => {
@@ -30,12 +31,12 @@ describe('ImageComponent', () => {
       comp.ngOnChanges({ image: new SimpleChange(null, comp.image, null) })
     );
 
-    it('should call CloudinaryPipe for src', () => {
-      expect(page.cloudinaryPipe).toHaveBeenCalled();
+    it('should call CloudinaryPipe transform for src', () => {
+      expect(cloudinaryPipe.transform).toHaveBeenCalled();
     });
 
-    it('should call CloudinaryPipe with src args', () => {
-      expect(page.cloudinaryPipe).toHaveBeenCalledWith('example', {
+    it('should call CloudinaryPipe transform with src args', () => {
+      expect(cloudinaryPipe.transform).toHaveBeenCalledWith('example', {
         width: 64
       });
     });
@@ -44,12 +45,12 @@ describe('ImageComponent', () => {
       expect(comp.src).toBeDefined();
     });
 
-    it('should call CloudinaryPipe for srcset', () => {
-      expect(page.cloudinaryPipe).toHaveBeenCalledTimes(6);
+    it('should call CloudinaryPipe transform for srcset', () => {
+      expect(cloudinaryPipe.transform).toHaveBeenCalledTimes(6);
     });
 
-    it('should call CloudinaryPipe with srcset args', () => {
-      expect(page.cloudinaryPipe).toHaveBeenCalledWith('example', {
+    it('should call CloudinaryPipe transform with srcset args', () => {
+      expect(cloudinaryPipe.transform).toHaveBeenCalledWith('example', {
         width: jasmine.any(Number),
         height: jasmine.any(Number)
       });
@@ -86,6 +87,7 @@ function createComponent() {
   fixture = TestBed.createComponent(ImageComponent);
   comp = fixture.componentInstance;
   page = new Page();
+  cloudinaryPipe = new CloudinaryPipeStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
@@ -93,9 +95,18 @@ function createComponent() {
   });
 }
 
+class CloudinaryPipeStub {
+  transform: jasmine.Spy;
+
+  constructor() {
+    const cloudinary = fixture.debugElement.injector.get(CloudinaryPipe);
+
+    this.transform = spyOn(cloudinary, 'transform').and.callThrough();
+  }
+}
+
 class Page {
   imageLoaded: jasmine.Spy;
-  cloudinaryPipe: jasmine.Spy;
 
   constructor() {
     comp.image = {
@@ -103,9 +114,6 @@ class Page {
       alt: ''
     };
 
-    const cloudinary = fixture.debugElement.injector.get(CloudinaryPipe);
-
     this.imageLoaded = spyOn(comp, 'imageLoaded').and.callThrough();
-    this.cloudinaryPipe = spyOn(cloudinary, 'transform').and.callThrough();
   }
 }

@@ -10,6 +10,7 @@ import { HeaderComponent } from './header.component';
 let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
 let page: Page;
+let router: RouterStub;
 
 describe('HeaderComponent', () => {
   beforeEach(
@@ -46,13 +47,13 @@ describe('HeaderComponent', () => {
     it('should call Router navigateByUrl', () => {
       page.navLink.triggerEventHandler('click', null);
 
-      expect(page.routerNavigateByUrl).toHaveBeenCalled();
+      expect(router.navigateByUrl).toHaveBeenCalled();
     });
 
     it('should call Router navigateByUrl with url arg', () => {
       page.navLink.triggerEventHandler('click', null);
 
-      expect(page.routerNavigateByUrl).toHaveBeenCalledWith('/page-1');
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/page-1');
     });
   });
 
@@ -80,11 +81,11 @@ describe('HeaderComponent', () => {
 
   describe('linkActive', () => {
     it('should call Router isActive', () => {
-      expect(page.routerIsActive).toHaveBeenCalled();
+      expect(router.isActive).toHaveBeenCalled();
     });
 
     it('should call Router isActive with url arg', () => {
-      expect(page.routerIsActive).toHaveBeenCalledWith('/page-1', true);
+      expect(router.isActive).toHaveBeenCalledWith('/page-1', true);
     });
   });
 });
@@ -93,6 +94,7 @@ function createComponent() {
   fixture = TestBed.createComponent(HeaderComponent);
   comp = fixture.componentInstance;
   page = new Page();
+  router = new RouterStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
@@ -101,11 +103,23 @@ function createComponent() {
   });
 }
 
+class RouterStub {
+  navigateByUrl: jasmine.Spy;
+  isActive: jasmine.Spy;
+
+  constructor() {
+    const router = fixture.debugElement.injector.get(Router);
+
+    this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(
+      () => undefined
+    );
+    this.isActive = spyOn(router, 'isActive').and.callFake(() => undefined);
+  }
+}
+
 class Page {
   navClick: jasmine.Spy;
-  routerNavigateByUrl: jasmine.Spy;
   toggleMobile: jasmine.Spy;
-  routerIsActive: jasmine.Spy;
 
   navLink: DebugElement;
   navButton: DebugElement;
@@ -117,16 +131,8 @@ class Page {
       { title: 'Page 2', url: '/page-2' }
     ];
 
-    const router = fixture.debugElement.injector.get(Router);
-
     this.navClick = spyOn(comp, 'navClick').and.callThrough();
-    this.routerNavigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(
-      () => undefined
-    );
     this.toggleMobile = spyOn(comp, 'toggleMobile').and.callThrough();
-    this.routerIsActive = spyOn(router, 'isActive').and.callFake(
-      () => undefined
-    );
   }
 
   addElements() {

@@ -15,12 +15,12 @@ let renderer: RendererStub;
 let router: Router;
 
 @Component({
-  template: `Page 1`
+  template: 'Page 1'
 })
 class Page1Component {}
 
 @Component({
-  template: `Page 2`
+  template: 'Page 2'
 })
 class Page2Component {}
 

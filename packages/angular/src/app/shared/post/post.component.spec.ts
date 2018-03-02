@@ -15,7 +15,9 @@ import { PostComponent } from './post.component';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
-let page: Page;
+let titleService: TitleService;
+let apiService: ApiService;
+let router: RouterStub;
 let activatedRoute: ActivatedRouteStub;
 
 describe('PostComponent', () => {
@@ -39,11 +41,11 @@ describe('PostComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call Router navigateByUrl on empty post', () => {
-    expect(page.routerNavigateByUrl).toHaveBeenCalled();
+    expect(router.navigateByUrl).toHaveBeenCalled();
   });
 
   it('should call Router navigateByUrl with root arg on empty post', () => {
-    expect(page.routerNavigateByUrl).toHaveBeenCalledWith('/');
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/');
   });
 
   describe('OnInit', () => {
@@ -53,14 +55,11 @@ describe('PostComponent', () => {
     });
 
     it('should call ApiService getPost', () => {
-      expect(page.apiService.getPost).toHaveBeenCalled();
+      expect(apiService.getPost).toHaveBeenCalled();
     });
 
     it('should call ApiService getPost with type and id args', () => {
-      expect(page.apiService.getPost).toHaveBeenCalledWith(
-        'work',
-        'case-study-1'
-      );
+      expect(apiService.getPost).toHaveBeenCalledWith('work', 'case-study-1');
     });
 
     it('should set post', () => {
@@ -69,11 +68,11 @@ describe('PostComponent', () => {
     });
 
     it('should call TitleService setTitle', () => {
-      expect(page.titleService.setTitle).toHaveBeenCalled();
+      expect(titleService.setTitle).toHaveBeenCalled();
     });
 
     it('should call TitleService setTitle with post title', () => {
-      expect(page.titleService.setTitle).toHaveBeenCalledWith('Case Study 1');
+      expect(titleService.setTitle).toHaveBeenCalledWith('Case Study 1');
     });
 
     it('should set layout', () => {
@@ -84,7 +83,7 @@ describe('PostComponent', () => {
       activatedRoute.testParamMap = { type: 'work', id: 'case-study-2' };
       fixture.detectChanges();
 
-      expect(page.apiService.getPost).toHaveBeenCalledTimes(3);
+      expect(apiService.getPost).toHaveBeenCalledTimes(3);
     });
 
     it('should set post again on route change', () => {
@@ -95,7 +94,7 @@ describe('PostComponent', () => {
     });
 
     it('should not call Router navigateByUrl', () => {
-      expect(page.routerNavigateByUrl).toHaveBeenCalledTimes(1);
+      expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -127,7 +126,9 @@ describe('PostComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(PostComponent);
   comp = fixture.componentInstance;
-  page = new Page();
+  titleService = fixture.debugElement.injector.get(TitleService);
+  apiService = fixture.debugElement.injector.get(ApiService);
+  router = new RouterStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
@@ -135,19 +136,14 @@ function createComponent() {
   });
 }
 
-class Page {
-  titleService: MockTitleService;
-  apiService: MockApiService;
-  routerNavigateByUrl: jasmine.Spy;
+class RouterStub {
+  navigateByUrl: jasmine.Spy;
 
   constructor() {
-    const noop = () => undefined;
     const router = fixture.debugElement.injector.get(Router);
-    (<any>this.titleService) = fixture.debugElement.injector.get(TitleService);
-    (<any>this.apiService) = fixture.debugElement.injector.get(ApiService);
 
-    this.routerNavigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(
-      noop
+    this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(
+      () => undefined
     );
   }
 }

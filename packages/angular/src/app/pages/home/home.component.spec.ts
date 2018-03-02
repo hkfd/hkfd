@@ -12,7 +12,8 @@ import { HomeComponent } from './home.component';
 
 let comp: HomeComponent;
 let fixture: ComponentFixture<HomeComponent>;
-let page: Page;
+let titleService: TitleService;
+let apiService: ApiService;
 
 describe('HomeComponent', () => {
   beforeEach(
@@ -32,15 +33,15 @@ describe('HomeComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should call TitleService setTitle', () => {
-    expect(page.titleService.setTitle).toHaveBeenCalled();
+    expect(titleService.setTitle).toHaveBeenCalled();
   });
 
   it('should call TitleService setTitle with no argument', () => {
-    expect(page.titleService.setTitle).toHaveBeenCalledWith();
+    expect(titleService.setTitle).toHaveBeenCalledWith();
   });
 
   it('should call ApiService getCaseStudies', () => {
-    expect(page.apiService.getCaseStudies).toHaveBeenCalledWith();
+    expect(apiService.getCaseStudies).toHaveBeenCalledWith();
   });
 
   it('should set caseStudies', () => {
@@ -54,31 +55,22 @@ describe('HomeComponent', () => {
     ));
 
   it('should call ApiService getServices', () => {
-    expect(page.apiService.getServices).toHaveBeenCalled();
+    expect(apiService.getServices).toHaveBeenCalled();
   });
 
   it('should call ApiService getClients', () => {
-    expect(page.apiService.getClients).toHaveBeenCalled();
+    expect(apiService.getClients).toHaveBeenCalled();
   });
 });
 
 function createComponent() {
   fixture = TestBed.createComponent(HomeComponent);
   comp = fixture.componentInstance;
-  page = new Page();
+  titleService = fixture.debugElement.injector.get(TitleService);
+  apiService = fixture.debugElement.injector.get(ApiService);
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
     fixture.detectChanges();
   });
-}
-
-class Page {
-  titleService: MockTitleService;
-  apiService: MockApiService;
-
-  constructor() {
-    (<any>this.titleService) = fixture.debugElement.injector.get(TitleService);
-    (<any>this.apiService) = fixture.debugElement.injector.get(ApiService);
-  }
 }
