@@ -6,7 +6,7 @@
 </section>
 
 <section id="case-studies">
-  <a class="case-study {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies" [@caseStudyList]="caseStudy?.thumbnail?.loaded" routerLink="{{ caseStudy?.id }}">
+  <a class="case-study {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies$ | async" [@caseStudyList]="caseStudy?.thumbnail?.loaded" routerLink="{{ caseStudy?.id }}">
     <h2>{{ caseStudy?.title | uppercase }}</h2>
     <span class="button">READ MORE</span>
     <image full-height [image]="caseStudy?.thumbnail"></image>

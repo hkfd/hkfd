@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
+import { catchError, retry, tap, map, flatMap, find } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
@@ -57,13 +57,15 @@ export class ApiService {
       );
   }
 
-  getCaseStudies(): Observable<CaseStudy[]> {
+  getCaseStudies(featured: boolean): Observable<CaseStudy[]> {
     return this.http
       .get<CaseStudy[]>(this.caseStudies)
       .pipe(
         retry(3),
-        tap((caseStudies: CaseStudy[]) =>
-          this.logger.log('getCaseStudies', caseStudies)
+        map((caseStudies: CaseStudy[]) =>
+          caseStudies.filter(
+            (caseStudy: CaseStudy) => caseStudy.featured === featured
+          )
         ),
         catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
       );

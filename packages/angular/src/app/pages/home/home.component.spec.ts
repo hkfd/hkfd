@@ -41,18 +41,12 @@ describe('HomeComponent', () => {
   });
 
   it('should call ApiService getCaseStudies', () => {
-    expect(apiService.getCaseStudies).toHaveBeenCalledWith();
+    expect(apiService.getCaseStudies).toHaveBeenCalled();
   });
 
-  it('should set caseStudies', () => {
-    expect(comp.caseStudies).toBeDefined();
-    expect(comp.caseStudies.length).toBe(1);
+  it('should call ApiService getCaseStudies with true arg', () => {
+    expect(apiService.getCaseStudies).toHaveBeenCalledWith(true);
   });
-
-  it('should set only featured case studies', () =>
-    comp.caseStudies.forEach(caseStudy =>
-      expect(caseStudy).toEqual(jasmine.objectContaining({ featured: true }))
-    ));
 
   it('should call ApiService getServices', () => {
     expect(apiService.getServices).toHaveBeenCalled();

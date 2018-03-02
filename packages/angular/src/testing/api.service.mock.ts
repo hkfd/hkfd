@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { flatMap, find, catchError } from 'rxjs/operators';
+import { map, flatMap, find, catchError } from 'rxjs/operators';
 
 import {
   Service,
@@ -26,8 +26,14 @@ export class MockApiService {
     return Observable.of(services);
   }
 
-  getCaseStudies(): Observable<CaseStudy[]> {
-    return Observable.of(caseStudies);
+  getCaseStudies(featured: boolean): Observable<CaseStudy[]> {
+    return Observable.of(<CaseStudy[]>caseStudies).pipe(
+      map((caseStudies: CaseStudy[]) =>
+        caseStudies.filter(
+          (caseStudy: CaseStudy) => caseStudy.featured === featured
+        )
+      )
+    );
   }
 
   getClients(): Observable<Image[]> {

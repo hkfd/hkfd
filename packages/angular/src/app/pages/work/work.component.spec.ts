@@ -42,18 +42,12 @@ describe('WorkComponent', () => {
   });
 
   it('should call ApiService getCaseStudies', () => {
-    expect(apiService.getCaseStudies).toHaveBeenCalledWith();
+    expect(apiService.getCaseStudies).toHaveBeenCalled();
   });
 
-  it('should set caseStudies', () => {
-    expect(comp.caseStudies).toBeDefined();
-    expect(comp.caseStudies.length).toBe(2);
+  it('should call ApiService getCaseStudies with false arg', () => {
+    expect(apiService.getCaseStudies).toHaveBeenCalledWith(false);
   });
-
-  it('should set only non featured case studies', () =>
-    comp.caseStudies.forEach(caseStudy =>
-      expect(caseStudy).toEqual(jasmine.objectContaining({ featured: false }))
-    ));
 });
 
 function createComponent() {

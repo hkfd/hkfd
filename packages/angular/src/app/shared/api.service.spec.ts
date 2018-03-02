@@ -118,7 +118,7 @@ describe('ApiService', () => {
     it(
       'should call HttpClient get',
       async(() => {
-        apiService.getCaseStudies().subscribe();
+        apiService.getCaseStudies(false).subscribe();
 
         mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
@@ -127,7 +127,7 @@ describe('ApiService', () => {
     it(
       'should call HttpClient again on error',
       async(() => {
-        apiService.getCaseStudies().subscribe();
+        apiService.getCaseStudies(false).subscribe();
 
         mockHttp.expectOne(apiService.caseStudies).error(new ErrorEvent('err'));
         mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
@@ -135,11 +135,34 @@ describe('ApiService', () => {
     );
 
     it(
-      'should return case studies',
+      'should return featured case studies if passed true arg',
       async(() => {
         apiService
-          .getCaseStudies()
-          .subscribe(res => expect(res).toEqual(caseStudies));
+          .getCaseStudies(true)
+          .subscribe(caseStudies =>
+            caseStudies.forEach(caseStudy =>
+              expect(caseStudy).toEqual(
+                jasmine.objectContaining({ featured: true })
+              )
+            )
+          );
+
+        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
+      })
+    );
+
+    it(
+      'should return non featured case studies if passed false arg',
+      async(() => {
+        apiService
+          .getCaseStudies(false)
+          .subscribe(caseStudies =>
+            caseStudies.forEach(caseStudy =>
+              expect(caseStudy).toEqual(
+                jasmine.objectContaining({ featured: false })
+              )
+            )
+          );
 
         mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
       })
@@ -148,7 +171,9 @@ describe('ApiService', () => {
     it(
       'should return empty array on last retry error',
       async(() => {
-        apiService.getCaseStudies().subscribe(res => expect(res).toEqual([]));
+        apiService
+          .getCaseStudies(false)
+          .subscribe(res => expect(res).toEqual([]));
 
         Array(4)
           .fill(0)

@@ -32,7 +32,7 @@
   </div>
 </section>
 
-<slider-work [caseStudies]="caseStudies" [autoplay]="true"></slider-work>
+<slider-work [caseStudies]="caseStudies$ | async" [autoplay]="true"></slider-work>
 
 <section id="clients">
   <div class="text">

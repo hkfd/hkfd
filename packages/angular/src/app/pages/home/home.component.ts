@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import {
@@ -17,10 +16,8 @@ import { HomeImages } from './home.images';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  caseStudies$: Subscription;
-  caseStudies: CaseStudy[];
-
+export class HomeComponent implements OnInit {
+  caseStudies$: Observable<CaseStudy[]>;
   services$: Observable<Service[]>;
   clients$: Observable<Image[]>;
 
@@ -34,20 +31,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.titleService.setTitle();
 
-    this.caseStudies$ = this.apiService
-      .getCaseStudies()
-      .subscribe(
-        (caseStudies: CaseStudy[]) =>
-          (this.caseStudies = caseStudies.filter(
-            (caseStudy: CaseStudy) => caseStudy.featured
-          ))
-      );
-
+    this.caseStudies$ = this.apiService.getCaseStudies(true);
     this.services$ = this.apiService.getServices();
     this.clients$ = this.apiService.getClients();
-  }
-
-  ngOnDestroy() {
-    this.caseStudies$.unsubscribe();
   }
 }
