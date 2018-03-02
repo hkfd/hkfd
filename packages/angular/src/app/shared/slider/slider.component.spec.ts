@@ -56,6 +56,11 @@ describe('SliderComponent', () => {
       expect(comp.currentIndex).toBeDefined();
     });
 
+    it('should set currentIndex between 0 and 5', () => {
+      expect(comp.currentIndex).toBeGreaterThanOrEqual(0);
+      expect(comp.currentIndex).toBeLessThanOrEqual(5);
+    });
+
     it('should call startTimer', () => {
       expect(page.startTimer).toHaveBeenCalled();
     });

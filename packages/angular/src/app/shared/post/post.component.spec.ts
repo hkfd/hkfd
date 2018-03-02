@@ -79,6 +79,10 @@ describe('PostComponent', () => {
       expect(comp.layout).toBeDefined();
     });
 
+    it(`should set layout as 'layout-'`, () => {
+      expect(comp.layout).toMatch(/layout-[1-3]/);
+    });
+
     it('should call ApiService getPost on route change', () => {
       activatedRoute.testParamMap = { type: 'work', id: 'case-study-2' };
       fixture.detectChanges();
@@ -95,30 +99,6 @@ describe('PostComponent', () => {
 
     it('should not call Router navigateByUrl', () => {
       expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('randomInt', () => {
-    it('should return numbers between min and max', () => {
-      const numbers = Array(20)
-        .fill(0)
-        .map(() => comp.randomInt(1, 3));
-      const isBetween = numbers.every(num => num >= 1 && num <= 3);
-
-      expect(isBetween).toBe(true);
-    });
-
-    it('should not return identical numbers', () => {
-      const unique = [];
-      const numbers = Array(20)
-        .fill(0)
-        .map(() => comp.randomInt(1, 3));
-
-      numbers.forEach(num => {
-        if (!unique.includes(num)) return unique.push(num);
-      });
-
-      expect(unique.length).toBeGreaterThan(1);
     });
   });
 });

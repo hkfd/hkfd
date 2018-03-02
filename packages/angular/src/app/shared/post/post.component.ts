@@ -24,10 +24,6 @@ export class PostComponent implements OnInit {
     private apiService: ApiService
   ) {}
 
-  randomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   ngOnInit() {
     this.post$ = this.route.paramMap
       .switchMap((params: ParamMap) =>
@@ -40,7 +36,10 @@ export class PostComponent implements OnInit {
         this.titleService.setTitle(post.title);
       });
 
-    this.layout = `layout-${this.randomInt(1, 3)}`;
+    const randomInt = (min: number, max: number) =>
+      Math.floor(Math.random() * (max - min + 1) + min);
+
+    this.layout = `layout-${randomInt(1, 3)}`;
   }
 
   ngOnDestroy() {

@@ -50,7 +50,7 @@ export class SliderComponent implements OnChanges {
   }
 
   sliderInit() {
-    const randomInt = (min, max) =>
+    const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min) + min);
 
     this.currentIndex = randomInt(0, this.images.length);
