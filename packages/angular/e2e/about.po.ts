@@ -39,11 +39,7 @@ export class AboutPage {
       .element(by.css('span'));
   }
 
-  getJoinTeam() {
-    return element(by.id('join'));
-  }
-
   getJoinTeamLink() {
-    return this.getJoinTeam().element(by.css('a'));
+    return element(by.id('join')).element(by.css('a'));
   }
 }

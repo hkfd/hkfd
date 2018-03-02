@@ -17,6 +17,17 @@ describe('About', () => {
   });
 
   describe('Team', () => {
+    beforeAll(() => {
+      it('should display person', () => {
+        expect(
+          page
+            .getPeople()
+            .first()
+            .isPresent()
+        ).toBe(true);
+      });
+    });
+
     it('should display more than 1 person', () => {
       expect(page.getPeople().count()).toBeGreaterThan(1);
     });
@@ -31,10 +42,6 @@ describe('About', () => {
 
     it(`should display person's position`, () => {
       expect(page.getPersonPosition().getText()).toBe('Chairman');
-    });
-
-    it('should display join our team', () => {
-      expect(page.getJoinTeam().isPresent()).toBe(true);
     });
 
     it('should display join our team link', () => {
