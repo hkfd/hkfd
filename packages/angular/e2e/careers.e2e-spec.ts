@@ -17,15 +17,13 @@ describe('Careers', () => {
   });
 
   describe('careers', () => {
-    beforeAll(() => {
-      it('should display career', () => {
-        expect(
-          page
-            .getCareers()
-            .first()
-            .isPresent()
-        ).toBe(true);
-      });
+    it('should display career', () => {
+      expect(
+        page
+          .getCareers()
+          .first()
+          .isPresent()
+      ).toBe(true);
     });
 
     it('should display career title', () => {

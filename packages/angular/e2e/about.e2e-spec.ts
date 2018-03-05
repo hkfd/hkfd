@@ -17,15 +17,13 @@ describe('About', () => {
   });
 
   describe('Team', () => {
-    beforeAll(() => {
-      it('should display person', () => {
-        expect(
-          page
-            .getPeople()
-            .first()
-            .isPresent()
-        ).toBe(true);
-      });
+    it('should display person', () => {
+      expect(
+        page
+          .getPeople()
+          .first()
+          .isPresent()
+      ).toBe(true);
     });
 
     it('should display more than 1 person', () => {

@@ -26,15 +26,13 @@ describe('Home', () => {
   });
 
   describe('Services', () => {
-    beforeAll(() => {
-      it('should display service', () => {
-        expect(
-          page
-            .getServices()
-            .first()
-            .isPresent()
-        ).toBe(true);
-      });
+    it('should display service', () => {
+      expect(
+        page
+          .getServices()
+          .first()
+          .isPresent()
+      ).toBe(true);
     });
 
     it('should display more than 1 service', () => {

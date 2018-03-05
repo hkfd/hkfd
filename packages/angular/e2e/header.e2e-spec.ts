@@ -8,15 +8,13 @@ describe('Header', () => {
     page.navigateTo();
   });
 
-  beforeAll(() => {
-    it('should have links', () => {
-      expect(
-        page
-          .getLinks()
-          .first()
-          .isPresent()
-      ).toBe(true);
-    });
+  it('should have links', () => {
+    expect(
+      page
+        .getLinks()
+        .first()
+        .isPresent()
+    ).toBe(true);
   });
 
   it('should have 6 links', () => {

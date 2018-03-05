@@ -13,15 +13,13 @@ describe('Work', () => {
   });
 
   describe('Case Studies', () => {
-    beforeAll(() => {
-      it('should display case study', () => {
-        expect(
-          page
-            .getCaseStudies()
-            .first()
-            .isPresent()
-        ).toBe(true);
-      });
+    it('should display case study', () => {
+      expect(
+        page
+          .getCaseStudies()
+          .first()
+          .isPresent()
+      ).toBe(true);
     });
 
     it('should display more than 1 case study', () => {
