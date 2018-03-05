@@ -1,10 +1,10 @@
-import { HeaderPage } from './header.po';
+import { Header } from './header.po';
 
 describe('Header', () => {
-  let page: HeaderPage;
+  let page: Header;
 
   beforeEach(() => {
-    page = new HeaderPage();
+    page = new Header();
     page.navigateTo();
   });
 
@@ -74,7 +74,7 @@ describe('Header', () => {
   });
 
   describe('Toggle', () => {
-    beforeEach(() => page.setMobile());
+    beforeAll(() => page.setSize(200, 300));
 
     it('should show toggle', () => {
       expect(page.getToggle().isDisplayed()).toBe(true);
@@ -129,5 +129,7 @@ describe('Header', () => {
         )
         .then(_ => expect(page.getNavLinks().isDisplayed()).toBe(false));
     });
+
+    afterAll(() => page.setSize());
   });
 });

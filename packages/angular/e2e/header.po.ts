@@ -1,6 +1,10 @@
 import { browser, by, element } from 'protractor';
 
-export class HeaderPage {
+export class Header {
+  sleep(time: number = 500) {
+    return browser.sleep(time);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
@@ -19,15 +23,11 @@ export class HeaderPage {
       .getText();
   }
 
-  setMobile() {
+  setSize(width: number = 800, height: number = 600) {
     return browser.driver
       .manage()
       .window()
-      .setSize(200, 200);
-  }
-
-  sleep() {
-    return browser.sleep(500);
+      .setSize(width, height);
   }
 
   getToggle() {

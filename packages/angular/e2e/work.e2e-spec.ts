@@ -44,6 +44,7 @@ describe('Work', () => {
 
     it('should route on click', () => {
       const originalUrl = page.getUrl();
+      page.sleep();
 
       page
         .getCaseStudies()

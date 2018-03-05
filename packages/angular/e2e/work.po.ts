@@ -1,6 +1,10 @@
 import { browser, by, element } from 'protractor';
 
 export class WorkPage {
+  sleep(time: number = 500) {
+    return browser.sleep(time);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
