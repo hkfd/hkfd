@@ -19,6 +19,7 @@ export class SliderComponent implements OnChanges {
   private timer: number;
   currentIndex: number = 0;
 
+  @Input() random: boolean = false;
   @Input() autoplay: boolean = false;
   @Input() delay: number = 2000;
   @Input() images: Image[];
@@ -62,7 +63,7 @@ export class SliderComponent implements OnChanges {
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min) + min);
 
-    this.currentIndex = randomInt(0, this.images.length);
+    if (this.random) this.currentIndex = randomInt(0, this.images.length);
     this.startTimer();
   }
 

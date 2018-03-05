@@ -4,10 +4,13 @@
   overflow: hidden;
   display: block;
   position: relative;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   width: auto;
+  height: 70vh;
   white-space: nowrap;
+  cursor: ew-resize;
+  -webkit-overflow-scroll: touch;
 }
 
 image {
@@ -18,49 +21,6 @@ image {
 
 #swipe {
   position: absolute;
-  top: 50%;
-  top: calc(50% - 1em);
-  left: 50%;
-  background: #fff;
-  width: 2em;
-  height: 2em;
-  z-index: 4;
-  border-radius: 50%;
-  animation: swipe 1.7s linear infinite;
-  transform-origin: left;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .arrow {
-    margin: 0;
-    padding: 0;
-    color: $blue;
-    width: 0.65em;
-    height: 0.65em;
-    margin-left: -0.35em;
-
-    &::before {
-      width: 1em;
-    }
-  }
-}
-
-@keyframes swipe {
-  0% {
-    transform: translateX(150%) scaleX(1);
-  }
-  20% {
-    transform: translateX(0) scaleX(1.2);
-  }
-  40% {
-    transform: translateX(-150%) scaleX(1);
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
+  bottom: 0.5em;
+  left: 1em;
 }

@@ -17,6 +17,11 @@ h2 {
 
 section {
   overflow: hidden;
+
+  &:first-of-type {
+    background: $grey-dark;
+    color: #fff;
+  }
 }
 
 #intro {

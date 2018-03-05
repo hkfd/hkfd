@@ -27,10 +27,6 @@ export const HomeImages: { [name: string]: Image | Image[] } = {
       alt: 'Heckford reception'
     },
     {
-      name: 'heckford-print2',
-      alt: 'Heckford printing'
-    },
-    {
       name: 'heckford-studio',
       alt: 'Heckford studio'
     }
