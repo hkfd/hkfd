@@ -12,10 +12,10 @@ import { HeaderAnimations } from './header.animations';
 export class HeaderComponent {
   pages = [
     { url: '/' },
-    { title: 'ABOUT', url: '/about' },
-    { title: 'OUR WORK', url: '/work' },
-    { title: 'CAREERS', url: '/careers' },
-    { title: 'CONTACT', url: '/contact' }
+    { title: 'About', url: '/about' },
+    { title: 'Our Work', url: '/work' },
+    { title: 'Careers', url: '/careers' },
+    { title: 'Contact', url: '/contact' }
   ];
 
   mobileShow: boolean = false;
