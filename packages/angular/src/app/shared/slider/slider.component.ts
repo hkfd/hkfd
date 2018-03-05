@@ -4,7 +4,8 @@ import {
   OnDestroy,
   SimpleChanges,
   Input,
-  HostListener
+  HostListener,
+  NgZone
 } from '@angular/core';
 
 import { Image } from '../shared.module';
@@ -31,6 +32,8 @@ export class SliderComponent implements OnChanges {
     if (this.images) this.startTimer();
   }
 
+  constructor(private zone: NgZone) {}
+
   changeImage(offset: number = 1) {
     const index = this.currentIndex + offset;
 
@@ -42,11 +45,17 @@ export class SliderComponent implements OnChanges {
 
   startTimer() {
     if (this.autoplay)
-      this.timer = setInterval(this.changeImage.bind(this), this.delay);
+      this.zone.runOutsideAngular(
+        _ =>
+          (this.timer = window.setInterval(
+            _ => this.zone.run(this.changeImage.bind(this)),
+            this.delay
+          ))
+      );
   }
 
   endTimer() {
-    clearInterval(this.timer);
+    this.zone.runOutsideAngular(_ => window.clearInterval(this.timer));
   }
 
   sliderInit() {

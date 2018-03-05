@@ -32,6 +32,12 @@ describe('Careers', () => {
       expect(page.getCareerTitle()).toBeTruthy();
     });
 
+    it('should display uppercase career title', () => {
+      page.getCareerTitle().then(title => {
+        expect(title).toEqual(title.toUpperCase());
+      });
+    });
+
     it('should display career image', () => {
       expect(page.getCareerImage().isPresent()).toBe(true);
     });

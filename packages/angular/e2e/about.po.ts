@@ -30,13 +30,15 @@ export class AboutPage {
   getPersonName() {
     return this.getPeople()
       .first()
-      .element(by.css('h4'));
+      .element(by.css('h4'))
+      .getText();
   }
 
   getPersonPosition() {
     return this.getPeople()
       .first()
-      .element(by.css('span'));
+      .element(by.css('span'))
+      .getText();
   }
 
   getJoinTeamLink() {

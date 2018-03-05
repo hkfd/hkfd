@@ -37,11 +37,17 @@ describe('About', () => {
     });
 
     it(`should display person's name`, () => {
-      expect(page.getPersonName().getText()).toBe('STEVE');
+      expect(page.getPersonName()).toBeTruthy;
+    });
+
+    it(`should display uppercase person's name`, () => {
+      page.getPersonName().then(title => {
+        expect(title).toEqual(title.toUpperCase());
+      });
     });
 
     it(`should display person's position`, () => {
-      expect(page.getPersonPosition().getText()).toBe('Chairman');
+      expect(page.getPersonPosition()).toBeTruthy();
     });
 
     it('should display join our team link', () => {
