@@ -16,8 +16,14 @@ describe('Home', () => {
     expect(page.getIntroSlider().isPresent()).toBe(true);
   });
 
+  it('should display intro slider logo', () => {
+    expect(page.getIntroSliderLogo().isDisplayed()).toBe(true);
+  });
+
   describe('Help', () => {
     it('should link to /about', () => {
+      page.sleep();
+
       page
         .getHelpButton()
         .click()

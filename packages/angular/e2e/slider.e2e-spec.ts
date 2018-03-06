@@ -8,6 +8,10 @@ describe('Slider', () => {
     page.navigateTo();
   });
 
+  it('should be present', () => {
+    expect(page.getSlider().isPresent()).toBe(true);
+  });
+
   it('should have image', () => {
     expect(
       page
@@ -19,6 +23,16 @@ describe('Slider', () => {
 
   it('should have more than 1 image', () => {
     expect(page.getImages().count()).toBeGreaterThan(1);
+  });
+
+  it('should display image', () => {
+    page.sliderHover();
+    expect(
+      page
+        .getImages()
+        .first()
+        .isDisplayed()
+    ).toBe(true);
   });
 
   it('should display previous arrow', () => {

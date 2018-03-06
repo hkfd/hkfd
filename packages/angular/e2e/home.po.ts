@@ -1,6 +1,10 @@
 import { browser, by, element } from 'protractor';
 
 export class HomePage {
+  sleep(time: number = 500) {
+    return browser.sleep(time);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
@@ -15,6 +19,10 @@ export class HomePage {
 
   getIntroSlider() {
     return element(by.css('slider'));
+  }
+
+  getIntroSliderLogo() {
+    return element(by.id('icon-40'));
   }
 
   getHelpButton() {
