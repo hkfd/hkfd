@@ -9,21 +9,15 @@ describe('Home', () => {
   });
 
   it('should display title', () => {
-    expect(page.getPageTitle()).toContain(`LANCASHIRE'S LARGEST`);
+    expect(page.getPageTitle()).toBeTruthy();
   });
 
   it('should display intro slider', () => {
-    expect(page.getIntroSlider().isPresent()).toBe(true);
-  });
-
-  it('should display intro slider logo', () => {
-    expect(page.getIntroSliderLogo().isDisplayed()).toBe(true);
+    expect(page.getIntroSlider().isDisplayed()).toBe(true);
   });
 
   describe('Help', () => {
     it('should link to /about', () => {
-      page.sleep();
-
       page
         .getHelpButton()
         .click()
@@ -32,7 +26,7 @@ describe('Home', () => {
   });
 
   describe('Services', () => {
-    it('should display service', () => {
+    it('should have service', () => {
       expect(
         page
           .getServices()
@@ -41,12 +35,21 @@ describe('Home', () => {
       ).toBe(true);
     });
 
-    it('should display more than 1 service', () => {
+    it('should display service', () => {
+      expect(
+        page
+          .getServices()
+          .first()
+          .isDisplayed()
+      ).toBe(true);
+    });
+
+    it('should have more than 1 service', () => {
       expect(page.getServices().count()).toBeGreaterThan(1);
     });
 
     it('should display service thumbnail', () => {
-      expect(page.getServiceThumbnail().isPresent()).toBe(true);
+      expect(page.getServiceThumbnail().isDisplayed()).toBe(true);
     });
 
     it('should display service title', () => {
@@ -75,11 +78,11 @@ describe('Home', () => {
   });
 
   it('should display case studies slider', () => {
-    expect(page.getCaseStudiesSlider().isPresent()).toBe(true);
+    expect(page.getCaseStudiesSlider().isDisplayed()).toBe(true);
   });
 
   describe('Clients', () => {
-    it('should display client', () => {
+    it('should have client', () => {
       expect(
         page
           .getClients()
@@ -88,7 +91,16 @@ describe('Home', () => {
       ).toBe(true);
     });
 
-    it('should display more than 1 client', () => {
+    it('should display client', () => {
+      expect(
+        page
+          .getClients()
+          .first()
+          .isDisplayed()
+      ).toBe(true);
+    });
+
+    it('should have more than 1 client', () => {
       expect(page.getClients().count()).toBeGreaterThan(1);
     });
   });

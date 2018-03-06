@@ -8,12 +8,12 @@ describe('Image', () => {
     page.navigateTo();
   });
 
-  it('should display image', () => {
+  it('should be present', () => {
     expect(
       page
         .getImages()
         .first()
-        .isDisplayed()
+        .isPresent()
     ).toBe(true);
   });
 

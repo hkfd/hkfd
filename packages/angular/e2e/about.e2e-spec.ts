@@ -9,15 +9,15 @@ describe('About', () => {
   });
 
   it('should display title', () => {
-    expect(page.getPageTitle()).toEqual('40 YEARS OF INNOVATION');
+    expect(page.getPageTitle()).toBeTruthy();
   });
 
   it('should display intro image', () => {
-    expect(page.getIntroImage().isPresent()).toBe(true);
+    expect(page.getIntroImage().isDisplayed()).toBe(true);
   });
 
   describe('Team', () => {
-    it('should display person', () => {
+    it('should have person', () => {
       expect(
         page
           .getPeople()
@@ -26,16 +26,25 @@ describe('About', () => {
       ).toBe(true);
     });
 
-    it('should display more than 1 person', () => {
+    it('should display person', () => {
+      expect(
+        page
+          .getPeople()
+          .first()
+          .isDisplayed()
+      ).toBe(true);
+    });
+
+    it('should have more than 1 person', () => {
       expect(page.getPeople().count()).toBeGreaterThan(1);
     });
 
     it(`should display person's image`, () => {
-      expect(page.getPersonImage().isPresent()).toBe(true);
+      expect(page.getPersonImage().isDisplayed()).toBe(true);
     });
 
     it(`should display person's name`, () => {
-      expect(page.getPersonName()).toBeTruthy;
+      expect(page.getPersonName()).toBeTruthy();
     });
 
     it(`should display uppercase person's name`, () => {
@@ -49,7 +58,7 @@ describe('About', () => {
     });
 
     it('should display join our team link', () => {
-      expect(page.getJoinTeamLink().isPresent()).toBe(true);
+      expect(page.getJoinTeamLink().isDisplayed()).toBe(true);
     });
 
     it('should link to /careers', () => {

@@ -9,11 +9,11 @@ describe('Work', () => {
   });
 
   it('should display title', () => {
-    expect(page.getPageTitle()).toEqual('OUR WORK');
+    expect(page.getPageTitle()).toBeTruthy();
   });
 
   describe('Case Studies', () => {
-    it('should display case study', () => {
+    it('should have case study', () => {
       expect(
         page
           .getCaseStudies()
@@ -22,7 +22,16 @@ describe('Work', () => {
       ).toBe(true);
     });
 
-    it('should display more than 1 case study', () => {
+    it('should display case study', () => {
+      expect(
+        page
+          .getCaseStudies()
+          .first()
+          .isDisplayed()
+      ).toBe(true);
+    });
+
+    it('should have more than 1 case study', () => {
       expect(page.getCaseStudies().count()).toBeGreaterThan(1);
     });
 
@@ -37,7 +46,7 @@ describe('Work', () => {
     });
 
     it('should display case study image', () => {
-      expect(page.getCaseStudyImage().isPresent()).toBe(true);
+      expect(page.getCaseStudyImage().isDisplayed()).toBe(true);
     });
 
     it('should route on click', () => {

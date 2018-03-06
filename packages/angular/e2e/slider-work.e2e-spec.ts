@@ -33,11 +33,11 @@ describe('SliderWork', () => {
     expect(page.getNextArrow().isDisplayed()).toBe(true);
   });
 
-  xit('should have title', () => {
+  xit('should display title', () => {
     expect(page.getTitle().getText()).toBeTruthy();
   });
 
-  xit('should have uppercase title', () => {
+  xit('should display uppercase title', () => {
     page
       .getTitle()
       .getText()
@@ -46,7 +46,7 @@ describe('SliderWork', () => {
       });
   });
 
-  xit('should have sector', () => {
+  xit('should display sector', () => {
     expect(page.getSector().getText()).toBeTruthy();
   });
 

@@ -8,7 +8,7 @@ describe('Header', () => {
     page.navigateTo();
   });
 
-  it('should have links', () => {
+  it('should have link', () => {
     expect(
       page
         .getLinks()
@@ -21,11 +21,11 @@ describe('Header', () => {
     expect(page.getLinks().count()).toBe(6);
   });
 
-  it('should set link title', () => {
+  it('should display link title', () => {
     expect(page.getLinkTitle()).toBeTruthy();
   });
 
-  it('should set uppercase link title', () => {
+  it('should display uppercase link title', () => {
     page.getLinkTitle().then(title => {
       expect(title).toEqual(title.toUpperCase());
     });

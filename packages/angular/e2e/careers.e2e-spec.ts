@@ -9,20 +9,29 @@ describe('Careers', () => {
   });
 
   it('should display title', () => {
-    expect(page.getPageTitle()).toEqual('FANCY JOINING THE TEAM?');
+    expect(page.getPageTitle()).toBeTruthy();
   });
 
   it('should display intro image', () => {
-    expect(page.getIntroImage().isPresent()).toBe(true);
+    expect(page.getIntroImage().isDisplayed()).toBe(true);
   });
 
   describe('careers', () => {
-    it('should display career', () => {
+    it('should have career', () => {
       expect(
         page
           .getCareers()
           .first()
           .isPresent()
+      ).toBe(true);
+    });
+
+    it('should display career', () => {
+      expect(
+        page
+          .getCareers()
+          .first()
+          .isDisplayed()
       ).toBe(true);
     });
 
@@ -37,7 +46,7 @@ describe('Careers', () => {
     });
 
     it('should display career image', () => {
-      expect(page.getCareerImage().isPresent()).toBe(true);
+      expect(page.getCareerImage().isDisplayed()).toBe(true);
     });
 
     xit('should link to /contact', () => {

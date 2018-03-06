@@ -54,13 +54,13 @@ describe('Post', () => {
       ).toBeTruthy();
     });
 
-    it('should display more than 1 list item', () => {
+    it('should have more than 1 list item', () => {
       expect(page.getOverviewList().count()).toBeGreaterThan(1);
     });
   });
 
   describe('Content', () => {
-    it('should display section', () => {
+    it('should have section', () => {
       expect(
         page
           .getSections()
@@ -69,7 +69,16 @@ describe('Post', () => {
       ).toBe(true);
     });
 
-    it('should display more than 1 section', () => {
+    it('should display section', () => {
+      expect(
+        page
+          .getSections()
+          .get(1)
+          .isDisplayed()
+      ).toBe(true);
+    });
+
+    it('should have more than 1 section', () => {
       expect(page.getSections().count()).toBeGreaterThan(1);
     });
 

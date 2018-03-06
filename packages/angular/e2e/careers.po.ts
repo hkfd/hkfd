@@ -14,7 +14,7 @@ export class CareersPage {
   }
 
   getIntroImage() {
-    return element(by.css('image'));
+    return element.all(by.css('image')).first();
   }
 
   getCareers() {
