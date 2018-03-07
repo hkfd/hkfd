@@ -4,7 +4,8 @@ import {
   Post,
   CaseStudy,
   Team,
-  Image
+  Image,
+  TextBlock
 } from '../app/shared/shared.module';
 
 export const services: Service[] = [
@@ -260,3 +261,62 @@ export const images: Image[] = [
     alt: ''
   }
 ];
+
+export const textBlocks: { [name: string]: TextBlock } = {
+  text: {
+    type: 'text',
+    data: [
+      {
+        paragraph: [
+          {
+            text: 'Paragraph 1, Sentence 1.'
+          },
+          {
+            text: 'Paragraph 1, Sentence 2.'
+          }
+        ]
+      },
+      {
+        paragraph: [
+          {
+            text: 'Paragraph 2, Sentence 1.'
+          },
+          {
+            text: 'Paragraph 2, Sentence 2.'
+          },
+          {
+            text: 'Paragraph 2, Sentence 3.'
+          }
+        ]
+      }
+    ]
+  },
+  list: {
+    type: 'text',
+    data: [
+      {
+        list: [
+          {
+            text: 'List 1, Item 1'
+          },
+          {
+            text: 'List 1, Item 2'
+          },
+          {
+            text: 'List 1, Item 3'
+          }
+        ]
+      },
+      {
+        list: [
+          {
+            text: 'List 2, Item 1'
+          },
+          {
+            text: 'List 2, Item 2'
+          }
+        ]
+      }
+    ]
+  }
+};
