@@ -6,7 +6,8 @@ import {
   Team,
   Image,
   TextBlock,
-  Sentence
+  Sentence,
+  GalleryBlock
 } from '../app/shared/shared.module';
 
 export const services: Service[] = [
@@ -342,4 +343,15 @@ export const sentence: { [name: string]: Sentence } = {
   normal: {
     text: 'Normal sentence.'
   }
+};
+
+export const galleryBlock: GalleryBlock = {
+  type: 'gallery',
+  images: [
+    { name: 'image1', alt: '' },
+    { name: 'image2', alt: '' },
+    { name: 'image3', alt: '' },
+    { name: 'image4', alt: '' },
+    { name: 'image5', alt: '' }
+  ]
 };
