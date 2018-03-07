@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { TitleService } from '../../shared/shared.module';
 import { ContactImages } from './contact.images';
 
 @Component({
@@ -7,6 +8,12 @@ import { ContactImages } from './contact.images';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
   images = ContactImages;
+
+  constructor(private titleService: TitleService) {}
+
+  ngOnInit() {
+    this.titleService.setTitle('Contact');
+  }
 }
