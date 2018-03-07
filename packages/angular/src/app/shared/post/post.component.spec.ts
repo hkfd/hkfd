@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import {
   Router,
@@ -10,13 +11,18 @@ import {
   ActivatedRouteStub
 } from '../../../testing';
 
-import { TitleService, ApiService } from '../../shared/shared.module';
+import {
+  TitleService,
+  ApiService,
+  ImageBlock
+} from '../../shared/shared.module';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
 let titleService: TitleService;
 let apiService: ApiService;
+let page: Page;
 let router: RouterStub;
 let activatedRoute: ActivatedRouteStub;
 
@@ -101,6 +107,116 @@ describe('PostComponent', () => {
       expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('Content', () => {
+    it('should display title', () => {
+      activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
+      fixture.detectChanges();
+      page.addElements();
+
+      expect(page.sectionTitle.nativeElement.textContent).toEqual(
+        jasmine.any(String)
+      );
+    });
+
+    it('should display uppercase title', () => {
+      activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
+      fixture.detectChanges();
+      page.addElements();
+
+      expect(page.sectionTitle.nativeElement.textContent).toEqual('TEXTBLOCK');
+    });
+
+    describe('Text', () => {
+      beforeEach(() => {
+        activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
+        fixture.detectChanges();
+        page.addElements();
+      });
+
+      it('should display TextBlockComponent', () => {
+        expect(page.textBlock).toBeTruthy();
+      });
+    });
+
+    describe('Image', () => {
+      beforeEach(() => {
+        activatedRoute.testParamMap = { type: 'work', id: 'case-study-2' };
+        fixture.detectChanges();
+        page.addElements();
+      });
+
+      it('should display ImageBlockComponent', () => {
+        expect(page.imageBlock).toBeTruthy();
+      });
+
+      it(`should set full-bleed attibute as 'true' if fullBleed is true`, () => {
+        (<ImageBlock>comp.post.content[0].data[0]).fullBleed = true;
+        fixture.detectChanges();
+
+        expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
+          'true'
+        );
+      });
+
+      it(`should not set full-bleed attibute if no fullBleed`, () => {
+        (<ImageBlock>comp.post.content[0].data[0]).fullBleed = undefined;
+        fixture.detectChanges();
+
+        expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
+          null
+        );
+      });
+    });
+
+    describe('Gallery', () => {
+      beforeEach(() => {
+        activatedRoute.testParamMap = { type: 'work', id: 'case-study-3' };
+        fixture.detectChanges();
+        page.addElements();
+      });
+
+      it('should display GalleryBlockComponent', () => {
+        expect(page.galleryBlock).toBeTruthy();
+      });
+    });
+
+    describe('Duo', () => {
+      beforeEach(() => {
+        activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
+        fixture.detectChanges();
+        page.addElements();
+      });
+
+      it('should display DuoBlockComponent', () => {
+        expect(page.duoBlock).toBeTruthy();
+      });
+    });
+
+    describe('Video', () => {
+      beforeEach(() => {
+        activatedRoute.testParamMap = { type: 'service', id: 'service-2' };
+        fixture.detectChanges();
+        page.addElements();
+      });
+
+      it('should display VideoBlockComponent', () => {
+        expect(page.videoBlock).toBeTruthy();
+      });
+    });
+
+    describe('Audio', () => {
+      beforeEach(() => {
+        activatedRoute.testParamMap = { type: 'service', id: 'service-3' };
+        fixture.detectChanges();
+        page.addElements();
+      });
+
+      it('should display AudioBlockComponent', () => {
+        expect(page.audioBlock).toBeTruthy();
+      });
+    });
+  });
 });
 
 function createComponent() {
@@ -108,11 +224,13 @@ function createComponent() {
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
   apiService = fixture.debugElement.injector.get(ApiService);
+  page = new Page();
   router = new RouterStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
     fixture.detectChanges();
+    page.addElements();
   });
 }
 
@@ -124,5 +242,25 @@ class RouterStub {
     const router = fixture.debugElement.injector.get(Router);
 
     this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(noop);
+  }
+}
+
+class Page {
+  sectionTitle: DebugElement;
+  textBlock: DebugElement;
+  imageBlock: DebugElement;
+  galleryBlock: DebugElement;
+  duoBlock: DebugElement;
+  videoBlock: DebugElement;
+  audioBlock: DebugElement;
+
+  addElements() {
+    this.sectionTitle = fixture.debugElement.query(By.css('h2'));
+    this.textBlock = fixture.debugElement.query(By.css('text-block'));
+    this.imageBlock = fixture.debugElement.query(By.css('image-block'));
+    this.galleryBlock = fixture.debugElement.query(By.css('gallery-block'));
+    this.duoBlock = fixture.debugElement.query(By.css('duo-block'));
+    this.videoBlock = fixture.debugElement.query(By.css('video-block'));
+    this.audioBlock = fixture.debugElement.query(By.css('audio-block'));
   }
 }

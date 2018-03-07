@@ -48,5 +48,11 @@ export interface Data {
 
 export interface Content {
   title?: string;
-  data: Data[];
+  data:
+    | TextBlock[]
+    | ImageBlock[]
+    | GalleryBlock[]
+    | VideoBlock[]
+    | AudioBlock[]
+    | DuoBlock[];
 }

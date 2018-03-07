@@ -4,11 +4,14 @@ import {
   Post,
   CaseStudy,
   Team,
-  Image,
   TextBlock,
-  Sentence,
+  ImageBlock,
   GalleryBlock,
-  DuoBlock
+  DuoBlock,
+  VideoBlock,
+  AudioBlock,
+  Image,
+  Sentence
 } from '../app/shared/shared.module';
 
 export const services: Service[] = [
@@ -34,9 +37,11 @@ export const services: Service[] = [
     },
     content: [
       {
-        data: [
+        title: 'DuoBlock',
+        data: <DuoBlock[]>[
           {
-            type: 'text'
+            type: 'duo',
+            images: [{ name: 'image1', alt: '' }, { name: 'image2', alt: '' }]
           }
         ]
       }
@@ -64,9 +69,43 @@ export const services: Service[] = [
     },
     content: [
       {
-        data: [
+        title: 'VideoBlock',
+        data: <VideoBlock[]>[
           {
-            type: 'text'
+            type: 'video',
+            id: ''
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'service-3',
+    title: 'Service 3',
+    description: 'Service 3 description',
+    thumbnail: {
+      name: '',
+      alt: ''
+    },
+    intro: {
+      type: 'text',
+      data: [
+        {
+          paragraph: [
+            {
+              text: 'Service 3 introduction'
+            }
+          ]
+        }
+      ]
+    },
+    content: [
+      {
+        title: 'AudioBlock',
+        data: <AudioBlock[]>[
+          {
+            type: 'audio',
+            url: ''
           }
         ]
       }
@@ -85,22 +124,11 @@ export const caseStudies: CaseStudy[] = [
       alt: ''
     },
     overview: ['deliverable'],
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text: 'Case Study 1 intro'
-            }
-          ]
-        }
-      ]
-    },
+    intro: null,
     content: [
       {
-        title: 'Title',
-        data: [
+        title: 'TextBlock',
+        data: <TextBlock[]>[
           {
             type: 'text'
           }
@@ -132,10 +160,11 @@ export const caseStudies: CaseStudy[] = [
     },
     content: [
       {
-        title: 'Title',
-        data: [
+        title: 'ImageBlock',
+        data: <ImageBlock[]>[
           {
-            type: 'text'
+            type: 'image',
+            fullBleed: true
           }
         ]
       }
@@ -165,10 +194,15 @@ export const caseStudies: CaseStudy[] = [
     },
     content: [
       {
-        title: 'Title',
-        data: [
+        title: 'GalleryBlock',
+        data: <GalleryBlock[]>[
           {
-            type: 'text'
+            type: 'gallery',
+            images: [
+              { name: 'image1', alt: '' },
+              { name: 'image2', alt: '' },
+              { name: 'image3', alt: '' }
+            ]
           }
         ]
       }
