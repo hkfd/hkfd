@@ -1,6 +1,6 @@
 @import '../../../styles';
 
-#footer-cta {
+#cta {
   @extend %container-full;
   padding-top: 5vh;
   padding-bottom: 5vh;
@@ -21,77 +21,80 @@
   }
 }
 
-#footer-info {
+#footer {
   @extend %container-full;
   margin: 5vh 0;
 
-  #info {
+  h4 {
+    @extend %font-large;
+  }
+
+  #footer-info {
     display: block;
+    @extend %container-col;
+    color: $grey;
 
     @include sm {
       display: flex;
       justify-content: space-between;
       margin: 0 -($gutter / 2);
     }
-  }
 
-  #info-locations {
-    display: block;
-
-    @include sm {
-      display: flex;
-      justify-content: space-between;
-      margin: 0 -2em;
+    #locations {
+      display: block;
       padding: 0 ($gutter / 2);
-    }
-
-    .location {
-      margin: 10px 0;
-      color: $grey;
 
       @include sm {
-        padding: 0 2em;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 -2em;
       }
 
-      h5 {
-        color: #000;
-      }
-
-      address {
-        margin: 20px 0;
+      .location {
+        margin: 10px 0;
 
         @include sm {
-          margin: 20px 0 0;
+          padding: 0 2em;
+        }
+
+        address {
+          margin: 20px 0;
+          line-height: 1.6;
+
+          @include sm {
+            margin: 20px 0 0;
+          }
         }
       }
     }
-  }
 
-  #info-social {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin: 10px 0;
+    #legal {
+      margin: 1em 0;
+    }
 
-    @include sm {
+    #info-social {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin: 10px 0;
       padding: 0 ($gutter / 2);
-    }
 
-    a {
-      opacity: 0.5;
-      @include sm {
-        margin: 0.5em;
+      a {
+        opacity: 0.5;
+        @include sm {
+          margin: 0.75em;
+        }
+
+        &:hover,
+        &:active {
+          opacity: 1;
+        }
       }
 
-      &:hover,
-      &:active {
-        opacity: 1;
+      img {
+        height: 1em;
+        width: auto;
       }
-    }
-
-    img {
-      height: 15px;
-      width: auto;
     }
   }
 }

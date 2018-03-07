@@ -5,7 +5,10 @@
   </div>
 </section>
 
-<image id="intro-image" full-height [image]="images.intro"></image>
+<div id="intro-image">
+  <img class="icon-40" src="/assets/icons/40-years.svg">
+  <image full-height [image]="images?.intro"></image>
+</div>
 
 <section id="team">
   <h2>MEET THE TEAM</h2>
@@ -26,10 +29,14 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="join">
-    <h3>JOIN OUR TEAM</h3>
-    <a class="button" routerLink="/careers">VIEW OUR VACANCIES</a>
+    <a class="person">
+      <div class="person-container">
+        <div class="person-info">
+          <h4>JOIN THE TEAM</h4>
+          <a class="button" routerLink="/careers">VIEW OUR VACANCIES</a>
+        </div>
+      </div>
+    </a>
   </div>
 </section>

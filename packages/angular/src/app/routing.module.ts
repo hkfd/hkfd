@@ -31,6 +31,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'contact',
+    loadChildren: 'app/pages/contact/contact.module#ContactModule',
+    data: {
+      state: 'contact'
+    }
+  },
+  {
     path: ':type/:id',
     loadChildren: 'app/shared/post/post.module#PostModule',
     data: {

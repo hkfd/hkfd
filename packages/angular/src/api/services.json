@@ -1143,7 +1143,7 @@
         "data": [
           {
             "type": "video",
-            "id": "kcd8L4fe28o"
+            "id": "Fhq8e1THP-M"
           }
         ]
       },
@@ -1305,95 +1305,15 @@
     },
     "content": [
       {
-        "title": "Car Graphics / Vehicle Wraps",
         "data": [
           {
-            "type": "text",
-            "data": [
+            "type": "duo",
+            "images": [
               {
-                "paragraph": [
-                  {
-                    "text":
-                      "Your company’s marketing spend goes so much further with vehicle advertising."
-                  }
-                ]
+                "name": "service-signage1"
               },
               {
-                "paragraph": [
-                  {
-                    "text":
-                      "Your fleet of business cars aren’t just about getting from A to B, vehicle wraps provide a fantastic opportunity to promote your brand whilst on the move."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "service-signage-car1"
-            },
-            "fullBleed": true
-          }
-        ]
-      },
-      {
-        "title": "Large Format Digital Print",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Market leaders in high-quality large format digital prints, our facilities enable us to stay one step ahead of the competition, meeting the most demanding deadlines."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "We provide free estimates and site visits to ensure we get it right."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "As well as an in-house winning design team at your disposal, we have;"
-                  }
-                ]
-              },
-              {
-                "list": [
-                  {
-                    "text":
-                      "Print ready artwork that can be turned around in only 24hrs"
-                  },
-                  {
-                    "text":
-                      "Printers capable of printing on substrate; including wallpaper, canvas and even hubcaps!"
-                  },
-                  {
-                    "text": "Free delivery within a 10 mile radius"
-                  },
-                  {
-                    "text": "7 top of the range large format printers"
-                  },
-                  {
-                    "text": "3 in-house laminators"
-                  },
-                  {
-                    "text": "We can cater for all print sizes"
-                  },
-                  {
-                    "text":
-                      "We have our own in-house delivery and installation service if required"
-                  }
-                ]
+                "name": "service-signage2"
               }
             ]
           }
@@ -1463,13 +1383,14 @@
             ]
           },
           {
-            "type": "gallery",
+            "type": "duo",
             "images": [
-              { "name": "service-signage-external1" },
-              { "name": "service-signage-external2" },
-              { "name": "service-signage-external3" },
-              { "name": "service-signage-external4" },
-              { "name": "service-signage-external5" }
+              {
+                "name": "service-signage-external1"
+              },
+              {
+                "name": "service-signage-external2"
+              }
             ]
           }
         ]
@@ -1524,7 +1445,114 @@
             "type": "image",
             "image": {
               "name": "service-signage-internal1"
-            }
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Car Graphics / Vehicle Wraps",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Your company’s marketing spend goes so much further with vehicle advertising."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Your fleet of business cars aren’t just about getting from A to B, vehicle wraps provide a fantastic opportunity to promote your brand whilst on the move."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "duo",
+            "images": [
+              {
+                "name": "service-signage-vehicle1"
+              },
+              {
+                "name": "service-signage-vehicle2"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Large Format Digital Print",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Market leaders in high-quality large format digital prints, our facilities enable us to stay one step ahead of the competition, meeting the most demanding deadlines."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "We provide free estimates and site visits to ensure we get it right."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "As well as an in-house winning design team at your disposal, we have;"
+                  }
+                ]
+              },
+              {
+                "list": [
+                  {
+                    "text":
+                      "Print ready artwork that can be turned around in only 24hrs"
+                  },
+                  {
+                    "text":
+                      "Printers capable of printing on substrate; including wallpaper, canvas and even hubcaps!"
+                  },
+                  {
+                    "text": "Free delivery within a 10 mile radius"
+                  },
+                  {
+                    "text": "7 top of the range large format printers"
+                  },
+                  {
+                    "text": "3 in-house laminators"
+                  },
+                  {
+                    "text": "We can cater for all print sizes"
+                  },
+                  {
+                    "text":
+                      "We have our own in-house delivery and installation service if required"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-signage-print1"
+            },
+            "fullBleed": true
           }
         ]
       },

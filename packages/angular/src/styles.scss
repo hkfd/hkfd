@@ -12,8 +12,8 @@ $black: #1a1919;
 }
 
 @font-face {
-  font-family: 'Montserrat Medium';
-  @include font-src('/assets/fonts/montserrat-medium', ('ttf', 'woff', 'woff2'));
+  font-family: 'Montserrat Bold';
+  @include font-src('/assets/fonts/montserrat-bold', ('ttf', 'woff', 'woff2'));
 }
 
 @font-face {
@@ -34,7 +34,7 @@ $black: #1a1919;
 }
 
 %font-bold {
-  font-family: 'Montserrat Medium', sans-serif;
+  font-family: 'Montserrat Bold', sans-serif;
   font-weight: normal;
 }
 
@@ -103,9 +103,12 @@ h5 {
 }
 
 li {
-  list-style: disc;
   margin-left: 1em;
-  text-align: left;
+
+  &::before {
+    content: '•';
+    margin-right: 0.25em;
+  }
 }
 
 a {
@@ -229,6 +232,18 @@ main {
 
   &.right {
     transform: rotate(45deg);
+  }
+}
+
+.icon-40 {
+  position: absolute;
+  right: 1.5em;
+  bottom: 1.5em;
+  width: 75px;
+  z-index: 1;
+
+  @include md {
+    width: 100px;
   }
 }
 

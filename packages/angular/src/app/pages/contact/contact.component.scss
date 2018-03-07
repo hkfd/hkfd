@@ -1,0 +1,48 @@
+@import '../../../styles';
+
+:host {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  background: $blue;
+  color: #fff;
+}
+
+#intro {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+
+  #intro-info {
+    h1 {
+      margin: 0;
+    }
+
+    .text {
+      @extend %font-medium;
+
+      .button {
+        font-family: inherit;
+        font-size: inherit;
+        margin: 0.5em 0;
+        background: none;
+        color: #fff;
+        border: 1px solid #fff;
+        opacity: 1;
+
+        &:hover,
+        &:active {
+          background: #fff;
+          color: $blue;
+        }
+      }
+    }
+  }
+}
+
+#contact-image {
+  position: relative;
+  height: 80vh;
+}

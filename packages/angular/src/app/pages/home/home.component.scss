@@ -25,18 +25,6 @@ h2 {
   }
 }
 
-#icon-40 {
-  position: absolute;
-  right: 1.5em;
-  bottom: 1.5em;
-  width: 75px;
-  z-index: 1;
-
-  @include md {
-    width: 100px;
-  }
-}
-
 #help {
   overflow: hidden;
   padding-top: 5vh;

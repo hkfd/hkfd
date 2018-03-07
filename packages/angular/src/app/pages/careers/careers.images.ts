@@ -1,8 +1,8 @@
 import { Image } from '../../shared/shared.module';
 
 export const CareersImages: { [name: string]: Image | Image[] } = {
-  intro: {
-    name: 'careers-intro',
+  hiring: {
+    name: 'careers-hiring',
     alt: 'Careers'
   },
   career: {

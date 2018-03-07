@@ -246,5 +246,29 @@
       "name": "kelly.jpg",
       "alt": "Kelly"
     }
+  },
+  {
+    "name": "Oliver",
+    "position": "Social Media",
+    "image": {
+      "name": "oliver.jpg",
+      "alt": "Oliver"
+    }
+  },
+  {
+    "name": "Eddie",
+    "position": "SW Account Manager",
+    "image": {
+      "name": "eddie.jpg",
+      "alt": "Eddie"
+    }
+  },
+  {
+    "name": "Charlene",
+    "position": "Trainee Account Manager",
+    "image": {
+      "name": "Charlene.jpg",
+      "alt": "Charlene"
+    }
   }
 ]

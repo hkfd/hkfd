@@ -1,2 +1,7 @@
-<span id="swipe" class="button">SCROLL HERE</span>
-<image *ngFor="let image of data?.images" [image]="image" gallery></image>
+<div id="images">
+  <image *ngFor="let image of data?.images" [image]="image" gallery></image>
+</div>
+<div id="helpers">
+  <span id="swipe" class="button">SCROLL HERE</span>
+  <span id="swipe" class="button">SCROLL HERE</span>
+</div>

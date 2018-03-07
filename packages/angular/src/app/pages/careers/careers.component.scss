@@ -3,14 +3,16 @@
 :host {
   display: block;
   overflow: hidden;
-  background: $grey-light;
 }
 
 #intro {
-  margin: 10vh 0;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
   @extend %padding;
   @extend %font-medium;
   line-height: 1.4;
+  background: $black;
+  color: #fff;
 
   .text {
     padding: 0;
@@ -18,34 +20,69 @@
 }
 
 #hiring {
-  @extend %padding;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  background: #fff;
-  text-align: center;
+  display: block;
 
-  .text {
-    padding: 0;
-    margin: 0 auto;
+  @include sm {
+    display: flex;
+  }
+
+  #hiring-image,
+  #hiring-text {
+    @include width($xs: 12, $sm: 6, $padding: 0);
+  }
+
+  #hiring-text {
+    padding-left: $gutter / 2;
+    padding-right: $gutter / 2;
+
+    @include sm {
+      padding: 5%;
+    }
+
+    h2 {
+      @extend %font-extralarge;
+      margin-bottom: 0;
+    }
+
+    .text {
+      padding: 0;
+    }
   }
 }
 
 #careers {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   background: $black;
   color: #fff;
 
   .career {
+    position: relative;
     display: flex;
     align-content: center;
     align-items: center;
-    position: relative;
     overflow: hidden;
     width: 100%;
+    z-index: 1;
+
+    &:nth-of-type(odd) {
+      background: rgba($blue-dark, 0.7);
+    }
 
     @include sm {
       width: 50%;
+
+      &:nth-of-type(odd) {
+        background: none;
+      }
+
+      &:nth-of-type(4n - 1) {
+        background: rgba($blue-dark, 0.7);
+      }
+      &:nth-of-type(4n - 2) {
+        background: rgba($blue-dark, 0.7);
+      }
     }
 
     .career-info {
@@ -58,13 +95,13 @@
         margin: 0;
       }
     }
+  }
 
-    image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
+  image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }

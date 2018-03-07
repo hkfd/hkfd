@@ -9,8 +9,12 @@
 }
 
 #intro-image {
-  height: 100vh;
-  margin: 5vh 0;
+  position: relative;
+  margin: 10vh 0;
+
+  image {
+    height: 60vh;
+  }
 }
 
 #team {
@@ -34,6 +38,19 @@
     .person {
       @include width($xs: 6, $sm: 4, $md: 3, $xl: 2);
       margin: ($gutter / 2) 0;
+
+      &:last-child {
+        display: block;
+        background: $blue;
+
+        h4 {
+          @extend %font-large;
+        }
+
+        .button {
+          color: $blue;
+        }
+      }
 
       .person-container {
         position: relative;
