@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { textBlocks } from '../../../../testing';
-import { TextComponent } from './text/text.component';
 import { TextBlockComponent } from './text-block.component';
 
 let comp: TextBlockComponent;
@@ -14,7 +13,8 @@ describe('TextBlockComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        declarations: [TextBlockComponent, TextComponent]
+        declarations: [TextBlockComponent],
+        schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     })
   );
