@@ -5,7 +5,8 @@ import {
   CaseStudy,
   Team,
   Image,
-  TextBlock
+  TextBlock,
+  Sentence
 } from '../app/shared/shared.module';
 
 export const services: Service[] = [
@@ -318,5 +319,27 @@ export const textBlocks: { [name: string]: TextBlock } = {
         ]
       }
     ]
+  }
+};
+
+export const sentence: { [name: string]: Sentence } = {
+  url: {
+    text: 'Click here',
+    url: 'http://example.com'
+  },
+  heading: {
+    text: 'Heading',
+    attributes: { heading: true }
+  },
+  bold: {
+    text: 'Bold sentence.',
+    attributes: { bold: true }
+  },
+  italic: {
+    text: 'Italic sentence.',
+    attributes: { italic: true }
+  },
+  normal: {
+    text: 'Normal sentence.'
   }
 };
