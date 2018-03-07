@@ -9,7 +9,7 @@ let comp: DuoBlockComponent;
 let fixture: ComponentFixture<DuoBlockComponent>;
 let page: Page;
 
-fdescribe('DuoBlockComponent', () => {
+describe('DuoBlockComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
