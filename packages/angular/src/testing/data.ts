@@ -7,7 +7,8 @@ import {
   Image,
   TextBlock,
   Sentence,
-  GalleryBlock
+  GalleryBlock,
+  DuoBlock
 } from '../app/shared/shared.module';
 
 export const services: Service[] = [
@@ -353,5 +354,14 @@ export const galleryBlock: GalleryBlock = {
     { name: 'image3', alt: '' },
     { name: 'image4', alt: '' },
     { name: 'image5', alt: '' }
+  ]
+};
+
+export const duoBlock: DuoBlock = {
+  type: 'duo',
+  images: [
+    { name: 'image1', alt: '' },
+    { name: 'image2', alt: '' },
+    { name: 'image3', alt: '' }
   ]
 };
