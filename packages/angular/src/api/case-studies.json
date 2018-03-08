@@ -529,6 +529,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "priestley1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Design and Print",
         "data": [
           {
@@ -547,10 +558,10 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "priestley-print1" },
-              { "name": "priestley-print2" },
-              { "name": "priestley-print3" },
-              { "name": "priestley-print4" }
+              { "name": "priestley-design-print1" },
+              { "name": "priestley-design-print2" },
+              { "name": "priestley-design-print3" },
+              { "name": "priestley-design-print4" }
             ]
           }
         ]
@@ -572,14 +583,11 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "priestley-vehiclewraps1" },
-              { "name": "priestley-vehiclewraps2" },
-              { "name": "priestley-vehiclewraps3" },
-              { "name": "priestley-vehiclewraps4" },
-              { "name": "priestley-vehiclewraps5" }
-            ]
+            "type": "image",
+            "image": {
+              "name": "priestley-bus1"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -602,16 +610,12 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "priestley-externalsignage1" },
-              { "name": "priestley-externalsignage2" },
-              { "name": "priestley-externalsignage3" },
-              { "name": "priestley-externalsignage4" },
-              { "name": "priestley-externalsignage5" },
-              { "name": "priestley-externalsignage6" },
-              { "name": "priestley-externalsignage7" },
-              { "name": "priestley-externalsignage8" },
-              { "name": "priestley-externalsignage9" },
-              { "name": "priestley-externalsignage10" }
+              { "name": "priestley-signage1" },
+              { "name": "priestley-signage2" },
+              { "name": "priestley-signage3" },
+              { "name": "priestley-signage4" },
+              { "name": "priestley-signage5" },
+              { "name": "priestley-signage6" }
             ]
           }
         ]
@@ -620,10 +624,15 @@
         "title": "Photography",
         "data": [
           {
-            "paragraph": [
+            "type": "text",
+            "data": [
               {
-                "text":
-                  "For the past 5 years, Heckford have conducted a photoshoot for the Priestley College student ambassadors. The students experience a day in a professional photography studio complete with make artist and stylist and the resulting images are used across various print, media and digital marketing materials."
+                "paragraph": [
+                  {
+                    "text":
+                      "For the past 5 years, Heckford have conducted a photoshoot for the Priestley College student ambassadors. The students experience a day in a professional photography studio complete with make artist and stylist and the resulting images are used across various print, media and digital marketing materials."
+                  }
+                ]
               }
             ]
           },
@@ -633,8 +642,7 @@
               { "name": "priestley-photography1" },
               { "name": "priestley-photography2" },
               { "name": "priestley-photography3" },
-              { "name": "priestley-photography4" },
-              { "name": "priestley-photography5" }
+              { "name": "priestley-photography4" }
             ]
           }
         ]

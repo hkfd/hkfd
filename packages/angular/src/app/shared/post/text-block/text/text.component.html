@@ -1,5 +1,5 @@
 <ng-container [ngSwitch]="true">
-  <ng-template [ngSwitchCase]="!!text.url"><a href="{{ text?.url }}" target="_blank" rel="nofollow">{{ text?.text }}</a></ng-template>
+  <ng-template [ngSwitchCase]="!!text.url"><a href="{{ text?.url }}" target="_blank" rel="nofollow noopener">{{ text?.text }}</a></ng-template>
   <ng-template [ngSwitchCase]="text?.attributes?.heading"><h3>{{ text?.text | uppercase }}</h3></ng-template>
   <ng-template [ngSwitchCase]="text?.attributes?.bold"><b>{{ text?.text }}</b></ng-template>
   <ng-template [ngSwitchCase]="text?.attributes?.italic"><i>{{ text?.text }}</i></ng-template>

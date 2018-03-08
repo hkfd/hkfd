@@ -11,6 +11,6 @@
 
   <div id="nav-links" [@linkState]="mobileShow">
     <a *ngFor="let page of pages | slice: 1" class="nav-link" [class.active]="linkActive(page?.url)" (click)="navClick(page?.url)">{{ page?.title | uppercase }}</a>
-    <a class="nav-link" href="https://medium.com/heckford" target="_blank" rel="nofollow">NEWS</a>
+    <a class="nav-link" href="https://medium.com/heckford" target="_blank" rel="nofollow noopener">NEWS</a>
   </div>
 </nav>

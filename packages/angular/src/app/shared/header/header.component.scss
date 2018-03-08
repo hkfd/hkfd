@@ -55,6 +55,29 @@ nav {
     &:hover,
     &:active {
       color: $blue-dark;
+
+      .arrow {
+        color: $blue-dark;
+        transition: all 150ms ease;
+
+        &::before {
+          background: $blue-dark;
+        }
+      }
+    }
+
+    .arrow {
+      width: 0.4em;
+      height: 0.4em;
+      margin: 0 0.25em;
+      border-width: 2px 2px 0 0;
+      vertical-align: top;
+
+      &::before {
+        width: 0.6em;
+        height: 2px;
+        top: -1px;
+      }
     }
   }
 }
