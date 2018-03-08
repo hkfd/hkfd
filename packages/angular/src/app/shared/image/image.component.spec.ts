@@ -70,15 +70,22 @@ describe('ImageComponent', () => {
   });
 
   describe('imageLoaded', () => {
-    beforeEach(() =>
-      comp.ngOnChanges({ image: new SimpleChange(null, comp.image, null) })
-    );
+    beforeEach(() => {
+      comp.ngOnChanges({ image: new SimpleChange(null, comp.image, null) });
+    });
 
-    it('should set image loaded to true', () => {
+    it('should set image loaded to true if image', () => {
       comp.image.loaded = false;
       comp.imageLoaded();
 
       expect(comp.image.loaded).toBe(true);
+    });
+
+    it('should do nothing if no image', () => {
+      comp.image = null;
+      comp.imageLoaded();
+
+      expect(comp.image).toBe(null);
     });
   });
 });

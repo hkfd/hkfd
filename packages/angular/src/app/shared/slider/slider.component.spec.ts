@@ -56,9 +56,19 @@ describe('SliderComponent', () => {
       expect(comp.currentIndex).toBeDefined();
     });
 
-    it('should set currentIndex between 0 and 5', () => {
+    it('should set currentIndex between 0 and 5 if random is true', () => {
+      comp.random = true;
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+
       expect(comp.currentIndex).toBeGreaterThanOrEqual(0);
       expect(comp.currentIndex).toBeLessThanOrEqual(5);
+    });
+
+    it('should set currentIndex as 0 if random is false', () => {
+      comp.random = false;
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+
+      expect(comp.currentIndex).toBe(0);
     });
 
     it('should call startTimer', () => {

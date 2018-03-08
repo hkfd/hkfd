@@ -245,6 +245,9 @@ main {
   @include md {
     width: 100px;
   }
+  @include lg {
+    width: 125px;
+  }
 }
 
 #page-intro {

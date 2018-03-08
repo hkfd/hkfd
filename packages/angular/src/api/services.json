@@ -235,6 +235,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "service-design-print1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Graphic Design",
         "data": [
           {
@@ -275,7 +286,8 @@
               { "name": "service-design-print-design4" },
               { "name": "service-design-print-design5" },
               { "name": "service-design-print-design6" },
-              { "name": "service-design-print-design7" }
+              { "name": "service-design-print-design7" },
+              { "name": "service-design-print-design8" }
             ]
           }
         ]
@@ -305,11 +317,16 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-design-print-concepts1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-design-print-concepts1" },
+              { "name": "service-design-print-concepts2" },
+              { "name": "service-design-print-concepts3" },
+              { "name": "service-design-print-concepts4" },
+              { "name": "service-design-print-concepts5" },
+              { "name": "service-design-print-concepts6" },
+              { "name": "service-design-print-concepts7" }
+            ]
           }
         ]
       },
@@ -336,6 +353,13 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-design-print-typography1"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -356,11 +380,16 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-design-print-identity1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-design-print-identity1" },
+              { "name": "service-design-print-identity2" },
+              { "name": "service-design-print-identity3" },
+              { "name": "service-design-print-identity4" },
+              { "name": "service-design-print-identity5" },
+              { "name": "service-design-print-identity6" },
+              { "name": "service-design-print-identity7" }
+            ]
           }
         ]
       }
@@ -964,13 +993,6 @@
             "type": "image",
             "image": {
               "name": "service-digital1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "service-digital2"
             },
             "fullBleed": true
           }

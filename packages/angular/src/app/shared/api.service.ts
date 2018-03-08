@@ -91,7 +91,7 @@ export class ApiService {
       );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation: string, result?: T) {
     return (error: any): Observable<T> => {
       this.logger.error(operation, error);
       return of(result as T);

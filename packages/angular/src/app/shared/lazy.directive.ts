@@ -37,8 +37,6 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    if (!this.el || !this.el.nativeElement) return;
-
     const options = {
       root: null,
       rootMargin: '0px',
@@ -53,6 +51,6 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.observer) this.observer.disconnect();
+    this.observer.disconnect();
   }
 }
