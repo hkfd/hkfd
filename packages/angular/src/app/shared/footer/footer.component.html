@@ -36,17 +36,12 @@
       </div>
 
       <div id="legal" class="text">
-        <p><small>Copyright © {{ currentDate | date: 'yyyy' }} Heckford Printers Limited. All rights reserved. Registered in England. Company No: 1402909. VAT Registration No: 322 9116 80</small></p>
+        <p><small>Copyright © {{ currentYear }} Heckford Printers Limited. All rights reserved. Registered in England. Company No: 1402909. VAT Registration No: 322 9116 80</small></p>
       </div>
     </div>
 
     <div id="info-social">
-      <a href="https://www.facebook.com/HeckfordAdvertising/" target="_blank" rel="nofollow noopener"><img src="/assets/icons/facebook.svg"></a>
-      <a href="https://instagram.com/heckford_" target="_blank" rel="nofollow noopener"><img src="/assets/icons/instagram.svg"></a>
-      <a href="https://www.pinterest.com/heckford/" target="_blank" rel="nofollow noopener"><img src="/assets/icons/pinterest.svg"></a>
-      <a href="https://www.youtube.com/user/heckfordadvertising" target="_blank" rel="nofollow noopener"><img src="/assets/icons/youtube.svg"></a>
-      <a href="https://plus.google.com/+Heckford-advertisingCoUk" target="_blank" rel="nofollow noopener"><img src="/assets/icons/google-plus.svg"></a>
-      <a href="https://www.linkedin.com/company/heckford" target="_blank" rel="nofollow noopener"><img src="/assets/icons/linkedin.svg"></a>
+      <a *ngFor="let link of links" href="{{ link?.url }}" target="_blank" rel="nofollow noopener"><img src="{{ link?.icon }}"></a>
     </div>
   </div>
 </div>

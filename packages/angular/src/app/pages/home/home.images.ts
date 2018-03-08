@@ -29,6 +29,10 @@ export const HomeImages: { [name: string]: Image | Image[] } = {
     {
       name: 'heckford-studio',
       alt: 'Heckford studio'
+    },
+    {
+      name: 'heckford-boardroom',
+      alt: 'Heckford boardroom'
     }
   ]
 };

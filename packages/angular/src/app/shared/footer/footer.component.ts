@@ -6,5 +6,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  currentDate: number = Date.now();
+  currentYear: number = new Date().getFullYear();
+
+  links = [
+    {
+      url: 'https://www.facebook.com/HeckfordAdvertising/',
+      icon: '/assets/icons/facebook.svg'
+    },
+    {
+      url: 'https://instagram.com/heckford_',
+      icon: '/assets/icons/instagram.svg'
+    },
+    {
+      url: 'https://www.pinterest.com/heckford/',
+      icon: '/assets/icons/pinterest.svg'
+    },
+    {
+      url: 'https://www.youtube.com/user/heckfordadvertising',
+      icon: '/assets/icons/youtube.svg'
+    },
+    {
+      url: 'https://plus.google.com/+Heckford-advertisingCoUk',
+      icon: '/assets/icons/google-plus.svg'
+    },
+    {
+      url: 'https://www.linkedin.com/company/heckford',
+      icon: '/assets/icons/linkedin.svg'
+    }
+  ];
 }
