@@ -57,15 +57,14 @@ describe('About', () => {
       expect(page.getPersonPosition()).toBeTruthy();
     });
 
-    it('should display join our team link', () => {
-      expect(page.getJoinTeamLink().isDisplayed()).toBe(true);
-    });
-
-    it('should link to /careers', () => {
-      page
-        .getJoinTeamLink()
-        .click()
-        .then(_ => expect(page.getUrl()).toContain('/careers'));
+    describe('Join', () => {
+      it('should link to /careers', () => {
+        page
+          .getPeople()
+          .last()
+          .click()
+          .then(_ => expect(page.getUrl()).toContain('/careers'));
+      });
     });
   });
 });

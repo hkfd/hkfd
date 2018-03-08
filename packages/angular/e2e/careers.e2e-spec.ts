@@ -45,16 +45,16 @@ describe('Careers', () => {
       });
     });
 
-    it('should display career image', () => {
-      expect(page.getCareerImage().isDisplayed()).toBe(true);
-    });
-
-    xit('should link to /contact', () => {
+    it('should link to /contact', () => {
       page
         .getCareers()
-        .first()
+        .last()
         .click()
         .then(_ => expect(page.getUrl()).toContain('/contact'));
+    });
+
+    it('should display careers image', () => {
+      expect(page.getCareersImage().isDisplayed()).toBe(true);
     });
   });
 });

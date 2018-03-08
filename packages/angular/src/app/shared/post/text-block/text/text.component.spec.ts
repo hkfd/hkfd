@@ -46,7 +46,9 @@ describe('TextComponent', () => {
     });
 
     it(`should set rel as 'nofollow'`, () => {
-      expect(page.a.nativeElement.getAttribute('rel')).toBe('nofollow');
+      expect(page.a.nativeElement.getAttribute('rel')).toBe(
+        'nofollow noopener'
+      );
     });
   });
 

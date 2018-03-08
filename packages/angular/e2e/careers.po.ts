@@ -27,9 +27,7 @@ export class CareersPage {
       .getText();
   }
 
-  getCareerImage() {
-    return this.getCareers()
-      .first()
-      .element(by.css('image'));
+  getCareersImage() {
+    return element(by.id('careers')).element(by.css('image'));
   }
 }

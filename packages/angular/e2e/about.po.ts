@@ -40,8 +40,4 @@ export class AboutPage {
       .element(by.css('span'))
       .getText();
   }
-
-  getJoinTeamLink() {
-    return element(by.id('join')).element(by.css('a'));
-  }
 }
