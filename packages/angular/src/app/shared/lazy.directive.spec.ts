@@ -41,6 +41,11 @@ describe('LazyDirective', () => {
   beforeEach(async(() => createComponent()));
 
   describe('intersectionCallback', () => {
+    beforeEach(() => {
+      page.elLoaded.calls.reset();
+      renderer.setAttribute.calls.reset();
+    });
+
     it('should emit loaded if intersecting', () => {
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
 
