@@ -1,4 +1,6 @@
-# HeckfordAngular
+# Heckford Angular
+[![CircleCI](https://circleci.com/bb/heckford/heckford-angular.svg?style=svg&circle-token=e02291a7d209b31a48a0ba16ca8b2da4a7226160)](https://circleci.com/bb/heckford/heckford-angular)
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
 

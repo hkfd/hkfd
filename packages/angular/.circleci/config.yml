@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/heckford-angular
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "node_modules"
+      - run:
+          name: spec
+          command: npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+      - run:
+          name: e2e
+          command: xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
