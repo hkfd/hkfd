@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
+import { RavenErrorHandler } from './raven';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +17,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     RoutingModule
   ],
-  providers: [Title],
+  providers: [Title, { provide: ErrorHandler, useClass: RavenErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

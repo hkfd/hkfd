@@ -388,7 +388,8 @@
               { "name": "service-design-print-identity4" },
               { "name": "service-design-print-identity5" },
               { "name": "service-design-print-identity6" },
-              { "name": "service-design-print-identity7" }
+              { "name": "service-design-print-identity7" },
+              { "name": "service-design-print-identity8" }
             ]
           }
         ]
@@ -1329,14 +1330,14 @@
       {
         "data": [
           {
-            "type": "duo",
+            "type": "gallery",
             "images": [
-              {
-                "name": "service-signage1"
-              },
-              {
-                "name": "service-signage2"
-              }
+              { "name": "service-signage1" },
+              { "name": "service-signage2" },
+              { "name": "service-signage3" },
+              { "name": "service-signage4" },
+              { "name": "service-signage5" },
+              { "name": "service-signage6" }
             ]
           }
         ]
@@ -1405,14 +1406,14 @@
             ]
           },
           {
-            "type": "duo",
+            "type": "gallery",
             "images": [
-              {
-                "name": "service-signage-external1"
-              },
-              {
-                "name": "service-signage-external2"
-              }
+              { "name": "service-signage-external1" },
+              { "name": "service-signage-external2" },
+              { "name": "service-signage-external3" },
+              { "name": "service-signage-external4" },
+              { "name": "service-signage-external5" },
+              { "name": "service-signage-external6" }
             ]
           }
         ]
@@ -1464,11 +1465,14 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-signage-internal1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-signage-internal1" },
+              { "name": "service-signage-internal2" },
+              { "name": "service-signage-internal3" },
+              { "name": "service-signage-internal4" },
+              { "name": "service-signage-internal5" }
+            ]
           }
         ]
       },
@@ -1497,14 +1501,14 @@
             ]
           },
           {
-            "type": "duo",
+            "type": "gallery",
             "images": [
-              {
-                "name": "service-signage-vehicle1"
-              },
-              {
-                "name": "service-signage-vehicle2"
-              }
+              { "name": "service-signage-vehicle1" },
+              { "name": "service-signage-vehicle2" },
+              { "name": "service-signage-vehicle3" },
+              { "name": "service-signage-vehicle4" },
+              { "name": "service-signage-vehicle5" },
+              { "name": "service-signage-vehicle6" }
             ]
           }
         ]
@@ -1570,11 +1574,14 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-signage-print1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-signage-print1" },
+              { "name": "service-signage-print2" },
+              { "name": "service-signage-print3" },
+              { "name": "service-signage-print4" },
+              { "name": "service-signage-print5" }
+            ]
           }
         ]
       },
@@ -1608,6 +1615,17 @@
                   }
                 ]
               }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-signage-pos1" },
+              { "name": "service-signage-pos2" },
+              { "name": "service-signage-pos3" },
+              { "name": "service-signage-pos4" },
+              { "name": "service-signage-pos5" },
+              { "name": "service-signage-pos6" }
             ]
           }
         ]

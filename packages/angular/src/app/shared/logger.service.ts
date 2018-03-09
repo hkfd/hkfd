@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 
+import * as Raven from 'raven-js';
+
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LoggerService {
-  env = environment;
-
   log(val: any, ...params: any[]) {
-    if (this.env.production) return;
+    if (environment.production) return;
 
     console.log(val, ...params);
   }
 
   warn(val: any, ...params: any[]) {
-    if (this.env.production) return;
-
     console.warn(val, ...params);
+    Raven.captureMessage(val, { level: 'warning' });
   }
 
   error(val: any, ...params: any[]) {
     console.error(val, ...params);
+    Raven.captureException(val, ...params);
   }
 }

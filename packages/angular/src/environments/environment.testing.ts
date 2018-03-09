@@ -1,5 +1,8 @@
 export const environment = {
-  production: false,
+  production: true,
   cloudinaryName: 'abc',
-  analyticsId: 'def'
+  analyticsId: 'def',
+  sentry: {
+    dsn: null
+  }
 };
