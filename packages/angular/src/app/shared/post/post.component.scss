@@ -4,6 +4,7 @@ $grey-light: #d7d8d6;
 $grey-dark: #404040;
 
 :host {
+  overflow: hidden;
   display: block;
   background: #fff;
 }

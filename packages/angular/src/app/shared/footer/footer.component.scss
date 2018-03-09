@@ -1,5 +1,11 @@
 @import '../../../styles';
 
+:host {
+  display: block;
+  overflow: hidden;
+  background: #fff;
+}
+
 #cta {
   @extend %container-full;
   padding-top: 5vh;
@@ -37,7 +43,7 @@
     @include sm {
       display: flex;
       justify-content: space-between;
-      margin: 0 -($gutter / 2);
+      margin: 0 - ($gutter / 2);
     }
 
     #locations {
