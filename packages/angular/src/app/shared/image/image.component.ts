@@ -12,7 +12,7 @@ const Sizes = [
 ];
 
 @Component({
-  selector: 'image',
+  selector: 'image-component',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.scss'],
   providers: [CloudinaryPipe]

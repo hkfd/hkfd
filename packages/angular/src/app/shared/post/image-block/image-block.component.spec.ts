@@ -49,6 +49,6 @@ class Page {
   }
 
   addElements() {
-    this.image = fixture.debugElement.query(By.css('image'));
+    this.image = fixture.debugElement.query(By.css('image-component'));
   }
 }

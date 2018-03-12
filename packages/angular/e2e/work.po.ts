@@ -31,6 +31,6 @@ export class WorkPage {
   getCaseStudyImage() {
     return this.getCaseStudies()
       .first()
-      .element(by.css('image'));
+      .element(by.css('image-component'));
   }
 }

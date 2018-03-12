@@ -50,6 +50,6 @@ class Page {
   }
 
   addElements() {
-    this.image = fixture.debugElement.queryAll(By.css('image'));
+    this.image = fixture.debugElement.queryAll(By.css('image-component'));
   }
 }

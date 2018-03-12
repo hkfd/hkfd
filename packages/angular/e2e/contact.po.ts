@@ -24,6 +24,6 @@ export class ContactPage {
   }
 
   getContactImage() {
-    return element(by.css('image'));
+    return element(by.css('image-component'));
   }
 }

@@ -6,7 +6,7 @@ export class Image {
   }
 
   getImages() {
-    return element.all(by.css('image'));
+    return element.all(by.css('image-component'));
   }
 
   getImgs() {

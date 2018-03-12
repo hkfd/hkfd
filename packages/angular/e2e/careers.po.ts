@@ -14,7 +14,7 @@ export class CareersPage {
   }
 
   getIntroImage() {
-    return element.all(by.css('image')).first();
+    return element.all(by.css('image-component')).first();
   }
 
   getCareers() {
@@ -28,6 +28,6 @@ export class CareersPage {
   }
 
   getCareersImage() {
-    return element(by.id('careers')).element(by.css('image'));
+    return element(by.id('careers')).element(by.css('image-component'));
   }
 }

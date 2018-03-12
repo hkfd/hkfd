@@ -36,7 +36,7 @@ export class HomePage {
   getServiceThumbnail() {
     return this.getServices()
       .first()
-      .element(by.css('image'));
+      .element(by.css('image-component'));
   }
 
   getServiceTitle() {

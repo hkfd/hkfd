@@ -21,7 +21,7 @@ export class Slider {
   }
 
   getImages() {
-    return this.getSlider().all(by.css('image'));
+    return this.getSlider().all(by.css('image-component'));
   }
 
   getPrevArrow() {

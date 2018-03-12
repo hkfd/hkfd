@@ -10,7 +10,7 @@ export class SliderWork {
   }
 
   getImages() {
-    return this.getSlider().all(by.css('image'));
+    return this.getSlider().all(by.css('image-component'));
   }
 
   getPrevArrow() {

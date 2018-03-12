@@ -7,6 +7,6 @@
 
 <div id="slide-container" [style.transform]="'translateX(' + (this.currentIndex * -100) + '%)'">
   <div class="slide" *ngFor="let image of images">
-    <image full-height [image]="image"></image>
+    <image-component full-height [image]="image"></image-component>
   </div>
 </div>
