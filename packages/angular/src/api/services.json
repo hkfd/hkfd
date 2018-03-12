@@ -991,11 +991,12 @@
       {
         "data": [
           {
-            "type": "image",
-            "image": {
-              "name": "service-digital1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-digital1" },
+              { "name": "service-digital2" },
+              { "name": "service-digital3" }
+            ]
           }
         ]
       },
@@ -1021,6 +1022,14 @@
                   }
                 ]
               }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-digital-social1" },
+              { "name": "service-digital-social2" },
+              { "name": "service-digital-social3" }
             ]
           }
         ]
@@ -1048,6 +1057,14 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-digital-web1" },
+              { "name": "service-digital-web2" },
+              { "name": "service-digital-web3" }
+            ]
           }
         ]
       },
@@ -1065,6 +1082,15 @@
                   }
                 ]
               }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-digital-seo1" },
+              { "name": "service-digital-seo2" },
+              { "name": "service-digital-seo3" },
+              { "name": "service-digital-seo4" }
             ]
           }
         ]
@@ -1092,6 +1118,18 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-digital-email-mms1" },
+              { "name": "service-digital-email-mms2" },
+              { "name": "service-digital-email-mms3" },
+              { "name": "service-digital-email-mms4" },
+              { "name": "service-digital-email-mms5" },
+              { "name": "service-digital-email-mms6" },
+              { "name": "service-digital-email-mms7" }
+            ]
           }
         ]
       },
@@ -1118,6 +1156,13 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-digital-blog1"
+            },
+            "fullBleed": true
           }
         ]
       }
