@@ -1543,7 +1543,7 @@
       "alt": "Galliford Try"
     },
     "overview": [
-      "Design and Print",
+      "Creative Design and Print",
       "National and Local Press Advertising",
       "Internal Signage",
       "External and Site Signage"
@@ -1563,7 +1563,7 @@
           "paragraph": [
             {
               "text":
-                "Top 10 housebuilder, Linden Homes is a subsidiary of Galliford Try; offering a distinctive range of new homes and properties throughout the UK."
+                "Linden Homes is a subsidiary of Galliford Try; offering a distinctive range of new homes and properties throughout the UK."
             }
           ]
         },
@@ -1571,13 +1571,24 @@
           "paragraph": [
             {
               "text":
-                "Heckford have undertaken numerous projects for Galliford Try and Linden Homes, such as signage, media bookings, design and print; covering the North West, South West and Wales."
+                "Heckford have undertaken numerous projects on behalf of both Galliford Try and Linden Homes including signage manufacture and installation, media bookings and design and print."
             }
           ]
         }
       ]
     },
     "content": [
+      {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "galliford-try1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
       {
         "title": "Internal Signage",
         "data": [
@@ -1588,23 +1599,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "If you’ve ever been to Heckford’s head quarters, you’ll have seen our array of internal signage, custom wallpaper and quirky wall features – all created in-house."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "As experts in this area, we know how it’s done and how to help make our client’s offices and show rooms stand out."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "We helped Galliford Try install their company branding into one of their offices; including bespoke feature walls, reception desk and window customisation."
+                      "Heckford were appointed by Galliford Try to brand their North West office in Warrington. Following a site visit we created a plan for their office interiors before installing a range of products including bespoke feature wall graphics, a bespoke reception desk, back mounted acrylic displays and window customisation."
                   }
                 ]
               }
@@ -1613,10 +1608,10 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "galliford-try-signage1" },
-              { "name": "galliford-try-signage2" },
-              { "name": "galliford-try-signage3" },
-              { "name": "galliford-try-signage4" }
+              { "name": "galliford-try-signage-internal1" },
+              { "name": "galliford-try-signage-internal2" },
+              { "name": "galliford-try-signage-internal3" },
+              { "name": "galliford-try-signage-internal4" }
             ]
           }
         ]
@@ -1631,7 +1626,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Heckford have been producing quality outdoor signage for nearly 40 years. Recently, we have been providing pylon and banner signs for Linden Homes across the North West, South West and Wales."
+                      "Heckford have been producing quality outdoor signage for both Galliford try and Linden Homes for several years. From large trays signs with stand-off acrylic lettering through to stack signs, pylon signs and mesh banners we have produced a variety of eye-catching site signage that gets noticed and generates response."
                   }
                 ]
               }
@@ -1640,38 +1635,13 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "galliford-try-outdoor-signage1" },
-              { "name": "galliford-try-outdoor-signage2" },
-              { "name": "galliford-try-outdoor-signage3" },
-              { "name": "galliford-try-outdoor-signage4" },
-              { "name": "galliford-try-outdoor-signage5" },
-              { "name": "galliford-try-outdoor-signage6" }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Acrylic Posters",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Acrylic signage looks high-tech and sophisticated, making any office or showroom look the part. The posters we created for the Galliford Try offices were second to none; adding a professional ambience to every room."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "gallery",
-            "images": [
-              { "name": "galliford-try-poster1" },
-              { "name": "galliford-try-poster2" },
-              { "name": "galliford-try-poster3" }
+              { "name": "galliford-try-signage-outdoor1" },
+              { "name": "galliford-try-signage-outdoor2" },
+              { "name": "galliford-try-signage-outdoor3" },
+              { "name": "galliford-try-signage-outdoor4" },
+              { "name": "galliford-try-signage-outdoor5" },
+              { "name": "galliford-try-signage-outdoor6" },
+              { "name": "galliford-try-signage-outdoor7" }
             ]
           }
         ]

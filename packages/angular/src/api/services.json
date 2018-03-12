@@ -753,7 +753,11 @@
             "images": [
               { "name": "service-advertising1" },
               { "name": "service-advertising2" },
-              { "name": "service-advertising3" }
+              { "name": "service-advertising3" },
+              { "name": "service-advertising4" },
+              { "name": "service-advertising5" },
+              { "name": "service-advertising6" },
+              { "name": "service-advertising7" }
             ]
           }
         ]
@@ -783,11 +787,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-advertising-newspapers1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-advertising-newspapers-magazines1" },
+              { "name": "service-advertising-newspapers-magazines2" },
+              { "name": "service-advertising-newspapers-magazines3" },
+              { "name": "service-advertising-newspapers-magazines4" },
+              { "name": "service-advertising-newspapers-magazines5" },
+              { "name": "service-advertising-newspapers-magazines6" }
+            ]
           }
         ]
       },
@@ -824,10 +832,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-advertising-recruitment1"
-            }
+            "type": "duo",
+            "images": [
+              {
+                "name": "service-advertising-recruitment1"
+              },
+              {
+                "name": "service-advertising-recruitment2"
+              }
+            ]
           }
         ]
       },
@@ -856,11 +869,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-advertising-outdoor1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-advertising-outdoor1" },
+              { "name": "service-advertising-outdoor2" },
+              { "name": "service-advertising-outdoor3" },
+              { "name": "service-advertising-outdoor4" },
+              { "name": "service-advertising-outdoor5" },
+              { "name": "service-advertising-outdoor6" }
+            ]
           }
         ]
       },
@@ -884,7 +901,8 @@
             "type": "image",
             "image": {
               "name": "service-advertising-tv1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -939,11 +957,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-advertising-mail1"
-            },
-            "fullBleed": true
+            "type": "duo",
+            "images": [
+              {
+                "name": "service-advertising-mail1"
+              },
+              {
+                "name": "service-advertising-mail2"
+              }
+            ]
           }
         ]
       }
