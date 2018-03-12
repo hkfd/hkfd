@@ -1,0 +1,14 @@
+image: node:8
+
+pipelines:
+  default:
+    - step:
+        deployment: staging
+        caches:
+          - node
+        script:
+          - yarn global add @angular/cli
+          - yarn global add firebase-tools
+          - yarn
+          - ng build --prod
+          - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
