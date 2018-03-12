@@ -56,6 +56,8 @@
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "^2.6.2"
-  }
+    "typescript": ">=2.4.2 <2.7.0"
+  },
+  "repository":
+    "https://rajansolanki@bitbucket.org/heckford/heckford-angular.git"
 }

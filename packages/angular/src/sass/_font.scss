@@ -69,7 +69,7 @@
   @each $format in $formats {
     $src-list: append(
       $src-list,
-      url($dir + $name + '.#{$format}') format('#{$format}'),
+      url($dir+$name+'.#{$format}') format('#{$format}'),
       'comma'
     );
   }
@@ -78,9 +78,9 @@
 
 @mixin font-src($location, $formats) {
   $name-start: _str-last-index($location, '/');
-  $name: str_slice($location,  ($name-start + 1));
+  $name: str_slice($location, ($name-start + 1));
   $dir: str_slice($location, 0, $name-start);
   $formats: selector_parse($formats);
 
-  src: src($formats, $dir, $name);
+  // src: src($formats, $dir, $name);
 }

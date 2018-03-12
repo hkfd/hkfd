@@ -1,4 +1,12 @@
 version: 2
+machine:
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
 jobs:
   build:
     working_directory: ~/heckford-angular
@@ -8,14 +16,14 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
-      - run: npm install
+      - run: yarn
       - save_cache:
           key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
       - run:
           name: spec
-          command: npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+          command: yarn run test -- --single-run --no-progress --browser=ChromeNoSandbox
       - run:
           name: e2e
-          command: xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+          command: xvfb-run -a yarn run e2e -- --no-progress --config=protractor-ci.conf.js

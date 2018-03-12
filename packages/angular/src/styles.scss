@@ -8,23 +8,17 @@ $black: #1a1919;
 
 @font-face {
   font-family: 'Montserrat Regular';
-  @include font-src(
-    '/assets/fonts/montserrat-regular',
-    ('ttf', 'woff', 'woff2')
-  );
+  @include font-src('/assets/fonts/montserrat-regular', ('ttf, woff, woff2'));
 }
 
 @font-face {
   font-family: 'Montserrat Bold';
-  @include font-src('/assets/fonts/montserrat-bold', ('ttf', 'woff', 'woff2'));
+  @include font-src('/assets/fonts/montserrat-bold', ('ttf, woff, woff2'));
 }
 
 @font-face {
   font-family: 'League Gothic Regular';
-  @include font-src(
-    '/assets/fonts/leaguegothic-regular',
-    ('ttf', 'eot', 'svg', 'woff')
-  );
+  @include font-src('/assets/fonts/leaguegothic-regular', ('ttf, woff, woff2'));
 }
 
 %font-heading {
