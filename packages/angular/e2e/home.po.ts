@@ -58,6 +58,6 @@ export class HomePage {
   }
 
   getClients() {
-    return element.all(by.css('.client'));
+    return element(by.id('client-list')).element(by.css('p'));
   }
 }

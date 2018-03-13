@@ -36,7 +36,7 @@ export class MockApiService {
     );
   }
 
-  getClients(): Observable<Image[]> {
+  getClients(): Observable<string[]> {
     return Observable.of(clients);
   }
 

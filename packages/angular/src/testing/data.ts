@@ -210,16 +210,7 @@ export const caseStudies: CaseStudy[] = [
   }
 ];
 
-export const clients: Image[] = [
-  {
-    name: 'client-1',
-    alt: ''
-  },
-  {
-    name: 'client-2',
-    alt: ''
-  }
-];
+export const clients: string[] = ['client1', 'client2', 'client3'];
 
 export const careers: Career[] = [
   {

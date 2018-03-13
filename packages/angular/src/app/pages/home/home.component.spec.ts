@@ -55,6 +55,14 @@ describe('HomeComponent', () => {
   it('should call ApiService getClients', () => {
     expect(apiService.getClients).toHaveBeenCalled();
   });
+
+  it('should set clients', () => {
+    expect(comp.clients).toBeDefined();
+  });
+
+  it('should set clients as comma-seperated string', () => {
+    expect(comp.clients).toBe('client1, client2, client3');
+  });
 });
 
 function createComponent() {

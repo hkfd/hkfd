@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import {
   TitleService,
@@ -16,10 +17,11 @@ import { HomeImages } from './home.images';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   caseStudies$: Observable<CaseStudy[]>;
   services$: Observable<Service[]>;
-  clients$: Observable<Image[]>;
+  clients$: Subscription;
+  clients: string;
 
   images = HomeImages;
 
@@ -33,6 +35,13 @@ export class HomeComponent implements OnInit {
 
     this.caseStudies$ = this.apiService.getCaseStudies(true);
     this.services$ = this.apiService.getServices();
-    this.clients$ = this.apiService.getClients();
+
+    this.clients$ = this.apiService
+      .getClients()
+      .subscribe((clients: string[]) => (this.clients = clients.join(', ')));
+  }
+
+  ngOnDestroy() {
+    this.clients$.unsubscribe();
   }
 }

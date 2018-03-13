@@ -987,23 +987,7 @@
           "paragraph": [
             {
               "text":
-                "Digital marketing is a highly measurable and interactive strategy that has become an essential tool for businesses to reach and convert leads."
-            }
-          ]
-        },
-        {
-          "paragraph": [
-            {
-              "text":
-                "As a full-service digital design agency, we can build your website from scratch, optimise your current site to ensure you are getting the best out of it, and introduce you to the latest digital technology."
-            }
-          ]
-        },
-        {
-          "paragraph": [
-            {
-              "text":
-                "After a free consultation, we will create a bespoke package for the services you need, helping you get the best out of your budget."
+                "Whether an established brand looking to take market share with a new product or service to an innovative new start-up looking to disrupt the norm, every company is battling for valuable consumer impressions. Our digital advertising services from PPC, social, remarketing, video and more will give you the competitive edge in driving your growth."
             }
           ]
         }
@@ -1023,7 +1007,7 @@
         ]
       },
       {
-        "title": "Social Media",
+        "title": "Digital Marketing Strategy",
         "data": [
           {
             "type": "text",
@@ -1032,15 +1016,32 @@
                 "paragraph": [
                   {
                     "text":
-                      "Social Media is a must-have digital marketing strategy creates brand awareness, builds relationships, gains website traffic and boosts your ROI."
+                      "The new global marketplace is allowing brands to merge digital and traditional sales and marketing to create a global customer base. We provide an innovative approach to defining your digital marketing strategy from social media, demand generation, brand awareness and digital advertising channels."
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-digital-marketing-strategy1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Social Media Marketing (SMM)",
+        "data": [
+          {
+            "type": "text",
+            "data": [
               {
                 "paragraph": [
                   {
                     "text":
-                      "As well as receiving meaningful feedback from your customers and fulfilling your marketing objectives, we will provide detailed analytical reports, so you will have a complete understanding of your investment and how you can best utilise the data to optimise future strategies."
+                      "Our social media management services are designed to grow your brand’s online presence. We help your brand establish trust and build relationships with potential customers. The benefits of using our social media management services include increased awareness, customer engagement, website traffic and lead generation."
                   }
                 ]
               }
@@ -1057,7 +1058,7 @@
         ]
       },
       {
-        "title": "Website Design and Development",
+        "title": "Search Engine Marketing (PPC)",
         "data": [
           {
             "type": "text",
@@ -1066,15 +1067,83 @@
                 "paragraph": [
                   {
                     "text":
-                      "More people than ever are choosing to search and shop online. The first thing they see is your website so first impressions really do count."
+                      "Getting found in the search results is still the cornerstone of any effective digital-marketing effort. We live and breathe the algorithm changes and latest techniques, in order to bring you the highest rankings that fit your budget."
                   }
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "type": "gallery",
+            "images": [
+              { "name": "service-digital-ppc1" },
+              { "name": "service-digital-ppc2" },
+              { "name": "service-digital-ppc3" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Content Marketing Management (CMM)",
+        "data": [
+          {
+            "type": "text",
+            "data": [
               {
                 "paragraph": [
                   {
                     "text":
-                      "Our experts at Heckford can build your website completely from scratch or develop existing sites, so you can provide an easy and enjoyable user experience."
+                      "Content creation is the future for driving customer acquisitions, brand awareness and omni- channel communications. Content Marketing Management is your one-stop shop for all things content from photography, video, graphic design, blog posts and more."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-digital-content-marketing1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Influencer Outreach",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Who is writing about you online? Who is linking to your page? Who are the trusted voices in your industry? We can reach out to the established influencers in your niche with information, promotions, and engaging materials to keep you firmly entrenched in your industry’s conversations."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-digital-influencer1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Web Design & Development",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Our work empowers brands by creating meaningful experiences that engage users and push boundaries. We’ve entered a new generation of interactive web experiences. Going beyond presenting products, we focus relentlessly on user needs and behaviour to drive action."
                   }
                 ]
               }
@@ -1091,34 +1160,7 @@
         ]
       },
       {
-        "title": "SEO",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Our great team of SEO specialists will create great content that is interesting, relevant and authoritative. Having content like this is not just about style, it also leads to search engine success."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "gallery",
-            "images": [
-              { "name": "service-digital-seo1" },
-              { "name": "service-digital-seo2" },
-              { "name": "service-digital-seo3" },
-              { "name": "service-digital-seo4" }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Email Campaigns / MMS Campaigns",
+        "title": "Email & SMS Marketing",
         "data": [
           {
             "type": "text",
@@ -1152,39 +1194,6 @@
               { "name": "service-digital-email-mms6" },
               { "name": "service-digital-email-mms7" }
             ]
-          }
-        ]
-      },
-      {
-        "title": "Blogging and Content Marketing",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Content marketing isn’t just limited to your blog or news section; you need to ensure that your entire website is consistent and helpful throughout."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Blogging is a great way for your brand to connect with your audience. Blog articles are proven to boost traffic to sites, increase brand awareness, and encourage others to share your message to a much wider network."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "service-digital-blog1"
-            },
-            "fullBleed": true
           }
         ]
       }

@@ -82,5 +82,5 @@
   $dir: str_slice($location, 0, $name-start);
   $formats: selector_parse($formats);
 
-  // src: src($formats, $dir, $name);
+  src: src($formats, $dir, $name);
 }

@@ -81,13 +81,13 @@ export class ApiService {
       );
   }
 
-  getClients(): Observable<Image[]> {
+  getClients(): Observable<string[]> {
     return this.http
-      .get<Image[]>(this.clients)
+      .get<string[]>(this.clients)
       .pipe(
         retry(3),
-        tap((clients: Image[]) => this.logger.log('getClients', clients)),
-        catchError(this.handleError<Image[]>('getClients', []))
+        tap((clients: string[]) => this.logger.log('getClients', clients)),
+        catchError(this.handleError<string[]>('getClients', []))
       );
   }
 

@@ -82,26 +82,12 @@ describe('Home', () => {
   });
 
   describe('Clients', () => {
-    it('should have client', () => {
-      expect(
-        page
-          .getClients()
-          .first()
-          .isPresent()
-      ).toBe(true);
+    it('should have clients', () => {
+      expect(page.getClients().isPresent()).toBe(true);
     });
 
-    it('should display client', () => {
-      expect(
-        page
-          .getClients()
-          .first()
-          .isDisplayed()
-      ).toBe(true);
-    });
-
-    it('should have more than 1 client', () => {
-      expect(page.getClients().count()).toBeGreaterThan(1);
+    it('should display clients', () => {
+      expect(page.getClients().isDisplayed()).toBe(true);
     });
   });
 });

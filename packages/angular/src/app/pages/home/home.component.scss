@@ -113,13 +113,21 @@ h2 {
   }
 
   #client-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
     @extend %container;
+    max-height: 80vh;
+    @extend %font-small;
+    line-height: 1.4;
 
-    .client {
-      @include width($xs: 6, $sm: 4, $md: 3, $lg: 2.4);
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(255, 255, 255, 0) 30%, #fff 80%);
     }
   }
 }
