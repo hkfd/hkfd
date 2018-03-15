@@ -1271,11 +1271,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-illustration-traditional1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-illustration-traditional1" },
+              { "name": "service-illustration-traditional2" },
+              { "name": "service-illustration-traditional3" },
+              { "name": "service-illustration-traditional4" },
+              { "name": "service-illustration-traditional5" },
+              { "name": "service-illustration-traditional6" }
+            ]
           }
         ]
       },
@@ -1296,10 +1300,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-illustration-hand1"
-            }
+            "type": "gallery",
+            "images": [
+              { "name": "service-illustration-hand-drawn1" },
+              { "name": "service-illustration-hand-drawn2" },
+              { "name": "service-illustration-hand-drawn3" },
+              { "name": "service-illustration-hand-drawn4" },
+              { "name": "service-illustration-hand-drawn5" },
+              { "name": "service-illustration-hand-drawn6" }
+            ]
           }
         ]
       },
@@ -1324,11 +1333,16 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-illustration-technical1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-illustration-technical1" },
+              { "name": "service-illustration-technical2" },
+              { "name": "service-illustration-technical3" },
+              { "name": "service-illustration-technical4" },
+              { "name": "service-illustration-technical5" },
+              { "name": "service-illustration-technical6" },
+              { "name": "service-illustration-technical7" }
+            ]
           }
         ]
       },
@@ -1358,7 +1372,10 @@
               { "name": "service-illustration-digital1" },
               { "name": "service-illustration-digital2" },
               { "name": "service-illustration-digital3" },
-              { "name": "service-illustration-digital4" }
+              { "name": "service-illustration-digital4" },
+              { "name": "service-illustration-digital5" },
+              { "name": "service-illustration-digital6" },
+              { "name": "service-illustration-digital7" }
             ]
           }
         ]
