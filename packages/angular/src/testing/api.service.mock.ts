@@ -5,6 +5,7 @@ import { map, flatMap, find, catchError } from 'rxjs/operators';
 import {
   Service,
   Career,
+  Client,
   Post,
   CaseStudy,
   Team,
@@ -30,7 +31,7 @@ export class MockApiService {
     return Observable.of(caseStudies);
   }
 
-  getClients(): Observable<string[]> {
+  getClients(): Observable<Client[]> {
     return Observable.of(clients);
   }
 

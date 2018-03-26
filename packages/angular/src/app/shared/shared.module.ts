@@ -33,6 +33,7 @@ export {
 export { Image, Lazy } from './images';
 export { Team } from './team';
 export { Career } from './career';
+export { Client } from './client';
 
 @NgModule({
   imports: [CommonModule, RouterModule],

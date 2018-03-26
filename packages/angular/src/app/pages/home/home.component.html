@@ -38,7 +38,12 @@
     <p>Just a few of the brands that we have been privileged to work with over the years</p>
   </div>
 
-  <div id="client-list">
-    <p>{{ clients }}</p>
-  </div>
+  <ul id="client-list">
+    <li class="client" *ngFor="let client of clients$ | async">
+      {{ client?.sector | uppercase }}:
+      <ul class="client-list">
+        <li class="client-name" *ngFor="let name of client?.list">{{ name }}</li>
+      </ul>
+    </li>
+  </ul>
 </section>

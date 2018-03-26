@@ -86,8 +86,25 @@ describe('Home', () => {
       expect(page.getClients().isPresent()).toBe(true);
     });
 
-    it('should display clients', () => {
-      expect(page.getClients().isDisplayed()).toBe(true);
+    it('should display client sector', () => {
+      expect(
+        page
+          .getClientSector()
+          .first()
+          .getText()
+      ).toBeTruthy();
+    });
+
+    it('should have more than 1 client sector', () => {
+      expect(page.getClientSector().count()).toBeGreaterThan(1);
+    });
+
+    it('should display client name', () => {
+      expect(page.getClientNames().getText()).toBeTruthy();
+    });
+
+    it('should have more than 1 client name', () => {
+      expect(page.getClientNames().count()).toBeGreaterThan(1);
     });
   });
 });

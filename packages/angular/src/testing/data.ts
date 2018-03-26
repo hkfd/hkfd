@@ -1,6 +1,7 @@
 import {
   Service,
   Career,
+  Client,
   Post,
   CaseStudy,
   Team,
@@ -210,7 +211,16 @@ export const caseStudies: CaseStudy[] = [
   }
 ];
 
-export const clients: string[] = ['client1', 'client2', 'client3'];
+export const clients: Client[] = [
+  {
+    sector: 'Sector 1',
+    list: ['Client 1', 'Client 2', 'Client 3']
+  },
+  {
+    sector: 'Sector 2',
+    list: ['Client 4', 'Client 5', 'Client 6']
+  }
+];
 
 export const careers: Career[] = [
   {

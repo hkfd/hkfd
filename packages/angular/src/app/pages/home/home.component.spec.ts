@@ -40,6 +40,10 @@ describe('HomeComponent', () => {
     expect(titleService.setTitle).toHaveBeenCalledWith();
   });
 
+  it('should call ApiService getServices', () => {
+    expect(apiService.getServices).toHaveBeenCalled();
+  });
+
   it('should call ApiService getClients', () => {
     expect(apiService.getClients).toHaveBeenCalled();
   });
@@ -54,18 +58,6 @@ describe('HomeComponent', () => {
 
   it('should set featured caseStudies only', () => {
     expect(comp.caseStudies.length).toBe(2);
-  });
-
-  it('should call ApiService getServices', () => {
-    expect(apiService.getServices).toHaveBeenCalled();
-  });
-
-  it('should set clients', () => {
-    expect(comp.clients).toBeDefined();
-  });
-
-  it('should set clients as comma-seperated string', () => {
-    expect(comp.clients).toBe('client1, client2, client3');
   });
 });
 

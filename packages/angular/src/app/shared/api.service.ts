@@ -9,6 +9,7 @@ import { LoggerService } from './logger.service';
 import { Post, Service, CaseStudy } from './post';
 import { Team } from './team';
 import { Career } from './career';
+import { Client } from './client';
 import { Image } from './images';
 
 @Injectable()
@@ -79,13 +80,13 @@ export class ApiService {
       );
   }
 
-  getClients(): Observable<string[]> {
+  getClients(): Observable<Client[]> {
     return this.http
-      .get<string[]>(this.clients)
+      .get<Client[]>(this.clients)
       .pipe(
         retry(3),
-        tap((clients: string[]) => this.logger.log('getClients', clients)),
-        catchError(this.handleError<string[]>('getClients', []))
+        tap((clients: Client[]) => this.logger.log('getClients', clients)),
+        catchError(this.handleError<Client[]>('getClients', []))
       );
   }
 

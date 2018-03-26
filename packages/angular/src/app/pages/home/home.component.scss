@@ -123,6 +123,10 @@ h2 {
     @extend %font-small;
     line-height: 1.4;
 
+    @include md {
+      max-height: 100vh;
+    }
+
     &::before {
       content: '';
       position: absolute;
@@ -130,7 +134,37 @@ h2 {
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(rgba(255, 255, 255, 0) 30%, #fff 80%);
+      background: linear-gradient(rgba(255, 255, 255, 0) 30%, #fff 90%);
+    }
+
+    .client {
+      display: inline-block;
+      margin: 0;
+      @extend %font-bold;
+
+      &::before {
+        display: none;
+        content: '';
+      }
+    }
+
+    .client-list {
+      display: inline;
+      @extend %font-body;
+
+      .client-name {
+        display: inline-block;
+        margin: 0 0.2em;
+
+        &:nth-of-type(2n) {
+          color: $blue;
+        }
+
+        &::before {
+          display: none;
+          content: '';
+        }
+      }
     }
   }
 }

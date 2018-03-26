@@ -58,6 +58,17 @@ export class HomePage {
   }
 
   getClients() {
-    return element(by.id('client-list')).element(by.css('p'));
+    return element(by.id('client-list')).all(by.css('.client'));
+  }
+
+  getClientSector() {
+    return this.getClients();
+  }
+
+  getClientNames() {
+    return this.getClients()
+      .first()
+      .element(by.css('ul'))
+      .all(by.css('li'));
   }
 }

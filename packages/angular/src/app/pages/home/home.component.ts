@@ -8,6 +8,7 @@ import {
   ApiService,
   Service,
   CaseStudy,
+  Client,
   Image
 } from '../../shared/shared.module';
 import { HomeImages } from './home.images';
@@ -19,10 +20,9 @@ import { HomeImages } from './home.images';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   services$: Observable<Service[]>;
+  clients$: Observable<Client[]>;
   caseStudies$: Subscription;
   caseStudies: CaseStudy[];
-  clients$: Subscription;
-  clients: string;
 
   images = HomeImages;
 
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.titleService.setTitle();
 
     this.services$ = this.apiService.getServices();
+    this.clients$ = this.apiService.getClients();
 
     this.caseStudies$ = this.apiService
       .getCaseStudies()
@@ -44,13 +45,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             caseStudy => caseStudy.featured === true
           ))
       );
-
-    this.clients$ = this.apiService
-      .getClients()
-      .subscribe((clients: string[]) => (this.clients = clients.join(', ')));
   }
 
   ngOnDestroy() {
-    this.clients$.unsubscribe();
+    this.caseStudies$.unsubscribe();
   }
 }
