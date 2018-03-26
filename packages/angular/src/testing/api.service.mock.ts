@@ -26,14 +26,8 @@ export class MockApiService {
     return Observable.of(services);
   }
 
-  getCaseStudies(featured: boolean): Observable<CaseStudy[]> {
-    return Observable.of(<CaseStudy[]>caseStudies).pipe(
-      map((caseStudies: CaseStudy[]) =>
-        caseStudies.filter(
-          (caseStudy: CaseStudy) => caseStudy.featured === featured
-        )
-      )
-    );
+  getCaseStudies(): Observable<CaseStudy[]> {
+    return Observable.of(caseStudies);
   }
 
   getClients(): Observable<string[]> {

@@ -18,8 +18,9 @@ import { HomeImages } from './home.images';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  caseStudies$: Observable<CaseStudy[]>;
   services$: Observable<Service[]>;
+  caseStudies$: Subscription;
+  caseStudies: CaseStudy[];
   clients$: Subscription;
   clients: string;
 
@@ -33,8 +34,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.titleService.setTitle();
 
-    this.caseStudies$ = this.apiService.getCaseStudies(true);
     this.services$ = this.apiService.getServices();
+
+    this.caseStudies$ = this.apiService
+      .getCaseStudies()
+      .subscribe(
+        (caseStudies: CaseStudy[]) =>
+          (this.caseStudies = caseStudies.filter(
+            caseStudy => caseStudy.featured === true
+          ))
+      );
 
     this.clients$ = this.apiService
       .getClients()

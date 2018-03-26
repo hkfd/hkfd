@@ -41,11 +41,15 @@
       {
         "data": [
           {
-            "type": "image",
-            "image": {
-              "name": "service-3d-cgi1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-3d-cgi1" },
+              { "name": "service-3d-cgi2" },
+              { "name": "service-3d-cgi3" },
+              { "name": "service-3d-cgi4" },
+              { "name": "service-3d-cgi5" },
+              { "name": "service-3d-cgi6" }
+            ]
           }
         ]
       },
@@ -67,18 +71,22 @@
                 "paragraph": [
                   {
                     "text":
-                      "These digital creations can be animated and used in art, printed media, video gaming, films, television programmes, commercials, promotional videos, and simulators."
+                      "These digital creations can be animated and used in art, printed media, video gaming, films, television programmes, commercials, promotional videos and simulators."
                   }
                 ]
               }
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-3d-cgi-cgi1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-3d-cgi-cgi1" },
+              { "name": "service-3d-cgi-cgi2" },
+              { "name": "service-3d-cgi-cgi3" },
+              { "name": "service-3d-cgi-cgi4" },
+              { "name": "service-3d-cgi-cgi5" },
+              { "name": "service-3d-cgi-cgi6" }
+            ]
           }
         ]
       },
@@ -99,10 +107,15 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-3d-cgi-characters1"
-            }
+            "type": "gallery",
+            "images": [
+              { "name": "service-3d-cgi-characters1" },
+              { "name": "service-3d-cgi-characters2" },
+              { "name": "service-3d-cgi-characters3" },
+              { "name": "service-3d-cgi-characters4" },
+              { "name": "service-3d-cgi-characters5" },
+              { "name": "service-3d-cgi-characters6" }
+            ]
           }
         ]
       },
@@ -131,11 +144,16 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-3d-cgi-construction1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-3d-cgi-construction1" },
+              { "name": "service-3d-cgi-construction2" },
+              { "name": "service-3d-cgi-construction3" },
+              { "name": "service-3d-cgi-construction4" },
+              { "name": "service-3d-cgi-construction5" },
+              { "name": "service-3d-cgi-construction6" },
+              { "name": "service-3d-cgi-construction7" }
+            ]
           }
         ]
       },
@@ -194,10 +212,14 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-3d-cgi-concepts1"
-            }
+            "type": "gallery",
+            "images": [
+              { "name": "service-3d-cgi-concepts1" },
+              { "name": "service-3d-cgi-concepts2" },
+              { "name": "service-3d-cgi-concepts3" },
+              { "name": "service-3d-cgi-concepts4" },
+              { "name": "service-3d-cgi-concepts5" }
+            ]
           }
         ]
       }
@@ -420,7 +442,7 @@
           "paragraph": [
             {
               "text":
-                "From initial design, print and build, right through to the exhibition day, our highly skilled and dedicated print team are reliable, and with over 4 decades of experience, they have a reputation for the quality of their workmanship. Our committed account managers and installers work hand in hand closely with clients to get the look, structure and layout intended."
+                "From initial design, print and build, right through to the exhibition day, our highly skilled and dedicated print team are reliable, and with over four decades of experience, they have a reputation for the quality of their workmanship. Our committed account managers and installers work hand in hand closely with clients to get the look, structure and layout intended."
             }
           ]
         },
@@ -443,6 +465,17 @@
       ]
     },
     "content": [
+      {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "service-exhibitions1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
       {
         "title": "Bespoke Exhibitions",
         "data": [
@@ -476,10 +509,14 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-exhibitions-bespoke1"
-            }
+            "type": "gallery",
+            "images": [
+              { "name": "service-exhibitions-bespoke1" },
+              { "name": "service-exhibitions-bespoke2" },
+              { "name": "service-exhibitions-bespoke3" },
+              { "name": "service-exhibitions-bespoke4" },
+              { "name": "service-exhibitions-bespoke5" }
+            ]
           }
         ]
       },
@@ -516,11 +553,13 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "service-exhibitions-modular1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "service-exhibitions-modular1" },
+              { "name": "service-exhibitions-modular2" },
+              { "name": "service-exhibitions-modular3" },
+              { "name": "service-exhibitions-modular4" }
+            ]
           }
         ]
       },
@@ -560,7 +599,8 @@
             "type": "image",
             "image": {
               "name": "service-exhibitions-banners1"
-            }
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -600,7 +640,15 @@
             "type": "image",
             "image": {
               "name": "service-exhibitions-installation1"
-            }
+            },
+            "fullBleed": true
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "service-exhibitions-installation2"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1118,7 +1166,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Who is writing about you online? Who is linking to your page? Who are the trusted voices in your industry? We can reach out to the established influencers in your niche with information, promotions, and engaging materials to keep you firmly entrenched in your industry’s conversations."
+                      "Who is writing about you online? Who is linking to your page? Who are the trusted voices in your industry? We can reach out to the established influencers in your niche with information, promotions and engaging materials to keep you firmly entrenched in your industry’s conversations."
                   }
                 ]
               }
@@ -1203,7 +1251,7 @@
     "id": "illustration",
     "title": "Illustration",
     "description":
-      "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photo realism.",
+      "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photorealism.",
     "thumbnail": {
       "name": "illustration-thumb",
       "alt": "Illustration"
@@ -1650,10 +1698,10 @@
                     "text": "Free delivery within a 10 mile radius"
                   },
                   {
-                    "text": "7 top of the range large format printers"
+                    "text": "Seven top of the range large format printers"
                   },
                   {
-                    "text": "3 in-house laminators"
+                    "text": "Three in-house laminators"
                   },
                   {
                     "text": "We can cater for all print sizes"
@@ -1741,7 +1789,7 @@
           "paragraph": [
             {
               "text":
-                "Creative photography for products, advertising, merchandising, fashion, food, brochures, on line & social media, the list goes on and on."
+                "Creative photography for products, advertising, merchandising, fashion, food, brochures, online and social media, the list goes on and on."
             }
           ]
         },

@@ -37,6 +37,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "inspiring-healthy-lifestyles1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Design and Print",
         "data": [
           {
@@ -60,8 +71,7 @@
               { "name": "inspiring-healthy-lifestyles-design-print3" },
               { "name": "inspiring-healthy-lifestyles-design-print4" },
               { "name": "inspiring-healthy-lifestyles-design-print5" },
-              { "name": "inspiring-healthy-lifestyles-design-print6" },
-              { "name": "inspiring-healthy-lifestyles-design-print7" }
+              { "name": "inspiring-healthy-lifestyles-design-print6" }
             ]
           }
         ]
@@ -126,7 +136,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Heckford were asked by Inspiring healthy lifestyles to help launch their indoor skate and BMX facility at Howe Bridge Leisure Centre. Recognising that the target audience was distinctly different from traditional leisure centre users, we produced a launch video designing to go viral across the skate and BMX community. The resulting film was really well received and successfully shared across various social media platforms."
+                      "Heckford were asked by Inspiring healthy lifestyles to help launch their indoor skate and BMX facility at Howe Bridge Leisure Centre. Recognising that the target audience was distinctly different from traditional leisure centre users, we produced a launch video designed to go viral across the skate and BMX community. The resulting film was really well received and successfully shared across various social media platforms."
                   }
                 ]
               }
@@ -177,6 +187,9 @@
               },
               {
                 "name": "inspiring-healthy-lifestyles-signage7"
+              },
+              {
+                "name": "inspiring-healthy-lifestyles-signage8"
               }
             ]
           }
@@ -233,6 +246,17 @@
       ]
     },
     "content": [
+      {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "wainhomes1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
       {
         "title": "Signage",
         "data": [
@@ -300,9 +324,7 @@
               { "name": "wainhomes-cgi2" },
               { "name": "wainhomes-cgi3" },
               { "name": "wainhomes-cgi4" },
-              { "name": "wainhomes-cgi5" },
-              { "name": "wainhomes-cgi6" },
-              { "name": "wainhomes-cgi7" }
+              { "name": "wainhomes-cgi5" }
             ]
           }
         ]
@@ -325,7 +347,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Alongside providing print services, our experienced Media Buyers place press and magazine ads for both Wainhomes North West and Southwest."
+                      "Alongside providing print services, our experienced Media Buyers place press and magazine ads for both Wainhomes North West and South West."
                   }
                 ]
               }
@@ -413,14 +435,7 @@
           {
             "type": "image",
             "image": {
-              "name": "wainhomes-social1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "wainhomes-social2"
+              "name": "wainhomes-ppc1"
             },
             "fullBleed": true
           }
@@ -443,15 +458,11 @@
             ]
           },
           {
-            "type": "duo",
-            "images": [
-              {
-                "name": "wainhomes-emailmarketing1"
-              },
-              {
-                "name": "wainhomes-emailmarketing2"
-              }
-            ]
+            "type": "image",
+            "image": {
+              "name": "wainhomes-email1"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -480,11 +491,14 @@
             ]
           },
           {
-            "type": "gallery",
+            "type": "duo",
             "images": [
-              { "name": "wainhomes-promo1" },
-              { "name": "wainhomes-promo2" },
-              { "name": "wainhomes-promo3" }
+              {
+                "name": "wainhomes-promo1"
+              },
+              {
+                "name": "wainhomes-promo2"
+              }
             ]
           }
         ]
@@ -497,7 +511,7 @@
     "title": "Priestley College",
     "sector": "Education",
     "featured": true,
-    "colour": "black",
+    "colour": "white",
     "thumbnail": {
       "name": "priestley-college-thumb",
       "alt": "Priestley College"
@@ -630,7 +644,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "For the past 5 years, Heckford have conducted a photoshoot for the Priestley College student ambassadors. The students experience a day in a professional photography studio complete with make artist and stylist and the resulting images are used across various print, media and digital marketing materials."
+                      "For the past five years, Heckford have conducted a photoshoot for the Priestley College student ambassadors. The students experience a day in a professional photography studio complete with make artist and stylist and the resulting images are used across various print, media and digital marketing materials."
                   }
                 ]
               }
@@ -654,7 +668,7 @@
     "title": "Sandcastle",
     "sector": "Leisure",
     "featured": true,
-    "colour": "black",
+    "colour": "white",
     "thumbnail": {
       "name": "sandcastle-thumb",
       "alt": "Sandcastle"
@@ -692,7 +706,16 @@
     },
     "content": [
       {
-        "title": "Logo Design",
+        "data": [
+          {
+            "type": "image",
+            "image": { "name": "sandcastle1" },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Illustration and Logo Design",
         "data": [
           {
             "type": "text",
@@ -716,11 +739,12 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "sandcastle-logodesign1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "sandcastle-illustration1" },
+              { "name": "sandcastle-illustration2" },
+              { "name": "sandcastle-illustration3" }
+            ]
           }
         ]
       },
@@ -728,13 +752,26 @@
         "title": "Design and Print",
         "data": [
           {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Bright colours, compelling text and attractive imagery; all components in the creation of fun, family-friendly magazine and newspaper adverts for Sandcastle Waterpark."
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "type": "gallery",
             "images": [
-              { "name": "sandcastle-designprint1" },
-              { "name": "sandcastle-designprint2" },
-              { "name": "sandcastle-designprint3" },
-              { "name": "sandcastle-designprint4" },
-              { "name": "sandcastle-designprint5" }
+              { "name": "sandcastle-design-print1" },
+              { "name": "sandcastle-design-print2" },
+              { "name": "sandcastle-design-print3" },
+              { "name": "sandcastle-design-print4" },
+              { "name": "sandcastle-design-print5" }
             ]
           }
         ]
@@ -777,8 +814,7 @@
               { "name": "sandcastle-signage1" },
               { "name": "sandcastle-signage2" },
               { "name": "sandcastle-signage3" },
-              { "name": "sandcastle-signage4" },
-              { "name": "sandcastle-signage5" }
+              { "name": "sandcastle-signage4" }
             ]
           }
         ]
@@ -788,26 +824,13 @@
         "data": [
           {
             "type": "image",
-            "image": { "name": "sandcastle-vehiclewrap1" }
-          }
-        ]
-      },
-      {
-        "title": "Illustration",
-        "data": [
-          {
-            "type": "image",
-            "image": { "name": "sandcastle-illustration1" }
-          },
-          {
-            "type": "image",
-            "image": { "name": "sandcastle-illustration2" },
+            "image": { "name": "sandcastle-vehicle1" },
             "fullBleed": true
           }
         ]
       },
       {
-        "title": "Social Media",
+        "title": "Social Media & Email Marketing",
         "data": [
           {
             "type": "text",
@@ -832,17 +855,8 @@
           },
           {
             "type": "image",
-            "image": { "name": "sandcastle-social1" },
+            "image": { "name": "sandcastle-social-media1" },
             "fullBleed": true
-          }
-        ]
-      },
-      {
-        "title": "Email Marketing",
-        "data": [
-          {
-            "type": "image",
-            "image": { "name": "sandcastle-emailmarketing1" }
           }
         ]
       },
@@ -904,6 +918,15 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": { "name": "lutron1" },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "ARCHITECT@WORK 2016",
         "data": [
           {
@@ -932,8 +955,7 @@
             "images": [
               { "name": "lutron-work1" },
               { "name": "lutron-work2" },
-              { "name": "lutron-work3" },
-              { "name": "lutron-work4" }
+              { "name": "lutron-work3" }
             ]
           }
         ]
@@ -957,17 +979,10 @@
           {
             "type": "gallery",
             "images": [
-              { "name": "lutron-lightbuilding1" },
-              { "name": "lutron-lightbuilding2" },
-              { "name": "lutron-lightbuilding3" },
-              { "name": "lutron-lightbuilding4" },
-              { "name": "lutron-lightbuilding5" },
-              { "name": "lutron-lightbuilding6" },
-              { "name": "lutron-lightbuilding7" },
-              { "name": "lutron-lightbuilding8" },
-              { "name": "lutron-lightbuilding9" },
-              { "name": "lutron-lightbuilding10" },
-              { "name": "lutron-lightbuilding11" }
+              { "name": "lutron-light-building1" },
+              { "name": "lutron-light-building2" },
+              { "name": "lutron-light-building3" },
+              { "name": "lutron-light-building4" }
             ]
           }
         ]
@@ -1013,12 +1028,9 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "lutron-ise1" },
-              { "name": "lutron-ise2" },
-              { "name": "lutron-ise3" }
-            ]
+            "type": "image",
+            "image": { "name": "lutron-ise1" },
+            "fullBleed": true
           }
         ]
       }
@@ -1066,6 +1078,17 @@
       ]
     },
     "content": [
+      {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "winfields1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
       {
         "title": "Design & Print",
         "data": [
@@ -1124,10 +1147,7 @@
               { "name": "winfields-signage2" },
               { "name": "winfields-signage3" },
               { "name": "winfields-signage4" },
-              { "name": "winfields-signage5" },
-              { "name": "winfields-signage6" },
-              { "name": "winfields-signage7" },
-              { "name": "winfields-signage8" }
+              { "name": "winfields-signage5" }
             ]
           }
         ]
@@ -1264,6 +1284,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "tomy1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Exhibitions",
         "data": [
           {
@@ -1281,7 +1312,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Pleased with Heckford’s creative minds, experience and professionalism; TOMY have chosen Heckford to produce their exhibition for this year’s British Toy and Hobby Association Fair at Olympia – where their stand is the biggest it has ever been at 126m2!"
+                      "Pleased with Heckford’s creative minds, experience and professionalism; TOMY have chosen Heckford to produce their exhibition for this year’s British Toy and Hobby Association Fair at Olympia – where their stand is the biggest it has ever been at 126m²!"
                   }
                 ]
               }
@@ -1292,11 +1323,7 @@
             "images": [
               { "name": "tomy-exhibitions1" },
               { "name": "tomy-exhibitions2" },
-              { "name": "tomy-exhibitions3" },
-              { "name": "tomy-exhibitions4" },
-              { "name": "tomy-exhibitions5" },
-              { "name": "tomy-exhibitions6" },
-              { "name": "tomy-exhibitions7" }
+              { "name": "tomy-exhibitions3" }
             ]
           }
         ]
@@ -1316,11 +1343,18 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "tomy-pos1"
+            },
+            "fullBleed": true
           }
         ]
       },
       {
-        "title": "Show Room Design",
+        "title": "Showroom Design",
         "data": [
           {
             "type": "text",
@@ -1329,21 +1363,10 @@
                 "paragraph": [
                   {
                     "text":
-                      "A particularly exciting project was undertaking the design of their brand new Hong Kong show room back in 2013; seeing the potential in their space, our CGI & 3D specialists created contemporary concepts to bring ideas to life."
+                      "A particularly exciting project was undertaking the design of their brand new Hong Kong showroom back in 2013; seeing the potential in their space, our CGI & 3D specialists created contemporary concepts to bring ideas to life."
                   }
                 ]
               }
-            ]
-          },
-          {
-            "type": "gallery",
-            "images": [
-              { "name": "tomy-showroom1" },
-              { "name": "tomy-showroom2" },
-              { "name": "tomy-showroom3" },
-              { "name": "tomy-showroom4" },
-              { "name": "tomy-showroom5" },
-              { "name": "tomy-showroom6" }
             ]
           }
         ]
@@ -1374,6 +1397,17 @@
       ]
     },
     "content": [
+      {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "vimto1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
       {
         "title": "Print",
         "data": [
@@ -1407,22 +1441,18 @@
                 "paragraph": [
                   {
                     "text":
-                      "We designed and created the below pull-up banners that generate a large display area for brand awareness and maximum exposure of the ‘Feel Good’ drinks range. Catering for all sizes and with a quick turnaround, these roll up banners provide portable exhibition or retail display units that are cost effective and efficient, taking up limited floor space!"
+                      "We designed and created pull-up banners that generate a large display area for brand awareness and maximum exposure of the ‘Feel Good’ drinks range. Catering for all sizes and with a quick turnaround, these roll up banners provide portable exhibition or retail display units that are cost effective and efficient, taking up limited floor space!"
                   }
                 ]
               }
             ]
           },
           {
-            "type": "duo",
-            "images": [
-              {
-                "name": "vimto-print1"
-              },
-              {
-                "name": "vimto-print2"
-              }
-            ]
+            "type": "image",
+            "image": {
+              "name": "vimto-print1"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1459,7 +1489,7 @@
                   },
                   {
                     "text":
-                      "in Telford, the fully branded stand featured customised cool boxes, t.v. surroundings and oversize cans."
+                      "in Telford, the fully branded stand featured customised cool boxes, TV surroundings and oversize cans."
                   }
                 ]
               },
@@ -1626,7 +1656,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Heckford have been producing quality outdoor signage for both Galliford try and Linden Homes for several years. From large trays signs with stand-off acrylic lettering through to stack signs, pylon signs and mesh banners we have produced a variety of eye-catching site signage that gets noticed and generates response."
+                      "Heckford have been producing quality outdoor signage for both Galliford Try and Linden Homes for several years. From large trays signs with stand-off acrylic lettering through to stack signs, pylon signs and mesh banners we have produced a variety of eye-catching site signage that gets noticed and generates response."
                   }
                 ]
               }
@@ -1700,6 +1730,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Digital Brochures",
         "data": [
           {
@@ -1709,7 +1750,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Lloyd Group asked Heckford to design a digital brochure for their 6 MINI dealerships and their BMW dealerships. The clean and attractive design includes interactive elements; making the brochure fun and appealing to its audience."
+                      "Lloyd Group asked Heckford to design a digital brochure for their six MINI dealerships and their BMW dealerships. The clean and attractive design includes interactive elements; making the brochure fun and appealing to its audience."
                   },
                   {
                     "text": "Click here to view the BMW brochure",
@@ -1727,18 +1768,44 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "lloyd-brochure1" },
-              { "name": "lloyd-brochure2" },
-              { "name": "lloyd-brochure3" },
-              { "name": "lloyd-brochure4" },
-              { "name": "lloyd-brochure5" },
-              { "name": "lloyd-brochure6" },
-              { "name": "lloyd-brochure7" },
-              { "name": "lloyd-brochure8" },
-              { "name": "lloyd-brochure9" }
+            "type": "image",
+            "image": {
+              "name": "lloyd-brochure1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Direct Mail",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Alongside the email campaign for their Twelve Hour Opportunity, Lloyd BMW and Lloyd MINI in Blackpool and Newcastle wanted to target customers and potential customers in their local area through direct mail."
+                  }
+                ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "With a super fast turn around, Heckford designed a cut-out pocket envelope containing a leaflet and organised both print and postage."
+                  }
+                ]
+              }
             ]
+          },
+          {
+            "type": "image",
+            "image": {
+              "name": "lloyd-mail1"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -1796,77 +1863,6 @@
         ]
       },
       {
-        "title": "Direct Mail",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "With their Christmas Markets fast approaching, Lloyd BMW Blackpool and Colne asked us to create a jovial direct mail campaign to invite customers and locals to attend."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Disguised as a present, the cross-brochure invitation opened up to reveal a merry masterpiece detailing the event’s festivities."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "lloyd-mail1"
-            },
-            "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "lloyd-mail2"
-            }
-          },
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Alongside the email campaign for their Twelve Hour Opportunity, Lloyd BMW and Lloyd MINI in Blackpool and Newcastle wanted to target customers and potential customers in their local area through direct mail."
-                  }
-                ]
-              },
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "With a super fast turn around, Heckford designed a cut-out pocket envelope containing a leaflet and organised both print and postage."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "duo",
-            "images": [
-              {
-                "name": "lloyd-mail3"
-              },
-              {
-                "name": "lloyd-mail4"
-              }
-            ]
-          }
-        ]
-      },
-      {
         "title": "MMS/SMS Messages",
         "data": [
           {
@@ -1904,6 +1900,14 @@
                       "Heckford were asked to head-up Lloyd’s Facebook campaigns for Lloyd BMW Blackpool and Lloyd BMW Colne’s Christmas Markets. Taking the Christmas season by storm, we created festive cover photos, post images, event pages, advertisements and paid boosts."
                   }
                 ]
+              },
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Attractive artwork was created in anticipation of the New MINI Clubman launch, which was used to implement Facebook advertisements, boosted posts, competitions, cover photos and event pages as part of a fully-integrated online campaign which Heckford had the pleasure of managing."
+                  }
+                ]
               }
             ]
           },
@@ -1911,30 +1915,8 @@
             "type": "image",
             "image": {
               "name": "lloyd-social1"
-            }
-          },
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Attractive artwork was created in anticipation of the New MINI Clubman launch, which was used to implement Facebook advertisements, boosted posts, competitions, cover photos and event pages as part of a fully-integrated online campaign; in which Heckford had the pleasure of managing."
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "gallery",
-            "images": [
-              { "name": "lloyd-social2" },
-              { "name": "lloyd-social3" },
-              { "name": "lloyd-social4" },
-              { "name": "lloyd-social5" },
-              { "name": "lloyd-social6" }
-            ]
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -2026,16 +2008,11 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "lloyd-photography1" },
-              { "name": "lloyd-photography2" },
-              { "name": "lloyd-photography3" },
-              { "name": "lloyd-photography4" },
-              { "name": "lloyd-photography5" },
-              { "name": "lloyd-photography6" },
-              { "name": "lloyd-photography7" }
-            ]
+            "type": "image",
+            "image": {
+              "name": "lloyd-photography1"
+            },
+            "fullBleed": true
           }
         ]
       },
@@ -2056,13 +2033,11 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "lloyd-exhibition1" },
-              { "name": "lloyd-exhibition2" },
-              { "name": "lloyd-exhibition3" },
-              { "name": "lloyd-exhibition4" }
-            ]
+            "type": "image",
+            "image": {
+              "name": "lloyd-exhibition1"
+            },
+            "fullBleed": true
           }
         ]
       }
@@ -2413,6 +2388,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "watermouth1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Design and Print",
         "data": [
           {
@@ -2438,7 +2424,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "In order for the new brochure to enhance the personality of theme park, our team of talented illustrators travelled down to take images, so the attractions and park characters could be visualised and illustrated into a full resort brochure and map."
+                      "In order for the new brochure to enhance the personality of the theme park, our team of talented illustrators travelled down to take images, so the attractions and park characters could be visualised and illustrated into a full resort brochure and map."
                   }
                 ]
               },
@@ -2453,19 +2439,12 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "watermouth-design-print1"
-            },
-            "fullBleed": true
-          },
-          {
             "type": "gallery",
             "images": [
+              { "name": "watermouth-design-print1" },
               { "name": "watermouth-design-print2" },
               { "name": "watermouth-design-print3" },
-              { "name": "watermouth-design-print4" },
-              { "name": "watermouth-design-print5" }
+              { "name": "watermouth-design-print4" }
             ]
           }
         ]
@@ -2500,13 +2479,6 @@
               "name": "watermouth-illustration1"
             },
             "fullBleed": true
-          },
-          {
-            "type": "image",
-            "image": {
-              "name": "watermouth-illustration2"
-            },
-            "fullBleed": true
           }
         ]
       },
@@ -2520,7 +2492,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "Impressed with the exceptional level of skill shown for the brochure and map, we were thrilled to undertake the redesign of the attraction’s website. With it being a an e-commerce website, it was vital to use the same bright colours and imagery to entice users to buy tickets online. Our talented web design team animated the original character illustrations to give the website an interactive feel. The overall web design is fun, inviting, memorable and certainly appealing to parents of those with young children."
+                      "Impressed with the exceptional level of skill shown for the brochure and map, we were thrilled to undertake the redesign of the attraction’s website. With it being an e-commerce website, it was vital to use the same bright colours and imagery to entice users to buy tickets online. Our talented web design team animated the original character illustrations to give the website an interactive feel. The overall web design is fun, inviting, memorable and certainly appealing to parents of those with young children."
                   }
                 ]
               },
@@ -2570,6 +2542,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "panaz1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Exhibition",
         "data": [
           {
@@ -2579,23 +2562,25 @@
                 "paragraph": [
                   {
                     "text":
-                      "Heckford were extremely pleased when approached by Panaz Contract Fabrics to support them in the design, supply and construction of their exhibition stands for two large-scale events. These events were Architect@Work in Kortrijk and the British Contract Furnishing Association at the Old Truman brewery in London, both of which were a huge success."
+                      "Heckford were extremely pleased when approached by Panaz Contract Fabrics to support them in the design, supply and construction of their exhibition stands for two large-scale events. These events were Architect@Work in Kortrijk and the British Contract Furnishing Association at the Old Truman Brewery in London, both of which were a huge success."
                   }
                 ]
               }
             ]
           },
           {
+            "type": "image",
+            "image": {
+              "name": "panaz-exhibition1"
+            },
+            "fullBleed": true
+          },
+          {
             "type": "gallery",
             "images": [
-              { "name": "panaz-exhibition1" },
               { "name": "panaz-exhibition2" },
               { "name": "panaz-exhibition3" },
-              { "name": "panaz-exhibition4" },
-              { "name": "panaz-exhibition5" },
-              { "name": "panaz-exhibition6" },
-              { "name": "panaz-exhibition7" },
-              { "name": "panaz-exhibition8" }
+              { "name": "panaz-exhibition4" }
             ]
           }
         ]
@@ -2651,6 +2636,15 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": { "name": "helston1" },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Video",
         "data": [
           {
@@ -2697,14 +2691,9 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "helston-payperclick1" },
-              { "name": "helston-payperclick2" },
-              { "name": "helston-payperclick3" },
-              { "name": "helston-payperclick4" },
-              { "name": "helston-payperclick5" }
-            ]
+            "type": "image",
+            "image": { "name": "helston-ppc1" },
+            "fullBleed": true
           }
         ]
       },
@@ -2733,11 +2722,9 @@
             ]
           },
           {
-            "type": "duo",
-            "images": [
-              { "name": "helston-email1" },
-              { "name": "helston-email2" }
-            ]
+            "type": "image",
+            "image": { "name": "helston-email1" },
+            "fullBleed": true
           }
         ]
       },
@@ -2766,37 +2753,9 @@
             ]
           },
           {
-            "type": "gallery",
-            "images": [
-              { "name": "helston-social1" },
-              { "name": "helston-social2" },
-              { "name": "helston-social3" },
-              { "name": "helston-social4" },
-              { "name": "helston-social5" },
-              { "name": "helston-social6" }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Outdoor Advertising",
-        "data": [
-          {
-            "type": "text",
-            "data": [
-              {
-                "paragraph": [
-                  {
-                    "text":
-                      "Heckford recently designed a 48 sheet billboard for Westerly MINI Exeter to advertise the spacious MINI Clubman, which was posted in several prime locations across the city."
-                  }
-                ]
-              }
-            ]
-          },
-          {
             "type": "image",
-            "image": { "name": "helston-outdoor1" }
+            "image": { "name": "helston-social1" },
+            "fullBleed": true
           }
         ]
       },
@@ -2818,7 +2777,31 @@
           },
           {
             "type": "image",
-            "image": { "name": "helston-directmail1" }
+            "image": { "name": "helston-mail1" },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
+        "title": "Outdoor Advertising",
+        "data": [
+          {
+            "type": "text",
+            "data": [
+              {
+                "paragraph": [
+                  {
+                    "text":
+                      "Heckford recently designed a 48 sheet billboard for Westerly MINI Exeter to advertise the spacious MINI Clubman, which was posted in several prime locations across the city."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "image": { "name": "helston-advertising1" },
+            "fullBleed": true
           }
         ]
       }
@@ -3030,6 +3013,17 @@
     },
     "content": [
       {
+        "data": [
+          {
+            "type": "image",
+            "image": {
+              "name": "crealy1"
+            },
+            "fullBleed": true
+          }
+        ]
+      },
+      {
         "title": "Design & Print",
         "data": [
           {
@@ -3051,8 +3045,7 @@
               { "name": "crealy-design-print1" },
               { "name": "crealy-design-print2" },
               { "name": "crealy-design-print3" },
-              { "name": "crealy-design-print4" },
-              { "name": "crealy-design-print5" }
+              { "name": "crealy-design-print4" }
             ]
           }
         ]

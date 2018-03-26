@@ -4,8 +4,12 @@
   display: block;
   @extend %padding;
   @extend %text;
-  margin: 1em auto 10vh;
+  margin: 10vh auto 7vh;
   text-align: center;
+
+  h2 + & {
+    margin: 1em auto 7vh;
+  }
 }
 
 :host([intro]) {

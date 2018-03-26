@@ -25,14 +25,12 @@
         <h3>{{ service?.title | uppercase }}</h3>
         <p>{{ service?.description }}</p>
       </div>
-      <div class="service-more">
-        <span class="button">READ MORE</span>
-      </div>
+      <span class="service-more button">READ MORE</span>
     </a>
   </div>
 </section>
 
-<slider-work [caseStudies]="caseStudies$ | async" [autoplay]="true" [random]="true"></slider-work>
+<slider-work [caseStudies]="caseStudies" [autoplay]="true" [random]="true"></slider-work>
 
 <section id="clients">
   <div class="text">

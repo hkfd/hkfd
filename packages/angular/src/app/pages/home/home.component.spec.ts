@@ -40,20 +40,24 @@ describe('HomeComponent', () => {
     expect(titleService.setTitle).toHaveBeenCalledWith();
   });
 
+  it('should call ApiService getClients', () => {
+    expect(apiService.getClients).toHaveBeenCalled();
+  });
+
   it('should call ApiService getCaseStudies', () => {
     expect(apiService.getCaseStudies).toHaveBeenCalled();
   });
 
-  it('should call ApiService getCaseStudies with true arg', () => {
-    expect(apiService.getCaseStudies).toHaveBeenCalledWith(true);
+  it('should set caseStudies', () => {
+    expect(comp.caseStudies).toBeDefined();
+  });
+
+  it('should set featured caseStudies only', () => {
+    expect(comp.caseStudies.length).toBe(2);
   });
 
   it('should call ApiService getServices', () => {
     expect(apiService.getServices).toHaveBeenCalled();
-  });
-
-  it('should call ApiService getClients', () => {
-    expect(apiService.getClients).toHaveBeenCalled();
   });
 
   it('should set clients', () => {

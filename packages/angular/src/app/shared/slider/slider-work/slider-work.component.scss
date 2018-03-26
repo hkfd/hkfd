@@ -1,13 +1,5 @@
 @import '../../../../styles';
 
-.slide {
-  justify-content: center;
-
-  @include md {
-    justify-content: flex-start;
-  }
-}
-
 .slide-info {
   display: flex;
   justify-content: center;
@@ -15,24 +7,13 @@
   height: 100%;
   width: 100%;
   @extend %padding;
-
-  @include md {
-    justify-content: flex-start;
-  }
+  white-space: normal;
 }
 
 .info-meta {
-  position: relative;
-  align-self: top;
+  align-self: center;
   text-align: center;
-  margin: 1em 0;
   z-index: 3;
-
-  @include md {
-    align-self: center;
-    text-align: left;
-    margin: 0;
-  }
 
   a {
     display: block;
@@ -49,5 +30,6 @@
 .info-more {
   position: absolute;
   bottom: 0.5em;
+  left: 1em;
   z-index: 3;
 }

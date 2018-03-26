@@ -57,15 +57,13 @@ export class ApiService {
       );
   }
 
-  getCaseStudies(featured: boolean): Observable<CaseStudy[]> {
+  getCaseStudies(): Observable<CaseStudy[]> {
     return this.http
       .get<CaseStudy[]>(this.caseStudies)
       .pipe(
         retry(3),
-        map((caseStudies: CaseStudy[]) =>
-          caseStudies.filter(
-            (caseStudy: CaseStudy) => caseStudy.featured === featured
-          )
+        tap((caseStudies: CaseStudy[]) =>
+          this.logger.log('getCaseStudies', caseStudies)
         ),
         catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
       );

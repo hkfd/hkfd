@@ -45,10 +45,6 @@ describe('WorkComponent', () => {
     expect(apiService.getCaseStudies).toHaveBeenCalled();
   });
 
-  it('should call ApiService getCaseStudies with false arg', () => {
-    expect(apiService.getCaseStudies).toHaveBeenCalledWith(false);
-  });
-
   xit('should set case study class colour', () => {});
 });
 

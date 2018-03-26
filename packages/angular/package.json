@@ -28,6 +28,7 @@
     "core-js": "^2.5.3",
     "css-spring": "^4.1.0",
     "intersection-observer": "^0.5.0",
+    "npm": "^5.8.0",
     "raven-js": "^3.23.1",
     "rxjs": "^5.5.6",
     "web-animations-js": "^2.3.1",

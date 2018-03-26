@@ -26,6 +26,6 @@ export class WorkComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Our Work');
 
-    this.caseStudies$ = this.apiService.getCaseStudies(false);
+    this.caseStudies$ = this.apiService.getCaseStudies();
   }
 }

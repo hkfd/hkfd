@@ -40,7 +40,7 @@ export class PostPage {
 
   getSectionTitle() {
     return this.getSections()
-      .get(1)
+      .last()
       .element(by.css('h2'))
       .getText();
   }

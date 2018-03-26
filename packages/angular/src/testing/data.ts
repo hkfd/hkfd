@@ -117,7 +117,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'case-study-1',
     title: 'Case Study 1',
-    featured: false,
+    featured: true,
     colour: 'white',
     thumbnail: {
       name: '',
