@@ -23,7 +23,7 @@
           "paragraph": [
             {
               "text":
-                "Not only can we produce images and videos in motion, our skilled professionals can take our 3d designs and produce a real, physical object using 3D printing."
+                "Not only can we produce images and videos in motion, our skilled professionals can take our 3D designs and produce a real, physical object using 3D printing."
             }
           ]
         },
@@ -434,7 +434,7 @@
           "paragraph": [
             {
               "text":
-                "We’re one of the UK’s leading providers of exhibition stands, with an award-winning track record in design, build, and event management for leading brands across the UK, Europe and the United States."
+                "We’re one of the UK’s leading providers of exhibition stands, with an award-winning track record in design, build and event management for leading brands across the UK, Europe and the United States."
             }
           ]
         },
@@ -880,14 +880,12 @@
             ]
           },
           {
-            "type": "duo",
+            "type": "gallery",
             "images": [
-              {
-                "name": "service-advertising-recruitment1"
-              },
-              {
-                "name": "service-advertising-recruitment2"
-              }
+              { "name": "service-advertising-recruitment1" },
+              { "name": "service-advertising-recruitment2" },
+              { "name": "service-advertising-recruitment3" },
+              { "name": "service-advertising-recruitment4" }
             ]
           }
         ]

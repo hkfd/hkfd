@@ -1345,11 +1345,12 @@
             ]
           },
           {
-            "type": "image",
-            "image": {
-              "name": "tomy-pos1"
-            },
-            "fullBleed": true
+            "type": "gallery",
+            "images": [
+              { "name": "tomy-pos1" },
+              { "name": "tomy-pos2" },
+              { "name": "tomy-pos3" }
+            ]
           }
         ]
       },
@@ -3166,7 +3167,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-emailmarketing1" },
+            "image": { "name": "crealy-email-marketing1" },
             "fullBleed": true
           }
         ]

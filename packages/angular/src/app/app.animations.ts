@@ -19,7 +19,7 @@ export const AppAnimations = [
             optional: true
           }
         ),
-        query(':leave', style({ height: '100vh', opacity: 1 }), {
+        query(':leave', style({ height: '*', opacity: 1 }), {
           optional: true
         }),
         query(':enter', style({ height: 0, opacity: 0 }), { optional: true })
@@ -31,7 +31,7 @@ export const AppAnimations = [
       ),
       query(
         ':enter',
-        animate('0.4s ease-in', style({ height: '100vh', opacity: 1 })),
+        animate('0.4s ease-in', style({ height: '*', opacity: 1 })),
         { optional: true }
       )
     ]),
