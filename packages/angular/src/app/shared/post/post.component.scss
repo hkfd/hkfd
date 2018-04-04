@@ -28,7 +28,6 @@ section {
 #intro {
   position: relative;
   padding-top: 15vh;
-  padding-bottom: 5vh;
 
   h1 {
     margin: 0;
@@ -76,6 +75,14 @@ section {
         @extend %font-small;
       }
     }
+  }
+
+  .icon-40 {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin: 1.5em;
+    margin-left: auto;
   }
 }
 
