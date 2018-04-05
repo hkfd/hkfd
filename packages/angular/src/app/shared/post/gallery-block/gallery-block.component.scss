@@ -9,7 +9,7 @@
   margin: 0 -0.5em;
   white-space: nowrap;
   cursor: ew-resize;
-  -webkit-overflow-scroll: touch;
+  -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar-track {
     background-color: #f5f5f5;

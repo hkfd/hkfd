@@ -35,61 +35,61 @@
     @extend %font-large;
   }
 
-  #footer-info {
+  #footer-locations {
+    overflow: hidden;
     display: block;
-    @extend %container-col;
+    margin: 0 -2%;
     color: $grey;
 
     @include sm {
       display: flex;
-      justify-content: space-between;
-      margin: 0 - ($gutter / 2);
     }
 
-    #locations {
-      display: block;
-      padding: 0 ($gutter / 2);
+    .location {
+      float: left;
+      margin: 10px 0;
+      padding: 0 2%;
 
-      @include sm {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 -2em;
-      }
-
-      .location {
-        margin: 10px 0;
+      address {
+        margin: 20px 0;
+        line-height: 1.6;
 
         @include sm {
-          padding: 0 2em;
-        }
-
-        address {
-          margin: 20px 0;
-          line-height: 1.6;
-
-          @include sm {
-            margin: 20px 0 0;
-          }
+          margin: 20px 0 0;
         }
       }
     }
+  }
 
-    #legal {
-      margin: 1em 0;
+  #footer-info {
+    display: block;
+
+    @include sm {
+      display: flex;
+      justify-content: space-between;
     }
 
     #info-social {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
-      margin: 10px 0;
-      padding: 0 ($gutter / 2);
+      flex-basis: 100%;
+      margin: 0 -0.75em;
+
+      @include sm {
+        justify-content: flex-end;
+      }
+
+      .social-link {
+        display: inline-block;
+        flex-basis: 100%;
+        max-width: 3em;
+        padding: 0 0.75em;
+      }
 
       a {
+        display: inline-block;
         opacity: 0.5;
-        @include sm {
-          margin: 0.75em;
-        }
 
         &:hover,
         &:active {

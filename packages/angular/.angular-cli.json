@@ -7,7 +7,7 @@
     {
       "root": "src",
       "outDir": "dist",
-      "assets": ["assets", "api"],
+      "assets": ["assets", "api", ".htaccess"],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",

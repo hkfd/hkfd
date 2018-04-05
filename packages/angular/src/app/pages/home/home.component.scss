@@ -86,6 +86,7 @@ h2 {
       }
 
       .service-info {
+        overflow: hidden;
         margin: 1em;
         margin-bottom: 3em;
         @extend %font-body;
