@@ -4,7 +4,7 @@
     "title": "Inspiring Healthy Lifestyles",
     "sector": "Local Authorities",
     "featured": true,
-    "colour": "black",
+    "colour": "white",
     "thumbnail": {
       "name": "inspiring-healthy-lifestyles-thumb",
       "alt": "Inspiring Healthy Lifestyles"
@@ -644,7 +644,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "For the past five years, Heckford have conducted a photoshoot for the Priestley College student ambassadors. The students experience a day in a professional photography studio complete with make artist and stylist and the resulting images are used across various print, media and digital marketing materials."
+                      "For the past five years, Heckford have conducted a photoshoot for the Priestley College student ambassadors. The students experience a day in a professional photography studio complete with make up artist and stylist and the resulting images are used across various print, media and digital marketing materials."
                   }
                 ]
               }
@@ -1786,8 +1786,15 @@
               {
                 "paragraph": [
                   {
+                    "text": "Alongside the email campaign for their"
+                  },
+                  {
+                    "text": "Twelve Hour Opportunity,",
+                    "attributes": { "italic": true }
+                  },
+                  {
                     "text":
-                      "Alongside the email campaign for their Twelve Hour Opportunity, Lloyd BMW and Lloyd MINI in Blackpool and Newcastle wanted to target customers and potential customers in their local area through direct mail."
+                      "Lloyd BMW and Lloyd MINI in Blackpool and Newcastle wanted to target customers and potential customers in their local area through direct mail."
                   }
                 ]
               },
@@ -2334,7 +2341,7 @@
                 "paragraph": [
                   {
                     "text":
-                      "As well as the creation, we also take full responsibility in booking the adverts to be placed in a number of well known established newspapers, such as the Lancashire Telegraph, The Bolton News and The Bury News."
+                      "As well as the creation, we also take full responsibility in booking the adverts to be placed in a number of well known established newspapers, such as the Lancashire Telegraph, Bolton News and Bury Times."
                   }
                 ]
               }
@@ -2833,7 +2840,7 @@
           "paragraph": [
             {
               "text":
-                "Heckford Exhibitions was appointed by charity Chorley Remembers to design and create an interactive exhibition commemorating local residents who fought in con icts since 1914."
+                "Heckford Exhibitions was appointed by charity Chorley Remembers to design and create an interactive exhibition commemorating local residents who fought in conflicts since 1914."
             }
           ]
         },
@@ -2998,7 +3005,7 @@
           "paragraph": [
             {
               "text":
-                "Crealy Adventure Parks consisted of two award-winning family attractions, Devon’s Crealy Adventure Park in Exeter and Cornwall’s Crealy Adverture Park in Wadebridge, as well as camping and glamping site, Crealy Meadows."
+                "Crealy Adventure Parks consisted of two award-winning family attractions, Devon’s Crealy Adventure Park in Exeter and Cornwall’s Crealy Adventure Park in Wadebridge, as well as camping and glamping site, Crealy Meadows."
             }
           ]
         },

@@ -43,9 +43,17 @@ export class ApiService {
   }
 
   getPost(type: string, id: string): Observable<Post> {
-    let url;
-    if (type === 'service') url = this.services;
-    if (type === 'work') url = this.caseStudies;
+    let url: string;
+    switch (type) {
+      case 'service':
+        url = this.services;
+        break;
+      case 'work':
+        url = this.caseStudies;
+        break;
+      default:
+        return of(null);
+    }
 
     return this.http
       .get<Post[]>(url)

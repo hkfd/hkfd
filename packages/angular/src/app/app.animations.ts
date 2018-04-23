@@ -26,7 +26,7 @@ export const AppAnimations = [
       ]),
       query(
         ':leave',
-        animate('0.3s ease-out', style({ height: '0', opacity: 0 })),
+        animate('0.3s ease-out', style({ height: 0, opacity: 0 })),
         { optional: true }
       ),
       query(
