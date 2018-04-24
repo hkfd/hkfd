@@ -45,12 +45,13 @@ describe('Careers', () => {
       });
     });
 
-    it('should link to /contact', () => {
-      page
-        .getCareers()
-        .last()
-        .click()
-        .then(_ => expect(page.getUrl()).toContain('/contact'));
+    it('should href mailto', () => {
+      expect(
+        page
+          .getCareers()
+          .last()
+          .getAttribute('href')
+      ).toBe('mailto:hello@heckford-advertising.co.uk');
     });
 
     it('should display careers image', () => {

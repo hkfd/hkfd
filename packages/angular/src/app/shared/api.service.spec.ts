@@ -289,11 +289,11 @@ describe('ApiService', () => {
     );
 
     it(
-      'should return undefined if no type arg',
+      'should return null if no type arg',
       async(() => {
         apiService
           .getPost(null, 'service-1')
-          .subscribe(res => expect(res).toBe(undefined));
+          .subscribe(res => expect(res).toBe(null));
       })
     );
 

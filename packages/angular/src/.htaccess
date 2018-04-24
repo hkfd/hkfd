@@ -97,13 +97,13 @@ AddDefaultCharset utf-8
   RewriteRule ^ - [env=proto:http]
 </IfModule>
 
-<ifModule mod_rewrite.c>
+<IfModule mod_rewrite.c>
   # SPA
   RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule (.*) index.html [QSA,L]
-</ifModule>
+</IfModule>
 
 <IfModule mod_rewrite.c>
   # HTTPS
@@ -176,7 +176,7 @@ AddDefaultCharset utf-8
 
 # CSP
 <IfModule mod_headers.c>
-  Header set Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com  https://www.google-analytics.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com; frame-src https://www.youtube.com"
+  Header set Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com  https://www.google-analytics.com https://www.google.com https://www.google.co.uk https://*.doubleclick.net https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com; frame-src https://www.youtube.com; media-src https://res.cloudinary.com"
 
   <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
     Header unset Content-Security-Policy
