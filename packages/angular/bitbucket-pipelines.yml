@@ -1,14 +1,22 @@
-image: node:8
+image: andthensome/docker-node-rsync
 
 pipelines:
-  default:
-    - step:
-        deployment: staging
-        caches:
-          - node
-        script:
-          - yarn global add @angular/cli
-          - yarn global add firebase-tools
-          - yarn
-          - ng build --prod
-          - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+  branches:
+    master:
+      - step:
+          deployment: production
+          caches:
+            - node
+          script:
+            - yarn
+            - ./node_modules/.bin/ng build --prod
+            - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:public_html
+    dev:
+      - step:
+          deployment: staging
+          caches:
+            - node
+          script:
+            - yarn
+            - ./node_modules/.bin/ng build --prod
+            - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging
