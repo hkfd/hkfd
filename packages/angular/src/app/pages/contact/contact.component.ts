@@ -13,6 +13,10 @@ export class ContactComponent implements OnInit {
 
   constructor(private titleService: TitleService) {}
 
+  messageClick() {
+    ga('send', 'event', 'Message Us Button', 'click');
+  }
+
   ngOnInit() {
     this.titleService.setTitle('Contact');
   }
