@@ -8,7 +8,7 @@ import {
   NgZone
 } from '@angular/core';
 
-import { Image } from '../shared.module';
+import { Generic } from '../shared.module';
 
 @Component({
   selector: 'slider',
@@ -22,7 +22,7 @@ export class SliderComponent implements OnChanges {
   @Input() random: boolean = false;
   @Input() autoplay: boolean = false;
   @Input() delay: number = 2000;
-  @Input() images: Image[];
+  @Input() images: Generic.Image[];
 
   @HostListener('mouseenter')
   mouseEnter() {

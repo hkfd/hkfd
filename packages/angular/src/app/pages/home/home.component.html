@@ -2,7 +2,7 @@
   <h1>LANCASHIRE'S LEADERS<span>Independent advertising &amp; marketing agency</span></h1>
 </section>
 
-<slider [images]="images?.intro" [autoplay]="true"><img class="icon-40" src="/assets/icons/40-years-white.svg"></slider>
+<slider [images]="images?.intro | server" [autoplay]="true"><img class="icon-40" src="/assets/icons/40-years-white.svg"></slider>
 
 <section id="help">
   <div id="help-container">
@@ -15,12 +15,12 @@
 <section id="services">
   <div class="text">
     <h2>OUR SERVICES</h2>
-    <p>Our team provides you with a complete range of corporate marketing services, including advertising, design & print, digital, illustration, 3D CGI, exhibitions and signage.</p>
+    <p>Our team provides you with a complete range of corporate marketing services, including advertising, design &amp; print, digital, illustration, 3D CGI, exhibitions and signage.</p>
   </div>
 
   <div id="services-list">
     <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]">
-      <image-component full-height [image]="service?.thumbnail"></image-component>
+      <image-component full-height [image]="service?.thumbnail | server"></image-component>
       <div class="service-info">
         <h3>{{ service?.title | uppercase }}</h3>
         <p>{{ service?.description }}</p>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { ApiService } from './api.service';
+import { PrismicService } from './prismic.service';
 import { TitleService } from './title.service';
 import { LoggerService } from './logger.service';
 import { HeaderComponent } from './header/header.component';
@@ -10,30 +11,25 @@ import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
 import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
-import { CloudinaryPipe } from './pipes/cloudinary.pipe';
+import { ImageBlockComponent } from './blocks/image-block/image-block.component';
+import { DuoBlockComponent } from './blocks/duo-block/duo-block.component';
+import { GalleryBlockComponent } from './blocks/gallery-block/gallery-block.component';
+import { VideoBlockComponent } from './blocks/video-block/video-block.component';
+import { AudioBlockComponent } from './blocks/audio-block/audio-block.component';
+import { ServerPipe } from './pipes/server.pipe';
+import { PrismicPipe } from './pipes/prismic.pipe';
 import { LazyDirective } from './lazy.directive';
 
 export { ApiService } from './api.service';
+export { PrismicService } from './prismic.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
-export { CloudinaryPipe } from './pipes/cloudinary.pipe';
+export { ServerPipe } from './pipes/server.pipe';
+export { PrismicPipe } from './pipes/prismic.pipe';
 export { LazyDirective } from './lazy.directive';
-export { Post, Service, CaseStudy } from './post';
-export {
-  Content,
-  Data,
-  TextBlock,
-  ImageBlock,
-  GalleryBlock,
-  VideoBlock,
-  AudioBlock,
-  Sentence,
-  DuoBlock
-} from './content';
-export { Image, Lazy } from './images';
-export { Team } from './team';
-export { Career } from './career';
-export { Client } from './client';
+export { Server } from './server';
+export { Prismic } from './prismic';
+export { Generic } from './generic';
 
 @NgModule({
   imports: [CommonModule, RouterModule],
@@ -42,19 +38,37 @@ export { Client } from './client';
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
+    ImageBlockComponent,
+    DuoBlockComponent,
+    GalleryBlockComponent,
+    VideoBlockComponent,
+    AudioBlockComponent,
     ImageComponent,
-    CloudinaryPipe,
-    LazyDirective
+    LazyDirective,
+    ServerPipe,
+    PrismicPipe
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
+    ImageBlockComponent,
+    DuoBlockComponent,
+    GalleryBlockComponent,
+    VideoBlockComponent,
+    AudioBlockComponent,
     ImageComponent,
     LazyDirective,
-    CloudinaryPipe
+    ServerPipe,
+    PrismicPipe
   ],
-  providers: [ApiService, TitleService, LoggerService]
+  providers: [
+    ApiService,
+    PrismicService,
+    TitleService,
+    LoggerService,
+    ServerPipe
+  ]
 })
 export class SharedModule {}

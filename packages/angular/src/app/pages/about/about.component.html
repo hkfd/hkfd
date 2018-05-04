@@ -7,7 +7,7 @@
 
 <div id="intro-image">
   <img class="icon-40" src="/assets/icons/40-years-white.svg">
-  <image-component full-height [image]="images?.intro"></image-component>
+  <image-component full-height [image]="images?.intro | server"></image-component>
 </div>
 
 <section id="team">
@@ -21,7 +21,7 @@
     <div class="person" *ngFor="let person of team">
       <div class="person-container">
 
-        <img src="{{ person?.image?.name | cloudinary: { width: 64 } }}" srcset="{{ person?.image?.name | cloudinary: { width: 300 } }} 64w" alt="{{ person?.image?.alt }}">
+        <image-component [image]="person?.thumbnail | server"></image-component>
 
         <div class="person-info">
           <h4>{{ person?.name | uppercase }}</h4>

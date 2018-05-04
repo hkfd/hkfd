@@ -69,18 +69,27 @@ describe('LoggerService', () => {
       expect(_console.warn).toHaveBeenCalledWith('val', 'param');
     });
 
-    it('should call Raven captureMessage', () => {
+    it('should call Raven captureMessage in prod environment', () => {
+      environment.production = true;
       loggerService.warn('');
 
       expect(raven.captureMessage).toHaveBeenCalled();
     });
 
-    it('should call Raven captureMessage with val and level param args', () => {
+    it('should call Raven captureMessage with val and level param args in prod environment', () => {
+      environment.production = true;
       loggerService.warn('val');
 
       expect(raven.captureMessage).toHaveBeenCalledWith('val', {
         level: 'warning'
       });
+    });
+
+    it('should not call Raven captureMessage in dev environment', () => {
+      environment.production = false;
+      loggerService.warn('val');
+
+      expect(raven.captureMessage).not.toHaveBeenCalled();
     });
   });
 
@@ -103,16 +112,25 @@ describe('LoggerService', () => {
       expect(_console.error).toHaveBeenCalledWith('val', 'param');
     });
 
-    it('should call Raven captureMessage', () => {
+    it('should call Raven captureMessage in prod environment', () => {
+      environment.production = true;
       loggerService.error('');
 
       expect(raven.captureException).toHaveBeenCalled();
     });
 
-    it('should call Raven captureMessage with val and param args', () => {
+    it('should call Raven captureMessage with val and param args in prod environment', () => {
+      environment.production = true;
       loggerService.error('val', 'param');
 
       expect(raven.captureException).toHaveBeenCalledWith('val', 'param');
+    });
+
+    it('should not call Raven captureMessage in dev environment', () => {
+      environment.production = false;
+      loggerService.error('val', 'param');
+
+      expect(raven.captureException).not.toHaveBeenCalled();
     });
   });
 });

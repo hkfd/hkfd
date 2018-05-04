@@ -42,6 +42,7 @@
       &:last-child {
         display: block;
         background: $blue;
+        color: inherit;
 
         .person-info {
           position: relative;

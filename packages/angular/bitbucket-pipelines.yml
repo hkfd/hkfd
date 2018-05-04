@@ -6,7 +6,7 @@ pipelines:
       - step:
           deployment: production
           caches:
-            - node
+            - yarn
           script:
             - yarn
             - ./node_modules/.bin/ng build --prod
@@ -15,8 +15,11 @@ pipelines:
       - step:
           deployment: staging
           caches:
-            - node
+            - yarn
           script:
             - yarn
             - ./node_modules/.bin/ng build --prod
             - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging
+definitions:
+  caches:
+    yarn: /usr/local/share/.cache/yarn/v1

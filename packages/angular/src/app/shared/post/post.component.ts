@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 
-import { TitleService, ApiService, Post } from '../../shared/shared.module';
+import { TitleService, ApiService, Server } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-post',
@@ -13,7 +13,7 @@ import { TitleService, ApiService, Post } from '../../shared/shared.module';
 })
 export class PostComponent implements OnInit {
   post$: Subscription;
-  post: Post;
+  post: Server.Post;
 
   @HostBinding('class') layout: string;
 
@@ -29,7 +29,7 @@ export class PostComponent implements OnInit {
       .switchMap((params: ParamMap) =>
         this.apiService.getPost(params.get('type'), params.get('id'))
       )
-      .subscribe((post: Post) => {
+      .subscribe((post: Server.Post) => {
         if (!post) return this.router.navigateByUrl('/');
 
         this.post = post;

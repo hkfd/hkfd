@@ -1,13 +1,15 @@
-import { SimpleChange } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import { LazyDirective, CloudinaryPipe } from '../shared.module';
+import { Data } from '../../../testing';
+import { LazyDirective } from '../shared.module';
 import { ImageComponent } from './image.component';
 
 let comp: ImageComponent;
 let fixture: ComponentFixture<ImageComponent>;
 let page: Page;
-let cloudinaryPipe: CloudinaryPipeStub;
+let lazyDirective: LazyDirective;
 
 describe('ImageComponent', () => {
   beforeEach(
@@ -20,73 +22,20 @@ describe('ImageComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should not call CloudinaryPipe transform without image', () => {
-    comp.ngOnChanges({ image: new SimpleChange(null, null, null) });
-
-    expect(cloudinaryPipe.transform).not.toHaveBeenCalled();
+  it('should display img', () => {
+    expect(page.img).toBeTruthy();
   });
 
-  describe('OnChanges', () => {
-    beforeEach(() =>
-      comp.ngOnChanges({ image: new SimpleChange(null, comp.image, null) })
-    );
-
-    it('should call CloudinaryPipe transform for src', () => {
-      expect(cloudinaryPipe.transform).toHaveBeenCalled();
-    });
-
-    it('should call CloudinaryPipe transform with src args', () => {
-      expect(cloudinaryPipe.transform).toHaveBeenCalledWith('example', {
-        width: 64
-      });
-    });
-
-    it('should set src', () => {
-      expect(comp.src).toBeDefined();
-    });
-
-    it('should call CloudinaryPipe transform for srcset', () => {
-      expect(cloudinaryPipe.transform).toHaveBeenCalledTimes(6);
-    });
-
-    it('should call CloudinaryPipe transform with srcset args', () => {
-      expect(cloudinaryPipe.transform).toHaveBeenCalledWith('example', {
-        width: jasmine.any(Number),
-        height: jasmine.any(Number)
-      });
-    });
-
-    it('should set srcset', () => {
-      expect(comp.srcset).toBeDefined();
-    });
-
-    it(`should set srcset with attr as 'srcset'`, () => {
-      expect(comp.srcset.attr).toBe('srcset');
-    });
-
-    it('should set srcset with value', () => {
-      expect(comp.srcset.value.length).toBe(5);
-    });
+  it('should set img src', () => {
+    expect(page.img.properties.src).toBe('example.jpg');
   });
 
-  describe('imageLoaded', () => {
-    beforeEach(() => {
-      comp.ngOnChanges({ image: new SimpleChange(null, comp.image, null) });
-    });
+  it('should set img alt', () => {
+    expect(page.img.properties.alt).toBe('Example image');
+  });
 
-    it('should set image loaded to true if image', () => {
-      comp.image.loaded = false;
-      comp.imageLoaded();
-
-      expect(comp.image.loaded).toBe(true);
-    });
-
-    it('should do nothing if no image', () => {
-      comp.image = null;
-      comp.imageLoaded();
-
-      expect(comp.image).toBe(null);
-    });
+  it('should set LazyDirective data', () => {
+    expect(lazyDirective.data).toEqual(comp.image.srcset);
   });
 });
 
@@ -94,33 +43,25 @@ function createComponent() {
   fixture = TestBed.createComponent(ImageComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  cloudinaryPipe = new CloudinaryPipeStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
     fixture.detectChanges();
+    page.addElements();
   });
 }
 
-class CloudinaryPipeStub {
-  transform: jasmine.Spy;
-
-  constructor() {
-    const cloudinary = fixture.debugElement.injector.get(CloudinaryPipe);
-
-    this.transform = spyOn(cloudinary, 'transform').and.callThrough();
-  }
-}
-
 class Page {
-  imageLoaded: jasmine.Spy;
+  img: DebugElement;
 
   constructor() {
-    comp.image = {
-      name: 'example',
-      alt: ''
-    };
+    comp.image = Data.Generic.image;
 
-    this.imageLoaded = spyOn(comp, 'imageLoaded').and.callThrough();
+    const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
+    lazyDirective = directiveEl.injector.get(LazyDirective);
+  }
+
+  addElements() {
+    this.img = fixture.debugElement.query(By.css('img'));
   }
 }

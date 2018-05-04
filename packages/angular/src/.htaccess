@@ -150,19 +150,6 @@ AddDefaultCharset utf-8
   Redirect permanent "/case-studies/haven-funeral-care/" "/work/haven-funeral-services"
   Redirect gone "/case-studies/prestons-college/"
   Redirect permanent "/case-studies/" "/work"
-  Redirect permanent "/fun-ideas-for-early-may-bank-holiday/" "https://medium.com/heckford/high-five-fridays-fun-ideas-for-early-may-bank-holiday-e3fc4e7fdf61"
-  Redirect permanent "/the-champions-of-global-ad-spend/" "https://medium.com/heckford/the-champions-of-global-ad-spend-c4ac6d0ce416"
-  Redirect permanent "/the-power-of-emotional-advertising/" "https://medium.com/heckford/high-five-fridays-the-power-of-emotional-advertising-85efc5c4a990"
-  Redirect permanent "/8-incredible-ways-you-can-target-on-facebook/" "https://medium.com/heckford/8-incredible-ways-you-can-target-on-facebook-9e1bfa354e89"
-  Redirect permanent "/most-tweeted-foods/" "https://medium.com/heckford/high-five-friday-the-five-most-tweeted-foods-7635e1d4e0c0"
-  Redirect permanent "/high-five-friday/" "https://medium.com/heckford/high-five-friday-close-the-shutters-and-go-global-67f823ab892a"
-  Redirect permanent "/best-times-post-social-media/" "https://medium.com/heckford/the-best-times-to-post-on-social-media-c134eebd1e18"
-  Redirect permanent "/how-social-media-behaviour-can-affect-sales/" "https://medium.com/heckford/how-social-media-behaviour-can-affect-sales-453a178b9e4b"
-  Redirect permanent "/get-online-ads/" "https://medium.com/heckford/how-to-get-the-most-out-of-your-online-ads-facac0e90d47"
-  Redirect permanent "/gain-top-marks-heckford/" "https://medium.com/heckford/gain-top-marks-with-heckford-949861e4003b"
-  Redirect permanent "/social-media-day-2017/" "https://medium.com/heckford/social-media-day-2017-17-things-to-post-about-in-july-a81d7663b774"
-  Redirect permanent "/build-online-campaign/" "https://medium.com/heckford/how-to-build-an-online-campaign-8d478a8c6ef6"
-  Redirect permanent "/news/" "https://medium.com/heckford"
 </IfModule>
 
 # Clickjacking

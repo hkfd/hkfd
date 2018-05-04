@@ -1,0 +1,26 @@
+@import '../../../../styles';
+
+:host {
+  display: block;
+  overflow: hidden;
+  background: #fff;
+}
+
+#intro {
+  overflow: hidden;
+  padding-top: 5vh;
+  background: $grey-dark;
+  color: #fff;
+
+  #intro-info {
+    @extend %container-full;
+
+    h1 {
+      margin: 0.5em 0;
+    }
+  }
+
+  image-component {
+    height: 50vh;
+  }
+}

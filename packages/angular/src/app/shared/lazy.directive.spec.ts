@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { Renderer2, ElementRef, ElementRefStub } from '../../testing';
 import { LazyDirective } from './lazy.directive';
-import { Lazy } from './images';
+import { Generic } from './generic';
 
 let comp: TestHostComponent;
 let fixture: ComponentFixture<TestHostComponent>;
@@ -14,15 +14,13 @@ let directive: LazyDirectiveStub;
 let renderer: RendererStub;
 
 @Component({
-  template: `<img src="" [lazy]="srcset" (loaded)="elLoaded()">`
+  template: `<img src="" [lazy]="srcset">`
 })
 class TestHostComponent {
-  srcset: Lazy = {
+  srcset: Generic.Lazy = {
     attr: 'srcset',
-    value: ['example-xs.jpg 100w', 'example-sm.jpg 200w']
+    val: ['example-xs.jpg 100w', 'example-sm.jpg 200w']
   };
-
-  elLoaded() {}
 }
 
 describe('LazyDirective', () => {
@@ -42,20 +40,19 @@ describe('LazyDirective', () => {
 
   describe('intersectionCallback', () => {
     beforeEach(() => {
-      page.elLoaded.calls.reset();
       renderer.setAttribute.calls.reset();
     });
 
-    it('should emit loaded if intersecting', () => {
+    it('should set data loaded as true if intersecting', () => {
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
 
-      expect(page.elLoaded).toHaveBeenCalled();
+      expect(comp.srcset.loaded).toBeTruthy();
     });
 
-    it('should not emit loaded if not intersecting', () => {
+    it('should not set data loaded if not intersecting', () => {
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: false }]);
 
-      expect(page.elLoaded).not.toHaveBeenCalled();
+      expect(comp.srcset.loaded).toBeUndefined();
     });
 
     it('should call Renderer2 setAttribute if intersecting', () => {
@@ -78,8 +75,8 @@ describe('LazyDirective', () => {
       );
     });
 
-    it('should not call Renderer2 setAttribute if no data', () => {
-      lazyDirective.data = null;
+    it('should not call Renderer2 setAttribute if no data attr', () => {
+      lazyDirective.data = { attr: null, val: ['example'] };
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
 
       expect(renderer.setAttribute).not.toHaveBeenCalledWith(
@@ -89,7 +86,18 @@ describe('LazyDirective', () => {
       );
     });
 
-    it('should set img srcset if intersecting', () => {
+    it('should not call Renderer2 setAttribute if no data val', () => {
+      lazyDirective.data = { attr: 'example', val: null };
+      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+
+      expect(renderer.setAttribute).not.toHaveBeenCalledWith(
+        jasmine.anything(),
+        'srcset',
+        jasmine.anything()
+      );
+    });
+
+    it('should set el attr if intersecting', () => {
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
       fixture.detectChanges();
 
@@ -127,12 +135,16 @@ class RendererStub {
 }
 
 class LazyDirectiveStub {
+  ngAfterViewInit: jasmine.Spy;
   intersectionCallback: jasmine.Spy;
 
   constructor() {
     const image = fixture.debugElement.query(By.directive(LazyDirective));
     lazyDirective = image.injector.get(LazyDirective);
 
+    this.ngAfterViewInit = spyOn(lazyDirective, 'ngAfterViewInit').and.callFake(
+      () => undefined
+    );
     this.intersectionCallback = spyOn(
       lazyDirective,
       'intersectionCallback'
@@ -141,13 +153,7 @@ class LazyDirectiveStub {
 }
 
 class Page {
-  elLoaded: jasmine.Spy;
-
   img: DebugElement;
-
-  constructor() {
-    this.elLoaded = spyOn(comp, 'elLoaded').and.callThrough();
-  }
 
   addElements() {
     this.img = fixture.debugElement.query(By.css('img'));

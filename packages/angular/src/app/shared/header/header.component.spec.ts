@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SlicePipe } from '@angular/common';
 
 import { Router, RouterTestingModule } from '../../../testing';
 
@@ -11,6 +12,7 @@ let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
 let page: Page;
 let router: RouterStub;
+let slicePipe: jasmine.Spy;
 
 describe('HeaderComponent', () => {
   beforeEach(
@@ -23,6 +25,18 @@ describe('HeaderComponent', () => {
   );
 
   beforeEach(async(() => createComponent()));
+
+  it('should call SlicePipe', () => {
+    expect(slicePipe).toHaveBeenCalled();
+  });
+
+  it('should call SlicePipe with 0:1', () => {
+    expect(slicePipe).toHaveBeenCalledWith(comp.pages, 0, 1);
+  });
+
+  it('should call SlicePipe with 1', () => {
+    expect(slicePipe).toHaveBeenCalledWith(comp.pages, 1);
+  });
 
   describe('navClick', () => {
     it('should be called on link click', () => {
@@ -95,6 +109,7 @@ function createComponent() {
   comp = fixture.componentInstance;
   page = new Page();
   router = new RouterStub();
+  slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {

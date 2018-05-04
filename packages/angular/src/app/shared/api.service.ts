@@ -6,11 +6,7 @@ import { catchError, retry, tap, map, flatMap, find } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
-import { Post, Service, CaseStudy } from './post';
-import { Team } from './team';
-import { Career } from './career';
-import { Client } from './client';
-import { Image } from './images';
+import { Server } from './server';
 
 @Injectable()
 export class ApiService {
@@ -22,27 +18,31 @@ export class ApiService {
 
   constructor(private http: HttpClient, private logger: LoggerService) {}
 
-  getServices(): Observable<Service[]> {
+  getServices(): Observable<Server.Service[]> {
     return this.http
-      .get<Service[]>(this.services)
+      .get<Server.Service[]>(this.services)
       .pipe(
         retry(3),
-        tap((services: Service[]) => this.logger.log('getServices', services)),
-        catchError(this.handleError<Service[]>('getServices', []))
+        tap((services: Server.Service[]) =>
+          this.logger.log('getServices', services)
+        ),
+        catchError(this.handleError<Server.Service[]>('getServices', []))
       );
   }
 
-  getCareers(): Observable<Career[]> {
+  getCareers(): Observable<Server.Career[]> {
     return this.http
-      .get<Career[]>(this.careers)
+      .get<Server.Career[]>(this.careers)
       .pipe(
         retry(3),
-        tap((careers: Career[]) => this.logger.log('getCareers', careers)),
-        catchError(this.handleError<Career[]>('getCareers', []))
+        tap((careers: Server.Career[]) =>
+          this.logger.log('getCareers', careers)
+        ),
+        catchError(this.handleError<Server.Career[]>('getCareers', []))
       );
   }
 
-  getPost(type: string, id: string): Observable<Post> {
+  getPost(type: string, id: string): Observable<Server.Post> {
     let url: string;
     switch (type) {
       case 'service':
@@ -56,45 +56,47 @@ export class ApiService {
     }
 
     return this.http
-      .get<Post[]>(url)
+      .get<Server.Post[]>(url)
       .pipe(
         retry(3),
-        flatMap((posts: Post[]) => posts),
-        find((post: Post) => post.id === id),
-        tap((post: Post) => this.logger.log('getPost', post)),
-        catchError(this.handleError<Post>('getPost'))
+        flatMap((posts: Server.Post[]) => posts),
+        find((post: Server.Post) => post.id === id),
+        tap((post: Server.Post) => this.logger.log('getPost', post)),
+        catchError(this.handleError<Server.Post>('getPost'))
       );
   }
 
-  getCaseStudies(): Observable<CaseStudy[]> {
+  getCaseStudies(): Observable<Server.CaseStudy[]> {
     return this.http
-      .get<CaseStudy[]>(this.caseStudies)
+      .get<Server.CaseStudy[]>(this.caseStudies)
       .pipe(
         retry(3),
-        tap((caseStudies: CaseStudy[]) =>
+        tap((caseStudies: Server.CaseStudy[]) =>
           this.logger.log('getCaseStudies', caseStudies)
         ),
-        catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
+        catchError(this.handleError<Server.CaseStudy[]>('getCaseStudies', []))
       );
   }
 
-  getTeam(): Observable<Team[]> {
+  getTeam(): Observable<Server.Team[]> {
     return this.http
-      .get<Team[]>(this.team)
+      .get<Server.Team[]>(this.team)
       .pipe(
         retry(3),
-        tap((team: Team[]) => this.logger.log('getTeam', team)),
-        catchError(this.handleError<Team[]>('getTeam', []))
+        tap((team: Server.Team[]) => this.logger.log('getTeam', team)),
+        catchError(this.handleError<Server.Team[]>('getTeam', []))
       );
   }
 
-  getClients(): Observable<Client[]> {
+  getClients(): Observable<Server.Client[]> {
     return this.http
-      .get<Client[]>(this.clients)
+      .get<Server.Client[]>(this.clients)
       .pipe(
         retry(3),
-        tap((clients: Client[]) => this.logger.log('getClients', clients)),
-        catchError(this.handleError<Client[]>('getClients', []))
+        tap((clients: Server.Client[]) =>
+          this.logger.log('getClients', clients)
+        ),
+        catchError(this.handleError<Server.Client[]>('getClients', []))
       );
   }
 

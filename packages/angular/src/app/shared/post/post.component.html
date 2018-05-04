@@ -20,11 +20,11 @@
   <ng-container *ngFor="let block of section?.data">
     <ng-container [ngSwitch]="block?.type">
       <text-block *ngSwitchCase="'text'" [data]="block"></text-block>
-      <image-block *ngSwitchCase="'image'" [data]="block" [attr.full-bleed]="block?.fullBleed"></image-block>
-      <gallery-block *ngSwitchCase="'gallery'" [data]="block"></gallery-block>
-      <duo-block *ngSwitchCase="'duo'" [data]="block"></duo-block>
-      <video-block *ngSwitchCase="'video'" [data]="block"></video-block>
-      <audio-block *ngSwitchCase="'audio'" [data]="block"></audio-block>
+      <image-block *ngSwitchCase="'image'" [data]="block?.data | server" [attr.full-bleed]="block?.fullBleed"></image-block>
+      <duo-block *ngSwitchCase="'duo'" [data]="block?.data | server"></duo-block>
+      <gallery-block *ngSwitchCase="'gallery'" [data]="block?.data | server"></gallery-block>
+      <video-block *ngSwitchCase="'video'" [data]="block?.data | server"></video-block>
+      <audio-block *ngSwitchCase="'audio'" [data]="block?.data | server"></audio-block>
     </ng-container>
   </ng-container>
 </section>

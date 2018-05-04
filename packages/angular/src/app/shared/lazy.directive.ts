@@ -3,20 +3,17 @@ import {
   AfterViewInit,
   OnDestroy,
   Input,
-  Output,
-  EventEmitter,
   Renderer2,
   ElementRef
 } from '@angular/core';
 
-import { Lazy } from './images';
+import { Generic } from './generic';
 
 @Directive({
   selector: '[lazy]'
 })
 export class LazyDirective implements AfterViewInit, OnDestroy {
-  @Input('lazy') data: Lazy;
-  @Output() loaded: EventEmitter<boolean> = new EventEmitter();
+  @Input('lazy') data: Generic.Lazy;
   private observer: IntersectionObserver;
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
@@ -24,15 +21,15 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   intersectionCallback([entry, ...rest]: [IntersectionObserverEntry, any[]]) {
     if (!entry.isIntersecting) return;
 
-    this.loaded.emit(true);
-    this.observer.disconnect();
+    this.data.loaded = true;
+    if (this.observer) this.observer.disconnect();
 
-    if (!this.data || !this.data.attr || !this.data.value) return;
+    if (!this.data.attr || !this.data.val) return;
 
     this.renderer.setAttribute(
       this.el.nativeElement,
       this.data.attr,
-      this.data.value.join()
+      this.data.val.join()
     );
   }
 
@@ -51,6 +48,6 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.observer.disconnect();
+    if (this.observer) this.observer.disconnect();
   }
 }

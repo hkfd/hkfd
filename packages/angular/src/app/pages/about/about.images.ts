@@ -1,8 +1,10 @@
-import { Image } from '../../shared/shared.module';
+import { Server } from '../../shared/shared.module';
 
-export const AboutImages: { [name: string]: Image | Image[] } = {
+export const AboutImages: { [name: string]: { image: Server.Image } } = {
   intro: {
-    name: 'heckford-studio',
-    alt: 'Heckford studio'
+    image: {
+      name: 'heckford-studio',
+      alt: 'Heckford studio'
+    }
   }
 };

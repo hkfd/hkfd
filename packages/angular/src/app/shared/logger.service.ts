@@ -14,11 +14,15 @@ export class LoggerService {
 
   warn(val: any, ...params: any[]) {
     console.warn(val, ...params);
+
+    if (!environment.production) return;
     Raven.captureMessage(val, { level: 'warning' });
   }
 
   error(val: any, ...params: any[]) {
     console.error(val, ...params);
+
+    if (!environment.production) return;
     Raven.captureException(val, ...params);
   }
 }

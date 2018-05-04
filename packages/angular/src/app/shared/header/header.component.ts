@@ -15,7 +15,8 @@ export class HeaderComponent {
     { title: 'About', url: '/about' },
     { title: 'Our Work', url: '/work' },
     { title: 'Careers', url: '/careers' },
-    { title: 'Contact', url: '/contact' }
+    { title: 'Contact', url: '/contact' },
+    { title: 'News', url: '/news' }
   ];
 
   mobileShow: boolean = false;

@@ -7,15 +7,12 @@ import {
   RouterTestingModule,
   MockTitleService,
   MockApiService,
+  MockServerPipe,
   ActivatedRoute,
   ActivatedRouteStub
 } from '../../../testing';
 
-import {
-  TitleService,
-  ApiService,
-  ImageBlock
-} from '../../shared/shared.module';
+import { TitleService, ApiService, Server } from '../../shared/shared.module';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;
@@ -25,6 +22,7 @@ let apiService: ApiService;
 let page: Page;
 let router: RouterStub;
 let activatedRoute: ActivatedRouteStub;
+let serverPipe: jasmine.Spy;
 
 describe('PostComponent', () => {
   beforeEach(
@@ -33,7 +31,7 @@ describe('PostComponent', () => {
 
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
-        declarations: [PostComponent],
+        declarations: [PostComponent, MockServerPipe],
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService },
@@ -137,6 +135,10 @@ describe('PostComponent', () => {
       it('should display TextBlockComponent', () => {
         expect(page.textBlock).toBeTruthy();
       });
+
+      it('should not call ServerPipe', () => {
+        expect(serverPipe).not.toHaveBeenCalled();
+      });
     });
 
     describe('Image', () => {
@@ -150,8 +152,19 @@ describe('PostComponent', () => {
         expect(page.imageBlock).toBeTruthy();
       });
 
+      it('should call ServerPipe', () => {
+        expect(serverPipe).toHaveBeenCalled();
+      });
+
+      it('should call ServerPipe with block data', () => {
+        expect(serverPipe).toHaveBeenCalledWith(
+          comp.post.content[0].data[0].data
+        );
+      });
+
       it(`should set full-bleed attibute as 'true' if fullBleed is true`, () => {
-        (<ImageBlock>comp.post.content[0].data[0]).fullBleed = true;
+        (<Server.Blocks.ImageBlock>comp.post.content[0]
+          .data[0]).fullBleed = true;
         fixture.detectChanges();
 
         expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
@@ -160,7 +173,8 @@ describe('PostComponent', () => {
       });
 
       it(`should not set full-bleed attibute if no fullBleed`, () => {
-        (<ImageBlock>comp.post.content[0].data[0]).fullBleed = undefined;
+        (<Server.Blocks.ImageBlock>comp.post.content[0]
+          .data[0]).fullBleed = undefined;
         fixture.detectChanges();
 
         expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
@@ -179,6 +193,16 @@ describe('PostComponent', () => {
       it('should display GalleryBlockComponent', () => {
         expect(page.galleryBlock).toBeTruthy();
       });
+
+      it('should call ServerPipe', () => {
+        expect(serverPipe).toHaveBeenCalled();
+      });
+
+      it('should call ServerPipe with block data', () => {
+        expect(serverPipe).toHaveBeenCalledWith(
+          comp.post.content[0].data[0].data
+        );
+      });
     });
 
     describe('Duo', () => {
@@ -190,6 +214,16 @@ describe('PostComponent', () => {
 
       it('should display DuoBlockComponent', () => {
         expect(page.duoBlock).toBeTruthy();
+      });
+
+      it('should call ServerPipe', () => {
+        expect(serverPipe).toHaveBeenCalled();
+      });
+
+      it('should call ServerPipe with block data', () => {
+        expect(serverPipe).toHaveBeenCalledWith(
+          comp.post.content[0].data[0].data
+        );
       });
     });
 
@@ -203,6 +237,16 @@ describe('PostComponent', () => {
       it('should display VideoBlockComponent', () => {
         expect(page.videoBlock).toBeTruthy();
       });
+
+      it('should call ServerPipe', () => {
+        expect(serverPipe).toHaveBeenCalled();
+      });
+
+      it('should call ServerPipe with block data', () => {
+        expect(serverPipe).toHaveBeenCalledWith(
+          comp.post.content[0].data[0].data
+        );
+      });
     });
 
     describe('Audio', () => {
@@ -215,6 +259,16 @@ describe('PostComponent', () => {
       it('should display AudioBlockComponent', () => {
         expect(page.audioBlock).toBeTruthy();
       });
+
+      it('should call ServerPipe', () => {
+        expect(serverPipe).toHaveBeenCalled();
+      });
+
+      it('should call ServerPipe with block data', () => {
+        expect(serverPipe).toHaveBeenCalledWith(
+          comp.post.content[0].data[0].data
+        );
+      });
     });
   });
 });
@@ -226,6 +280,7 @@ function createComponent() {
   apiService = fixture.debugElement.injector.get(ApiService);
   page = new Page();
   router = new RouterStub();
+  serverPipe = spyOn(MockServerPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {

@@ -5,8 +5,10 @@
     "description":
       "Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life.",
     "thumbnail": {
-      "name": "3d-cgi-thumb",
-      "alt": "3D & CGI"
+      "image": {
+        "name": "3d-cgi-thumb",
+        "alt": "3D & CGI"
+      }
     },
     "intro": {
       "type": "text",
@@ -42,13 +44,13 @@
         "data": [
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-3d-cgi1" },
-              { "name": "service-3d-cgi2" },
-              { "name": "service-3d-cgi3" },
-              { "name": "service-3d-cgi4" },
-              { "name": "service-3d-cgi5" },
-              { "name": "service-3d-cgi6" }
+            "data": [
+              { "image": { "name": "service-3d-cgi1" } },
+              { "image": { "name": "service-3d-cgi2" } },
+              { "image": { "name": "service-3d-cgi3" } },
+              { "image": { "name": "service-3d-cgi4" } },
+              { "image": { "name": "service-3d-cgi5" } },
+              { "image": { "name": "service-3d-cgi6" } }
             ]
           }
         ]
@@ -79,13 +81,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-3d-cgi-cgi1" },
-              { "name": "service-3d-cgi-cgi2" },
-              { "name": "service-3d-cgi-cgi3" },
-              { "name": "service-3d-cgi-cgi4" },
-              { "name": "service-3d-cgi-cgi5" },
-              { "name": "service-3d-cgi-cgi6" }
+            "data": [
+              { "image": { "name": "service-3d-cgi-cgi1" } },
+              { "image": { "name": "service-3d-cgi-cgi2" } },
+              { "image": { "name": "service-3d-cgi-cgi3" } },
+              { "image": { "name": "service-3d-cgi-cgi4" } },
+              { "image": { "name": "service-3d-cgi-cgi5" } },
+              { "image": { "name": "service-3d-cgi-cgi6" } }
             ]
           }
         ]
@@ -108,13 +110,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-3d-cgi-characters1" },
-              { "name": "service-3d-cgi-characters2" },
-              { "name": "service-3d-cgi-characters3" },
-              { "name": "service-3d-cgi-characters4" },
-              { "name": "service-3d-cgi-characters5" },
-              { "name": "service-3d-cgi-characters6" }
+            "data": [
+              { "image": { "name": "service-3d-cgi-characters1" } },
+              { "image": { "name": "service-3d-cgi-characters2" } },
+              { "image": { "name": "service-3d-cgi-characters3" } },
+              { "image": { "name": "service-3d-cgi-characters4" } },
+              { "image": { "name": "service-3d-cgi-characters5" } },
+              { "image": { "name": "service-3d-cgi-characters6" } }
             ]
           }
         ]
@@ -145,14 +147,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-3d-cgi-construction1" },
-              { "name": "service-3d-cgi-construction2" },
-              { "name": "service-3d-cgi-construction3" },
-              { "name": "service-3d-cgi-construction4" },
-              { "name": "service-3d-cgi-construction5" },
-              { "name": "service-3d-cgi-construction6" },
-              { "name": "service-3d-cgi-construction7" }
+            "data": [
+              { "image": { "name": "service-3d-cgi-construction1" } },
+              { "image": { "name": "service-3d-cgi-construction2" } },
+              { "image": { "name": "service-3d-cgi-construction3" } },
+              { "image": { "name": "service-3d-cgi-construction4" } },
+              { "image": { "name": "service-3d-cgi-construction5" } },
+              { "image": { "name": "service-3d-cgi-construction6" } },
+              { "image": { "name": "service-3d-cgi-construction7" } }
             ]
           }
         ]
@@ -175,7 +177,11 @@
           },
           {
             "type": "video",
-            "id": "BW5eYEowNB4"
+            "data": {
+              "video": {
+                "id": "BW5eYEowNB4"
+              }
+            }
           }
         ]
       },
@@ -213,12 +219,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-3d-cgi-concepts1" },
-              { "name": "service-3d-cgi-concepts2" },
-              { "name": "service-3d-cgi-concepts3" },
-              { "name": "service-3d-cgi-concepts4" },
-              { "name": "service-3d-cgi-concepts5" }
+            "data": [
+              { "image": { "name": "service-3d-cgi-concepts1" } },
+              { "image": { "name": "service-3d-cgi-concepts2" } },
+              { "image": { "name": "service-3d-cgi-concepts3" } },
+              { "image": { "name": "service-3d-cgi-concepts4" } },
+              { "image": { "name": "service-3d-cgi-concepts5" } }
             ]
           }
         ]
@@ -231,8 +237,10 @@
     "description":
       "The ultimate combination, creative design and cost effective print. Providing cost effective solutions, on time and on budget.",
     "thumbnail": {
-      "name": "design-print-thumb",
-      "alt": "Design & Print"
+      "image": {
+        "name": "design-print-thumb",
+        "alt": "Design & Print"
+      }
     },
     "intro": {
       "type": "text",
@@ -260,8 +268,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "service-design-print1"
+            "data": {
+              "image": {
+                "name": "service-design-print1"
+              }
             },
             "fullBleed": true
           }
@@ -301,15 +311,15 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-design-print-design1" },
-              { "name": "service-design-print-design2" },
-              { "name": "service-design-print-design3" },
-              { "name": "service-design-print-design4" },
-              { "name": "service-design-print-design5" },
-              { "name": "service-design-print-design6" },
-              { "name": "service-design-print-design7" },
-              { "name": "service-design-print-design8" }
+            "data": [
+              { "image": { "name": "service-design-print-design1" } },
+              { "image": { "name": "service-design-print-design2" } },
+              { "image": { "name": "service-design-print-design3" } },
+              { "image": { "name": "service-design-print-design4" } },
+              { "image": { "name": "service-design-print-design5" } },
+              { "image": { "name": "service-design-print-design6" } },
+              { "image": { "name": "service-design-print-design7" } },
+              { "image": { "name": "service-design-print-design8" } }
             ]
           }
         ]
@@ -340,14 +350,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-design-print-concepts1" },
-              { "name": "service-design-print-concepts2" },
-              { "name": "service-design-print-concepts3" },
-              { "name": "service-design-print-concepts4" },
-              { "name": "service-design-print-concepts5" },
-              { "name": "service-design-print-concepts6" },
-              { "name": "service-design-print-concepts7" }
+            "data": [
+              { "image": { "name": "service-design-print-concepts1" } },
+              { "image": { "name": "service-design-print-concepts2" } },
+              { "image": { "name": "service-design-print-concepts3" } },
+              { "image": { "name": "service-design-print-concepts4" } },
+              { "image": { "name": "service-design-print-concepts5" } },
+              { "image": { "name": "service-design-print-concepts6" } },
+              { "image": { "name": "service-design-print-concepts7" } }
             ]
           }
         ]
@@ -378,8 +388,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-design-print-typography1"
+            "data": {
+              "image": {
+                "name": "service-design-print-typography1"
+              }
             },
             "fullBleed": true
           }
@@ -403,15 +415,15 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-design-print-identity1" },
-              { "name": "service-design-print-identity2" },
-              { "name": "service-design-print-identity3" },
-              { "name": "service-design-print-identity4" },
-              { "name": "service-design-print-identity5" },
-              { "name": "service-design-print-identity6" },
-              { "name": "service-design-print-identity7" },
-              { "name": "service-design-print-identity8" }
+            "data": [
+              { "image": { "name": "service-design-print-identity1" } },
+              { "image": { "name": "service-design-print-identity2" } },
+              { "image": { "name": "service-design-print-identity3" } },
+              { "image": { "name": "service-design-print-identity4" } },
+              { "image": { "name": "service-design-print-identity5" } },
+              { "image": { "name": "service-design-print-identity6" } },
+              { "image": { "name": "service-design-print-identity7" } },
+              { "image": { "name": "service-design-print-identity8" } }
             ]
           }
         ]
@@ -424,8 +436,10 @@
     "description":
       "Creating the right impression for your business. Inspire your customers to use your services and stand out from your competitors.",
     "thumbnail": {
-      "name": "exhibitions-thumb",
-      "alt": "Exhibitions"
+      "image": {
+        "name": "exhibitions-thumb",
+        "alt": "Exhibitions"
+      }
     },
     "intro": {
       "type": "text",
@@ -469,8 +483,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "service-exhibitions1"
+            "data": {
+              "image": {
+                "name": "service-exhibitions1"
+              }
             },
             "fullBleed": true
           }
@@ -510,12 +526,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-exhibitions-bespoke1" },
-              { "name": "service-exhibitions-bespoke2" },
-              { "name": "service-exhibitions-bespoke3" },
-              { "name": "service-exhibitions-bespoke4" },
-              { "name": "service-exhibitions-bespoke5" }
+            "data": [
+              { "image": { "name": "service-exhibitions-bespoke1" } },
+              { "image": { "name": "service-exhibitions-bespoke2" } },
+              { "image": { "name": "service-exhibitions-bespoke3" } },
+              { "image": { "name": "service-exhibitions-bespoke4" } },
+              { "image": { "name": "service-exhibitions-bespoke5" } }
             ]
           }
         ]
@@ -554,11 +570,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-exhibitions-modular1" },
-              { "name": "service-exhibitions-modular2" },
-              { "name": "service-exhibitions-modular3" },
-              { "name": "service-exhibitions-modular4" }
+            "data": [
+              { "image": { "name": "service-exhibitions-modular1" } },
+              { "image": { "name": "service-exhibitions-modular2" } },
+              { "image": { "name": "service-exhibitions-modular3" } },
+              { "image": { "name": "service-exhibitions-modular4" } }
             ]
           }
         ]
@@ -597,8 +613,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-exhibitions-banners1"
+            "data": {
+              "image": {
+                "name": "service-exhibitions-banners1"
+              }
             },
             "fullBleed": true
           }
@@ -638,15 +656,19 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-exhibitions-installation1"
+            "data": {
+              "image": {
+                "name": "service-exhibitions-installation1"
+              }
             },
             "fullBleed": true
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-exhibitions-installation2"
+            "data": {
+              "image": {
+                "name": "service-exhibitions-installation2"
+              }
             },
             "fullBleed": true
           }
@@ -694,8 +716,10 @@
     "description":
       "We have Google AdWords Certified Professionals creating compelling and effective campaigns that maximise your ROI.",
     "thumbnail": {
-      "name": "ppc-adwords-thumb",
-      "alt": "PPC / Adwords"
+      "image": {
+        "name": "ppc-adwords-thumb",
+        "alt": "PPC / Adwords"
+      }
     },
     "intro": {
       "type": "text",
@@ -755,8 +779,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "service-ppc-adwords1"
+            "data": {
+              "image": {
+                "name": "service-ppc-adwords1"
+              }
             }
           }
         ]
@@ -769,8 +795,10 @@
     "description":
       "In the right place, at the right time, a good idea is made great with effective advertising campaigns.",
     "thumbnail": {
-      "name": "advertising-thumb",
-      "alt": "Advertising"
+      "image": {
+        "name": "advertising-thumb",
+        "alt": "Advertising"
+      }
     },
     "intro": {
       "type": "text",
@@ -798,14 +826,14 @@
         "data": [
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-advertising1" },
-              { "name": "service-advertising2" },
-              { "name": "service-advertising3" },
-              { "name": "service-advertising4" },
-              { "name": "service-advertising5" },
-              { "name": "service-advertising6" },
-              { "name": "service-advertising7" }
+            "data": [
+              { "image": { "name": "service-advertising1" } },
+              { "image": { "name": "service-advertising2" } },
+              { "image": { "name": "service-advertising3" } },
+              { "image": { "name": "service-advertising4" } },
+              { "image": { "name": "service-advertising5" } },
+              { "image": { "name": "service-advertising6" } },
+              { "image": { "name": "service-advertising7" } }
             ]
           }
         ]
@@ -836,13 +864,25 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-advertising-newspapers-magazines1" },
-              { "name": "service-advertising-newspapers-magazines2" },
-              { "name": "service-advertising-newspapers-magazines3" },
-              { "name": "service-advertising-newspapers-magazines4" },
-              { "name": "service-advertising-newspapers-magazines5" },
-              { "name": "service-advertising-newspapers-magazines6" }
+            "data": [
+              {
+                "image": { "name": "service-advertising-newspapers-magazines1" }
+              },
+              {
+                "image": { "name": "service-advertising-newspapers-magazines2" }
+              },
+              {
+                "image": { "name": "service-advertising-newspapers-magazines3" }
+              },
+              {
+                "image": { "name": "service-advertising-newspapers-magazines4" }
+              },
+              {
+                "image": { "name": "service-advertising-newspapers-magazines5" }
+              },
+              {
+                "image": { "name": "service-advertising-newspapers-magazines6" }
+              }
             ]
           }
         ]
@@ -881,11 +921,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-advertising-recruitment1" },
-              { "name": "service-advertising-recruitment2" },
-              { "name": "service-advertising-recruitment3" },
-              { "name": "service-advertising-recruitment4" }
+            "data": [
+              { "image": { "name": "service-advertising-recruitment1" } },
+              { "image": { "name": "service-advertising-recruitment2" } },
+              { "image": { "name": "service-advertising-recruitment3" } },
+              { "image": { "name": "service-advertising-recruitment4" } }
             ]
           }
         ]
@@ -916,13 +956,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-advertising-outdoor1" },
-              { "name": "service-advertising-outdoor2" },
-              { "name": "service-advertising-outdoor3" },
-              { "name": "service-advertising-outdoor4" },
-              { "name": "service-advertising-outdoor5" },
-              { "name": "service-advertising-outdoor6" }
+            "data": [
+              { "image": { "name": "service-advertising-outdoor1" } },
+              { "image": { "name": "service-advertising-outdoor2" } },
+              { "image": { "name": "service-advertising-outdoor3" } },
+              { "image": { "name": "service-advertising-outdoor4" } },
+              { "image": { "name": "service-advertising-outdoor5" } },
+              { "image": { "name": "service-advertising-outdoor6" } }
             ]
           }
         ]
@@ -945,8 +985,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-advertising-tv1"
+            "data": {
+              "image": {
+                "name": "service-advertising-tv1"
+              }
             },
             "fullBleed": true
           }
@@ -1004,12 +1046,16 @@
           },
           {
             "type": "duo",
-            "images": [
+            "data": [
               {
-                "name": "service-advertising-mail1"
+                "image": {
+                  "name": "service-advertising-mail1"
+                }
               },
               {
-                "name": "service-advertising-mail2"
+                "image": {
+                  "name": "service-advertising-mail2"
+                }
               }
             ]
           }
@@ -1023,8 +1069,10 @@
     "description":
       "Taking your message to the world, with imaginative, highly measurable and effective online marketing.",
     "thumbnail": {
-      "name": "digital-thumb",
-      "alt": "Digital"
+      "image": {
+        "name": "digital-thumb",
+        "alt": "Digital"
+      }
     },
     "intro": {
       "type": "text",
@@ -1044,10 +1092,10 @@
         "data": [
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-digital1" },
-              { "name": "service-digital2" },
-              { "name": "service-digital3" }
+            "data": [
+              { "image": { "name": "service-digital1" } },
+              { "image": { "name": "service-digital2" } },
+              { "image": { "name": "service-digital3" } }
             ]
           }
         ]
@@ -1070,8 +1118,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-digital-marketing-strategy1"
+            "data": {
+              "image": {
+                "name": "service-digital-marketing-strategy1"
+              }
             },
             "fullBleed": true
           }
@@ -1095,10 +1145,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-digital-social1" },
-              { "name": "service-digital-social2" },
-              { "name": "service-digital-social3" }
+            "data": [
+              { "image": { "name": "service-digital-social1" } },
+              { "image": { "name": "service-digital-social2" } },
+              { "image": { "name": "service-digital-social3" } }
             ]
           }
         ]
@@ -1121,10 +1171,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-digital-ppc1" },
-              { "name": "service-digital-ppc2" },
-              { "name": "service-digital-ppc3" }
+            "data": [
+              { "image": { "name": "service-digital-ppc1" } },
+              { "image": { "name": "service-digital-ppc2" } },
+              { "image": { "name": "service-digital-ppc3" } }
             ]
           }
         ]
@@ -1147,8 +1197,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-digital-content-marketing1"
+            "data": {
+              "image": {
+                "name": "service-digital-content-marketing1"
+              }
             },
             "fullBleed": true
           }
@@ -1172,8 +1224,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "service-digital-influencer1"
+            "data": {
+              "image": {
+                "name": "service-digital-influencer1"
+              }
             },
             "fullBleed": true
           }
@@ -1197,10 +1251,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-digital-web1" },
-              { "name": "service-digital-web2" },
-              { "name": "service-digital-web3" }
+            "data": [
+              { "image": { "name": "service-digital-web1" } },
+              { "image": { "name": "service-digital-web2" } },
+              { "image": { "name": "service-digital-web3" } }
             ]
           }
         ]
@@ -1231,14 +1285,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-digital-email-mms1" },
-              { "name": "service-digital-email-mms2" },
-              { "name": "service-digital-email-mms3" },
-              { "name": "service-digital-email-mms4" },
-              { "name": "service-digital-email-mms5" },
-              { "name": "service-digital-email-mms6" },
-              { "name": "service-digital-email-mms7" }
+            "data": [
+              { "image": { "name": "service-digital-email-mms1" } },
+              { "image": { "name": "service-digital-email-mms2" } },
+              { "image": { "name": "service-digital-email-mms3" } },
+              { "image": { "name": "service-digital-email-mms4" } },
+              { "image": { "name": "service-digital-email-mms5" } },
+              { "image": { "name": "service-digital-email-mms6" } },
+              { "image": { "name": "service-digital-email-mms7" } }
             ]
           }
         ]
@@ -1251,8 +1305,10 @@
     "description":
       "Illustration solutions for advertising and publishing. From quirky characters and abstract concepts to photorealism.",
     "thumbnail": {
-      "name": "illustration-thumb",
-      "alt": "Illustration"
+      "image": {
+        "name": "illustration-thumb",
+        "alt": "Illustration"
+      }
     },
     "intro": {
       "type": "text",
@@ -1288,7 +1344,9 @@
         "data": [
           {
             "type": "video",
-            "id": "Fhq8e1THP-M"
+            "data": {
+              "video": { "id": "Fhq8e1THP-M" }
+            }
           }
         ]
       },
@@ -1318,13 +1376,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-illustration-traditional1" },
-              { "name": "service-illustration-traditional2" },
-              { "name": "service-illustration-traditional3" },
-              { "name": "service-illustration-traditional4" },
-              { "name": "service-illustration-traditional5" },
-              { "name": "service-illustration-traditional6" }
+            "data": [
+              { "image": { "name": "service-illustration-traditional1" } },
+              { "image": { "name": "service-illustration-traditional2" } },
+              { "image": { "name": "service-illustration-traditional3" } },
+              { "image": { "name": "service-illustration-traditional4" } },
+              { "image": { "name": "service-illustration-traditional5" } },
+              { "image": { "name": "service-illustration-traditional6" } }
             ]
           }
         ]
@@ -1347,13 +1405,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-illustration-hand-drawn1" },
-              { "name": "service-illustration-hand-drawn2" },
-              { "name": "service-illustration-hand-drawn3" },
-              { "name": "service-illustration-hand-drawn4" },
-              { "name": "service-illustration-hand-drawn5" },
-              { "name": "service-illustration-hand-drawn6" }
+            "data": [
+              { "image": { "name": "service-illustration-hand-drawn1" } },
+              { "image": { "name": "service-illustration-hand-drawn2" } },
+              { "image": { "name": "service-illustration-hand-drawn3" } },
+              { "image": { "name": "service-illustration-hand-drawn4" } },
+              { "image": { "name": "service-illustration-hand-drawn5" } },
+              { "image": { "name": "service-illustration-hand-drawn6" } }
             ]
           }
         ]
@@ -1380,14 +1438,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-illustration-technical1" },
-              { "name": "service-illustration-technical2" },
-              { "name": "service-illustration-technical3" },
-              { "name": "service-illustration-technical4" },
-              { "name": "service-illustration-technical5" },
-              { "name": "service-illustration-technical6" },
-              { "name": "service-illustration-technical7" }
+            "data": [
+              { "image": { "name": "service-illustration-technical1" } },
+              { "image": { "name": "service-illustration-technical2" } },
+              { "image": { "name": "service-illustration-technical3" } },
+              { "image": { "name": "service-illustration-technical4" } },
+              { "image": { "name": "service-illustration-technical5" } },
+              { "image": { "name": "service-illustration-technical6" } },
+              { "image": { "name": "service-illustration-technical7" } }
             ]
           }
         ]
@@ -1414,14 +1472,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-illustration-digital1" },
-              { "name": "service-illustration-digital2" },
-              { "name": "service-illustration-digital3" },
-              { "name": "service-illustration-digital4" },
-              { "name": "service-illustration-digital5" },
-              { "name": "service-illustration-digital6" },
-              { "name": "service-illustration-digital7" }
+            "data": [
+              { "image": { "name": "service-illustration-digital1" } },
+              { "image": { "name": "service-illustration-digital2" } },
+              { "image": { "name": "service-illustration-digital3" } },
+              { "image": { "name": "service-illustration-digital4" } },
+              { "image": { "name": "service-illustration-digital5" } },
+              { "image": { "name": "service-illustration-digital6" } },
+              { "image": { "name": "service-illustration-digital7" } }
             ]
           }
         ]
@@ -1434,8 +1492,10 @@
     "description":
       "Let’s get you turning heads with our efficient and effective range of interior or exterior signage solutions.",
     "thumbnail": {
-      "name": "signage-thumb",
-      "alt": "Signage"
+      "image": {
+        "name": "signage-thumb",
+        "alt": "Signage"
+      }
     },
     "intro": {
       "type": "text",
@@ -1470,13 +1530,13 @@
         "data": [
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-signage1" },
-              { "name": "service-signage2" },
-              { "name": "service-signage3" },
-              { "name": "service-signage4" },
-              { "name": "service-signage5" },
-              { "name": "service-signage6" }
+            "data": [
+              { "image": { "name": "service-signage1" } },
+              { "image": { "name": "service-signage2" } },
+              { "image": { "name": "service-signage3" } },
+              { "image": { "name": "service-signage4" } },
+              { "image": { "name": "service-signage5" } },
+              { "image": { "name": "service-signage6" } }
             ]
           }
         ]
@@ -1546,13 +1606,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-signage-external1" },
-              { "name": "service-signage-external2" },
-              { "name": "service-signage-external3" },
-              { "name": "service-signage-external4" },
-              { "name": "service-signage-external5" },
-              { "name": "service-signage-external6" }
+            "data": [
+              { "image": { "name": "service-signage-external1" } },
+              { "image": { "name": "service-signage-external2" } },
+              { "image": { "name": "service-signage-external3" } },
+              { "image": { "name": "service-signage-external4" } },
+              { "image": { "name": "service-signage-external5" } },
+              { "image": { "name": "service-signage-external6" } }
             ]
           }
         ]
@@ -1605,12 +1665,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-signage-internal1" },
-              { "name": "service-signage-internal2" },
-              { "name": "service-signage-internal3" },
-              { "name": "service-signage-internal4" },
-              { "name": "service-signage-internal5" }
+            "data": [
+              { "image": { "name": "service-signage-internal1" } },
+              { "image": { "name": "service-signage-internal2" } },
+              { "image": { "name": "service-signage-internal3" } },
+              { "image": { "name": "service-signage-internal4" } },
+              { "image": { "name": "service-signage-internal5" } }
             ]
           }
         ]
@@ -1641,13 +1701,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-signage-vehicle1" },
-              { "name": "service-signage-vehicle2" },
-              { "name": "service-signage-vehicle3" },
-              { "name": "service-signage-vehicle4" },
-              { "name": "service-signage-vehicle5" },
-              { "name": "service-signage-vehicle6" }
+            "data": [
+              { "image": { "name": "service-signage-vehicle1" } },
+              { "image": { "name": "service-signage-vehicle2" } },
+              { "image": { "name": "service-signage-vehicle3" } },
+              { "image": { "name": "service-signage-vehicle4" } },
+              { "image": { "name": "service-signage-vehicle5" } },
+              { "image": { "name": "service-signage-vehicle6" } }
             ]
           }
         ]
@@ -1714,12 +1774,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-signage-print1" },
-              { "name": "service-signage-print2" },
-              { "name": "service-signage-print3" },
-              { "name": "service-signage-print4" },
-              { "name": "service-signage-print5" }
+            "data": [
+              { "image": { "name": "service-signage-print1" } },
+              { "image": { "name": "service-signage-print2" } },
+              { "image": { "name": "service-signage-print3" } },
+              { "image": { "name": "service-signage-print4" } },
+              { "image": { "name": "service-signage-print5" } }
             ]
           }
         ]
@@ -1758,13 +1818,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-signage-pos1" },
-              { "name": "service-signage-pos2" },
-              { "name": "service-signage-pos3" },
-              { "name": "service-signage-pos4" },
-              { "name": "service-signage-pos5" },
-              { "name": "service-signage-pos6" }
+            "data": [
+              { "image": { "name": "service-signage-pos1" } },
+              { "image": { "name": "service-signage-pos2" } },
+              { "image": { "name": "service-signage-pos3" } },
+              { "image": { "name": "service-signage-pos4" } },
+              { "image": { "name": "service-signage-pos5" } },
+              { "image": { "name": "service-signage-pos6" } }
             ]
           }
         ]
@@ -1777,8 +1837,10 @@
     "description":
       "Our experienced photographers are dedicated to creating outstanding studio or location images for every use.",
     "thumbnail": {
-      "name": "photography-thumb",
-      "alt": "Photography"
+      "image": {
+        "name": "photography-thumb",
+        "alt": "Photography"
+      }
     },
     "intro": {
       "type": "text",
@@ -1806,13 +1868,13 @@
         "data": [
           {
             "type": "gallery",
-            "images": [
-              { "name": "service-photography1" },
-              { "name": "service-photography2" },
-              { "name": "service-photography3" },
-              { "name": "service-photography4" },
-              { "name": "service-photography5" },
-              { "name": "service-photography6" }
+            "data": [
+              { "image": { "name": "service-photography1" } },
+              { "image": { "name": "service-photography2" } },
+              { "image": { "name": "service-photography3" } },
+              { "image": { "name": "service-photography4" } },
+              { "image": { "name": "service-photography5" } },
+              { "image": { "name": "service-photography6" } }
             ]
           }
         ]

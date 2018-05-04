@@ -3,7 +3,8 @@
 $blue: #0591d2;
 $blue-dark: #054a79;
 $grey: #828282;
-$grey-light: #dedfde;
+$grey-light: #d7d8d6;
+$grey-dark: #404040;
 $black: #1a1919;
 
 @font-face {
@@ -114,6 +115,7 @@ li {
 
 a {
   @extend %font-bold;
+  color: $grey;
   opacity: 0.85;
   transition: opacity 150ms ease;
 
@@ -133,7 +135,8 @@ button {
   }
 }
 
-b {
+b,
+strong {
   @extend %font-bold;
 }
 
@@ -257,6 +260,7 @@ main {
   @extend %font-medium;
   text-align: center;
   line-height: 1.4;
+  color: #fff;
 
   #intro-container {
     max-width: $max-width;

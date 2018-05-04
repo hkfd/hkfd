@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { TextBlock } from '../../shared.module';
+import { Server } from '../../shared.module';
 
 @Component({
   selector: 'text-block',
@@ -8,5 +8,5 @@ import { TextBlock } from '../../shared.module';
   styleUrls: ['./text-block.component.scss']
 })
 export class TextBlockComponent {
-  @Input() data: TextBlock;
+  @Input() data: Server.Blocks.TextBlock;
 }

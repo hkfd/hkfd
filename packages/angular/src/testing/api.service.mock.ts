@@ -2,16 +2,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { map, flatMap, find, catchError } from 'rxjs/operators';
 
-import {
-  Service,
-  Career,
-  Client,
-  Post,
-  CaseStudy,
-  Team,
-  Image
-} from '../app/shared/shared.module';
-import { services, caseStudies, clients, careers, team } from './data';
+import { Server } from '../app/shared/shared.module';
+import { Data } from './';
 
 export class MockApiService {
   constructor() {
@@ -23,34 +15,34 @@ export class MockApiService {
     this.getPost = spyOn(this, 'getPost').and.callThrough();
   }
 
-  getServices(): Observable<Service[]> {
-    return Observable.of(services);
+  getServices(): Observable<Server.Service[]> {
+    return Observable.of(Data.Server.services);
   }
 
-  getCaseStudies(): Observable<CaseStudy[]> {
-    return Observable.of(caseStudies);
+  getCaseStudies(): Observable<Server.CaseStudy[]> {
+    return Observable.of(Data.Server.caseStudies);
   }
 
-  getClients(): Observable<Client[]> {
-    return Observable.of(clients);
+  getClients(): Observable<Server.Client[]> {
+    return Observable.of(Data.Server.clients);
   }
 
-  getCareers(): Observable<Career[]> {
-    return Observable.of(careers);
+  getCareers(): Observable<Server.Career[]> {
+    return Observable.of(Data.Server.careers);
   }
 
-  getTeam(): Observable<Team[]> {
-    return Observable.of(team);
+  getTeam(): Observable<Server.Team[]> {
+    return Observable.of(Data.Server.team);
   }
 
-  getPost(type: string, id: string): Observable<Post> {
+  getPost(type: string, id: string): Observable<Server.Post> {
     let url;
-    if (type === 'service') url = services;
-    if (type === 'work') url = caseStudies;
+    if (type === 'service') url = Data.Server.services;
+    if (type === 'work') url = Data.Server.caseStudies;
 
-    return Observable.of(<Post[]>url).pipe(
-      flatMap((posts: Post[]) => posts),
-      find((post: Post) => post.id === id),
+    return Observable.of(<Server.Post[]>url).pipe(
+      flatMap((posts: Server.Post[]) => posts),
+      find((post: Server.Post) => post.id === id),
       catchError(err => Observable.of(null))
     );
   }

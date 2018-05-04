@@ -20,6 +20,7 @@
     @extend %font-heading;
     @extend %font-display;
     padding: 0;
+    color: inherit;
   }
 
   span {

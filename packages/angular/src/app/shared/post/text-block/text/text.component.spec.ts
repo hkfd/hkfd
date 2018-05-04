@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { sentence } from '../../../../../testing';
+import { Data } from '../../../../../testing';
 import { TextComponent } from './text.component';
 
 let comp: TextComponent;
@@ -22,7 +22,7 @@ describe('TextComponent', () => {
 
   describe('URL', () => {
     beforeEach(() => {
-      comp.text = sentence.url;
+      comp.text = Data.Server.sentence.url;
       fixture.detectChanges();
       page.addElements();
     });
@@ -54,7 +54,7 @@ describe('TextComponent', () => {
 
   describe('Heading', () => {
     beforeEach(() => {
-      comp.text = sentence.heading;
+      comp.text = Data.Server.sentence.heading;
       fixture.detectChanges();
       page.addElements();
     });
@@ -74,7 +74,7 @@ describe('TextComponent', () => {
 
   describe('Bold', () => {
     beforeEach(() => {
-      comp.text = sentence.bold;
+      comp.text = Data.Server.sentence.bold;
       fixture.detectChanges();
       page.addElements();
     });
@@ -90,7 +90,7 @@ describe('TextComponent', () => {
 
   describe('Italic', () => {
     beforeEach(() => {
-      comp.text = sentence.italic;
+      comp.text = Data.Server.sentence.italic;
       fixture.detectChanges();
       page.addElements();
     });
@@ -106,7 +106,7 @@ describe('TextComponent', () => {
 
   describe('Normal', () => {
     beforeEach(() => {
-      comp.text = sentence.normal;
+      comp.text = Data.Server.sentence.normal;
       fixture.detectChanges();
       page.addElements();
     });

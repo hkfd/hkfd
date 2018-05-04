@@ -9,7 +9,7 @@ import {
 import { DebugElement, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { images } from '../../../testing';
+import { Data } from '../../../testing';
 import { SliderComponent } from './slider.component';
 
 let comp: SliderComponent;
@@ -195,7 +195,7 @@ describe('SliderComponent', () => {
 
   describe('mouseLeave', () => {
     it('should call startTimer if images', () => {
-      comp.images = images;
+      comp.images = Data.Generic.images;
       comp.mouseLeave();
 
       expect(page.startTimer).toHaveBeenCalled();
@@ -232,7 +232,7 @@ class Page {
   slideContainer: DebugElement;
 
   constructor() {
-    comp.images = images;
+    comp.images = Data.Generic.images;
 
     this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
     this.startTimer = spyOn(comp, 'startTimer').and.callThrough();

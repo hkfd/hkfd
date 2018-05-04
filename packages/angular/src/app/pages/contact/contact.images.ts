@@ -1,8 +1,10 @@
-import { Image } from '../../shared/shared.module';
+import { Server } from '../../shared/shared.module';
 
-export const ContactImages: { [name: string]: Image | Image[] } = {
+export const ContactImages: { [name: string]: { image: Server.Image } } = {
   contact: {
-    name: 'heckford-building',
-    alt: 'Heckford – Preston'
+    image: {
+      name: 'heckford-building',
+      alt: 'Heckford – Preston'
+    }
   }
 };

@@ -3,14 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import {
-  TitleService,
-  ApiService,
-  Service,
-  CaseStudy,
-  Client,
-  Image
-} from '../../shared/shared.module';
+import { TitleService, ApiService, Server } from '../../shared/shared.module';
 import { HomeImages } from './home.images';
 
 @Component({
@@ -19,10 +12,10 @@ import { HomeImages } from './home.images';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  services$: Observable<Service[]>;
-  clients$: Observable<Client[]>;
+  services$: Observable<Server.Service[]>;
+  clients$: Observable<Server.Client[]>;
   caseStudies$: Subscription;
-  caseStudies: CaseStudy[];
+  caseStudies: Server.CaseStudy[];
 
   images = HomeImages;
 
@@ -40,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.caseStudies$ = this.apiService
       .getCaseStudies()
       .subscribe(
-        (caseStudies: CaseStudy[]) =>
+        caseStudies =>
           (this.caseStudies = caseStudies.filter(
             caseStudy => caseStudy.featured === true
           ))

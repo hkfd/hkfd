@@ -38,6 +38,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'news',
+    loadChildren: 'app/pages/news/news.module#NewsModule',
+    data: {
+      state: 'news'
+    }
+  },
+  {
     path: ':type/:id',
     loadChildren: 'app/shared/post/post.module#PostModule',
     data: {

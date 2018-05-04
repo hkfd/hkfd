@@ -6,8 +6,10 @@
     "featured": true,
     "colour": "white",
     "thumbnail": {
-      "name": "inspiring-healthy-lifestyles-thumb",
-      "alt": "Inspiring Healthy Lifestyles"
+      "image": {
+        "name": "inspiring-healthy-lifestyles-thumb",
+        "alt": "Inspiring Healthy Lifestyles"
+      }
     },
     "overview": [
       "Design and Print",
@@ -40,8 +42,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "inspiring-healthy-lifestyles1"
+            "data": {
+              "image": {
+                "name": "inspiring-healthy-lifestyles1"
+              }
             },
             "fullBleed": true
           }
@@ -65,13 +69,37 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "inspiring-healthy-lifestyles-design-print1" },
-              { "name": "inspiring-healthy-lifestyles-design-print2" },
-              { "name": "inspiring-healthy-lifestyles-design-print3" },
-              { "name": "inspiring-healthy-lifestyles-design-print4" },
-              { "name": "inspiring-healthy-lifestyles-design-print5" },
-              { "name": "inspiring-healthy-lifestyles-design-print6" }
+            "data": [
+              {
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-design-print1"
+                }
+              },
+              {
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-design-print2"
+                }
+              },
+              {
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-design-print3"
+                }
+              },
+              {
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-design-print4"
+                }
+              },
+              {
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-design-print5"
+                }
+              },
+              {
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-design-print6"
+                }
+              }
             ]
           }
         ]
@@ -94,8 +122,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "inspiring-healthy-lifestyles-social1"
+            "data": {
+              "image": {
+                "name": "inspiring-healthy-lifestyles-social1"
+              }
             },
             "fullBleed": true
           }
@@ -119,8 +149,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "inspiring-healthy-lifestyles-web1"
+            "data": {
+              "image": {
+                "name": "inspiring-healthy-lifestyles-web1"
+              }
             },
             "fullBleed": true
           }
@@ -142,10 +174,7 @@
               }
             ]
           },
-          {
-            "type": "video",
-            "id": "llQnYoe_U-M"
-          }
+          { "type": "video", "data": { "video": { "id": "llQnYoe_U-M" } } }
         ]
       },
       {
@@ -166,30 +195,46 @@
           },
           {
             "type": "gallery",
-            "images": [
+            "data": [
               {
-                "name": "inspiring-healthy-lifestyles-signage1"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage1"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage2"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage2"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage3"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage3"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage4"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage4"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage5"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage5"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage6"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage6"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage7"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage7"
+                }
               },
               {
-                "name": "inspiring-healthy-lifestyles-signage8"
+                "image": {
+                  "name": "inspiring-healthy-lifestyles-signage8"
+                }
               }
             ]
           }
@@ -204,8 +249,10 @@
     "featured": true,
     "colour": "white",
     "thumbnail": {
-      "name": "wainhomes-thumb",
-      "alt": "Wainhomes"
+      "image": {
+        "name": "wainhomes-thumb",
+        "alt": "Wainhomes"
+      }
     },
     "overview": [
       "Design and Print",
@@ -250,8 +297,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "wainhomes1"
+            "data": {
+              "image": {
+                "name": "wainhomes1"
+              }
             },
             "fullBleed": true
           }
@@ -283,12 +332,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "wainhomes-signage1" },
-              { "name": "wainhomes-signage2" },
-              { "name": "wainhomes-signage3" },
-              { "name": "wainhomes-signage4" },
-              { "name": "wainhomes-signage5" }
+            "data": [
+              { "image": { "name": "wainhomes-signage1" } },
+              { "image": { "name": "wainhomes-signage2" } },
+              { "image": { "name": "wainhomes-signage3" } },
+              { "image": { "name": "wainhomes-signage4" } },
+              { "image": { "name": "wainhomes-signage5" } }
             ]
           }
         ]
@@ -319,12 +368,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "wainhomes-cgi1" },
-              { "name": "wainhomes-cgi2" },
-              { "name": "wainhomes-cgi3" },
-              { "name": "wainhomes-cgi4" },
-              { "name": "wainhomes-cgi5" }
+            "data": [
+              { "image": { "name": "wainhomes-cgi1" } },
+              { "image": { "name": "wainhomes-cgi2" } },
+              { "image": { "name": "wainhomes-cgi3" } },
+              { "image": { "name": "wainhomes-cgi4" } },
+              { "image": { "name": "wainhomes-cgi5" } }
             ]
           }
         ]
@@ -355,14 +404,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "wainhomes-print1" },
-              { "name": "wainhomes-print2" },
-              { "name": "wainhomes-print3" },
-              { "name": "wainhomes-print4" },
-              { "name": "wainhomes-print5" },
-              { "name": "wainhomes-print6" },
-              { "name": "wainhomes-print7" }
+            "data": [
+              { "image": { "name": "wainhomes-print1" } },
+              { "image": { "name": "wainhomes-print2" } },
+              { "image": { "name": "wainhomes-print3" } },
+              { "image": { "name": "wainhomes-print4" } },
+              { "image": { "name": "wainhomes-print5" } },
+              { "image": { "name": "wainhomes-print6" } },
+              { "image": { "name": "wainhomes-print7" } }
             ]
           }
         ]
@@ -393,8 +442,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "wainhomes-website1"
+            "data": {
+              "image": {
+                "name": "wainhomes-website1"
+              }
             },
             "fullBleed": true
           }
@@ -434,8 +485,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "wainhomes-ppc1"
+            "data": {
+              "image": {
+                "name": "wainhomes-ppc1"
+              }
             },
             "fullBleed": true
           }
@@ -459,8 +512,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "wainhomes-email1"
+            "data": {
+              "image": {
+                "name": "wainhomes-email1"
+              }
             },
             "fullBleed": true
           }
@@ -492,12 +547,16 @@
           },
           {
             "type": "duo",
-            "images": [
+            "data": [
               {
-                "name": "wainhomes-promo1"
+                "image": {
+                  "name": "wainhomes-promo1"
+                }
               },
               {
-                "name": "wainhomes-promo2"
+                "image": {
+                  "name": "wainhomes-promo2"
+                }
               }
             ]
           }
@@ -513,8 +572,10 @@
     "featured": true,
     "colour": "white",
     "thumbnail": {
-      "name": "priestley-college-thumb",
-      "alt": "Priestley College"
+      "image": {
+        "name": "priestley-college-thumb",
+        "alt": "Priestley College"
+      }
     },
     "overview": [
       "Design and Print",
@@ -546,8 +607,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "priestley1"
+            "data": {
+              "image": {
+                "name": "priestley1"
+              }
             },
             "fullBleed": true
           }
@@ -571,11 +634,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "priestley-design-print1" },
-              { "name": "priestley-design-print2" },
-              { "name": "priestley-design-print3" },
-              { "name": "priestley-design-print4" }
+            "data": [
+              { "image": { "name": "priestley-design-print1" } },
+              { "image": { "name": "priestley-design-print2" } },
+              { "image": { "name": "priestley-design-print3" } },
+              { "image": { "name": "priestley-design-print4" } }
             ]
           }
         ]
@@ -598,8 +661,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "priestley-bus1"
+            "data": {
+              "image": {
+                "name": "priestley-bus1"
+              }
             },
             "fullBleed": true
           }
@@ -623,13 +688,13 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "priestley-signage1" },
-              { "name": "priestley-signage2" },
-              { "name": "priestley-signage3" },
-              { "name": "priestley-signage4" },
-              { "name": "priestley-signage5" },
-              { "name": "priestley-signage6" }
+            "data": [
+              { "image": { "name": "priestley-signage1" } },
+              { "image": { "name": "priestley-signage2" } },
+              { "image": { "name": "priestley-signage3" } },
+              { "image": { "name": "priestley-signage4" } },
+              { "image": { "name": "priestley-signage5" } },
+              { "image": { "name": "priestley-signage6" } }
             ]
           }
         ]
@@ -652,11 +717,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "priestley-photography1" },
-              { "name": "priestley-photography2" },
-              { "name": "priestley-photography3" },
-              { "name": "priestley-photography4" }
+            "data": [
+              { "image": { "name": "priestley-photography1" } },
+              { "image": { "name": "priestley-photography2" } },
+              { "image": { "name": "priestley-photography3" } },
+              { "image": { "name": "priestley-photography4" } }
             ]
           }
         ]
@@ -670,8 +735,10 @@
     "featured": true,
     "colour": "white",
     "thumbnail": {
-      "name": "sandcastle-thumb",
-      "alt": "Sandcastle"
+      "image": {
+        "name": "sandcastle-thumb",
+        "alt": "Sandcastle"
+      }
     },
     "overview": [
       "Design and Print",
@@ -709,7 +776,7 @@
         "data": [
           {
             "type": "image",
-            "image": { "name": "sandcastle1" },
+            "data": { "image": { "name": "sandcastle1" } },
             "fullBleed": true
           }
         ]
@@ -740,10 +807,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "sandcastle-illustration1" },
-              { "name": "sandcastle-illustration2" },
-              { "name": "sandcastle-illustration3" }
+            "data": [
+              { "image": { "name": "sandcastle-illustration1" } },
+              { "image": { "name": "sandcastle-illustration2" } },
+              { "image": { "name": "sandcastle-illustration3" } }
             ]
           }
         ]
@@ -766,12 +833,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "sandcastle-design-print1" },
-              { "name": "sandcastle-design-print2" },
-              { "name": "sandcastle-design-print3" },
-              { "name": "sandcastle-design-print4" },
-              { "name": "sandcastle-design-print5" }
+            "data": [
+              { "image": { "name": "sandcastle-design-print1" } },
+              { "image": { "name": "sandcastle-design-print2" } },
+              { "image": { "name": "sandcastle-design-print3" } },
+              { "image": { "name": "sandcastle-design-print4" } },
+              { "image": { "name": "sandcastle-design-print5" } }
             ]
           }
         ]
@@ -810,11 +877,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "sandcastle-signage1" },
-              { "name": "sandcastle-signage2" },
-              { "name": "sandcastle-signage3" },
-              { "name": "sandcastle-signage4" }
+            "data": [
+              { "image": { "name": "sandcastle-signage1" } },
+              { "image": { "name": "sandcastle-signage2" } },
+              { "image": { "name": "sandcastle-signage3" } },
+              { "image": { "name": "sandcastle-signage4" } }
             ]
           }
         ]
@@ -824,7 +891,7 @@
         "data": [
           {
             "type": "image",
-            "image": { "name": "sandcastle-vehicle1" },
+            "data": { "image": { "name": "sandcastle-vehicle1" } },
             "fullBleed": true
           }
         ]
@@ -855,7 +922,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "sandcastle-social-media1" },
+            "data": { "image": { "name": "sandcastle-social-media1" } },
             "fullBleed": true
           }
         ]
@@ -863,10 +930,7 @@
       {
         "title": "TV and Radio",
         "data": [
-          {
-            "type": "video",
-            "id": "rFVsec4gHKA"
-          }
+          { "type": "video", "data": { "video": { "id": "rFVsec4gHKA" } } }
         ]
       }
     ]
@@ -878,8 +942,10 @@
     "featured": true,
     "colour": "white",
     "thumbnail": {
-      "name": "lutron-thumb",
-      "alt": "Lutron"
+      "image": {
+        "name": "lutron-thumb",
+        "alt": "Lutron"
+      }
     },
     "overview": [
       "Modular and Bespoke Exhibition Stands",
@@ -921,7 +987,7 @@
         "data": [
           {
             "type": "image",
-            "image": { "name": "lutron1" },
+            "data": { "image": { "name": "lutron1" } },
             "fullBleed": true
           }
         ]
@@ -952,10 +1018,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "lutron-work1" },
-              { "name": "lutron-work2" },
-              { "name": "lutron-work3" }
+            "data": [
+              { "image": { "name": "lutron-work1" } },
+              { "image": { "name": "lutron-work2" } },
+              { "image": { "name": "lutron-work3" } }
             ]
           }
         ]
@@ -978,11 +1044,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "lutron-light-building1" },
-              { "name": "lutron-light-building2" },
-              { "name": "lutron-light-building3" },
-              { "name": "lutron-light-building4" }
+            "data": [
+              { "image": { "name": "lutron-light-building1" } },
+              { "image": { "name": "lutron-light-building2" } },
+              { "image": { "name": "lutron-light-building3" } },
+              { "image": { "name": "lutron-light-building4" } }
             ]
           }
         ]
@@ -1029,7 +1095,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "lutron-ise1" },
+            "data": { "image": { "name": "lutron-ise1" } },
             "fullBleed": true
           }
         ]
@@ -1043,8 +1109,10 @@
     "featured": true,
     "colour": "white",
     "thumbnail": {
-      "name": "winfields-outdoors-thumb",
-      "alt": "Winfields Outdoors"
+      "image": {
+        "name": "winfields-outdoors-thumb",
+        "alt": "Winfields Outdoors"
+      }
     },
     "overview": [
       "Design and Print",
@@ -1082,8 +1150,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "winfields1"
+            "data": {
+              "image": {
+                "name": "winfields1"
+              }
             },
             "fullBleed": true
           }
@@ -1107,11 +1177,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "winfields-design-print1" },
-              { "name": "winfields-design-print2" },
-              { "name": "winfields-design-print3" },
-              { "name": "winfields-design-print4" }
+            "data": [
+              { "image": { "name": "winfields-design-print1" } },
+              { "image": { "name": "winfields-design-print2" } },
+              { "image": { "name": "winfields-design-print3" } },
+              { "image": { "name": "winfields-design-print4" } }
             ]
           }
         ]
@@ -1142,12 +1212,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "winfields-signage1" },
-              { "name": "winfields-signage2" },
-              { "name": "winfields-signage3" },
-              { "name": "winfields-signage4" },
-              { "name": "winfields-signage5" }
+            "data": [
+              { "image": { "name": "winfields-signage1" } },
+              { "image": { "name": "winfields-signage2" } },
+              { "image": { "name": "winfields-signage3" } },
+              { "image": { "name": "winfields-signage4" } },
+              { "image": { "name": "winfields-signage5" } }
             ]
           }
         ]
@@ -1191,12 +1261,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "winfields-advertising-local1" },
-              { "name": "winfields-advertising-local2" },
-              { "name": "winfields-advertising-local3" },
-              { "name": "winfields-advertising-local4" },
-              { "name": "winfields-advertising-local5" }
+            "data": [
+              { "image": { "name": "winfields-advertising-local1" } },
+              { "image": { "name": "winfields-advertising-local2" } },
+              { "image": { "name": "winfields-advertising-local3" } },
+              { "image": { "name": "winfields-advertising-local4" } },
+              { "image": { "name": "winfields-advertising-local5" } }
             ]
           },
           {
@@ -1214,10 +1284,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "winfields-advertising-outdoor1" },
-              { "name": "winfields-advertising-outdoor2" },
-              { "name": "winfields-advertising-outdoor3" }
+            "data": [
+              { "image": { "name": "winfields-advertising-outdoor1" } },
+              { "image": { "name": "winfields-advertising-outdoor2" } },
+              { "image": { "name": "winfields-advertising-outdoor3" } }
             ]
           },
           {
@@ -1233,14 +1303,15 @@
               }
             ]
           },
-          {
-            "type": "video",
-            "id": "X2nlvzOSgkE"
-          },
+          { "type": "video", "data": { "video": { "id": "X2nlvzOSgkE" } } },
           {
             "type": "audio",
-            "url":
-              "https://res.cloudinary.com/dv8oeiozq/video/upload/winfields-media-booking.mp3"
+            "data": {
+              "audio": {
+                "url":
+                  "https://res.cloudinary.com/dv8oeiozq/video/upload/winfields-media-booking.mp3"
+              }
+            }
           }
         ]
       }
@@ -1252,8 +1323,10 @@
     "featured": false,
     "colour": "black",
     "thumbnail": {
-      "name": "tomy-thumb",
-      "alt": "Tomy"
+      "image": {
+        "name": "tomy-thumb",
+        "alt": "Tomy"
+      }
     },
     "overview": [
       "Exhibitions",
@@ -1287,8 +1360,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "tomy1"
+            "data": {
+              "image": {
+                "name": "tomy1"
+              }
             },
             "fullBleed": true
           }
@@ -1320,10 +1395,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "tomy-exhibitions1" },
-              { "name": "tomy-exhibitions2" },
-              { "name": "tomy-exhibitions3" }
+            "data": [
+              { "image": { "name": "tomy-exhibitions1" } },
+              { "image": { "name": "tomy-exhibitions2" } },
+              { "image": { "name": "tomy-exhibitions3" } }
             ]
           }
         ]
@@ -1346,10 +1421,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "tomy-pos1" },
-              { "name": "tomy-pos2" },
-              { "name": "tomy-pos3" }
+            "data": [
+              { "image": { "name": "tomy-pos1" } },
+              { "image": { "name": "tomy-pos2" } },
+              { "image": { "name": "tomy-pos3" } }
             ]
           }
         ]
@@ -1380,8 +1455,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "vimto-thumb",
-      "alt": "Vimto"
+      "image": {
+        "name": "vimto-thumb",
+        "alt": "Vimto"
+      }
     },
     "overview": ["Design and Print", "Exhibitions", "Portable Stands"],
     "intro": {
@@ -1402,8 +1479,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "vimto1"
+            "data": {
+              "image": {
+                "name": "vimto1"
+              }
             },
             "fullBleed": true
           }
@@ -1450,8 +1529,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "vimto-print1"
+            "data": {
+              "image": {
+                "name": "vimto-print1"
+              }
             },
             "fullBleed": true
           }
@@ -1506,8 +1587,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "vimto-exhibitions1"
+            "data": {
+              "image": {
+                "name": "vimto-exhibitions1"
+              }
             },
             "fullBleed": true
           },
@@ -1526,12 +1609,12 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "vimto-exhibitions2" },
-              { "name": "vimto-exhibitions3" },
-              { "name": "vimto-exhibitions4" },
-              { "name": "vimto-exhibitions5" },
-              { "name": "vimto-exhibitions6" }
+            "data": [
+              { "image": { "name": "vimto-exhibitions2" } },
+              { "image": { "name": "vimto-exhibitions3" } },
+              { "image": { "name": "vimto-exhibitions4" } },
+              { "image": { "name": "vimto-exhibitions5" } },
+              { "image": { "name": "vimto-exhibitions6" } }
             ]
           }
         ]
@@ -1554,10 +1637,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "vimto-banners1" },
-              { "name": "vimto-banners2" },
-              { "name": "vimto-banners3" }
+            "data": [
+              { "image": { "name": "vimto-banners1" } },
+              { "image": { "name": "vimto-banners2" } },
+              { "image": { "name": "vimto-banners3" } }
             ]
           }
         ]
@@ -1570,8 +1653,10 @@
     "featured": false,
     "colour": "black",
     "thumbnail": {
-      "name": "galliford-try-thumb",
-      "alt": "Galliford Try"
+      "image": {
+        "name": "galliford-try-thumb",
+        "alt": "Galliford Try"
+      }
     },
     "overview": [
       "Creative Design and Print",
@@ -1613,8 +1698,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "galliford-try1"
+            "data": {
+              "image": {
+                "name": "galliford-try1"
+              }
             },
             "fullBleed": true
           }
@@ -1638,11 +1725,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "galliford-try-signage-internal1" },
-              { "name": "galliford-try-signage-internal2" },
-              { "name": "galliford-try-signage-internal3" },
-              { "name": "galliford-try-signage-internal4" }
+            "data": [
+              { "image": { "name": "galliford-try-signage-internal1" } },
+              { "image": { "name": "galliford-try-signage-internal2" } },
+              { "image": { "name": "galliford-try-signage-internal3" } },
+              { "image": { "name": "galliford-try-signage-internal4" } }
             ]
           }
         ]
@@ -1665,14 +1752,14 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "galliford-try-signage-outdoor1" },
-              { "name": "galliford-try-signage-outdoor2" },
-              { "name": "galliford-try-signage-outdoor3" },
-              { "name": "galliford-try-signage-outdoor4" },
-              { "name": "galliford-try-signage-outdoor5" },
-              { "name": "galliford-try-signage-outdoor6" },
-              { "name": "galliford-try-signage-outdoor7" }
+            "data": [
+              { "image": { "name": "galliford-try-signage-outdoor1" } },
+              { "image": { "name": "galliford-try-signage-outdoor2" } },
+              { "image": { "name": "galliford-try-signage-outdoor3" } },
+              { "image": { "name": "galliford-try-signage-outdoor4" } },
+              { "image": { "name": "galliford-try-signage-outdoor5" } },
+              { "image": { "name": "galliford-try-signage-outdoor6" } },
+              { "image": { "name": "galliford-try-signage-outdoor7" } }
             ]
           }
         ]
@@ -1685,8 +1772,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "lloyd-motor-group-thumb",
-      "alt": "Lloyd Motor Group"
+      "image": {
+        "name": "lloyd-motor-group-thumb",
+        "alt": "Lloyd Motor Group"
+      }
     },
     "overview": [
       "Design and Print",
@@ -1734,8 +1823,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "lloyd1"
+            "data": {
+              "image": {
+                "name": "lloyd1"
+              }
             },
             "fullBleed": true
           }
@@ -1770,8 +1861,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-brochure1"
+            "data": {
+              "image": {
+                "name": "lloyd-brochure1"
+              }
             },
             "fullBleed": true
           }
@@ -1810,8 +1903,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-mail1"
+            "data": {
+              "image": {
+                "name": "lloyd-mail1"
+              }
             },
             "fullBleed": true
           }
@@ -1843,8 +1938,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-eshot1"
+            "data": {
+              "image": {
+                "name": "lloyd-eshot1"
+              }
             },
             "fullBleed": true
           },
@@ -1863,8 +1960,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-eshot2"
+            "data": {
+              "image": {
+                "name": "lloyd-eshot2"
+              }
             },
             "fullBleed": true
           }
@@ -1888,8 +1987,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-mms1"
+            "data": {
+              "image": {
+                "name": "lloyd-mms1"
+              }
             },
             "fullBleed": true
           }
@@ -1921,8 +2022,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-social1"
+            "data": {
+              "image": {
+                "name": "lloyd-social1"
+              }
             },
             "fullBleed": true
           }
@@ -1946,8 +2049,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-advertising1"
+            "data": {
+              "image": {
+                "name": "lloyd-advertising1"
+              }
             },
             "fullBleed": true
           }
@@ -1985,10 +2090,7 @@
               }
             ]
           },
-          {
-            "type": "video",
-            "id": "5vsx4ckAI5Q"
-          }
+          { "type": "video", "data": { "video": { "id": "5vsx4ckAI5Q" } } }
         ]
       },
       {
@@ -2017,8 +2119,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-photography1"
+            "data": {
+              "image": {
+                "name": "lloyd-photography1"
+              }
             },
             "fullBleed": true
           }
@@ -2042,8 +2146,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "lloyd-exhibition1"
+            "data": {
+              "image": {
+                "name": "lloyd-exhibition1"
+              }
             },
             "fullBleed": true
           }
@@ -2057,8 +2163,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "healthy-heroes-thumb",
-      "alt": "Healthy Heroes"
+      "image": {
+        "name": "healthy-heroes-thumb",
+        "alt": "Healthy Heroes"
+      }
     },
     "overview": [
       "Creative Concepts",
@@ -2100,18 +2208,15 @@
     "content": [
       {
         "data": [
-          {
-            "type": "video",
-            "id": "47Dx01n6VtI"
-          },
+          { "type": "video", "data": { "video": { "id": "47Dx01n6VtI" } } },
           {
             "type": "gallery",
-            "images": [
-              { "name": "healthy-heroes1" },
-              { "name": "healthy-heroes2" },
-              { "name": "healthy-heroes3" },
-              { "name": "healthy-heroes4" },
-              { "name": "healthy-heroes5" }
+            "data": [
+              { "image": { "name": "healthy-heroes1" } },
+              { "image": { "name": "healthy-heroes2" } },
+              { "image": { "name": "healthy-heroes3" } },
+              { "image": { "name": "healthy-heroes4" } },
+              { "image": { "name": "healthy-heroes5" } }
             ]
           }
         ]
@@ -2124,8 +2229,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "cruden-group-thumb",
-      "alt": "Cruden Group"
+      "image": {
+        "name": "cruden-group-thumb",
+        "alt": "Cruden Group"
+      }
     },
     "overview": ["Website Design and Build"],
     "intro": {
@@ -2154,27 +2261,35 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "cruden1"
+            "data": {
+              "image": {
+                "name": "cruden1"
+              }
             }
           },
           {
             "type": "image",
-            "image": {
-              "name": "cruden2"
+            "data": {
+              "image": {
+                "name": "cruden2"
+              }
             }
           },
           {
             "type": "image",
-            "image": {
-              "name": "cruden3"
+            "data": {
+              "image": {
+                "name": "cruden3"
+              }
             },
             "fullBleed": true
           },
           {
             "type": "image",
-            "image": {
-              "name": "cruden4"
+            "data": {
+              "image": {
+                "name": "cruden4"
+              }
             }
           }
         ]
@@ -2187,8 +2302,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "haven-funeral-services-thumb",
-      "alt": "Haven Funeral Services"
+      "image": {
+        "name": "haven-funeral-services-thumb",
+        "alt": "Haven Funeral Services"
+      }
     },
     "overview": [
       "Design and Print",
@@ -2231,22 +2348,28 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "haven1"
+            "data": {
+              "image": {
+                "name": "haven1"
+              }
             },
             "fullBleed": true
           },
           {
             "type": "image",
-            "image": {
-              "name": "haven2"
+            "data": {
+              "image": {
+                "name": "haven2"
+              }
             },
             "fullBleed": true
           },
           {
             "type": "image",
-            "image": {
-              "name": "haven3"
+            "data": {
+              "image": {
+                "name": "haven3"
+              }
             }
           },
           {
@@ -2280,12 +2403,16 @@
           },
           {
             "type": "duo",
-            "images": [
+            "data": [
               {
-                "name": "haven4"
+                "image": {
+                  "name": "haven4"
+                }
               },
               {
-                "name": "haven5"
+                "image": {
+                  "name": "haven5"
+                }
               }
             ]
           }
@@ -2317,8 +2444,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "haven-print1"
+            "data": {
+              "image": {
+                "name": "haven-print1"
+              }
             }
           }
         ]
@@ -2349,8 +2478,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "haven-media1"
+            "data": {
+              "image": {
+                "name": "haven-media1"
+              }
             },
             "fullBleed": true
           }
@@ -2364,8 +2495,10 @@
     "featured": false,
     "colour": "black",
     "thumbnail": {
-      "name": "watermouth-castle-thumb",
-      "alt": "Watermouth Castle"
+      "image": {
+        "name": "watermouth-castle-thumb",
+        "alt": "Watermouth Castle"
+      }
     },
     "overview": [
       "Design and Print",
@@ -2399,8 +2532,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "watermouth1"
+            "data": {
+              "image": {
+                "name": "watermouth1"
+              }
             },
             "fullBleed": true
           }
@@ -2448,11 +2583,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "watermouth-design-print1" },
-              { "name": "watermouth-design-print2" },
-              { "name": "watermouth-design-print3" },
-              { "name": "watermouth-design-print4" }
+            "data": [
+              { "image": { "name": "watermouth-design-print1" } },
+              { "image": { "name": "watermouth-design-print2" } },
+              { "image": { "name": "watermouth-design-print3" } },
+              { "image": { "name": "watermouth-design-print4" } }
             ]
           }
         ]
@@ -2483,8 +2618,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "watermouth-illustration1"
+            "data": {
+              "image": {
+                "name": "watermouth-illustration1"
+              }
             },
             "fullBleed": true
           }
@@ -2516,8 +2653,10 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "watermouth-website1"
+            "data": {
+              "image": {
+                "name": "watermouth-website1"
+              }
             },
             "fullBleed": true
           }
@@ -2531,8 +2670,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "panaz-thumb",
-      "alt": "Panaz"
+      "image": {
+        "name": "panaz-thumb",
+        "alt": "Panaz"
+      }
     },
     "overview": ["Exhibition Stand Design and Build"],
     "intro": {
@@ -2553,8 +2694,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "panaz1"
+            "data": {
+              "image": {
+                "name": "panaz1"
+              }
             },
             "fullBleed": true
           }
@@ -2578,17 +2721,19 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "panaz-exhibition1"
+            "data": {
+              "image": {
+                "name": "panaz-exhibition1"
+              }
             },
             "fullBleed": true
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "panaz-exhibition2" },
-              { "name": "panaz-exhibition3" },
-              { "name": "panaz-exhibition4" }
+            "data": [
+              { "image": { "name": "panaz-exhibition2" } },
+              { "image": { "name": "panaz-exhibition3" } },
+              { "image": { "name": "panaz-exhibition4" } }
             ]
           }
         ]
@@ -2601,8 +2746,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "helston-garages-group-thumb",
-      "alt": "Helston Garages Group"
+      "image": {
+        "name": "helston-garages-group-thumb",
+        "alt": "Helston Garages Group"
+      }
     },
     "overview": [
       "Design and Print",
@@ -2647,7 +2794,7 @@
         "data": [
           {
             "type": "image",
-            "image": { "name": "helston1" },
+            "data": { "image": { "name": "helston1" } },
             "fullBleed": true
           }
         ]
@@ -2668,10 +2815,7 @@
               }
             ]
           },
-          {
-            "type": "video",
-            "id": "IVRbuMxqibk"
-          }
+          { "type": "video", "data": { "video": { "id": "IVRbuMxqibk" } } }
         ]
       },
       {
@@ -2700,7 +2844,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "helston-ppc1" },
+            "data": { "image": { "name": "helston-ppc1" } },
             "fullBleed": true
           }
         ]
@@ -2731,7 +2875,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "helston-email1" },
+            "data": { "image": { "name": "helston-email1" } },
             "fullBleed": true
           }
         ]
@@ -2762,7 +2906,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "helston-social1" },
+            "data": { "image": { "name": "helston-social1" } },
             "fullBleed": true
           }
         ]
@@ -2785,7 +2929,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "helston-mail1" },
+            "data": { "image": { "name": "helston-mail1" } },
             "fullBleed": true
           }
         ]
@@ -2808,7 +2952,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "helston-advertising1" },
+            "data": { "image": { "name": "helston-advertising1" } },
             "fullBleed": true
           }
         ]
@@ -2821,8 +2965,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "chorley-remembers-thumb",
-      "alt": "Chorley Remembers"
+      "image": {
+        "name": "chorley-remembers-thumb",
+        "alt": "Chorley Remembers"
+      }
     },
     "overview": ["Design", "Print", "Exhibition", "Character Development"],
     "intro": {
@@ -2857,20 +3003,21 @@
     "content": [
       {
         "data": [
-          {
-            "type": "video",
-            "id": "ZUeM4tkQh3Y"
-          },
+          { "type": "video", "data": { "video": { "id": "ZUeM4tkQh3Y" } } },
           {
             "type": "image",
-            "image": {
-              "name": "chorley-remembers1"
+            "data": {
+              "image": {
+                "name": "chorley-remembers1"
+              }
             }
           },
           {
             "type": "image",
-            "image": {
-              "name": "chorley-remembers2"
+            "data": {
+              "image": {
+                "name": "chorley-remembers2"
+              }
             },
             "fullBleed": true
           }
@@ -2902,10 +3049,10 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "chorley-remembers-illustration1" },
-              { "name": "chorley-remembers-illustration2" },
-              { "name": "chorley-remembers-illustration3" }
+            "data": [
+              { "image": { "name": "chorley-remembers-illustration1" } },
+              { "image": { "name": "chorley-remembers-illustration2" } },
+              { "image": { "name": "chorley-remembers-illustration3" } }
             ]
           }
         ]
@@ -2928,14 +3075,18 @@
           },
           {
             "type": "image",
-            "image": {
-              "name": "chorley-remembers-design1"
+            "data": {
+              "image": {
+                "name": "chorley-remembers-design1"
+              }
             }
           },
           {
             "type": "image",
-            "image": {
-              "name": "chorley-remembers-design2"
+            "data": {
+              "image": {
+                "name": "chorley-remembers-design2"
+              }
             }
           }
         ]
@@ -2958,12 +3109,16 @@
           },
           {
             "type": "duo",
-            "images": [
+            "data": [
               {
-                "name": "chorley-remembers-3d1"
+                "image": {
+                  "name": "chorley-remembers-3d1"
+                }
               },
               {
-                "name": "chorley-remembers-3d2"
+                "image": {
+                  "name": "chorley-remembers-3d2"
+                }
               }
             ]
           }
@@ -2977,8 +3132,10 @@
     "featured": false,
     "colour": "white",
     "thumbnail": {
-      "name": "crealy-thumb",
-      "alt": "Crealy"
+      "image": {
+        "name": "crealy-thumb",
+        "alt": "Crealy"
+      }
     },
     "overview": [
       "Design and Print",
@@ -3024,8 +3181,10 @@
         "data": [
           {
             "type": "image",
-            "image": {
-              "name": "crealy1"
+            "data": {
+              "image": {
+                "name": "crealy1"
+              }
             },
             "fullBleed": true
           }
@@ -3049,11 +3208,11 @@
           },
           {
             "type": "gallery",
-            "images": [
-              { "name": "crealy-design-print1" },
-              { "name": "crealy-design-print2" },
-              { "name": "crealy-design-print3" },
-              { "name": "crealy-design-print4" }
+            "data": [
+              { "image": { "name": "crealy-design-print1" } },
+              { "image": { "name": "crealy-design-print2" } },
+              { "image": { "name": "crealy-design-print3" } },
+              { "image": { "name": "crealy-design-print4" } }
             ]
           }
         ]
@@ -3084,12 +3243,16 @@
           },
           {
             "type": "duo",
-            "images": [
+            "data": [
               {
-                "name": "crealy-outdoor1"
+                "image": {
+                  "name": "crealy-outdoor1"
+                }
               },
               {
-                "name": "crealy-outdoor2"
+                "image": {
+                  "name": "crealy-outdoor2"
+                }
               }
             ]
           }
@@ -3113,7 +3276,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-illustration1" },
+            "data": { "image": { "name": "crealy-illustration1" } },
             "fullBleed": true
           }
         ]
@@ -3142,10 +3305,7 @@
               }
             ]
           },
-          {
-            "type": "video",
-            "id": "wzr9d4vsc1w"
-          }
+          { "type": "video", "data": { "video": { "id": "wzr9d4vsc1w" } } }
         ]
       },
       {
@@ -3174,7 +3334,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-email-marketing1" },
+            "data": { "image": { "name": "crealy-email-marketing1" } },
             "fullBleed": true
           }
         ]
@@ -3205,7 +3365,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-vehiclewraps1" },
+            "data": { "image": { "name": "crealy-vehiclewraps1" } },
             "fullBleed": true
           }
         ]
@@ -3236,7 +3396,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-website1" },
+            "data": { "image": { "name": "crealy-website1" } },
             "fullBleed": true
           }
         ]
@@ -3275,7 +3435,7 @@
           },
           {
             "type": "image",
-            "image": { "name": "crealy-social1" }
+            "data": { "image": { "name": "crealy-social1" } }
           }
         ]
       }

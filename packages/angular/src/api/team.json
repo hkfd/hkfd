@@ -2,265 +2,331 @@
   {
     "name": "Steve",
     "position": "Chairman",
-    "image": {
-      "name": "steve.jpg",
-      "alt": "Steve"
+    "thumbnail": {
+      "image": {
+        "name": "steve",
+        "alt": "Steve"
+      }
     }
   },
   {
     "name": "Paula",
     "position": "Director",
-    "image": {
-      "name": "paula-scurr.jpg",
-      "alt": "Paula"
+    "thumbnail": {
+      "image": {
+        "name": "paula-scurr",
+        "alt": "Paula"
+      }
     }
   },
   {
     "name": "Mark",
     "position": "Managing Director",
-    "image": {
-      "name": "mark.jpg",
-      "alt": "Mark"
+    "thumbnail": {
+      "image": {
+        "name": "mark",
+        "alt": "Mark"
+      }
     }
   },
   {
     "name": "Rob",
     "position": "Finance Director",
-    "image": {
-      "name": "rob-holcroft.jpg",
-      "alt": "Rob"
+    "thumbnail": {
+      "image": {
+        "name": "rob-holcroft",
+        "alt": "Rob"
+      }
     }
   },
   {
     "name": "Ian",
     "position": "Account Director",
-    "image": {
-      "name": "ian.jpg",
-      "alt": "Ian"
+    "thumbnail": {
+      "image": {
+        "name": "ian",
+        "alt": "Ian"
+      }
     }
   },
   {
     "name": "Abi",
     "position": "Account Manager",
-    "image": {
-      "name": "abi.jpg",
-      "alt": "Abi"
+    "thumbnail": {
+      "image": {
+        "name": "abi",
+        "alt": "Abi"
+      }
     }
   },
   {
     "name": "Gary",
     "position": "Account Manager",
-    "image": {
-      "name": "gary.jpg",
-      "alt": "Gary"
+    "thumbnail": {
+      "image": {
+        "name": "gary",
+        "alt": "Gary"
+      }
     }
   },
   {
     "name": "Thomas",
     "position": "Account Manager",
-    "image": {
-      "name": "thomas.jpg",
-      "alt": "Thomas"
+    "thumbnail": {
+      "image": {
+        "name": "thomas",
+        "alt": "Thomas"
+      }
     }
   },
   {
     "name": "Stu",
     "position": "Studio Manager",
-    "image": {
-      "name": "stu.jpg",
-      "alt": "Stu"
+    "thumbnail": {
+      "image": {
+        "name": "stu",
+        "alt": "Stu"
+      }
     }
   },
   {
     "name": "Phil",
     "position": "Senior Creative",
-    "image": {
-      "name": "phil.jpg",
-      "alt": "Phil"
+    "thumbnail": {
+      "image": {
+        "name": "phil",
+        "alt": "Phil"
+      }
     }
   },
   {
     "name": "George",
     "position": "Creative",
-    "image": {
-      "name": "george.jpg",
-      "alt": "George"
+    "thumbnail": {
+      "image": {
+        "name": "george",
+        "alt": "George"
+      }
     }
   },
   {
     "name": "Wendy",
     "position": "Creative",
-    "image": {
-      "name": "wendy.jpg",
-      "alt": "Wendy"
+    "thumbnail": {
+      "image": {
+        "name": "wendy",
+        "alt": "Wendy"
+      }
     }
   },
   {
     "name": "Martin",
     "position": "Illustrator",
-    "image": {
-      "name": "martin.jpg",
-      "alt": "Martin"
+    "thumbnail": {
+      "image": {
+        "name": "martin",
+        "alt": "Martin"
+      }
     }
   },
   {
     "name": "Geoff",
     "position": "3D & CGI",
-    "image": {
-      "name": "geoff.jpg",
-      "alt": "Geoff"
+    "thumbnail": {
+      "image": {
+        "name": "geoff",
+        "alt": "Geoff"
+      }
     }
   },
   {
     "name": "Kev",
     "position": "Graphics",
-    "image": {
-      "name": "kev.jpg",
-      "alt": "Kev"
+    "thumbnail": {
+      "image": {
+        "name": "kev",
+        "alt": "Kev"
+      }
     }
   },
   {
     "name": "Rachel",
     "position": "Graphics",
-    "image": {
-      "name": "rachel.jpg",
-      "alt": "Rachel"
+    "thumbnail": {
+      "image": {
+        "name": "rachel",
+        "alt": "Rachel"
+      }
     }
   },
   {
     "name": "Moses",
     "position": "Senior Feline",
-    "image": {
-      "name": "moses.jpg",
-      "alt": "Moses"
+    "thumbnail": {
+      "image": {
+        "name": "moses",
+        "alt": "Moses"
+      }
     }
   },
   {
     "name": "Rob",
     "position": "Web Developer",
-    "image": {
-      "name": "rob.jpg",
-      "alt": "Rob"
+    "thumbnail": {
+      "image": {
+        "name": "rob",
+        "alt": "Rob"
+      }
     }
   },
   {
     "name": "Raj",
     "position": "Web Developer",
-    "image": {
-      "name": "raj.jpg",
-      "alt": "Raj"
+    "thumbnail": {
+      "image": {
+        "name": "raj",
+        "alt": "Raj"
+      }
     }
   },
   {
     "name": "Paula",
     "position": "Media",
-    "image": {
-      "name": "paula.jpg",
-      "alt": "Paula"
+    "thumbnail": {
+      "image": {
+        "name": "paula",
+        "alt": "Paula"
+      }
     }
   },
   {
     "name": "Rohanna",
     "position": "Media",
-    "image": {
-      "name": "rohanna.jpg",
-      "alt": "Rohanna"
+    "thumbnail": {
+      "image": {
+        "name": "rohanna",
+        "alt": "Rohanna"
+      }
     }
   },
   {
     "name": "Mary",
     "position": "Media",
-    "image": {
-      "name": "mary.jpg",
-      "alt": "Mary"
+    "thumbnail": {
+      "image": {
+        "name": "mary",
+        "alt": "Mary"
+      }
     }
   },
   {
     "name": "Mike",
     "position": "Digital Production",
-    "image": {
-      "name": "mike.jpg",
-      "alt": "Mike"
+    "thumbnail": {
+      "image": {
+        "name": "mike",
+        "alt": "Mike"
+      }
     }
   },
   {
     "name": "Pawel",
     "position": "Digital Production",
-    "image": {
-      "name": "pawel.jpg",
-      "alt": "Pawel"
+    "thumbnail": {
+      "image": {
+        "name": "pawel",
+        "alt": "Pawel"
+      }
     }
   },
   {
     "name": "Mick",
     "position": "Digital Production",
-    "image": {
-      "name": "mick.jpg",
-      "alt": "Mick"
+    "thumbnail": {
+      "image": {
+        "name": "mick",
+        "alt": "Mick"
+      }
     }
   },
   {
     "name": "Rik",
     "position": "Digital Production",
-    "image": {
-      "name": "rik.jpg",
-      "alt": "Rik"
+    "thumbnail": {
+      "image": {
+        "name": "rik",
+        "alt": "Rik"
+      }
     }
   },
   {
     "name": "Dave",
     "position": "Digital Production",
-    "image": {
-      "name": "dave.jpg",
-      "alt": "Dave"
+    "thumbnail": {
+      "image": {
+        "name": "dave",
+        "alt": "Dave"
+      }
     }
   },
   {
     "name": "Kane",
     "position": "Digital Production",
-    "image": {
-      "name": "kane.jpg",
-      "alt": "Kane"
+    "thumbnail": {
+      "image": {
+        "name": "kane",
+        "alt": "Kane"
+      }
     }
   },
   {
     "name": "John",
     "position": "Digital Production",
-    "image": {
-      "name": "john.jpg",
-      "alt": "John"
+    "thumbnail": {
+      "image": {
+        "name": "john",
+        "alt": "John"
+      }
     }
   },
   {
     "name": "Rachael",
     "position": "Account Manager",
-    "image": {
-      "name": "rachael.jpg",
-      "alt": "Rachael"
+    "thumbnail": {
+      "image": {
+        "name": "rachael",
+        "alt": "Rachael"
+      }
     }
   },
   {
     "name": "Kelly",
     "position": "SW Admin",
-    "image": {
-      "name": "kelly.jpg",
-      "alt": "Kelly"
+    "thumbnail": {
+      "image": {
+        "name": "kelly",
+        "alt": "Kelly"
+      }
     }
   },
   {
     "name": "Oliver",
     "position": "Social Media",
-    "image": {
-      "name": "oliver.jpg",
-      "alt": "Oliver"
+    "thumbnail": {
+      "image": {
+        "name": "oliver",
+        "alt": "Oliver"
+      }
     }
   },
   {
     "name": "Eddie",
     "position": "SW Account Manager",
-    "image": {
-      "name": "eddie.jpg",
-      "alt": "Eddie"
+    "thumbnail": {
+      "image": {
+        "name": "eddie",
+        "alt": "Eddie"
+      }
     }
   }
 ]

@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
 
-import { Sentence } from '../../../shared.module';
+import { Server } from '../../../shared.module';
 
 @Component({
   selector: 'text',
-  templateUrl: './text.component.html',
-  styleUrls: ['./text.component.scss']
+  templateUrl: './text.component.html'
 })
 export class TextComponent {
-  @Input() text: Sentence;
+  @Input() text: Server.Sentence;
 }

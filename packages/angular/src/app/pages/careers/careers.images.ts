@@ -1,12 +1,16 @@
-import { Image } from '../../shared/shared.module';
+import { Server } from '../../shared/shared.module';
 
-export const CareersImages: { [name: string]: Image | Image[] } = {
+export const CareersImages: { [name: string]: { image: Server.Image } } = {
   hiring: {
-    name: 'careers-hiring',
-    alt: 'Careers'
+    image: {
+      name: 'careers-hiring',
+      alt: 'Careers'
+    }
   },
   career: {
-    name: 'career',
-    alt: 'Heckford studio'
+    image: {
+      name: 'career',
+      alt: 'Heckford studio'
+    }
   }
 };

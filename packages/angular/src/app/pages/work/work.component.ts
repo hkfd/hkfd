@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import {
   TitleService,
   ApiService,
-  CaseStudy
+  ServerPipe,
+  Server,
+  Generic
 } from '../../shared/shared.module';
 import { WorkAnimations } from './work.animations';
 
@@ -15,17 +17,29 @@ import { WorkAnimations } from './work.animations';
   styleUrls: ['./work.component.scss'],
   animations: WorkAnimations
 })
-export class WorkComponent implements OnInit {
-  caseStudies$: Observable<CaseStudy[]>;
+export class WorkComponent implements OnInit, OnDestroy {
+  caseStudies$: Subscription;
+  caseStudies: Server.CaseStudy[];
 
   constructor(
     private titleService: TitleService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private serverPipe: ServerPipe
   ) {}
 
   ngOnInit() {
     this.titleService.setTitle('Our Work');
 
-    this.caseStudies$ = this.apiService.getCaseStudies();
+    this.caseStudies$ = this.apiService.getCaseStudies().subscribe(
+      caseStudies =>
+        (this.caseStudies = caseStudies.map(caseStudy => {
+          caseStudy.thumbnail = this.serverPipe.transform(caseStudy.thumbnail);
+          return caseStudy;
+        }))
+    );
+  }
+
+  ngOnDestroy() {
+    this.caseStudies$.unsubscribe();
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { TitleService, ApiService, Team } from '../../shared/shared.module';
+import { TitleService, ApiService, Server } from '../../shared/shared.module';
 import { AboutImages } from './about.images';
 
 @Component({
@@ -12,7 +12,7 @@ import { AboutImages } from './about.images';
 })
 export class AboutComponent implements OnInit, OnDestroy {
   team$: Subscription;
-  team: Team[];
+  team: Server.Team[];
 
   images = AboutImages;
 
@@ -26,7 +26,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
     this.team$ = this.apiService
       .getTeam()
-      .subscribe((team: Team[]) => (this.team = team));
+      .subscribe(team => (this.team = team));
   }
 
   ngOnDestroy() {

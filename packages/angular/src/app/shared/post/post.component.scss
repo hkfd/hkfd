@@ -1,8 +1,5 @@
 @import '../../../styles';
 
-$grey-light: #d7d8d6;
-$grey-dark: #404040;
-
 :host {
   overflow: hidden;
   display: block;
@@ -14,6 +11,10 @@ h2 {
   @extend %text;
   margin: 10vh auto 0.5em;
   text-align: center;
+}
+
+a {
+  color: $grey-light;
 }
 
 section {

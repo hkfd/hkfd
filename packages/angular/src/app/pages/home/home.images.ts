@@ -1,38 +1,54 @@
-import { Image } from '../../shared/shared.module';
+import { Server } from '../../shared/shared.module';
 
-export const HomeImages: { [name: string]: Image | Image[] } = {
+export const HomeImages: { [name: string]: { image: Server.Image }[] } = {
   intro: [
     {
-      name: 'heckford-building',
-      alt: 'Heckford – Preston'
+      image: {
+        name: 'heckford-building',
+        alt: 'Heckford – Preston'
+      }
     },
     {
-      name: 'heckford-reception1',
-      alt: 'Heckford reception'
+      image: {
+        name: 'heckford-reception1',
+        alt: 'Heckford reception'
+      }
     },
     {
-      name: 'heckford-reception3',
-      alt: 'Heckford reception'
+      image: {
+        name: 'heckford-reception3',
+        alt: 'Heckford reception'
+      }
     },
     {
-      name: 'heckford-accounts',
-      alt: 'Heckford accounts'
+      image: {
+        name: 'heckford-accounts',
+        alt: 'Heckford accounts'
+      }
     },
     {
-      name: 'heckford-print1',
-      alt: 'Heckford printing'
+      image: {
+        name: 'heckford-print1',
+        alt: 'Heckford printing'
+      }
     },
     {
-      name: 'heckford-reception2',
-      alt: 'Heckford reception'
+      image: {
+        name: 'heckford-reception2',
+        alt: 'Heckford reception'
+      }
     },
     {
-      name: 'heckford-studio',
-      alt: 'Heckford studio'
+      image: {
+        name: 'heckford-studio',
+        alt: 'Heckford studio'
+      }
     },
     {
-      name: 'heckford-boardroom',
-      alt: 'Heckford boardroom'
+      image: {
+        name: 'heckford-boardroom',
+        alt: 'Heckford boardroom'
+      }
     }
   ]
 };

@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 
-import { services, careers, caseStudies, team, clients } from '../../testing';
+import { Data } from '../../testing';
 import { LoggerService } from './shared.module';
 import { ApiService } from './api.service';
 
@@ -32,7 +32,7 @@ describe('ApiService', () => {
       async(() => {
         apiService.getServices().subscribe();
 
-        mockHttp.expectOne(apiService.services).flush(services);
+        mockHttp.expectOne(apiService.services).flush(Data.Server.services);
       })
     );
 
@@ -42,7 +42,7 @@ describe('ApiService', () => {
         apiService.getServices().subscribe();
 
         mockHttp.expectOne(apiService.services).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.services).flush(services);
+        mockHttp.expectOne(apiService.services).flush(Data.Server.services);
       })
     );
 
@@ -51,9 +51,9 @@ describe('ApiService', () => {
       async(() => {
         apiService
           .getServices()
-          .subscribe(res => expect(res).toEqual(services));
+          .subscribe(res => expect(res).toEqual(Data.Server.services));
 
-        mockHttp.expectOne(apiService.services).flush(services);
+        mockHttp.expectOne(apiService.services).flush(Data.Server.services);
       })
     );
 
@@ -77,7 +77,7 @@ describe('ApiService', () => {
       async(() => {
         apiService.getCareers().subscribe();
 
-        mockHttp.expectOne(apiService.careers).flush(careers);
+        mockHttp.expectOne(apiService.careers).flush(Data.Server.careers);
       })
     );
 
@@ -87,16 +87,18 @@ describe('ApiService', () => {
         apiService.getCareers().subscribe();
 
         mockHttp.expectOne(apiService.careers).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.careers).flush(careers);
+        mockHttp.expectOne(apiService.careers).flush(Data.Server.careers);
       })
     );
 
     it(
       'should return careers',
       async(() => {
-        apiService.getCareers().subscribe(res => expect(res).toEqual(careers));
+        apiService
+          .getCareers()
+          .subscribe(res => expect(res).toEqual(Data.Server.careers));
 
-        mockHttp.expectOne(apiService.careers).flush(careers);
+        mockHttp.expectOne(apiService.careers).flush(Data.Server.careers);
       })
     );
 
@@ -120,7 +122,9 @@ describe('ApiService', () => {
       async(() => {
         apiService.getCaseStudies().subscribe();
 
-        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
+        mockHttp
+          .expectOne(apiService.caseStudies)
+          .flush(Data.Server.caseStudies);
       })
     );
 
@@ -130,7 +134,9 @@ describe('ApiService', () => {
         apiService.getCaseStudies().subscribe();
 
         mockHttp.expectOne(apiService.caseStudies).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
+        mockHttp
+          .expectOne(apiService.caseStudies)
+          .flush(Data.Server.caseStudies);
       })
     );
 
@@ -139,9 +145,11 @@ describe('ApiService', () => {
       async(() => {
         apiService
           .getCaseStudies()
-          .subscribe(res => expect(res).toEqual(caseStudies));
+          .subscribe(res => expect(res).toEqual(Data.Server.caseStudies));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
+        mockHttp
+          .expectOne(apiService.caseStudies)
+          .flush(Data.Server.caseStudies);
       })
     );
 
@@ -167,7 +175,7 @@ describe('ApiService', () => {
       async(() => {
         apiService.getTeam().subscribe();
 
-        mockHttp.expectOne(apiService.team).flush(team);
+        mockHttp.expectOne(apiService.team).flush(Data.Server.team);
       })
     );
 
@@ -177,16 +185,18 @@ describe('ApiService', () => {
         apiService.getTeam().subscribe();
 
         mockHttp.expectOne(apiService.team).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.team).flush(team);
+        mockHttp.expectOne(apiService.team).flush(Data.Server.team);
       })
     );
 
     it(
       'should return team',
       async(() => {
-        apiService.getTeam().subscribe(res => expect(res).toEqual(team));
+        apiService
+          .getTeam()
+          .subscribe(res => expect(res).toEqual(Data.Server.team));
 
-        mockHttp.expectOne(apiService.team).flush(team);
+        mockHttp.expectOne(apiService.team).flush(Data.Server.team);
       })
     );
 
@@ -210,7 +220,7 @@ describe('ApiService', () => {
       async(() => {
         apiService.getClients().subscribe();
 
-        mockHttp.expectOne(apiService.clients).flush(clients);
+        mockHttp.expectOne(apiService.clients).flush(Data.Server.clients);
       })
     );
 
@@ -220,16 +230,18 @@ describe('ApiService', () => {
         apiService.getClients().subscribe();
 
         mockHttp.expectOne(apiService.clients).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.clients).flush(clients);
+        mockHttp.expectOne(apiService.clients).flush(Data.Server.clients);
       })
     );
 
     it(
       'should return clients',
       async(() => {
-        apiService.getClients().subscribe(res => expect(res).toEqual(clients));
+        apiService
+          .getClients()
+          .subscribe(res => expect(res).toEqual(Data.Server.clients));
 
-        mockHttp.expectOne(apiService.clients).flush(clients);
+        mockHttp.expectOne(apiService.clients).flush(Data.Server.clients);
       })
     );
 
@@ -273,7 +285,7 @@ describe('ApiService', () => {
           .getPost('service', 'service-2')
           .subscribe(res => expect(res.title).toBe('Service 2'));
 
-        mockHttp.expectOne(apiService.services).flush(services);
+        mockHttp.expectOne(apiService.services).flush(Data.Server.services);
       })
     );
 
@@ -284,7 +296,9 @@ describe('ApiService', () => {
           .getPost('work', 'case-study-1')
           .subscribe(res => expect(res.title).toBe('Case Study 1'));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
+        mockHttp
+          .expectOne(apiService.caseStudies)
+          .flush(Data.Server.caseStudies);
       })
     );
 
@@ -304,7 +318,9 @@ describe('ApiService', () => {
           .getPost('work', null)
           .subscribe(res => expect(res).toBe(undefined));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(caseStudies);
+        mockHttp
+          .expectOne(apiService.caseStudies)
+          .flush(Data.Server.caseStudies);
       })
     );
 

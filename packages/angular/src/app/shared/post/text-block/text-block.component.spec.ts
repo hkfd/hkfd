@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { textBlocks } from '../../../../testing';
+import { Data } from '../../../../testing';
 import { TextBlockComponent } from './text-block.component';
 
 let comp: TextBlockComponent;
@@ -23,7 +23,7 @@ describe('TextBlockComponent', () => {
 
   describe('Paragraph', () => {
     beforeEach(() => {
-      comp.data = textBlocks.text;
+      comp.data = Data.Server.textBlocks.text;
       fixture.detectChanges();
       page.addElements();
     });
@@ -51,7 +51,7 @@ describe('TextBlockComponent', () => {
 
   describe('List', () => {
     beforeEach(() => {
-      comp.data = textBlocks.list;
+      comp.data = Data.Server.textBlocks.list;
       fixture.detectChanges();
       page.addElements();
     });
