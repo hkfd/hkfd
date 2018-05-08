@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "lib": ["es2017"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": true
+  }
+}
