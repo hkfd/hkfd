@@ -4,11 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "serve": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build --prod",
     "test": "ng test --sourcemaps=false",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --port 4200 --proxy-config proxy.conf.json",
     "precommit": "lint-staged"
   },
   "lint-staged": {
