@@ -1,3 +1,4 @@
 [submodule "src/api"]
 	path = src/api
 	url = git@bitbucket.org:heckford/heckford-angular-api.git
+	branch = master
