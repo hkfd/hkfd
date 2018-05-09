@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Server } from '../server';
+import { Api } from 'api';
 import { Generic } from '../generic';
 import { environment } from '../../../environments/environment';
 
@@ -13,10 +13,10 @@ export const Sizes = [
 ];
 
 @Pipe({
-  name: 'server'
+  name: 'api'
 })
-export class ServerPipe implements PipeTransform {
-  private transformImage({ image }: { image: Server.Image }): Generic.Image {
+export class ApiPipe implements PipeTransform {
+  private transformImage({ image }: { image: Api.Image }): Generic.Image {
     return {
       src: `https://res.cloudinary.com/${
         environment.cloudinaryName
@@ -36,7 +36,7 @@ export class ServerPipe implements PipeTransform {
     };
   }
 
-  private transformVideo({ video }: { video: Server.Video }): Generic.Video {
+  private transformVideo({ video }: { video: Api.Video }): Generic.Video {
     return {
       src: {
         attr: 'src',
@@ -47,7 +47,7 @@ export class ServerPipe implements PipeTransform {
     };
   }
 
-  private transformAudio({ audio }: { audio: Server.Audio }): Generic.Audio {
+  private transformAudio({ audio }: { audio: Api.Audio }): Generic.Audio {
     return {
       url: audio.url
     };

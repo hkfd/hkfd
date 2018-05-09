@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { TitleService, ApiService, Server } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from '../../shared/shared.module';
 import { HomeImages } from './home.images';
 
 @Component({
@@ -12,10 +12,10 @@ import { HomeImages } from './home.images';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  services$: Observable<Server.Service[]>;
-  clients$: Observable<Server.Client[]>;
+  services$: Observable<Api.Service[]>;
+  clients$: Observable<Api.Client[]>;
   caseStudies$: Subscription;
-  caseStudies: Server.CaseStudy[];
+  caseStudies: Api.CaseStudy[];
 
   images = HomeImages;
 

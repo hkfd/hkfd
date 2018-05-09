@@ -7,21 +7,17 @@ import {
   RouterTestingModule,
   MockTitleService,
   MockApiService,
-  MockServerPipe
+  MockApiPipe
 } from '../../../testing';
 
-import {
-  TitleService,
-  ApiService,
-  ServerPipe
-} from '../../shared/shared.module';
+import { TitleService, ApiService, ApiPipe } from '../../shared/shared.module';
 import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;
 let fixture: ComponentFixture<WorkComponent>;
 let titleService: TitleService;
 let apiService: ApiService;
-let serverPipe: ServerPipeStub;
+let apiPipe: ApiPipeStub;
 let page: Page;
 
 describe('WorkComponent', () => {
@@ -33,7 +29,7 @@ describe('WorkComponent', () => {
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService },
-          { provide: ServerPipe, useClass: MockServerPipe }
+          { provide: ApiPipe, useClass: MockApiPipe }
         ],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -54,13 +50,13 @@ describe('WorkComponent', () => {
     expect(apiService.getCaseStudies).toHaveBeenCalled();
   });
 
-  it('should call ServerPipe', () => {
-    expect(serverPipe.transform).toHaveBeenCalled();
+  it('should call ApiPipe', () => {
+    expect(apiPipe.transform).toHaveBeenCalled();
   });
 
-  it('should call ServerPipe with case study thumbnails', () => {
+  it('should call ApiPipe with case study thumbnails', () => {
     comp.caseStudies.forEach(caseStudy =>
-      expect(serverPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
+      expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
     );
   });
 
@@ -82,7 +78,7 @@ function createComponent() {
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
   apiService = fixture.debugElement.injector.get(ApiService);
-  serverPipe = new ServerPipeStub();
+  apiPipe = new ApiPipeStub();
   page = new Page();
 
   fixture.detectChanges();
@@ -92,13 +88,13 @@ function createComponent() {
   });
 }
 
-class ServerPipeStub {
+class ApiPipeStub {
   transform: jasmine.Spy;
 
   constructor() {
-    const serverPipe = fixture.debugElement.injector.get(ServerPipe);
+    const apiPipe = fixture.debugElement.injector.get(ApiPipe);
 
-    this.transform = spyOn(serverPipe, 'transform').and.callThrough();
+    this.transform = spyOn(apiPipe, 'transform').and.callThrough();
   }
 }
 

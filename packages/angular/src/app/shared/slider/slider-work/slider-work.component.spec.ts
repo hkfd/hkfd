@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { RouterTestingModule, MockServerPipe, Data } from '../../../../testing';
-import { ServerPipe } from '../../shared.module';
+import { RouterTestingModule, MockApiPipe, Data } from '../../../../testing';
+import { ApiPipe } from '../../shared.module';
 import { SliderWorkComponent } from './slider-work.component';
 
 let comp: SliderWorkComponent;
 let fixture: ComponentFixture<SliderWorkComponent>;
-let serverPipe: ServerPipeStub;
+let apiPipe: ApiPipeStub;
 let page: Page;
 
 describe('SliderWorkComponent', () => {
@@ -16,7 +16,7 @@ describe('SliderWorkComponent', () => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
         declarations: [SliderWorkComponent],
-        providers: [{ provide: ServerPipe, useClass: MockServerPipe }],
+        providers: [{ provide: ApiPipe, useClass: MockApiPipe }],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     })
@@ -32,13 +32,13 @@ describe('SliderWorkComponent', () => {
     expect(comp.images).toBeDefined();
   });
 
-  it('should call ServerPipe', () => {
-    expect(serverPipe.transform).toHaveBeenCalled();
+  it('should call ApiPipe', () => {
+    expect(apiPipe.transform).toHaveBeenCalled();
   });
 
-  it('should call ServerPipe with case study thumbnails', () => {
+  it('should call ApiPipe with case study thumbnails', () => {
     comp.caseStudies.forEach(caseStudy =>
-      expect(serverPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
+      expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
     );
   });
 
@@ -56,7 +56,7 @@ describe('SliderWorkComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(SliderWorkComponent);
   comp = fixture.componentInstance;
-  serverPipe = new ServerPipeStub();
+  apiPipe = new ApiPipeStub();
   page = new Page();
 
   fixture.detectChanges();
@@ -65,13 +65,13 @@ function createComponent() {
   });
 }
 
-class ServerPipeStub {
+class ApiPipeStub {
   transform: jasmine.Spy;
 
   constructor() {
-    const serverPipe = fixture.debugElement.injector.get(ServerPipe);
+    const apiPipe = fixture.debugElement.injector.get(ApiPipe);
 
-    this.transform = spyOn(serverPipe, 'transform').and.callThrough();
+    this.transform = spyOn(apiPipe, 'transform').and.callThrough();
   }
 }
 
@@ -81,6 +81,6 @@ class Page {
   constructor() {
     this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
 
-    comp.caseStudies = Data.Server.caseStudies;
+    comp.caseStudies = Data.Api.caseStudies;
   }
 }

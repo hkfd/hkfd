@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import {
   RouterTestingModule,
   MockTitleService,
-  MockServerPipe
+  MockApiPipe
 } from '../../../testing';
 
 import { TitleService } from '../../shared/shared.module';
@@ -17,14 +17,14 @@ let comp: ContactComponent;
 let fixture: ComponentFixture<ContactComponent>;
 let page: Page;
 let titleService: TitleService;
-let serverPipe: jasmine.Spy;
+let apiPipe: jasmine.Spy;
 
 describe('ContactComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
-        declarations: [ContactComponent, MockServerPipe],
+        declarations: [ContactComponent, MockApiPipe],
         providers: [{ provide: TitleService, useClass: MockTitleService }],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -41,12 +41,12 @@ describe('ContactComponent', () => {
     expect(titleService.setTitle).toHaveBeenCalledWith(jasmine.any(String));
   });
 
-  it('should call ServerPipe', () => {
-    expect(serverPipe).toHaveBeenCalled();
+  it('should call ApiPipe', () => {
+    expect(apiPipe).toHaveBeenCalled();
   });
 
-  it('should call ServerPipe with contact image', () => {
-    expect(serverPipe).toHaveBeenCalledWith(ContactImages.contact);
+  it('should call ApiPipe with contact image', () => {
+    expect(apiPipe).toHaveBeenCalledWith(ContactImages.contact);
   });
 
   describe('messageClick', () => {
@@ -79,7 +79,7 @@ function createComponent() {
   fixture = TestBed.createComponent(ContactComponent);
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
-  serverPipe = spyOn(MockServerPipe.prototype, 'transform').and.callThrough();
+  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
   page = new Page();
   new GoogleAnalytics();
 

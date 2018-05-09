@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import {
   TitleService,
   ApiService,
-  ServerPipe,
-  Server,
+  ApiPipe,
+  Api,
   Generic
 } from '../../shared/shared.module';
 import { WorkAnimations } from './work.animations';
@@ -19,12 +19,12 @@ import { WorkAnimations } from './work.animations';
 })
 export class WorkComponent implements OnInit, OnDestroy {
   caseStudies$: Subscription;
-  caseStudies: Server.CaseStudy[];
+  caseStudies: Api.CaseStudy[];
 
   constructor(
     private titleService: TitleService,
     private apiService: ApiService,
-    private serverPipe: ServerPipe
+    private apiPipe: ApiPipe
   ) {}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class WorkComponent implements OnInit, OnDestroy {
     this.caseStudies$ = this.apiService.getCaseStudies().subscribe(
       caseStudies =>
         (this.caseStudies = caseStudies.map(caseStudy => {
-          caseStudy.thumbnail = this.serverPipe.transform(caseStudy.thumbnail);
+          caseStudy.thumbnail = this.apiPipe.transform(caseStudy.thumbnail);
           return caseStudy;
         }))
     );

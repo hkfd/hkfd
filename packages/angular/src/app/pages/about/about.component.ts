@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { TitleService, ApiService, Server } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from '../../shared/shared.module';
 import { AboutImages } from './about.images';
 
 @Component({
@@ -12,7 +12,7 @@ import { AboutImages } from './about.images';
 })
 export class AboutComponent implements OnInit, OnDestroy {
   team$: Subscription;
-  team: Server.Team[];
+  team: Api.Team[];
 
   images = AboutImages;
 

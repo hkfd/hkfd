@@ -22,7 +22,7 @@ describe('TextComponent', () => {
 
   describe('URL', () => {
     beforeEach(() => {
-      comp.text = Data.Server.sentence.url;
+      comp.text = Data.Api.sentence.url;
       fixture.detectChanges();
       page.addElements();
     });
@@ -54,7 +54,7 @@ describe('TextComponent', () => {
 
   describe('Heading', () => {
     beforeEach(() => {
-      comp.text = Data.Server.sentence.heading;
+      comp.text = Data.Api.sentence.heading;
       fixture.detectChanges();
       page.addElements();
     });
@@ -74,7 +74,7 @@ describe('TextComponent', () => {
 
   describe('Bold', () => {
     beforeEach(() => {
-      comp.text = Data.Server.sentence.bold;
+      comp.text = Data.Api.sentence.bold;
       fixture.detectChanges();
       page.addElements();
     });
@@ -90,7 +90,7 @@ describe('TextComponent', () => {
 
   describe('Italic', () => {
     beforeEach(() => {
-      comp.text = Data.Server.sentence.italic;
+      comp.text = Data.Api.sentence.italic;
       fixture.detectChanges();
       page.addElements();
     });
@@ -106,7 +106,7 @@ describe('TextComponent', () => {
 
   describe('Normal', () => {
     beforeEach(() => {
-      comp.text = Data.Server.sentence.normal;
+      comp.text = Data.Api.sentence.normal;
       fixture.detectChanges();
       page.addElements();
     });

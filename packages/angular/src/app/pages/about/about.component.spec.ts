@@ -5,11 +5,11 @@ import {
   RouterTestingModule,
   MockTitleService,
   MockApiService,
-  MockServerPipe,
+  MockApiPipe,
   Data
 } from '../../../testing';
 
-import { TitleService, ApiService, Server } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from '../../shared/shared.module';
 import { AboutImages } from './about.images';
 import { AboutComponent } from './about.component';
 
@@ -17,14 +17,14 @@ let comp: AboutComponent;
 let fixture: ComponentFixture<AboutComponent>;
 let titleService: TitleService;
 let apiService: ApiService;
-let serverPipe: jasmine.Spy;
+let apiPipe: jasmine.Spy;
 
 describe('AboutComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
-        declarations: [AboutComponent, MockServerPipe],
+        declarations: [AboutComponent, MockApiPipe],
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService }
@@ -53,17 +53,17 @@ describe('AboutComponent', () => {
     expect(comp.team.length).toBe(5);
   });
 
-  it('should call ServerPipe', () => {
-    expect(serverPipe).toHaveBeenCalled();
+  it('should call ApiPipe', () => {
+    expect(apiPipe).toHaveBeenCalled();
   });
 
-  it('should call ServerPipe with intro image', () => {
-    expect(serverPipe).toHaveBeenCalledWith(AboutImages.intro);
+  it('should call ApiPipe with intro image', () => {
+    expect(apiPipe).toHaveBeenCalledWith(AboutImages.intro);
   });
 
-  it('should call ServerPipe with team thumbnails', () => {
-    Data.Server.team.forEach(person =>
-      expect(serverPipe).toHaveBeenCalledWith(person.thumbnail)
+  it('should call ApiPipe with team thumbnails', () => {
+    Data.Api.team.forEach(person =>
+      expect(apiPipe).toHaveBeenCalledWith(person.thumbnail)
     );
   });
 });
@@ -73,7 +73,7 @@ function createComponent() {
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
   apiService = fixture.debugElement.injector.get(ApiService);
-  serverPipe = spyOn(MockServerPipe.prototype, 'transform').and.callThrough();
+  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {

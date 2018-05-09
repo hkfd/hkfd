@@ -5,7 +5,7 @@ import {
   RouterTestingModule,
   MockTitleService,
   MockApiService,
-  MockServerPipe
+  MockApiPipe
 } from '../../../testing';
 
 import { TitleService, ApiService } from '../../shared/shared.module';
@@ -16,14 +16,14 @@ let comp: CareersComponent;
 let fixture: ComponentFixture<CareersComponent>;
 let titleService: TitleService;
 let apiService: ApiService;
-let serverPipe: jasmine.Spy;
+let apiPipe: jasmine.Spy;
 
 describe('CareersComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule],
-        declarations: [CareersComponent, MockServerPipe],
+        declarations: [CareersComponent, MockApiPipe],
         providers: [
           { provide: TitleService, useClass: MockTitleService },
           { provide: ApiService, useClass: MockApiService }
@@ -52,16 +52,16 @@ describe('CareersComponent', () => {
     expect(comp.careers.length).toBe(3);
   });
 
-  it('should call ServerPipe', () => {
-    expect(serverPipe).toHaveBeenCalled();
+  it('should call ApiPipe', () => {
+    expect(apiPipe).toHaveBeenCalled();
   });
 
-  it('should call ServerPipe with hiring image', () => {
-    expect(serverPipe).toHaveBeenCalledWith(CareersImages.hiring);
+  it('should call ApiPipe with hiring image', () => {
+    expect(apiPipe).toHaveBeenCalledWith(CareersImages.hiring);
   });
 
-  it('should call ServerPipe with career image', () => {
-    expect(serverPipe).toHaveBeenCalledWith(CareersImages.career);
+  it('should call ApiPipe with career image', () => {
+    expect(apiPipe).toHaveBeenCalledWith(CareersImages.career);
   });
 });
 
@@ -70,7 +70,7 @@ function createComponent() {
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
   apiService = fixture.debugElement.injector.get(ApiService);
-  serverPipe = spyOn(MockServerPipe.prototype, 'transform').and.callThrough();
+  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {

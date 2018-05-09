@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { map, flatMap, find, catchError } from 'rxjs/operators';
 
-import { Server } from '../app/shared/shared.module';
+import { Api } from '../app/shared/shared.module';
 import { Data } from './';
 
 export class MockApiService {
@@ -15,34 +15,34 @@ export class MockApiService {
     this.getPost = spyOn(this, 'getPost').and.callThrough();
   }
 
-  getServices(): Observable<Server.Service[]> {
-    return Observable.of(Data.Server.services);
+  getServices(): Observable<Api.Service[]> {
+    return Observable.of(Data.Api.services);
   }
 
-  getCaseStudies(): Observable<Server.CaseStudy[]> {
-    return Observable.of(Data.Server.caseStudies);
+  getCaseStudies(): Observable<Api.CaseStudy[]> {
+    return Observable.of(Data.Api.caseStudies);
   }
 
-  getClients(): Observable<Server.Client[]> {
-    return Observable.of(Data.Server.clients);
+  getClients(): Observable<Api.Client[]> {
+    return Observable.of(Data.Api.clients);
   }
 
-  getCareers(): Observable<Server.Career[]> {
-    return Observable.of(Data.Server.careers);
+  getCareers(): Observable<Api.Career[]> {
+    return Observable.of(Data.Api.careers);
   }
 
-  getTeam(): Observable<Server.Team[]> {
-    return Observable.of(Data.Server.team);
+  getTeam(): Observable<Api.Team[]> {
+    return Observable.of(Data.Api.team);
   }
 
-  getPost(type: string, id: string): Observable<Server.Post> {
+  getPost(type: string, id: string): Observable<Api.Post> {
     let url;
-    if (type === 'service') url = Data.Server.services;
-    if (type === 'work') url = Data.Server.caseStudies;
+    if (type === 'service') url = Data.Api.services;
+    if (type === 'work') url = Data.Api.caseStudies;
 
-    return Observable.of(<Server.Post[]>url).pipe(
-      flatMap((posts: Server.Post[]) => posts),
-      find((post: Server.Post) => post.id === id),
+    return Observable.of(<Api.Post[]>url).pipe(
+      flatMap((posts: Api.Post[]) => posts),
+      find((post: Api.Post) => post.id === id),
       catchError(err => Observable.of(null))
     );
   }

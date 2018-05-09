@@ -16,7 +16,7 @@ import { DuoBlockComponent } from './blocks/duo-block/duo-block.component';
 import { GalleryBlockComponent } from './blocks/gallery-block/gallery-block.component';
 import { VideoBlockComponent } from './blocks/video-block/video-block.component';
 import { AudioBlockComponent } from './blocks/audio-block/audio-block.component';
-import { ServerPipe } from './pipes/server.pipe';
+import { ApiPipe } from './pipes/api.pipe';
 import { PrismicPipe } from './pipes/prismic.pipe';
 import { LazyDirective } from './lazy.directive';
 
@@ -24,10 +24,10 @@ export { ApiService } from './api.service';
 export { PrismicService } from './prismic.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
-export { ServerPipe } from './pipes/server.pipe';
+export { ApiPipe } from './pipes/api.pipe';
 export { PrismicPipe } from './pipes/prismic.pipe';
 export { LazyDirective } from './lazy.directive';
-export { Server } from './server';
+export { Api } from '../../api/src/api';
 export { Prismic } from './prismic';
 export { Generic } from './generic';
 
@@ -45,7 +45,7 @@ export { Generic } from './generic';
     AudioBlockComponent,
     ImageComponent,
     LazyDirective,
-    ServerPipe,
+    ApiPipe,
     PrismicPipe
   ],
   exports: [
@@ -60,15 +60,9 @@ export { Generic } from './generic';
     AudioBlockComponent,
     ImageComponent,
     LazyDirective,
-    ServerPipe,
+    ApiPipe,
     PrismicPipe
   ],
-  providers: [
-    ApiService,
-    PrismicService,
-    TitleService,
-    LoggerService,
-    ServerPipe
-  ]
+  providers: [ApiService, PrismicService, TitleService, LoggerService, ApiPipe]
 })
 export class SharedModule {}

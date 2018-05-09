@@ -1,6 +1,6 @@
-import { Server } from '../../shared/shared.module';
+import { Api } from '../../shared/shared.module';
 
-export const HomeImages: { [name: string]: { image: Server.Image }[] } = {
+export const HomeImages: { [name: string]: { image: Api.Image }[] } = {
   intro: [
     {
       image: {

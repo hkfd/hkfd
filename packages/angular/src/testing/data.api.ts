@@ -1,7 +1,7 @@
-import { Server as ServerTypes } from '../app/shared/shared.module';
+import { Api as ApiTypes } from '../app/shared/shared.module';
 
-export namespace Server {
-  export const services: ServerTypes.Service[] = [
+export namespace Api {
+  export const services: ApiTypes.Service[] = [
     {
       id: 'service-1',
       title: 'Service 1',
@@ -27,7 +27,7 @@ export namespace Server {
       content: [
         {
           title: 'DuoBlock',
-          data: <ServerTypes.Blocks.DuoBlock[]>[
+          data: <ApiTypes.Blocks.DuoBlock[]>[
             {
               type: 'duo',
               data: [
@@ -64,7 +64,7 @@ export namespace Server {
       content: [
         {
           title: 'VideoBlock',
-          data: <ServerTypes.Blocks.VideoBlock[]>[
+          data: <ApiTypes.Blocks.VideoBlock[]>[
             {
               type: 'video',
               data: {
@@ -102,7 +102,7 @@ export namespace Server {
       content: [
         {
           title: 'AudioBlock',
-          data: <ServerTypes.Blocks.AudioBlock[]>[
+          data: <ApiTypes.Blocks.AudioBlock[]>[
             {
               type: 'audio',
               data: {
@@ -117,7 +117,7 @@ export namespace Server {
     }
   ];
 
-  export const caseStudies: ServerTypes.CaseStudy[] = [
+  export const caseStudies: ApiTypes.CaseStudy[] = [
     {
       id: 'case-study-1',
       title: 'Case Study 1',
@@ -134,7 +134,7 @@ export namespace Server {
       content: [
         {
           title: 'TextBlock',
-          data: <ServerTypes.Blocks.TextBlock[]>[
+          data: <ApiTypes.Blocks.TextBlock[]>[
             {
               type: 'text'
             }
@@ -169,7 +169,7 @@ export namespace Server {
       content: [
         {
           title: 'ImageBlock',
-          data: <ServerTypes.Blocks.ImageBlock[]>[
+          data: <ApiTypes.Blocks.ImageBlock[]>[
             {
               type: 'image',
               data: {
@@ -211,7 +211,7 @@ export namespace Server {
       content: [
         {
           title: 'GalleryBlock',
-          data: <ServerTypes.Blocks.GalleryBlock[]>[
+          data: <ApiTypes.Blocks.GalleryBlock[]>[
             {
               type: 'gallery',
               data: [
@@ -226,7 +226,7 @@ export namespace Server {
     }
   ];
 
-  export const clients: ServerTypes.Client[] = [
+  export const clients: ApiTypes.Client[] = [
     {
       sector: 'Sector 1',
       list: ['Client 1', 'Client 2', 'Client 3']
@@ -237,7 +237,7 @@ export namespace Server {
     }
   ];
 
-  export const careers: ServerTypes.Career[] = [
+  export const careers: ApiTypes.Career[] = [
     {
       title: 'Career 1'
     },
@@ -249,7 +249,7 @@ export namespace Server {
     }
   ];
 
-  export const team: ServerTypes.Team[] = [
+  export const team: ApiTypes.Team[] = [
     {
       name: 'Person 1',
       position: 'Position 1',
@@ -302,7 +302,7 @@ export namespace Server {
     }
   ];
 
-  export const images: ServerTypes.Image[] = [
+  export const images: ApiTypes.Image[] = [
     {
       name: 'image-1',
       alt: ''
@@ -325,7 +325,7 @@ export namespace Server {
     }
   ];
 
-  export const textBlocks: { [name: string]: ServerTypes.Blocks.TextBlock } = {
+  export const textBlocks: { [name: string]: ApiTypes.Blocks.TextBlock } = {
     text: {
       type: 'text',
       data: [
@@ -384,7 +384,7 @@ export namespace Server {
     }
   };
 
-  export const sentence: { [name: string]: ServerTypes.Sentence } = {
+  export const sentence: { [name: string]: ApiTypes.Sentence } = {
     url: {
       text: 'Click here',
       url: 'http://example.com'
@@ -406,7 +406,7 @@ export namespace Server {
     }
   };
 
-  export const galleryBlock: ServerTypes.Blocks.GalleryBlock = {
+  export const galleryBlock: ApiTypes.Blocks.GalleryBlock = {
     type: 'gallery',
     data: [
       { image: { name: 'image1', alt: '' } },
@@ -417,7 +417,7 @@ export namespace Server {
     ]
   };
 
-  export const duoBlock: ServerTypes.Blocks.DuoBlock = {
+  export const duoBlock: ApiTypes.Blocks.DuoBlock = {
     type: 'duo',
     data: [
       { image: { name: 'image1', alt: '' } },
@@ -426,16 +426,16 @@ export namespace Server {
     ]
   };
 
-  export const image: ServerTypes.Image = {
+  export const image: ApiTypes.Image = {
     name: 'image',
     alt: 'Image'
   };
 
-  export const video: ServerTypes.Video = {
+  export const video: ApiTypes.Video = {
     id: '123'
   };
 
-  export const audio: ServerTypes.Audio = {
+  export const audio: ApiTypes.Audio = {
     url: 'soundcloud.com'
   };
 }

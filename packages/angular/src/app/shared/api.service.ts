@@ -6,7 +6,7 @@ import { catchError, retry, tap, map, flatMap, find } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from './logger.service';
-import { Server } from './server';
+import { Api } from 'api';
 
 @Injectable()
 export class ApiService {
@@ -18,31 +18,29 @@ export class ApiService {
 
   constructor(private http: HttpClient, private logger: LoggerService) {}
 
-  getServices(): Observable<Server.Service[]> {
+  getServices(): Observable<Api.Service[]> {
     return this.http
-      .get<Server.Service[]>(this.services)
+      .get<Api.Service[]>(this.services)
       .pipe(
         retry(3),
-        tap((services: Server.Service[]) =>
+        tap((services: Api.Service[]) =>
           this.logger.log('getServices', services)
         ),
-        catchError(this.handleError<Server.Service[]>('getServices', []))
+        catchError(this.handleError<Api.Service[]>('getServices', []))
       );
   }
 
-  getCareers(): Observable<Server.Career[]> {
+  getCareers(): Observable<Api.Career[]> {
     return this.http
-      .get<Server.Career[]>(this.careers)
+      .get<Api.Career[]>(this.careers)
       .pipe(
         retry(3),
-        tap((careers: Server.Career[]) =>
-          this.logger.log('getCareers', careers)
-        ),
-        catchError(this.handleError<Server.Career[]>('getCareers', []))
+        tap((careers: Api.Career[]) => this.logger.log('getCareers', careers)),
+        catchError(this.handleError<Api.Career[]>('getCareers', []))
       );
   }
 
-  getPost(type: string, id: string): Observable<Server.Post> {
+  getPost(type: string, id: string): Observable<Api.Post> {
     let url: string;
     switch (type) {
       case 'service':
@@ -56,47 +54,45 @@ export class ApiService {
     }
 
     return this.http
-      .get<Server.Post[]>(url)
+      .get<Api.Post[]>(url)
       .pipe(
         retry(3),
-        flatMap((posts: Server.Post[]) => posts),
-        find((post: Server.Post) => post.id === id),
-        tap((post: Server.Post) => this.logger.log('getPost', post)),
-        catchError(this.handleError<Server.Post>('getPost'))
+        flatMap((posts: Api.Post[]) => posts),
+        find((post: Api.Post) => post.id === id),
+        tap((post: Api.Post) => this.logger.log('getPost', post)),
+        catchError(this.handleError<Api.Post>('getPost'))
       );
   }
 
-  getCaseStudies(): Observable<Server.CaseStudy[]> {
+  getCaseStudies(): Observable<Api.CaseStudy[]> {
     return this.http
-      .get<Server.CaseStudy[]>(this.caseStudies)
+      .get<Api.CaseStudy[]>(this.caseStudies)
       .pipe(
         retry(3),
-        tap((caseStudies: Server.CaseStudy[]) =>
+        tap((caseStudies: Api.CaseStudy[]) =>
           this.logger.log('getCaseStudies', caseStudies)
         ),
-        catchError(this.handleError<Server.CaseStudy[]>('getCaseStudies', []))
+        catchError(this.handleError<Api.CaseStudy[]>('getCaseStudies', []))
       );
   }
 
-  getTeam(): Observable<Server.Team[]> {
+  getTeam(): Observable<Api.Team[]> {
     return this.http
-      .get<Server.Team[]>(this.team)
+      .get<Api.Team[]>(this.team)
       .pipe(
         retry(3),
-        tap((team: Server.Team[]) => this.logger.log('getTeam', team)),
-        catchError(this.handleError<Server.Team[]>('getTeam', []))
+        tap((team: Api.Team[]) => this.logger.log('getTeam', team)),
+        catchError(this.handleError<Api.Team[]>('getTeam', []))
       );
   }
 
-  getClients(): Observable<Server.Client[]> {
+  getClients(): Observable<Api.Client[]> {
     return this.http
-      .get<Server.Client[]>(this.clients)
+      .get<Api.Client[]>(this.clients)
       .pipe(
         retry(3),
-        tap((clients: Server.Client[]) =>
-          this.logger.log('getClients', clients)
-        ),
-        catchError(this.handleError<Server.Client[]>('getClients', []))
+        tap((clients: Api.Client[]) => this.logger.log('getClients', clients)),
+        catchError(this.handleError<Api.Client[]>('getClients', []))
       );
   }
 

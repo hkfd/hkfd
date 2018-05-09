@@ -90,7 +90,7 @@ describe('NewsPostComponent', () => {
         expect(page.textBlock).toBeTruthy();
       });
 
-      it('should not call ServerPipe', () => {
+      it('should not call ApiPipe', () => {
         expect(prismicPipe).not.toHaveBeenCalled();
       });
     });

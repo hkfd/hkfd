@@ -23,7 +23,7 @@ describe('TextBlockComponent', () => {
 
   describe('Paragraph', () => {
     beforeEach(() => {
-      comp.data = Data.Server.textBlocks.text;
+      comp.data = Data.Api.textBlocks.text;
       fixture.detectChanges();
       page.addElements();
     });
@@ -51,7 +51,7 @@ describe('TextBlockComponent', () => {
 
   describe('List', () => {
     beforeEach(() => {
-      comp.data = Data.Server.textBlocks.list;
+      comp.data = Data.Api.textBlocks.list;
       fixture.detectChanges();
       page.addElements();
     });
