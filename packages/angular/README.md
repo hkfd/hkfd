@@ -1,29 +1,48 @@
 # Heckford Angular
 [![CircleCI](https://circleci.com/bb/heckford/heckford-angular.svg?style=svg&circle-token=e02291a7d209b31a48a0ba16ca8b2da4a7226160)](https://circleci.com/bb/heckford/heckford-angular)
 
+## Install
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+Run `yarn api-init` to download Heckford Angular API dependencies and generate the JSON files.
 
-## Development server
+## Usage
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `yarn serve` for a dev server. Navigate to `http://localhost:4200/`. Use the `-prod` flag for a production build.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Updating
 
-## Build
+### Angular CLI
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Global:
+```
+yarn global remove @angular/cli
+yarn cache clean
+yarn global add @angular/cli@latest
+```
 
-## Running unit tests
+Local:
+```
+rm -rf node_modules dist
+yarn add --dev @angular/cli@latest
+yarn
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Angular
 
-## Running end-to-end tests
+Run `ng update`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Heckford Angular API
 
-## Further help
+Run `yarn api-update`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Testing
+
+### Unit Tests
+
+Run `yarn test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## E2E Tests
+
+Run `yarn e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

@@ -9,6 +9,8 @@
     "test": "ng test --sourcemaps=false",
     "lint": "ng lint",
     "e2e": "ng e2e --prod --port 4200 --proxy-config proxy.conf.json",
+    "api-init": "cd src/api && yarn && yarn build",
+    "api-update": "git submodule update --remote && yarn api-init",
     "precommit": "lint-staged"
   },
   "lint-staged": {
