@@ -12,7 +12,11 @@ describe('News', () => {
     expect(page.getPageTitle()).toBeTruthy();
   });
 
-  describe('Posts', () => {
+  it('should have 9 initial posts', () => {
+    expect(page.getPosts().count()).toBe(9);
+  });
+
+  describe('Post', () => {
     it('should have post', () => {
       expect(
         page
@@ -55,19 +59,14 @@ describe('News', () => {
 
     it('should route on click', () => {
       const originalUrl = page.getUrl();
-      page.sleep();
+      const el = page.getPosts().first();
 
       page
-        .getPosts()
-        .first()
-        .click()
-        .then(_ => page.sleep())
+        .isClickable(el)
+        .then(() => el.click())
+        .then(() => page.isNotVisible())
         .then(_ => expect(page.getUrl()).not.toBe(originalUrl));
     });
-  });
-
-  it('should have 9 initial posts', () => {
-    expect(page.getPosts().count()).toBe(9);
   });
 
   it('should display load more button', () => {
@@ -75,12 +74,12 @@ describe('News', () => {
   });
 
   it('should load more posts on button click', () => {
-    page.sleep();
+    const el = page.getLoadMoreButton();
 
     page
-      .getLoadMoreButton()
-      .click()
-      .then(_ => page.sleep())
+      .isClickable(el)
+      .then(() => el.click())
+      .then(() => page.hasLoadedPosts())
       .then(_ => expect(page.getPosts().count()).toBeGreaterThan(9));
   });
 });

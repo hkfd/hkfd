@@ -9,7 +9,7 @@ describe('NewsPost', () => {
   });
 
   it('should display post date', () => {
-    expect(page.getPostDate()).toBeTruthy();
+    expect(page.getPostDate().getText()).toBeTruthy();
   });
 
   it('should display post title', () => {

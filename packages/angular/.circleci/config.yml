@@ -11,7 +11,7 @@ jobs:
   build:
     working_directory: ~/heckford-angular
     docker:
-      - image: circleci/node:9.11-stretch-browsers
+      - image: circleci/node:8.11.1-stretch-browsers
     steps:
       - checkout
       - run:

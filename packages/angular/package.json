@@ -8,7 +8,7 @@
     "build": "ng build --prod",
     "test": "ng test --sourcemaps=false",
     "lint": "ng lint",
-    "e2e": "ng e2e --port 4200 --proxy-config proxy.conf.json",
+    "e2e": "ng e2e --prod --port 4200 --proxy-config proxy.conf.json",
     "precommit": "lint-staged"
   },
   "lint-staged": {

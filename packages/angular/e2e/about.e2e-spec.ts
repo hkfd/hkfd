@@ -59,10 +59,11 @@ describe('About', () => {
 
     describe('Join', () => {
       it('should link to /careers', () => {
+        const el = page.getPeople().last();
+
         page
-          .getPeople()
-          .last()
-          .click()
+          .isClickable(el)
+          .then(() => el.click())
           .then(_ => expect(page.getUrl()).toContain('/careers'));
       });
     });

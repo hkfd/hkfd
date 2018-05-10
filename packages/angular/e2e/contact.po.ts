@@ -1,6 +1,10 @@
 import { browser, by, element } from 'protractor';
 
 export class ContactPage {
+  constructor() {
+    browser.waitForAngularEnabled(false);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }

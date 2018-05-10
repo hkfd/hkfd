@@ -1,8 +1,13 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class Header {
-  sleep(time: number = 500) {
-    return browser.sleep(time);
+  constructor() {
+    browser.waitForAngularEnabled(false);
+  }
+
+  isClickable(el: ElementFinder) {
+    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
   }
 
   getUrl() {

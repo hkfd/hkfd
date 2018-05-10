@@ -9,13 +9,16 @@ describe('Post', () => {
   });
 
   it('should display title', () => {
-    expect(page.getPageTitle()).toBeTruthy();
+    expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
   it('should display uppercase title', () => {
-    page.getPageTitle().then(title => {
-      expect(title).toEqual(title.toUpperCase());
-    });
+    page
+      .getPageTitle()
+      .getText()
+      .then(title => {
+        expect(title).toEqual(title.toUpperCase());
+      });
   });
 
   it('should display intro', () => {

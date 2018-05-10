@@ -1,8 +1,26 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class NewsPage {
-  sleep(time: number = 500) {
-    return browser.sleep(time);
+  isClickable(el: ElementFinder) {
+    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
+  }
+
+  isVisible(el: ElementFinder) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
+  isNotVisible(el: ElementFinder = this.getPosts().first()) {
+    const isNotVisible = protractor.ExpectedConditions.invisibilityOf(el);
+    return browser.wait(isNotVisible, 3000);
+  }
+
+  hasLoadedPosts() {
+    const hasLoadedPosts = () =>
+      this.getPosts().then(posts => posts.length > 9);
+
+    return browser.wait(hasLoadedPosts, 5000);
   }
 
   getUrl() {
@@ -10,7 +28,9 @@ export class NewsPage {
   }
 
   navigateTo() {
-    return browser.get('/news').then(_ => this.sleep());
+    return browser
+      .get('/news')
+      .then(_ => this.isVisible(this.getPosts().first()));
   }
 
   getPageTitle() {

@@ -51,12 +51,11 @@ describe('Work', () => {
 
     it('should route on click', () => {
       const originalUrl = page.getUrl();
-      page.sleep();
+      const el = page.getCaseStudies().first();
 
       page
-        .getCaseStudies()
-        .first()
-        .click()
+        .isClickable(el)
+        .then(() => el.click())
         .then(_ => expect(page.getUrl()).not.toBe(originalUrl));
     });
   });

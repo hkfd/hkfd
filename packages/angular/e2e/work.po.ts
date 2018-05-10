@@ -1,8 +1,9 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class WorkPage {
-  sleep(time: number = 500) {
-    return browser.sleep(time);
+  isClickable(el: ElementFinder) {
+    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
   }
 
   getUrl() {

@@ -1,3 +1,6 @@
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
+import * as fs from 'fs';
+
 import { HomePage } from './home.po';
 
 describe('Home', () => {
@@ -18,9 +21,12 @@ describe('Home', () => {
 
   describe('Help', () => {
     it('should link to /about', () => {
+      const el = page.getHelpButton();
+
       page
-        .getHelpButton()
-        .click()
+        .isClickable(el)
+        .then(() => page.isClickable(el))
+        .then(() => el.click())
         .then(_ => expect(page.getUrl()).toContain('/about'));
     });
   });
@@ -67,10 +73,11 @@ describe('Home', () => {
     });
 
     it('should link to /service', () => {
-      page
-        .getServices()
-        .first()
-        .click()
+      const el = page.getServices().first();
+
+      return page
+        .isClickable(el)
+        .then(() => el.click())
         .then(_ => {
           expect(page.getUrl()).toContain('/service/');
         });

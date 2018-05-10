@@ -102,16 +102,13 @@ describe('Header', () => {
     });
 
     it('should hide links on page click', () => {
+      const el = page.getLinks().get(1);
+
       page
         .getToggle()
         .click()
-        .then(() => page.sleep())
-        .then(() =>
-          page
-            .getLinks()
-            .get(1)
-            .click()
-        )
+        .then(() => page.isClickable(el))
+        .then(() => el.click())
         .then(_ => expect(page.getNavLinks().isDisplayed()).toBe(false));
     });
 

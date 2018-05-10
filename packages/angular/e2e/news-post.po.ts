@@ -1,8 +1,9 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class NewsPostPage {
-  sleep(time: number = 500) {
-    return browser.sleep(time);
+  isVisible(el: ElementFinder = this.getPostDate()) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
   }
 
   getUrl() {
@@ -12,11 +13,11 @@ export class NewsPostPage {
   navigateTo() {
     return browser
       .get('/news/how-to-build-an-online-campaign')
-      .then(_ => this.sleep());
+      .then(_ => this.isVisible());
   }
 
   getPostDate() {
-    return element(by.id('info-date')).getText();
+    return element(by.id('info-date'));
   }
 
   getPostTitle() {

@@ -1,16 +1,21 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class PostPage {
+  isVisible(el: ElementFinder = this.getPageTitle()) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
 
   navigateTo(url: string = '/work/tomy') {
-    return browser.get(url);
+    return browser.get(url).then(_ => this.isVisible());
   }
 
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getPageIntro() {
