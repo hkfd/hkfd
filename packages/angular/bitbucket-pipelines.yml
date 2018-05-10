@@ -10,7 +10,7 @@ pipelines:
           script:
             - yarn
             - ./node_modules/.bin/ng build --prod
-            - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:public_html
+            - rsync -av --exclude api --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:public_html
     dev:
       - step:
           deployment: staging
@@ -19,7 +19,7 @@ pipelines:
           script:
             - yarn
             - ./node_modules/.bin/ng build --prod
-            - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging
+            - rsync -av --exclude api --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging
 definitions:
   caches:
     yarn: /usr/local/share/.cache/yarn/v1
