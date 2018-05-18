@@ -20,7 +20,7 @@ export const Clients: Api.Client[] = [
       'CME Medical UK',
       'Family Care Associates',
       'Fred Hamer Funeral Services',
-      "Haslingden Community Link & Children's Centre",
+      'Haslingden Community Link & Children’s Centre',
       'Potensial Ltd (T/A Potens)',
       'SLC Group'
     ]
@@ -37,11 +37,11 @@ export const Clients: Api.Client[] = [
     sector: 'Education',
     list: [
       'Blackburn College',
-      'Blackpool & Fylde College',
+      'Blackpool and the Fylde College',
       'Bolton School',
       'Fulwood Academy',
       'Myerscough College',
-      'Prestons College',
+      'Preston’s College',
       'Priestley College',
       'Runshaw College',
       'St Pius X School',
