@@ -1,14 +1,37 @@
-<div id="intro">
-  <div id="intro-info">
-    <h1>CONTACT US</h1>
-    <div class="text">
-      <p>Call us now on <a href="tel:+441772884444">01772 884444</a></p>
-      <a class="button" (click)="messageClick()" href="mailto:hello@heckford-advertising.co.uk">MESSAGE US</a>
-    </div>
+<section id="page-intro">
+  <h1>CONTACT US</h1>
+  <div id="intro-container">
+    <p>Call us now on <a href="tel:+441772884444">01772 884444</a></p>
   </div>
-</div>
+</section>
 
-<div id="contact-image">
+<section id="contact">
+  <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+    <div class="input">
+      <label for="name">Your Name*</label>
+      <p class="error" *ngIf="name?.invalid && name?.touched">Name is required</p>
+      <input required formControlName="name" id="name">
+    </div>
+    <div class="input">
+      <label for="email">Your Email*</label>
+      <p class="error" *ngIf="email?.invalid && email?.touched">Email is required</p>
+      <input required formControlName="email" id="email">
+    </div>
+    <div class="input">
+      <label for="message">Your Message*</label>
+      <p class="error" *ngIf="message?.invalid && message?.touched">Message is required</p>
+      <textarea required rows="10" formControlName="message" id="message"></textarea>
+    </div>
+    <ng-container *ngIf="contactForm?.dirty || contactForm?.touched">
+      <p><small>By submitting this form you consent to being contacted by email in relation to this query. Please see our <a href="/legal/privacy-policy.html" target="_blank">Privacy Policy</a> for more information.</small></p>
+      <button [disabled]="contactForm?.invalid" class="button" type="submit">Send</button>
+    </ng-container>
+  </form>
+</section>
+
+
+
+<section id="contact-image">
   <img class="icon-40" src="/assets/icons/40-years-white.svg">
   <image-component [image]="images?.contact | api" full-height></image-component>
-</div>
+</section>

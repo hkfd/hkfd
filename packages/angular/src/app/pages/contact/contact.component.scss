@@ -8,43 +8,69 @@
   color: #fff;
 }
 
-#intro {
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
+#page-intro {
+  p,
+  a {
+    color: #fff;
+  }
+}
 
-  #intro-info {
-    h1 {
-      margin: 0;
+#contact {
+  @extend %container-full;
+  margin: 5vh auto;
+
+  form {
+    @extend %text;
+    margin: 0 auto;
+
+    a {
+      color: #fff;
     }
 
-    .text {
-      @extend %font-large;
+    .input {
+      margin: 1em 0;
 
-      p {
-        margin-top: 0;
+      label,
+      input,
+      textarea {
+        display: block;
+        width: 100%;
       }
 
-      a {
-        color: inherit;
+      label {
+        @extend %font-heading;
+        @extend %font-small;
       }
 
-      .button {
-        font-family: inherit;
-        font-size: inherit;
-        margin: 1em 0;
-        padding: 0.5em;
-        background: none;
-        color: #fff;
-        border: 0.1em solid #fff;
-        opacity: 1;
+      input,
+      textarea {
+        padding: 0.25em;
+        border: 1px solid transparent;
+      }
+
+      .ng-invalid.ng-dirty.ng-touched {
+        border: 1px solid red;
+      }
+
+      .error {
+        @extend %font-bold;
+        margin: 0.25em 0;
+        color: #000;
+      }
+    }
+
+    button {
+      @extend %font-small;
+      margin: 0.5em 0;
+
+      &:disabled {
+        opacity: 0.3;
 
         &:hover,
         &:active {
           background: #fff;
-          color: $blue;
+          color: #000;
+          cursor: not-allowed;
         }
       }
     }
