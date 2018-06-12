@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoggerService } from '../logger.service';
+import { SendGridService } from '../sendgrid.service';
 import { FormAnimations } from './form.animations';
 
 @Component({
@@ -24,13 +25,24 @@ export class FormComponent {
     return this.form.get('message');
   }
 
-  constructor(private logger: LoggerService, private formBuilder: FormBuilder) {
+  constructor(
+    private logger: LoggerService,
+    private sendGridService: SendGridService,
+    private formBuilder: FormBuilder
+  ) {
     this.createForm();
   }
 
   submitForm() {
     this.logger.log('submitForm', this.form.value);
-    this.formSent = true;
+
+    this.sendGridService
+      .sendEmail(this.form.value)
+      .then(_ => (this.formSent = true))
+      .catch(err => {
+        this.logger.error('submitForm', err);
+        this.formSent = false;
+      });
   }
 
   createForm() {

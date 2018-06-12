@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ApiService } from './api.service';
 import { PrismicService } from './prismic.service';
+import { SendGridService } from './sendgrid.service';
 import { TitleService } from './title.service';
 import { LoggerService } from './logger.service';
 import { HeaderComponent } from './header/header.component';
@@ -24,6 +25,7 @@ import { LazyDirective } from './lazy.directive';
 
 export { ApiService } from './api.service';
 export { PrismicService } from './prismic.service';
+export { SendGridService } from './sendgrid.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
 export { ApiPipe } from './pipes/api.pipe';
@@ -67,6 +69,13 @@ export { Generic } from './generic';
     ApiPipe,
     PrismicPipe
   ],
-  providers: [ApiService, PrismicService, TitleService, LoggerService, ApiPipe]
+  providers: [
+    ApiService,
+    PrismicService,
+    SendGridService,
+    TitleService,
+    LoggerService,
+    ApiPipe
+  ]
 })
 export class SharedModule {}
