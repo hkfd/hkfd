@@ -1,4 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="submitForm()">
+<p *ngIf="formSent" id="form-sent">Thanks, we'll be in touch soon</p>
+
+<form [formGroup]="form" (ngSubmit)="submitForm()" [@formState]="formSent">
   <div class="input">
     <label for="name">Your Name*</label>
     <p class="error" *ngIf="name?.invalid && name?.touched">Name is required</p>
@@ -16,6 +18,7 @@
   </div>
   <ng-container *ngIf="form?.dirty || form?.touched">
     <p><small>By submitting this form you consent to being contacted by email in relation to this query. Please see our <a href="/legal/privacy-policy.html" target="_blank">Privacy Policy</a> for more information.</small></p>
-    <button [disabled]="form?.invalid" class="button" type="submit">Send</button>
+    <button [disabled]="form?.invalid || formSent === true || formSent === false" class="button" type="submit">Send</button>
+    <p *ngIf="formSent === false" class="error">Sorry, please try again later</p>
   </ng-container>
 </form>

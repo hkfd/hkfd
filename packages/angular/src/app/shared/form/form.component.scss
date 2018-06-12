@@ -1,13 +1,21 @@
 @import '../../../styles';
 
 :host {
+  overflow: hidden;
   display: block;
+  position: relative;
+  @extend %text;
+  margin: 0 auto;
+}
+
+#form-sent {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
 }
 
 form {
-  @extend %text;
-  margin: 0 auto;
-
   a {
     color: #fff;
   }
@@ -36,12 +44,12 @@ form {
     .ng-invalid.ng-dirty.ng-touched {
       border: 1px solid red;
     }
+  }
 
-    .error {
-      @extend %font-bold;
-      margin: 0.25em 0;
-      color: #000;
-    }
+  .error {
+    @extend %font-bold;
+    margin: 0.25em 0;
+    color: #000;
   }
 
   button {
