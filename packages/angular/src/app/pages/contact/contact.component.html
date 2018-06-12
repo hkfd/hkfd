@@ -6,27 +6,7 @@
 </section>
 
 <section id="contact">
-  <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
-    <div class="input">
-      <label for="name">Your Name*</label>
-      <p class="error" *ngIf="name?.invalid && name?.touched">Name is required</p>
-      <input required formControlName="name" id="name">
-    </div>
-    <div class="input">
-      <label for="email">Your Email*</label>
-      <p class="error" *ngIf="email?.invalid && email?.touched">Email is required</p>
-      <input required formControlName="email" id="email">
-    </div>
-    <div class="input">
-      <label for="message">Your Message*</label>
-      <p class="error" *ngIf="message?.invalid && message?.touched">Message is required</p>
-      <textarea required rows="10" formControlName="message" id="message"></textarea>
-    </div>
-    <ng-container *ngIf="contactForm?.dirty || contactForm?.touched">
-      <p><small>By submitting this form you consent to being contacted by email in relation to this query. Please see our <a href="/legal/privacy-policy.html" target="_blank">Privacy Policy</a> for more information.</small></p>
-      <button [disabled]="contactForm?.invalid" class="button" type="submit">Send</button>
-    </ng-container>
-  </form>
+  <app-form></app-form>
 </section>
 
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ApiService } from './api.service';
 import { PrismicService } from './prismic.service';
@@ -11,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
 import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
+import { FormComponent } from './form/form.component';
 import { ImageBlockComponent } from './blocks/image-block/image-block.component';
 import { DuoBlockComponent } from './blocks/duo-block/duo-block.component';
 import { GalleryBlockComponent } from './blocks/gallery-block/gallery-block.component';
@@ -32,7 +34,7 @@ export { Prismic } from './prismic';
 export { Generic } from './generic';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -44,6 +46,7 @@ export { Generic } from './generic';
     VideoBlockComponent,
     AudioBlockComponent,
     ImageComponent,
+    FormComponent,
     LazyDirective,
     ApiPipe,
     PrismicPipe
@@ -59,6 +62,7 @@ export { Generic } from './generic';
     VideoBlockComponent,
     AudioBlockComponent,
     ImageComponent,
+    FormComponent,
     LazyDirective,
     ApiPipe,
     PrismicPipe

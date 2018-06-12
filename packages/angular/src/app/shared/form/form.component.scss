@@ -1,0 +1,62 @@
+@import '../../../styles';
+
+:host {
+  display: block;
+}
+
+form {
+  @extend %text;
+  margin: 0 auto;
+
+  a {
+    color: #fff;
+  }
+
+  .input {
+    margin: 1em 0;
+
+    label,
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+    }
+
+    label {
+      @extend %font-heading;
+      @extend %font-small;
+    }
+
+    input,
+    textarea {
+      padding: 0.25em;
+      border: 1px solid transparent;
+    }
+
+    .ng-invalid.ng-dirty.ng-touched {
+      border: 1px solid red;
+    }
+
+    .error {
+      @extend %font-bold;
+      margin: 0.25em 0;
+      color: #000;
+    }
+  }
+
+  button {
+    @extend %font-small;
+    margin: 0.5em 0;
+
+    &:disabled {
+      opacity: 0.3;
+
+      &:hover,
+      &:active {
+        background: #fff;
+        color: #000;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
