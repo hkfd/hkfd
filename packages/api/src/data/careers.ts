@@ -6,5 +6,8 @@ export const Careers: Api.Career[] = [
   },
   {
     title: 'Junior Graphic Designer'
+  },
+  {
+    title: 'Signage Fitter/Installer'
   }
 ];
