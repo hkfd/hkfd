@@ -38,7 +38,10 @@ export class FormComponent {
 
     this.sendGridService
       .sendEmail(this.form.value)
-      .then(_ => (this.formSent = true))
+      .then(_ => {
+        this.formSent = true;
+        ga('send', 'event', 'Contact Form', 'sent');
+      })
       .catch(err => {
         this.logger.error('submitForm', err);
         this.formSent = false;
