@@ -36,16 +36,16 @@ export class FormComponent {
   submitForm() {
     this.logger.log('submitForm', this.form.value);
 
-    this.sendGridService
-      .sendEmail(this.form.value)
-      .then(_ => {
+    this.sendGridService.sendEmail(this.form.value).then(
+      _ => {
         this.formSent = true;
         ga('send', 'event', 'Contact Form', 'sent');
-      })
-      .catch(err => {
+      },
+      err => {
         this.logger.error('submitForm', err);
         this.formSent = false;
-      });
+      }
+    );
   }
 
   createForm() {
