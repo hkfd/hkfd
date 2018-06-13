@@ -11,6 +11,6 @@ export const environment = {
   sendGrid: {
     apiKey:
       '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',
-    email: 'rajansolanki@heckford-advertising.co.uk'
+    email: 'hello@heckford-advertising.co.uk'
   }
 };

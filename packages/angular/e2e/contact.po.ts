@@ -18,13 +18,13 @@ export class ContactPage {
   }
 
   getTelLink() {
-    return element(by.id('intro'))
+    return element(by.id('page-intro'))
       .all(by.css('a'))
       .first();
   }
 
-  getEmailLink() {
-    return element(by.css('.button'));
+  getContactForm() {
+    return element(by.css('app-form'));
   }
 
   getContactImage() {

@@ -22,16 +22,8 @@ describe('Contact', () => {
     });
   });
 
-  describe('Email', () => {
-    it('should be displayed', () => {
-      expect(page.getEmailLink().isDisplayed()).toBe(true);
-    });
-
-    it('should have href mailto', () => {
-      expect(page.getEmailLink().getAttribute('href')).toBe(
-        'mailto:hello@heckford-advertising.co.uk'
-      );
-    });
+  it('should display contact form', () => {
+    expect(page.getContactForm().isDisplayed()).toBe(true);
   });
 
   it('should display contact image', () => {
