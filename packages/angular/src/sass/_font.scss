@@ -79,7 +79,7 @@
 @mixin font-src($location, $formats) {
   $name-start: _str-last-index($location, '/');
   $name: str_slice($location, ($name-start + 1));
-  $dir: str_slice($location, 0, $name-start);
+  $dir: str_slice($location, 1, $name-start);
   $formats: selector_parse($formats);
 
   src: src($formats, $dir, $name);

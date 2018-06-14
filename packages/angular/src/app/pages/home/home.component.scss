@@ -1,4 +1,4 @@
-@import '../../../styles';
+@import '../../../sass/mixins';
 
 h1,
 h2 {
@@ -18,10 +18,12 @@ h2 {
     display: block;
     @extend %font-body;
     @extend %font-medium;
+    text-transform: none;
+    letter-spacing: normal;
+
     @include xl {
       font-size: 3vw;
     }
-    letter-spacing: normal;
   }
 }
 
