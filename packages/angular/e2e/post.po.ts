@@ -3,7 +3,7 @@ import { protractor, browser, by, element, ElementFinder } from 'protractor';
 export class PostPage {
   isVisible(el: ElementFinder = this.getPageTitle()) {
     const isVisible = protractor.ExpectedConditions.visibilityOf(el);
-    return browser.wait(isVisible, 3000);
+    return browser.wait(isVisible, 5000);
   }
 
   getUrl() {

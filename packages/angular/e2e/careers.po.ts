@@ -1,12 +1,17 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class CareersPage {
+  isVisible(el: ElementFinder = this.getCareers().first()) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
 
   navigateTo() {
-    return browser.get('/careers');
+    return browser.get('/careers').then(_ => this.isVisible());
   }
 
   getPageTitle() {

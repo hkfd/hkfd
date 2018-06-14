@@ -12,7 +12,11 @@ exports.config = {
     browserName: 'chrome',
     chromeOptions: {
        args: [ '--headless', '--disable-gpu', '--window-size=800,600' ]
-     }
+     },
+     loggingPrefs: {
+    'driver': 'INFO',
+    'browser': 'INFO'
+}
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
@@ -27,5 +31,9 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-  }
+  },
+  plugins: [{
+    package: 'protractor-console',
+    logLevels: ['debug', 'info', 'warning', 'severe']
+  }]
 };

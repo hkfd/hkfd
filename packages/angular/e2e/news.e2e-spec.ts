@@ -80,6 +80,6 @@ describe('News', () => {
       .isClickable(el)
       .then(() => el.click())
       .then(() => page.hasLoadedPosts())
-      .then(_ => expect(page.getPosts().count()).toBeGreaterThan(9));
+      .then(() => expect(page.getPosts().count()).toBeGreaterThan(9));
   });
 });

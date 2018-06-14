@@ -1,19 +1,19 @@
 import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class NewsPage {
-  isClickable(el: ElementFinder) {
-    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
-    return browser.wait(isClickable, 3000);
-  }
-
   isVisible(el: ElementFinder) {
     const isVisible = protractor.ExpectedConditions.visibilityOf(el);
-    return browser.wait(isVisible, 3000);
+    return browser.wait(isVisible, 5000);
   }
 
   isNotVisible(el: ElementFinder = this.getPosts().first()) {
     const isNotVisible = protractor.ExpectedConditions.invisibilityOf(el);
-    return browser.wait(isNotVisible, 3000);
+    return browser.wait(isNotVisible, 5000);
+  }
+
+  isClickable(el: ElementFinder) {
+    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 5000);
   }
 
   hasLoadedPosts() {
@@ -30,7 +30,7 @@ export class NewsPage {
   navigateTo() {
     return browser
       .get('/news')
-      .then(_ => this.isVisible(this.getPosts().first()));
+      .then(_ => this.isVisible(this.getPosts().last()));
   }
 
   getPageTitle() {
@@ -43,20 +43,20 @@ export class NewsPage {
 
   getPostImage() {
     return this.getPosts()
-      .first()
+      .last()
       .element(by.css('image-component'));
   }
 
   getPostDate() {
     return this.getPosts()
-      .first()
+      .last()
       .element(by.css('.post-date'))
       .getText();
   }
 
   getPostTitle() {
     return this.getPosts()
-      .first()
+      .last()
       .element(by.css('h2'))
       .getText();
   }

@@ -1,6 +1,11 @@
 import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class HomePage {
+  isVisible(el: ElementFinder) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
   isClickable(el: ElementFinder) {
     const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
     return browser.wait(isClickable, 3000);
@@ -11,7 +16,12 @@ export class HomePage {
   }
 
   navigateTo() {
-    return browser.get('/');
+    return browser
+      .get('/')
+      .then(() => this.isVisible(this.getIntroSlider()))
+      .then(() => this.isVisible(this.getServices().first()))
+      .then(() => this.isVisible(this.getCaseStudiesSlider()))
+      .then(_ => this.isVisible(this.getClients().first()));
   }
 
   getPageTitle() {

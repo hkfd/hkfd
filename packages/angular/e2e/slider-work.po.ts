@@ -1,8 +1,13 @@
-import { browser, by, element } from 'protractor';
+import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class SliderWork {
+  isVisible(el: ElementFinder = this.getSlider()) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
   navigateTo() {
-    return browser.get('/');
+    return browser.get('/').then(_ => this.isVisible());
   }
 
   getSlider() {

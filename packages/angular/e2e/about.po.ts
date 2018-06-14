@@ -1,6 +1,11 @@
 import { protractor, browser, by, element, ElementFinder } from 'protractor';
 
 export class AboutPage {
+  isVisible(el: ElementFinder = this.getPeople().first()) {
+    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
   isClickable(el: ElementFinder) {
     const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
     return browser.wait(isClickable, 3000);
@@ -11,7 +16,7 @@ export class AboutPage {
   }
 
   navigateTo() {
-    return browser.get('/about');
+    return browser.get('/about').then(_ => this.isVisible());
   }
 
   getPageTitle() {
