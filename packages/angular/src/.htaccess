@@ -8,6 +8,7 @@ Allow from all
 Deny from env=passreq
 Satisfy any
 
+AddType x-httpd-php71 .php
 Options -MultiViews
 Options -Indexes
 
