@@ -3,18 +3,18 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MockSendGridService } from '../../../testing';
+import { MockFormService } from '../../../testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 import { LoggerService } from '../logger.service';
-import { SendGridService } from '../sendgrid.service';
+import { FormService } from '../form.service';
 import { FormComponent } from './form.component';
 
 const app = <any>window;
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
 let page: Page;
-let sendGridService: SendGridServiceStub;
+let formService: FormServiceStub;
 
 describe('FormComponent', () => {
   beforeEach(
@@ -25,7 +25,7 @@ describe('FormComponent', () => {
         providers: [
           LoggerService,
           FormBuilder,
-          { provide: SendGridService, useClass: MockSendGridService }
+          { provide: FormService, useClass: MockFormService }
         ],
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -213,19 +213,19 @@ describe('FormComponent', () => {
   });
 
   describe('submitForm', () => {
-    it('should call SendGridService sendEmail', () => {
+    it('should call FormService sendEmail', () => {
       comp.submitForm();
 
-      expect(sendGridService.sendEmail).toHaveBeenCalled();
+      expect(formService.sendEmail).toHaveBeenCalled();
     });
 
-    it('should call SendGridService sendEmail with form value arg', () => {
+    it('should call FormService sendEmail with form value arg', () => {
       comp.form.controls.name.setValue('a');
       comp.form.controls.email.setValue('b@c');
       comp.form.controls.message.setValue('d');
       comp.submitForm();
 
-      expect(sendGridService.sendEmail).toHaveBeenCalledWith({
+      expect(formService.sendEmail).toHaveBeenCalledWith({
         name: 'a',
         email: 'b@c',
         message: 'd'
@@ -419,7 +419,7 @@ function createComponent() {
   fixture = TestBed.createComponent(FormComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  sendGridService = new SendGridServiceStub();
+  formService = new FormServiceStub();
   new GoogleAnalytics();
 
   fixture.detectChanges();
@@ -435,13 +435,13 @@ class GoogleAnalytics {
   }
 }
 
-class SendGridServiceStub {
+class FormServiceStub {
   sendEmail: jasmine.Spy;
 
   constructor() {
-    const sendGridService = fixture.debugElement.injector.get(SendGridService);
+    const formService = fixture.debugElement.injector.get(FormService);
 
-    this.sendEmail = spyOn(sendGridService, 'sendEmail').and.callThrough();
+    this.sendEmail = spyOn(formService, 'sendEmail').and.callThrough();
   }
 }
 

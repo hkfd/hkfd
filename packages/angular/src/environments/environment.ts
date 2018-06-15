@@ -7,10 +7,5 @@ export const environment = {
   },
   prismic: {
     endpoint: 'https://hkfd.cdn.prismic.io/api/v2'
-  },
-  sendGrid: {
-    apiKey:
-      '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',
-    email: 'rajansolanki@heckford-advertising.co.uk'
   }
 };

@@ -3,5 +3,10 @@
     "target": "http://localhost:4200/api/dist",
     "pathRewrite": { "^/api": "" },
     "secure": false
+  },
+  "/form": {
+    "target": "http://localhost:8000/",
+    "pathRewrite": { "^/form": "" },
+    "secure": false
   }
 }

@@ -1,4 +1,4 @@
-export class MockSendGridService {
+export class MockFormService {
   sendEmail({
     name,
     email,

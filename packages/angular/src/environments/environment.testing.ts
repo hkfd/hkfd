@@ -7,9 +7,5 @@ export const environment = {
   },
   prismic: {
     endpoint: 'https://hkfd.cdn.prismic.io/api/v2'
-  },
-  sendGrid: {
-    apiKey: 'ghi',
-    email: 'abc@example.com'
   }
 };

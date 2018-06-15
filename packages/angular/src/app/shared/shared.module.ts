@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ApiService } from './api.service';
 import { PrismicService } from './prismic.service';
-import { SendGridService } from './sendgrid.service';
+import { FormService } from './form.service';
 import { TitleService } from './title.service';
 import { LoggerService } from './logger.service';
 import { HeaderComponent } from './header/header.component';
@@ -25,7 +25,7 @@ import { LazyDirective } from './lazy.directive';
 
 export { ApiService } from './api.service';
 export { PrismicService } from './prismic.service';
-export { SendGridService } from './sendgrid.service';
+export { FormService } from './form.service';
 export { TitleService } from './title.service';
 export { LoggerService } from './logger.service';
 export { ApiPipe } from './pipes/api.pipe';
@@ -72,7 +72,7 @@ export { Generic } from './generic';
   providers: [
     ApiService,
     PrismicService,
-    SendGridService,
+    FormService,
     TitleService,
     LoggerService,
     ApiPipe

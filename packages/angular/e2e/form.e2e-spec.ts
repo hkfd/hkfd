@@ -108,17 +108,5 @@ describe('Form', () => {
         .then(() => page.getMessageInput().sendKeys('d'))
         .then(_ => expect(page.getSendButton().isEnabled()).toBe(true));
     });
-
-    it('should display error on click', () => {
-      page
-        .getNameInput()
-        .sendKeys('a')
-        .then(() => page.getEmailInput().sendKeys('b@c'))
-        .then(() => page.getMessageInput().sendKeys('d'))
-        .then(() => page.isClickable(page.getSendButton()))
-        .then(() => page.getSendButton().click())
-        .then(() => page.isVisible(page.getError()))
-        .then(_ => expect(page.getError().getText()).toContain('try again'));
-    });
   });
 });
