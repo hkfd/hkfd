@@ -3,11 +3,14 @@
 
 ## Install
 
-Run `yarn api-init` to download Heckford Angular API dependencies and generate the JSON files.
+Run `yarn api-init` to download Heckford Angular API dependencies and generate the JSON files.  
+Run `yarn form-init` to download Heckford Angular Form dependencies.
 
 ## Usage
 
 Run `yarn serve` for a dev server. Navigate to `http://localhost:4200/`. Use the `-prod` flag for a production build.
+
+To use the form, follow the Heckford Angular Form install instructions, then run `yarn form-serve`.
 
 
 ## Updating
@@ -35,6 +38,10 @@ Run `ng update`
 ### Heckford Angular API
 
 Run `yarn api-update`
+
+### Heckford Angular Form
+
+Run `yarn form-update`
 
 
 ## Testing
