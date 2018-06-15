@@ -10,7 +10,7 @@ pipelines:
           script:
             - git submodule sync && git submodule update --init --recursive
             - yarn && yarn build
-            - rsync -av --exclude api --delete dist/. $SSH_USERNAME@$SSH_HOST:public_html
+            - rsync -av --exclude=api --exclude=form --delete dist/. $SSH_USERNAME@$SSH_HOST:public_html
     dev:
       - step:
           deployment: staging
@@ -19,7 +19,7 @@ pipelines:
           script:
             - git submodule sync && git submodule update --init --recursive
             - yarn && yarn build
-            - rsync -av --exclude api --delete dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging
+            - rsync -av --exclude=api --exclude=form --delete dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging
 definitions:
   caches:
     yarn: /usr/local/share/.cache/yarn/v1
