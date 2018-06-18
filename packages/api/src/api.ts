@@ -82,7 +82,10 @@ export namespace Api {
   }
 
   export interface Career {
+    id: string;
     title: string;
+    salary: string;
+    content: Content[];
   }
 
   export interface Team {
