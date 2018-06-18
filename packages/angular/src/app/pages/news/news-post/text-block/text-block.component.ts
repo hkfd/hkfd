@@ -8,7 +8,7 @@ import { Prismic } from '../../../../shared/shared.module';
   selector: 'prismic-text-block',
   templateUrl: './text-block.component.html',
   styleUrls: [
-    '../../../../shared/post/text-block/text-block.component.scss',
+    '../../../../shared/blocks/text-block/text-block.component.scss',
     './text-block.component.scss'
   ]
 })

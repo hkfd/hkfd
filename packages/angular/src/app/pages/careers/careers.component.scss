@@ -6,13 +6,16 @@
 }
 
 #intro {
-  padding-top: 10vh;
-  padding-bottom: 10vh;
+  margin: 15vh 0;
   @extend %padding;
   @extend %font-medium;
   line-height: 1.4;
   background: $black;
   color: #fff;
+
+  h1 {
+    margin: 0;
+  }
 
   .text {
     padding: 0;
@@ -89,7 +92,7 @@
 
     .career-info {
       position: relative;
-      margin: 8vh 5vw;
+      margin: 15vh 5vw;
       z-index: 1;
 
       h3 {

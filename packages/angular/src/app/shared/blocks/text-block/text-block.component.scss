@@ -21,3 +21,18 @@
     line-height: 1.4;
   }
 }
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+
+  li {
+    flex-grow: 1;
+    flex-basis: 100%;
+
+    @include sm {
+      flex-basis: 50%;
+    }
+  }
+}

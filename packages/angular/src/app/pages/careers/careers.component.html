@@ -22,7 +22,7 @@
   <a class="career" *ngFor="let career of careers" [routerLink]="career?.id">
     <div class="career-info">
       <h3>{{ career?.title | uppercase }}</h3>
-      <span class="button">APPLY NOW</span>
+      <span>{{ career?.salary }}</span>
     </div>
   </a>
   <image-component full-height [image]="images?.career | api"></image-component>

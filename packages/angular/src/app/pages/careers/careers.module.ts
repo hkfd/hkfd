@@ -8,11 +8,20 @@ import { CareersComponent } from './careers.component';
 import { CareerComponent } from './career/career.component';
 
 const routes: Routes = [
-  { path: '', component: CareersComponent },
+  {
+    path: '',
+    component: CareersComponent,
+    data: {
+      state: 'careers'
+    }
+  },
   {
     path: ':id',
     component: CareerComponent,
-    resolve: { career: CareerResolver }
+    resolve: { career: CareerResolver },
+    data: {
+      state: 'career'
+    }
   }
 ];
 

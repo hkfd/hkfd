@@ -1,3 +1,39 @@
-<p>
-  career works!
-</p>
+<section id="intro">
+  <div id="intro-info">
+    <h1>{{ career?.title }}</h1>
+  </div>
+</section>
+
+<section *ngFor="let section of career?.content">
+  <h2 *ngIf="section?.title">{{ section?.title }}</h2>
+
+  <ng-container *ngFor="let block of section?.data">
+    <ng-container [ngSwitch]="block?.type">
+      <text-block *ngSwitchCase="'text'" [data]="block"></text-block>
+      <image-block *ngSwitchCase="'image'" [data]="block?.data | api" [attr.full-bleed]="block?.fullBleed"></image-block>
+      <duo-block *ngSwitchCase="'duo'" [data]="block?.data | api"></duo-block>
+      <gallery-block *ngSwitchCase="'gallery'" [data]="block?.data | api"></gallery-block>
+      <video-block *ngSwitchCase="'video'" [data]="block?.data | api"></video-block>
+      <audio-block *ngSwitchCase="'audio'" [data]="block?.data | api"></audio-block>
+    </ng-container>
+  </ng-container>
+</section>
+
+<section id="benefits">
+  <div class="text">
+    <h2>Benefits</h2>
+    <p>In return for your skills and experience as a {{ career?.title }}, we will offer a competitive salary, 25 days holiday a year plus bank holidays, opportunities for professional development and other benefits such as free staff car parking, childcare vouchers and contributory pension scheme.</p>
+    <ul>
+      <li>Excellent and competitive rates of pay</li>
+      <li>25 days holiday a year plus bank holidays</li>
+      <li>Full time job within a creative &amp; vibrant team</li>
+      <li>All the tea and coffee you require is provided</li>
+      <li>Opportunities for professional career development</li>
+      <li>A great opportunity to work for a leading and established creative agency</li>
+      <li>Free on-site car parking</li>
+      <li>Regular, paid for company outings and events</li>
+    </ul>
+  </div>
+</section>
+
+<a class="button black" href="mailto:hello@heckford-advertising.co.uk">APPLY NOW</a>

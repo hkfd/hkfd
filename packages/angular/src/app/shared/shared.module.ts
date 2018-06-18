@@ -14,6 +14,8 @@ import { SliderComponent } from './slider/slider.component';
 import { SliderWorkComponent } from './slider/slider-work/slider-work.component';
 import { ImageComponent } from './image/image.component';
 import { FormComponent } from './form/form.component';
+import { TextBlockComponent } from './blocks/text-block/text-block.component';
+import { TextComponent } from './blocks/text-block/text/text.component';
 import { ImageBlockComponent } from './blocks/image-block/image-block.component';
 import { DuoBlockComponent } from './blocks/duo-block/duo-block.component';
 import { GalleryBlockComponent } from './blocks/gallery-block/gallery-block.component';
@@ -42,6 +44,8 @@ export { Generic } from './generic';
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
+    TextBlockComponent,
+    TextComponent,
     ImageBlockComponent,
     DuoBlockComponent,
     GalleryBlockComponent,
@@ -58,6 +62,7 @@ export { Generic } from './generic';
     FooterComponent,
     SliderComponent,
     SliderWorkComponent,
+    TextBlockComponent,
     ImageBlockComponent,
     DuoBlockComponent,
     GalleryBlockComponent,

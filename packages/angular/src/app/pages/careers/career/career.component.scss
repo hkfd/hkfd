@@ -1,0 +1,50 @@
+@import '../../../../sass/mixins';
+
+:host {
+  display: block;
+  overflow: hidden;
+  background: #fff;
+  text-align: center;
+}
+
+#intro {
+  overflow: hidden;
+  background: $grey-dark;
+  color: #fff;
+  text-align: left;
+
+  #intro-info {
+    @extend %container-full;
+    margin: 15vh 0;
+
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+section {
+  .text {
+    margin: 0 auto;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+
+    li {
+      flex-grow: 1;
+      flex-basis: 100%;
+
+      @include sm {
+        flex-basis: 50%;
+      }
+    }
+  }
+}
+
+.button {
+  @extend %font-medium;
+  margin: 2em auto;
+}
