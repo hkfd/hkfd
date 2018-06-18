@@ -40,6 +40,18 @@ export class ApiService {
       );
   }
 
+  getCareer(id: string): Observable<Api.Career> {
+    return this.http
+      .get<Api.Career[]>(this.careers)
+      .pipe(
+        retry(3),
+        flatMap((careers: Api.Career[]) => careers),
+        find((career: Api.Career) => career.id === id),
+        tap((career: Api.Career) => this.logger.log('getCareer', career)),
+        catchError(this.handleError<Api.Career>('getCareer'))
+      );
+  }
+
   getPost(type: string, id: string): Observable<Api.Post> {
     let url: string;
     switch (type) {

@@ -19,7 +19,7 @@
 </section>
 
 <section id="careers">
-  <a class="career" *ngFor="let career of careers" href="mailto:hello@heckford-advertising.co.uk">
+  <a class="career" *ngFor="let career of careers" [routerLink]="career?.id">
     <div class="career-info">
       <h3>{{ career?.title | uppercase }}</h3>
       <span class="button">APPLY NOW</span>
