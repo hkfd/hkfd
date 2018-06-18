@@ -239,13 +239,49 @@ export namespace Api {
 
   export const careers: ApiTypes.Career[] = [
     {
-      title: 'Career 1'
+      id: 'career-1',
+      title: 'Career 1',
+      salary: '£0',
+      content: [
+        {
+          title: 'TextBlock',
+          data: <ApiTypes.Blocks.TextBlock[]>[
+            {
+              type: 'text'
+            }
+          ]
+        }
+      ]
     },
     {
-      title: 'Career 2'
+      id: 'career-2',
+
+      title: 'Career 2',
+      salary: '£0',
+      content: [
+        {
+          data: <ApiTypes.Blocks.TextBlock[]>[
+            {
+              type: 'text'
+            }
+          ]
+        }
+      ]
     },
     {
-      title: 'Career 3'
+      id: 'career-3',
+
+      title: 'Career 3',
+      salary: '£0',
+      content: [
+        {
+          data: <ApiTypes.Blocks.TextBlock[]>[
+            {
+              type: 'text'
+            }
+          ]
+        }
+      ]
     }
   ];
 

@@ -11,6 +11,7 @@ export class MockApiService {
     this.getCaseStudies = spyOn(this, 'getCaseStudies').and.callThrough();
     this.getClients = spyOn(this, 'getClients').and.callThrough();
     this.getCareers = spyOn(this, 'getCareers').and.callThrough();
+    this.getCareer = spyOn(this, 'getCareer').and.callThrough();
     this.getTeam = spyOn(this, 'getTeam').and.callThrough();
     this.getPost = spyOn(this, 'getPost').and.callThrough();
   }
@@ -29,6 +30,14 @@ export class MockApiService {
 
   getCareers(): Observable<Api.Career[]> {
     return Observable.of(Data.Api.careers);
+  }
+
+  getCareer(id: string): Observable<Api.Career> {
+    return Observable.of(Data.Api.careers).pipe(
+      flatMap((careers: Api.Career[]) => careers),
+      find((career: Api.Career) => career.id === id),
+      catchError(err => Observable.of(null))
+    );
   }
 
   getTeam(): Observable<Api.Team[]> {
