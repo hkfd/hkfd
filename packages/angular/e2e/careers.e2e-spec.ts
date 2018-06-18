@@ -45,13 +45,19 @@ describe('Careers', () => {
       });
     });
 
-    it('should href mailto', () => {
-      expect(
-        page
-          .getCareers()
-          .last()
-          .getAttribute('href')
-      ).toBe('mailto:hello@heckford-advertising.co.uk');
+    it('should display career salary', () => {
+      expect(page.getCareerSalary()).toBeTruthy();
+    });
+
+    it('should link to career', () => {
+      const el = page.getCareers().first();
+
+      return page
+        .isClickable(el)
+        .then(() => el.click())
+        .then(_ => {
+          expect(page.getUrl()).toContain('/careers/');
+        });
     });
 
     it('should display careers image', () => {

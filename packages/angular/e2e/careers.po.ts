@@ -6,6 +6,11 @@ export class CareersPage {
     return browser.wait(isVisible, 3000);
   }
 
+  isClickable(el: ElementFinder) {
+    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
@@ -28,7 +33,14 @@ export class CareersPage {
 
   getCareerTitle() {
     return this.getCareers()
-      .first()
+      .last()
+      .getText();
+  }
+
+  getCareerSalary() {
+    return this.getCareers()
+      .last()
+      .element(by.css('span'))
       .getText();
   }
 
