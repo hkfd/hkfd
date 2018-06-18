@@ -4,11 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../../shared/shared.module';
 import { CareersComponent } from './careers.component';
+import { CareerComponent } from './career/career.component';
 
-const routes: Routes = [{ path: '', component: CareersComponent }];
+const routes: Routes = [
+  { path: '', component: CareersComponent },
+  { path: ':id', component: CareerComponent }
+];
 
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
-  declarations: [CareersComponent]
+  declarations: [CareersComponent, CareerComponent]
 })
 export class CareersModule {}
