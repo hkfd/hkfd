@@ -148,6 +148,7 @@ h2 {
     .client {
       display: inline-block;
       margin: 0;
+      padding: 0;
       @extend %font-bold;
 
       &::before {
@@ -163,6 +164,7 @@ h2 {
       .client-name {
         display: inline-block;
         margin: 0 0.2em;
+        padding: 0;
 
         &:nth-of-type(2n) {
           color: $blue;

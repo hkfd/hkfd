@@ -14,6 +14,10 @@ export class FooterComponent {
       icon: '/assets/icons/facebook.svg'
     },
     {
+      url: 'https://twitter.com/HkfdAdvertising',
+      icon: '/assets/icons/twitter.svg'
+    },
+    {
       url: 'https://www.instagram.com/heckfordadvertising/',
       icon: '/assets/icons/instagram.svg'
     },
