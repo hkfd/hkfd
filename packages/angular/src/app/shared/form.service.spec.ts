@@ -10,26 +10,21 @@ let formService: FormService;
 let mockHttp: HttpTestingController;
 
 describe('FormService', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [FormService]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [FormService]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createService()));
 
   describe('sendEmail', () => {
-    it(
-      'should call HttpClient',
-      async(() => {
-        formService.sendEmail({ name: 'a', email: 'b@c', message: 'd' });
+    it('should call HttpClient', async(() => {
+      formService.sendEmail({ name: 'a', email: 'b@c', message: 'd' });
 
-        mockHttp.expectOne('form/form.php');
-      })
-    );
+      mockHttp.expectOne('form/form.php');
+    }));
   });
 });
 

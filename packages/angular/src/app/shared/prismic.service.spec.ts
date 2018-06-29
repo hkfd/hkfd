@@ -7,13 +7,11 @@ let prismicService: PrismicService;
 let service: Service;
 
 describe('PrismicService', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        providers: [PrismicService, LoggerService]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      providers: [PrismicService, LoggerService]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createService()));
 

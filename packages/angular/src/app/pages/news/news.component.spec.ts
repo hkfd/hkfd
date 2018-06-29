@@ -28,20 +28,18 @@ let richText: RichTextStub;
 let page: Page;
 
 describe('NewsComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule, NoopAnimationsModule],
-        declarations: [NewsComponent, MockPrismicPipe],
-        providers: [
-          { provide: TitleService, useClass: MockTitleService },
-          { provide: PrismicService, useClass: MockPrismicService },
-          LoggerService
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, NoopAnimationsModule],
+      declarations: [NewsComponent, MockPrismicPipe],
+      providers: [
+        { provide: TitleService, useClass: MockTitleService },
+        { provide: PrismicService, useClass: MockPrismicService },
+        LoggerService
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

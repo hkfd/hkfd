@@ -20,19 +20,17 @@ let apiService: ApiService;
 let apiPipe: jasmine.Spy;
 
 describe('HomeComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [HomeComponent, MockApiPipe],
-        providers: [
-          { provide: TitleService, useClass: MockTitleService },
-          { provide: ApiService, useClass: MockApiService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [HomeComponent, MockApiPipe],
+      providers: [
+        { provide: TitleService, useClass: MockTitleService },
+        { provide: ApiService, useClass: MockApiService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

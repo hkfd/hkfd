@@ -9,13 +9,11 @@ let fixture: ComponentFixture<FooterComponent>;
 let page: Page;
 
 describe('FooterComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [FooterComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [FooterComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

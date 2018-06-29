@@ -11,13 +11,11 @@ let _console: ConsoleStub;
 let raven: RavenStub;
 
 describe('LoggerService', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        providers: [LoggerService]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      providers: [LoggerService]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createService()));
 

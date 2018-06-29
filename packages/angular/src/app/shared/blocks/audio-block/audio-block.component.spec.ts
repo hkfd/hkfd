@@ -10,13 +10,11 @@ let fixture: ComponentFixture<AudioBlockComponent>;
 let page: Page;
 
 describe('AudioBlockComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [AudioBlockComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [AudioBlockComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

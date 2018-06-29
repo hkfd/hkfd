@@ -12,13 +12,11 @@ let page: Page;
 let lazyDirective: LazyDirective;
 
 describe('VideoBlockComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [VideoBlockComponent, LazyDirective]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [VideoBlockComponent, LazyDirective]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

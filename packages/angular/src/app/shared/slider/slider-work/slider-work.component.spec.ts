@@ -11,16 +11,14 @@ let apiPipe: ApiPipeStub;
 let page: Page;
 
 describe('SliderWorkComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [SliderWorkComponent],
-        providers: [{ provide: ApiPipe, useClass: MockApiPipe }],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [SliderWorkComponent],
+      providers: [{ provide: ApiPipe, useClass: MockApiPipe }],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

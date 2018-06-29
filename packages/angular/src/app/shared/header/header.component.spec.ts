@@ -15,14 +15,12 @@ let router: RouterStub;
 let slicePipe: jasmine.Spy;
 
 describe('HeaderComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule, NoopAnimationsModule],
-        declarations: [HeaderComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, NoopAnimationsModule],
+      declarations: [HeaderComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

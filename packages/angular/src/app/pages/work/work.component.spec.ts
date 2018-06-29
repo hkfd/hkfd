@@ -21,20 +21,18 @@ let apiPipe: ApiPipeStub;
 let page: Page;
 
 describe('WorkComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule, NoopAnimationsModule],
-        declarations: [WorkComponent],
-        providers: [
-          { provide: TitleService, useClass: MockTitleService },
-          { provide: ApiService, useClass: MockApiService },
-          { provide: ApiPipe, useClass: MockApiPipe }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, NoopAnimationsModule],
+      declarations: [WorkComponent],
+      providers: [
+        { provide: TitleService, useClass: MockTitleService },
+        { provide: ApiService, useClass: MockApiService },
+        { provide: ApiPipe, useClass: MockApiPipe }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

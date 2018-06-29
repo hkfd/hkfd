@@ -12,13 +12,11 @@ let page: Page;
 let lazyDirective: LazyDirective;
 
 describe('ImageComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [ImageComponent, LazyDirective]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ImageComponent, LazyDirective]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

@@ -17,20 +17,18 @@ let page: Page;
 let formService: FormServiceStub;
 
 describe('FormComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [ReactiveFormsModule, NoopAnimationsModule],
-        declarations: [FormComponent],
-        providers: [
-          LoggerService,
-          FormBuilder,
-          { provide: FormService, useClass: MockFormService }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, NoopAnimationsModule],
+      declarations: [FormComponent],
+      providers: [
+        LoggerService,
+        FormBuilder,
+        { provide: FormService, useClass: MockFormService }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 
@@ -233,184 +231,154 @@ describe('FormComponent', () => {
     });
 
     describe('resolve', () => {
-      it(
-        `should set formSent as 'true'`,
-        async(() => {
-          comp.form.markAsTouched();
-          comp.form.controls.name.setValue('a');
-          comp.form.controls.email.setValue('b@c');
-          comp.form.controls.message.setValue('d');
-          comp.submitForm();
+      it(`should set formSent as 'true'`, async(() => {
+        comp.form.markAsTouched();
+        comp.form.controls.name.setValue('a');
+        comp.form.controls.email.setValue('b@c');
+        comp.form.controls.message.setValue('d');
+        comp.submitForm();
+        fixture.detectChanges();
+
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
+          expect(comp.formSent).toBe(true);
+        });
+      }));
 
-            expect(comp.formSent).toBe(true);
-          });
-        })
-      );
+      it('should show form sent', async(() => {
+        comp.form.markAsTouched();
+        comp.form.controls.name.setValue('a');
+        comp.form.controls.email.setValue('b@c');
+        comp.form.controls.message.setValue('d');
+        comp.submitForm();
+        fixture.detectChanges();
 
-      it(
-        'should show form sent',
-        async(() => {
-          comp.form.markAsTouched();
-          comp.form.controls.name.setValue('a');
-          comp.form.controls.email.setValue('b@c');
-          comp.form.controls.message.setValue('d');
-          comp.submitForm();
+        return fixture.whenStable().then(_ => {
+          fixture.detectChanges();
+          const formSent = fixture.debugElement.query(By.css('#form-sent'));
+
+          expect(formSent).toBeTruthy();
+        });
+      }));
+
+      it('should not show error', async(() => {
+        comp.form.markAsTouched();
+        comp.form.controls.name.setValue('a');
+        comp.form.controls.email.setValue('b@c');
+        comp.form.controls.message.setValue('d');
+        comp.submitForm();
+        fixture.detectChanges();
+
+        return fixture.whenStable().then(_ => {
+          fixture.detectChanges();
+          const error = fixture.debugElement.query(By.css('.error'));
+
+          expect(error).toBeFalsy();
+        });
+      }));
+
+      it('should disable submit button', async(() => {
+        comp.form.markAsTouched();
+        comp.submitForm();
+        fixture.detectChanges();
+
+        return fixture.whenStable().then(_ => {
+          fixture.detectChanges();
+          const submitButton: HTMLButtonElement = fixture.debugElement.query(
+            By.css('button[type="submit"]')
+          ).nativeElement;
+
+          expect(submitButton.disabled).toBe(true);
+        });
+      }));
+
+      it('should call ga', async(() => {
+        comp.form.controls.name.setValue('a');
+        comp.form.controls.email.setValue('b@c');
+        comp.form.controls.message.setValue('d');
+        comp.submitForm();
+        fixture.detectChanges();
+
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-            const formSent = fixture.debugElement.query(By.css('#form-sent'));
+          expect(app.ga).toHaveBeenCalled();
+        });
+      }));
 
-            expect(formSent).toBeTruthy();
-          });
-        })
-      );
+      it('should call ga with params', async(() => {
+        comp.form.controls.name.setValue('a');
+        comp.form.controls.email.setValue('b@c');
+        comp.form.controls.message.setValue('d');
+        comp.submitForm();
+        fixture.detectChanges();
 
-      it(
-        'should not show error',
-        async(() => {
-          comp.form.markAsTouched();
-          comp.form.controls.name.setValue('a');
-          comp.form.controls.email.setValue('b@c');
-          comp.form.controls.message.setValue('d');
-          comp.submitForm();
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-            const error = fixture.debugElement.query(By.css('.error'));
-
-            expect(error).toBeFalsy();
-          });
-        })
-      );
-
-      it(
-        'should disable submit button',
-        async(() => {
-          comp.form.markAsTouched();
-          comp.submitForm();
-          fixture.detectChanges();
-
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-            const submitButton: HTMLButtonElement = fixture.debugElement.query(
-              By.css('button[type="submit"]')
-            ).nativeElement;
-
-            expect(submitButton.disabled).toBe(true);
-          });
-        })
-      );
-
-      it(
-        'should call ga',
-        async(() => {
-          comp.form.controls.name.setValue('a');
-          comp.form.controls.email.setValue('b@c');
-          comp.form.controls.message.setValue('d');
-          comp.submitForm();
-          fixture.detectChanges();
-
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-
-            expect(app.ga).toHaveBeenCalled();
-          });
-        })
-      );
-
-      it(
-        'should call ga with params',
-        async(() => {
-          comp.form.controls.name.setValue('a');
-          comp.form.controls.email.setValue('b@c');
-          comp.form.controls.message.setValue('d');
-          comp.submitForm();
-          fixture.detectChanges();
-
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-
-            expect(app.ga).toHaveBeenCalledWith(
-              'send',
-              'event',
-              'Contact Form',
-              jasmine.any(String)
-            );
-          });
-        })
-      );
+          expect(app.ga).toHaveBeenCalledWith(
+            'send',
+            'event',
+            'Contact Form',
+            jasmine.any(String)
+          );
+        });
+      }));
     });
 
     describe('reject', () => {
-      it(
-        `should set formSent as 'false'`,
-        async(() => {
-          comp.submitForm();
+      it(`should set formSent as 'false'`, async(() => {
+        comp.submitForm();
+        fixture.detectChanges();
+
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
+          expect(comp.formSent).toBe(false);
+        });
+      }));
 
-            expect(comp.formSent).toBe(false);
-          });
-        })
-      );
+      it('should show error', async(() => {
+        comp.form.markAsTouched();
+        comp.submitForm();
+        fixture.detectChanges();
 
-      it(
-        'should show error',
-        async(() => {
-          comp.form.markAsTouched();
-          comp.submitForm();
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
+          const error = fixture.debugElement.query(By.css('.error'));
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-            const error = fixture.debugElement.query(By.css('.error'));
+          expect(error).toBeTruthy();
+        });
+      }));
 
-            expect(error).toBeTruthy();
-          });
-        })
-      );
+      it('should not show form sent', async(() => {
+        comp.form.markAsTouched();
+        comp.submitForm();
+        fixture.detectChanges();
 
-      it(
-        'should not show form sent',
-        async(() => {
-          comp.form.markAsTouched();
-          comp.submitForm();
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
+          const formSent = fixture.debugElement.query(By.css('#form-sent'));
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-            const formSent = fixture.debugElement.query(By.css('#form-sent'));
+          expect(formSent).toBeFalsy();
+        });
+      }));
 
-            expect(formSent).toBeFalsy();
-          });
-        })
-      );
+      it('should disable submit button', async(() => {
+        comp.form.markAsTouched();
+        comp.submitForm();
+        fixture.detectChanges();
 
-      it(
-        'should disable submit button',
-        async(() => {
-          comp.form.markAsTouched();
-          comp.submitForm();
+        return fixture.whenStable().then(_ => {
           fixture.detectChanges();
+          const submitButton: HTMLButtonElement = fixture.debugElement.query(
+            By.css('button[type="submit"]')
+          ).nativeElement;
 
-          return fixture.whenStable().then(_ => {
-            fixture.detectChanges();
-            const submitButton: HTMLButtonElement = fixture.debugElement.query(
-              By.css('button[type="submit"]')
-            ).nativeElement;
-
-            expect(submitButton.disabled).toBe(true);
-          });
-        })
-      );
+          expect(submitButton.disabled).toBe(true);
+        });
+      }));
     });
   });
 });

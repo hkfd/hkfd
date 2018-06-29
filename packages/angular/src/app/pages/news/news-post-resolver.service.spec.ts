@@ -13,19 +13,17 @@ let newsPostResolver: NewsPostResolver;
 let prismicService: PrismicService;
 
 describe('NewsPostResolver', () => {
-  beforeEach(
-    async(() => {
-      activatedRoute = new ActivatedRouteStub();
+  beforeEach(async(() => {
+    activatedRoute = new ActivatedRouteStub();
 
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        providers: [
-          NewsPostResolver,
-          { provide: PrismicService, useClass: MockPrismicService }
-        ]
-      }).compileComponents();
-    })
-  );
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      providers: [
+        NewsPostResolver,
+        { provide: PrismicService, useClass: MockPrismicService }
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createService()));
 

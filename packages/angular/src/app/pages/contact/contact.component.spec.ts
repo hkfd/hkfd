@@ -18,16 +18,14 @@ let titleService: TitleService;
 let apiPipe: jasmine.Spy;
 
 describe('ContactComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [ContactComponent, MockApiPipe],
-        providers: [{ provide: TitleService, useClass: MockTitleService }],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [ContactComponent, MockApiPipe],
+      providers: [{ provide: TitleService, useClass: MockTitleService }],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

@@ -30,24 +30,22 @@ let richText: RichTextStub;
 let page: Page;
 
 describe('NewsPostComponent', () => {
-  beforeEach(
-    async(() => {
-      activatedRoute = new ActivatedRouteStub();
-      activatedRoute.testData = { post: Data.Prismic.posts[0] };
+  beforeEach(async(() => {
+    activatedRoute = new ActivatedRouteStub();
+    activatedRoute.testData = { post: Data.Prismic.posts[0] };
 
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [NewsPostComponent, MockPrismicPipe],
-        providers: [
-          { provide: TitleService, useClass: MockTitleService },
-          { provide: PrismicService, useClass: MockPrismicService },
-          { provide: ActivatedRoute, useValue: activatedRoute },
-          LoggerService
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [NewsPostComponent, MockPrismicPipe],
+      providers: [
+        { provide: TitleService, useClass: MockTitleService },
+        { provide: PrismicService, useClass: MockPrismicService },
+        { provide: ActivatedRoute, useValue: activatedRoute },
+        LoggerService
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

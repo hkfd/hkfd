@@ -24,17 +24,12 @@ class TestHostComponent {
 }
 
 describe('LazyDirective', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [LazyDirective, TestHostComponent],
-        providers: [
-          Renderer2,
-          { provide: ElementRef, useClass: ElementRefStub }
-        ]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [LazyDirective, TestHostComponent],
+      providers: [Renderer2, { provide: ElementRef, useClass: ElementRefStub }]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

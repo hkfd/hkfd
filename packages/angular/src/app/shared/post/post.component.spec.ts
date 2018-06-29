@@ -25,22 +25,20 @@ let activatedRoute: ActivatedRouteStub;
 let apiPipe: jasmine.Spy;
 
 describe('PostComponent', () => {
-  beforeEach(
-    async(() => {
-      activatedRoute = new ActivatedRouteStub();
+  beforeEach(async(() => {
+    activatedRoute = new ActivatedRouteStub();
 
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [PostComponent, MockApiPipe],
-        providers: [
-          { provide: TitleService, useClass: MockTitleService },
-          { provide: ApiService, useClass: MockApiService },
-          { provide: ActivatedRoute, useValue: activatedRoute }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [PostComponent, MockApiPipe],
+      providers: [
+        { provide: TitleService, useClass: MockTitleService },
+        { provide: ApiService, useClass: MockApiService },
+        { provide: ActivatedRoute, useValue: activatedRoute }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 
@@ -162,8 +160,9 @@ describe('PostComponent', () => {
       });
 
       it(`should not set full-bleed attibute if no fullBleed`, () => {
-        (<Api.Blocks.ImageBlock>comp.post.content[0]
-          .data[0]).fullBleed = undefined;
+        (<Api.Blocks.ImageBlock>(
+          comp.post.content[0].data[0]
+        )).fullBleed = undefined;
         fixture.detectChanges();
 
         expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(

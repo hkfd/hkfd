@@ -13,13 +13,11 @@ let richText: RichTextStub;
 let page: Page;
 
 describe('TextBlockComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [TextBlockComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [TextBlockComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 

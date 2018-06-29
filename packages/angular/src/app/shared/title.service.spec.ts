@@ -7,13 +7,11 @@ let titleService: TitleService;
 let title: TitleStub;
 
 describe('TitleService', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        providers: [TitleService]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      providers: [TitleService]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createService()));
 

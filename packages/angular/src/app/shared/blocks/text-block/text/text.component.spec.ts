@@ -10,13 +10,11 @@ let fixture: ComponentFixture<TextComponent>;
 let page: Page;
 
 describe('TextComponent', () => {
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [TextComponent]
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [TextComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 
