@@ -2,9 +2,9 @@ export { Router, ActivatedRoute } from '@angular/router';
 export { RouterTestingModule } from '@angular/router/testing';
 
 import { Injectable } from '@angular/core';
-
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { convertToParamMap, ParamMap } from '@angular/router';
+
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class ActivatedRouteStub {

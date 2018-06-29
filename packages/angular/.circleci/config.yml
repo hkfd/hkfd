@@ -38,7 +38,7 @@ jobs:
             rm google-chrome.deb
       - run:
           name: spec
-          command: yarn run test --single-run --no-progress --browser=ChromeNoSandbox
+          command: yarn test --watch=false --no-progress --browsers=ChromeNoSandbox
       - run:
           name: e2e
-          command: xvfb-run -a yarn run e2e --no-progress --config=protractor-ci.conf.js
+          command: xvfb-run -a yarn e2e --protractor-config=protractor-ci.conf.js

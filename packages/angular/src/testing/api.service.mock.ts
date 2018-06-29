@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 import { map, flatMap, find, catchError } from 'rxjs/operators';
 
 import { Api } from '../app/shared/shared.module';
@@ -17,31 +16,31 @@ export class MockApiService {
   }
 
   getServices(): Observable<Api.Service[]> {
-    return Observable.of(Data.Api.services);
+    return of(Data.Api.services);
   }
 
   getCaseStudies(): Observable<Api.CaseStudy[]> {
-    return Observable.of(Data.Api.caseStudies);
+    return of(Data.Api.caseStudies);
   }
 
   getClients(): Observable<Api.Client[]> {
-    return Observable.of(Data.Api.clients);
+    return of(Data.Api.clients);
   }
 
   getCareers(): Observable<Api.Career[]> {
-    return Observable.of(Data.Api.careers);
+    return of(Data.Api.careers);
   }
 
-  getCareer(id: string): Observable<Api.Career> {
-    return Observable.of(Data.Api.careers).pipe(
+  getCareer(id: string): Observable<Api.Career | {}> {
+    return of(Data.Api.careers).pipe(
       flatMap((careers: Api.Career[]) => careers),
       find((career: Api.Career) => career.id === id),
-      catchError(err => Observable.of(null))
+      catchError(err => of(null))
     );
   }
 
   getTeam(): Observable<Api.Team[]> {
-    return Observable.of(Data.Api.team);
+    return of(Data.Api.team);
   }
 
   getPost(type: string, id: string): Observable<Api.Post> {
@@ -49,10 +48,10 @@ export class MockApiService {
     if (type === 'service') url = Data.Api.services;
     if (type === 'work') url = Data.Api.caseStudies;
 
-    return Observable.of(<Api.Post[]>url).pipe(
+    return of(<Api.Post[]>url).pipe(
       flatMap((posts: Api.Post[]) => posts),
       find((post: Api.Post) => post.id === id),
-      catchError(err => Observable.of(null))
+      catchError(err => of(null))
     );
   }
 }

@@ -6,7 +6,7 @@ import {
   NavigationEnd
 } from '@angular/router';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { environment } from '../environments/environment';
 import { AppAnimations } from './app.animations';

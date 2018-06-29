@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { TitleService, ApiService, Api } from '../../shared/shared.module';
 
@@ -26,8 +26,10 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.post$ = this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.apiService.getPost(params.get('type'), params.get('id'))
+      .pipe(
+        switchMap((params: ParamMap) =>
+          this.apiService.getPost(params.get('type'), params.get('id'))
+        )
       )
       .subscribe((post: Api.Post) => {
         if (!post) return this.router.navigateByUrl('/');
