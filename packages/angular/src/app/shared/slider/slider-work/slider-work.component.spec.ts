@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { RouterTestingModule, MockApiPipe, Data } from '../../../../testing';
-import { ApiPipe } from '../../shared.module';
+import { RouterTestingModule, MockApiPipe, Data } from 'testing';
+import { ApiPipe } from 'shared';
 import { SliderWorkComponent } from './slider-work.component';
 
 let comp: SliderWorkComponent;

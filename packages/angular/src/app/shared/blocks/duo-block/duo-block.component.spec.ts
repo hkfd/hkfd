@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { SlicePipe } from '@angular/common';
 
-import { Data } from '../../../../testing';
+import { Data } from 'testing';
 import { DuoBlockComponent } from './duo-block.component';
 
 let comp: DuoBlockComponent;

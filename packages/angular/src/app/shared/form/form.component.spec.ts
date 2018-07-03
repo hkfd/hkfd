@@ -3,11 +3,10 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MockFormService } from '../../../testing';
+import { MockFormService } from 'testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
-import { LoggerService } from '../logger.service';
-import { FormService } from '../form.service';
+import { LoggerService, FormService } from 'shared';
 import { FormComponent } from './form.component';
 
 const app = <any>window;

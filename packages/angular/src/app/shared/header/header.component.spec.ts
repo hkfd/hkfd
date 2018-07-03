@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SlicePipe } from '@angular/common';
 
-import { Router, RouterTestingModule } from '../../../testing';
+import { Router, RouterTestingModule } from 'testing';
 
 import { HeaderComponent } from './header.component';
 

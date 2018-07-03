@@ -7,7 +7,9 @@ import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 import { Api } from 'api';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
   services = 'api/services.json';
   caseStudies = 'api/case-studies.json';

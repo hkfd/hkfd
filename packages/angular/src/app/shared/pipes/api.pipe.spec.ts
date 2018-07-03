@@ -1,4 +1,4 @@
-import { Data } from '../../../testing';
+import { Data } from 'testing';
 import { ApiPipe, Sizes } from './api.pipe';
 
 let pipe: ApiPipe;

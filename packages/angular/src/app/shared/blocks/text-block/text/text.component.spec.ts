@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { Data } from '../../../../../testing';
+import { Data } from 'testing';
 import { TextComponent } from './text.component';
 
 let comp: TextComponent;

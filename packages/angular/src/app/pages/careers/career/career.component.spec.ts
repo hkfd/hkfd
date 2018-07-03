@@ -10,9 +10,9 @@ import {
   ActivatedRoute,
   ActivatedRouteStub,
   Data
-} from '../../../../testing';
+} from 'testing';
 
-import { TitleService, ApiService, Api } from '../../../shared/shared.module';
+import { TitleService, ApiService, Api } from 'shared';
 import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;

@@ -8,7 +8,7 @@ import {
   NgZone
 } from '@angular/core';
 
-import { Generic } from '../shared.module';
+import { Generic } from 'shared';
 
 @Component({
   selector: 'slider',

@@ -4,9 +4,11 @@ import { getApi, Predicates } from 'prismic-javascript';
 
 import { LoggerService } from './logger.service';
 import { Prismic } from './prismic';
-import { environment } from '../../environments/environment';
+import { environment } from 'environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PrismicService {
   private api = getApi(environment.prismic.endpoint);
   postPage: number = 1;

@@ -1,4 +1,4 @@
-import { Generic as GenericType } from '../app/shared/shared.module';
+import { Generic as GenericType } from 'shared';
 
 export namespace Generic {
   export const image: GenericType.Image = {

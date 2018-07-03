@@ -7,8 +7,8 @@ import {
   MockApiService,
   MockApiPipe,
   ActivatedRouteStub
-} from '../../../testing';
-import { ApiService } from '../../shared/shared.module';
+} from 'testing';
+import { ApiService } from 'shared';
 import { CareerResolver } from './career-resolver.service';
 import { CareersComponent } from './careers.component';
 

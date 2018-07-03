@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { RichText } from 'prismic-dom';
 
-import { Prismic } from '../../../../shared/shared.module';
+import { Prismic } from 'shared';
 
 @Component({
   selector: 'prismic-text-block',

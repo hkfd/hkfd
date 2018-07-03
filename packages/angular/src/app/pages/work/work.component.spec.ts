@@ -8,9 +8,9 @@ import {
   MockTitleService,
   MockApiService,
   MockApiPipe
-} from '../../../testing';
+} from 'testing';
 
-import { TitleService, ApiService, ApiPipe } from '../../shared/shared.module';
+import { TitleService, ApiService, ApiPipe } from 'shared';
 import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;

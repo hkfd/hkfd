@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { Data } from '../../../../testing';
+import { Data } from 'testing';
 import { AudioBlockComponent } from './audio-block.component';
 
 let comp: AudioBlockComponent;

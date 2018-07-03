@@ -1,4 +1,4 @@
-import { Api as ApiTypes } from '../app/shared/shared.module';
+import { Api as ApiTypes } from 'shared';
 
 export namespace Api {
   export const services: ApiTypes.Service[] = [

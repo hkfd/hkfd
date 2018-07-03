@@ -6,9 +6,8 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { Data } from '../../testing';
-import { LoggerService } from './shared.module';
-import { ApiService } from './api.service';
+import { Data } from 'testing';
+import { ApiService, LoggerService } from 'shared';
 
 let apiService: ApiService;
 let mockHttp: HttpTestingController;

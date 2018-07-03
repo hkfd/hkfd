@@ -4,8 +4,8 @@ import {
   RouterTestingModule,
   MockPrismicService,
   ActivatedRouteStub
-} from '../../../testing';
-import { PrismicService } from '../../shared/shared.module';
+} from 'testing';
+import { PrismicService } from 'shared';
 import { NewsPostResolver } from './news-post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;

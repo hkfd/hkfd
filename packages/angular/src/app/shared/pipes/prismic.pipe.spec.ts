@@ -1,4 +1,4 @@
-import { Data } from '../../../testing';
+import { Data } from 'testing';
 import { PrismicPipe } from './prismic.pipe';
 
 let pipe: PrismicPipe;

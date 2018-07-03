@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 
 import * as Raven from 'raven-js';
 
-import { environment } from '../../environments/environment';
+import { environment } from 'environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoggerService {
   log(val: any, ...params: any[]) {
     if (environment.production) return;

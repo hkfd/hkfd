@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { LoggerService } from '../logger.service';
-import { FormService } from '../form.service';
+import { LoggerService, FormService } from 'shared';
 import { FormAnimations } from './form.animations';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Api } from '../../shared/shared.module';
+import { Api } from 'shared';
 
 export const ContactImages: { [name: string]: { image: Api.Image } } = {
   contact: {

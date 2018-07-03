@@ -1,8 +1,7 @@
 import { Component, Input, NgZone } from '@angular/core';
 
 import { SliderComponent } from '../slider.component';
-import { ApiPipe } from '../../pipes/api.pipe';
-import { Api } from '../../shared.module';
+import { ApiPipe, Api } from 'shared';
 
 @Component({
   selector: 'slider-work',

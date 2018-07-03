@@ -3,11 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ApiService } from './api.service';
-import { PrismicService } from './prismic.service';
-import { FormService } from './form.service';
-import { TitleService } from './title.service';
-import { LoggerService } from './logger.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
@@ -24,18 +19,6 @@ import { AudioBlockComponent } from './blocks/audio-block/audio-block.component'
 import { ApiPipe } from './pipes/api.pipe';
 import { PrismicPipe } from './pipes/prismic.pipe';
 import { LazyDirective } from './lazy.directive';
-
-export { ApiService } from './api.service';
-export { PrismicService } from './prismic.service';
-export { FormService } from './form.service';
-export { TitleService } from './title.service';
-export { LoggerService } from './logger.service';
-export { ApiPipe } from './pipes/api.pipe';
-export { PrismicPipe } from './pipes/prismic.pipe';
-export { LazyDirective } from './lazy.directive';
-export { Api } from '../../api/src/api';
-export { Prismic } from './prismic';
-export { Generic } from './generic';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
@@ -74,13 +57,6 @@ export { Generic } from './generic';
     ApiPipe,
     PrismicPipe
   ],
-  providers: [
-    ApiService,
-    PrismicService,
-    FormService,
-    TitleService,
-    LoggerService,
-    ApiPipe
-  ]
+  providers: [ApiPipe]
 })
 export class SharedModule {}

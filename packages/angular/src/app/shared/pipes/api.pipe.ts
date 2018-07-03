@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Api } from 'api';
-import { Generic } from '../generic';
-import { environment } from '../../../environments/environment';
+import { environment } from 'environment';
+import { Api, Generic } from 'shared';
 
 export const Sizes = [
   { width: 550, height: 300 },

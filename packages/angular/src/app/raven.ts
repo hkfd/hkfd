@@ -2,7 +2,7 @@ import { ErrorHandler } from '@angular/core';
 
 import * as Raven from 'raven-js';
 
-import { environment } from '../environments/environment';
+import { environment } from 'environment';
 
 export class RavenErrorHandler implements ErrorHandler {
   constructor() {

@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { Data } from '../../../../testing';
-import { LazyDirective } from '../../shared.module';
+import { Data } from 'testing';
+import { LazyDirective } from 'shared';
 import { VideoBlockComponent } from './video-block.component';
 
 let comp: VideoBlockComponent;

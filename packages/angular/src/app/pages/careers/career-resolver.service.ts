@@ -4,8 +4,7 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 
-import { ApiService } from '../../shared/api.service';
-import { Api } from 'api';
+import { ApiService, Api } from 'shared';
 
 @Injectable()
 export class CareerResolver implements Resolve<Api.Career> {

@@ -7,9 +7,9 @@ import {
   MockApiService,
   MockApiPipe,
   Data
-} from '../../../testing';
+} from 'testing';
 
-import { TitleService, ApiService, Api } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from 'shared';
 import { HomeImages } from './home.images';
 import { HomeComponent } from './home.component';
 

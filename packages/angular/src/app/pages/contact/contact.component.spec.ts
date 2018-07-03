@@ -2,13 +2,9 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import {
-  RouterTestingModule,
-  MockTitleService,
-  MockApiPipe
-} from '../../../testing';
+import { RouterTestingModule, MockTitleService, MockApiPipe } from 'testing';
 
-import { TitleService } from '../../shared/shared.module';
+import { TitleService } from 'shared';
 import { ContactImages } from './contact.images';
 import { ContactComponent } from './contact.component';
 

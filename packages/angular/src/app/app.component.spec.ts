@@ -3,7 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Router, RouterTestingModule, Renderer2 } from '../testing';
+import { Router, RouterTestingModule, Renderer2 } from 'testing';
 
 import { AppComponent } from './app.component';
 

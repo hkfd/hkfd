@@ -5,11 +5,7 @@ import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RichText } from 'prismic-dom';
 
-import {
-  TitleService,
-  LoggerService,
-  Prismic
-} from '../../../shared/shared.module';
+import { TitleService, LoggerService, Prismic } from 'shared';
 
 @Component({
   selector: 'app-news-post',

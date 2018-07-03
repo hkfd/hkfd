@@ -1,5 +1,5 @@
 import { Data } from './';
-import { Prismic } from '../app/shared/prismic';
+import { Prismic } from 'shared';
 
 export class MockPrismicService {
   constructor() {

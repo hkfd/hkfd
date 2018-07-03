@@ -8,7 +8,7 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { environment } from '../environments/environment';
+import { environment } from 'environment';
 import { AppAnimations } from './app.animations';
 
 @Component({

@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { Data } from '../../../../../testing';
+import { Data } from 'testing';
 
-import { Prismic } from '../../../../shared/shared.module';
+import { Prismic } from 'shared';
 import { TextBlockComponent } from './text-block.component';
 
 let comp: TextBlockComponent;

@@ -2,8 +2,8 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Data } from '../../../testing';
-import { LazyDirective } from '../shared.module';
+import { Data } from 'testing';
+import { LazyDirective } from 'shared';
 import { ImageComponent } from './image.component';
 
 let comp: ImageComponent;

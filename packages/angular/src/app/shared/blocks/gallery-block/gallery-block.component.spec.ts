@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { Data } from '../../../../testing';
+import { Data } from 'testing';
 import { GalleryBlockComponent } from './gallery-block.component';
 
 let comp: GalleryBlockComponent;

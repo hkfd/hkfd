@@ -3,8 +3,7 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import * as Cookies from 'js-cookie';
 
-import { PrismicService } from '../../shared/prismic.service';
-import { Prismic } from '../../shared/prismic';
+import { PrismicService, Prismic } from 'shared';
 
 const PREVIEW_EXPIRES = 30 * 60 * 1000;
 

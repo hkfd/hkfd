@@ -10,9 +10,9 @@ import {
   MockApiPipe,
   ActivatedRoute,
   ActivatedRouteStub
-} from '../../../testing';
+} from 'testing';
 
-import { TitleService, ApiService, Api } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from 'shared';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;

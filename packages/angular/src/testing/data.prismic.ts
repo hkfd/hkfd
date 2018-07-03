@@ -1,4 +1,4 @@
-import { Prismic as PrismicType } from '../app/shared/shared.module';
+import { Prismic as PrismicType } from 'shared';
 
 export namespace Prismic {
   export const postsResponse: PrismicType.PostsResponse = {

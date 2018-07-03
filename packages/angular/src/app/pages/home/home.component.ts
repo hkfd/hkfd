@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { TitleService, ApiService, Api } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from 'shared';
 import { HomeImages } from './home.images';
 
 @Component({

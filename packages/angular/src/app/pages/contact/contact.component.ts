@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TitleService } from '../../shared/shared.module';
+import { TitleService } from 'shared';
 import { ContactImages } from './contact.images';
 
 @Component({

@@ -9,7 +9,7 @@ import {
 import { DebugElement, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { Data } from '../../../testing';
+import { Data } from 'testing';
 import { SliderComponent } from './slider.component';
 
 let comp: SliderComponent;

@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const url = 'form/form.php';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FormService {
   constructor(private http: HttpClient) {}
 

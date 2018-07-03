@@ -10,14 +10,9 @@ import {
   MockPrismicService,
   MockPrismicPipe,
   Data
-} from '../../../../testing';
+} from 'testing';
 
-import {
-  TitleService,
-  PrismicService,
-  LoggerService,
-  Prismic
-} from '../../../shared/shared.module';
+import { TitleService, PrismicService, LoggerService, Prismic } from 'shared';
 import { NewsPostComponent } from './news-post.component';
 
 let activatedRoute: ActivatedRouteStub;

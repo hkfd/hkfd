@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Renderer2, ElementRef, ElementRefStub } from '../../testing';
+import { Renderer2, ElementRef, ElementRefStub } from 'testing';
 import { LazyDirective } from './lazy.directive';
 import { Generic } from './generic';
 

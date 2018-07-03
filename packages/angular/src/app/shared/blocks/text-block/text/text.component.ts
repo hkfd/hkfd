@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Api } from '../../../shared.module';
+import { Api } from 'shared';
 
 @Component({
   selector: 'text',

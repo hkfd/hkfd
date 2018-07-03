@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 
 import * as Raven from 'raven-js';
 
-import { environment } from '../../environments/environment';
+import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 
 let loggerService: LoggerService;

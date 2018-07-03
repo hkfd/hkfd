@@ -9,14 +9,9 @@ import {
   MockPrismicService,
   MockPrismicPipe,
   Data
-} from '../../../testing';
+} from 'testing';
 
-import {
-  TitleService,
-  PrismicService,
-  LoggerService,
-  Prismic
-} from '../../shared/shared.module';
+import { TitleService, PrismicService, LoggerService, Prismic } from 'shared';
 import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;

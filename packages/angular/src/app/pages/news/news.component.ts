@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { RichText } from 'prismic-dom';
 
-import {
-  PrismicService,
-  TitleService,
-  LoggerService,
-  Prismic
-} from '../../shared/shared.module';
+import { TitleService, PrismicService, LoggerService, Prismic } from 'shared';
 import { NewsAnimations } from './news.animations';
 
 @Component({

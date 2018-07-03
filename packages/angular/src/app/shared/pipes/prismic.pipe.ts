@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Prismic } from '../prismic';
-import { Generic } from '../generic';
+import { Prismic, Generic } from 'shared';
 
 @Pipe({
   name: 'prismic'

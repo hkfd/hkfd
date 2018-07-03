@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { TitleService, ApiService, Api } from '../../shared/shared.module';
+import { TitleService, ApiService, Api } from 'shared';
 
 @Component({
   selector: 'app-post',
