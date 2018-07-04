@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
@@ -17,7 +18,21 @@ export class ApiService {
   careers = 'api/careers.json';
   clients = 'api/clients.json';
 
-  constructor(private http: HttpClient, private logger: LoggerService) {}
+  constructor(
+    private http: HttpClient,
+    private logger: LoggerService,
+    @Optional()
+    @Inject(APP_BASE_HREF)
+    origin: string
+  ) {
+    if (!origin) return;
+
+    this.services = `${origin}${this.services}`;
+    this.caseStudies = `${origin}${this.caseStudies}`;
+    this.team = `${origin}${this.team}`;
+    this.careers = `${origin}${this.careers}`;
+    this.clients = `${origin}${this.clients}`;
+  }
 
   getServices(): Observable<Api.Service[]> {
     return this.http.get<Api.Service[]>(this.services).pipe(

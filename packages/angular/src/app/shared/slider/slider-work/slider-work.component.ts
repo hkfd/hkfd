@@ -1,4 +1,4 @@
-import { Component, Input, NgZone } from '@angular/core';
+import { Component, Input, NgZone, Inject, PLATFORM_ID } from '@angular/core';
 
 import { SliderComponent } from '../slider.component';
 import { ApiPipe, Api } from 'shared';
@@ -11,8 +11,12 @@ import { ApiPipe, Api } from 'shared';
 export class SliderWorkComponent extends SliderComponent {
   private _caseStudies: Api.CaseStudy[];
 
-  constructor(zone: NgZone, private apiPipe: ApiPipe) {
-    super(zone);
+  constructor(
+    zone: NgZone,
+    @Inject(PLATFORM_ID) platformId: Object,
+    private apiPipe: ApiPipe
+  ) {
+    super(zone, platformId);
   }
 
   @Input()

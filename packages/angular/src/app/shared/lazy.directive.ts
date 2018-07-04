@@ -4,8 +4,11 @@ import {
   OnDestroy,
   Input,
   Renderer2,
-  ElementRef
+  ElementRef,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 
 import { Generic } from './generic';
 
@@ -16,7 +19,11 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   @Input('lazy') data: Generic.Lazy;
   private observer: IntersectionObserver;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   intersectionCallback([entry, ...rest]: [IntersectionObserverEntry, any[]]) {
     if (!entry.isIntersecting) return;
@@ -34,6 +41,8 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    if (isPlatformServer(this.platformId)) return;
+
     const options = {
       root: null,
       rootMargin: '0px',

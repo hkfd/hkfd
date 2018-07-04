@@ -34,6 +34,6 @@ exports.config = {
   },
   plugins: [{
     package: 'protractor-console',
-    logLevels: ['debug', 'info', 'warning', 'severe']
+    logLevels: ['debug', 'info']
   }]
 };

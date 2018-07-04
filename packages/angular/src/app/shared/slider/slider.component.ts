@@ -5,8 +5,11 @@ import {
   SimpleChanges,
   Input,
   HostListener,
-  NgZone
+  NgZone,
+  Inject,
+  PLATFORM_ID
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { Generic } from 'shared';
 
@@ -33,7 +36,10 @@ export class SliderComponent implements OnChanges {
     if (this.images) this.startTimer();
   }
 
-  constructor(private zone: NgZone) {}
+  constructor(
+    private zone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   changeImage(offset: number = 1) {
     const index = this.currentIndex + offset;
@@ -45,7 +51,7 @@ export class SliderComponent implements OnChanges {
   }
 
   startTimer() {
-    if (this.autoplay)
+    if (this.autoplay && isPlatformBrowser(this.platformId))
       this.zone.runOutsideAngular(
         _ =>
           (this.timer = window.setInterval(
@@ -56,7 +62,8 @@ export class SliderComponent implements OnChanges {
   }
 
   endTimer() {
-    this.zone.runOutsideAngular(_ => window.clearInterval(this.timer));
+    if (isPlatformBrowser(this.platformId))
+      this.zone.runOutsideAngular(_ => window.clearInterval(this.timer));
   }
 
   sliderInit() {

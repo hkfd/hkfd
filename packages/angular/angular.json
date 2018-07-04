@@ -11,12 +11,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/api", "src/assets", "src/legal", "src/.htaccess"],
+            "assets": [
+              "src/api",
+              "src/form",
+              "src/assets",
+              "src/legal",
+              "src/.htaccess"
+            ],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
@@ -87,13 +93,27 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": ["src/styles.scss"],
-            "assets": ["src/api", "src/assets", "src/legal", "src/.htaccess"],
+            "assets": [
+              "src/api",
+              "src/form",
+              "src/assets",
+              "src/legal",
+              "src/.htaccess"
+            ],
             "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
                 "with": "src/environments/environment.testing.ts"
               }
             ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "src/tsconfig.server.json"
           }
         },
         "lint": {
@@ -114,12 +134,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "heckford-angular:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "heckford-angular:serve:production"
-            }
+            "devServerTarget": "heckford-angular:serve:testing"
           }
         },
         "lint": {

@@ -1,4 +1,12 @@
-import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Renderer2,
+  Inject,
+  PLATFORM_ID
+} from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import {
   Router,
   RouterOutlet,
@@ -23,13 +31,19 @@ import { AppAnimations } from './app.animations';
 export class AppComponent implements OnInit, OnDestroy {
   router$: Subscription;
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   getState(outlet: RouterOutlet) {
     return outlet.activatedRouteData.state;
   }
 
   ngOnInit() {
+    if (isPlatformServer(this.platformId)) return;
+
     ga('create', environment.analyticsId, 'auto');
 
     this.router$ = this.router.events.subscribe((event: RouterEvent) => {
@@ -45,6 +59,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.router$.unsubscribe();
+    if (this.router$) this.router$.unsubscribe();
   }
 }

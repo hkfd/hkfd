@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  deployUrl: 'https://hkfd.co.uk/',
   cloudinaryName: 'dv8oeiozq',
   analyticsId: 'UA-31794450-2',
   sentry: {

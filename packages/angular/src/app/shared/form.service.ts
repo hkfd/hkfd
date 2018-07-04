@@ -1,13 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const url = 'form/form.php';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormService {
-  constructor(private http: HttpClient) {}
+  url = 'form/form.php';
+
+  constructor(
+    private http: HttpClient,
+    @Optional()
+    @Inject(APP_BASE_HREF)
+    origin: string
+  ) {
+    if (!origin) return;
+
+    this.url = `${origin}${this.url}`;
+  }
 
   sendEmail({
     name,
@@ -23,6 +33,6 @@ export class FormService {
     formData.append('email', email);
     formData.append('message', message);
 
-    return this.http.post(url, formData).toPromise();
+    return this.http.post(this.url, formData).toPromise();
   }
 }

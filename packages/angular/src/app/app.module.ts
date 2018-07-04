@@ -11,7 +11,7 @@ import { RavenErrorHandler } from './raven';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'hkfd' }),
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,

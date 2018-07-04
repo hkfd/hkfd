@@ -56,7 +56,7 @@ describe('ApiPipe', () => {
     it('should set src with env cloudinaryName', () => {
       const res = pipe.transform({ image: Data.Api.image });
 
-      expect(res.src).toContain('https://res.cloudinary.com/abc/');
+      expect(res.src).toContain('https://res.cloudinary.com/dv8oeiozq/');
     });
 
     it('should set src with width as 64', () => {
@@ -87,7 +87,9 @@ describe('ApiPipe', () => {
       const res = pipe.transform({ image: Data.Api.image });
 
       Sizes.forEach((_, i) =>
-        expect(res.srcset.val[i]).toContain('https://res.cloudinary.com/abc/')
+        expect(res.srcset.val[i]).toContain(
+          'https://res.cloudinary.com/dv8oeiozq/'
+        )
       );
     });
 
