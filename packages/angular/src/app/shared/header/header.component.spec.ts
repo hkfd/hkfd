@@ -1,24 +1,40 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { NgModule, Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SlicePipe } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 
-import { Router, RouterTestingModule } from 'testing';
+import { RouterTestingModule, Location, SpyLocation } from '../../../testing';
 
 import { HeaderComponent } from './header.component';
 
 let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
 let page: Page;
-let router: RouterStub;
+let location: SpyLocation;
 let slicePipe: jasmine.Spy;
+
+@Component({
+  template: `<div></div>`
+})
+class TestComponent {}
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [TestComponent]
+})
+export class TestModule {}
 
 describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, NoopAnimationsModule],
-      declarations: [HeaderComponent]
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: '**', component: TestComponent }
+        ]),
+        NoopAnimationsModule
+      ],
+      declarations: [HeaderComponent, TestComponent]
     }).compileComponents();
   }));
 
@@ -36,42 +52,62 @@ describe('HeaderComponent', () => {
     expect(slicePipe).toHaveBeenCalledWith(comp.pages, 1);
   });
 
+  it('should route on logo click', async(() => {
+    location.go('/page-1');
+    expect(location.path()).toBe('/page-1');
+
+    page.navLogo.nativeElement.click();
+    fixture.detectChanges();
+
+    return fixture.whenStable().then(() => {
+      expect(location.path()).toBe('/');
+    });
+  }));
+
+  it('should route on link click', async(() => {
+    location.go('/');
+    expect(location.path()).toBe('/');
+
+    page.navLink.nativeElement.click();
+    fixture.detectChanges();
+
+    return fixture.whenStable().then(() => {
+      expect(location.path()).toBe('/page-1');
+    });
+  }));
+
+  it(`should set class 'active' on link click`, async(() => {
+    location.go('/');
+    expect(location.path()).toBe('/');
+
+    const link: HTMLAnchorElement = page.navLink.nativeElement;
+
+    link.click();
+    fixture.detectChanges();
+
+    return fixture.whenStable().then(() => {
+      expect(link.className).toContain('active');
+    });
+  }));
+
   describe('navClick', () => {
     it('should be called on link click', () => {
-      page.navLink.triggerEventHandler('click', null);
+      page.navLink.triggerEventHandler('click', {});
 
       expect(page.navClick).toHaveBeenCalled();
     });
 
-    it('should be called with page url arg on link click', () => {
-      page.navLink.triggerEventHandler('click', null);
-
-      expect(page.navClick).toHaveBeenCalledWith('/page-1');
-    });
-
     it('should set mobileShow to false', () => {
       comp.mobileShow = true;
-      page.navLink.triggerEventHandler('click', null);
+      page.navLink.triggerEventHandler('click', {});
 
       expect(comp.mobileShow).toBe(false);
-    });
-
-    it('should call Router navigateByUrl', () => {
-      page.navLink.triggerEventHandler('click', null);
-
-      expect(router.navigateByUrl).toHaveBeenCalled();
-    });
-
-    it('should call Router navigateByUrl with url arg', () => {
-      page.navLink.triggerEventHandler('click', null);
-
-      expect(router.navigateByUrl).toHaveBeenCalledWith('/page-1');
     });
   });
 
   describe('toggleMobile', () => {
     it('should be called on button click', () => {
-      page.navButton.triggerEventHandler('click', null);
+      page.navButton.triggerEventHandler('click', {});
 
       expect(page.toggleMobile).toHaveBeenCalled();
     });
@@ -90,23 +126,13 @@ describe('HeaderComponent', () => {
       expect(comp.mobileShow).toBe(false);
     });
   });
-
-  describe('linkActive', () => {
-    it('should call Router isActive', () => {
-      expect(router.isActive).toHaveBeenCalled();
-    });
-
-    it('should call Router isActive with url arg', () => {
-      expect(router.isActive).toHaveBeenCalledWith('/page-1', true);
-    });
-  });
 });
 
 function createComponent() {
   fixture = TestBed.createComponent(HeaderComponent);
   comp = fixture.componentInstance;
+  location = fixture.debugElement.injector.get(Location) as SpyLocation;
   page = new Page();
-  router = new RouterStub();
   slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
@@ -116,23 +142,11 @@ function createComponent() {
   });
 }
 
-class RouterStub {
-  navigateByUrl: jasmine.Spy;
-  isActive: jasmine.Spy;
-
-  constructor() {
-    const noop = () => undefined;
-    const router = fixture.debugElement.injector.get(Router);
-
-    this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(noop);
-    this.isActive = spyOn(router, 'isActive').and.callFake(noop);
-  }
-}
-
 class Page {
   navClick: jasmine.Spy;
   toggleMobile: jasmine.Spy;
 
+  navLogo: DebugElement;
   navLink: DebugElement;
   navButton: DebugElement;
 
@@ -148,6 +162,7 @@ class Page {
   }
 
   addElements() {
+    this.navLogo = fixture.debugElement.query(By.css('#nav-logo'));
     this.navLink = fixture.debugElement.query(By.css('.nav-link'));
     this.navButton = fixture.debugElement.query(By.css('#nav-button'));
   }
