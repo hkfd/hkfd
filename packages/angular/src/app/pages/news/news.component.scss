@@ -1,5 +1,10 @@
 @import '../../../sass/mixins';
 
+:host {
+  display: block;
+  overflow: hidden;
+}
+
 #news-list {
   display: flex;
   flex-wrap: wrap;

@@ -150,7 +150,8 @@ AddDefaultCharset utf-8
   Redirect permanent "/case-studies/healthy-heroes/" "/work/healthy-heroes"
   Redirect permanent "/case-studies/haven-funeral-care/" "/work/haven-funeral-services"
   Redirect gone "/case-studies/prestons-college/"
-  Redirect permanent "/case-studies/" "/work"
+  Redirect permanent "/legal/privacy-policy.html" "https://legal.hkfd.co.uk/privacy-policy"
+  Redirect permanent "/legal/terms-conditions.html" "https://legal.hkfd.co.uk/terms-conditions"
 </IfModule>
 
 # Clickjacking
