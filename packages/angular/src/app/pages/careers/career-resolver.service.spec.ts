@@ -72,21 +72,29 @@ describe('CareerResolver', () => {
       .subscribe(career => expect(career).toBe(null));
   }));
 
-  it('should navigate to /careers if no matching career', async(() => {
-    activatedRoute.testParamMap = { id: 'no-career' };
-    activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+  it(
+    'should navigate to /careers if no matching career',
+    fakeAsync(() => {
+      activatedRoute.testParamMap = { id: 'no-career' };
+      activatedRoute.testQueryParamMap = {};
+      careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+      tick();
 
-    location.subscribe(location => expect(location.url).toBe('/careers'));
-  }));
+      return expect(location.path()).toBe('/careers');
+    })
+  );
 
-  it('should not navigate to /careers if matching career', async(() => {
-    activatedRoute.testParamMap = { id: 'career-1' };
-    activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+  it(
+    'should not navigate to /careers if matching career',
+    fakeAsync(() => {
+      activatedRoute.testParamMap = { id: 'career-1' };
+      activatedRoute.testQueryParamMap = {};
+      careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+      tick();
 
-    location.subscribe(location => expect(location).toBeUndefined());
-  }));
+      return expect(location.path()).toBe('');
+    })
+  );
 });
 
 function createService() {

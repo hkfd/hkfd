@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController
@@ -24,13 +24,13 @@ describe('ApiService', () => {
 
   describe('getServices', () => {
     it('should call HttpClient get', async(() => {
-      apiService.getServices().subscribe();
+      apiService.getServices().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.services).flush(Data.Api.services);
     }));
 
     it('should call HttpClient again on error', async(() => {
-      apiService.getServices().subscribe();
+      apiService.getServices().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.services).error(new ErrorEvent('err'));
       mockHttp.expectOne(apiService.services).flush(Data.Api.services);
@@ -57,13 +57,13 @@ describe('ApiService', () => {
 
   describe('getCareers', () => {
     it('should call HttpClient get', async(() => {
-      apiService.getCareers().subscribe();
+      apiService.getCareers().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.careers).flush(Data.Api.careers);
     }));
 
     it('should call HttpClient again on error', async(() => {
-      apiService.getCareers().subscribe();
+      apiService.getCareers().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.careers).error(new ErrorEvent('err'));
       mockHttp.expectOne(apiService.careers).flush(Data.Api.careers);
@@ -90,13 +90,13 @@ describe('ApiService', () => {
 
   describe('getCaseStudies', () => {
     it('should call HttpClient get', async(() => {
-      apiService.getCaseStudies().subscribe();
+      apiService.getCaseStudies().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
     }));
 
     it('should call HttpClient again on error', async(() => {
-      apiService.getCaseStudies().subscribe();
+      apiService.getCaseStudies().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.caseStudies).error(new ErrorEvent('err'));
       mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
@@ -125,13 +125,13 @@ describe('ApiService', () => {
 
   describe('getTeam', () => {
     it('should call HttpClient get', async(() => {
-      apiService.getTeam().subscribe();
+      apiService.getTeam().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.team).flush(Data.Api.team);
     }));
 
     it('should call HttpClient again on error', async(() => {
-      apiService.getTeam().subscribe();
+      apiService.getTeam().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.team).error(new ErrorEvent('err'));
       mockHttp.expectOne(apiService.team).flush(Data.Api.team);
@@ -156,13 +156,13 @@ describe('ApiService', () => {
 
   describe('getClients', () => {
     it('should call HttpClient get', async(() => {
-      apiService.getClients().subscribe();
+      apiService.getClients().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.clients).flush(Data.Api.clients);
     }));
 
     it('should call HttpClient again on error', async(() => {
-      apiService.getClients().subscribe();
+      apiService.getClients().subscribe(res => expect(res).toBeDefined());
 
       mockHttp.expectOne(apiService.clients).error(new ErrorEvent('err'));
       mockHttp.expectOne(apiService.clients).flush(Data.Api.clients);
@@ -189,15 +189,19 @@ describe('ApiService', () => {
 
   describe('getPost', () => {
     it(`should set url to services if type is 'service'`, async(() => {
-      apiService.getPost('service', null).subscribe();
+      apiService
+        .getPost('service', null)
+        .subscribe(res => expect(res).toBeUndefined());
 
-      mockHttp.expectOne(apiService.services);
+      mockHttp.expectOne(apiService.services).flush(Data.Api.services);
     }));
 
     it(`should set url to caseStudies if type is 'work'`, async(() => {
-      apiService.getPost('work', null).subscribe();
+      apiService
+        .getPost('work', null)
+        .subscribe(res => expect(res).toBeUndefined());
 
-      mockHttp.expectOne(apiService.caseStudies);
+      mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
     }));
 
     it('should return service post', async(() => {

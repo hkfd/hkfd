@@ -68,7 +68,7 @@ describe('NewsComponent', () => {
 
   it('should set posts as concat of existing posts', () => {
     comp.getPosts();
-    fixture.whenStable().then(_ => expect(comp.posts.length).toBe(6));
+    return fixture.whenStable().then(_ => expect(comp.posts.length).toBe(6));
   });
 
   it(`should set hasNextPage as 'true' if 'next_page' is string`, () => {
@@ -77,7 +77,9 @@ describe('NewsComponent', () => {
     );
 
     comp.getPosts();
-    fixture.whenStable().then(_ => expect(comp.hasNextPage).toBeTruthy());
+    return fixture
+      .whenStable()
+      .then(_ => expect(comp.hasNextPage).toBeTruthy());
   });
 
   it(`should set hasNextPage as 'false' if 'next_page' is empty`, () => {
@@ -86,7 +88,7 @@ describe('NewsComponent', () => {
     );
 
     comp.getPosts();
-    fixture.whenStable().then(_ => expect(comp.hasNextPage).toBeFalsy());
+    return fixture.whenStable().then(_ => expect(comp.hasNextPage).toBeFalsy());
   });
 
   it('should call PrismicPipe', () => {
