@@ -21,7 +21,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{ts,scss,json}": [
+    "*.{ts,js,scss,md,json}": [
       "prettier --single-quote --write",
       "git add"
     ]
