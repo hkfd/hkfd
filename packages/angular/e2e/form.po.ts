@@ -1,13 +1,19 @@
-import { browser, by, element, ElementFinder, protractor } from 'protractor';
+import {
+  browser,
+  by,
+  element,
+  ElementFinder,
+  ExpectedConditions
+} from 'protractor';
 
 export class Form {
   isVisible(el: ElementFinder) {
-    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
   }
 
   isClickable(el: ElementFinder) {
-    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    const isClickable = ExpectedConditions.elementToBeClickable(el);
     return browser.wait(isClickable, 3000);
   }
 

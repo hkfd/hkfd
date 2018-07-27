@@ -11,7 +11,7 @@ import {
   Data
 } from 'testing';
 
-import { TitleService, PrismicService, LoggerService, Prismic } from 'shared';
+import { TitleService, PrismicService, LoggerService } from 'shared';
 import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;

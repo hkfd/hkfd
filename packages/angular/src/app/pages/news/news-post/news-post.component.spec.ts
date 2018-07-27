@@ -12,14 +12,13 @@ import {
   Data
 } from 'testing';
 
-import { TitleService, PrismicService, LoggerService, Prismic } from 'shared';
+import { TitleService, PrismicService, LoggerService } from 'shared';
 import { NewsPostComponent } from './news-post.component';
 
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
 let titleService: TitleService;
-let prismicService: PrismicService;
 let prismicPipe: jasmine.Spy;
 let richText: RichTextStub;
 let page: Page;
@@ -182,7 +181,6 @@ function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
-  prismicService = fixture.debugElement.injector.get(PrismicService);
   prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
   richText = new RichTextStub();
   page = new Page();

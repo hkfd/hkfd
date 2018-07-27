@@ -12,7 +12,7 @@
     "build:client-and-server-bundles": "ng build && ng run heckford-angular:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:ssr": "yarn build:client-and-server-bundles && yarn webpack:server",
-    "serve:ssr": "node dist/server",
+    "serve:ssr": "DEBUG=express:* node dist/server",
     "api-init": "cd src/api && yarn && yarn build",
     "api-update": "git submodule update --remote && yarn api-init",
     "form-init": "cd src/form && composer install",
@@ -49,6 +49,7 @@
     "rxjs": "^6.2.2",
     "ts-loader": "^4.4.2",
     "web-animations-js": "^2.3.1",
+    "webpack": "^4.16.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -78,7 +79,8 @@
     "protractor-console": "^3.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": ">=2.7.0 <2.8.0"
+    "typescript": ">=2.7.0 <2.8.0",
+    "webpack-cli": "^3.1.0"
   },
   "repository": "https://rajansolanki@bitbucket.org/heckford/heckford-angular.git"
 }

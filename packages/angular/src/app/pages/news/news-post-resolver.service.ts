@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import * as Cookies from 'js-cookie';
 
@@ -9,7 +9,7 @@ const PREVIEW_EXPIRES = 30 * 60 * 1000;
 
 @Injectable()
 export class NewsPostResolver implements Resolve<Prismic.Post> {
-  constructor(private prismicService: PrismicService, private router: Router) {}
+  constructor(private prismicService: PrismicService) {}
 
   resolve(route: ActivatedRouteSnapshot): Promise<Prismic.Post> {
     const id = route.paramMap.get('id');

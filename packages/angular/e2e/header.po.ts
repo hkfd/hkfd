@@ -1,4 +1,10 @@
-import { protractor, browser, by, element, ElementFinder } from 'protractor';
+import {
+  browser,
+  by,
+  element,
+  ElementFinder,
+  ExpectedConditions
+} from 'protractor';
 
 export class Header {
   constructor() {
@@ -6,7 +12,7 @@ export class Header {
   }
 
   isClickable(el: ElementFinder) {
-    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    const isClickable = ExpectedConditions.elementToBeClickable(el);
     return browser.wait(isClickable, 3000);
   }
 

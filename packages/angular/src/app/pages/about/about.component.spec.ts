@@ -9,7 +9,7 @@ import {
   Data
 } from 'testing';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { TitleService, ApiService } from 'shared';
 import { AboutImages } from './about.images';
 import { AboutComponent } from './about.component';
 

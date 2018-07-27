@@ -9,7 +9,7 @@ import {
   Data
 } from 'testing';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { TitleService, ApiService } from 'shared';
 import { HomeImages } from './home.images';
 import { HomeComponent } from './home.component';
 

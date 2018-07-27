@@ -4,7 +4,6 @@ import { LoggerService } from './logger.service';
 import { PrismicService } from './prismic.service';
 
 let prismicService: PrismicService;
-let service: Service;
 
 describe('PrismicService', () => {
   beforeEach(async(() => {
@@ -32,13 +31,4 @@ describe('PrismicService', () => {
 
 function createService() {
   prismicService = TestBed.get(PrismicService);
-  service = new Service();
-}
-
-class Service {
-  getPosts: jasmine.Spy;
-
-  constructor() {
-    this.getPosts = spyOn(prismicService, 'getPosts').and.callThrough();
-  }
 }

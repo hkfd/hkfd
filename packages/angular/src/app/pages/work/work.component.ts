@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { TitleService, ApiService, ApiPipe, Api, Generic } from 'shared';
+import { TitleService, ApiService, ApiPipe, Api } from 'shared';
 import { WorkAnimations } from './work.animations';
 
 @Component({

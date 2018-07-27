@@ -12,13 +12,12 @@ import {
   Data
 } from 'testing';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { TitleService, ApiService } from 'shared';
 import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;
 let fixture: ComponentFixture<CareerComponent>;
 let titleService: TitleService;
-let apiService: ApiService;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
 let apiPipe: jasmine.Spy;
@@ -75,7 +74,6 @@ function createComponent() {
   fixture = TestBed.createComponent(CareerComponent);
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
-  apiService = fixture.debugElement.injector.get(ApiService);
   page = new Page();
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 

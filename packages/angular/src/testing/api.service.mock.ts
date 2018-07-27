@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { map, flatMap, find, catchError } from 'rxjs/operators';
+import { flatMap, find, catchError } from 'rxjs/operators';
 
 import { Api } from 'shared';
 import { Data } from './';
@@ -35,7 +35,7 @@ export class MockApiService {
     return of(Data.Api.careers).pipe(
       flatMap((careers: Api.Career[]) => careers),
       find((career: Api.Career) => career.id === id),
-      catchError(err => of(null))
+      catchError(_ => of(null))
     );
   }
 
@@ -51,7 +51,7 @@ export class MockApiService {
     return of(<Api.Post[]>url).pipe(
       flatMap((posts: Api.Post[]) => posts),
       find((post: Api.Post) => post.id === id),
-      catchError(err => of(null))
+      catchError(_ => of(null))
     );
   }
 }

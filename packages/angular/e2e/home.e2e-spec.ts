@@ -1,6 +1,3 @@
-import { protractor, browser, by, element, ElementFinder } from 'protractor';
-import * as fs from 'fs';
-
 import { HomePage } from './home.po';
 
 describe('Home', () => {

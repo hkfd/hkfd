@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { TitleService, Api } from 'shared';
 
 @Component({
   selector: 'app-career',

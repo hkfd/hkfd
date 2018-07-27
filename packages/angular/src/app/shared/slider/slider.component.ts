@@ -1,7 +1,6 @@
 import {
   Component,
   OnChanges,
-  OnDestroy,
   SimpleChanges,
   Input,
   HostListener,

@@ -3,7 +3,7 @@ export class MockTitleService {
     this.setTitle = spyOn(this, 'setTitle').and.callThrough();
   }
 
-  setTitle(title?: string) {
+  setTitle(__title?: string) {
     return;
   }
 }

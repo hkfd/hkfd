@@ -1,18 +1,24 @@
-import { protractor, browser, by, element, ElementFinder } from 'protractor';
+import {
+  browser,
+  by,
+  element,
+  ElementFinder,
+  ExpectedConditions
+} from 'protractor';
 
 export class NewsPage {
   isVisible(el: ElementFinder) {
-    const isVisible = protractor.ExpectedConditions.visibilityOf(el);
+    const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 5000);
   }
 
   isNotVisible(el: ElementFinder = this.getPosts().first()) {
-    const isNotVisible = protractor.ExpectedConditions.invisibilityOf(el);
+    const isNotVisible = ExpectedConditions.invisibilityOf(el);
     return browser.wait(isNotVisible, 5000);
   }
 
   isClickable(el: ElementFinder) {
-    const isClickable = protractor.ExpectedConditions.elementToBeClickable(el);
+    const isClickable = ExpectedConditions.elementToBeClickable(el);
     return browser.wait(isClickable, 5000);
   }
 

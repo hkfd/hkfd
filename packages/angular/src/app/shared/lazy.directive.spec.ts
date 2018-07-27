@@ -10,7 +10,6 @@ let comp: TestHostComponent;
 let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 let lazyDirective: LazyDirective;
-let directive: LazyDirectiveStub;
 let renderer: RendererStub;
 
 @Component({
@@ -108,8 +107,8 @@ function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  directive = new LazyDirectiveStub();
   renderer = new RendererStub();
+  new LazyDirectiveStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {

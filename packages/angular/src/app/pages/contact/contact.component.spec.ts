@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { RouterTestingModule, MockTitleService, MockApiPipe } from 'testing';
 
@@ -8,7 +7,6 @@ import { TitleService } from 'shared';
 import { ContactImages } from './contact.images';
 import { ContactComponent } from './contact.component';
 
-let comp: ContactComponent;
 let fixture: ComponentFixture<ContactComponent>;
 let titleService: TitleService;
 let apiPipe: jasmine.Spy;
@@ -44,7 +42,6 @@ describe('ContactComponent', () => {
 
 function createComponent() {
   fixture = TestBed.createComponent(ContactComponent);
-  comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
