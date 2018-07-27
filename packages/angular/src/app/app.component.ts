@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  Renderer2,
   Inject,
   PLATFORM_ID
 } from '@angular/core';
@@ -15,6 +14,7 @@ import {
 } from '@angular/router';
 
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { AppAnimations } from './app.animations';
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -46,16 +45,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ga('create', environment.analyticsId, 'auto');
 
-    this.router$ = this.router.events.subscribe((event: RouterEvent) => {
-      if (!(event instanceof NavigationEnd)) return;
-
-      const scrollEl = document.scrollingElement || document.documentElement;
-      this.renderer.setProperty(scrollEl, 'scrollTop', 0);
-
-      ga('set', 'title', 'Heckford');
-      ga('set', 'page', event.urlAfterRedirects);
-      ga('send', 'pageview');
-    });
+    this.router$ = this.router.events
+      .pipe(
+        filter(
+          (event: RouterEvent): event is NavigationEnd =>
+            event instanceof NavigationEnd
+        )
+      )
+      .subscribe(event => {
+        ga('set', 'title', 'Heckford');
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      });
   }
 
   ngOnDestroy() {

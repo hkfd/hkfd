@@ -3,7 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Router, RouterTestingModule, Renderer2 } from 'testing';
+import { Router, RouterTestingModule } from 'testing';
 
 import { AppComponent } from './app.component';
 
@@ -11,7 +11,6 @@ const app = <any>window;
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
 let page: Page;
-let renderer: RendererStub;
 let router: Router;
 
 @Component({
@@ -82,22 +81,6 @@ describe('AppComponent', () => {
     });
 
     describe('Routing', () => {
-      it('should call Renderer2 setProperty', async(() =>
-        router
-          .navigateByUrl('page-1')
-          .then(_ => expect(renderer.setProperty).toHaveBeenCalled())));
-
-      it('should call Renderer2 setProperty with args', async(() =>
-        router
-          .navigateByUrl('page-1')
-          .then(_ =>
-            expect(renderer.setProperty).toHaveBeenCalledWith(
-              jasmine.any(HTMLElement),
-              'scrollTop',
-              0
-            )
-          )));
-
       it('should call ga', async(() =>
         router
           .navigateByUrl('page-1')
@@ -152,7 +135,6 @@ function createComponent() {
   fixture = TestBed.createComponent(AppComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  renderer = new RendererStub();
   new GoogleAnalytics();
 
   fixture.detectChanges();
@@ -164,16 +146,6 @@ function createComponent() {
 class GoogleAnalytics {
   constructor() {
     app.ga = jasmine.createSpy('ga');
-  }
-}
-
-class RendererStub {
-  setProperty: jasmine.Spy;
-
-  constructor() {
-    const renderer2 = fixture.debugElement.injector.get(Renderer2);
-
-    this.setProperty = spyOn(renderer2, 'setProperty').and.callThrough();
   }
 }
 
