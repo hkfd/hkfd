@@ -94,7 +94,7 @@ export const Careers: Api.Career[] = [
   {
     id: 'signage-fitter-installer',
     title: 'Signage Fitter/Installer',
-    salary: '£20,000 – £24,000',
+    salary: '£18,000 – £24,000',
     content: [
       {
         data: [
@@ -163,7 +163,7 @@ export const Careers: Api.Career[] = [
                 paragraph: [
                   {
                     text:
-                      '£20,000 - £24,000 per year (dependent on skills and experience)'
+                      '£18,000 - £24,000 per year (dependent on skills and experience)'
                   }
                 ]
               }
@@ -276,6 +276,152 @@ export const Careers: Api.Career[] = [
                   {
                     text:
                       'PASMA, IPAF and various other industry qualifications would be an advantage but not essential as training & qualifications will be given for the successful applicant.'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'digital-marketing-executive',
+    title: 'Digital Marketing Executive',
+    salary: '£20,000 – £24,000',
+    content: [
+      {
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'We are currently seeking a Digital Marketing Executive to join our talented team at our Preston office.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'The ideal candidate will have at least 2 years experience in planning, building, optimising, and reporting on pay per click and social media campaigns.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'As well as a fantastic career opportunity, you would be joining a friendly, relaxed but exceptionally hard working agency with growth and customer service at the forefront of the business.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'This role offers the opportunity to be part of a large well established agency with all the benefits that go hand in hand with 40 years experience and passion for what we do.'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Salary',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text: '£18,000 - £26,000 (subject to experience)'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Key Responsibilities',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                list: [
+                  {
+                    text: 'Day-to-day interaction with studio staff'
+                  },
+                  {
+                    text: 'Campaign planning and structuring'
+                  },
+                  {
+                    text: 'Keyword and competitor research'
+                  },
+                  {
+                    text:
+                      'Building new campaigns using Google AdWords and AdWords Editor'
+                  },
+                  {
+                    text:
+                      'Building new campaigns on Facebook, Twitter, Instagram, LinkedIn and other social platforms'
+                  },
+                  {
+                    text:
+                      'Providing regular reports on all aspects of campaign performance'
+                  },
+                  {
+                    text:
+                      'Drive forward the Heckford presence online, across all platforms'
+                  },
+                  {
+                    text:
+                      'Keep up to date with industry developments to provide insight into new trends'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Essentials',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                list: [
+                  {
+                    text:
+                      'Proven experience in building and reporting on multiple PPC/social media campaigns'
+                  },
+                  {
+                    text: 'Current Google AdWords certification'
+                  },
+                  {
+                    text:
+                      'Skilled in Google Analytics (Analytics certification would be an advantage)'
+                  },
+                  {
+                    text: 'Experience in liaising with external agencies'
+                  },
+                  {
+                    text: 'Effective oral and written communication skills'
+                  },
+                  {
+                    text:
+                      'Ability to manage and lead a team to ensure all projects are completed with efficiency and on budget'
+                  },
+                  {
+                    text: 'Proficient in the use of MS office'
                   }
                 ]
               }
