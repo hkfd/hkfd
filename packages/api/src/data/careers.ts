@@ -287,8 +287,8 @@ export const Careers: Api.Career[] = [
   },
   {
     id: 'digital-marketing-executive',
-    title: 'Digital Marketing Executive',
-    salary: '£20,000 – £24,000',
+    title: 'Senior Digital Marketing Executive',
+    salary: '£20,000 – £27,000',
     content: [
       {
         data: [
@@ -299,7 +299,7 @@ export const Careers: Api.Career[] = [
                 paragraph: [
                   {
                     text:
-                      'We are currently seeking a Digital Marketing Executive to join our talented team at our Preston office.'
+                      'We are currently seeking a Senior Digital Marketing Executive to join our talented team at our Preston office.'
                   }
                 ]
               },
@@ -340,7 +340,7 @@ export const Careers: Api.Career[] = [
               {
                 paragraph: [
                   {
-                    text: '£18,000 - £26,000 (subject to experience)'
+                    text: '£20,000 - £27,000 (subject to experience)'
                   }
                 ]
               }
