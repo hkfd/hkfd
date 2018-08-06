@@ -2408,11 +2408,6 @@ export const Services: Api.Service[] = [
                 image: {
                   name: 'service-signage-print4'
                 }
-              },
-              {
-                image: {
-                  name: 'service-signage-print5'
-                }
               }
             ]
           }
