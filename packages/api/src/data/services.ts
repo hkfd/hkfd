@@ -2072,6 +2072,11 @@ export const Services: Api.Service[] = [
                 image: {
                   name: 'service-signage6'
                 }
+              },
+              {
+                image: {
+                  name: 'service-signage7'
+                }
               }
             ]
           }
@@ -2171,6 +2176,11 @@ export const Services: Api.Service[] = [
               {
                 image: {
                   name: 'service-signage-external6'
+                }
+              },
+              {
+                image: {
+                  name: 'service-signage-external7'
                 }
               }
             ]
