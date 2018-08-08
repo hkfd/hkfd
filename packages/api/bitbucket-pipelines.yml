@@ -1,15 +1,13 @@
 image: andthensome/docker-node-rsync
 
 pipelines:
-  default:
-    - step:
-        caches:
-          - yarn
-        script:
-          - yarn
-          - yarn build
-          - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:public_html/api
-          - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging/api
-definitions:
-  caches:
-    yarn: /usr/local/share/.cache/yarn/v1
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          script:
+            - yarn
+            - yarn build
+            - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:public_html/api
+            - rsync -av --delete $BITBUCKET_CLONE_DIR/dist/. $SSH_USERNAME@$SSH_HOST:subdomains/staging/api
