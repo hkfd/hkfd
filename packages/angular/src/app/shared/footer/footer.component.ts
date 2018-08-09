@@ -11,31 +11,38 @@ export class FooterComponent {
   links = [
     {
       url: 'https://www.facebook.com/HeckfordAdvertising/',
-      icon: '/assets/icons/facebook.svg'
+      icon: '/assets/icons/facebook.svg',
+      alt: 'Facebook'
     },
     {
       url: 'https://twitter.com/HkfdAdvertising',
-      icon: '/assets/icons/twitter.svg'
+      icon: '/assets/icons/twitter.svg',
+      alt: 'Twitter'
     },
     {
       url: 'https://www.instagram.com/heckfordadvertising/',
-      icon: '/assets/icons/instagram.svg'
+      icon: '/assets/icons/instagram.svg',
+      alt: 'Instagram'
     },
     {
       url: 'https://www.pinterest.com/heckford/',
-      icon: '/assets/icons/pinterest.svg'
+      icon: '/assets/icons/pinterest.svg',
+      alt: 'Pinterest'
     },
     {
       url: 'https://www.youtube.com/user/heckfordadvertising',
-      icon: '/assets/icons/youtube.svg'
+      icon: '/assets/icons/youtube.svg',
+      alt: 'YouTube'
     },
     {
       url: 'https://plus.google.com/+Heckford-advertisingCoUk',
-      icon: '/assets/icons/google-plus.svg'
+      icon: '/assets/icons/google-plus.svg',
+      alt: 'Google+'
     },
     {
       url: 'https://www.linkedin.com/company/heckford',
-      icon: '/assets/icons/linkedin.svg'
+      icon: '/assets/icons/linkedin.svg',
+      alt: 'LinkedIn'
     }
   ];
 }

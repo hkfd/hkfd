@@ -1,11 +1,11 @@
 <div class="slider-nav">
-  <button class="slider-prev" type="button" (click)="changeImage(-1)"><span class="arrow left"></span></button>
-  <button class="slider-next" type="button" (click)="changeImage(1)"><span class="arrow right"></span></button>
+  <button class="slider-prev" type="button" (click)="changeImage(-1)" aria-label="Previous"><span class="arrow left"></span></button>
+  <button class="slider-next" type="button" (click)="changeImage(1)" aria-label="Next"><span class="arrow right"></span></button>
 </div>
 
 <ng-content></ng-content>
 
-<div id="slide-container" [style.transform]="'translateX(' + (this.currentIndex * -100) + '%)'">
+<div class="slide-container" [style.transform]="'translateX(' + (this.currentIndex * -100) + '%)'">
   <div class="slide" *ngFor="let image of images">
     <image-component full-height [image]="image"></image-component>
   </div>

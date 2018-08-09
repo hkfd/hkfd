@@ -13,13 +13,15 @@
     <h2>WE'RE CURRENTLY HIRING&hellip;</h2>
     <div class="text">
       <p>If you talk to anyone on the Heckford team, we’re pretty sure that they’ll agree on Heckford being a pretty cool place to work. We’re definitely not your standard agency. You’ve obviously read over our site and seen who we work with, what we do and had a gander at what we get up to on a regular basis.</p>
-      <p>The next step is to view our current job vacancies (listed below)&hellip; but don’t worry, if you can’t see one that suits you please drop us an email at <a href="mailto:hello@heckford-advertising.co.uk">hello@heckford-advertising.co.uk</a> and we’ll keep you on file in case something pops up for you in the future.</p>
+      <p>The next step is to view our current job vacancies (listed below)&hellip; but don’t worry, if you can’t see one that suits you please drop us an email at
+      <a href="mailto:hello@heckford-advertising.co.uk" attr.aria-label="Email">hello@heckford-advertising.co.uk</a>
+      and we’ll keep you on file in case something pops up for you in the future.</p>
     </div>
   </div>
 </section>
 
 <section id="careers">
-  <a class="career" *ngFor="let career of careers" [routerLink]="career?.id">
+  <a class="career" *ngFor="let career of careers" [routerLink]="career?.id" [attr.aria-label]="career?.title">
     <div class="career-info">
       <h3>{{ career?.title }}</h3>
       <span>{{ career?.salary }}</span>

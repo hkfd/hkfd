@@ -2,13 +2,13 @@
   <h1>LANCASHIRE'S LEADERS<span>Independent advertising &amp; marketing agency</span></h1>
 </section>
 
-<slider [images]="images?.intro | api" [autoplay]="true"><img class="icon-40" src="/assets/icons/40-years-white.svg"></slider>
+<slider [images]="images?.intro | api" [autoplay]="true"><img class="icon-40" src="/assets/icons/40-years-white.svg" alt="40 Years of Creativity"></slider>
 
 <section id="help">
   <div id="help-container">
     <h2>WE CAN HELP YOU</h2>
     <p>We’re a creative agency based in Lancashire. For over 40 years our team have worked with organisations of all sizes and types. We focus on one thing: delivering creative that works.</p>
-    <a class="button" routerLink="/about">READ MORE</a>
+    <a class="button" routerLink="/about" attr.aria-label="Read More">READ MORE</a>
   </div>
 </section>
 
@@ -19,7 +19,7 @@
   </div>
 
   <div id="services-list">
-    <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]">
+    <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]" [attr.aria-label]="service?.title">
       <image-component full-height [image]="service?.thumbnail | api"></image-component>
       <div class="service-info">
         <h3>{{ service?.title }}</h3>
@@ -46,5 +46,5 @@
       </ul>
     </li>
   </ul>
-  <img class="icon-40" src="/assets/icons/40-years-black.svg">
+  <img class="icon-40" src="/assets/icons/40-years-black.svg" alt="40 Years of Creativity">
 </section>

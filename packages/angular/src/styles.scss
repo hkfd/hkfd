@@ -2,16 +2,19 @@
 
 @font-face {
   font-family: 'Montserrat Regular';
+  font-display: fallback;
   @include font-src('/assets/fonts/montserrat-regular', ('ttf, woff, woff2'));
 }
 
 @font-face {
   font-family: 'Montserrat Bold';
+  font-display: fallback;
   @include font-src('/assets/fonts/montserrat-bold', ('ttf, woff, woff2'));
 }
 
 @font-face {
   font-family: 'League Gothic Regular';
+  font-display: swap;
   @include font-src('/assets/fonts/leaguegothic-regular', ('ttf, woff, woff2'));
 }
 

@@ -65,8 +65,8 @@ class Page {
 
   constructor() {
     comp.links = [
-      { url: 'http://example1.com', icon: '/assets/1.jpg' },
-      { url: 'http://example2.com', icon: '/assets/2.jpg' }
+      { url: 'http://example1.com', icon: '/assets/1.jpg', alt: 'Image' },
+      { url: 'http://example2.com', icon: '/assets/2.jpg', alt: 'Image' }
     ];
   }
 

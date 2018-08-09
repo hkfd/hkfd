@@ -3,7 +3,7 @@
 </section>
 
 <section id="news-list" [@listAnimation]="posts.length">
-  <a *ngFor="let post of posts" [routerLink]="[ '/news/', post?.uid ]" class="post">
+  <a *ngFor="let post of posts" [routerLink]="[ '/news/', post?.uid ]" class="post" [attr.aria-label]="richText.asText(post?.data?.title)">
     <image-component *ngIf="post?.data?.image?.proxy?.url" full-height [image]="post?.data | prismic"></image-component>
     <div class="post-info">
       <span class="post-date">{{ post?.first_publication_date | date: 'dd/MM' }}</span>
@@ -13,4 +13,4 @@
   </a>
 </section>
 
-<button *ngIf="hasNextPage" class="button" id="load-more" (click)="getPosts()">SEE MORE</button>
+<button *ngIf="hasNextPage" class="button" id="load-more" (click)="getPosts()" aria-label="See More">SEE MORE</button>

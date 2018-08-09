@@ -242,7 +242,7 @@ class Page {
     this.sliderNext = fixture.debugElement.query(By.css('.slider-next'));
     this.sliderPrev = fixture.debugElement.query(By.css('.slider-prev'));
     this.slideContainer = fixture.debugElement.query(
-      By.css('#slide-container')
+      By.css('.slide-container')
     );
   }
 }
