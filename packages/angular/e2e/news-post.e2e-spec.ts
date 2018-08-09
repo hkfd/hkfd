@@ -16,12 +16,6 @@ describe('NewsPost', () => {
     expect(page.getPostTitle()).toBeTruthy();
   });
 
-  it('should display uppercase post title', () => {
-    page.getPostTitle().then(title => {
-      expect(title).toEqual(title.toUpperCase());
-    });
-  });
-
   it('should display post thumbnail', () => {
     expect(page.getPostThumbnail().isDisplayed()).toBe(true);
   });

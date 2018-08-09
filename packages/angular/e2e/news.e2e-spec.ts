@@ -51,12 +51,6 @@ describe('News', () => {
       expect(page.getPostTitle()).toBeTruthy();
     });
 
-    it('should display uppercase post title', () => {
-      page.getPostTitle().then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
-    });
-
     it('should route on click', () => {
       const originalUrl = page.getUrl();
       const el = page.getPosts().first();

@@ -62,12 +62,6 @@ describe('Home', () => {
       expect(page.getServiceTitle()).toBeTruthy();
     });
 
-    it('should display uppercase service title', () => {
-      page.getServiceTitle().then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
-    });
-
     it('should display service description', () => {
       expect(page.getServiceDescription()).toBeTruthy();
     });

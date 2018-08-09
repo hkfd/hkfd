@@ -1,11 +1,11 @@
 <section id="intro">
   <div id="intro-info">
     <div id="info-text">
-      <h1>{{ post?.title | uppercase }}</h1>
+      <h1>{{ post?.title }}</h1>
       <text-block intro [data]="post?.intro"></text-block>
     </div>
     <div id="info-overview" *ngIf="$any(post)?.overview">
-      <span>OUR SERVICES TO {{ post?.title | uppercase }}</span>
+      <span>OUR SERVICES TO {{ post?.title }}</span>
       <ul>
         <li *ngFor="let service of post?.overview">{{ service }}</li>
       </ul>
@@ -15,7 +15,7 @@
 </section>
 
 <section *ngFor="let section of post?.content">
-  <h2 *ngIf="section?.title">{{ section?.title | uppercase }}</h2>
+  <h2 *ngIf="section?.title">{{ section?.title }}</h2>
 
   <ng-container *ngFor="let block of section?.data">
     <ng-container [ngSwitch]="block?.type">

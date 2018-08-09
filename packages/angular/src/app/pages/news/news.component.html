@@ -7,7 +7,7 @@
     <image-component *ngIf="post?.data?.image?.proxy?.url" full-height [image]="post?.data | prismic"></image-component>
     <div class="post-info">
       <span class="post-date">{{ post?.first_publication_date | date: 'dd/MM' }}</span>
-      <h2>{{ richText.asText(post?.data?.title) | uppercase }}</h2>
+      <h2>{{ richText.asText(post?.data?.title) }}</h2>
     </div>
     <span class="post-more button">READ MORE</span>
   </a>

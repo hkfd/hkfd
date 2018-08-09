@@ -117,14 +117,6 @@ describe('PostComponent', () => {
       );
     });
 
-    it('should display uppercase title', () => {
-      activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
-      fixture.detectChanges();
-      page.addElements();
-
-      expect(page.sectionTitle.nativeElement.textContent).toEqual('TEXTBLOCK');
-    });
-
     describe('Text', () => {
       beforeEach(() => {
         activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };

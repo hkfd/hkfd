@@ -12,15 +12,6 @@ describe('Post', () => {
     expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
-  it('should display uppercase title', () => {
-    page
-      .getPageTitle()
-      .getText()
-      .then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
-  });
-
   it('should display intro', () => {
     expect(page.getPageIntro()).toBeTruthy();
   });
@@ -40,12 +31,6 @@ describe('Post', () => {
 
     it('should display title', () => {
       expect(page.getOverviewTitle()).toBeTruthy();
-    });
-
-    it('should display uppercase title', () => {
-      page.getOverviewTitle().then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
     });
 
     it('should display list item', () => {
@@ -87,12 +72,6 @@ describe('Post', () => {
 
     it('should display section title', () => {
       expect(page.getSectionTitle()).toBeTruthy();
-    });
-
-    it('should display uppercase section title', () => {
-      page.getSectionTitle().then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
     });
   });
 });

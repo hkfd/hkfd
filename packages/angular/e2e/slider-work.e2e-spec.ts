@@ -37,15 +37,6 @@ describe('SliderWork', () => {
     expect(page.getTitle().getText()).toBeTruthy();
   });
 
-  xit('should display uppercase title', () => {
-    page
-      .getTitle()
-      .getText()
-      .then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
-  });
-
   xit('should display sector', () => {
     expect(page.getSector().getText()).toBeTruthy();
   });

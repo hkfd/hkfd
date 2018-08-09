@@ -150,6 +150,7 @@ h2 {
       margin: 0;
       padding: 0;
       @extend %font-bold;
+      text-transform: uppercase;
 
       &::before {
         display: none;
@@ -160,6 +161,7 @@ h2 {
     .client-list {
       display: inline;
       @extend %font-body;
+      text-transform: none;
 
       .client-name {
         display: inline-block;

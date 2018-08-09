@@ -1,7 +1,7 @@
 <section id="intro">
   <div id="intro-info">
     <span id="info-date">{{ post?.first_publication_date | date: 'dd LLLL' }}</span>
-    <h1 *ngIf="post?.data?.title">{{ richText.asText(post?.data?.title) | uppercase }}</h1>
+    <h1 *ngIf="post?.data?.title">{{ richText.asText(post?.data?.title) }}</h1>
   </div>
   <image-component *ngIf="post?.data?.image?.proxy?.url" full-height [image]="post?.data | prismic"></image-component>
 </section>

@@ -47,12 +47,6 @@ describe('About', () => {
       expect(page.getPersonName()).toBeTruthy();
     });
 
-    it(`should display uppercase person's name`, () => {
-      page.getPersonName().then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
-    });
-
     it(`should display person's position`, () => {
       expect(page.getPersonPosition()).toBeTruthy();
     });

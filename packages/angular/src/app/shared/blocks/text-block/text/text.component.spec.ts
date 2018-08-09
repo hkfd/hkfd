@@ -66,10 +66,6 @@ describe('TextComponent', () => {
     it('should display text in element', () => {
       expect(page.h3.nativeElement.textContent).toEqual(jasmine.any(String));
     });
-
-    it('should display uppercase text in element', () => {
-      expect(page.h3.nativeElement.textContent).toBe('HEADING');
-    });
   });
 
   describe('Bold', () => {

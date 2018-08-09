@@ -25,12 +25,6 @@ describe('Header', () => {
     expect(page.getLinkTitle()).toBeTruthy();
   });
 
-  it('should display uppercase link title', () => {
-    page.getLinkTitle().then(title => {
-      expect(title).toEqual(title.toUpperCase());
-    });
-  });
-
   it('should route on page click', () => {
     page
       .getLinks()

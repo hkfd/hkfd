@@ -22,7 +22,7 @@
     <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]">
       <image-component full-height [image]="service?.thumbnail | api"></image-component>
       <div class="service-info">
-        <h3>{{ service?.title | uppercase }}</h3>
+        <h3>{{ service?.title }}</h3>
         <p>{{ service?.description }}</p>
       </div>
       <span class="service-more button">READ MORE</span>
@@ -40,7 +40,7 @@
 
   <ul id="client-list">
     <li class="client" *ngFor="let client of clients$ | async">
-      {{ client?.sector | uppercase }}:
+      {{ client?.sector }}:
       <ul class="client-list">
         <li class="client-name" *ngFor="let name of client?.list">{{ name }}</li>
       </ul>

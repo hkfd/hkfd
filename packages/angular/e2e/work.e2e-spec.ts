@@ -39,12 +39,6 @@ describe('Work', () => {
       expect(page.getCaseStudyTitle()).toBeTruthy();
     });
 
-    it('should display uppercase case study title', () => {
-      page.getCaseStudyTitle().then(title => {
-        expect(title).toEqual(title.toUpperCase());
-      });
-    });
-
     it('should display case study image', () => {
       expect(page.getCaseStudyImage().isDisplayed()).toBe(true);
     });
