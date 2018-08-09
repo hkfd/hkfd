@@ -20,7 +20,7 @@ export class ApiPipe implements PipeTransform {
     return {
       src: `https://res.cloudinary.com/${
         environment.cloudinaryName
-      }/image/upload/w_64,h_ih,c_limit/${image.name}`,
+      }/image/upload/w_64,h_ih,c_limit,q_auto,f_auto/${image.name}`,
       srcset: {
         attr: 'srcset',
         val: Sizes.map(
