@@ -49,32 +49,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-3d-cgi1'
+                  name: 'service-3d-cgi1',
+                  alt: 'Grade II listed building render'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi2'
+                  name: 'service-3d-cgi2',
+                  alt: 'Myerscough basketball render'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi3'
+                  name: 'service-3d-cgi3',
+                  alt: 'Sandcastle character'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi4'
+                  name: 'service-3d-cgi4',
+                  alt: 'Waterfront buildings'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi5'
+                  name: 'service-3d-cgi5',
+                  alt: 'Running tap render'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi6'
+                  name: 'service-3d-cgi6',
+                  alt: 'Shoe print'
                 }
               }
             ]
@@ -110,32 +116,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-3d-cgi-cgi1'
+                  name: 'service-3d-cgi-cgi1',
+                  alt: 'Shop interior clay render'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-cgi2'
+                  name: 'service-3d-cgi-cgi2',
+                  alt: 'Detached house'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-cgi3'
+                  name: 'service-3d-cgi-cgi3',
+                  alt: 'Chester Zoo exhibition'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-cgi4'
+                  name: 'service-3d-cgi-cgi4',
+                  alt: 'Stolat vodka'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-cgi5'
+                  name: 'service-3d-cgi-cgi5',
+                  alt: 'Materials test'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-cgi6'
+                  name: 'service-3d-cgi-cgi6',
+                  alt: 'Rings'
                 }
               }
             ]
@@ -163,32 +175,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-3d-cgi-characters1'
+                  name: 'service-3d-cgi-characters1',
+                  alt: 'Aliens'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-characters2'
+                  name: 'service-3d-cgi-characters2',
+                  alt: 'Stagecoach mascot'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-characters3'
+                  name: 'service-3d-cgi-characters3',
+                  alt: 'Heckford robot characters'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-characters4'
+                  name: 'service-3d-cgi-characters4',
+                  alt: 'Sandcastle character'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-characters5'
+                  name: 'service-3d-cgi-characters5',
+                  alt: 'Heckford character'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-characters6'
+                  name: 'service-3d-cgi-characters6',
+                  alt: 'Test character'
                 }
               }
             ]
@@ -224,37 +242,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-3d-cgi-construction1'
+                  name: 'service-3d-cgi-construction1',
+                  alt: 'Modern estate'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-construction2'
+                  name: 'service-3d-cgi-construction2',
+                  alt: 'Detached house'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-construction3'
+                  name: 'service-3d-cgi-construction3',
+                  alt: '3D house floor plan'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-construction4'
+                  name: 'service-3d-cgi-construction4',
+                  alt: 'Estate'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-construction5'
+                  name: 'service-3d-cgi-construction5',
+                  alt: 'Housing development'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-construction6'
+                  name: 'service-3d-cgi-construction6',
+                  alt: 'Villa'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-construction7'
+                  name: 'service-3d-cgi-construction7',
+                  alt: 'Modern bungalow'
                 }
               }
             ]
@@ -324,27 +349,32 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-3d-cgi-concepts1'
+                  name: 'service-3d-cgi-concepts1',
+                  alt: 'Wainhomes showroom interior'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-concepts2'
+                  name: 'service-3d-cgi-concepts2',
+                  alt: 'Stagecoach bus'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-concepts3'
+                  name: 'service-3d-cgi-concepts3',
+                  alt: 'Letterpress blocks'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-concepts4'
+                  name: 'service-3d-cgi-concepts4',
+                  alt: 'Kitchen appliance shop interior'
                 }
               },
               {
                 image: {
-                  name: 'service-3d-cgi-concepts5'
+                  name: 'service-3d-cgi-concepts5',
+                  alt: 'LEGO exhibition'
                 }
               }
             ]
@@ -392,7 +422,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-design-print1'
+                name: 'service-design-print1',
+                alt: 'Lancashire Visitor Guide spreads'
               }
             },
             fullBleed: true
@@ -436,42 +467,50 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-design-print-design1'
+                  name: 'service-design-print-design1',
+                  alt: 'Blackpool Coastal Housing Annual Report cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design2'
+                  name: 'service-design-print-design2',
+                  alt: 'Howe Bridge poster'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design3'
+                  name: 'service-design-print-design3',
+                  alt: 'Myerscough Prospectus cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design4'
+                  name: 'service-design-print-design4',
+                  alt: 'Priestley College Prospectus cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design5'
+                  name: 'service-design-print-design5',
+                  alt: 'Haigh Hall Wedding Venue cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design6'
+                  name: 'service-design-print-design6',
+                  alt: 'Wigan Food & Drink Festival cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design7'
+                  name: 'service-design-print-design7',
+                  alt: 'Ironbridge leaflet cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-design8'
+                  name: 'service-design-print-design8',
+                  alt: 'Lathom High School Prospectus artwork'
                 }
               }
             ]
@@ -507,37 +546,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-design-print-concepts1'
+                  name: 'service-design-print-concepts1',
+                  alt: 'Wigan Now brochure cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-concepts2'
+                  name: 'service-design-print-concepts2',
+                  alt: 'Visit Lancashire brochure spread'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-concepts3'
+                  name: 'service-design-print-concepts3',
+                  alt: 'astra Product Guide cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-concepts4'
+                  name: 'service-design-print-concepts4',
+                  alt: 'Lytham 1940s Wartime Weekend poster'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-concepts5'
+                  name: 'service-design-print-concepts5',
+                  alt: 'Wainhomes development brochure covers'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-concepts6'
+                  name: 'service-design-print-concepts6',
+                  alt: 'Ironbridge Visitor Guide brochure cover'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-concepts7'
+                  name: 'service-design-print-concepts7',
+                  alt: "Lancashire What's On Guide poster"
                 }
               }
             ]
@@ -572,7 +618,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-design-print-typography1'
+                name: 'service-design-print-typography1',
+                alt: 'The Wigan International Jazz Festival poster'
               }
             },
             fullBleed: true
@@ -600,42 +647,50 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-design-print-identity1'
+                  name: 'service-design-print-identity1',
+                  alt: 'Wainhomes logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity2'
+                  name: 'service-design-print-identity2',
+                  alt: 'Sandcastle Water Park logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity3'
+                  name: 'service-design-print-identity3',
+                  alt: 'Infinium logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity4'
+                  name: 'service-design-print-identity4',
+                  alt: 'Pallet2Deliver logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity5'
+                  name: 'service-design-print-identity5',
+                  alt: 'Tiggis logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity6'
+                  name: 'service-design-print-identity6',
+                  alt: 'Spider rentals logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity7'
+                  name: 'service-design-print-identity7',
+                  alt: 'achieve foot health logo'
                 }
               },
               {
                 image: {
-                  name: 'service-design-print-identity8'
+                  name: 'service-design-print-identity8',
+                  alt: 'Education Fast Forward logo'
                 }
               }
             ]
@@ -699,7 +754,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-exhibitions1'
+                name: 'service-exhibitions1',
+                alt: 'Exa Networks stand'
               }
             },
             fullBleed: true
@@ -743,27 +799,32 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-exhibitions-bespoke1'
+                  name: 'service-exhibitions-bespoke1',
+                  alt: 'TOMY stand'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-bespoke2'
+                  name: 'service-exhibitions-bespoke2',
+                  alt: 'Exa Networks stand'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-bespoke3'
+                  name: 'service-exhibitions-bespoke3',
+                  alt: 'Lutron stand'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-bespoke4'
+                  name: 'service-exhibitions-bespoke4',
+                  alt: 'Whyte Group stand'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-bespoke5'
+                  name: 'service-exhibitions-bespoke5',
+                  alt: 'Mitsubishi Air Conditioning stand'
                 }
               }
             ]
@@ -807,22 +868,26 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-exhibitions-modular1'
+                  name: 'service-exhibitions-modular1',
+                  alt: 'Heckford stand render'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-modular2'
+                  name: 'service-exhibitions-modular2',
+                  alt: 'pte plc stand'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-modular3'
+                  name: 'service-exhibitions-modular3',
+                  alt: 'missguided stand'
                 }
               },
               {
                 image: {
-                  name: 'service-exhibitions-modular4'
+                  name: 'service-exhibitions-modular4',
+                  alt: 'Scorpion Electro Systems stand'
                 }
               }
             ]
@@ -865,7 +930,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-exhibitions-banners1'
+                name: 'service-exhibitions-banners1',
+                alt: 'Bowker BMW banner'
               }
             },
             fullBleed: true
@@ -908,7 +974,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-exhibitions-installation1'
+                name: 'service-exhibitions-installation1',
+                alt: 'iliv stand'
               }
             },
             fullBleed: true
@@ -917,7 +984,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-exhibitions-installation2'
+                name: 'service-exhibitions-installation2',
+                alt: 'Certifications'
               }
             },
             fullBleed: true
@@ -1031,7 +1099,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-ppc-adwords1'
+                name: 'service-ppc-adwords1',
+                alt: 'Wainhomes Google advertisements'
               }
             }
           }
@@ -1079,37 +1148,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-advertising1'
+                  name: 'service-advertising1',
+                  alt: 'Bowker poster'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising2'
+                  name: 'service-advertising2',
+                  alt: 'Royal Westmoreland magazine advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising3'
+                  name: 'service-advertising3',
+                  alt: 'Staywell pet door advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising4'
+                  name: 'service-advertising4',
+                  alt: 'missguided dress advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising5'
+                  name: 'service-advertising5',
+                  alt: 'Wainhomes billboard advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising6'
+                  name: 'service-advertising6',
+                  alt: 'Wigan event poster'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising7'
+                  name: 'service-advertising7',
+                  alt: 'Tewitfield Marina houses advertisement'
                 }
               }
             ]
@@ -1145,32 +1221,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-advertising-newspapers-magazines1'
+                  name: 'service-advertising-newspapers-magazines1',
+                  alt: 'Winfields advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-newspapers-magazines2'
+                  name: 'service-advertising-newspapers-magazines2',
+                  alt: 'Bowker Motor Group magazine advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-newspapers-magazines3'
+                  name: 'service-advertising-newspapers-magazines3',
+                  alt: 'Stagecoach advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-newspapers-magazines4'
+                  name: 'service-advertising-newspapers-magazines4',
+                  alt: 'Matalan advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-newspapers-magazines5'
+                  name: 'service-advertising-newspapers-magazines5',
+                  alt: 'Larocca advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-newspapers-magazines6'
+                  name: 'service-advertising-newspapers-magazines6',
+                  alt: 'QHotels adverisement'
                 }
               }
             ]
@@ -1214,22 +1296,26 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-advertising-recruitment1'
+                  name: 'service-advertising-recruitment1',
+                  alt: 'Berghaus Marketing Communications Manager advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-recruitment2'
+                  name: 'service-advertising-recruitment2',
+                  alt: 'Leisure Parcs jobs advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-recruitment3'
+                  name: 'service-advertising-recruitment3',
+                  alt: 'The SLC Group and NHS job advertisements'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-recruitment4'
+                  name: 'service-advertising-recruitment4',
+                  alt: 'Leisure Parcs jobs advertisement'
                 }
               }
             ]
@@ -1265,32 +1351,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-advertising-outdoor1'
+                  name: 'service-advertising-outdoor1',
+                  alt: 'Jones Homes bus stand advertisement'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-outdoor2'
+                  name: 'service-advertising-outdoor2',
+                  alt: 'Winfields billboard artwork'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-outdoor3'
+                  name: 'service-advertising-outdoor3',
+                  alt: 'Winfields billboard'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-outdoor4'
+                  name: 'service-advertising-outdoor4',
+                  alt: 'Churchwood Finance Group billboard artwork'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-outdoor5'
+                  name: 'service-advertising-outdoor5',
+                  alt: 'Churchwood Finance Group billboard'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-outdoor6'
+                  name: 'service-advertising-outdoor6',
+                  alt: 'MINI Clubman billboard'
                 }
               }
             ]
@@ -1317,7 +1409,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-advertising-tv1'
+                name: 'service-advertising-tv1',
+                alt: 'Multiple TV advertisements'
               }
             },
             fullBleed: true
@@ -1379,12 +1472,14 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-advertising-mail1'
+                  name: 'service-advertising-mail1',
+                  alt: 'Plumbs brochure'
                 }
               },
               {
                 image: {
-                  name: 'service-advertising-mail2'
+                  name: 'service-advertising-mail2',
+                  alt: 'LLoyd Approved leaflet'
                 }
               }
             ]
@@ -1425,17 +1520,20 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-digital1'
+                  name: 'service-digital1',
+                  alt: 'Family Care homepage'
                 }
               },
               {
                 image: {
-                  name: 'service-digital2'
+                  name: 'service-digital2',
+                  alt: 'Fulwood Academy and Adventure Island homepages'
                 }
               },
               {
                 image: {
-                  name: 'service-digital3'
+                  name: 'service-digital3',
+                  alt: 'Chester Zoo email campaigns and Crealy homepage'
                 }
               }
             ]
@@ -1462,7 +1560,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-digital-marketing-strategy1'
+                name: 'service-digital-marketing-strategy1',
+                alt: 'Wainhomes Summer Newsletter'
               }
             },
             fullBleed: true
@@ -1490,17 +1589,20 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-digital-social1'
+                  name: 'service-digital-social1',
+                  alt: 'Wainhomes NW Facebook page'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-social2'
+                  name: 'service-digital-social2',
+                  alt: 'LLoyd Blackpool BMW Facebook post'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-social3'
+                  name: 'service-digital-social3',
+                  alt: 'LLoyd Blackpool BMW post and cover images'
                 }
               }
             ]
@@ -1528,17 +1630,20 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-digital-ppc1'
+                  name: 'service-digital-ppc1',
+                  alt: 'n-compass website pages on multiple devices'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-ppc2'
+                  name: 'service-digital-ppc2',
+                  alt: 'Watermouth Castle homepage'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-ppc3'
+                  name: 'service-digital-ppc3',
+                  alt: 'St Pius X homepage'
                 }
               }
             ]
@@ -1565,7 +1670,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-digital-content-marketing1'
+                name: 'service-digital-content-marketing1',
+                alt: 'Watkin Jones Homes news page'
               }
             },
             fullBleed: true
@@ -1592,7 +1698,8 @@ export const Services: Api.Service[] = [
             type: 'image',
             data: {
               image: {
-                name: 'service-digital-influencer1'
+                name: 'service-digital-influencer1',
+                alt: 'Sandcastle Waterpark Facebook page'
               }
             },
             fullBleed: true
@@ -1620,17 +1727,20 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-digital-web1'
+                  name: 'service-digital-web1',
+                  alt: 'Kents Cavern and Cruden Group homepages'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-web2'
+                  name: 'service-digital-web2',
+                  alt: 'Becky Falls homepage'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-web3'
+                  name: 'service-digital-web3',
+                  alt: 'Cycle Lancashire homepage'
                 }
               }
             ]
@@ -1666,37 +1776,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-digital-email-mms1'
+                  name: 'service-digital-email-mms1',
+                  alt: 'Preston Harley-Davidson email campaigns'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-email-mms2'
+                  name: 'service-digital-email-mms2',
+                  alt: 'Westerley BMW email campaign'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-email-mms3'
+                  name: 'service-digital-email-mms3',
+                  alt: 'Clayton Legal and Clayton Recruitment email campaigns'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-email-mms4'
+                  name: 'service-digital-email-mms4',
+                  alt: 'Wainhomes email campaign'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-email-mms5'
+                  name: 'service-digital-email-mms5',
+                  alt: 'LLoyd Mini email campaign'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-email-mms6'
+                  name: 'service-digital-email-mms6',
+                  alt: 'LLoyd BMW MMS campaign'
                 }
               },
               {
                 image: {
-                  name: 'service-digital-email-mms7'
+                  name: 'service-digital-email-mms7',
+                  alt: 'Bowker email campaign'
                 }
               }
             ]
@@ -1787,32 +1904,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-illustration-traditional1'
+                  name: 'service-illustration-traditional1',
+                  alt: 'Chester Zoo ride signage'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-traditional2'
+                  name: 'service-illustration-traditional2',
+                  alt: 'Castle'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-traditional3'
+                  name: 'service-illustration-traditional3',
+                  alt: 'People'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-traditional4'
+                  name: 'service-illustration-traditional4',
+                  alt: 'Crealy billboard'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-traditional5'
+                  name: 'service-illustration-traditional5',
+                  alt: "Bucky Tucker's Home Run Diner logo"
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-traditional6'
+                  name: 'service-illustration-traditional6',
+                  alt: 'Healthy Heroes characters'
                 }
               }
             ]
@@ -1840,32 +1963,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-illustration-hand-drawn1'
+                  name: 'service-illustration-hand-drawn1',
+                  alt: 'Animals in beard'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-hand-drawn2'
+                  name: 'service-illustration-hand-drawn2',
+                  alt: 'Messy kitchen'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-hand-drawn3'
+                  name: 'service-illustration-hand-drawn3',
+                  alt: 'Dinosaur playing football'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-hand-drawn4'
+                  name: 'service-illustration-hand-drawn4',
+                  alt: 'Castle'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-hand-drawn5'
+                  name: 'service-illustration-hand-drawn5',
+                  alt: 'Explorer character'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-hand-drawn6'
+                  name: 'service-illustration-hand-drawn6',
+                  alt: 'Watermouth Castle park map'
                 }
               }
             ]
@@ -1897,37 +2026,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-illustration-technical1'
+                  name: 'service-illustration-technical1',
+                  alt: 'Parking sensors'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-technical2'
+                  name: 'service-illustration-technical2',
+                  alt: 'Football stadium'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-technical3'
+                  name: 'service-illustration-technical3',
+                  alt: 'Park map'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-technical4'
+                  name: 'service-illustration-technical4',
+                  alt: 'The Heathers housing development map'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-technical5'
+                  name: 'service-illustration-technical5',
+                  alt: 'NGPOD product diagram'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-technical6'
+                  name: 'service-illustration-technical6',
+                  alt: 'flex 360 product'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-technical7'
+                  name: 'service-illustration-technical7',
+                  alt: 'Fighter jet'
                 }
               }
             ]
@@ -1959,37 +2095,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-illustration-digital1'
+                  name: 'service-illustration-digital1',
+                  alt: 'Plane flying over rally car'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-digital2'
+                  name: 'service-illustration-digital2',
+                  alt: 'Tesco Mobile characters'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-digital3'
+                  name: 'service-illustration-digital3',
+                  alt: 'Sandcastle Waterpark logo'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-digital4'
+                  name: 'service-illustration-digital4',
+                  alt: 'Diver character'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-digital5'
+                  name: 'service-illustration-digital5',
+                  alt: 'Crealy characters'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-digital6'
+                  name: 'service-illustration-digital6',
+                  alt: 'Characters'
                 }
               },
               {
                 image: {
-                  name: 'service-illustration-digital7'
+                  name: 'service-illustration-digital7',
+                  alt: 'Halloween on 31st Street characters'
                 }
               }
             ]
@@ -2045,37 +2188,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-signage1'
+                  name: 'service-signage1',
+                  alt: 'Wainhomes Visitor Parking sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage2'
+                  name: 'service-signage2',
+                  alt: 'Sandcastle Waterworld entrance sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage3'
+                  name: 'service-signage3',
+                  alt: 'Watkin Jones Homes sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage4'
+                  name: 'service-signage4',
+                  alt: 'profiles health & fitness suite lettering'
                 }
               },
               {
                 image: {
-                  name: 'service-signage5'
+                  name: 'service-signage5',
+                  alt: 'NHS Stop Smoking Centre graphics'
                 }
               },
               {
                 image: {
-                  name: 'service-signage6'
+                  name: 'service-signage6',
+                  alt: 'the study lab sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage7'
+                  name: 'service-signage7',
+                  alt: 'A Mano sign'
                 }
               }
             ]
@@ -2150,37 +2300,44 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-signage-external1'
+                  name: 'service-signage-external1',
+                  alt: 'Linden Homes standing sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-external2'
+                  name: 'service-signage-external2',
+                  alt: 'Timbuktu sign and graphics'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-external3'
+                  name: 'service-signage-external3',
+                  alt: 'Haigh Woodland Park standing sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-external4'
+                  name: 'service-signage-external4',
+                  alt: 'Farrell Heyworth shopfront sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-external5'
+                  name: 'service-signage-external5',
+                  alt: 'Safari Express sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-external6'
+                  name: 'service-signage-external6',
+                  alt: 'Priestley College plinth'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-external7'
+                  name: 'service-signage-external7',
+                  alt: 'Walmer Homes Sales & Marketing Suite sign'
                 }
               }
             ]
@@ -2238,27 +2395,32 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-signage-internal1'
+                  name: 'service-signage-internal1',
+                  alt: 'Wainhomes wall signs'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-internal2'
+                  name: 'service-signage-internal2',
+                  alt: 'GallifordTry wall graphics'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-internal3'
+                  name: 'service-signage-internal3',
+                  alt: 'Reception sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-internal4'
+                  name: 'service-signage-internal4',
+                  alt: 'Priestley College wall signs'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-internal5'
+                  name: 'service-signage-internal5',
+                  alt: 'Farrell Heyworth lettering'
                 }
               }
             ]
@@ -2294,32 +2456,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-signage-vehicle1'
+                  name: 'service-signage-vehicle1',
+                  alt: 'Crealy van'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-vehicle2'
+                  name: 'service-signage-vehicle2',
+                  alt: 'Priestley College bus'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-vehicle3'
+                  name: 'service-signage-vehicle3',
+                  alt: 'Pathfinder Homes van'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-vehicle4'
+                  name: 'service-signage-vehicle4',
+                  alt: "Wing's van"
                 }
               },
               {
                 image: {
-                  name: 'service-signage-vehicle5'
+                  name: 'service-signage-vehicle5',
+                  alt: 'Winfields truck'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-vehicle6'
+                  name: 'service-signage-vehicle6',
+                  alt: 'atg vans'
                 }
               }
             ]
@@ -2391,22 +2559,26 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-signage-print1'
+                  name: 'service-signage-print1',
+                  alt: 'Gym wall graphics'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-print2'
+                  name: 'service-signage-print2',
+                  alt: 'Gym wall graphic'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-print3'
+                  name: 'service-signage-print3',
+                  alt: 'Sandcastle Waterpark building graphics'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-print4'
+                  name: 'service-signage-print4',
+                  alt: 'Wall installation'
                 }
               }
             ]
@@ -2450,32 +2622,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-signage-pos1'
+                  name: 'service-signage-pos1',
+                  alt: 'Winfields cabin'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-pos2'
+                  name: 'service-signage-pos2',
+                  alt: 'MINI Seal & Protect'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-pos3'
+                  name: 'service-signage-pos3',
+                  alt: 'Linden Homes Marketing Suite sign'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-pos4'
+                  name: 'service-signage-pos4',
+                  alt: 'Wainhomes'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-pos5'
+                  name: 'service-signage-pos5',
+                  alt: 'Lloyd pull-up banner'
                 }
               },
               {
                 image: {
-                  name: 'service-signage-pos6'
+                  name: 'service-signage-pos6',
+                  alt: 'Winfields hanging sign'
                 }
               }
             ]
@@ -2524,32 +2702,38 @@ export const Services: Api.Service[] = [
             data: [
               {
                 image: {
-                  name: 'service-photography1'
+                  name: 'service-photography1',
+                  alt: 'Kitchen'
                 }
               },
               {
                 image: {
-                  name: 'service-photography2'
+                  name: 'service-photography2',
+                  alt: 'Students'
                 }
               },
               {
                 image: {
-                  name: 'service-photography3'
+                  name: 'service-photography3',
+                  alt: 'Horse'
                 }
               },
               {
                 image: {
-                  name: 'service-photography4'
+                  name: 'service-photography4',
+                  alt: 'Watkin Jones Homes flags'
                 }
               },
               {
                 image: {
-                  name: 'service-photography5'
+                  name: 'service-photography5',
+                  alt: 'Building'
                 }
               },
               {
                 image: {
-                  name: 'service-photography6'
+                  name: 'service-photography6',
+                  alt: 'Journal'
                 }
               }
             ]

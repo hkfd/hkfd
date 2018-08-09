@@ -46,7 +46,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'inspiring-healthy-lifestyles1'
+                name: 'inspiring-healthy-lifestyles1',
+                alt: 'Wigan Food & Drink Festival magazine cover'
               }
             },
             fullBleed: true
@@ -74,32 +75,38 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-design-print1'
+                  name: 'inspiring-healthy-lifestyles-design-print1',
+                  alt: 'Wigan Food & Drink Festival magazine spread'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-design-print2'
+                  name: 'inspiring-healthy-lifestyles-design-print2',
+                  alt: 'Museum of Cannock Chase leaflet'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-design-print3'
+                  name: 'inspiring-healthy-lifestyles-design-print3',
+                  alt: 'Haigh Woodland Park print'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-design-print4'
+                  name: 'inspiring-healthy-lifestyles-design-print4',
+                  alt: 'Leigh Sports Village poster'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-design-print5'
+                  name: 'inspiring-healthy-lifestyles-design-print5',
+                  alt: 'Haigh Woodland Park print'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-design-print6'
+                  name: 'inspiring-healthy-lifestyles-design-print6',
+                  alt: 'Museum of Cannock Chase leaflet'
                 }
               }
             ]
@@ -126,7 +133,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'inspiring-healthy-lifestyles-social1'
+                name: 'inspiring-healthy-lifestyles-social1',
+                alt: 'Leisure centre Facebook pages'
               }
             },
             fullBleed: true
@@ -143,7 +151,7 @@ export const CaseStudies: Api.CaseStudy[] = [
                 paragraph: [
                   {
                     text:
-                      'We produce a number of campaign specific landing pages for Inspring healthy lifestyles. These pages act as a focal point for capturing customer details, generating membership leads and highlighting user case studies to show how joining a leisure centre will lead to a healthier lifestyle.'
+                      'We produce a number of campaign specific landing pages for Inspiring healthy lifestyles. These pages act as a focal point for capturing customer details, generating membership leads and highlighting user case studies to show how joining a leisure centre will lead to a healthier lifestyle.'
                   }
                 ]
               }
@@ -153,7 +161,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'inspiring-healthy-lifestyles-web1'
+                name: 'inspiring-healthy-lifestyles-web1',
+                alt: 'Website'
               }
             },
             fullBleed: true
@@ -207,42 +216,50 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage1'
+                  name: 'inspiring-healthy-lifestyles-signage1',
+                  alt: 'Haigh Woodland Park car park sign'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage2'
+                  name: 'inspiring-healthy-lifestyles-signage2',
+                  alt: 'Haigh Kitchen Courtyard sign'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage3'
+                  name: 'inspiring-healthy-lifestyles-signage3',
+                  alt: 'Howe Bridge Leisure centre sign'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage4'
+                  name: 'inspiring-healthy-lifestyles-signage4',
+                  alt: 'The Subs Bench sign'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage5'
+                  name: 'inspiring-healthy-lifestyles-signage5',
+                  alt: 'Gym wall decal'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage6'
+                  name: 'inspiring-healthy-lifestyles-signage6',
+                  alt: 'Gym wall posters'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage7'
+                  name: 'inspiring-healthy-lifestyles-signage7',
+                  alt: 'Gym wall decal'
                 }
               },
               {
                 image: {
-                  name: 'inspiring-healthy-lifestyles-signage8'
+                  name: 'inspiring-healthy-lifestyles-signage8',
+                  alt: 'Gym wall decal'
                 }
               }
             ]
@@ -308,7 +325,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'wainhomes1'
+                name: 'wainhomes1',
+                alt: 'Sales & Marketing Suite interior'
               }
             },
             fullBleed: true
@@ -344,27 +362,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'wainhomes-signage1'
+                  name: 'wainhomes-signage1',
+                  alt: 'Visitor parking sign'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-signage2'
+                  name: 'wainhomes-signage2',
+                  alt: 'Wainhomes flags'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-signage3'
+                  name: 'wainhomes-signage3',
+                  alt: 'Standing signs'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-signage4'
+                  name: 'wainhomes-signage4',
+                  alt: 'Wainhomes flags'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-signage5'
+                  name: 'wainhomes-signage5',
+                  alt: 'Development sign'
                 }
               }
             ]
@@ -400,27 +423,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'wainhomes-cgi1'
+                  name: 'wainhomes-cgi1',
+                  alt: 'Detached house render'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-cgi2'
+                  name: 'wainhomes-cgi2',
+                  alt: 'Apartment block render'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-cgi3'
+                  name: 'wainhomes-cgi3',
+                  alt: 'Development site render'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-cgi4'
+                  name: 'wainhomes-cgi4',
+                  alt: 'Terraced houses render'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-cgi5'
+                  name: 'wainhomes-cgi5',
+                  alt: 'Detached house render'
                 }
               }
             ]
@@ -456,37 +484,44 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'wainhomes-print1'
+                  name: 'wainhomes-print1',
+                  alt: 'Development brochure covers'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-print2'
+                  name: 'wainhomes-print2',
+                  alt: 'Brochure advert'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-print3'
+                  name: 'wainhomes-print3',
+                  alt: 'Billboard advertisement'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-print4'
+                  name: 'wainhomes-print4',
+                  alt: 'Brochure spread'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-print5'
+                  name: 'wainhomes-print5',
+                  alt: 'Folder design'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-print6'
+                  name: 'wainhomes-print6',
+                  alt: 'Billboard advertisement'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-print7'
+                  name: 'wainhomes-print7',
+                  alt: 'Brochure spread'
                 }
               }
             ]
@@ -521,7 +556,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'wainhomes-website1'
+                name: 'wainhomes-website1',
+                alt: 'Website on multiple devices'
               }
             },
             fullBleed: true
@@ -564,7 +600,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'wainhomes-ppc1'
+                name: 'wainhomes-ppc1',
+                alt: 'Wainhomes North West Facebook page'
               }
             },
             fullBleed: true
@@ -591,7 +628,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'wainhomes-email1'
+                name: 'wainhomes-email1',
+                alt: 'Email'
               }
             },
             fullBleed: true
@@ -627,12 +665,14 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'wainhomes-promo1'
+                  name: 'wainhomes-promo1',
+                  alt: 'Flag'
                 }
               },
               {
                 image: {
-                  name: 'wainhomes-promo2'
+                  name: 'wainhomes-promo2',
+                  alt: 'Gift bag'
                 }
               }
             ]
@@ -685,7 +725,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'priestley1'
+                name: 'priestley1',
+                alt: 'Students'
               }
             },
             fullBleed: true
@@ -713,22 +754,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'priestley-design-print1'
+                  name: 'priestley-design-print1',
+                  alt: '2018 prospectus cover'
                 }
               },
               {
                 image: {
-                  name: 'priestley-design-print2'
+                  name: 'priestley-design-print2',
+                  alt: '2018 prospectus spread'
                 }
               },
               {
                 image: {
-                  name: 'priestley-design-print3'
+                  name: 'priestley-design-print3',
+                  alt: '2018 prospectus cover design'
                 }
               },
               {
                 image: {
-                  name: 'priestley-design-print4'
+                  name: 'priestley-design-print4',
+                  alt: '2018 prospectus spread'
                 }
               }
             ]
@@ -755,7 +800,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'priestley-bus1'
+                name: 'priestley-bus1',
+                alt: 'Dame Sarah Storey with bus'
               }
             },
             fullBleed: true
@@ -783,32 +829,38 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'priestley-signage1'
+                  name: 'priestley-signage1',
+                  alt: 'Main signage'
                 }
               },
               {
                 image: {
-                  name: 'priestley-signage2'
+                  name: 'priestley-signage2',
+                  alt: 'Hanging signs'
                 }
               },
               {
                 image: {
-                  name: 'priestley-signage3'
+                  name: 'priestley-signage3',
+                  alt: 'Cafe sign'
                 }
               },
               {
                 image: {
-                  name: 'priestley-signage4'
+                  name: 'priestley-signage4',
+                  alt: 'Signpost'
                 }
               },
               {
                 image: {
-                  name: 'priestley-signage5'
+                  name: 'priestley-signage5',
+                  alt: 'Kit Shop graphic'
                 }
               },
               {
                 image: {
-                  name: 'priestley-signage6'
+                  name: 'priestley-signage6',
+                  alt: 'Sport wall sign'
                 }
               }
             ]
@@ -836,22 +888,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'priestley-photography1'
+                  name: 'priestley-photography1',
+                  alt: 'Photograher and subject'
                 }
               },
               {
                 image: {
-                  name: 'priestley-photography2'
+                  name: 'priestley-photography2',
+                  alt: 'Student with flowers'
                 }
               },
               {
                 image: {
-                  name: 'priestley-photography3'
+                  name: 'priestley-photography3',
+                  alt: 'Students'
                 }
               },
               {
                 image: {
-                  name: 'priestley-photography4'
+                  name: 'priestley-photography4',
+                  alt: 'Students'
                 }
               }
             ]
@@ -910,7 +966,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'sandcastle1'
+                name: 'sandcastle1',
+                alt: 'Construction render'
               }
             },
             fullBleed: true
@@ -946,17 +1003,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'sandcastle-illustration1'
+                  name: 'sandcastle-illustration1',
+                  alt: 'Logo'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-illustration2'
+                  name: 'sandcastle-illustration2',
+                  alt: 'Map'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-illustration3'
+                  name: 'sandcastle-illustration3',
+                  alt: 'Ride sketches'
                 }
               }
             ]
@@ -984,27 +1044,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'sandcastle-design-print1'
+                  name: 'sandcastle-design-print1',
+                  alt: 'Opening Times leaflet cover'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-design-print2'
+                  name: 'sandcastle-design-print2',
+                  alt: 'Caribbean Christmas poster'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-design-print3'
+                  name: 'sandcastle-design-print3',
+                  alt: 'Pop-up stand graphics'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-design-print4'
+                  name: 'sandcastle-design-print4',
+                  alt: 'Group deals poster'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-design-print5'
+                  name: 'sandcastle-design-print5',
+                  alt: 'Leaflet spread'
                 }
               }
             ]
@@ -1048,22 +1113,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'sandcastle-signage1'
+                  name: 'sandcastle-signage1',
+                  alt: 'Waterfalls Cafe-Bar sign'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-signage2'
+                  name: 'sandcastle-signage2',
+                  alt: 'External building graphic'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-signage3'
+                  name: 'sandcastle-signage3',
+                  alt: 'Waterfalls Cafe-Bar sign'
                 }
               },
               {
                 image: {
-                  name: 'sandcastle-signage4'
+                  name: 'sandcastle-signage4',
+                  alt: 'External building graphic'
                 }
               }
             ]
@@ -1077,7 +1146,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'sandcastle-vehicle1'
+                name: 'sandcastle-vehicle1',
+                alt: 'Van'
               }
             },
             fullBleed: true
@@ -1112,7 +1182,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'sandcastle-social-media1'
+                name: 'sandcastle-social-media1',
+                alt: 'Facebook page'
               }
             },
             fullBleed: true
@@ -1188,7 +1259,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lutron1'
+                name: 'lutron1',
+                alt: 'Exhibition stand'
               }
             },
             fullBleed: true
@@ -1224,17 +1296,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'lutron-work1'
+                  name: 'lutron-work1',
+                  alt: 'People around stand'
                 }
               },
               {
                 image: {
-                  name: 'lutron-work2'
+                  name: 'lutron-work2',
+                  alt: 'Stand'
                 }
               },
               {
                 image: {
-                  name: 'lutron-work3'
+                  name: 'lutron-work3',
+                  alt: 'Interview with exhibitor in front of stand'
                 }
               }
             ]
@@ -1262,22 +1337,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'lutron-light-building1'
+                  name: 'lutron-light-building1',
+                  alt: 'Attendees looking at stand'
                 }
               },
               {
                 image: {
-                  name: 'lutron-light-building2'
+                  name: 'lutron-light-building2',
+                  alt: 'Exhibitor talking to attendee in front of stand'
                 }
               },
               {
                 image: {
-                  name: 'lutron-light-building3'
+                  name: 'lutron-light-building3',
+                  alt: 'Stand front'
                 }
               },
               {
                 image: {
-                  name: 'lutron-light-building4'
+                  name: 'lutron-light-building4',
+                  alt: 'Stand side'
                 }
               }
             ]
@@ -1328,7 +1407,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lutron-ise1'
+                name: 'lutron-ise1',
+                alt: 'Stand with people'
               }
             },
             fullBleed: true
@@ -1387,7 +1467,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'winfields1'
+                name: 'winfields1',
+                alt: 'Exterior poster'
               }
             },
             fullBleed: true
@@ -1415,22 +1496,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'winfields-design-print1'
+                  name: 'winfields-design-print1',
+                  alt: "JJ's cafe poster"
                 }
               },
               {
                 image: {
-                  name: 'winfields-design-print2'
+                  name: 'winfields-design-print2',
+                  alt: 'Accordion leaflet'
                 }
               },
               {
                 image: {
-                  name: 'winfields-design-print3'
+                  name: 'winfields-design-print3',
+                  alt: 'Leaflet'
                 }
               },
               {
                 image: {
-                  name: 'winfields-design-print4'
+                  name: 'winfields-design-print4',
+                  alt: 'Accordion artwork'
                 }
               }
             ]
@@ -1466,27 +1551,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'winfields-signage1'
+                  name: 'winfields-signage1',
+                  alt: 'Shop signage'
                 }
               },
               {
                 image: {
-                  name: 'winfields-signage2'
+                  name: 'winfields-signage2',
+                  alt: 'Hanging sign'
                 }
               },
               {
                 image: {
-                  name: 'winfields-signage3'
+                  name: 'winfields-signage3',
+                  alt: 'Black Friday Weekend poster'
                 }
               },
               {
                 image: {
-                  name: 'winfields-signage4'
+                  name: 'winfields-signage4',
+                  alt: 'Exterior building signage'
                 }
               },
               {
                 image: {
-                  name: 'winfields-signage5'
+                  name: 'winfields-signage5',
+                  alt: 'Cabin signage'
                 }
               }
             ]
@@ -1537,27 +1627,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'winfields-advertising-local1'
+                  name: 'winfields-advertising-local1',
+                  alt: 'Sale poster'
                 }
               },
               {
                 image: {
-                  name: 'winfields-advertising-local2'
+                  name: 'winfields-advertising-local2',
+                  alt: 'Sale billboard'
                 }
               },
               {
                 image: {
-                  name: 'winfields-advertising-local3'
+                  name: 'winfields-advertising-local3',
+                  alt: 'Poster'
                 }
               },
               {
                 image: {
-                  name: 'winfields-advertising-local4'
+                  name: 'winfields-advertising-local4',
+                  alt: 'Footwear advertisement'
                 }
               },
               {
                 image: {
-                  name: 'winfields-advertising-local5'
+                  name: 'winfields-advertising-local5',
+                  alt: 'Poster'
                 }
               }
             ]
@@ -1582,17 +1677,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'winfields-advertising-outdoor1'
+                  name: 'winfields-advertising-outdoor1',
+                  alt: 'Display panel advertisement'
                 }
               },
               {
                 image: {
-                  name: 'winfields-advertising-outdoor2'
+                  name: 'winfields-advertising-outdoor2',
+                  alt: 'Bus advertisement'
                 }
               },
               {
                 image: {
-                  name: 'winfields-advertising-outdoor3'
+                  name: 'winfields-advertising-outdoor3',
+                  alt: 'Billboard advertisement'
                 }
               }
             ]
@@ -1678,7 +1776,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'tomy1'
+                name: 'tomy1',
+                alt: 'Exhibition stand'
               }
             },
             fullBleed: true
@@ -1714,17 +1813,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'tomy-exhibitions1'
+                  name: 'tomy-exhibitions1',
+                  alt: 'Stand entrance'
                 }
               },
               {
                 image: {
-                  name: 'tomy-exhibitions2'
+                  name: 'tomy-exhibitions2',
+                  alt: 'Stand render'
                 }
               },
               {
                 image: {
-                  name: 'tomy-exhibitions3'
+                  name: 'tomy-exhibitions3',
+                  alt: 'Stand wall graphic'
                 }
               }
             ]
@@ -1752,17 +1854,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'tomy-pos1'
+                  name: 'tomy-pos1',
+                  alt: 'Stand outer wall graphics'
                 }
               },
               {
                 image: {
-                  name: 'tomy-pos2'
+                  name: 'tomy-pos2',
+                  alt: 'Product stand graphics'
                 }
               },
               {
                 image: {
-                  name: 'tomy-pos3'
+                  name: 'tomy-pos3',
+                  alt: 'Stand graphics'
                 }
               }
             ]
@@ -1821,7 +1926,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'vimto1'
+                name: 'vimto1',
+                alt: 'Logo wall graphic'
               }
             },
             fullBleed: true
@@ -1873,7 +1979,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'vimto-print1'
+                name: 'vimto-print1',
+                alt: 'Stand graphics'
               }
             },
             fullBleed: true
@@ -1930,7 +2037,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'vimto-exhibitions1'
+                name: 'vimto-exhibitions1',
+                alt: 'Pop-up stand'
               }
             },
             fullBleed: true
@@ -1953,27 +2061,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'vimto-exhibitions2'
+                  name: 'vimto-exhibitions2',
+                  alt: 'Vimto wall graphic'
                 }
               },
               {
                 image: {
-                  name: 'vimto-exhibitions3'
+                  name: 'vimto-exhibitions3',
+                  alt: 'Extreme Energy wall graphic'
                 }
               },
               {
                 image: {
-                  name: 'vimto-exhibitions4'
+                  name: 'vimto-exhibitions4',
+                  alt: 'Vimto Soft Drinks stand'
                 }
               },
               {
                 image: {
-                  name: 'vimto-exhibitions5'
+                  name: 'vimto-exhibitions5',
+                  alt: 'Vimto artwork'
                 }
               },
               {
                 image: {
-                  name: 'vimto-exhibitions6'
+                  name: 'vimto-exhibitions6',
+                  alt: 'Stand graphics'
                 }
               }
             ]
@@ -2001,17 +2114,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'vimto-banners1'
+                  name: 'vimto-banners1',
+                  alt: 'Milkshake shakes banner'
                 }
               },
               {
                 image: {
-                  name: 'vimto-banners2'
+                  name: 'vimto-banners2',
+                  alt: 'Milkshake shakes banner detail'
                 }
               },
               {
                 image: {
-                  name: 'vimto-banners3'
+                  name: 'vimto-banners3',
+                  alt: 'Vimto frozen drinks banner'
                 }
               }
             ]
@@ -2073,7 +2189,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'galliford-try1'
+                name: 'galliford-try1',
+                alt: 'Linden Homes Sales & Marketing Suite'
               }
             },
             fullBleed: true
@@ -2101,22 +2218,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'galliford-try-signage-internal1'
+                  name: 'galliford-try-signage-internal1',
+                  alt: 'Opening times sign'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-internal2'
+                  name: 'galliford-try-signage-internal2',
+                  alt: 'Wall image sign'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-internal3'
+                  name: 'galliford-try-signage-internal3',
+                  alt: 'Reception desk signage'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-internal4'
+                  name: 'galliford-try-signage-internal4',
+                  alt: 'Glass wall signage'
                 }
               }
             ]
@@ -2144,37 +2265,44 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor1'
+                  name: 'galliford-try-signage-outdoor1',
+                  alt: 'Linden Homes logo sign'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor2'
+                  name: 'galliford-try-signage-outdoor2',
+                  alt: 'Development plinth sign'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor3'
+                  name: 'galliford-try-signage-outdoor3',
+                  alt: 'Galliford Try sign'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor4'
+                  name: 'galliford-try-signage-outdoor4',
+                  alt: 'Linden Homes flag'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor5'
+                  name: 'galliford-try-signage-outdoor5',
+                  alt: 'Office window logos'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor6'
+                  name: 'galliford-try-signage-outdoor6',
+                  alt: 'Development construction signage'
                 }
               },
               {
                 image: {
-                  name: 'galliford-try-signage-outdoor7'
+                  name: 'galliford-try-signage-outdoor7',
+                  alt: 'Marketing Suite sign'
                 }
               }
             ]
@@ -2242,7 +2370,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd1'
+                name: 'lloyd1',
+                alt: 'Mini Clubman advertisement'
               }
             },
             fullBleed: true
@@ -2280,7 +2409,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-brochure1'
+                name: 'lloyd-brochure1',
+                alt: 'Winter Warrior brochure cover'
               }
             },
             fullBleed: true
@@ -2324,7 +2454,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-mail1'
+                name: 'lloyd-mail1',
+                alt: 'Twelve Hour Opportunity invitations'
               }
             },
             fullBleed: true
@@ -2361,7 +2492,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-eshot1'
+                name: 'lloyd-eshot1',
+                alt: 'Twelve Hour Opportunity email'
               }
             },
             fullBleed: true
@@ -2383,7 +2515,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-eshot2'
+                name: 'lloyd-eshot2',
+                alt: 'Mini Clubman preview event email'
               }
             },
             fullBleed: true
@@ -2410,7 +2543,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-mms1'
+                name: 'lloyd-mms1',
+                alt: 'BMW 3 Series MMS'
               }
             },
             fullBleed: true
@@ -2445,7 +2579,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-social1'
+                name: 'lloyd-social1',
+                alt: 'LLoyd Blackpool Facebook page'
               }
             },
             fullBleed: true
@@ -2472,7 +2607,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-advertising1'
+                name: 'lloyd-advertising1',
+                alt: 'LLoyd South Lakes adverts'
               }
             },
             fullBleed: true
@@ -2531,7 +2667,7 @@ export const CaseStudies: Api.CaseStudy[] = [
                 paragraph: [
                   {
                     text:
-                      'Heckford attended Lloyd MINI Blackpool’s 1oth annual Halloween MINI Drive out; which coincided with an exclusive first look at the new MINI Clubman.'
+                      'Heckford attended Lloyd MINI Blackpool’s 10th annual Halloween MINI Drive out; which coincided with an exclusive first look at the new MINI Clubman.'
                   }
                 ]
               },
@@ -2549,7 +2685,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-photography1'
+                name: 'lloyd-photography1',
+                alt: 'MINI cars'
               }
             },
             fullBleed: true
@@ -2576,7 +2713,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'lloyd-exhibition1'
+                name: 'lloyd-exhibition1',
+                alt: 'BMW 7 Series stand'
               }
             },
             fullBleed: true
@@ -2649,27 +2787,32 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'healthy-heroes1'
+                  name: 'healthy-heroes1',
+                  alt: 'Character sketches'
                 }
               },
               {
                 image: {
-                  name: 'healthy-heroes2'
+                  name: 'healthy-heroes2',
+                  alt: 'Poster designs'
                 }
               },
               {
                 image: {
-                  name: 'healthy-heroes3'
+                  name: 'healthy-heroes3',
+                  alt: 'Character development'
                 }
               },
               {
                 image: {
-                  name: 'healthy-heroes4'
+                  name: 'healthy-heroes4',
+                  alt: 'Character sketches'
                 }
               },
               {
                 image: {
-                  name: 'healthy-heroes5'
+                  name: 'healthy-heroes5',
+                  alt: 'Character development'
                 }
               }
             ]
@@ -2718,7 +2861,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'cruden1'
+                name: 'cruden1',
+                alt: 'Website'
               }
             }
           },
@@ -2726,7 +2870,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'cruden2'
+                name: 'cruden2',
+                alt: 'Website sketches'
               }
             }
           },
@@ -2734,7 +2879,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'cruden3'
+                name: 'cruden3',
+                alt: 'Website on multiple devices'
               }
             },
             fullBleed: true
@@ -2743,7 +2889,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'cruden4'
+                name: 'cruden4',
+                alt: 'Website mockups'
               }
             }
           }
@@ -2805,7 +2952,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'haven1'
+                name: 'haven1',
+                alt: 'Brochure cover'
               }
             },
             fullBleed: true
@@ -2814,7 +2962,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'haven2'
+                name: 'haven2',
+                alt: 'Brochure spread'
               }
             },
             fullBleed: true
@@ -2823,7 +2972,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'haven3'
+                name: 'haven3',
+                alt: 'Brochure spread artwork'
               }
             }
           },
@@ -2861,12 +3011,14 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'haven4'
+                  name: 'haven4',
+                  alt: 'POS stands'
                 }
               },
               {
                 image: {
-                  name: 'haven5'
+                  name: 'haven5',
+                  alt: 'POS stand closeup'
                 }
               }
             ]
@@ -2901,7 +3053,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'haven-print1'
+                name: 'haven-print1',
+                alt: 'Fred Hamer magazine advertisement'
               }
             }
           }
@@ -2935,7 +3088,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'haven-media1'
+                name: 'haven-media1',
+                alt: 'Newspaper advertisements'
               }
             },
             fullBleed: true
@@ -2989,7 +3143,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'watermouth1'
+                name: 'watermouth1',
+                alt: 'Ride logos'
               }
             },
             fullBleed: true
@@ -3041,22 +3196,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'watermouth-design-print1'
+                  name: 'watermouth-design-print1',
+                  alt: 'Park map covers'
                 }
               },
               {
                 image: {
-                  name: 'watermouth-design-print2'
+                  name: 'watermouth-design-print2',
+                  alt: 'Park map'
                 }
               },
               {
                 image: {
-                  name: 'watermouth-design-print3'
+                  name: 'watermouth-design-print3',
+                  alt: 'Park map inner'
                 }
               },
               {
                 image: {
-                  name: 'watermouth-design-print4'
+                  name: 'watermouth-design-print4',
+                  alt: 'Park map detail'
                 }
               }
             ]
@@ -3091,7 +3250,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'watermouth-illustration1'
+                name: 'watermouth-illustration1',
+                alt: 'Park map with sketch overlay'
               }
             },
             fullBleed: true
@@ -3126,7 +3286,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'watermouth-website1'
+                name: 'watermouth-website1',
+                alt: 'Website on multiple devices'
               }
             },
             fullBleed: true
@@ -3167,7 +3328,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'panaz1'
+                name: 'panaz1',
+                alt: 'Chairs'
               }
             },
             fullBleed: true
@@ -3194,7 +3356,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'panaz-exhibition1'
+                name: 'panaz-exhibition1',
+                alt: 'Stand sketches'
               }
             },
             fullBleed: true
@@ -3204,17 +3367,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'panaz-exhibition2'
+                  name: 'panaz-exhibition2',
+                  alt: 'Stand'
                 }
               },
               {
                 image: {
-                  name: 'panaz-exhibition3'
+                  name: 'panaz-exhibition3',
+                  alt: 'Fabrics on stand'
                 }
               },
               {
                 image: {
-                  name: 'panaz-exhibition4'
+                  name: 'panaz-exhibition4',
+                  alt: 'Stand on showfloor'
                 }
               }
             ]
@@ -3279,7 +3445,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'helston1'
+                name: 'helston1',
+                alt: 'Westerly MINI logo'
               }
             },
             fullBleed: true
@@ -3340,7 +3507,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'helston-ppc1'
+                name: 'helston-ppc1',
+                alt: 'MINI advertisements on website'
               }
             },
             fullBleed: true
@@ -3375,7 +3543,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'helston-email1'
+                name: 'helston-email1',
+                alt: 'MINI Countryman launch email on multiple devices'
               }
             },
             fullBleed: true
@@ -3410,7 +3579,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'helston-social1'
+                name: 'helston-social1',
+                alt: 'Westerly MINI and BMW Facebook posts'
               }
             },
             fullBleed: true
@@ -3437,7 +3607,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'helston-mail1'
+                name: 'helston-mail1',
+                alt: 'Invite brochure cover'
               }
             },
             fullBleed: true
@@ -3464,7 +3635,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'helston-advertising1'
+                name: 'helston-advertising1',
+                alt: 'MINI Clubman billboard'
               }
             },
             fullBleed: true
@@ -3529,7 +3701,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'chorley-remembers1'
+                name: 'chorley-remembers1',
+                alt: 'Exhibition'
               }
             }
           },
@@ -3537,7 +3710,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'chorley-remembers2'
+                name: 'chorley-remembers2',
+                alt: 'Model plane'
               }
             },
             fullBleed: true
@@ -3573,17 +3747,20 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'chorley-remembers-illustration1'
+                  name: 'chorley-remembers-illustration1',
+                  alt: 'Charley Pal'
                 }
               },
               {
                 image: {
-                  name: 'chorley-remembers-illustration2'
+                  name: 'chorley-remembers-illustration2',
+                  alt: 'Exhibition visualisation'
                 }
               },
               {
                 image: {
-                  name: 'chorley-remembers-illustration3'
+                  name: 'chorley-remembers-illustration3',
+                  alt: 'Exhibition layout sketch'
                 }
               }
             ]
@@ -3610,7 +3787,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'chorley-remembers-design1'
+                name: 'chorley-remembers-design1',
+                alt: 'The Chorley Pals panel artwork'
               }
             }
           },
@@ -3618,7 +3796,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'chorley-remembers-design2'
+                name: 'chorley-remembers-design2',
+                alt: 'Panels'
               }
             }
           }
@@ -3645,12 +3824,14 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'chorley-remembers-3d1'
+                  name: 'chorley-remembers-3d1',
+                  alt: 'Wall graphics render'
                 }
               },
               {
                 image: {
-                  name: 'chorley-remembers-3d2'
+                  name: 'chorley-remembers-3d2',
+                  alt: 'Display case render'
                 }
               }
             ]
@@ -3716,7 +3897,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'crealy1'
+                name: 'crealy1',
+                alt: 'Dino Jeeps artwork detail'
               }
             },
             fullBleed: true
@@ -3744,22 +3926,26 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'crealy-design-print1'
+                  name: 'crealy-design-print1',
+                  alt: 'New rides poster artwork'
                 }
               },
               {
                 image: {
-                  name: 'crealy-design-print2'
+                  name: 'crealy-design-print2',
+                  alt: 'Posters'
                 }
               },
               {
                 image: {
-                  name: 'crealy-design-print3'
+                  name: 'crealy-design-print3',
+                  alt: 'Easter Extravaganza poster artwork'
                 }
               },
               {
                 image: {
-                  name: 'crealy-design-print4'
+                  name: 'crealy-design-print4',
+                  alt: 'Great Winter Play Pass poster'
                 }
               }
             ]
@@ -3795,12 +3981,14 @@ export const CaseStudies: Api.CaseStudy[] = [
             data: [
               {
                 image: {
-                  name: 'crealy-outdoor1'
+                  name: 'crealy-outdoor1',
+                  alt: 'Petrol pump advertisements'
                 }
               },
               {
                 image: {
-                  name: 'crealy-outdoor2'
+                  name: 'crealy-outdoor2',
+                  alt: 'End of Season Finale billboard'
                 }
               }
             ]
@@ -3827,7 +4015,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'crealy-illustration1'
+                name: 'crealy-illustration1',
+                alt: 'Park map artwork'
               }
             },
             fullBleed: true
@@ -3896,7 +4085,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'crealy-email-marketing1'
+                name: 'crealy-email-marketing1',
+                alt: 'Email campaigns displayed on phones'
               }
             },
             fullBleed: true
@@ -3931,7 +4121,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'crealy-vehiclewraps1'
+                name: 'crealy-vehiclewraps1',
+                alt: 'Van'
               }
             },
             fullBleed: true
@@ -3966,7 +4157,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'crealy-website1'
+                name: 'crealy-website1',
+                alt: 'Website homepage'
               }
             },
             fullBleed: true
@@ -4009,7 +4201,8 @@ export const CaseStudies: Api.CaseStudy[] = [
             type: 'image',
             data: {
               image: {
-                name: 'crealy-social1'
+                name: 'crealy-social1',
+                alt: 'Facebook page on multiple devices'
               }
             }
           }
