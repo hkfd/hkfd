@@ -19,7 +19,7 @@
   </div>
 
   <div id="services-list">
-    <a class="service" *ngFor="let service of services$ | async" [routerLink]="[ '/service', service?.id ]" [attr.aria-label]="service?.title">
+    <a *ngFor="let service of services$ | async" class="service" [routerLink]="[ 'service', service?.id ]" [attr.aria-label]="service?.title">
       <image-component full-height [image]="service?.thumbnail | api"></image-component>
       <div class="service-info">
         <h3>{{ service?.title }}</h3>

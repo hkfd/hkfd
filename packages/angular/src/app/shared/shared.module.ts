@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { PostComponent } from './post/post.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
@@ -23,6 +24,7 @@ import { LazyDirective } from './lazy.directive';
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   declarations: [
+    PostComponent,
     HeaderComponent,
     FooterComponent,
     SliderComponent,

@@ -6,7 +6,7 @@
 </section>
 
 <section id="case-studies">
-  <a class="case-study {{ caseStudy?.colour }}" *ngFor="let caseStudy of caseStudies" [@caseStudyList]="caseStudy?.thumbnail?.srcset?.loaded" routerLink="{{ caseStudy?.id }}" [attr.aria-label]="caseStudy?.title">
+  <a *ngFor="let caseStudy of caseStudies" class="case-study {{ caseStudy?.colour }}" [@caseStudyList]="caseStudy?.thumbnail?.srcset?.loaded" [routerLink]="[caseStudy?.id]" [attr.aria-label]="caseStudy?.title">
     <h2>{{ caseStudy?.title }}</h2>
     <span class="button">READ MORE</span>
     <image-component full-height [image]="caseStudy?.thumbnail"></image-component>

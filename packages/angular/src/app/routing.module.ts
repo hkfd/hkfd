@@ -3,13 +3,6 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: 'app/pages/home/home.module#HomeModule',
-    data: {
-      state: 'home'
-    }
-  },
-  {
     path: 'about',
     loadChildren: 'app/pages/about/about.module#AboutModule',
     data: {
@@ -45,10 +38,10 @@ const routes: Routes = [
     }
   },
   {
-    path: ':type/:id',
-    loadChildren: 'app/shared/post/post.module#PostModule',
+    path: '',
+    loadChildren: 'app/pages/home/home.module#HomeModule',
     data: {
-      state: 'post'
+      state: 'home'
     }
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' }

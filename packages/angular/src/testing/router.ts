@@ -44,7 +44,8 @@ export class ActivatedRouteStub {
   get snapshot() {
     return {
       paramMap: this.testParamMap,
-      queryParamMap: this.testQueryParamMap
+      queryParamMap: this.testQueryParamMap,
+      parent: this.parent
     };
   }
 
@@ -56,4 +57,10 @@ export class ActivatedRouteStub {
     this._testData = data;
     this.dataSubject.next(data);
   }
+
+  parent = {
+    routeConfig: {
+      path: ''
+    }
+  };
 }

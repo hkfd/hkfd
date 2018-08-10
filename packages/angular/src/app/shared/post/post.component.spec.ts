@@ -3,37 +3,34 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import {
-  Router,
   RouterTestingModule,
   MockTitleService,
-  MockApiService,
   MockApiPipe,
   ActivatedRoute,
-  ActivatedRouteStub
+  ActivatedRouteStub,
+  Data
 } from 'testing';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { TitleService, Api } from 'shared';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
 let titleService: TitleService;
-let apiService: ApiService;
 let page: Page;
-let router: RouterStub;
 let activatedRoute: ActivatedRouteStub;
 let apiPipe: jasmine.Spy;
 
 describe('PostComponent', () => {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
+    activatedRoute.testData = { post: Data.Api.caseStudies[0] };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [PostComponent, MockApiPipe],
       providers: [
         { provide: TitleService, useClass: MockTitleService },
-        { provide: ApiService, useClass: MockApiService },
         { provide: ActivatedRoute, useValue: activatedRoute }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -42,31 +39,13 @@ describe('PostComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should call Router navigateByUrl on empty post', () => {
-    expect(router.navigateByUrl).toHaveBeenCalled();
-  });
-
-  it('should call Router navigateByUrl with root arg on empty post', () => {
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/');
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
   describe('OnInit', () => {
-    beforeEach(() => {
-      activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
-      fixture.detectChanges();
-    });
-
-    it('should call ApiService getPost', () => {
-      expect(apiService.getPost).toHaveBeenCalled();
-    });
-
-    it('should call ApiService getPost with type and id args', () => {
-      expect(apiService.getPost).toHaveBeenCalledWith('work', 'case-study-1');
-    });
-
     it('should set post', () => {
-      expect(comp.post).toBeDefined();
-      expect(comp.post.title).toBe('Case Study 1');
+      expect(comp.post).toEqual(Data.Api.caseStudies[0]);
     });
 
     it('should call TitleService setTitle', () => {
@@ -84,29 +63,12 @@ describe('PostComponent', () => {
     it(`should set layout as 'layout-'`, () => {
       expect(comp.layout).toMatch(/layout-[1-3]/);
     });
-
-    it('should call ApiService getPost on route change', () => {
-      activatedRoute.testParamMap = { type: 'work', id: 'case-study-2' };
-      fixture.detectChanges();
-
-      expect(apiService.getPost).toHaveBeenCalledTimes(3);
-    });
-
-    it('should set post again on route change', () => {
-      activatedRoute.testParamMap = { type: 'work', id: 'case-study-2' };
-      fixture.detectChanges();
-
-      expect(comp.post.title).toBe('Case Study 2');
-    });
-
-    it('should not call Router navigateByUrl', () => {
-      expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
-    });
   });
 
   describe('Content', () => {
     it('should display title', () => {
-      activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
+      activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+      comp.ngOnInit();
       fixture.detectChanges();
       page.addElements();
 
@@ -117,8 +79,8 @@ describe('PostComponent', () => {
 
     describe('Text', () => {
       beforeEach(() => {
-        activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
-        fixture.detectChanges();
+        activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+        comp.ngOnInit();
         page.addElements();
       });
 
@@ -133,7 +95,8 @@ describe('PostComponent', () => {
 
     describe('Image', () => {
       beforeEach(() => {
-        activatedRoute.testParamMap = { type: 'work', id: 'case-study-2' };
+        activatedRoute.testData = { post: Data.Api.caseStudies[1] };
+        comp.ngOnInit();
         fixture.detectChanges();
         page.addElements();
       });
@@ -173,7 +136,8 @@ describe('PostComponent', () => {
 
     describe('Gallery', () => {
       beforeEach(() => {
-        activatedRoute.testParamMap = { type: 'work', id: 'case-study-3' };
+        activatedRoute.testData = { post: Data.Api.caseStudies[2] };
+        comp.ngOnInit();
         fixture.detectChanges();
         page.addElements();
       });
@@ -193,7 +157,8 @@ describe('PostComponent', () => {
 
     describe('Duo', () => {
       beforeEach(() => {
-        activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
+        activatedRoute.testData = { post: Data.Api.services[0] };
+        comp.ngOnInit();
         fixture.detectChanges();
         page.addElements();
       });
@@ -213,7 +178,8 @@ describe('PostComponent', () => {
 
     describe('Video', () => {
       beforeEach(() => {
-        activatedRoute.testParamMap = { type: 'service', id: 'service-2' };
+        activatedRoute.testData = { post: Data.Api.services[1] };
+        comp.ngOnInit();
         fixture.detectChanges();
         page.addElements();
       });
@@ -233,7 +199,8 @@ describe('PostComponent', () => {
 
     describe('Audio', () => {
       beforeEach(() => {
-        activatedRoute.testParamMap = { type: 'service', id: 'service-3' };
+        activatedRoute.testData = { post: Data.Api.services[2] };
+        comp.ngOnInit();
         fixture.detectChanges();
         page.addElements();
       });
@@ -257,9 +224,7 @@ function createComponent() {
   fixture = TestBed.createComponent(PostComponent);
   comp = fixture.componentInstance;
   titleService = fixture.debugElement.injector.get(TitleService);
-  apiService = fixture.debugElement.injector.get(ApiService);
   page = new Page();
-  router = new RouterStub();
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
@@ -267,17 +232,6 @@ function createComponent() {
     fixture.detectChanges();
     page.addElements();
   });
-}
-
-class RouterStub {
-  navigateByUrl: jasmine.Spy;
-
-  constructor() {
-    const noop = () => undefined;
-    const router = fixture.debugElement.injector.get(Router);
-
-    this.navigateByUrl = spyOn(router, 'navigateByUrl').and.callFake(noop);
-  }
 }
 
 class Page {

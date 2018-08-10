@@ -1,10 +1,10 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { TitleService } from '../title.service';
+import { Api } from 'shared';
 
 @Component({
   selector: 'app-post',
@@ -19,24 +19,14 @@ export class PostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private titleService: TitleService,
-    private apiService: ApiService
+    private titleService: TitleService
   ) {}
 
   ngOnInit() {
-    this.post$ = this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap) =>
-          this.apiService.getPost(params.get('type'), params.get('id'))
-        )
-      )
-      .subscribe((post: Api.Post) => {
-        if (!post) return this.router.navigateByUrl('/');
-
-        this.post = post;
-        this.titleService.setTitle(post.title);
-      });
+    this.post$ = this.route.data.subscribe(({ post }: { post: Api.Post }) => {
+      this.post = post;
+      this.titleService.setTitle(post.title);
+    });
 
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min + 1) + min);
