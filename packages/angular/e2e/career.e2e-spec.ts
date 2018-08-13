@@ -8,7 +8,21 @@ describe('Career', () => {
     page.navigateTo();
   });
 
-  it('should display title', () => {
+  it('should set title', () => {
+    page
+      .getPageTitle()
+      .getAttribute('textContent')
+      .then(title => expect(page.getTitle()).toBe(`Heckford – ${title}`));
+  });
+
+  it('should set og:title', () => {
+    page
+      .getPageTitle()
+      .getAttribute('textContent')
+      .then(title => expect(page.getMetaTagTitle()).toBe(title));
+  });
+
+  it('should display page title', () => {
     expect(page.getPageTitle().getText()).toBeTruthy();
   });
 

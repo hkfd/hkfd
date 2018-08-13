@@ -2,10 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { RichText } from 'prismic-dom';
 
-import { TitleService, LoggerService, Prismic } from 'shared';
+import { Prismic } from 'shared';
 
 @Component({
   selector: 'app-news-post',
@@ -18,21 +17,12 @@ export class NewsPostComponent implements OnInit, OnDestroy {
   post$: Subscription;
   post: Prismic.Post;
 
-  constructor(
-    private route: ActivatedRoute,
-    private titleService: TitleService,
-    private logger: LoggerService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.post$ = this.route.data
-      .pipe(tap(post => this.logger.log('getPost', post)))
-      .subscribe(({ post }: { post: Prismic.Post }) => {
-        if (!post) return;
-
-        this.post = post;
-        this.titleService.setTitle(this.richText.asText(post.data.title));
-      });
+    this.post$ = this.route.data.subscribe(
+      ({ post }: { post: Prismic.Post }) => (this.post = post)
+    );
   }
 
   ngOnDestroy() {

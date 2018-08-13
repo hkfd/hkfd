@@ -8,6 +8,14 @@ describe('News', () => {
     page.navigateTo();
   });
 
+  it('should set title', () => {
+    expect(page.getTitle()).toBe('Heckford – News');
+  });
+
+  it('should set og:title', () => {
+    expect(page.getMetaTagTitle()).toBe('News');
+  });
+
   it('should display title', () => {
     expect(page.getPageTitle()).toBeTruthy();
   });

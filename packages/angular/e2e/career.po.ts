@@ -29,6 +29,16 @@ export class CareerPage {
       .then(_ => this.isVisible());
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getMetaTagTitle() {
+    return browser.driver
+      .findElement(by.xpath("//meta[@property='og:title']"))
+      .getAttribute('content');
+  }
+
   getCareers() {
     return element.all(by.css('.career'));
   }

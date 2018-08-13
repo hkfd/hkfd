@@ -1,3 +1,5 @@
+import { Observable, of } from 'rxjs';
+
 import { Data } from './';
 import { Prismic } from 'shared';
 
@@ -11,7 +13,7 @@ export class MockPrismicService {
     return Promise.resolve(Data.Prismic.postsResponse);
   }
 
-  getPost(_uid: string): Promise<Prismic.Post> {
-    return Promise.resolve(Data.Prismic.posts[0]);
+  getPost(_uid: string): Observable<Prismic.Post> {
+    return of(Data.Prismic.posts[0]);
   }
 }

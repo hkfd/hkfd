@@ -39,6 +39,16 @@ export class NewsPage {
       .then(_ => this.isVisible(this.getPosts().last()));
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getMetaTagTitle() {
+    return browser.driver
+      .findElement(by.xpath("//meta[@property='og:title']"))
+      .getAttribute('content');
+  }
+
   getPageTitle() {
     return element(by.css('h1')).getText();
   }

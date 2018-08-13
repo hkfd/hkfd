@@ -5,17 +5,17 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   RouterTestingModule,
-  MockTitleService,
+  MockMetaService,
   MockApiService,
   MockApiPipe
 } from 'testing';
 
-import { TitleService, ApiService, ApiPipe } from 'shared';
+import { MetaService, ApiService, ApiPipe } from 'shared';
 import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;
 let fixture: ComponentFixture<WorkComponent>;
-let titleService: TitleService;
+let metaService: MetaService;
 let apiService: ApiService;
 let apiPipe: ApiPipeStub;
 let page: Page;
@@ -26,7 +26,7 @@ describe('WorkComponent', () => {
       imports: [RouterTestingModule, NoopAnimationsModule],
       declarations: [WorkComponent],
       providers: [
-        { provide: TitleService, useClass: MockTitleService },
+        { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService },
         { provide: ApiPipe, useClass: MockApiPipe }
       ],
@@ -36,12 +36,15 @@ describe('WorkComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
+  it('should call MetaService setMetaTags', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with argument', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith(jasmine.any(String));
+  it('should call MetaService setMetaTags with title and url args', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalledWith({
+      title: jasmine.any(String),
+      url: jasmine.any(String)
+    });
   });
 
   it('should call ApiService getCaseStudies', () => {
@@ -74,7 +77,7 @@ describe('WorkComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(WorkComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
+  metaService = fixture.debugElement.injector.get(MetaService);
   apiService = fixture.debugElement.injector.get(ApiService);
   apiPipe = new ApiPipeStub();
   page = new Page();

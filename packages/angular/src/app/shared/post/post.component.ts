@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { TitleService } from '../title.service';
 import { Api } from 'shared';
 
 @Component({
@@ -17,16 +16,12 @@ export class PostComponent implements OnInit {
 
   @HostBinding('class') layout: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private titleService: TitleService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.post$ = this.route.data.subscribe(({ post }: { post: Api.Post }) => {
-      this.post = post;
-      this.titleService.setTitle(post.title);
-    });
+    this.post$ = this.route.data.subscribe(
+      ({ post }: { post: Api.Post }) => (this.post = post)
+    );
 
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min + 1) + min);

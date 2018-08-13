@@ -8,7 +8,15 @@ describe('Careers', () => {
     page.navigateTo();
   });
 
-  it('should display title', () => {
+  it('should set title', () => {
+    expect(page.getTitle()).toBe('Heckford – Careers');
+  });
+
+  it('should set og:title', () => {
+    expect(page.getMetaTagTitle()).toBe('Careers');
+  });
+
+  it('should display page title', () => {
     expect(page.getPageTitle()).toBeTruthy();
   });
 

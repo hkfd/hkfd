@@ -4,20 +4,16 @@ import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
-  MockTitleService,
-  MockApiService,
   MockApiPipe,
   ActivatedRoute,
   ActivatedRouteStub,
   Data
 } from 'testing';
 
-import { TitleService, ApiService } from 'shared';
 import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;
 let fixture: ComponentFixture<CareerComponent>;
-let titleService: TitleService;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
 let apiPipe: jasmine.Spy;
@@ -30,11 +26,7 @@ describe('CareerComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [CareerComponent, MockApiPipe],
-      providers: [
-        { provide: TitleService, useClass: MockTitleService },
-        { provide: ApiService, useClass: MockApiService },
-        { provide: ActivatedRoute, useValue: activatedRoute }
-      ],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -43,14 +35,6 @@ describe('CareerComponent', () => {
 
   it('should set career', () => {
     expect(comp.career).toEqual(Data.Api.careers[0]);
-  });
-
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
-  });
-
-  it('should call TitleService setTitle with post title', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith('Career 1');
   });
 
   describe('Content', () => {
@@ -73,7 +57,6 @@ describe('CareerComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(CareerComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
   page = new Page();
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 

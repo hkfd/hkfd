@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TitleService } from 'shared';
+import { MetaService } from 'shared';
 import { ContactImages } from './contact.images';
 
 @Component({
@@ -11,9 +11,9 @@ import { ContactImages } from './contact.images';
 export class ContactComponent implements OnInit {
   images = ContactImages;
 
-  constructor(private titleService: TitleService) {}
+  constructor(private metaService: MetaService) {}
 
   ngOnInit() {
-    this.titleService.setTitle('Contact');
+    this.metaService.setMetaTags({ title: 'Contact', url: 'contact' });
   }
 }

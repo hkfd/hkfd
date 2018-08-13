@@ -6,21 +6,16 @@ import {
   RouterTestingModule,
   ActivatedRoute,
   ActivatedRouteStub,
-  MockTitleService,
-  MockPrismicService,
   MockPrismicPipe,
   Data
 } from 'testing';
 
-import { TitleService, PrismicService, LoggerService } from 'shared';
 import { NewsPostComponent } from './news-post.component';
 
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
-let titleService: TitleService;
 let prismicPipe: jasmine.Spy;
-let richText: RichTextStub;
 let page: Page;
 
 describe('NewsPostComponent', () => {
@@ -31,12 +26,7 @@ describe('NewsPostComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [NewsPostComponent, MockPrismicPipe],
-      providers: [
-        { provide: TitleService, useClass: MockTitleService },
-        { provide: PrismicService, useClass: MockPrismicService },
-        { provide: ActivatedRoute, useValue: activatedRoute },
-        LoggerService
-      ],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -45,20 +35,6 @@ describe('NewsPostComponent', () => {
 
   it('should set post', () => {
     expect(comp.post).toEqual(Data.Prismic.posts[0]);
-  });
-
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
-  });
-
-  it('should call RichText asText with post title arg', () => {
-    expect(richText.asText).toHaveBeenCalledWith(
-      Data.Prismic.posts[0].data.title
-    );
-  });
-
-  it('should call TitleService setTitle with post title arg', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith('Post 1');
   });
 
   it('should call PrismicPipe', () => {
@@ -180,9 +156,7 @@ describe('NewsPostComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
   prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
-  richText = new RichTextStub();
   page = new Page();
 
   fixture.detectChanges();
@@ -190,14 +164,6 @@ function createComponent() {
     fixture.detectChanges();
     page.addElements();
   });
-}
-
-class RichTextStub {
-  asText: jasmine.Spy;
-
-  constructor() {
-    this.asText = spyOn(comp.richText, 'asText').and.callThrough();
-  }
 }
 
 class Page {

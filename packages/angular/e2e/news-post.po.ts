@@ -22,12 +22,22 @@ export class NewsPostPage {
       .then(_ => this.isVisible());
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getMetaTagTitle() {
+    return browser.driver
+      .findElement(by.xpath("//meta[@property='og:title']"))
+      .getAttribute('content');
+  }
+
   getPostDate() {
     return element(by.id('info-date'));
   }
 
   getPostTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getPostThumbnail() {

@@ -25,6 +25,16 @@ export class AboutPage {
     return browser.get('/about').then(_ => this.isVisible());
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getMetaTagTitle() {
+    return browser.driver
+      .findElement(by.xpath("//meta[@property='og:title']"))
+      .getAttribute('content');
+  }
+
   getPageTitle() {
     return element(by.css('h1')).getText();
   }

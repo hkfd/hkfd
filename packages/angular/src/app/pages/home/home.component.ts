@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { TitleService, ApiService, Api } from 'shared';
+import { MetaService, ApiService, Api } from 'shared';
 import { HomeImages } from './home.images';
 
 @Component({
@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   images = HomeImages;
 
   constructor(
-    private titleService: TitleService,
+    private metaService: MetaService,
     private apiService: ApiService
   ) {}
 
   ngOnInit() {
-    this.titleService.setTitle();
+    this.metaService.setMetaTags({});
 
     this.services$ = this.apiService.getServices();
     this.clients$ = this.apiService.getClients();

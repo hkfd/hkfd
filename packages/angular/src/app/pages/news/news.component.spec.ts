@@ -5,18 +5,18 @@ import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
-  MockTitleService,
+  MockMetaService,
   MockPrismicService,
   MockPrismicPipe,
   Data
 } from 'testing';
 
-import { TitleService, PrismicService, LoggerService } from 'shared';
+import { MetaService, PrismicService, LoggerService } from 'shared';
 import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;
 let fixture: ComponentFixture<NewsComponent>;
-let titleService: TitleService;
+let metaService: MetaService;
 let prismicService: PrismicService;
 let prismicPipe: jasmine.Spy;
 let richText: RichTextStub;
@@ -28,7 +28,7 @@ describe('NewsComponent', () => {
       imports: [RouterTestingModule, NoopAnimationsModule],
       declarations: [NewsComponent, MockPrismicPipe],
       providers: [
-        { provide: TitleService, useClass: MockTitleService },
+        { provide: MetaService, useClass: MockMetaService },
         { provide: PrismicService, useClass: MockPrismicService },
         LoggerService
       ],
@@ -38,12 +38,15 @@ describe('NewsComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
+  it('should call MetaService setMetaTags', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with argument', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith(jasmine.any(String));
+  it('should call MetaService setMetaTags with title and url args', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalledWith({
+      title: jasmine.any(String),
+      url: jasmine.any(String)
+    });
   });
 
   it('should call getPosts', () => {
@@ -151,7 +154,7 @@ describe('NewsComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(NewsComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
+  metaService = fixture.debugElement.injector.get(MetaService);
   prismicService = fixture.debugElement.injector.get(PrismicService);
   prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
   richText = new RichTextStub();

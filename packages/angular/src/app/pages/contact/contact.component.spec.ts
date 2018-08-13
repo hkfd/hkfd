@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { RouterTestingModule, MockTitleService, MockApiPipe } from 'testing';
+import { RouterTestingModule, MockMetaService, MockApiPipe } from 'testing';
 
-import { TitleService } from 'shared';
+import { MetaService } from 'shared';
 import { ContactImages } from './contact.images';
 import { ContactComponent } from './contact.component';
 
 let fixture: ComponentFixture<ContactComponent>;
-let titleService: TitleService;
+let metaService: MetaService;
 let apiPipe: jasmine.Spy;
 
 describe('ContactComponent', () => {
@@ -16,19 +16,22 @@ describe('ContactComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [ContactComponent, MockApiPipe],
-      providers: [{ provide: TitleService, useClass: MockTitleService }],
+      providers: [{ provide: MetaService, useClass: MockMetaService }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(async(() => createComponent()));
 
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
+  it('should call MetaService setMetaTags', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with argument', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith(jasmine.any(String));
+  it('should call MetaService setMetaTags with title and url args', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalledWith({
+      title: jasmine.any(String),
+      url: jasmine.any(String)
+    });
   });
 
   it('should call ApiPipe', () => {
@@ -42,7 +45,7 @@ describe('ContactComponent', () => {
 
 function createComponent() {
   fixture = TestBed.createComponent(ContactComponent);
-  titleService = fixture.debugElement.injector.get(TitleService);
+  metaService = fixture.debugElement.injector.get(MetaService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();

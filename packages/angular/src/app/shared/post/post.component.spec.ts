@@ -4,19 +4,17 @@ import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
-  MockTitleService,
   MockApiPipe,
   ActivatedRoute,
   ActivatedRouteStub,
   Data
 } from 'testing';
 
-import { TitleService, Api } from 'shared';
+import { Api } from 'shared';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
-let titleService: TitleService;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
 let apiPipe: jasmine.Spy;
@@ -29,10 +27,7 @@ describe('PostComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [PostComponent, MockApiPipe],
-      providers: [
-        { provide: TitleService, useClass: MockTitleService },
-        { provide: ActivatedRoute, useValue: activatedRoute }
-      ],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -46,14 +41,6 @@ describe('PostComponent', () => {
   describe('OnInit', () => {
     it('should set post', () => {
       expect(comp.post).toEqual(Data.Api.caseStudies[0]);
-    });
-
-    it('should call TitleService setTitle', () => {
-      expect(titleService.setTitle).toHaveBeenCalled();
-    });
-
-    it('should call TitleService setTitle with post title', () => {
-      expect(titleService.setTitle).toHaveBeenCalledWith('Case Study 1');
     });
 
     it('should set layout', () => {
@@ -223,7 +210,6 @@ describe('PostComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(PostComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
   page = new Page();
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 

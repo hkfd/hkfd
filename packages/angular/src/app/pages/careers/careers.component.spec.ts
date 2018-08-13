@@ -3,18 +3,18 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
-  MockTitleService,
+  MockMetaService,
   MockApiService,
   MockApiPipe
 } from 'testing';
 
-import { TitleService, ApiService } from 'shared';
+import { MetaService, ApiService } from 'shared';
 import { CareersImages } from './careers.images';
 import { CareersComponent } from './careers.component';
 
 let comp: CareersComponent;
 let fixture: ComponentFixture<CareersComponent>;
-let titleService: TitleService;
+let metaService: MetaService;
 let apiService: ApiService;
 let apiPipe: jasmine.Spy;
 
@@ -24,7 +24,7 @@ describe('CareersComponent', () => {
       imports: [RouterTestingModule],
       declarations: [CareersComponent, MockApiPipe],
       providers: [
-        { provide: TitleService, useClass: MockTitleService },
+        { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -33,12 +33,15 @@ describe('CareersComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
+  it('should call MetaService setMetaTags', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with argument', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith(jasmine.any(String));
+  it('should call MetaService setMetaTags with title and url args', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalledWith({
+      title: jasmine.any(String),
+      url: jasmine.any(String)
+    });
   });
 
   it('should call ApiService getCareers', () => {
@@ -66,7 +69,7 @@ describe('CareersComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(CareersComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
+  metaService = fixture.debugElement.injector.get(MetaService);
   apiService = fixture.debugElement.injector.get(ApiService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 

@@ -20,6 +20,16 @@ export class PostPage {
     return browser.get(url).then(_ => this.isVisible());
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getMetaTagTitle() {
+    return browser.driver
+      .findElement(by.xpath("//meta[@property='og:title']"))
+      .getAttribute('content');
+  }
+
   getPageTitle() {
     return element(by.css('h1'));
   }

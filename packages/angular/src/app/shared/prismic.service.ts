@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { Observable, from, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+
 import { getApi, Predicates } from 'prismic-javascript';
 
 import { LoggerService } from './logger.service';
@@ -34,13 +37,23 @@ export class PrismicService {
       .catch(err => this.logger.error(err));
   }
 
-  getPost(idType: 'id' | 'uid', val: string): Promise<Prismic.Post> {
+  getPost(idType: 'id' | 'uid', val: string): Observable<Prismic.Post> {
     this.logger.log(`getPost type: ${idType} ${val}`);
 
-    return this.api
-      .then<any>(
+    return from(
+      this.api.then<any>(
         api => (idType === 'id' ? api.getByID(val) : api.getByUID('news', val))
       )
-      .catch(err => this.logger.error(err));
+    ).pipe(
+      tap(post => this.logger.log('getPost', post)),
+      catchError(this.handleError<Prismic.Post>('getPost'))
+    );
+  }
+
+  private handleError<T>(operation: string, result?: T) {
+    return (error: any): Observable<T> => {
+      this.logger.error(operation, error);
+      return of(result as T);
+    };
   }
 }

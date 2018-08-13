@@ -8,7 +8,15 @@ describe('About', () => {
     page.navigateTo();
   });
 
-  it('should display title', () => {
+  it('should set title', () => {
+    expect(page.getTitle()).toBe('Heckford – About');
+  });
+
+  it('should set og:title', () => {
+    expect(page.getMetaTagTitle()).toBe('About');
+  });
+
+  it('should display page title', () => {
     expect(page.getPageTitle()).toBeTruthy();
   });
 

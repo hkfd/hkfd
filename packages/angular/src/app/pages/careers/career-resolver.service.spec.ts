@@ -4,16 +4,18 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
+  MockMetaService,
   MockApiService,
   MockApiPipe,
   ActivatedRouteStub
 } from 'testing';
-import { ApiService } from 'shared';
+import { MetaService, ApiService } from 'shared';
 import { CareerResolver } from './career-resolver.service';
 import { CareersComponent } from './careers.component';
 
 let activatedRoute: ActivatedRouteStub;
 let careerResolver: CareerResolver;
+let metaService: MetaService;
 let apiService: ApiService;
 let location: Location;
 
@@ -30,6 +32,7 @@ describe('CareerResolver', () => {
       declarations: [CareersComponent, MockApiPipe],
       providers: [
         CareerResolver,
+        { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -52,6 +55,22 @@ describe('CareerResolver', () => {
     careerResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getCareer).toHaveBeenCalledWith('career-1');
+  });
+
+  it('should call MetaService setMetaTags with career args if matching career', () => {
+    activatedRoute.testParamMap = { id: 'career-1' };
+    activatedRoute.testQueryParamMap = {};
+
+    careerResolver
+      .resolve(<any>activatedRoute.snapshot)
+      .subscribe(_ =>
+        expect(metaService.setMetaTags).toHaveBeenCalledWith({
+          type: 'article',
+          title: 'Career 1',
+          description: '£0',
+          url: 'careers/career-1'
+        })
+      );
   });
 
   it('should return career if matching career', async(() => {
@@ -99,6 +118,7 @@ describe('CareerResolver', () => {
 
 function createService() {
   careerResolver = TestBed.get(CareerResolver);
+  metaService = TestBed.get(MetaService);
   apiService = TestBed.get(ApiService);
   location = TestBed.get(Location);
 }

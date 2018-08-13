@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  deployUrl: null,
+  deployUrl: 'https://testing/',
   cloudinaryName: 'dv8oeiozq',
   analyticsId: 'def',
   sentry: {

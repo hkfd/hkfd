@@ -13,6 +13,16 @@ export class ContactPage {
     return browser.get('/contact');
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getMetaTagTitle() {
+    return browser.driver
+      .findElement(by.xpath("//meta[@property='og:title']"))
+      .getAttribute('content');
+  }
+
   getPageTitle() {
     return element(by.css('h1')).getText();
   }

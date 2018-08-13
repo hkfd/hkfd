@@ -4,17 +4,19 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
+  MockMetaService,
   MockApiService,
   MockApiPipe,
   ActivatedRouteStub,
   Data
 } from 'testing';
-import { ApiService } from 'shared';
+import { MetaService, ApiService } from 'shared';
 import { PostResolver } from './post-resolver.service';
 import { PostComponent } from './post.component';
 
 let activatedRoute: ActivatedRouteStub;
 let postResolver: PostResolver;
+let metaService: MetaService;
 let apiService: ApiService;
 let location: Location;
 
@@ -31,6 +33,7 @@ describe('PostResolver', () => {
       declarations: [PostComponent, MockApiPipe],
       providers: [
         PostResolver,
+        { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -75,6 +78,22 @@ describe('PostResolver', () => {
       'parent-path',
       jasmine.any(String)
     );
+  });
+
+  it('should call MetaService setMetaTags with post args if exists', () => {
+    activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
+
+    postResolver
+      .resolve(<any>activatedRoute.snapshot)
+      .subscribe(_ =>
+        expect(metaService.setMetaTags).toHaveBeenCalledWith({
+          type: 'article',
+          title: 'Service 1',
+          url: 'service/service-1',
+          image:
+            'https://res.cloudinary.com/dv8oeiozq/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/service-1'
+        })
+      );
   });
 
   it('should return service post if exists', () => {
@@ -135,6 +154,7 @@ describe('PostResolver', () => {
 
 function createService() {
   postResolver = TestBed.get(PostResolver);
+  metaService = TestBed.get(MetaService);
   apiService = TestBed.get(ApiService);
   location = TestBed.get(Location);
 }

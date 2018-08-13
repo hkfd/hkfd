@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { TitleService, Api } from 'shared';
+import { Api } from 'shared';
 
 @Component({
   selector: 'app-career',
@@ -14,17 +14,11 @@ export class CareerComponent implements OnInit, OnDestroy {
   career$: Subscription;
   career: Api.Career;
 
-  constructor(
-    private route: ActivatedRoute,
-    private titleService: TitleService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.career$ = this.route.data.subscribe(
-      ({ career }: { career: Api.Career }) => {
-        this.career = career;
-        this.titleService.setTitle(career.title);
-      }
+      ({ career }: { career: Api.Career }) => (this.career = career)
     );
   }
 

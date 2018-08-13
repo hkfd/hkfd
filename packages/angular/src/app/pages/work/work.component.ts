@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { TitleService, ApiService, ApiPipe, Api } from 'shared';
+import { MetaService, ApiService, ApiPipe, Api } from 'shared';
 import { WorkAnimations } from './work.animations';
 
 @Component({
@@ -16,13 +16,13 @@ export class WorkComponent implements OnInit, OnDestroy {
   caseStudies: Api.CaseStudy[];
 
   constructor(
-    private titleService: TitleService,
+    private metaService: MetaService,
     private apiService: ApiService,
     private apiPipe: ApiPipe
   ) {}
 
   ngOnInit() {
-    this.titleService.setTitle('Our Work');
+    this.metaService.setMetaTags({ title: 'Our Work', url: 'work' });
 
     this.caseStudies$ = this.apiService.getCaseStudies().subscribe(
       caseStudies =>

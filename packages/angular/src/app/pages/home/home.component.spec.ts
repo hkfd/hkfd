@@ -3,19 +3,19 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
-  MockTitleService,
+  MockMetaService,
   MockApiService,
   MockApiPipe,
   Data
 } from 'testing';
 
-import { TitleService, ApiService } from 'shared';
+import { MetaService, ApiService } from 'shared';
 import { HomeImages } from './home.images';
 import { HomeComponent } from './home.component';
 
 let comp: HomeComponent;
 let fixture: ComponentFixture<HomeComponent>;
-let titleService: TitleService;
+let metaService: MetaService;
 let apiService: ApiService;
 let apiPipe: jasmine.Spy;
 
@@ -25,7 +25,7 @@ describe('HomeComponent', () => {
       imports: [RouterTestingModule],
       declarations: [HomeComponent, MockApiPipe],
       providers: [
-        { provide: TitleService, useClass: MockTitleService },
+        { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -34,12 +34,12 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it('should call TitleService setTitle', () => {
-    expect(titleService.setTitle).toHaveBeenCalled();
+  it('should call MetaService setMetaTags', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalled();
   });
 
-  it('should call TitleService setTitle with no argument', () => {
-    expect(titleService.setTitle).toHaveBeenCalledWith();
+  it('should call MetaService setMetaTags with no args', () => {
+    expect(metaService.setMetaTags).toHaveBeenCalledWith({});
   });
 
   it('should call ApiService getServices', () => {
@@ -80,7 +80,7 @@ describe('HomeComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(HomeComponent);
   comp = fixture.componentInstance;
-  titleService = fixture.debugElement.injector.get(TitleService);
+  metaService = fixture.debugElement.injector.get(MetaService);
   apiService = fixture.debugElement.injector.get(ApiService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 

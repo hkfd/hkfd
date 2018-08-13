@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { RichText } from 'prismic-dom';
 
-import { TitleService, PrismicService, LoggerService, Prismic } from 'shared';
+import { MetaService, PrismicService, LoggerService, Prismic } from 'shared';
 import { NewsAnimations } from './news.animations';
 
 @Component({
@@ -19,7 +19,7 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private prismicService: PrismicService,
-    private titleService: TitleService,
+    private metaService: MetaService,
     private logger: LoggerService
   ) {}
 
@@ -32,7 +32,7 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('News');
+    this.metaService.setMetaTags({ title: 'News', url: 'news' });
 
     this.getPosts(true);
   }
