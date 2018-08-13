@@ -11,6 +11,7 @@ export namespace Prismic {
         alternate_languages: null,
         data: {
           title: [{ spans: null, text: 'Post 1', type: 'h1' }],
+          description: 'Post 1 description',
           image: {
             dimensions: null,
             url: 'post-1',
@@ -50,6 +51,7 @@ export namespace Prismic {
         alternate_languages: null,
         data: {
           title: [{ spans: null, text: 'Post 2', type: 'h1' }],
+          description: 'Post 2 description',
           image: {
             dimensions: null,
             url: 'post-2',
@@ -89,6 +91,7 @@ export namespace Prismic {
         alternate_languages: null,
         data: {
           title: [{ spans: null, text: 'Post 3', type: 'h1' }],
+          description: 'Post 3 description',
           image: {
             dimensions: null,
             url: 'post-3',
@@ -137,6 +140,7 @@ export namespace Prismic {
       alternate_languages: null,
       data: {
         title: [{ spans: null, text: 'Post 1', type: 'h1' }],
+        description: 'Post 1 description',
         image: {
           dimensions: null,
           url: 'post-1',
@@ -176,6 +180,7 @@ export namespace Prismic {
       alternate_languages: null,
       data: {
         title: [{ spans: null, text: 'Post 2', type: 'h1' }],
+        description: 'Post 2 description',
         image: null,
         body: [
           {
@@ -205,6 +210,7 @@ export namespace Prismic {
       alternate_languages: null,
       data: {
         title: [{ spans: null, text: 'Post 3', type: 'h1' }],
+        description: 'Post 3 description',
         image: null,
         body: [
           {
@@ -236,6 +242,7 @@ export namespace Prismic {
       alternate_languages: null,
       data: {
         title: [{ spans: null, text: 'Post 4', type: 'h1' }],
+        description: 'Post 4 description',
         image: null,
         body: [
           {
@@ -280,6 +287,7 @@ export namespace Prismic {
       alternate_languages: null,
       data: {
         title: [{ spans: null, text: 'Post 5', type: 'h1' }],
+        description: 'Post 5 description',
         image: null,
         body: [
           {
@@ -335,6 +343,7 @@ export namespace Prismic {
       alternate_languages: null,
       data: {
         title: [{ spans: null, text: 'Post 6', type: 'h1' }],
+        description: 'Post 6 description',
         image: null,
         body: [
           {

@@ -86,6 +86,7 @@ export namespace Prismic {
 
   export interface News {
     title: Text[];
+    description: string;
     image: Image;
     body: Blocks.Block[];
   }

@@ -35,9 +35,18 @@ export class NewsPostResolver implements Resolve<Prismic.Post> {
           post
             ? this.metaService.setMetaTags({
                 type: 'article',
-                title: post.data.title[0].text,
+                ...(post.data.title &&
+                  post.data.title[0] &&
+                  post.data.title[0].text && {
+                    title: post.data.title[0].text
+                  }),
+                ...(post.data.description && {
+                  description: post.data.description
+                }),
                 url: `news/${post.uid}`,
-                image: post.data.image.lg.url
+                ...(post.data.image &&
+                  post.data.image.lg &&
+                  post.data.image.lg.url && { image: post.data.image.lg.url })
               })
             : undefined
       )
