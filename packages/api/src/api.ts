@@ -121,7 +121,7 @@ export namespace Api {
   export interface Post {
     id: string;
     title: string;
-    intro: Blocks.TextBlock;
+    intro: string[];
     thumbnail: {
       image: Image;
     };

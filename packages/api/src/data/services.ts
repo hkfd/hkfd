@@ -12,35 +12,11 @@ export const Services: Api.Service[] = [
         alt: '3D & CGI'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Not only can we produce images and videos in motion, our skilled professionals can take our 3D designs and produce a real, physical object using 3D printing.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Whatever the size and scope of your budget, we’re certain we can produce digital creations that will help you to stand out against the rest.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'Whether you’re after a single 3D graphic or several minutes of animation, you can use our creative resources to make your ideas come to life.',
+      'Not only can we produce images and videos in motion, our skilled professionals can take our 3D designs and produce a real, physical object using 3D printing.',
+      'Whatever the size and scope of your budget, we’re certain we can produce digital creations that will help you to stand out against the rest.'
+    ],
     content: [
       {
         data: [
@@ -394,27 +370,10 @@ export const Services: Api.Service[] = [
         alt: 'Design & Print'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'As a full-service agency, we deliver all your creative design & print needs.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Our talented team of designers are focused on creating seamless concepts, whilst our skilled print-room team make use of our state of the art printers and routers to produce quality end products, from pocket-sized brochures to large-scale signage.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'As a full-service agency, we deliver all your creative design & print needs.',
+      'Our talented team of designers are focused on creating seamless concepts, whilst our skilled print-room team make use of our state of the art printers and routers to produce quality end products, from pocket-sized brochures to large-scale signage.'
+    ],
     content: [
       {
         data: [
@@ -710,43 +669,12 @@ export const Services: Api.Service[] = [
         alt: 'Exhibitions'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'We’re one of the UK’s leading providers of exhibition stands, with an award-winning track record in design, build and event management for leading brands across the UK, Europe and the United States.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'From initial design, print and build, right through to the exhibition day, our highly skilled and dedicated print team are reliable, and with over four decades of experience, they have a reputation for the quality of their workmanship. Our committed account managers and installers work hand in hand closely with clients to get the look, structure and layout intended.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Our digital marketing executives can also utilise the event on your social media platforms for maximum exposure.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'From portable exhibition equipment, through to modular and custom build stands, from start-up companies to multi-nation businesses, we can provide you with the guidance and solution you need. Get in touch and let’s get creative!'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'We’re one of the UK’s leading providers of exhibition stands, with an award-winning track record in design, build and event management for leading brands across the UK, Europe and the United States.',
+      'From initial design, print and build, right through to the exhibition day, our highly skilled and dedicated print team are reliable, and with over four decades of experience, they have a reputation for the quality of their workmanship. Our committed account managers and installers work hand in hand closely with clients to get the look, structure and layout intended.',
+      'Our digital marketing executives can also utilise the event on your social media platforms for maximum exposure.',
+      'From portable exhibition equipment, through to modular and custom build stands, from start-up companies to multi-nation businesses, we can provide you with the guidance and solution you need. Get in touch and let’s get creative!'
+    ],
     content: [
       {
         data: [
@@ -1039,59 +967,14 @@ export const Services: Api.Service[] = [
         alt: 'PPC / Adwords'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'Pay-Per-Click (PPC) advertising is online marketing designed to deliver targeted traffic, focusing on those who are actively searching or considering to purchase your company’s products or services.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Imagine only paying for a poster campaign per customer that walks through your businesses door. A huge benefit of using PPC is that you will only pay when someone clicks on your advert, making it one of the most effective marketing methods available.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Google AdWords allows you to formulate carefully targeted campaigns across the Google Network. By choosing the right keywords, phrases, locations, demographics and placements, we can attract the best audience for your adverts on desktop, mobile and tablet.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'As well as those text based adverts, which you will no doubt have seen during a Google Search, we take things a step further by planning and creating rich media campaigns. These typically involve images, animations and videos which then generate enormous exposure for your brand on popular websites and apps within the Google Display Network.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'We can also help your online advertising efforts reach various platforms and outlets, such as YouTube, Gmail Sponsored Promotions (GSP) and more.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Heckford have Google AdWords Certified Professionals who understand every aspect of the AdWords & PPC management process. They will work with you to create compelling and effective online campaigns, which will continue to maximise your ROI. As part of our service, we produce analytical reports that will provide insights to traffic sources, how visitors behave on your site, and goals so you can measure your campaign’s ROI.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'Pay-Per-Click (PPC) advertising is online marketing designed to deliver targeted traffic, focusing on those who are actively searching or considering to purchase your company’s products or services.',
+      'Imagine only paying for a poster campaign per customer that walks through your businesses door. A huge benefit of using PPC is that you will only pay when someone clicks on your advert, making it one of the most effective marketing methods available.',
+      'Google AdWords allows you to formulate carefully targeted campaigns across the Google Network. By choosing the right keywords, phrases, locations, demographics and placements, we can attract the best audience for your adverts on desktop, mobile and tablet.',
+      'As well as those text based adverts, which you will no doubt have seen during a Google Search, we take things a step further by planning and creating rich media campaigns. These typically involve images, animations and videos which then generate enormous exposure for your brand on popular websites and apps within the Google Display Network.',
+      'We can also help your online advertising efforts reach various platforms and outlets, such as YouTube, Gmail Sponsored Promotions (GSP) and more.',
+      'Heckford have Google AdWords Certified Professionals who understand every aspect of the AdWords & PPC management process. They will work with you to create compelling and effective online campaigns, which will continue to maximise your ROI. As part of our service, we produce analytical reports that will provide insights to traffic sources, how visitors behave on your site, and goals so you can measure your campaign’s ROI.'
+    ],
     content: [
       {
         data: [
@@ -1119,27 +1002,10 @@ export const Services: Api.Service[] = [
         alt: 'Advertising'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'As one of the biggest leading agencies in Lancashire, when businesses hear the name ‘Heckford’, they know they’re in the right hands when it comes to advertising.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Advertising is still one of the most effective methods of relaying your message and it’s buried deep in the foundations of everything we do; it’s where we started four decades ago and, thanks to the excellent reputation we have built, it’s where we’ve continued to grow.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'As one of the biggest leading agencies in Lancashire, when businesses hear the name ‘Heckford’, they know they’re in the right hands when it comes to advertising.',
+      'Advertising is still one of the most effective methods of relaying your message and it’s buried deep in the foundations of everything we do; it’s where we started four decades ago and, thanks to the excellent reputation we have built, it’s where we’ve continued to grow.'
+    ],
     content: [
       {
         data: [
@@ -1499,19 +1365,9 @@ export const Services: Api.Service[] = [
         alt: 'Digital'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'Whether an established brand looking to take market share with a new product or service to an innovative new start-up looking to disrupt the norm, every company is battling for valuable consumer impressions. Our digital advertising services from PPC, social, remarketing, video and more will give you the competitive edge in driving your growth.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'Whether an established brand looking to take market share with a new product or service to an innovative new start-up looking to disrupt the norm, every company is battling for valuable consumer impressions. Our digital advertising services from PPC, social, remarketing, video and more will give you the competitive edge in driving your growth.'
+    ],
     content: [
       {
         data: [
@@ -1833,35 +1689,11 @@ export const Services: Api.Service[] = [
         alt: 'Illustration'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'Creating illustrations for advertising and publishing, from the visualisation of an abstract concept to a quirky character that brings a product to life, can be the perfect answer to a variety of challenges.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'We consider ourselves truly lucky to have such an extremely talented in-house team; from freehand to computer graphics, our illustrators produce exceptional imagery to enhance any project from photo-realistic art to cartoon characters, company logos to technical plans.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Take a look at our case studies and examples to see our talented team’s work, and check out our show reel below:'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'Creating illustrations for advertising and publishing, from the visualisation of an abstract concept to a quirky character that brings a product to life, can be the perfect answer to a variety of challenges.',
+      'We consider ourselves truly lucky to have such an extremely talented in-house team; from freehand to computer graphics, our illustrators produce exceptional imagery to enhance any project from photo-realistic art to cartoon characters, company logos to technical plans.',
+      'Take a look at our case studies and examples to see our talented team’s work, and check out our show reel below:'
+    ],
     content: [
       {
         data: [
@@ -2152,34 +1984,11 @@ export const Services: Api.Service[] = [
         alt: 'Signage'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text: 'Let’s get you turning heads!'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Your signage speaks volumes about your company, therefore it’s so important to get it right, look professional and shout from the rooftops about how amazing your company is.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Signage is where it all started. Since 1978, we have designed, manufactured and installed a whole range of bespoke signage. If it’s point of sale you require, 2D or 3D, we offer Digital, Screen and Litho printing. Our company values are to be innovative and responsive to this fast moving market by producing high quality, professional and effective point of sales to enhance your brand awareness.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'Let’s get you turning heads!',
+      'Your signage speaks volumes about your company, therefore it’s so important to get it right, look professional and shout from the rooftops about how amazing your company is.',
+      'Signage is where it all started. Since 1978, we have designed, manufactured and installed a whole range of bespoke signage. If it’s point of sale you require, 2D or 3D, we offer Digital, Screen and Litho printing. Our company values are to be innovative and responsive to this fast moving market by producing high quality, professional and effective point of sales to enhance your brand awareness.'
+    ],
     content: [
       {
         data: [
@@ -2673,27 +2482,10 @@ export const Services: Api.Service[] = [
         alt: 'Photography'
       }
     },
-    intro: {
-      type: 'text',
-      data: [
-        {
-          paragraph: [
-            {
-              text:
-                'Creative photography for products, advertising, merchandising, fashion, food, brochures, online and social media, the list goes on and on.'
-            }
-          ]
-        },
-        {
-          paragraph: [
-            {
-              text:
-                'Heckford are proud to provide our clients with a wide variety of expert commercial photography services, combining creative thinking with attention to detail to create high quality and original photography solutions in the studio or on location.'
-            }
-          ]
-        }
-      ]
-    },
+    intro: [
+      'Creative photography for products, advertising, merchandising, fashion, food, brochures, online and social media, the list goes on and on.',
+      'Heckford are proud to provide our clients with a wide variety of expert commercial photography services, combining creative thinking with attention to detail to create high quality and original photography solutions in the studio or on location.'
+    ],
     content: [
       {
         data: [
