@@ -50,10 +50,15 @@ section {
         margin-right: 5%;
       }
 
-      text-block {
-        text-align: left;
-        margin-left: 0;
-        margin-right: 0;
+      #text-intro {
+        @extend %text;
+        margin: 10vh 0 7vh;
+
+        p:first-of-type {
+          @extend %font-medium;
+          line-height: 1.4;
+          margin-top: 0;
+        }
       }
     }
 
@@ -68,7 +73,7 @@ section {
 
       li {
         list-style: none;
-        margin-left: 0;
+        padding-left: 0;
       }
 
       span {

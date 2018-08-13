@@ -35,7 +35,7 @@ export class PostPage {
   }
 
   getPageIntro() {
-    return element(by.id('info-text'))
+    return element(by.id('text-intro'))
       .all(by.css('p'))
       .first()
       .getText();

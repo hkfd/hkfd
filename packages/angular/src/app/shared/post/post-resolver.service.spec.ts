@@ -83,17 +83,16 @@ describe('PostResolver', () => {
   it('should call MetaService setMetaTags with post args if exists', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
 
-    postResolver
-      .resolve(<any>activatedRoute.snapshot)
-      .subscribe(_ =>
-        expect(metaService.setMetaTags).toHaveBeenCalledWith({
-          type: 'article',
-          title: 'Service 1',
-          url: 'service/service-1',
-          image:
-            'https://res.cloudinary.com/dv8oeiozq/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/service-1'
-        })
-      );
+    postResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+      expect(metaService.setMetaTags).toHaveBeenCalledWith({
+        type: 'article',
+        title: 'Service 1',
+        description: 'Service 1 intro',
+        url: 'service/service-1',
+        image:
+          'https://res.cloudinary.com/dv8oeiozq/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/service-1'
+      })
+    );
   });
 
   it('should return service post if exists', () => {

@@ -31,6 +31,7 @@ export class PostResolver implements Resolve<Api.Post> {
             ? this.metaService.setMetaTags({
                 type: 'article',
                 title: post.title,
+                description: post.intro[0],
                 url: `${type}/${id}`,
                 image: `https://res.cloudinary.com/${
                   environment.cloudinaryName

@@ -12,18 +12,7 @@ export namespace Api {
           alt: ''
         }
       },
-      intro: {
-        type: 'text',
-        data: [
-          {
-            paragraph: [
-              {
-                text: 'Service 1 introduction'
-              }
-            ]
-          }
-        ]
-      },
+      intro: ['Service 1 intro'],
       content: [
         {
           title: 'DuoBlock',
@@ -49,18 +38,7 @@ export namespace Api {
           alt: ''
         }
       },
-      intro: {
-        type: 'text',
-        data: [
-          {
-            paragraph: [
-              {
-                text: 'Service 2 introduction'
-              }
-            ]
-          }
-        ]
-      },
+      intro: ['Service 2 intro'],
       content: [
         {
           title: 'VideoBlock',
@@ -87,18 +65,7 @@ export namespace Api {
           alt: ''
         }
       },
-      intro: {
-        type: 'text',
-        data: [
-          {
-            paragraph: [
-              {
-                text: 'Service 3 introduction'
-              }
-            ]
-          }
-        ]
-      },
+      intro: ['Service 3 intro'],
       content: [
         {
           title: 'AudioBlock',
@@ -130,7 +97,7 @@ export namespace Api {
         }
       },
       overview: ['deliverable'],
-      intro: null,
+      intro: ['Case Study 1 intro'],
       content: [
         {
           title: 'TextBlock',
@@ -154,18 +121,7 @@ export namespace Api {
         }
       },
       overview: ['deliverable'],
-      intro: {
-        type: 'text',
-        data: [
-          {
-            paragraph: [
-              {
-                text: 'Case Study 2 intro'
-              }
-            ]
-          }
-        ]
-      },
+      intro: ['Case Study 2 intro'],
       content: [
         {
           title: 'ImageBlock',
@@ -196,18 +152,7 @@ export namespace Api {
         }
       },
       overview: ['deliverable'],
-      intro: {
-        type: 'text',
-        data: [
-          {
-            paragraph: [
-              {
-                text: 'Case Study 3 intro'
-              }
-            ]
-          }
-        ]
-      },
+      intro: ['Case Study 3 intro'],
       content: [
         {
           title: 'GalleryBlock',

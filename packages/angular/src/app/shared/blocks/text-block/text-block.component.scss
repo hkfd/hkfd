@@ -12,16 +12,6 @@
   }
 }
 
-:host([intro]) {
-  padding: 0;
-
-  p:first-of-type {
-    margin-top: 0;
-    @extend %font-medium;
-    line-height: 1.4;
-  }
-}
-
 ul {
   display: flex;
   flex-wrap: wrap;

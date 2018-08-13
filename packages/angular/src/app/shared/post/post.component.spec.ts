@@ -64,6 +64,17 @@ describe('PostComponent', () => {
       );
     });
 
+    it('should display intro', () => {
+      activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+      comp.ngOnInit();
+      fixture.detectChanges();
+      page.addElements();
+
+      expect(page.introText.nativeElement.textContent).toBe(
+        'Case Study 1 intro'
+      );
+    });
+
     describe('Text', () => {
       beforeEach(() => {
         activatedRoute.testData = { post: Data.Api.caseStudies[0] };
@@ -221,6 +232,7 @@ function createComponent() {
 }
 
 class Page {
+  introText: DebugElement;
   sectionTitle: DebugElement;
   textBlock: DebugElement;
   imageBlock: DebugElement;
@@ -230,6 +242,7 @@ class Page {
   audioBlock: DebugElement;
 
   addElements() {
+    this.introText = fixture.debugElement.query(By.css('#text-intro p'));
     this.sectionTitle = fixture.debugElement.query(By.css('h2'));
     this.textBlock = fixture.debugElement.query(By.css('text-block'));
     this.imageBlock = fixture.debugElement.query(By.css('image-block'));

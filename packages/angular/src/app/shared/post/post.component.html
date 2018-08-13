@@ -2,7 +2,9 @@
   <div id="intro-info">
     <div id="info-text">
       <h1>{{ post?.title }}</h1>
-      <text-block intro [data]="post?.intro"></text-block>
+      <div id="text-intro">
+        <p *ngFor="let text of post?.intro">{{ text }}</p>
+      </div>
     </div>
     <div id="info-overview" *ngIf="$any(post)?.overview">
       <span>OUR SERVICES TO {{ post?.title }}</span>
