@@ -27,7 +27,7 @@ describe('PrismicPipe', () => {
       });
     });
 
-    it('should call map transformImage by default', () => {
+    it('should call map transformImage if array', () => {
       const res = pipe.transform([{ image: Data.Prismic.image }]);
 
       expect(res).toEqual([
@@ -37,6 +37,12 @@ describe('PrismicPipe', () => {
           alt: jasmine.anything()
         }
       ]);
+    });
+
+    it('should return unchanged input if no compatible structure', () => {
+      const res = pipe.transform({ test: 'test' });
+
+      expect(res).toEqual({ test: 'test' });
     });
   });
 

@@ -1,5 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  Title,
+  BrowserTransferStateModule
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -12,6 +16,7 @@ import { RavenErrorHandler } from './raven';
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'hkfd' }),
+    BrowserTransferStateModule,
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,

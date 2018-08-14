@@ -45,6 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ga('create', environment.analyticsId, 'auto');
 
+    // TODO: replace individual component calls to MetaService and get data from route https://github.com/angular/angular/issues/15004
     this.router$ = this.router.events
       .pipe(
         filter(

@@ -6,6 +6,7 @@ export * from './api.pipe.mock';
 export * from './prismic.pipe.mock';
 export * from './router';
 export * from './native';
+export * from './state';
 
 import { Generic as GenericData } from './data.generic';
 import { Api as ApiData } from './data.api';

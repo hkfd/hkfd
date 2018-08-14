@@ -52,11 +52,12 @@ export class ApiPipe implements PipeTransform {
     };
   }
 
-  transform(val: any | any[]): any {
+  transform(val: any): any {
     if (val.image) return this.transformImage(val);
     if (val.video) return this.transformVideo(val);
     if (val.audio) return this.transformAudio(val);
+    if (Array.isArray(val)) return val.map(image => this.transformImage(image));
 
-    return val.map(image => this.transformImage(image));
+    return val;
   }
 }
