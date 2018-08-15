@@ -27,7 +27,7 @@ describe('ApiService', () => {
 
   describe('getServices', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('services', Data.Api.services));
+      beforeEach(() => transferState.set('api-services', Data.Api.services));
 
       it('should not call HttpClient get', async(() => {
         apiService.getServices().subscribe();
@@ -78,7 +78,7 @@ describe('ApiService', () => {
 
   describe('getCareers', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('careers', Data.Api.careers));
+      beforeEach(() => transferState.set('api-careers', Data.Api.careers));
 
       it('should not call HttpClient get', async(() => {
         apiService.getCareers().subscribe();
@@ -129,7 +129,8 @@ describe('ApiService', () => {
 
   describe('getCaseStudies', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('caseStudies', Data.Api.caseStudies));
+      beforeEach(() =>
+        transferState.set('api-case-studies', Data.Api.caseStudies));
 
       it('should not call HttpClient get', async(() => {
         apiService.getCaseStudies().subscribe();
@@ -182,7 +183,7 @@ describe('ApiService', () => {
 
   describe('getTeam', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('team', Data.Api.team));
+      beforeEach(() => transferState.set('api-team', Data.Api.team));
 
       it('should not call HttpClient get', async(() => {
         apiService.getTeam().subscribe();
@@ -233,7 +234,7 @@ describe('ApiService', () => {
 
   describe('getClients', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('clients', Data.Api.clients));
+      beforeEach(() => transferState.set('api-clients', Data.Api.clients));
 
       it('should not call HttpClient get', async(() => {
         apiService.getClients().subscribe();
@@ -284,7 +285,7 @@ describe('ApiService', () => {
 
   describe('getPost', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('post', {}));
+      beforeEach(() => transferState.set('api-post', {}));
 
       it('should not call HttpClient get', async(() => {
         apiService.getCareers().subscribe();

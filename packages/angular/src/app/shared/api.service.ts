@@ -9,13 +9,13 @@ import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 import { Api } from 'api';
 
-const SERVICES_KEY = makeStateKey<Api.Service[]>('services');
-const CAREERS_KEY = makeStateKey<Api.Career[]>('careers');
-const CAREER_KEY = makeStateKey<Api.Career>('career');
-const POST_KEY = makeStateKey<Api.Post>('post');
-const CASE_STUDIES_KEY = makeStateKey<Api.CaseStudy[]>('caseStudies');
-const TEAM_KEY = makeStateKey<Api.Team[]>('team');
-const CLIENTS_KEY = makeStateKey<Api.Client[]>('clients');
+const SERVICES_KEY = makeStateKey<Api.Service[]>('api-services');
+const CAREERS_KEY = makeStateKey<Api.Career[]>('api-careers');
+const CAREER_KEY = makeStateKey<Api.Career>('api-career');
+const POST_KEY = makeStateKey<Api.Post>('api-post');
+const CASE_STUDIES_KEY = makeStateKey<Api.CaseStudy[]>('api-case-studies');
+const TEAM_KEY = makeStateKey<Api.Team[]>('api-team');
+const CLIENTS_KEY = makeStateKey<Api.Client[]>('api-clients');
 
 @Injectable({
   providedIn: 'root'
