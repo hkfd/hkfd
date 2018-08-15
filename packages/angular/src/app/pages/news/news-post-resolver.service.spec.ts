@@ -33,24 +33,24 @@ describe('NewsPostResolver', () => {
   beforeEach(async(() => createService()));
 
   it('should call PrismicService getPost', () => {
-    activatedRoute.testParamMap = { id: 'post-1' };
+    activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
     newsPostResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(prismicService.getPost).toHaveBeenCalled();
   });
 
-  it(`should call PrismicService getPost with 'uid' and id args`, () => {
-    activatedRoute.testParamMap = { id: 'post-1' };
+  it('should call PrismicService getPost with `uid` arg', () => {
+    activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
     newsPostResolver.resolve(<any>activatedRoute.snapshot);
 
-    expect(prismicService.getPost).toHaveBeenCalledWith('uid', 'post-1');
+    expect(prismicService.getPost).toHaveBeenCalledWith('post-1');
   });
 
   it('should call MetaService setMetaTags with post args', () => {
-    activatedRoute.testParamMap = { id: 'post-1' };
+    activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
     newsPostResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
@@ -65,7 +65,7 @@ describe('NewsPostResolver', () => {
   });
 
   it('should not call MetaService setMetaTags with `meta.title` arg if no title', () => {
-    activatedRoute.testParamMap = { id: 'post-1' };
+    activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
@@ -121,7 +121,7 @@ describe('NewsPostResolver', () => {
   });
 
   it('should not call MetaService setMetaTags with `meta.description` arg if no description', () => {
-    activatedRoute.testParamMap = { id: 'post-1' };
+    activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
@@ -177,7 +177,7 @@ describe('NewsPostResolver', () => {
   });
 
   it('should not call MetaService setMetaTags with `meta.image` arg if no image', () => {
-    activatedRoute.testParamMap = { id: 'post-1' };
+    activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
@@ -207,15 +207,6 @@ describe('NewsPostResolver', () => {
         url: 'news/post-1'
       })
     );
-  });
-
-  it(`should call PrismicService getPost with 'id' and documentId args if id is 'preview' and has token and documentId`, () => {
-    activatedRoute.testParamMap = { id: 'preview' };
-    activatedRoute.testQueryParamMap = { token: 'abc', documentId: '123' };
-
-    newsPostResolver.resolve(<any>activatedRoute.snapshot);
-
-    expect(prismicService.getPost).toHaveBeenCalledWith('id', '123');
   });
 });
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { RichText } from 'prismic-dom';
 
-import { MetaService, PrismicService, LoggerService, Prismic } from 'shared';
+import { MetaService, PrismicService, Prismic } from 'shared';
 import { NewsAnimations } from './news.animations';
 
 @Component({
@@ -19,13 +19,11 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private prismicService: PrismicService,
-    private metaService: MetaService,
-    private logger: LoggerService
+    private metaService: MetaService
   ) {}
 
   getPosts(onInit?: boolean) {
-    this.prismicService.getPosts(onInit).then(({ results, next_page }) => {
-      this.logger.log('getPosts', results);
+    this.prismicService.getPosts(onInit).subscribe(({ results, next_page }) => {
       this.posts = this.posts.concat(results);
       this.hasNextPage = !!next_page;
     });

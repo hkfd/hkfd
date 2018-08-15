@@ -118,4 +118,24 @@ export namespace Prismic {
     total_results_size: number;
     version: string;
   }
+
+  export interface Ref {
+    id: string;
+    isMasterRef: boolean;
+    label: string;
+    ref: string;
+  }
+
+  export interface RefResponse {
+    bookmarks: {};
+    experiments: {};
+    forms: {};
+    license: string;
+    oauth_initiate: string;
+    oauth_token: string;
+    refs: Ref[];
+    tags: any[];
+    types: {};
+    version: string;
+  }
 }

@@ -5,15 +5,20 @@ import { Prismic } from 'shared';
 
 export class MockPrismicService {
   constructor() {
+    this.getRef = spyOn(this, 'getRef').and.callThrough();
     this.getPosts = spyOn(this, 'getPosts').and.callThrough();
     this.getPost = spyOn(this, 'getPost').and.callThrough();
   }
 
-  getPosts(_firstLoad: boolean = false): Promise<Prismic.PostsResponse> {
-    return Promise.resolve(Data.Prismic.postsResponse);
+  getRef(): Observable<string> {
+    return of('abc');
   }
 
-  getPost(_uid: string): Observable<Prismic.Post> {
+  getPosts(): Observable<Prismic.PostsResponse> {
+    return of(Data.Prismic.postsResponse);
+  }
+
+  getPost(): Observable<Prismic.Post> {
     return of(Data.Prismic.posts[0]);
   }
 }

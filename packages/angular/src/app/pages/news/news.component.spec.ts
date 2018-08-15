@@ -10,8 +10,9 @@ import {
   MockPrismicPipe,
   Data
 } from 'testing';
+import { of } from 'rxjs';
 
-import { MetaService, PrismicService, LoggerService } from 'shared';
+import { MetaService, PrismicService } from 'shared';
 import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;
@@ -29,8 +30,7 @@ describe('NewsComponent', () => {
       declarations: [NewsComponent, MockPrismicPipe],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
-        { provide: PrismicService, useClass: MockPrismicService },
-        LoggerService
+        { provide: PrismicService, useClass: MockPrismicService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -76,7 +76,7 @@ describe('NewsComponent', () => {
 
   it(`should set hasNextPage as 'true' if 'next_page' is string`, () => {
     (prismicService.getPosts as jasmine.Spy).and.returnValue(
-      Promise.resolve({ results: null, next_page: 'page2' })
+      of({ results: null, next_page: 'page2' })
     );
 
     comp.getPosts();
@@ -87,7 +87,7 @@ describe('NewsComponent', () => {
 
   it(`should set hasNextPage as 'false' if 'next_page' is empty`, () => {
     (prismicService.getPosts as jasmine.Spy).and.returnValue(
-      Promise.resolve({ results: null, next_page: null })
+      of({ results: null, next_page: null })
     );
 
     comp.getPosts();

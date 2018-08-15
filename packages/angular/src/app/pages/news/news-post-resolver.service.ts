@@ -3,11 +3,8 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import * as Cookies from 'js-cookie';
 
 import { MetaService, PrismicService, Prismic } from 'shared';
-
-const PREVIEW_EXPIRES = 30 * 60 * 1000;
 
 @Injectable()
 export class NewsPostResolver implements Resolve<Prismic.Post> {
@@ -17,18 +14,7 @@ export class NewsPostResolver implements Resolve<Prismic.Post> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Prismic.Post> {
-    const id = route.paramMap.get('id');
-
-    const token = route.queryParamMap.get('token');
-    const documentId = route.queryParamMap.get('documentId');
-
-    if (id === 'preview' && token && documentId) {
-      Cookies.set('io.prismic.preview', token, { expires: PREVIEW_EXPIRES });
-
-      return this.prismicService.getPost('id', documentId).pipe(take(1));
-    }
-
-    return this.prismicService.getPost('uid', id).pipe(
+    return this.prismicService.getPost(route.paramMap.get('uid')).pipe(
       take(1),
       tap(
         post =>

@@ -368,6 +368,26 @@ export namespace Prismic {
     }
   ];
 
+  export const refResponse: PrismicType.RefResponse = {
+    bookmarks: null,
+    experiments: null,
+    forms: null,
+    license: null,
+    oauth_initiate: null,
+    oauth_token: null,
+    refs: [
+      {
+        id: '1',
+        isMasterRef: true,
+        label: null,
+        ref: 'abc'
+      }
+    ],
+    tags: null,
+    types: null,
+    version: null
+  };
+
   export const text: PrismicType.Text[] = [
     {
       spans: [],

@@ -11,7 +11,7 @@ import { TextBlockComponent } from './news-post/text-block/text-block.component'
 const routes: Routes = [
   { path: '', component: NewsComponent },
   {
-    path: ':id',
+    path: ':uid',
     component: NewsPostComponent,
     resolve: { post: NewsPostResolver }
   }
