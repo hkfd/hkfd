@@ -24,23 +24,21 @@ let activatedRoute: ActivatedRouteStub;
 let apiPipe: jasmine.Spy;
 
 describe('CareerComponent', () => {
-  beforeEach(
-    async(() => {
-      activatedRoute = new ActivatedRouteStub();
-      activatedRoute.testData = { career: Data.Api.careers[0] };
+  beforeEach(async(() => {
+    activatedRoute = new ActivatedRouteStub();
+    activatedRoute.testData = { career: Data.Api.careers[0] };
 
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule],
-        declarations: [CareerComponent, MockApiPipe],
-        providers: [
-          { provide: TitleService, useClass: MockTitleService },
-          { provide: ApiService, useClass: MockApiService },
-          { provide: ActivatedRoute, useValue: activatedRoute }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-    })
-  );
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [CareerComponent, MockApiPipe],
+      providers: [
+        { provide: TitleService, useClass: MockTitleService },
+        { provide: ApiService, useClass: MockApiService },
+        { provide: ActivatedRoute, useValue: activatedRoute }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 
@@ -59,10 +57,6 @@ describe('CareerComponent', () => {
   describe('Content', () => {
     it('should display title', () => {
       expect(page.sectionTitle.nativeElement.textContent).toEqual('TextBlock');
-    });
-
-    it('should display title in benefits information', () => {
-      expect(page.benefitsInfo.nativeElement.textContent).toContain('Career 1');
     });
 
     describe('Text', () => {
