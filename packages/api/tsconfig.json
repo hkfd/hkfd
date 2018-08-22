@@ -3,12 +3,10 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "removeComments": true,
-    "lib": ["es2017"]
+    "lib": ["es2017"],
+    "types": ["fs-extra"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
-  "compileOnSave": true,
-  "compilerOptions": {
-    "noImplicitAny": true
-  }
+  "compileOnSave": true
 }

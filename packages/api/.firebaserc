@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "production": "hkfd-api",
+    "staging": "hkfd-api-staging"
+  }
+}

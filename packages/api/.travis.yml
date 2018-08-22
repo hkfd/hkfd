@@ -1,0 +1,26 @@
+language: node_js
+node_js: lts/*
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  slack:
+    secure: YyOnEfYf1uY4qDGIiy5cVuhHWwlg3joa96SMvYynAF5u165m+lWbtQ2b+axv8IsztLBRRKHW8Hr/NAdcoXqVHRTZ/B1FKBnZC9OGlh6EEZGnA+3G14T0wDitGkxq1bk0h6vsALrFE2oxxn1daqEGb8O7NtwOjD1/OLvWE7OhI68tMtMQPS3wTArOSqXdHr+mnWn9sHB35LsWtrFnfgtv+uvocZu/oO745YSpED46seb+zb4VDin8Hzg6ycF4bqvk9FJuPMsT1KVMU1JoBg/1So+E+TBXiMc5VmNFTidpYTva7N3OyqbIw02e6KrRiKqjYjJYqope9Y8aDKNJ/xfO58shwLz7v/paTGJ0U12HZeSeviqucyx6GeW9qlWjVlyf9lE/fE/2xqbBnL86I7tvb+ZQtD8q55baoXzJjHt0ucSFfKaIpLZY+YKkhQ6Vu2+33bQNEdWJUk5bWj70ysFghQBwLweCOBREk6sBU0u/Vs4HzvGW+9QCOKzXhOL36hULPVG+v/hm2f7c8WieTgYKkYLzUR2VnppRidf2DxVxfLgQMwbi7sN9yP/E3COrwWr4VJbC9INSQtNCBzOYAhdNFTW8Bltbqo7NkUxLH29/YMwCseFDshFDted7PgrqgZVSrvHzjH+fI3Q1l7ppuxOCzi/l+ZThVt7E127ard7q6bg=
+
+firebase: &firebase
+  provider: firebase
+  skip_cleanup: true
+  on:
+    all_branches: true
+  token:
+    secure: h3IMl8TaspBKVFywBa0P3K4BVhyYLHJvZObzly0ZQZkSfMD2EoCpC31uZCh848p48439gj5X2azOh+itRW2VRZiCp48U20dQtnHbfAK1tOAL4QzFYT/j1EnWlmHbW2cczI03JuekeNjqOnIc5I/x4XH7fIyqR/RqZ0xV9ZlH3r9XIt95xnyustLCw1G+iIWjhQMhuW0e9JakmxJL0Ryz4fvrr/JW0d8p9gdKFnLen5FMxzM2YmrSpSy9qILcBFq0jR9CggmhMkwFoTlpL1E4217C9juszquEcvMGDIDHxihUCbVIu9/QMk/5D0ZZKDefibCTNhjxVhOT909FxOUuK9/1XUfK6wBDD4GyfU8gVN4zdiRJ1+QBdR6jU8Gm2dnbVW+sOqgcjkZGgQsdwhBItDgjyPTqcAETW70JqqIziFYaItI0fAuCKBcK6pQOocu95EX+5/qvG/9gubEwUYWUd8QQtPUOpjOEGN4WhWQqkoJMe/H83eSkGV+3Eheak2L4/8yq4IYQsZ+CEsft0LgjioYKD39UkNsrip6/JE74/81kE5gCPqtuJI2VXKiC29CzC1VwvljEV3DNjnOCXQL+55xq+0LdBfL0zVkAtTtL6TpD92kWWJAfxnDtT3bsQbhJQZQB7/toyCEFE0DO/uX0O/pBlFERfRmjInUj/jc/CNY=
+
+jobs:
+  include:
+    - stage: deploy
+      if: branch = master
+      script: yarn build
+      deploy:
+        <<: *firebase
+        project: hkfd-api
