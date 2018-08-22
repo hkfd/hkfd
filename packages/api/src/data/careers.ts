@@ -430,5 +430,91 @@ export const Careers: Api.Career[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'sales representative',
+    title: 'Sales Representative – Signage and Vehicle Livery',
+    salary: '£16,000 - £20,000',
+    content: [
+      {
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'Heckford are Lancashire’s largest agency, with over 40 years’ experience in creative marketing. We are looking to expand our sales team and have the following vacancy:'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text: 'SALES REPRESENTATIVE',
+                    attributes: { bold: true }
+                  },
+                  {
+                    text: '– Signage and Vehicle Livery'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'You will be joining an enthusiastic team who specialise in selling:'
+                  }
+                ]
+              },
+              {
+                list: [
+                  {
+                    text: 'CREATIVE ADVERTISING & MARKETING'
+                  },
+                  {
+                    text: 'DESIGN FOR PRINT'
+                  },
+                  {
+                    text: 'EXHIBITIONS & SIGNAGE'
+                  },
+                  {
+                    text: 'DIGITAL MEDIA & WEB DESIGN'
+                  },
+                  {
+                    text: '3D ILLUSTRATION'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'Although training will be given, you should have some previous experience in selling on the phone, strong IT and communication skills, confident, enthusiastic personality and a positive, can-do mentality.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'You will be able to display great customer service skills and be confident contacting potential new clients with a view to building on our client portfolio and briefing our Account Managers.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'In return we can offer you a rewarding work environment with all the support of a great creative and sales team and a basic salary between £16,000 - £20,000 with potential bonus earnings of...well, that’s up to you!'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
