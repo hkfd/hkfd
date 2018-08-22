@@ -1,0 +1,15 @@
+{
+  "functions": {
+    "predeploy": ["yarn --cwd \"$RESOURCE_DIR\" build"]
+  },
+  "hosting": {
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "email"
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}
