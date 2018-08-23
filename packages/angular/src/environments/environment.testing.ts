@@ -3,6 +3,9 @@ export const environment = {
   deployUrl: 'https://testing/',
   cloudinaryName: 'dv8oeiozq',
   analyticsId: 'def',
+  email: {
+    url: 'https://email.testing'
+  },
   sentry: {
     dsn: null
   },

@@ -27,7 +27,7 @@ describe('FormService', () => {
         .sendEmail({ name: 'a', email: 'b@c', message: 'd' })
         .then(res => expect(res).toBeDefined());
 
-      mockHttp.expectOne('form/form.php').flush(of(null));
+      mockHttp.expectOne('https://email.testing').flush(of(null));
     }));
   });
 });

@@ -2,7 +2,3 @@
 	path = src/api
 	url = git@bitbucket.org:heckford/heckford-angular-api.git
 	branch = master
-[submodule "src/form"]
-	path = src/form
-	url = git@bitbucket.org:heckford/heckford-angular-form.git
-	branch = master

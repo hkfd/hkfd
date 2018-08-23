@@ -29,7 +29,7 @@ app.engine(
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
 
-app.get(['/api/*', '/form/*'], express.static(DIST_FOLDER));
+app.get('/api/*', express.static(DIST_FOLDER));
 app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
 app.get('*', (req, res) => res.render('index', { req }));
 

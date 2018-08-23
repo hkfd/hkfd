@@ -15,9 +15,6 @@
     "serve:ssr": "DEBUG=express:* node dist/server",
     "api-init": "cd src/api && yarn && yarn build",
     "api-update": "git submodule update --remote && yarn api-init",
-    "form-init": "cd src/form && composer install",
-    "form-serve": "cd src/form && yarn serve",
-    "form-update": "git submodule update --remote && yarn form-init",
     "precommit": "lint-staged"
   },
   "lint-staged": {

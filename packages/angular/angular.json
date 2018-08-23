@@ -18,7 +18,6 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/api",
-              "src/form",
               "src/assets",
               "src/legal",
               "src/.htaccess"
@@ -95,7 +94,6 @@
             "styles": ["src/styles.scss"],
             "assets": [
               "src/api",
-              "src/form",
               "src/assets",
               "src/legal",
               "src/.htaccess"
