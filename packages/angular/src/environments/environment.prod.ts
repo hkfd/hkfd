@@ -3,6 +3,9 @@ export const environment = {
   deployUrl: 'https://hkfd.co.uk/',
   cloudinaryName: 'dv8oeiozq',
   analyticsId: 'UA-31794450-2',
+  api: {
+    url: 'https://api.hkfd.co.uk/'
+  },
   email: {
     url: 'https://email.hkfd.co.uk'
   },

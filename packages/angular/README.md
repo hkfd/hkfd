@@ -2,10 +2,6 @@
 
 [![CircleCI](https://circleci.com/bb/heckford/heckford-angular.svg?style=svg&circle-token=e02291a7d209b31a48a0ba16ca8b2da4a7226160)](https://circleci.com/bb/heckford/heckford-angular)
 
-## Install
-
-Run `yarn api-init` to download Heckford Angular API dependencies and generate the JSON files.
-
 ## Usage
 
 Run `yarn serve` for a dev server. Navigate to `http://localhost:4200/`. Use the `-prod` flag for a production build.
@@ -33,10 +29,6 @@ yarn
 ### Angular
 
 Run `ng update`
-
-### Heckford Angular API
-
-Run `yarn api-update`
 
 ## Testing
 

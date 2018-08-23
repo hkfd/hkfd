@@ -32,7 +32,9 @@ describe('ApiService', () => {
       it('should not call HttpClient get', async(() => {
         apiService.getServices().subscribe();
 
-        expect(mockHttp.expectNone(apiService.services)).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/services.json')
+        ).toBeUndefined();
       }));
 
       it('should return services', async(() => {
@@ -46,14 +48,20 @@ describe('ApiService', () => {
       it('should call HttpClient get', async(() => {
         apiService.getServices().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.services).flush(Data.Api.services);
+        mockHttp
+          .expectOne('https://api.testing/services.json')
+          .flush(Data.Api.services);
       }));
 
       it('should call HttpClient again on error', async(() => {
         apiService.getServices().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.services).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.services).flush(Data.Api.services);
+        mockHttp
+          .expectOne('https://api.testing/services.json')
+          .error(new ErrorEvent('err'));
+        mockHttp
+          .expectOne('https://api.testing/services.json')
+          .flush(Data.Api.services);
       }));
 
       it('should return services', async(() => {
@@ -61,7 +69,9 @@ describe('ApiService', () => {
           .getServices()
           .subscribe(res => expect(res).toEqual(Data.Api.services));
 
-        mockHttp.expectOne(apiService.services).flush(Data.Api.services);
+        mockHttp
+          .expectOne('https://api.testing/services.json')
+          .flush(Data.Api.services);
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -70,7 +80,9 @@ describe('ApiService', () => {
         Array(4)
           .fill(0)
           .forEach(_ =>
-            mockHttp.expectOne(apiService.services).error(new ErrorEvent('err'))
+            mockHttp
+              .expectOne('https://api.testing/services.json')
+              .error(new ErrorEvent('err'))
           );
       }));
     });
@@ -83,7 +95,9 @@ describe('ApiService', () => {
       it('should not call HttpClient get', async(() => {
         apiService.getCareers().subscribe();
 
-        expect(mockHttp.expectNone(apiService.careers)).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/careers.json')
+        ).toBeUndefined();
       }));
 
       it('should return careers', async(() => {
@@ -97,14 +111,20 @@ describe('ApiService', () => {
       it('should call HttpClient get', async(() => {
         apiService.getCareers().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.careers).flush(Data.Api.careers);
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .flush(Data.Api.careers);
       }));
 
       it('should call HttpClient again on error', async(() => {
         apiService.getCareers().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.careers).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.careers).flush(Data.Api.careers);
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .error(new ErrorEvent('err'));
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .flush(Data.Api.careers);
       }));
 
       it('should return careers', async(() => {
@@ -112,7 +132,9 @@ describe('ApiService', () => {
           .getCareers()
           .subscribe(res => expect(res).toEqual(Data.Api.careers));
 
-        mockHttp.expectOne(apiService.careers).flush(Data.Api.careers);
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .flush(Data.Api.careers);
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -121,7 +143,9 @@ describe('ApiService', () => {
         Array(4)
           .fill(0)
           .forEach(_ =>
-            mockHttp.expectOne(apiService.careers).error(new ErrorEvent('err'))
+            mockHttp
+              .expectOne('https://api.testing/careers.json')
+              .error(new ErrorEvent('err'))
           );
       }));
     });
@@ -135,7 +159,9 @@ describe('ApiService', () => {
       it('should not call HttpClient get', async(() => {
         apiService.getCaseStudies().subscribe();
 
-        expect(mockHttp.expectNone(apiService.caseStudies)).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/case-studies.json')
+        ).toBeUndefined();
       }));
 
       it('should return case studies', async(() => {
@@ -149,14 +175,20 @@ describe('ApiService', () => {
       it('should call HttpClient get', async(() => {
         apiService.getCaseStudies().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .flush(Data.Api.caseStudies);
       }));
 
       it('should call HttpClient again on error', async(() => {
         apiService.getCaseStudies().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.caseStudies).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .error(new ErrorEvent('err'));
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .flush(Data.Api.caseStudies);
       }));
 
       it('should return case studies', async(() => {
@@ -164,7 +196,9 @@ describe('ApiService', () => {
           .getCaseStudies()
           .subscribe(res => expect(res).toEqual(Data.Api.caseStudies));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .flush(Data.Api.caseStudies);
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -174,7 +208,7 @@ describe('ApiService', () => {
           .fill(0)
           .forEach(_ =>
             mockHttp
-              .expectOne(apiService.caseStudies)
+              .expectOne('https://api.testing/case-studies.json')
               .error(new ErrorEvent('err'))
           );
       }));
@@ -188,7 +222,9 @@ describe('ApiService', () => {
       it('should not call HttpClient get', async(() => {
         apiService.getTeam().subscribe();
 
-        expect(mockHttp.expectNone(apiService.team)).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/team.json')
+        ).toBeUndefined();
       }));
 
       it('should return team', async(() => {
@@ -202,14 +238,20 @@ describe('ApiService', () => {
       it('should call HttpClient get', async(() => {
         apiService.getTeam().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.team).flush(Data.Api.team);
+        mockHttp
+          .expectOne('https://api.testing/team.json')
+          .flush(Data.Api.team);
       }));
 
       it('should call HttpClient again on error', async(() => {
         apiService.getTeam().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.team).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.team).flush(Data.Api.team);
+        mockHttp
+          .expectOne('https://api.testing/team.json')
+          .error(new ErrorEvent('err'));
+        mockHttp
+          .expectOne('https://api.testing/team.json')
+          .flush(Data.Api.team);
       }));
 
       it('should return team', async(() => {
@@ -217,7 +259,9 @@ describe('ApiService', () => {
           .getTeam()
           .subscribe(res => expect(res).toEqual(Data.Api.team));
 
-        mockHttp.expectOne(apiService.team).flush(Data.Api.team);
+        mockHttp
+          .expectOne('https://api.testing/team.json')
+          .flush(Data.Api.team);
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -226,7 +270,9 @@ describe('ApiService', () => {
         Array(4)
           .fill(0)
           .forEach(_ =>
-            mockHttp.expectOne(apiService.team).error(new ErrorEvent('err'))
+            mockHttp
+              .expectOne('https://api.testing/team.json')
+              .error(new ErrorEvent('err'))
           );
       }));
     });
@@ -239,7 +285,9 @@ describe('ApiService', () => {
       it('should not call HttpClient get', async(() => {
         apiService.getClients().subscribe();
 
-        expect(mockHttp.expectNone(apiService.clients)).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/clients.json')
+        ).toBeUndefined();
       }));
 
       it('should return clients', async(() => {
@@ -253,14 +301,20 @@ describe('ApiService', () => {
       it('should call HttpClient get', async(() => {
         apiService.getClients().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.clients).flush(Data.Api.clients);
+        mockHttp
+          .expectOne('https://api.testing/clients.json')
+          .flush(Data.Api.clients);
       }));
 
       it('should call HttpClient again on error', async(() => {
         apiService.getClients().subscribe(res => expect(res).toBeDefined());
 
-        mockHttp.expectOne(apiService.clients).error(new ErrorEvent('err'));
-        mockHttp.expectOne(apiService.clients).flush(Data.Api.clients);
+        mockHttp
+          .expectOne('https://api.testing/clients.json')
+          .error(new ErrorEvent('err'));
+        mockHttp
+          .expectOne('https://api.testing/clients.json')
+          .flush(Data.Api.clients);
       }));
 
       it('should return clients', async(() => {
@@ -268,7 +322,9 @@ describe('ApiService', () => {
           .getClients()
           .subscribe(res => expect(res).toEqual(Data.Api.clients));
 
-        mockHttp.expectOne(apiService.clients).flush(Data.Api.clients);
+        mockHttp
+          .expectOne('https://api.testing/clients.json')
+          .flush(Data.Api.clients);
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -277,7 +333,9 @@ describe('ApiService', () => {
         Array(4)
           .fill(0)
           .forEach(_ =>
-            mockHttp.expectOne(apiService.clients).error(new ErrorEvent('err'))
+            mockHttp
+              .expectOne('https://api.testing/clients.json')
+              .error(new ErrorEvent('err'))
           );
       }));
     });
@@ -290,8 +348,12 @@ describe('ApiService', () => {
       it('should not call HttpClient get', async(() => {
         apiService.getCareers().subscribe();
 
-        expect(mockHttp.expectNone(apiService.services)).toBeUndefined();
-        expect(mockHttp.expectNone(apiService.caseStudies)).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/services.json')
+        ).toBeUndefined();
+        expect(
+          mockHttp.expectNone('https://api.testing/case-studies.json')
+        ).toBeUndefined();
       }));
     });
 
@@ -301,7 +363,9 @@ describe('ApiService', () => {
           .getPost('service', null)
           .subscribe(res => expect(res).toBeUndefined());
 
-        mockHttp.expectOne(apiService.services).flush(Data.Api.services);
+        mockHttp
+          .expectOne('https://api.testing/services.json')
+          .flush(Data.Api.services);
       }));
 
       it(`should set url to caseStudies if type is 'work'`, async(() => {
@@ -309,7 +373,9 @@ describe('ApiService', () => {
           .getPost('work', null)
           .subscribe(res => expect(res).toBeUndefined());
 
-        mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .flush(Data.Api.caseStudies);
       }));
 
       it('should return service post', async(() => {
@@ -317,7 +383,9 @@ describe('ApiService', () => {
           .getPost('service', 'service-2')
           .subscribe(res => expect(res.title).toBe('Service 2'));
 
-        mockHttp.expectOne(apiService.services).flush(Data.Api.services);
+        mockHttp
+          .expectOne('https://api.testing/services.json')
+          .flush(Data.Api.services);
       }));
 
       it('should return case study post', async(() => {
@@ -325,7 +393,9 @@ describe('ApiService', () => {
           .getPost('work', 'case-study-1')
           .subscribe(res => expect(res.title).toBe('Case Study 1'));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .flush(Data.Api.caseStudies);
       }));
 
       it('should return null if no type arg', async(() => {
@@ -339,7 +409,9 @@ describe('ApiService', () => {
           .getPost('work', null)
           .subscribe(res => expect(res).toBe(undefined));
 
-        mockHttp.expectOne(apiService.caseStudies).flush(Data.Api.caseStudies);
+        mockHttp
+          .expectOne('https://api.testing/case-studies.json')
+          .flush(Data.Api.caseStudies);
       }));
 
       it('should return undefined on last retry error', async(() => {
@@ -351,7 +423,7 @@ describe('ApiService', () => {
           .fill(0)
           .forEach(() =>
             mockHttp
-              .expectOne(apiService.caseStudies)
+              .expectOne('https://api.testing/case-studies.json')
               .error(new ErrorEvent('err'))
           );
       }));

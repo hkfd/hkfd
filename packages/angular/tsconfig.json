@@ -14,7 +14,7 @@
     "lib": ["es2017", "dom"],
     "baseUrl": "src",
     "paths": {
-      "api": ["api/src/api"],
+      "api": ["api"],
       "shared": ["app/shared"],
       "environment": ["environments/environment"],
       "testing": ["testing"]

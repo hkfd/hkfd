@@ -3,6 +3,9 @@ export const environment = {
   deployUrl: 'https://staging.hkfd.co.uk/',
   cloudinaryName: 'dv8oeiozq',
   analyticsId: 'UA-31794450-2',
+  api: {
+    url: 'https://hkfd-api-staging.firebaseapp.com/'
+  },
   email: {
     url: 'https://hkfd-email-staging.firebaseapp.com'
   },

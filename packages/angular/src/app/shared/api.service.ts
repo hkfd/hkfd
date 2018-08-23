@@ -1,13 +1,19 @@
-import { Injectable, Inject, Optional } from '@angular/core';
-import { APP_BASE_HREF } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import { Observable, of } from 'rxjs';
 import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
 
+import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 import { Api } from 'api';
+
+const SERVICES = `${environment.api.url}services.json`;
+const CASE_STUDIES = `${environment.api.url}case-studies.json`;
+const TEAM = `${environment.api.url}team.json`;
+const CAREERS = `${environment.api.url}careers.json`;
+const CLIENTS = `${environment.api.url}clients.json`;
 
 const SERVICES_KEY = makeStateKey<Api.Service[]>('api-services');
 const CAREERS_KEY = makeStateKey<Api.Career[]>('api-careers');
@@ -21,28 +27,11 @@ const CLIENTS_KEY = makeStateKey<Api.Client[]>('api-clients');
   providedIn: 'root'
 })
 export class ApiService {
-  services = 'api/services.json';
-  caseStudies = 'api/case-studies.json';
-  team = 'api/team.json';
-  careers = 'api/careers.json';
-  clients = 'api/clients.json';
-
   constructor(
     private http: HttpClient,
     private logger: LoggerService,
-    private state: TransferState,
-    @Optional()
-    @Inject(APP_BASE_HREF)
-    origin: string
-  ) {
-    if (!origin) return;
-
-    this.services = `${origin}${this.services}`;
-    this.caseStudies = `${origin}${this.caseStudies}`;
-    this.team = `${origin}${this.team}`;
-    this.careers = `${origin}${this.careers}`;
-    this.clients = `${origin}${this.clients}`;
-  }
+    private state: TransferState
+  ) {}
 
   getServices(): Observable<Api.Service[]> {
     const cache = this.state.get<Api.Service[]>(SERVICES_KEY, null);
@@ -52,7 +41,7 @@ export class ApiService {
         catchError(this.handleError<Api.Service[]>('getServices', []))
       );
 
-    return this.http.get<Api.Service[]>(this.services).pipe(
+    return this.http.get<Api.Service[]>(SERVICES).pipe(
       retry(3),
       tap((services: Api.Service[]) =>
         this.logger.log('getServices', services)
@@ -70,7 +59,7 @@ export class ApiService {
         catchError(this.handleError<Api.Career[]>('getCareers', []))
       );
 
-    return this.http.get<Api.Career[]>(this.careers).pipe(
+    return this.http.get<Api.Career[]>(CAREERS).pipe(
       retry(3),
       tap((careers: Api.Career[]) => this.logger.log('getCareers', careers)),
       tap((careers: Api.Career[]) => this.state.set(CAREERS_KEY, careers)),
@@ -86,7 +75,7 @@ export class ApiService {
         catchError(this.handleError<Api.Career>('getCareer'))
       );
 
-    return this.http.get<Api.Career[]>(this.careers).pipe(
+    return this.http.get<Api.Career[]>(CAREERS).pipe(
       retry(3),
       flatMap((careers: Api.Career[]) => careers),
       find((career: Api.Career) => career.id === id),
@@ -100,10 +89,10 @@ export class ApiService {
     let url: string;
     switch (type) {
       case 'service':
-        url = this.services;
+        url = SERVICES;
         break;
       case 'work':
-        url = this.caseStudies;
+        url = CASE_STUDIES;
         break;
       default:
         return of(null);
@@ -136,7 +125,7 @@ export class ApiService {
         catchError(this.handleError<Api.CaseStudy[]>('getCaseStudies', []))
       );
 
-    return this.http.get<Api.CaseStudy[]>(this.caseStudies).pipe(
+    return this.http.get<Api.CaseStudy[]>(CASE_STUDIES).pipe(
       retry(3),
       tap((caseStudies: Api.CaseStudy[]) =>
         this.logger.log('getCaseStudies', caseStudies)
@@ -156,7 +145,7 @@ export class ApiService {
         catchError(this.handleError<Api.Team[]>('getTeam', []))
       );
 
-    return this.http.get<Api.Team[]>(this.team).pipe(
+    return this.http.get<Api.Team[]>(TEAM).pipe(
       retry(3),
       tap((team: Api.Team[]) => this.logger.log('getTeam', team)),
       tap((team: Api.Team[]) => this.state.set(TEAM_KEY, team)),
@@ -172,7 +161,7 @@ export class ApiService {
         catchError(this.handleError<Api.Client[]>('getClients', []))
       );
 
-    return this.http.get<Api.Client[]>(this.clients).pipe(
+    return this.http.get<Api.Client[]>(CLIENTS).pipe(
       retry(3),
       tap((clients: Api.Client[]) => this.logger.log('getClients', clients)),
       tap((clients: Api.Client[]) => this.state.set(CLIENTS_KEY, clients)),

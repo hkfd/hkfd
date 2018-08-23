@@ -13,8 +13,6 @@
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:ssr": "yarn build:client-and-server-bundles && yarn webpack:server",
     "serve:ssr": "DEBUG=express:* node dist/server",
-    "api-init": "cd src/api && yarn && yarn build",
-    "api-update": "git submodule update --remote && yarn api-init",
     "precommit": "lint-staged"
   },
   "lint-staged": {
