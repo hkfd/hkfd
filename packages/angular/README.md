@@ -1,6 +1,6 @@
-# Heckford Angular
+# Hkfd
 
-[![CircleCI](https://circleci.com/bb/heckford/heckford-angular.svg?style=svg&circle-token=e02291a7d209b31a48a0ba16ca8b2da4a7226160)](https://circleci.com/bb/heckford/heckford-angular)
+[![Build Status](https://travis-ci.com/hkfd/hkfd.svg?branch=master)](https://travis-ci.com/hkfd/hkfd) [![Coverage Status](https://coveralls.io/repos/github/hkfd/hkfd/badge.svg)](https://coveralls.io/github/hkfd/hkfd)
 
 ## Usage
 

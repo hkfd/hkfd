@@ -42,6 +42,23 @@
                 }
               ]
             },
+            "staging": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "testing": {
               "optimization": true,
               "outputHashing": "all",
@@ -71,6 +88,9 @@
             "production": {
               "browserTarget": "heckford-angular:build:production"
             },
+            "staging": {
+              "browserTarget": "heckford-angular:build:staging"
+            },
             "testing": {
               "browserTarget": "heckford-angular:build:testing"
             }
@@ -90,12 +110,14 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
+            "sourceMap": true,
             "styles": ["src/styles.scss"],
             "assets": [
               "src/assets",
               "src/legal",
               "src/.htaccess"
             ],
+            "codeCoverageExclude": ["src/testing/**"],
             "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
@@ -148,7 +170,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "heckford-angular:serve:testing"
+            "devServerTarget": "heckford-angular:serve:staging"
           }
         },
         "lint": {
