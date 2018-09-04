@@ -69,7 +69,7 @@ export class ApiService {
 
   getCareer(id: string): Observable<Api.Career> {
     const cache = this.state.get<Api.Career>(CAREER_KEY, null);
-    if (cache)
+    if (cache && cache.id === id)
       return of(cache).pipe(
         tap(career => this.logger.log('getCareer', 'cache', career)),
         catchError(this.handleError<Api.Career>('getCareer'))
@@ -99,7 +99,7 @@ export class ApiService {
     }
 
     const cache = this.state.get<Api.Post>(POST_KEY, null);
-    if (cache)
+    if (cache && cache.id === id)
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post)),
         catchError(this.handleError<Api.Post>('getPost'))

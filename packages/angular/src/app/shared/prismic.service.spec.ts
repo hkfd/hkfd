@@ -241,17 +241,52 @@ describe('PrismicService', () => {
         transferState.set('prismic-post', Data.Prismic.posts[0]);
       });
 
-      it('should not call HttpClient get', async(() => {
-        prismicService.getPost(null).subscribe();
+      describe('same uid', () => {
+        it('should not call HttpClient get', async(() => {
+          prismicService.getPost('post-1').subscribe();
 
-        expect(mockHttp.verify()).toBeUndefined();
-      }));
+          expect(mockHttp.verify()).toBeUndefined();
+        }));
 
-      it('should return posts', async(() => {
-        prismicService
-          .getPost(null)
-          .subscribe(res => expect(res).toEqual(Data.Prismic.posts[0]));
-      }));
+        it('should return post', async(() => {
+          prismicService
+            .getPost('post-1')
+            .subscribe(res => expect(res).toEqual(Data.Prismic.posts[0]));
+        }));
+      });
+
+      describe('different uid', () => {
+        it('should call PrismicService getRef', () => {
+          const spy = spyOn(prismicService, 'getRef').and.callThrough();
+          prismicService.getPost('post-2');
+
+          expect(spy).toHaveBeenCalled();
+        });
+
+        it('should call HttpClient get', async(() => {
+          prismicService.getPost('post-2').subscribe();
+
+          expect(
+            mockHttp.expectOne(
+              req =>
+                req.url === `${environment.prismic.endpoint}/documents/search`
+            )
+          ).toBeTruthy();
+        }));
+
+        it('should return post', async(() => {
+          prismicService
+            .getPost('post-2')
+            .subscribe(post => expect(post).toEqual(Data.Prismic.posts[0]));
+
+          mockHttp
+            .expectOne(
+              req =>
+                req.url === `${environment.prismic.endpoint}/documents/search`
+            )
+            .flush(Data.Prismic.postsResponse);
+        }));
+      });
     });
 
     describe('no cache', () => {

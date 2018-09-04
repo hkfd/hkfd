@@ -151,6 +151,97 @@ describe('ApiService', () => {
     });
   });
 
+  describe('getCareer', () => {
+    describe('cache', () => {
+      beforeEach(() => transferState.set('api-career', Data.Api.careers[0]));
+
+      describe('same id', () => {
+        it('should not call HttpClient get', async(() => {
+          apiService.getCareer('career-1').subscribe();
+
+          expect(
+            mockHttp.expectNone('https://api.testing/careers.json')
+          ).toBeUndefined();
+        }));
+
+        it('should return career', async(() => {
+          apiService
+            .getCareer('career-1')
+            .subscribe(res => expect(res).toEqual(Data.Api.careers[0]));
+        }));
+      });
+
+      describe('different id', () => {
+        it('should call HttpClient get', async(() => {
+          apiService.getCareer('career-2').subscribe();
+
+          expect(
+            mockHttp.expectOne('https://api.testing/careers.json')
+          ).toBeTruthy();
+        }));
+
+        it('should return career', async(() => {
+          apiService
+            .getCareer('career-2')
+            .subscribe(res => expect(res.title).toBe('Career 2'));
+
+          mockHttp
+            .expectOne('https://api.testing/careers.json')
+            .flush(Data.Api.careers);
+        }));
+      });
+    });
+
+    describe('no cache', () => {
+      it('should call HttpClient get', async(() => {
+        apiService
+          .getCareer('career-1')
+          .subscribe(res => expect(res).toBeDefined());
+
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .flush(Data.Api.careers);
+      }));
+
+      it('should call HttpClient again on error', async(() => {
+        apiService
+          .getCareer('career-1')
+          .subscribe(res => expect(res).toBeDefined());
+
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .error(new ErrorEvent('err'));
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .flush(Data.Api.careers);
+      }));
+
+      it('should return career', async(() => {
+        apiService
+          .getCareer('career-1')
+          .subscribe(res => expect(res).toEqual(Data.Api.careers[0]));
+
+        mockHttp
+          .expectOne('https://api.testing/careers.json')
+          .flush(Data.Api.careers);
+      }));
+
+      it('should return undefined on last retry error', async(() => {
+        apiService
+          .getCareer('career-1')
+          .subscribe(res => expect(res).toBe(undefined));
+
+        Array(4)
+          .fill(0)
+          .forEach(_ =>
+            mockHttp
+              .expectOne('https://api.testing/careers.json')
+              .error(new ErrorEvent('err'))
+          );
+      }));
+    });
+  });
+
   describe('getCaseStudies', () => {
     describe('cache', () => {
       beforeEach(() =>
@@ -343,18 +434,46 @@ describe('ApiService', () => {
 
   describe('getPost', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-post', {}));
+      beforeEach(() => transferState.set('api-post', Data.Api.caseStudies[0]));
 
-      it('should not call HttpClient get', async(() => {
-        apiService.getCareers().subscribe();
+      describe('same id', () => {
+        it('should not call HttpClient get', async(() => {
+          apiService.getPost('work', 'case-study-1').subscribe();
 
-        expect(
-          mockHttp.expectNone('https://api.testing/services.json')
-        ).toBeUndefined();
-        expect(
-          mockHttp.expectNone('https://api.testing/case-studies.json')
-        ).toBeUndefined();
-      }));
+          expect(
+            mockHttp.expectNone('https://api.testing/services.json')
+          ).toBeUndefined();
+          expect(
+            mockHttp.expectNone('https://api.testing/case-studies.json')
+          ).toBeUndefined();
+        }));
+
+        it('should return post', async(() => {
+          apiService
+            .getPost('work', 'case-study-1')
+            .subscribe(res => expect(res).toEqual(Data.Api.caseStudies[0]));
+        }));
+      });
+
+      describe('different id', () => {
+        it('should call HttpClient get', async(() => {
+          apiService.getPost('work', 'case-study-2').subscribe();
+
+          expect(
+            mockHttp.expectOne('https://api.testing/case-studies.json')
+          ).toBeTruthy();
+        }));
+
+        it('should return post', async(() => {
+          apiService
+            .getPost('work', 'case-study-2')
+            .subscribe(res => expect(res.title).toBe('Case Study 2'));
+
+          mockHttp
+            .expectOne('https://api.testing/case-studies.json')
+            .flush(Data.Api.caseStudies);
+        }));
+      });
     });
 
     describe('no cache', () => {

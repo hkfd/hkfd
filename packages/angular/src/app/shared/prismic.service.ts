@@ -83,7 +83,7 @@ export class PrismicService {
     this.logger.log(`getPost ${uid}`);
 
     const cache = this.state.get<Prismic.Post>(POST_KEY, null);
-    if (cache)
+    if (cache && cache.uid === uid)
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post)),
         catchError(this.handleError<Prismic.Post>('getPost'))
