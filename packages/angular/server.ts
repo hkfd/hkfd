@@ -8,7 +8,12 @@ import * as express from 'express';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import { join } from 'path';
+import { Client } from 'memjs';
 import { config, requestHandler, errorHandler } from 'raven';
+
+interface CacheResponse extends express.Response {
+  sendResponse: (body?: any) => express.Response;
+}
 
 const {
   AppServerModuleNgFactory,
@@ -22,6 +27,7 @@ config(process.env.SENTRY_DSN, {
 enableProdMode();
 
 const app = express();
+const memCache = Client.create(process.env.MEMCACHIER_SERVERS);
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
@@ -66,6 +72,26 @@ app.use(
   })
 );
 
+const cacheRequest: express.RequestHandler = (
+  req,
+  res: CacheResponse,
+  next
+) => {
+  const CACHE_KEY = `__CACHE__${req.originalUrl || req.url}`;
+
+  return memCache.get(CACHE_KEY, (_err, data) => {
+    if (data) return res.send(data.toString());
+
+    res.sendResponse = res.send;
+    res.send = body => {
+      memCache.set(CACHE_KEY, body, { expires: 60 * 60 }, next);
+      return res.sendResponse(body);
+    };
+
+    next();
+  });
+};
+
 app.engine(
   'html',
   ngExpressEngine({
@@ -77,8 +103,11 @@ app.engine(
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'browser'));
 
-app.get('*.*', express.static(join(DIST_FOLDER, 'browser')));
-app.get('*', (req, res) => res.render('index', { req }));
+app.get(
+  '*.*',
+  express.static(join(DIST_FOLDER, 'browser'), { maxAge: 60 * 60 * 24 * 365 })
+);
+app.get('*', cacheRequest, (req, res) => res.render('index', { req }));
 
 app.use(errorHandler());
 

@@ -295,6 +295,12 @@
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.1.0.tgz#a8916246aa994db646c66d54c854916213300a51"
 
+"@types/memjs@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/memjs/-/memjs-1.2.0.tgz#e51814fdf223a1e64b7ac10911b3fdebb7cce4c5"
+  dependencies:
+    "@types/node" "*"
+
 "@types/mime@*":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
@@ -4774,6 +4780,10 @@ mem@^1.1.0:
   resolved "https://registry.yarnpkg.com/mem/-/mem-1.1.0.tgz#5edd52b485ca1d900fe64895505399a0dfa45f76"
   dependencies:
     mimic-fn "^1.0.0"
+
+memjs@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/memjs/-/memjs-1.2.0.tgz#3c2a28d9105f26ff37d69254bef35c804b3c6f5b"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
