@@ -105,10 +105,14 @@ app.set('views', join(DIST_FOLDER, 'browser'));
 
 app.get(
   '*.*',
-  express.static(join(DIST_FOLDER, 'browser'), { maxAge: 60 * 60 * 24 * 365 })
+  express.static(join(DIST_FOLDER, 'browser'), {
+    maxAge: '1y'
+  })
 );
 app.get('*', cacheRequest, (req, res) => res.render('index', { req }));
 
 app.use(errorHandler());
 
-app.listen(PORT);
+const server = app.listen(PORT);
+
+module.exports = server;

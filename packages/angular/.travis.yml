@@ -4,6 +4,11 @@ cache:
   yarn: true
   directories:
     - node_modules
+before_cache:
+  - rm -rf $TRAVIS_BUILD_DIR/node_modules/.cache
+env:
+  global:
+    - ENVIRONMENT=staging
 notifications:
   slack:
     secure: sd+z7P3ZK52RXjEoLNfZKATpYK+yKUNMZMXmqY4TtKh4Bkzrsq38/f845QWrpje5EmMuCSkiB9q4fA3g38rls50oaztiGdGYSxXOpcJr/kjTydsY7PREevIjN7s3yU3o5c+BX8jbn16iQeEdTffcRKH2upN5JBAcQfrqIVQHZdwPIFBa0nuZhRiysGL7kKuiPtwWZs2sNVBF+4RIj1kzJac6sL8BwUhMnbN2KYrUfHjiw9vuobvt3gTL36tNOzUVWJ5e2zxB+XphQr7skYrSKartSo0dTm4nd3HJFkxKv8aGP9maLdu5GcHeRJqqeZZB1uiUjFk3yKOBv2jc+JEtkjyEY6T1cvm2TdsEHcyHruBrAR+YxEGOcwTS6yUB/Hjo4IbSMhqgqq1baxRYS43GYDiWm+gEHRcGL0oUXXwiyYf0njSLPelDBm1Cu0hNRYek+CL8R/LtcoBp8f9mFe0ogYyRyOdeP94Mf8t1uAjbQLmu6orfSgbw0iVafgvEpehXxNSmMslW1XtkBTqc/cpJG81sqSD+y9arm6W+CLmXWvj8OpwJ+oMue1Gx0+dWSDHMN+Q8C91ClfTlrutZQgpx0Hh6QOFPpVXrhTaiOPUn0OovDBP9oR/tkv/G7/QmPaQX5Ffd82qqhjy3pGGDOgjXzsAtgEr17fCwIzGED/JzsVg=
@@ -11,11 +16,19 @@ notifications:
 jobs:
   include:
     - stage: Pre-cache
-      script: yarn
+      script: skip
 
     - stage: Test
-      name: Spec
-      script: yarn test --watch=false --progress=false --browsers=HeadlessChromeNoSandbox --code-coverage && cat coverage/lcov.info | yarn coveralls
+      name: "Spec: Browser"
+      script:
+        - yarn test:browser --progress=false --browsers=HeadlessChromeNoSandbox --code-coverage
+        - cat coverage/lcov.info | yarn coveralls
+
+    - stage: Test
+      name: "Spec: Server"
+      script:
+        - yarn build:client-and-server-bundles
+        - yarn test:server
 
     - stage: Test
       name: E2E
