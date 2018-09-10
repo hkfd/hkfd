@@ -432,7 +432,7 @@ export const Careers: Api.Career[] = [
     ]
   },
   {
-    id: 'sales representative',
+    id: 'sales-representative',
     title: 'Sales Representative – Signage and Vehicle Livery',
     salary: '£16,000 - £20,000',
     content: [
