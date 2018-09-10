@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, PLATFORM_ID } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -11,6 +11,7 @@ let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 let lazyDirective: LazyDirective;
 let renderer: RendererStub;
+let mockPlatformId: 'browser' | 'server';
 
 @Component({
   template: `<img src="" [lazy]="srcset">`
@@ -23,19 +24,37 @@ class TestHostComponent {
 }
 
 describe('LazyDirective', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LazyDirective, TestHostComponent],
-      providers: [Renderer2, { provide: ElementRef, useClass: ElementRefStub }]
-    }).compileComponents();
-  }));
+  describe('AfterViewInit', () => {
+    describe('browser', () => {
+      beforeEach(() => (mockPlatformId = 'browser'));
+      beforeEach(async(() => setupTest()));
+      beforeEach(async(() => createComponent()));
 
-  beforeEach(async(() => createComponent()));
+      it('should set observer', () => {
+        lazyDirective.ngAfterViewInit();
+
+        expect((lazyDirective as any).observer).toBeDefined();
+      });
+    });
+
+    describe('server', () => {
+      beforeEach(() => (mockPlatformId = 'server'));
+      beforeEach(async(() => setupTest()));
+      beforeEach(async(() => createComponent()));
+
+      it('should not set observer', () => {
+        lazyDirective.ngAfterViewInit();
+
+        expect((lazyDirective as any).observer).toBeUndefined();
+      });
+    });
+  });
 
   describe('intersectionCallback', () => {
-    beforeEach(() => {
-      renderer.setAttribute.calls.reset();
-    });
+    beforeEach(() => (mockPlatformId = 'server'));
+    beforeEach(async(() => setupTest()));
+    beforeEach(async(() => createComponent()));
+    beforeEach(() => renderer.setAttribute.calls.reset());
 
     it('should set data loaded as true if intersecting', () => {
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
@@ -103,6 +122,17 @@ describe('LazyDirective', () => {
   });
 });
 
+function setupTest() {
+  TestBed.configureTestingModule({
+    declarations: [LazyDirective, TestHostComponent],
+    providers: [
+      Renderer2,
+      { provide: ElementRef, useClass: ElementRefStub },
+      { provide: PLATFORM_ID, useValue: mockPlatformId }
+    ]
+  }).compileComponents();
+}
+
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   comp = fixture.componentInstance;
@@ -136,9 +166,6 @@ class LazyDirectiveStub {
     const image = fixture.debugElement.query(By.directive(LazyDirective));
     lazyDirective = image.injector.get(LazyDirective);
 
-    this.ngAfterViewInit = spyOn(lazyDirective, 'ngAfterViewInit').and.callFake(
-      () => undefined
-    );
     this.intersectionCallback = spyOn(
       lazyDirective,
       'intersectionCallback'
