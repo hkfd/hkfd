@@ -19,15 +19,15 @@ jobs:
       script: skip
 
     - stage: Test
-      name: "Spec: Browser"
+      name: 'Spec: Browser'
       script:
         - yarn test:browser --progress=false --browsers=HeadlessChromeNoSandbox --code-coverage
         - cat coverage/lcov.info | yarn coveralls
 
     - stage: Test
-      name: "Spec: Server"
+      name: 'Spec: Server'
       script:
-        - yarn build:client-and-server-bundles
+        - yarn build:ssr
         - yarn test:server
 
     - stage: Test

@@ -12,14 +12,18 @@
     "test:server:watch": "jest server.spec.ts --watch --verbose false",
     "lint": "ng lint",
     "e2e": "ng e2e --port 4200",
+    "compile:server": "tsc -p server.tsconfig.json",
     "build:client-and-server-bundles": "yarn build -c $ENVIRONMENT && ng run heckford-angular:server -c $ENVIRONMENT",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "build:ssr": "yarn build:client-and-server-bundles && yarn webpack:server",
+    "build:ssr": "yarn build:client-and-server-bundles && yarn compile:server",
     "serve:ssr": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 dist/server",
     "heroku-postbuild": "yarn build:ssr",
     "precommit": "lint-staged"
   },
   "jest": {
+    "moduleDirectories": [
+      "dist",
+      "node_modules"
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
@@ -66,7 +70,6 @@
     "rxjs": "^6.3.2",
     "ts-loader": "^4.4.2",
     "web-animations-js": "^2.3.1",
-    "webpack": "^4.16.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -107,7 +110,6 @@
     "ts-jest": "^23.1.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "2.9.2",
-    "webpack-cli": "^3.1.0"
+    "typescript": "2.9.2"
   }
 }

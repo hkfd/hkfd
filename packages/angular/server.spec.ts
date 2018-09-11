@@ -305,7 +305,7 @@ describe('Server', () => {
 
 const setupServer = () => {
   Client = require('memjs').Client;
-  server = require('./server');
+  server = require('./dist/server');
   request = supertest(server);
 };
 

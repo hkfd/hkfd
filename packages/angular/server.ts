@@ -15,10 +15,7 @@ interface CacheResponse extends express.Response {
   sendResponse: (body?: any) => express.Response;
 }
 
-const {
-  AppServerModuleNgFactory,
-  LAZY_MODULE_MAP
-} = require('./dist/server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./server/main');
 
 config(process.env.SENTRY_DSN, {
   environment: process.env.ENVIRONMENT
