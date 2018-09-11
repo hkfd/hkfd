@@ -2,96 +2,6 @@ import { Api } from '../api';
 
 export const Careers: Api.Career[] = [
   {
-    id: 'junior-account-manager',
-    title: 'Junior Account Manager',
-    salary: '£16,000 – £20,000',
-    content: [
-      {
-        data: [
-          {
-            type: 'text',
-            data: [
-              {
-                paragraph: [
-                  {
-                    text:
-                      'Are you passionate about the creative industry, keen to learn and hungry for success?'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text:
-                      'Heckford are Lancashire’s largest agency, with over 40 years experience in creative marketing. We are looking to expand our sales team with the addition of two'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text: 'JUNIOR ACCOUNT HANDLERS'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text:
-                      'You will be joining an enthusiastic sales team who specialise in selling:'
-                  }
-                ]
-              },
-              {
-                list: [
-                  {
-                    text: 'CREATIVE ADVERTISING & MARKETING'
-                  },
-                  {
-                    text: 'DESIGN FOR PRINT'
-                  },
-                  {
-                    text: 'EXHIBITIONS & SIGNAGE'
-                  },
-                  {
-                    text: 'DIGITAL MEDIA & WEB DESIGN'
-                  },
-                  {
-                    text: '3D ILLUSTRATION'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text:
-                      'Although extensive training will be given, you should have some experience in at least one of the above disciplines, and working in a creative environment.'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text:
-                      'You will be able to display great customer service skills coupled with sound account management ability and be confident contacting potential new clients with a view to building on our client portfolio and briefing our experienced creative team.'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text:
-                      'In return we can offer you a rewarding work environment with all the support of a great creative and sales team and a basic salary between £16,000 - £20,000 with potential bonus earnings of...well, that’s up to you!'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
     id: 'signage-fitter-installer',
     title: 'Signage Fitter/Installer',
     salary: '£18,000 – £24,000',
@@ -432,9 +342,9 @@ export const Careers: Api.Career[] = [
     ]
   },
   {
-    id: 'sales-representative',
+    id: 'sales-representative-signage-vehicle',
     title: 'Sales Representative – Signage and Vehicle Livery',
-    salary: '£16,000 - £20,000',
+    salary: '£24,000 - £35,000 + COMMISSION',
     content: [
       {
         data: [
@@ -445,18 +355,7 @@ export const Careers: Api.Career[] = [
                 paragraph: [
                   {
                     text:
-                      'Heckford are Lancashire’s largest agency, with over 40 years’ experience in creative marketing. We are looking to expand our sales team and have the following vacancy:'
-                  }
-                ]
-              },
-              {
-                paragraph: [
-                  {
-                    text: 'SALES REPRESENTATIVE',
-                    attributes: { bold: true }
-                  },
-                  {
-                    text: '– Signage and Vehicle Livery'
+                      'We are seeking a proactive motivated salesperson to develop new business. Responsibilities will include establishing and maintaining profitable relationships with customers on behalf of the company, actively prospecting for new accounts and maximising sales potential with existing customers.'
                   }
                 ]
               },
@@ -464,26 +363,70 @@ export const Careers: Api.Career[] = [
                 paragraph: [
                   {
                     text:
-                      'You will be joining an enthusiastic team who specialise in selling:'
+                      'You will be joining an enthusiastic team who specialise in selling Creative Advertising & Marketing, Design for Print, Exhibitions & Signage, Digital Media & Web Design, and 3D illustration.'
                   }
                 ]
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Requirements',
+        data: [
+          {
+            type: 'text',
+            data: [
               {
                 list: [
                   {
-                    text: 'CREATIVE ADVERTISING & MARKETING'
+                    text: 'Proven work experience as a sales representative'
                   },
                   {
-                    text: 'DESIGN FOR PRINT'
+                    text:
+                      'Highly motivated and target driven with a proven track record in sales'
                   },
                   {
-                    text: 'EXHIBITIONS & SIGNAGE'
+                    text: 'Strong IT and communication skills'
                   },
                   {
-                    text: 'DIGITAL MEDIA & WEB DESIGN'
+                    text:
+                      'Confident and enthusiastic personality and a positive can-do mentality'
                   },
                   {
-                    text: '3D ILLUSTRATION'
+                    text:
+                      'Good knowledge of all signage products, fabrication, vinyl and print'
+                  },
+                  {
+                    text:
+                      'Good understanding of Health and Safety (Risk assessments etc.)'
+                  },
+                  {
+                    text: `At least 3 years' experience in a signage and / or large format graphics account management role`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'sales-representative-exhibitions',
+    title: 'Sales Representative – Exhibitions',
+    salary: '£18,000 - £28,000 + COMMISSION',
+    content: [
+      {
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'We are seeking a first class sales representative for our expanding Exhibitions Department to develop new business as well as servicing existing clients. You will be a highly motivated, driven individual with strong sales experience and excellent communication skills who will be keen to succeed and may have an existing client base.'
                   }
                 ]
               },
@@ -491,23 +434,46 @@ export const Careers: Api.Career[] = [
                 paragraph: [
                   {
                     text:
-                      'Although training will be given, you should have some previous experience in selling on the phone, strong IT and communication skills, confident, enthusiastic personality and a positive, can-do mentality.'
+                      'You will be joining an enthusiastic team who specialise in selling Creative Advertising & Marketing, Design for Print, Exhibitions & Signage, Digital Media & Web Design, and 3D illustration.'
                   }
                 ]
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Requirements',
+        data: [
+          {
+            type: 'text',
+            data: [
               {
-                paragraph: [
+                list: [
                   {
                     text:
-                      'You will be able to display great customer service skills and be confident contacting potential new clients with a view to building on our client portfolio and briefing our Account Managers.'
-                  }
-                ]
-              },
-              {
-                paragraph: [
+                      'Have an understanding of the world of exhibitions and events'
+                  },
+                  {
+                    text: 'Good knowledge of exhibition design and build'
+                  },
                   {
                     text:
-                      'In return we can offer you a rewarding work environment with all the support of a great creative and sales team and a basic salary between £16,000 - £20,000 with potential bonus earnings of...well, that’s up to you!'
+                      'Highly motivated and target driven with a proven track record in the world of exhibition'
+                  },
+                  {
+                    text: 'Possess strong IT and communication skills'
+                  },
+                  {
+                    text:
+                      'Confident and enthusiastic personality and a positive can-do mentality'
+                  },
+                  {
+                    text: 'Good knowledge of exhibition design and build'
+                  },
+                  {
+                    text:
+                      'Good understanding of Health and Safety (Risk assessments etc.)'
                   }
                 ]
               }
