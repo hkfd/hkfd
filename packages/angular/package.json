@@ -6,6 +6,7 @@
     "ng": "ng",
     "serve": "ng serve",
     "build": "ng build --prod",
+    "test": "yarn test:browser && yarn test:server && yarn e2e",
     "test:browser": "ng test --watch=false",
     "test:browser:watch": "ng test",
     "test:server": "jest server.spec.ts",
@@ -45,7 +46,6 @@
       "git add"
     ]
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "6.1.7",
     "@angular/common": "6.1.7",

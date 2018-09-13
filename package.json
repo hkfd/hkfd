@@ -1,9 +1,15 @@
 {
   "name": "hkfd",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@angular*",
+      "**/@angular*/**"
+    ]
+  },
   "devDependencies": {
     "lerna": "^3.1.4"
   }
