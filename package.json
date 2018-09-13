@@ -3,11 +3,16 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "packages/*/functions"
     ],
     "nohoist": [
       "**/@angular*",
-      "**/@angular*/**"
+      "**/@angular*/**",
+      "**/firebase-admin",
+      "**/firebase-admin/**",
+      "**/firebase-functions",
+      "**/firebase-functions/**"
     ]
   },
   "devDependencies": {
