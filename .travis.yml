@@ -1,0 +1,46 @@
+language: node_js
+node_js: lts/*
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - packages/angular/node_modules
+    - packages/api/node_modules
+    - packages/email/node_modules
+    - packages/email/functions/node_modules
+before_cache:
+  - rm -rf $TRAVIS_BUILD_DIR/node_modules/.cache
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
+is_not_release: &is_not_release commit_message !~ /chore\(release\)/
+
+jobs:
+  include:
+    - stage: pre-cache
+      if: *is_not_release
+      script: skip
+
+    - stage: test
+      if: *is_not_release
+      name: '(angular) spec:browser'
+      script: ./scripts/angular/spec-browser.sh
+
+    - stage: test
+      if: *is_not_release
+      name: '(angular) spec:server'
+      script: ./scripts/angular/spec-server.sh
+
+    - stage: test
+      if: *is_not_release
+      name: '(angular) e2e'
+      sudo: required
+      addons:
+        chrome: stable
+      script: ./scripts/angular/e2e.sh
+
+    - stage: test
+      if: *is_not_release
+      name: (email)
+      script: ./scripts/email/test.sh
