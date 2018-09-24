@@ -14,7 +14,20 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
 
+env:
+  global:
+    # $HEROKU_API
+    - secure: o7i5ry7GeN64Ws6yQCOEZ2XswvrwuUg7Pf3QV+I1y8AdAfeG0opyqp1drPLuVFv9nsCs+ha+zRPypNBm8DtOuXLyTRCj+bVhxIdMhEO5mle5zj3D0pQIPfFCIkarlG/uI0Jb6cYEe3e0iR7tdDIY9diuDai8yYWHhzwD6sFk8LWgCtrzYcnRWGpD6KVuKLH9EComX7F9TpNbazgDPRocw52UCckw/Cw9XuIp2PINCJOfQWXi7tvnHn5cvcfGid1lvDnkjDuzdGRpE81w+nCtbsUyPoFab2O94J73yCvqCfGPluq7nFbHoS44D7+JOEmUikVbyzB0QFpuzlfWj0VQiiP7wZcYiGEJZ1prYZbCXFNRSsUk4ZMlAZt41CBScc7tfccs2w5QPW5aPLZWoBE7GTnI42MC1l3bX3ZYOes2lVWYB2HUbhQUg+iU7TrTVbNpBdsurQnXHkk4xBxQzC2efLT/mICZfle6jsR/o7QtTOyO6aCZOn7g8infO/NKGlfHEjEe6bYDixWuh0WnFv1q9g9f6I7ByQE1Xq2ihBG9NVjEoQ+0spXXuErQr9Nmo58tLFOm7YaVBMAbcZr9gOHz581QfY/QJ7ynKua1sdgsW6O9GeJvWQw2EA69OC8iQU0wd70wLAmy/4i0Wa5tKbKimvzFTR+i/+UPGif73UpOKR4=
+
+    # $API_FIREBASE_TOKEN
+    - secure: 7+p7nEOjGdvt4+QGGrgVT1ZtCvk6rdO8LeHM1NoL4qtzCvTgKdmPZH1gr11QoIIb0kR+efghQzM08jMQNf6odqwPICFQIZyU36mUF1v64FsfFYxf4J7IeHqqCXC5/BnZbsja/XP3+x3yBj6WRXIjWLQ+3/h3NsO93st+8Y5HUUC4X4Yct1OtsbYXYqkcgZsPZPzvqYV+rbKP9mZ0cJ+t1n5jgXKgPIdTOR+cnVNW4mtynzNNVo5MXdT9d1ifIDGpcV892vi+/cNBdi3V+IffMtSkSwxVUyKofqQUoGTHg+OEVzacFHrq2/y1YMH5mc0qAyhR2ww67WGFpNQw2vjc2GeIeqvye/7W0SDgOo9bSQEmYoZQwpVmikhJD2B2c7NOFwOtZ46YvbhGyDz5sD/uvMmqaFTJ3j44uqXE2SccaagcPwi6nros3KQMSgZz5x/VLFrdoRo5zpCD0M43Uh9GOC1kdakwZn5QMl75PxOOD4HvfSITWtrw45lT/3RhyWrcGvCvltb8ZPKPFvOXPlAEuxVWSD7EZavorUX2eB9d3S1393CDvsXmzNzYxIt9wGz7H/P5pHWFpUKxaJjCMmqmQbpC8bCLVNSN+Nduv/I0vj+SK9GMpV+hzCfwl5bIYnxslRg43+E2RskphpwuBPdJPQYo4WGAh4lFFPEKTZGucqM=
+
+    # $EMAIL_FIREBASE_TOKEN
+    - secure: gHmmave1Jq6TbZq+SdPw7VMIrWgeQGc1VZP0lY9Z8TWLcA2/Z12gNDfzjv0OiCCxLTlEjbwiDhMt4jmIDHeimBpHdum+PSziQt7UG3nZg20KgjsV4k9V3+5iaAJAf7xXZCyrO6Z+5HBzv5AP/EUhW2FNJ3JZ1cOhaBCbMMquQcrihpk5oAn3fRvBhjkXbmFKwh+OQSgqMMD2TmFB7yqfCjhR+gsT5zRVPDPjKfFQgVS3cOnnNzAx+Kw58wEKG1fhT4C0QFRVLPw3syysO6pE+FRS3Vh9HMYmwkj9xjaArg3l0cpSsh/MDqme0MfWrKIL34qX1zP38PJWa7NgX/lZiZJWk6i93D1iYT6wbbdo6zcDNINT7iWQqqcLAZdE7vm6RgUFt5u+DvveW2uu6vAvHt5m7ARP8SJARr4f2bOcordR2LaNDXw9kDMQjvWnpVdTDOTfm/iFn/U1SP6B65lxcElZvRE0d7nMPqWV/Jz3kNvi6oYyt5TH8LFIvrqW2HeM3fajD8kSY64knKRs8gQixqb6COgvgAT8i1u77c34r7bNOjcQOLGDn44oexitATy3P4ST1VW7ay6WzNCS4eehPcckk+2Vs6YwBh09y8W9lPOExN3GFCBJyiMHUpYLRYSX589bsdtLjItZUUw4fqdsUW6+ASNSHGA6B/89CyXzam0=
+
+is_release: &is_release branch = master AND type != pull_request AND commit_message =~ /chore\(release\)/
 is_not_release: &is_not_release commit_message !~ /chore\(release\)/
+is_master_is_buildable_commit: &is_master_is_buildable_commit branch = master AND type != pull_request AND commit_message =~ /(feat|fix|perf|refactor)\(?\w*\)?:/
 
 jobs:
   include:
@@ -44,3 +57,38 @@ jobs:
       if: *is_not_release
       name: (email)
       script: ./scripts/email/test.sh
+
+    - stage: release
+      if: *is_master_is_buildable_commit
+      script: skip
+      deploy:
+        provider: script
+        script: ./scripts/release.sh
+        skip_cleanup: true
+
+    - stage: deploy
+      if: *is_release
+      name: (angular)
+      script: skip
+      deploy:
+        provider: script
+        script: ./scripts/angular/deploy.sh
+        skip_cleanup: true
+
+    - stage: deploy
+      if: *is_release
+      name: (api)
+      script: skip
+      deploy:
+        provider: script
+        script: ./scripts/api/deploy.sh
+        skip_cleanup: true
+
+    - stage: deploy
+      if: *is_release
+      name: (email)
+      script: skip
+      deploy:
+        provider: script
+        script: ./scripts/email/deploy.sh
+        skip_cleanup: true

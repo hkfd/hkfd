@@ -6,6 +6,11 @@
   "command": {
     "bootstrap": {
       "npmClientArgs": ["--ignore-engines"]
+    },
+    "publish": {
+      "commitHooks": false,
+      "conventionalCommits": true,
+      "message": "chore(release): publish %s"
     }
   }
 }
