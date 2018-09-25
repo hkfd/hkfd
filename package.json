@@ -1,6 +1,9 @@
 {
   "name": "hkfd",
   "private": true,
+  "scripts": {
+    "heroku-postbuild": "lerna run build:ssr --scope=angular"
+  },
   "workspaces": {
     "packages": [
       "packages/*",

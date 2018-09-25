@@ -17,7 +17,6 @@
     "build:client-and-server-bundles": "yarn build -c $ENVIRONMENT && ng run heckford-angular:server -c $ENVIRONMENT",
     "build:ssr": "yarn build:client-and-server-bundles && yarn compile:server",
     "serve:ssr": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 dist/server",
-    "heroku-postbuild": "yarn build:ssr",
     "precommit": "lint-staged"
   },
   "jest": {
