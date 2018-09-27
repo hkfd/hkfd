@@ -13,9 +13,13 @@ before_cache:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
+notifications:
+  webhooks: https://coveralls.io/webhook
 
 env:
   global:
+    - COVERALLS_PARALLEL=true
+
     # $HEROKU_API
     - secure: o7i5ry7GeN64Ws6yQCOEZ2XswvrwuUg7Pf3QV+I1y8AdAfeG0opyqp1drPLuVFv9nsCs+ha+zRPypNBm8DtOuXLyTRCj+bVhxIdMhEO5mle5zj3D0pQIPfFCIkarlG/uI0Jb6cYEe3e0iR7tdDIY9diuDai8yYWHhzwD6sFk8LWgCtrzYcnRWGpD6KVuKLH9EComX7F9TpNbazgDPRocw52UCckw/Cw9XuIp2PINCJOfQWXi7tvnHn5cvcfGid1lvDnkjDuzdGRpE81w+nCtbsUyPoFab2O94J73yCvqCfGPluq7nFbHoS44D7+JOEmUikVbyzB0QFpuzlfWj0VQiiP7wZcYiGEJZ1prYZbCXFNRSsUk4ZMlAZt41CBScc7tfccs2w5QPW5aPLZWoBE7GTnI42MC1l3bX3ZYOes2lVWYB2HUbhQUg+iU7TrTVbNpBdsurQnXHkk4xBxQzC2efLT/mICZfle6jsR/o7QtTOyO6aCZOn7g8infO/NKGlfHEjEe6bYDixWuh0WnFv1q9g9f6I7ByQE1Xq2ihBG9NVjEoQ+0spXXuErQr9Nmo58tLFOm7YaVBMAbcZr9gOHz581QfY/QJ7ynKua1sdgsW6O9GeJvWQw2EA69OC8iQU0wd70wLAmy/4i0Wa5tKbKimvzFTR+i/+UPGif73UpOKR4=
 

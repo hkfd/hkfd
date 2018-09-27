@@ -4,5 +4,5 @@ source ./scripts/email/.env
 source ./scripts/helpers.sh
 
 if shouldRunTest $PACKAGE; then
-  lerna run test --scope=$PACKAGE --stream
+  yarn --cwd packages/$PACKAGE test --coverage --coverageReporters=text-lcov | yarn coveralls
 fi

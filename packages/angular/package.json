@@ -36,6 +36,10 @@
       "jsx",
       "json",
       "node"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/server/"
     ]
   },
   "dependencies": {
@@ -85,7 +89,6 @@
     "@types/raven": "^2.5.1",
     "@types/supertest": "^2.0.5",
     "codelyzer": "^4.4.2",
-    "coveralls": "^3.0.2",
     "jasmine": "^3.1.0",
     "jasmine-core": "^3.1.0",
     "jasmine-spec-reporter": "~4.2.1",
