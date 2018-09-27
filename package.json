@@ -4,6 +4,17 @@
   "scripts": {
     "heroku-postbuild": "lerna run build:ssr --scope=angular"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,scss,md,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "workspaces": {
     "packages": [
       "packages/*",
@@ -19,6 +30,9 @@
     ]
   },
   "devDependencies": {
-    "lerna": "^3.1.4"
+    "husky": "^1.0.1",
+    "lerna": "^3.1.4",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
   }
 }

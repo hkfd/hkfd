@@ -6,25 +6,11 @@
     "serve": "yarn firebase use staging && yarn --silent firebase functions:config:get > functions/.runtimeconfig.json && yarn --cwd functions build && yarn firebase serve --port 5000",
     "build": "yarn --cwd functions build",
     "deploy": "yarn firebase use production && yarn firebase deploy",
-    "precommit": "lint-staged",
     "test": "yarn --cwd functions test",
     "test:watch": "yarn --cwd functions test:watch"
   },
-  "lint-staged": {
-    "functions/**/*.ts": [
-      "yarn --cwd functions lint",
-      "git add"
-    ],
-    "*.{ts,md,json}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
-  },
   "devDependencies": {
-    "firebase-tools": "^4.2.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
-    "prettier": "^1.14.2"
+    "firebase-tools": "^4.2.1"
   },
   "dependencies": {
     "email-functions": "^1.0.0"
