@@ -15,7 +15,8 @@ import { Prismic } from 'shared';
 export class TextBlockComponent {
   richText = RichText;
 
-  @Input() data: Prismic.Text[];
+  @Input()
+  data: Prismic.Text[];
 
   linkResolver(post: Prismic.Post) {
     if (post.type === 'news') return `/news/${post.uid}`;

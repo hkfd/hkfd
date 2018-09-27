@@ -8,5 +8,6 @@ import { Generic } from 'shared';
   styleUrls: ['./duo-block.component.scss']
 })
 export class DuoBlockComponent {
-  @Input() data: Generic.Image[];
+  @Input()
+  data: Generic.Image[];
 }

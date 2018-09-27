@@ -8,5 +8,6 @@ import { Generic } from 'shared';
   styleUrls: ['./video-block.component.scss']
 })
 export class VideoBlockComponent {
-  @Input() data: Generic.Video;
+  @Input()
+  data: Generic.Video;
 }

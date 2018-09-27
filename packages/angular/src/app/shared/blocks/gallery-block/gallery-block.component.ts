@@ -8,5 +8,6 @@ import { Generic } from 'shared';
   styleUrls: ['./gallery-block.component.scss']
 })
 export class GalleryBlockComponent {
-  @Input() data: Generic.Image[];
+  @Input()
+  data: Generic.Image[];
 }

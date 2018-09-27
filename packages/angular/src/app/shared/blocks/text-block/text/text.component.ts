@@ -7,5 +7,6 @@ import { Api } from 'shared';
   templateUrl: './text.component.html'
 })
 export class TextComponent {
-  @Input() text: Api.Sentence;
+  @Input()
+  text: Api.Sentence;
 }

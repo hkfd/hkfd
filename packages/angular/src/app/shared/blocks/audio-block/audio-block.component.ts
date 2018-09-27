@@ -8,5 +8,6 @@ import { Generic } from 'shared';
   styleUrls: ['./audio-block.component.scss']
 })
 export class AudioBlockComponent {
-  @Input() data: Generic.Audio;
+  @Input()
+  data: Generic.Audio;
 }

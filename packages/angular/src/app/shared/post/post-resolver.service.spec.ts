@@ -128,27 +128,21 @@ describe('PostResolver', () => {
       .subscribe(post => expect(post).toBeNull());
   });
 
-  it(
-    'should navigate to / if no matching post',
-    fakeAsync(() => {
-      activatedRoute.testParamMap = { type: 'service', id: 'service-nope' };
-      postResolver.resolve(<any>activatedRoute.snapshot).subscribe();
-      tick();
+  it('should navigate to / if no matching post', fakeAsync(() => {
+    activatedRoute.testParamMap = { type: 'service', id: 'service-nope' };
+    postResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+    tick();
 
-      return expect(location.path()).toBe('/');
-    })
-  );
+    return expect(location.path()).toBe('/');
+  }));
 
-  it(
-    'should not navigate to / if matching post',
-    fakeAsync(() => {
-      activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-      postResolver.resolve(<any>activatedRoute.snapshot).subscribe();
-      tick();
+  it('should not navigate to / if matching post', fakeAsync(() => {
+    activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
+    postResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+    tick();
 
-      return expect(location.path()).toBe('');
-    })
-  );
+    return expect(location.path()).toBe('');
+  }));
 });
 
 function createService() {

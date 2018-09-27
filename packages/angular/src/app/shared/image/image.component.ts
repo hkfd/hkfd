@@ -8,5 +8,6 @@ import { Generic } from 'shared';
   styleUrls: ['./image.component.scss']
 })
 export class ImageComponent {
-  @Input() image: Generic.Image;
+  @Input()
+  image: Generic.Image;
 }

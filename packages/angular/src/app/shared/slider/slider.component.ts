@@ -21,10 +21,14 @@ export class SliderComponent implements OnChanges {
   private timer: number;
   currentIndex: number = 0;
 
-  @Input() random: boolean = false;
-  @Input() autoplay: boolean = false;
-  @Input() delay: number = 2000;
-  @Input() images: Generic.Image[];
+  @Input()
+  random: boolean = false;
+  @Input()
+  autoplay: boolean = false;
+  @Input()
+  delay: number = 2000;
+  @Input()
+  images: Generic.Image[];
 
   @HostListener('mouseenter')
   mouseEnter() {

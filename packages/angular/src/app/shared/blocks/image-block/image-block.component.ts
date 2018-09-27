@@ -8,5 +8,6 @@ import { Generic } from 'shared';
   styleUrls: ['./image-block.component.scss']
 })
 export class ImageBlockComponent {
-  @Input() data: Generic.Image;
+  @Input()
+  data: Generic.Image;
 }

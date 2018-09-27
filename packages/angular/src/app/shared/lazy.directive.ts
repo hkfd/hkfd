@@ -16,7 +16,8 @@ import { Generic } from './generic';
   selector: '[lazy]'
 })
 export class LazyDirective implements AfterViewInit, OnDestroy {
-  @Input('lazy') data: Generic.Lazy;
+  @Input('lazy')
+  data: Generic.Lazy;
   private observer: IntersectionObserver;
 
   constructor(

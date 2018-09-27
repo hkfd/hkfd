@@ -75,43 +75,34 @@ describe('SliderComponent', () => {
   });
 
   describe('startTimer', () => {
-    it(
-      'should call changeImage if autoplay is true',
-      fakeAsync(() => {
-        comp.autoplay = true;
-        comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
-        tick(comp.delay);
+    it('should call changeImage if autoplay is true', fakeAsync(() => {
+      comp.autoplay = true;
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      tick(comp.delay);
 
-        expect(page.changeImage).toHaveBeenCalled();
-        discardPeriodicTasks();
-      })
-    );
+      expect(page.changeImage).toHaveBeenCalled();
+      discardPeriodicTasks();
+    }));
 
-    it(
-      'should not call changeImage if autoplay is false',
-      fakeAsync(() => {
-        comp.autoplay = false;
-        comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
-        tick(comp.delay);
+    it('should not call changeImage if autoplay is false', fakeAsync(() => {
+      comp.autoplay = false;
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      tick(comp.delay);
 
-        expect(page.changeImage).not.toHaveBeenCalled();
-        discardPeriodicTasks();
-      })
-    );
+      expect(page.changeImage).not.toHaveBeenCalled();
+      discardPeriodicTasks();
+    }));
   });
 
   describe('endTimer', () => {
-    it(
-      'should stop changeImage calls',
-      fakeAsync(() => {
-        comp.autoplay = true;
-        comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
-        comp.endTimer();
+    it('should stop changeImage calls', fakeAsync(() => {
+      comp.autoplay = true;
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.endTimer();
 
-        expect(page.changeImage).not.toHaveBeenCalled();
-        discardPeriodicTasks();
-      })
-    );
+      expect(page.changeImage).not.toHaveBeenCalled();
+      discardPeriodicTasks();
+    }));
   });
 
   describe('changeImage', () => {

@@ -61,16 +61,14 @@ describe('CareerResolver', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
 
-    careerResolver
-      .resolve(<any>activatedRoute.snapshot)
-      .subscribe(_ =>
-        expect(metaService.setMetaTags).toHaveBeenCalledWith({
-          type: 'article',
-          title: 'Career 1',
-          description: '£0',
-          url: 'careers/career-1'
-        })
-      );
+    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+      expect(metaService.setMetaTags).toHaveBeenCalledWith({
+        type: 'article',
+        title: 'Career 1',
+        description: '£0',
+        url: 'careers/career-1'
+      })
+    );
   });
 
   it('should return career if matching career', async(() => {
@@ -91,29 +89,23 @@ describe('CareerResolver', () => {
       .subscribe(career => expect(career).toBe(null));
   }));
 
-  it(
-    'should navigate to /careers if no matching career',
-    fakeAsync(() => {
-      activatedRoute.testParamMap = { id: 'no-career' };
-      activatedRoute.testQueryParamMap = {};
-      careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
-      tick();
+  it('should navigate to /careers if no matching career', fakeAsync(() => {
+    activatedRoute.testParamMap = { id: 'no-career' };
+    activatedRoute.testQueryParamMap = {};
+    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+    tick();
 
-      return expect(location.path()).toBe('/careers');
-    })
-  );
+    return expect(location.path()).toBe('/careers');
+  }));
 
-  it(
-    'should not navigate to /careers if matching career',
-    fakeAsync(() => {
-      activatedRoute.testParamMap = { id: 'career-1' };
-      activatedRoute.testQueryParamMap = {};
-      careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
-      tick();
+  it('should not navigate to /careers if matching career', fakeAsync(() => {
+    activatedRoute.testParamMap = { id: 'career-1' };
+    activatedRoute.testQueryParamMap = {};
+    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+    tick();
 
-      return expect(location.path()).toBe('');
-    })
-  );
+    return expect(location.path()).toBe('');
+  }));
 });
 
 function createService() {

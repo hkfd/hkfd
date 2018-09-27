@@ -8,5 +8,6 @@ import { Api } from 'shared';
   styleUrls: ['./text-block.component.scss']
 })
 export class TextBlockComponent {
-  @Input() data: Api.Blocks.TextBlock;
+  @Input()
+  data: Api.Blocks.TextBlock;
 }

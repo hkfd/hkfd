@@ -14,7 +14,8 @@ export class PostComponent implements OnInit {
   post$: Subscription;
   post: Api.Post;
 
-  @HostBinding('class') layout: string;
+  @HostBinding('class')
+  layout: string;
 
   constructor(private route: ActivatedRoute) {}
 
