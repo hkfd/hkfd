@@ -2,11 +2,13 @@
   "name": "hkfd",
   "private": true,
   "scripts": {
+    "commit": "commit",
     "heroku-postbuild": "lerna run build:ssr --scope=angular"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -30,6 +32,10 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.1.2",
+    "@commitlint/config-conventional": "^7.1.2",
+    "@commitlint/prompt-cli": "^7.1.2",
+    "@commitlint/travis-cli": "^7.1.2",
     "coveralls": "^3.0.2",
     "husky": "^1.0.1",
     "lerna": "^3.1.4",

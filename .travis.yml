@@ -37,9 +37,9 @@ is_master_is_buildable_commit: &is_master_is_buildable_commit branch = master AN
 
 jobs:
   include:
-    - stage: pre-cache
+    - stage: lint
       if: *is_not_release
-      script: skip
+      script: commitlint-travis
 
     - stage: test
       if: *is_not_release
