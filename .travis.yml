@@ -9,7 +9,7 @@ cache:
     - packages/email/node_modules
     - packages/email/functions/node_modules
 before_cache:
-  - rm -rf $TRAVIS_BUILD_DIR/node_modules/.cache
+  - rm -rf $TRAVIS_BUILD_DIR/node_modules/.cache $TRAVIS_BUILD_DIR/packages/angular/node_modules/.cache
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
