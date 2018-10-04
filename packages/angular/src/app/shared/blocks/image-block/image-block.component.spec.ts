@@ -36,7 +36,7 @@ function createComponent() {
 }
 
 class Page {
-  image: DebugElement;
+  image!: DebugElement;
 
   constructor() {
     comp.data = {

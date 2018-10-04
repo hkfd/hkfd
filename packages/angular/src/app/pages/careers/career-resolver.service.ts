@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { take, map, tap } from 'rxjs/operators';
+import { Observable, of, EMPTY } from 'rxjs';
+import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { MetaService, ApiService, Api } from 'shared';
 
@@ -14,8 +14,10 @@ export class CareerResolver implements Resolve<Api.Career> {
     private apiService: ApiService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Api.Career> {
-    return this.apiService.getCareer(route.paramMap.get('id')).pipe(
+  resolve(
+    route: ActivatedRouteSnapshot
+  ): Observable<Api.Career> | Observable<never> {
+    return this.apiService.getCareer(route.paramMap.get('id') || '').pipe(
       take(1),
       tap(
         career =>
@@ -28,11 +30,11 @@ export class CareerResolver implements Resolve<Api.Career> {
               })
             : undefined
       ),
-      map(career => {
-        if (career) return career;
+      mergeMap(career => {
+        if (career) return of(career);
 
         this.router.navigate(['/careers']);
-        return null;
+        return EMPTY;
       })
     );
   }

@@ -56,17 +56,17 @@ describe('WorkComponent', () => {
   });
 
   it('should call ApiPipe with case study thumbnails', () => {
-    comp.caseStudies.forEach(caseStudy =>
+    comp.caseStudies!.forEach(caseStudy =>
       expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
     );
   });
 
   it('should set caseStudies', () => {
-    expect(comp.caseStudies.length).toBe(3);
+    expect(comp.caseStudies!.length).toBe(3);
   });
 
   it('should set case study colour', () => {
-    comp.caseStudies.forEach((caseStudy, index) =>
+    comp.caseStudies!.forEach((caseStudy, index) =>
       expect(page.caseStudies[index].properties.className).toContain(
         caseStudy.colour
       )
@@ -100,7 +100,7 @@ class ApiPipeStub {
 }
 
 class Page {
-  caseStudies: DebugElement[];
+  caseStudies!: DebugElement[];
 
   addElements() {
     this.caseStudies = fixture.debugElement.queryAll(By.css('.case-study'));

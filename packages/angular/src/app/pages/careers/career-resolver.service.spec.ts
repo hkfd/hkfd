@@ -2,6 +2,7 @@ import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { Location } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { Observable } from 'rxjs';
 import {
   RouterTestingModule,
   MockMetaService,
@@ -9,7 +10,7 @@ import {
   MockApiPipe,
   ActivatedRouteStub
 } from 'testing';
-import { MetaService, ApiService } from 'shared';
+import { MetaService, ApiService, Api } from 'shared';
 import { CareerResolver } from './career-resolver.service';
 import { CareersComponent } from './careers.component';
 
@@ -44,7 +45,9 @@ describe('CareerResolver', () => {
   it('should call ApiService getCareer', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot);
+    careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Api.Career
+    >;
 
     expect(apiService.getCareer).toHaveBeenCalled();
   });
@@ -52,7 +55,9 @@ describe('CareerResolver', () => {
   it('should call ApiService getCareer with id arg', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot);
+    careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Api.Career
+    >;
 
     expect(apiService.getCareer).toHaveBeenCalledWith('career-1');
   });
@@ -61,7 +66,9 @@ describe('CareerResolver', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
 
-    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Api.Career
+    >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
         type: 'article',
         title: 'Career 1',
@@ -75,24 +82,26 @@ describe('CareerResolver', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
 
-    careerResolver
-      .resolve(<any>activatedRoute.snapshot)
-      .subscribe(career => expect(career.title).toBe('Career 1'));
+    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Api.Career
+    >).subscribe(career => expect(career.title).toBe('Career 1'));
   }));
 
   it('should return null if no matching career', async(() => {
     activatedRoute.testParamMap = { id: 'no-career' };
     activatedRoute.testQueryParamMap = {};
 
-    careerResolver
-      .resolve(<any>activatedRoute.snapshot)
-      .subscribe(career => expect(career).toBe(null));
+    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      any
+    >).subscribe(career => expect(career).toBe(null));
   }));
 
   it('should navigate to /careers if no matching career', fakeAsync(() => {
     activatedRoute.testParamMap = { id: 'no-career' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Api.Career
+    >).subscribe();
     tick();
 
     return expect(location.path()).toBe('/careers');
@@ -101,7 +110,9 @@ describe('CareerResolver', () => {
   it('should not navigate to /careers if matching career', fakeAsync(() => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot).subscribe();
+    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Api.Career
+    >).subscribe();
     tick();
 
     return expect(location.path()).toBe('');

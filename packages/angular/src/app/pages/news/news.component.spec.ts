@@ -178,7 +178,7 @@ class RichTextStub {
 class Page {
   getPosts: jasmine.Spy;
 
-  loadMore: DebugElement;
+  loadMore!: DebugElement;
 
   constructor() {
     this.getPosts = spyOn(comp, 'getPosts').and.callThrough();

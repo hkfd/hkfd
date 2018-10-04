@@ -89,7 +89,7 @@ describe('LazyDirective', () => {
     });
 
     it('should not call Renderer2 setAttribute if no data attr', () => {
-      lazyDirective.data = { attr: null, val: ['example'] };
+      lazyDirective.data = { attr: '', val: ['example'] };
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
 
       expect(renderer.setAttribute).not.toHaveBeenCalledWith(
@@ -100,7 +100,7 @@ describe('LazyDirective', () => {
     });
 
     it('should not call Renderer2 setAttribute if no data val', () => {
-      lazyDirective.data = { attr: 'example', val: null };
+      lazyDirective.data = { attr: 'example', val: [''] };
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
 
       expect(renderer.setAttribute).not.toHaveBeenCalledWith(
@@ -159,7 +159,6 @@ class RendererStub {
 }
 
 class LazyDirectiveStub {
-  ngAfterViewInit: jasmine.Spy;
   intersectionCallback: jasmine.Spy;
 
   constructor() {
@@ -174,7 +173,7 @@ class LazyDirectiveStub {
 }
 
 class Page {
-  img: DebugElement;
+  img!: DebugElement;
 
   addElements() {
     this.img = fixture.debugElement.query(By.css('img'));

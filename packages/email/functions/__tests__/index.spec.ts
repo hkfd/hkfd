@@ -137,7 +137,7 @@ describe('send email', () => {
             .post('/')
             .send({ email: 'example@example.com', message: 'Message' })
             .then(res =>
-              res.body.map(err =>
+              res.body.map((err: any) =>
                 expect(err).toEqual(
                   jasmine.objectContaining({
                     keyword: 'required',
@@ -162,7 +162,7 @@ describe('send email', () => {
             .post('/')
             .send({ name: 'Name', message: 'Message' })
             .then(res =>
-              res.body.map(err =>
+              res.body.map((err: any) =>
                 expect(err).toEqual(
                   jasmine.objectContaining({
                     keyword: 'required',
@@ -187,7 +187,7 @@ describe('send email', () => {
             .post('/')
             .send({ name: 'Name', email: 'example@example.com' })
             .then(res =>
-              res.body.map(err =>
+              res.body.map((err: any) =>
                 expect(err).toEqual(
                   jasmine.objectContaining({
                     keyword: 'required',
@@ -214,7 +214,7 @@ describe('send email', () => {
             .post('/')
             .send({ name: 'Name', email: 'invalid', message: 'Message' })
             .then(res =>
-              res.body.map(err =>
+              res.body.map((err: any) =>
                 expect(err).toEqual(
                   jasmine.objectContaining({
                     keyword: 'format',

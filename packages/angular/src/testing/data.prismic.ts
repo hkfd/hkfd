@@ -1,187 +1,318 @@
 import { Prismic as PrismicType } from 'shared';
 
 export namespace Prismic {
+  export const post: PrismicType.Post = {
+    alternate_languages: [],
+    data: {
+      title: [{ spans: [], text: 'Post 1', type: 'h1' }],
+      description: 'Post 1 description',
+      image: {
+        dimensions: {
+          width: 0,
+          height: 0
+        },
+        url: 'post-1',
+        lg: {
+          dimensions: {
+            width: 0,
+            height: 0
+          },
+          url: 'post-1'
+        },
+        md: {
+          dimensions: {
+            width: 0,
+            height: 0
+          },
+          url: 'post-1'
+        },
+        sm: {
+          dimensions: {
+            width: 0,
+            height: 0
+          },
+          url: 'post-1'
+        },
+        xs: {
+          dimensions: {
+            width: 0,
+            height: 0
+          },
+          url: 'post-1'
+        },
+        proxy: {
+          dimensions: {
+            width: 0,
+            height: 0
+          },
+          url: 'post-1'
+        }
+      },
+      body: []
+    },
+    first_publication_date: null,
+    href: '',
+    id: '',
+    last_publication_date: null,
+    slugs: [],
+    tags: [],
+    type: '',
+    uid: 'post-1'
+  };
+
   export const postsResponse: PrismicType.PostsResponse = {
-    license: null,
+    license: '',
     next_page: null,
     page: 1,
     prev_page: null,
     results: [
       {
-        alternate_languages: null,
+        alternate_languages: [],
         data: {
-          title: [{ spans: null, text: 'Post 1', type: 'h1' }],
+          title: [{ spans: [], text: 'Post 1', type: 'h1' }],
           description: 'Post 1 description',
           image: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-1',
             lg: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-1'
             },
             md: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-1'
             },
             sm: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-1'
             },
             xs: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-1'
             },
             proxy: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-1'
             }
           },
-          body: null
+          body: []
         },
         first_publication_date: null,
-        href: null,
-        id: null,
+        href: '',
+        id: '',
         last_publication_date: null,
-        slugs: null,
-        tags: null,
-        type: null,
+        slugs: [],
+        tags: [],
+        type: '',
         uid: 'post-1'
       },
       {
-        alternate_languages: null,
+        alternate_languages: [],
         data: {
-          title: [{ spans: null, text: 'Post 2', type: 'h1' }],
+          title: [{ spans: [], text: 'Post 2', type: 'h1' }],
           description: 'Post 2 description',
           image: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-2',
             lg: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-2'
             },
             md: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-2'
             },
             sm: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-2'
             },
             xs: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-2'
             },
             proxy: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-2'
             }
           },
-          body: null
+          body: []
         },
         first_publication_date: null,
-        href: null,
-        id: null,
+        href: '',
+        id: '',
         last_publication_date: null,
-        slugs: null,
-        tags: null,
-        type: null,
+        slugs: [],
+        tags: [],
+        type: '',
         uid: 'post-2'
       },
       {
-        alternate_languages: null,
+        alternate_languages: [],
         data: {
-          title: [{ spans: null, text: 'Post 3', type: 'h1' }],
+          title: [{ spans: [], text: 'Post 3', type: 'h1' }],
           description: 'Post 3 description',
           image: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-3',
             lg: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-3'
             },
             md: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-3'
             },
             sm: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-3'
             },
             xs: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-3'
             },
             proxy: {
-              dimensions: null,
+              dimensions: {
+                width: 0,
+                height: 0
+              },
               url: 'post-3'
             }
           },
-          body: null
+          body: []
         },
         first_publication_date: null,
-        href: null,
-        id: null,
+        href: '',
+        id: '',
         last_publication_date: null,
-        slugs: null,
-        tags: null,
-        type: null,
+        slugs: [],
+        tags: [],
+        type: '',
         uid: 'post-3'
       }
     ],
-    results_per_page: null,
-    results_size: null,
-    total_pages: null,
-    total_results_size: null,
-    version: null
+    results_per_page: 0,
+    results_size: 0,
+    total_pages: 0,
+    total_results_size: 0,
+    version: ''
   };
 
   export const posts: PrismicType.Post[] = [
     {
-      alternate_languages: null,
+      alternate_languages: [],
       data: {
-        title: [{ spans: null, text: 'Post 1', type: 'h1' }],
+        title: [{ spans: [], text: 'Post 1', type: 'h1' }],
         description: 'Post 1 description',
         image: {
-          dimensions: null,
+          dimensions: {
+            width: 0,
+            height: 0
+          },
           url: 'post-1',
           lg: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-1'
           },
           md: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-1'
           },
           sm: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-1'
           },
           xs: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-1'
           },
           proxy: {
-            dimensions: null,
+            dimensions: {
+              width: 0,
+              height: 0
+            },
             url: 'post-1'
           }
         },
-        body: null
+        body: []
       },
       first_publication_date: null,
-      href: null,
-      id: null,
+      href: '',
+      id: '',
       last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
+      slugs: [],
+      tags: [],
+      type: '',
       uid: 'post-1'
     },
     {
-      alternate_languages: null,
+      alternate_languages: [],
       data: {
-        title: [{ spans: null, text: 'Post 2', type: 'h1' }],
+        title: [{ spans: [], text: 'Post 2', type: 'h1' }],
         description: 'Post 2 description',
-        image: null,
+        image: null as any,
         body: [
           {
             slice_type: 'text',
@@ -198,20 +329,20 @@ export namespace Prismic {
         ]
       },
       first_publication_date: null,
-      href: null,
-      id: null,
+      href: '',
+      id: '',
       last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
+      slugs: [],
+      tags: [],
+      type: '',
       uid: 'post-2'
     },
     {
-      alternate_languages: null,
+      alternate_languages: [],
       data: {
-        title: [{ spans: null, text: 'Post 3', type: 'h1' }],
+        title: [{ spans: [], text: 'Post 3', type: 'h1' }],
         description: 'Post 3 description',
-        image: null,
+        image: null as any,
         body: [
           {
             slice_type: 'image',
@@ -230,20 +361,20 @@ export namespace Prismic {
         ]
       },
       first_publication_date: null,
-      href: null,
-      id: null,
+      href: '',
+      id: '',
       last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
+      slugs: [],
+      tags: [],
+      type: '',
       uid: 'post-3'
     },
     {
-      alternate_languages: null,
+      alternate_languages: [],
       data: {
-        title: [{ spans: null, text: 'Post 4', type: 'h1' }],
+        title: [{ spans: [], text: 'Post 4', type: 'h1' }],
         description: 'Post 4 description',
-        image: null,
+        image: null as any,
         body: [
           {
             slice_type: 'duo',
@@ -275,20 +406,20 @@ export namespace Prismic {
         ]
       },
       first_publication_date: null,
-      href: null,
-      id: null,
+      href: '',
+      id: '',
       last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
+      slugs: [],
+      tags: [],
+      type: '',
       uid: 'post-4'
     },
     {
-      alternate_languages: null,
+      alternate_languages: [],
       data: {
-        title: [{ spans: null, text: 'Post 5', type: 'h1' }],
+        title: [{ spans: [], text: 'Post 5', type: 'h1' }],
         description: 'Post 5 description',
-        image: null,
+        image: null as any,
         body: [
           {
             slice_type: 'gallery',
@@ -331,20 +462,20 @@ export namespace Prismic {
         ]
       },
       first_publication_date: null,
-      href: null,
-      id: null,
+      href: '',
+      id: '',
       last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
+      slugs: [],
+      tags: [],
+      type: '',
       uid: 'post-5'
     },
     {
-      alternate_languages: null,
+      alternate_languages: [],
       data: {
-        title: [{ spans: null, text: 'Post 6', type: 'h1' }],
+        title: [{ spans: [], text: 'Post 6', type: 'h1' }],
         description: 'Post 6 description',
-        image: null,
+        image: null as any,
         body: [
           {
             slice_type: 'video',
@@ -358,34 +489,34 @@ export namespace Prismic {
         ]
       },
       first_publication_date: null,
-      href: null,
-      id: null,
+      href: '',
+      id: '',
       last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
+      slugs: [],
+      tags: [],
+      type: '',
       uid: 'post-6'
     }
   ];
 
   export const refResponse: PrismicType.RefResponse = {
-    bookmarks: null,
-    experiments: null,
-    forms: null,
-    license: null,
-    oauth_initiate: null,
-    oauth_token: null,
+    bookmarks: {},
+    experiments: {},
+    forms: {},
+    license: '',
+    oauth_initiate: '',
+    oauth_token: '',
     refs: [
       {
         id: '1',
         isMasterRef: true,
-        label: null,
+        label: '',
         ref: 'abc'
       }
     ],
-    tags: null,
-    types: null,
-    version: null
+    tags: [],
+    types: {},
+    version: ''
   };
 
   export const text: PrismicType.Text[] = [

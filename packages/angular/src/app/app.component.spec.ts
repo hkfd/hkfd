@@ -128,7 +128,7 @@ describe('AppComponent', () => {
       beforeEach(async(() => createComponent()));
 
       it('should call router$ unsubscribe', () => {
-        const spy = spyOn(comp.router$, 'unsubscribe').and.callThrough();
+        const spy = spyOn(comp.router$!, 'unsubscribe').and.callThrough();
         comp.ngOnDestroy();
 
         expect(spy).toHaveBeenCalled();

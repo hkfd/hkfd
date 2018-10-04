@@ -146,9 +146,9 @@ class Page {
   navClick: jasmine.Spy;
   toggleMobile: jasmine.Spy;
 
-  navLogo: DebugElement;
-  navLink: DebugElement;
-  navButton: DebugElement;
+  navLogo!: DebugElement;
+  navLink!: DebugElement;
+  navButton!: DebugElement;
 
   constructor() {
     comp.pages = [

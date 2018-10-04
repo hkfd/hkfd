@@ -108,11 +108,13 @@ describe('PostComponent', () => {
       });
 
       it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(comp.post.content[0].data[0].data);
+        expect(apiPipe).toHaveBeenCalledWith(
+          comp.post!.content[0].data[0].data
+        );
       });
 
       it(`should set full-bleed attibute as 'true' if fullBleed is true`, () => {
-        (<Api.Blocks.ImageBlock>comp.post.content[0].data[0]).fullBleed = true;
+        (<Api.Blocks.ImageBlock>comp.post!.content[0].data[0]).fullBleed = true;
         fixture.detectChanges();
 
         expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
@@ -122,7 +124,7 @@ describe('PostComponent', () => {
 
       it(`should not set full-bleed attibute if no fullBleed`, () => {
         (<Api.Blocks.ImageBlock>(
-          comp.post.content[0].data[0]
+          comp.post!.content[0].data[0]
         )).fullBleed = undefined;
         fixture.detectChanges();
 
@@ -149,7 +151,9 @@ describe('PostComponent', () => {
       });
 
       it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(comp.post.content[0].data[0].data);
+        expect(apiPipe).toHaveBeenCalledWith(
+          comp.post!.content[0].data[0].data
+        );
       });
     });
 
@@ -170,7 +174,9 @@ describe('PostComponent', () => {
       });
 
       it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(comp.post.content[0].data[0].data);
+        expect(apiPipe).toHaveBeenCalledWith(
+          comp.post!.content[0].data[0].data
+        );
       });
     });
 
@@ -191,7 +197,9 @@ describe('PostComponent', () => {
       });
 
       it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(comp.post.content[0].data[0].data);
+        expect(apiPipe).toHaveBeenCalledWith(
+          comp.post!.content[0].data[0].data
+        );
       });
     });
 
@@ -212,7 +220,9 @@ describe('PostComponent', () => {
       });
 
       it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(comp.post.content[0].data[0].data);
+        expect(apiPipe).toHaveBeenCalledWith(
+          comp.post!.content[0].data[0].data
+        );
       });
     });
   });
@@ -232,14 +242,14 @@ function createComponent() {
 }
 
 class Page {
-  introText: DebugElement;
-  sectionTitle: DebugElement;
-  textBlock: DebugElement;
-  imageBlock: DebugElement;
-  galleryBlock: DebugElement;
-  duoBlock: DebugElement;
-  videoBlock: DebugElement;
-  audioBlock: DebugElement;
+  introText!: DebugElement;
+  sectionTitle!: DebugElement;
+  textBlock!: DebugElement;
+  imageBlock!: DebugElement;
+  galleryBlock!: DebugElement;
+  duoBlock!: DebugElement;
+  videoBlock!: DebugElement;
+  audioBlock!: DebugElement;
 
   addElements() {
     this.introText = fixture.debugElement.query(By.css('#text-intro p'));

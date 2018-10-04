@@ -19,7 +19,7 @@ export class PrismicPipe implements PipeTransform {
           `${image.url} ${image.dimensions.width - 400}w`
         ]
       },
-      alt: image.alt
+      alt: image.alt || ''
     };
   }
 

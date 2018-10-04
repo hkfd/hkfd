@@ -11,8 +11,8 @@ import { FormAnimations } from './form.animations';
   animations: FormAnimations
 })
 export class FormComponent {
-  form: FormGroup;
-  formSent: boolean;
+  form!: FormGroup;
+  formSent: boolean | undefined;
 
   get name() {
     return this.form.get('name');

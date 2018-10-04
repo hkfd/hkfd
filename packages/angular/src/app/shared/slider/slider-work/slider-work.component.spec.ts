@@ -45,7 +45,7 @@ describe('SliderWorkComponent', () => {
   });
 
   it('should not set caseStudies if no input', () => {
-    comp.caseStudies = null;
+    comp.caseStudies = [];
 
     expect(comp.caseStudies).toBeDefined();
   });

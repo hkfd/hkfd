@@ -1,4 +1,4 @@
-import * as supertest from 'supertest';
+import supertest from 'supertest';
 
 process.env.SENTRY_DSN = 'SENTRY_DSN';
 process.env.ENVIRONMENT = 'ENVIRONMENT';
@@ -10,15 +10,15 @@ jest.mock('memjs');
 const errorHandlerFn = jest.fn((_err, _req, _res, next) => next());
 jest.setMock('raven', {
   config: jest.fn(_ => ({ install: () => undefined })),
-  requestHandler: jest.fn(_ => (_req, _res, next) => next()),
+  requestHandler: jest.fn(_ => (_req: any, _res: any, next: any) => next()),
   errorHandler: jest.fn(() => errorHandlerFn)
 });
 
 import { config, errorHandler } from 'raven';
 
 let request: supertest.SuperTest<supertest.Test>;
-let Client;
-let server;
+let Client: any;
+let server: any;
 
 describe('Server', () => {
   describe('setup', () => {

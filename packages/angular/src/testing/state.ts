@@ -1,7 +1,7 @@
 export { TransferState } from '@angular/platform-browser';
 
 export class MockTransferState {
-  data = {};
+  data: any = {};
 
   get(key: string, defaultReturn: any) {
     if (this.data[key]) return this.data[key];

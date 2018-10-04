@@ -27,14 +27,14 @@ describe('SliderComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should not call sliderInit without images', () => {
-    comp.ngOnChanges({ images: new SimpleChange(null, null, null) });
+    comp.ngOnChanges({ images: new SimpleChange(null, null, false) });
     fixture.detectChanges();
 
     expect(page.sliderInit).not.toHaveBeenCalled();
   });
 
   it('should call sliderInit OnChanges', () => {
-    comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+    comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
     fixture.detectChanges();
 
     expect(page.sliderInit).toHaveBeenCalled();
@@ -42,7 +42,7 @@ describe('SliderComponent', () => {
 
   describe('sliderInit', () => {
     beforeEach(() => {
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
       fixture.detectChanges();
     });
 
@@ -56,7 +56,7 @@ describe('SliderComponent', () => {
 
     it('should set currentIndex between 0 and 5 if random is true', () => {
       comp.random = true;
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
 
       expect(comp.currentIndex).toBeGreaterThanOrEqual(0);
       expect(comp.currentIndex).toBeLessThanOrEqual(5);
@@ -64,7 +64,7 @@ describe('SliderComponent', () => {
 
     it('should set currentIndex as 0 if random is false', () => {
       comp.random = false;
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
 
       expect(comp.currentIndex).toBe(0);
     });
@@ -77,7 +77,7 @@ describe('SliderComponent', () => {
   describe('startTimer', () => {
     it('should call changeImage if autoplay is true', fakeAsync(() => {
       comp.autoplay = true;
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
       tick(comp.delay);
 
       expect(page.changeImage).toHaveBeenCalled();
@@ -86,7 +86,7 @@ describe('SliderComponent', () => {
 
     it('should not call changeImage if autoplay is false', fakeAsync(() => {
       comp.autoplay = false;
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
       tick(comp.delay);
 
       expect(page.changeImage).not.toHaveBeenCalled();
@@ -97,7 +97,7 @@ describe('SliderComponent', () => {
   describe('endTimer', () => {
     it('should stop changeImage calls', fakeAsync(() => {
       comp.autoplay = true;
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
       comp.endTimer();
 
       expect(page.changeImage).not.toHaveBeenCalled();
@@ -108,7 +108,7 @@ describe('SliderComponent', () => {
   describe('changeImage', () => {
     beforeEach(() => {
       comp.autoplay = false;
-      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, null) });
+      comp.ngOnChanges({ images: new SimpleChange(null, comp.images, false) });
 
       expect(page.changeImage).not.toHaveBeenCalled();
     });
@@ -191,7 +191,7 @@ describe('SliderComponent', () => {
     });
 
     it('should not call startTimer if no images', () => {
-      comp.images = null;
+      (comp.images as any) = undefined;
       comp.mouseLeave();
 
       expect(page.startTimer).not.toHaveBeenCalled();

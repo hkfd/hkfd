@@ -68,9 +68,9 @@ function createComponent() {
 }
 
 class Page {
-  sectionTitle: DebugElement;
-  textBlock: DebugElement;
-  benefitsInfo: DebugElement;
+  sectionTitle!: DebugElement;
+  textBlock!: DebugElement;
+  benefitsInfo!: DebugElement;
 
   addElements() {
     this.sectionTitle = fixture.debugElement.query(By.css('h2'));

@@ -57,9 +57,9 @@ function createComponent() {
 }
 
 class Page {
-  currentYear: HTMLElement;
-  socialLinks: DebugElement[];
-  socialLinkIcons: DebugElement[];
+  currentYear!: HTMLElement;
+  socialLinks!: DebugElement[];
+  socialLinkIcons!: DebugElement[];
 
   constructor() {
     comp.links = [

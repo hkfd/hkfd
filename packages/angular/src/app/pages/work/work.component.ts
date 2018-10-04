@@ -12,8 +12,8 @@ import { WorkAnimations } from './work.animations';
   animations: WorkAnimations
 })
 export class WorkComponent implements OnInit, OnDestroy {
-  caseStudies$: Subscription;
-  caseStudies: Api.CaseStudy[];
+  caseStudies$!: Subscription;
+  caseStudies: Api.CaseStudy[] | undefined;
 
   constructor(
     private metaService: MetaService,

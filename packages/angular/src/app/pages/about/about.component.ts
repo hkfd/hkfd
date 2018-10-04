@@ -11,8 +11,8 @@ import { AboutImages } from './about.images';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit, OnDestroy {
-  team$: Subscription;
-  team: Api.Team[];
+  team$!: Subscription;
+  team: Api.Team[] | undefined;
 
   images = AboutImages;
 

@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class ImageComponent {
   @Input()
-  image: Generic.Image;
+  image!: Generic.Image;
 }

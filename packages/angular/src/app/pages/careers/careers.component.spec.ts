@@ -50,7 +50,7 @@ describe('CareersComponent', () => {
 
   it('should set careers', () => {
     expect(comp.careers).toBeDefined();
-    expect(comp.careers.length).toBe(3);
+    expect(comp.careers!.length).toBe(3);
   });
 
   it('should call ApiPipe', () => {

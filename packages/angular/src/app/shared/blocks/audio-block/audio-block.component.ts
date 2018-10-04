@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class AudioBlockComponent {
   @Input()
-  data: Generic.Audio;
+  data!: Generic.Audio;
 }

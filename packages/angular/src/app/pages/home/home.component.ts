@@ -11,10 +11,10 @@ import { HomeImages } from './home.images';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  services$: Observable<Api.Service[]>;
-  clients$: Observable<Api.Client[]>;
-  caseStudies$: Subscription;
-  caseStudies: Api.CaseStudy[];
+  services$!: Observable<Api.Service[]>;
+  clients$!: Observable<Api.Client[]>;
+  caseStudies$!: Subscription;
+  caseStudies: Api.CaseStudy[] | undefined;
 
   images = HomeImages;
 

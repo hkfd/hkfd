@@ -11,18 +11,16 @@ import { Api } from 'shared';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  post$: Subscription;
-  post: Api.Post;
+  post$!: Subscription;
+  post: Api.Post | undefined;
 
   @HostBinding('class')
-  layout: string;
+  layout!: string;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.post$ = this.route.data.subscribe(
-      ({ post }: { post: Api.Post }) => (this.post = post)
-    );
+    this.post$ = this.route.data.subscribe(({ post }) => (this.post = post));
 
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min + 1) + min);

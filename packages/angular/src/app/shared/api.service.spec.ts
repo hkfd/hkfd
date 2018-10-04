@@ -183,7 +183,7 @@ describe('ApiService', () => {
         it('should return career', async(() => {
           apiService
             .getCareer('career-2')
-            .subscribe(res => expect(res.title).toBe('Career 2'));
+            .subscribe(res => expect(res!.title).toBe('Career 2'));
 
           mockHttp
             .expectOne('https://api.testing/careers.json')
@@ -467,7 +467,7 @@ describe('ApiService', () => {
         it('should return post', async(() => {
           apiService
             .getPost('work', 'case-study-2')
-            .subscribe(res => expect(res.title).toBe('Case Study 2'));
+            .subscribe(res => expect(res!.title).toBe('Case Study 2'));
 
           mockHttp
             .expectOne('https://api.testing/case-studies.json')
@@ -479,7 +479,7 @@ describe('ApiService', () => {
     describe('no cache', () => {
       it(`should set url to services if type is 'service'`, async(() => {
         apiService
-          .getPost('service', null)
+          .getPost('service', '')
           .subscribe(res => expect(res).toBeUndefined());
 
         mockHttp
@@ -489,7 +489,7 @@ describe('ApiService', () => {
 
       it(`should set url to caseStudies if type is 'work'`, async(() => {
         apiService
-          .getPost('work', null)
+          .getPost('work', '')
           .subscribe(res => expect(res).toBeUndefined());
 
         mockHttp
@@ -500,7 +500,7 @@ describe('ApiService', () => {
       it('should return service post', async(() => {
         apiService
           .getPost('service', 'service-2')
-          .subscribe(res => expect(res.title).toBe('Service 2'));
+          .subscribe(res => expect(res!.title).toBe('Service 2'));
 
         mockHttp
           .expectOne('https://api.testing/services.json')
@@ -510,22 +510,22 @@ describe('ApiService', () => {
       it('should return case study post', async(() => {
         apiService
           .getPost('work', 'case-study-1')
-          .subscribe(res => expect(res.title).toBe('Case Study 1'));
+          .subscribe(res => expect(res!.title).toBe('Case Study 1'));
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
           .flush(Data.Api.caseStudies);
       }));
 
-      it('should return null if no type arg', async(() => {
+      it('should return undefined if no type arg', async(() => {
         apiService
-          .getPost(null, 'service-1')
-          .subscribe(res => expect(res).toBe(null));
+          .getPost('', 'service-1')
+          .subscribe(res => expect(res).toBe(undefined));
       }));
 
       it('should return undefined if no id arg', async(() => {
         apiService
-          .getPost('work', null)
+          .getPost('work', '')
           .subscribe(res => expect(res).toBe(undefined));
 
         mockHttp

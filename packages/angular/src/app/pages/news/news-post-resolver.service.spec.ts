@@ -3,10 +3,11 @@ import {
   RouterTestingModule,
   MockMetaService,
   MockPrismicService,
-  ActivatedRouteStub
+  ActivatedRouteStub,
+  Data
 } from 'testing';
 
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { MetaService, PrismicService, Prismic } from 'shared';
 import { NewsPostResolver } from './news-post-resolver.service';
@@ -35,7 +36,9 @@ describe('NewsPostResolver', () => {
   it('should call PrismicService getPost', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
-    newsPostResolver.resolve(<any>activatedRoute.snapshot);
+    newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Prismic.Post
+    >;
 
     expect(prismicService.getPost).toHaveBeenCalled();
   });
@@ -44,7 +47,9 @@ describe('NewsPostResolver', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot);
+    newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Prismic.Post
+    >;
 
     expect(prismicService.getPost).toHaveBeenCalledWith('post-1');
   });
@@ -53,7 +58,9 @@ describe('NewsPostResolver', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Prismic.Post
+    >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
         type: 'article',
         title: 'Post 1',
@@ -69,48 +76,14 @@ describe('NewsPostResolver', () => {
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
-      alternate_languages: null,
-      data: {
-        title: null,
-        description: 'Post 1 description',
-        image: {
-          dimensions: null,
-          url: 'post-1',
-          lg: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          md: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          sm: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          xs: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          proxy: {
-            dimensions: null,
-            url: 'post-1'
-          }
-        },
-        body: null
-      },
-      first_publication_date: null,
-      href: null,
-      id: null,
-      last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
-      uid: 'post-1'
+      ...Data.Prismic.post,
+      data: { ...Data.Prismic.post.data, title: null as any }
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Prismic.Post
+    >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
         type: 'article',
         description: 'Post 1 description',
@@ -125,48 +98,14 @@ describe('NewsPostResolver', () => {
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
-      alternate_languages: null,
-      data: {
-        title: [{ spans: null, text: 'Post 1', type: 'h1' }],
-        description: null,
-        image: {
-          dimensions: null,
-          url: 'post-1',
-          lg: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          md: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          sm: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          xs: {
-            dimensions: null,
-            url: 'post-1'
-          },
-          proxy: {
-            dimensions: null,
-            url: 'post-1'
-          }
-        },
-        body: null
-      },
-      first_publication_date: null,
-      href: null,
-      id: null,
-      last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
-      uid: 'post-1'
+      ...Data.Prismic.post,
+      data: { ...Data.Prismic.post.data, description: null as any }
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Prismic.Post
+    >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
         type: 'article',
         title: 'Post 1',
@@ -181,25 +120,14 @@ describe('NewsPostResolver', () => {
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
-      alternate_languages: null,
-      data: {
-        title: [{ spans: null, text: 'Post 1', type: 'h1' }],
-        description: 'Post 1 description',
-        image: null,
-        body: null
-      },
-      first_publication_date: null,
-      href: null,
-      id: null,
-      last_publication_date: null,
-      slugs: null,
-      tags: null,
-      type: null,
-      uid: 'post-1'
+      ...Data.Prismic.post,
+      data: { ...Data.Prismic.post.data, image: null as any }
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot).subscribe(_ =>
+    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+      Prismic.Post
+    >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
         type: 'article',
         title: 'Post 1',

@@ -74,7 +74,7 @@ class RichTextStub {
 }
 
 class Page {
-  text: HTMLDivElement;
+  text!: HTMLDivElement;
 
   constructor() {
     comp.data = Data.Prismic.text;

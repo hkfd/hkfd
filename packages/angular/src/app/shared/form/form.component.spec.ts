@@ -415,9 +415,9 @@ class FormServiceStub {
 class Page {
   submitForm: jasmine.Spy;
 
-  nameInput: DebugElement;
-  emailInput: DebugElement;
-  messageInput: DebugElement;
+  nameInput!: DebugElement;
+  emailInput!: DebugElement;
+  messageInput!: DebugElement;
 
   constructor() {
     this.submitForm = spyOn(comp, 'submitForm').and.callThrough();

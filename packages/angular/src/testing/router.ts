@@ -23,7 +23,7 @@ export class ActivatedRouteStub {
   private dataSubject = new BehaviorSubject(null);
   data = this.dataSubject.asObservable();
 
-  private _testParamMap: ParamMap;
+  private _testParamMap!: ParamMap;
   get testParamMap() {
     return this._testParamMap;
   }
@@ -32,7 +32,7 @@ export class ActivatedRouteStub {
     this.paramSubject.next(this._testParamMap);
   }
 
-  private _testQueryParamMap: ParamMap;
+  private _testQueryParamMap!: ParamMap;
   get testQueryParamMap() {
     return this._testQueryParamMap;
   }
@@ -49,7 +49,7 @@ export class ActivatedRouteStub {
     };
   }
 
-  private _testData;
+  private _testData: any;
   get testData() {
     return this._testData;
   }

@@ -42,7 +42,7 @@ describe('NewsPostComponent', () => {
   });
 
   it('should call PrismicPipe with post thumbnail', () => {
-    expect(prismicPipe).toHaveBeenCalledWith(comp.post.data);
+    expect(prismicPipe).toHaveBeenCalledWith(comp.post!.data);
   });
 
   describe('Content', () => {
@@ -81,7 +81,7 @@ describe('NewsPostComponent', () => {
 
       it('should call PrismicPipe with slice primary', () => {
         expect(prismicPipe).toHaveBeenCalledWith(
-          comp.post.data.body[0].primary
+          comp.post!.data.body[0].primary
         );
       });
     });
@@ -103,7 +103,7 @@ describe('NewsPostComponent', () => {
       });
 
       it('should call PrismicPipe with slice items', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(comp.post.data.body[0].items);
+        expect(prismicPipe).toHaveBeenCalledWith(comp.post!.data.body[0].items);
       });
     });
 
@@ -124,7 +124,7 @@ describe('NewsPostComponent', () => {
       });
 
       it('should call PrismicPipe with slice items', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(comp.post.data.body[0].items);
+        expect(prismicPipe).toHaveBeenCalledWith(comp.post!.data.body[0].items);
       });
     });
 
@@ -146,7 +146,7 @@ describe('NewsPostComponent', () => {
 
       it('should call PrismicPipe with slice primary', () => {
         expect(prismicPipe).toHaveBeenCalledWith(
-          comp.post.data.body[0].primary
+          comp.post!.data.body[0].primary
         );
       });
     });
@@ -167,11 +167,11 @@ function createComponent() {
 }
 
 class Page {
-  textBlock: DebugElement;
-  imageBlock: DebugElement;
-  galleryBlock: DebugElement;
-  duoBlock: DebugElement;
-  videoBlock: DebugElement;
+  textBlock!: DebugElement;
+  imageBlock!: DebugElement;
+  galleryBlock!: DebugElement;
+  duoBlock!: DebugElement;
+  videoBlock!: DebugElement;
 
   addElements() {
     this.textBlock = fixture.debugElement.query(By.css('prismic-text-block'));

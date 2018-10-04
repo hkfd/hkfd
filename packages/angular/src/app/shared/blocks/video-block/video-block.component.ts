@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class VideoBlockComponent {
   @Input()
-  data: Generic.Video;
+  data!: Generic.Video;
 }

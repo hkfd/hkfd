@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { take, map, tap } from 'rxjs/operators';
+import { Observable, of, EMPTY } from 'rxjs';
+import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { MetaService } from '../meta.service';
@@ -19,9 +19,16 @@ export class PostResolver implements Resolve<Api.Post> {
     private apiService: ApiService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Api.Post> {
-    const type = route.paramMap.get('type') || route.parent.routeConfig.path;
-    const id = route.paramMap.get('id');
+  resolve(
+    route: ActivatedRouteSnapshot
+  ): Observable<Api.Post> | Observable<never> {
+    const type =
+      route.paramMap.get('type') ||
+      (route.parent && route.parent.routeConfig
+        ? route.parent.routeConfig.path
+        : null) ||
+      '';
+    const id = route.paramMap.get('id') || '';
 
     return this.apiService.getPost(type, id).pipe(
       take(1),
@@ -41,11 +48,11 @@ export class PostResolver implements Resolve<Api.Post> {
               })
             : undefined
       ),
-      map(post => {
-        if (post) return post;
+      mergeMap(post => {
+        if (post) return of(post);
 
         this.router.navigate(['/']);
-        return null;
+        return EMPTY;
       })
     );
   }

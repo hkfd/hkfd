@@ -11,14 +11,14 @@ import { Api } from 'shared';
   styleUrls: ['./career.component.scss']
 })
 export class CareerComponent implements OnInit, OnDestroy {
-  career$: Subscription;
-  career: Api.Career;
+  career$!: Subscription;
+  career: Api.Career | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.career$ = this.route.data.subscribe(
-      ({ career }: { career: Api.Career }) => (this.career = career)
+      ({ career }) => (this.career = career)
     );
   }
 

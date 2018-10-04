@@ -44,7 +44,7 @@ function createComponent() {
 }
 
 class Page {
-  audio: DebugElement;
+  audio!: DebugElement;
 
   constructor() {
     comp.data = Data.Generic.audio;

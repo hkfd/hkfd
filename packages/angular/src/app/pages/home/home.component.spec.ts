@@ -59,7 +59,7 @@ describe('HomeComponent', () => {
   });
 
   it('should set featured caseStudies only', () => {
-    expect(comp.caseStudies.length).toBe(2);
+    expect(comp.caseStudies!.length).toBe(2);
   });
 
   it('should call ApiPipe', () => {

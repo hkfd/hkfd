@@ -8,5 +8,5 @@ import { Api } from 'shared';
 })
 export class TextComponent {
   @Input()
-  text: Api.Sentence;
+  text!: Api.Sentence;
 }

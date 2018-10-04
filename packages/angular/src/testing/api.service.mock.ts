@@ -31,11 +31,11 @@ export class MockApiService {
     return of(Data.Api.careers);
   }
 
-  getCareer(id: string): Observable<Api.Career | {}> {
+  getCareer(id: string): Observable<Api.Career | undefined> {
     return of(Data.Api.careers).pipe(
       flatMap((careers: Api.Career[]) => careers),
       find((career: Api.Career) => career.id === id),
-      catchError(_ => of(null))
+      catchError(_ => of(undefined))
     );
   }
 
@@ -43,7 +43,7 @@ export class MockApiService {
     return of(Data.Api.team);
   }
 
-  getPost(type: string, id: string): Observable<Api.Post> {
+  getPost(type: string, id: string): Observable<Api.Post | undefined> {
     let url;
     if (type === 'service') url = Data.Api.services;
     if (type === 'work') url = Data.Api.caseStudies;
@@ -51,7 +51,7 @@ export class MockApiService {
     return of(<Api.Post[]>url).pipe(
       flatMap((posts: Api.Post[]) => posts),
       find((post: Api.Post) => post.id === id),
-      catchError(_ => of(null))
+      catchError(_ => of(undefined))
     );
   }
 }

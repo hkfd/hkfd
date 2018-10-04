@@ -51,7 +51,7 @@ describe('AboutComponent', () => {
 
   it('should set team', () => {
     expect(comp.team).toBeDefined();
-    expect(comp.team.length).toBe(5);
+    expect(comp.team!.length).toBe(5);
   });
 
   it('should call ApiPipe', () => {

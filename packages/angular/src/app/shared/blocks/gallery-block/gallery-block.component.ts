@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class GalleryBlockComponent {
   @Input()
-  data: Generic.Image[];
+  data!: Generic.Image[];
 }

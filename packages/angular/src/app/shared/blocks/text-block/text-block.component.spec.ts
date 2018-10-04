@@ -83,9 +83,9 @@ function createComponent() {
 }
 
 class Page {
-  p: DebugElement[];
-  ul: DebugElement[];
-  text: DebugElement[];
+  p!: DebugElement[];
+  ul!: DebugElement[];
+  text!: DebugElement[];
 
   addElements() {
     this.p = fixture.debugElement.queryAll(By.css('p'));

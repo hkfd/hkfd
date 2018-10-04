@@ -10,7 +10,7 @@ export const environment = {
     url: 'https://email.testing'
   },
   sentry: {
-    dsn: null
+    dsn: ''
   },
   prismic: {
     endpoint: 'https://hkfd.cdn.prismic.io/api/v2'

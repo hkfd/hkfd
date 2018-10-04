@@ -292,13 +292,13 @@ describe('PrismicService', () => {
     describe('no cache', () => {
       it('should call PrismicService getRef', () => {
         const spy = spyOn(prismicService, 'getRef').and.callThrough();
-        prismicService.getPost(null);
+        prismicService.getPost('');
 
         expect(spy).toHaveBeenCalled();
       });
 
       it('should call HttpClient get with `ref` param', async(() => {
-        prismicService.getPost(null).subscribe();
+        prismicService.getPost('').subscribe();
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
@@ -329,7 +329,7 @@ describe('PrismicService', () => {
 
       it('should return post', async(() => {
         prismicService
-          .getPost(null)
+          .getPost('')
           .subscribe(post => expect(post).toEqual(Data.Prismic.posts[0]));
 
         mockHttp

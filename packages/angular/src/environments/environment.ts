@@ -10,7 +10,7 @@ export const environment = {
     url: 'http://localhost:4200/form'
   },
   sentry: {
-    dsn: null
+    dsn: ''
   },
   prismic: {
     endpoint: 'https://hkfd.cdn.prismic.io/api/v2'

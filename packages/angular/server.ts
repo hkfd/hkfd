@@ -4,15 +4,15 @@ import { enableProdMode } from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 
-import * as express from 'express';
-import * as compression from 'compression';
-import * as helmet from 'helmet';
+import express from 'express';
+import compression from 'compression';
+import helmet from 'helmet';
 import { join } from 'path';
 import { Client } from 'memjs';
 import { config, requestHandler, errorHandler } from 'raven';
 
 interface CacheResponse extends express.Response {
-  sendResponse: (body?: any) => express.Response;
+  sendResponse?: (body?: any) => express.Response;
 }
 
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./server/main');
@@ -82,10 +82,10 @@ const cacheRequest: express.RequestHandler = (
     res.sendResponse = res.send;
     res.send = body => {
       memCache.set(CACHE_KEY, body, { expires: 60 * 60 }, next);
-      return res.sendResponse(body);
+      return res.sendResponse!(body);
     };
 
-    next();
+    return next();
   });
 };
 

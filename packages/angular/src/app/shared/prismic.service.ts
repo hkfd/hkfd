@@ -27,7 +27,7 @@ export class PrismicService {
   ) {}
 
   getRef(): Observable<string> {
-    const cache = this.state.get<string>(REF_KEY, null);
+    const cache = this.state.get<string | null>(REF_KEY, null);
     if (cache)
       return of(cache).pipe(
         tap(ref => this.logger.log('getRef', 'cache', ref)),
@@ -37,7 +37,7 @@ export class PrismicService {
     return this.http
       .get<Prismic.RefResponse>(environment.prismic.endpoint)
       .pipe(
-        map(({ refs }) => refs.find(ref => ref.isMasterRef).ref),
+        map(({ refs }) => refs.find(ref => ref.isMasterRef)!.ref),
         tap(ref => this.logger.log('getRef', ref)),
         tap(ref => this.state.set(REF_KEY, ref)),
         catchError(this.handleError<string>('getRef'))
@@ -47,7 +47,7 @@ export class PrismicService {
   getPosts(firstLoad: boolean = false): Observable<Prismic.PostsResponse> {
     if (!firstLoad) this.postPage++;
 
-    const cache = this.state.get<Prismic.PostsResponse>(POSTS_KEY, null);
+    const cache = this.state.get<Prismic.PostsResponse | null>(POSTS_KEY, null);
     if (cache && firstLoad)
       return of(cache).pipe(
         tap(postsRes => this.logger.log('getPosts', 'cache', postsRes)),
@@ -82,7 +82,7 @@ export class PrismicService {
   getPost(uid: string): Observable<Prismic.Post> {
     this.logger.log(`getPost ${uid}`);
 
-    const cache = this.state.get<Prismic.Post>(POST_KEY, null);
+    const cache = this.state.get<Prismic.Post | null>(POST_KEY, null);
     if (cache && cache.uid === uid)
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post)),

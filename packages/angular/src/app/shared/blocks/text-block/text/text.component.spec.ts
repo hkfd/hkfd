@@ -118,10 +118,10 @@ function createComponent() {
 }
 
 class Page {
-  a: DebugElement;
-  h3: DebugElement;
-  b: DebugElement;
-  i: DebugElement;
+  a!: DebugElement;
+  h3!: DebugElement;
+  b!: DebugElement;
+  i!: DebugElement;
 
   addElements() {
     this.a = fixture.debugElement.query(By.css('a'));

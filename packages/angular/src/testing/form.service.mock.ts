@@ -10,6 +10,6 @@ export class MockFormService {
   }): Promise<Object> {
     if (!name || !email || !message) return Promise.reject(null);
 
-    return Promise.resolve(null);
+    return Promise.resolve({});
   }
 }

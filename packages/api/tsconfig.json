@@ -1,8 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
     "lib": ["es2017"],
     "types": ["fs-extra"]
   },

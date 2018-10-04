@@ -1,6 +1,6 @@
 import { ErrorHandler } from '@angular/core';
 
-import * as Raven from 'raven-js';
+import Raven from 'raven-js';
 
 import { environment } from 'environment';
 

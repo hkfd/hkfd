@@ -9,7 +9,7 @@ import { ApiPipe, Api } from 'shared';
   styleUrls: ['../slider.component.scss', './slider-work.component.scss']
 })
 export class SliderWorkComponent extends SliderComponent {
-  private _caseStudies: Api.CaseStudy[];
+  private _caseStudies!: Api.CaseStudy[];
 
   constructor(
     zone: NgZone,

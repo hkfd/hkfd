@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { Observable, of, EMPTY } from 'rxjs';
+import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { MetaService, PrismicService, Prismic } from 'shared';
 
@@ -13,8 +13,10 @@ export class NewsPostResolver implements Resolve<Prismic.Post> {
     private prismicService: PrismicService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Prismic.Post> {
-    return this.prismicService.getPost(route.paramMap.get('uid')).pipe(
+  resolve(
+    route: ActivatedRouteSnapshot
+  ): Observable<Prismic.Post> | Observable<never> {
+    return this.prismicService.getPost(route.paramMap.get('uid') || '').pipe(
       take(1),
       tap(
         post =>
@@ -35,7 +37,12 @@ export class NewsPostResolver implements Resolve<Prismic.Post> {
                   post.data.image.lg.url && { image: post.data.image.lg.url })
               })
             : undefined
-      )
+      ),
+      mergeMap(post => {
+        if (post) return of(post);
+
+        return EMPTY;
+      })
     );
   }
 }

@@ -18,7 +18,7 @@ import { Generic } from 'shared';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnChanges {
-  private timer: number;
+  private timer: number | undefined;
   currentIndex: number = 0;
 
   @Input()
@@ -28,7 +28,7 @@ export class SliderComponent implements OnChanges {
   @Input()
   delay: number = 2000;
   @Input()
-  images: Generic.Image[];
+  images!: Generic.Image[];
 
   @HostListener('mouseenter')
   mouseEnter() {
@@ -50,7 +50,7 @@ export class SliderComponent implements OnChanges {
     if (index < 0) return (this.currentIndex = this.images.length - 1);
     if (index >= this.images.length) return (this.currentIndex = 0);
 
-    this.currentIndex = index;
+    return (this.currentIndex = index);
   }
 
   startTimer() {

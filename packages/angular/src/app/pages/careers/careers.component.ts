@@ -11,8 +11,8 @@ import { CareersImages } from './careers.images';
   styleUrls: ['./careers.component.scss']
 })
 export class CareersComponent implements OnInit, OnDestroy {
-  careers$: Subscription;
-  careers: Api.Career[];
+  careers$!: Subscription;
+  careers: Api.Career[] | undefined;
 
   images = CareersImages;
 

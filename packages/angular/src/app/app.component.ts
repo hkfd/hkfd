@@ -6,12 +6,7 @@ import {
   PLATFORM_ID
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
-import {
-  Router,
-  RouterOutlet,
-  RouterEvent,
-  NavigationEnd
-} from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -29,7 +24,7 @@ import { AppAnimations } from './app.animations';
   animations: AppAnimations
 })
 export class AppComponent implements OnInit, OnDestroy {
-  router$: Subscription;
+  router$: Subscription | undefined;
 
   constructor(
     private router: Router,
@@ -49,8 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router$ = this.router.events
       .pipe(
         filter(
-          (event: RouterEvent): event is NavigationEnd =>
-            event instanceof NavigationEnd
+          (event): event is NavigationEnd => event instanceof NavigationEnd
         )
       )
       .subscribe(event => {

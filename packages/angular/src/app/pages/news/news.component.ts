@@ -15,7 +15,7 @@ export class NewsComponent implements OnInit {
   richText = RichText;
 
   posts: Prismic.Post[] = [];
-  hasNextPage: boolean;
+  hasNextPage: boolean | undefined;
 
   constructor(
     private prismicService: PrismicService,

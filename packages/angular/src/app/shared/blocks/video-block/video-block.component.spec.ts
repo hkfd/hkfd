@@ -42,7 +42,7 @@ function createComponent() {
 }
 
 class Page {
-  video: DebugElement;
+  video!: DebugElement;
 
   constructor() {
     comp.data = Data.Generic.video;

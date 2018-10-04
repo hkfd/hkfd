@@ -9,5 +9,5 @@ import { Api } from 'shared';
 })
 export class TextBlockComponent {
   @Input()
-  data: Api.Blocks.TextBlock;
+  data!: Api.Blocks.TextBlock;
 }

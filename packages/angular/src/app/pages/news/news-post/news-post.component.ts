@@ -14,15 +14,13 @@ import { Prismic } from 'shared';
 export class NewsPostComponent implements OnInit, OnDestroy {
   richText = RichText;
 
-  post$: Subscription;
-  post: Prismic.Post;
+  post$!: Subscription;
+  post: Prismic.Post | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.post$ = this.route.data.subscribe(
-      ({ post }: { post: Prismic.Post }) => (this.post = post)
-    );
+    this.post$ = this.route.data.subscribe(({ post }) => (this.post = post));
   }
 
   ngOnDestroy() {

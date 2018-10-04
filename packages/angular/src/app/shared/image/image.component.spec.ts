@@ -50,7 +50,7 @@ function createComponent() {
 }
 
 class Page {
-  img: DebugElement;
+  img!: DebugElement;
 
   constructor() {
     comp.image = Data.Generic.image;
