@@ -7,6 +7,12 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "packages",
+    "paths": {
+      "angular": ["angular"],
+      "api": ["api"],
+      "email": ["email"]
+    }
   }
 }

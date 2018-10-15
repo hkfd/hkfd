@@ -6,6 +6,8 @@ import { CLIENTS } from './data/clients';
 import { SERVICES } from './data/services';
 import { TEAM } from './data/team';
 
+export * from './api';
+
 const files = [
   { name: 'careers', data: CAREERS },
   { name: 'case-studies', data: CASE_STUDIES },
