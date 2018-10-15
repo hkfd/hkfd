@@ -1,6 +1,6 @@
 import { Api } from '../api';
 
-export const Careers: Api.Career[] = [
+export const CAREERS: Api.Career[] = [
   {
     id: 'signage-fitter-installer',
     title: 'Signage Fitter/Installer',

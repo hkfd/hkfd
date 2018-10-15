@@ -21,7 +21,7 @@ describe('DuoBlockComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it("should display two ImageComponent's", () => {
+  it(`should display two ImageComponent's`, () => {
     expect(page.image.length).toBe(2);
   });
 
@@ -33,7 +33,7 @@ describe('DuoBlockComponent', () => {
     expect(slicePipe).toHaveBeenCalledWith(Data.Generic.duo, 0, 2);
   });
 
-  it("should only display two ImageComponent's", () => {
+  it(`should only display two ImageComponent's`, () => {
     comp.data = Data.Generic.images;
     fixture.detectChanges();
     page.addElements();
@@ -41,6 +41,18 @@ describe('DuoBlockComponent', () => {
     expect(page.image.length).toBe(2);
   });
 });
+
+class Page {
+  image!: DebugElement[];
+
+  constructor() {
+    comp.data = Data.Generic.duo;
+  }
+
+  addElements() {
+    this.image = fixture.debugElement.queryAll(By.css('image-component'));
+  }
+}
 
 function createComponent() {
   fixture = TestBed.createComponent(DuoBlockComponent);
@@ -53,16 +65,4 @@ function createComponent() {
     fixture.detectChanges();
     page.addElements();
   });
-}
-
-class Page {
-  image!: DebugElement[];
-
-  constructor() {
-    comp.data = Data.Generic.duo;
-  }
-
-  addElements() {
-    this.image = fixture.debugElement.queryAll(By.css('image-component'));
-  }
 }

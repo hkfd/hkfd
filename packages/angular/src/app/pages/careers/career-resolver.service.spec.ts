@@ -45,9 +45,7 @@ describe('CareerResolver', () => {
   it('should call ApiService getCareer', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      Api.Career
-    >;
+    careerResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getCareer).toHaveBeenCalled();
   });
@@ -55,9 +53,7 @@ describe('CareerResolver', () => {
   it('should call ApiService getCareer with id arg', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      Api.Career
-    >;
+    careerResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getCareer).toHaveBeenCalledWith('career-1');
   });

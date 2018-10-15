@@ -133,42 +133,14 @@ function setupTest() {
   }).compileComponents();
 }
 
-function createComponent() {
-  fixture = TestBed.createComponent(TestHostComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-  renderer = new RendererStub();
-  new LazyDirectiveStub();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class RendererStub {
   setAttribute: jasmine.Spy;
 
   constructor() {
     const image = fixture.debugElement.query(By.directive(LazyDirective));
-    const renderer2 = image.injector.get(Renderer2);
+    const renderer2 = image.injector.get<Renderer2>(Renderer2 as any);
 
     this.setAttribute = spyOn(renderer2, 'setAttribute').and.callThrough();
-  }
-}
-
-class LazyDirectiveStub {
-  intersectionCallback: jasmine.Spy;
-
-  constructor() {
-    const image = fixture.debugElement.query(By.directive(LazyDirective));
-    lazyDirective = image.injector.get(LazyDirective);
-
-    this.intersectionCallback = spyOn(
-      lazyDirective,
-      'intersectionCallback'
-    ).and.callThrough();
   }
 }
 
@@ -178,4 +150,20 @@ class Page {
   addElements() {
     this.img = fixture.debugElement.query(By.css('img'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(TestHostComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+  renderer = new RendererStub();
+
+  const image = fixture.debugElement.query(By.directive(LazyDirective));
+  lazyDirective = image.injector.get<LazyDirective>(LazyDirective);
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

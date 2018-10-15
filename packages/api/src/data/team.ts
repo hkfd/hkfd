@@ -1,6 +1,6 @@
 import { Api } from '../api';
 
-export const Team: Api.Team[] = [
+export const TEAM: Api.Team[] = [
   {
     name: 'Steve',
     position: 'Chairman',

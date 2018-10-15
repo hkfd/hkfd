@@ -35,7 +35,7 @@ export class CareerPage {
 
   getMetaTagTitle() {
     return browser.driver
-      .findElement(by.xpath("//meta[@property='og:title']"))
+      .findElement(by.xpath('//meta[@property="og:title"]'))
       .getAttribute('content');
   }
 

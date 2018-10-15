@@ -1,17 +1,17 @@
 import { emptyDir, outputJson } from 'fs-extra';
 
-import { Careers } from './data/careers';
-import { CaseStudies } from './data/case-studies';
-import { Clients } from './data/clients';
-import { Services } from './data/services';
-import { Team } from './data/team';
+import { CAREERS } from './data/careers';
+import { CASE_STUDIES } from './data/case-studies';
+import { CLIENTS } from './data/clients';
+import { SERVICES } from './data/services';
+import { TEAM } from './data/team';
 
 const files = [
-  { name: 'careers', data: Careers },
-  { name: 'case-studies', data: CaseStudies },
-  { name: 'clients', data: Clients },
-  { name: 'services', data: Services },
-  { name: 'team', data: Team }
+  { name: 'careers', data: CAREERS },
+  { name: 'case-studies', data: CASE_STUDIES },
+  { name: 'clients', data: CLIENTS },
+  { name: 'services', data: SERVICES },
+  { name: 'team', data: TEAM }
 ];
 
 emptyDir('./dist')

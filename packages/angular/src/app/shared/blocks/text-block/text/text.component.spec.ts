@@ -111,12 +111,6 @@ describe('TextComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(TextComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-}
-
 class Page {
   a!: DebugElement;
   h3!: DebugElement;
@@ -129,4 +123,10 @@ class Page {
     this.b = fixture.debugElement.query(By.css('b'));
     this.i = fixture.debugElement.query(By.css('i'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(TextComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
 }

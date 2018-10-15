@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 
 import { TransferState, MockTransferState, Data } from 'testing';
-import { ApiService, LoggerService } from 'shared';
+import { ApiService, LoggerService, Api } from 'shared';
 
 let mockHttp: HttpTestingController;
 let transferState: MockTransferState;
@@ -183,7 +183,9 @@ describe('ApiService', () => {
         it('should return career', async(() => {
           apiService
             .getCareer('career-2')
-            .subscribe(res => expect(res!.title).toBe('Career 2'));
+            .subscribe(res =>
+              expect((res as Api.Career).title).toBe('Career 2')
+            );
 
           mockHttp
             .expectOne('https://api.testing/careers.json')
@@ -467,7 +469,9 @@ describe('ApiService', () => {
         it('should return post', async(() => {
           apiService
             .getPost('work', 'case-study-2')
-            .subscribe(res => expect(res!.title).toBe('Case Study 2'));
+            .subscribe(res =>
+              expect((res as Api.Post).title).toBe('Case Study 2')
+            );
 
           mockHttp
             .expectOne('https://api.testing/case-studies.json')
@@ -500,7 +504,7 @@ describe('ApiService', () => {
       it('should return service post', async(() => {
         apiService
           .getPost('service', 'service-2')
-          .subscribe(res => expect(res!.title).toBe('Service 2'));
+          .subscribe(res => expect((res as Api.Post).title).toBe('Service 2'));
 
         mockHttp
           .expectOne('https://api.testing/services.json')
@@ -510,7 +514,9 @@ describe('ApiService', () => {
       it('should return case study post', async(() => {
         apiService
           .getPost('work', 'case-study-1')
-          .subscribe(res => expect(res!.title).toBe('Case Study 1'));
+          .subscribe(res =>
+            expect((res as Api.Post).title).toBe('Case Study 1')
+          );
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')

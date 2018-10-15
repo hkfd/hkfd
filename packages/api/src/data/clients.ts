@@ -1,6 +1,6 @@
 import { Api } from '../api';
 
-export const Clients: Api.Client[] = [
+export const CLIENTS: Api.Client[] = [
   {
     sector: 'Automotive/Transport',
     list: [

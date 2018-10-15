@@ -133,13 +133,6 @@ describe('LoggerService', () => {
   });
 });
 
-function createService() {
-  loggerService = TestBed.get(LoggerService);
-  _console = new ConsoleStub();
-  raven = new RavenStub();
-  service = new Service();
-}
-
 class ConsoleStub {
   log: jasmine.Spy;
   warn: jasmine.Spy;
@@ -174,4 +167,11 @@ class Service {
     this.warn = spyOn(loggerService, 'warn').and.callThrough();
     this.error = spyOn(loggerService, 'error').and.callThrough();
   }
+}
+
+function createService() {
+  loggerService = TestBed.get(LoggerService);
+  _console = new ConsoleStub();
+  raven = new RavenStub();
+  service = new Service();
 }

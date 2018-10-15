@@ -128,20 +128,6 @@ describe('HeaderComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(HeaderComponent);
-  comp = fixture.componentInstance;
-  location = fixture.debugElement.injector.get(Location) as SpyLocation;
-  page = new Page();
-  slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class Page {
   navClick: jasmine.Spy;
   toggleMobile: jasmine.Spy;
@@ -166,4 +152,18 @@ class Page {
     this.navLink = fixture.debugElement.query(By.css('.nav-link'));
     this.navButton = fixture.debugElement.query(By.css('#nav-button'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(HeaderComponent);
+  comp = fixture.componentInstance;
+  location = fixture.debugElement.injector.get<SpyLocation>(Location as any);
+  page = new Page();
+  slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

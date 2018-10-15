@@ -39,7 +39,7 @@ jobs:
   include:
     - stage: lint
       if: *is_not_release
-      script: commitlint-travis
+      script: ./scripts/lint.sh
 
     - stage: test
       if: *is_not_release

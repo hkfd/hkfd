@@ -9,7 +9,7 @@ import {
   Data
 } from 'testing';
 
-import { MetaService, ApiService } from 'shared';
+import { MetaService, ApiService, Api } from 'shared';
 import { AboutImages } from './about.images';
 import { AboutComponent } from './about.component';
 
@@ -51,7 +51,7 @@ describe('AboutComponent', () => {
 
   it('should set team', () => {
     expect(comp.team).toBeDefined();
-    expect(comp.team!.length).toBe(5);
+    expect((comp.team as Api.Team[]).length).toBe(5);
   });
 
   it('should call ApiPipe', () => {
@@ -72,8 +72,8 @@ describe('AboutComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(AboutComponent);
   comp = fixture.componentInstance;
-  metaService = fixture.debugElement.injector.get(MetaService);
-  apiService = fixture.debugElement.injector.get(ApiService);
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
+  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();

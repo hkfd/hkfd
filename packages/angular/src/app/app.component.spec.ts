@@ -4,6 +4,7 @@ import { Component, PLATFORM_ID } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { Router, RouterTestingModule } from 'testing';
+import { Subscription } from 'rxjs';
 
 import { AppComponent } from './app.component';
 
@@ -128,7 +129,10 @@ describe('AppComponent', () => {
       beforeEach(async(() => createComponent()));
 
       it('should call router$ unsubscribe', () => {
-        const spy = spyOn(comp.router$!, 'unsubscribe').and.callThrough();
+        const spy = spyOn(
+          comp.router$ as Subscription,
+          'unsubscribe'
+        ).and.callThrough();
         comp.ngOnDestroy();
 
         expect(spy).toHaveBeenCalled();
@@ -168,30 +172,24 @@ function setupTest() {
   }).compileComponents();
 }
 
+class Page {
+  getState: jasmine.Spy;
+
+  constructor() {
+    router = fixture.debugElement.injector.get<Router>(Router);
+
+    this.getState = spyOn(comp, 'getState').and.callThrough();
+  }
+}
+
 function createComponent() {
   fixture = TestBed.createComponent(AppComponent);
   comp = fixture.componentInstance;
+  app.ga = jasmine.createSpy('ga');
   page = new Page();
-  new GoogleAnalytics();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => {
     fixture.detectChanges();
   });
-}
-
-class GoogleAnalytics {
-  constructor() {
-    app.ga = jasmine.createSpy('ga');
-  }
-}
-
-class Page {
-  getState: jasmine.Spy;
-
-  constructor() {
-    router = fixture.debugElement.injector.get(Router);
-
-    this.getState = spyOn(comp, 'getState').and.callThrough();
-  }
 }

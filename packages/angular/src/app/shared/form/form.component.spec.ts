@@ -382,33 +382,15 @@ describe('FormComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(FormComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-  formService = new FormServiceStub();
-  new GoogleAnalytics();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
-class GoogleAnalytics {
-  constructor() {
-    app.ga = jasmine.createSpy('ga');
-  }
-}
-
 class FormServiceStub {
   sendEmail: jasmine.Spy;
 
   constructor() {
-    const formService = fixture.debugElement.injector.get(FormService);
+    const formServiceInstance = fixture.debugElement.injector.get<FormService>(
+      FormService
+    );
 
-    this.sendEmail = spyOn(formService, 'sendEmail').and.callThrough();
+    this.sendEmail = spyOn(formServiceInstance, 'sendEmail').and.callThrough();
   }
 }
 
@@ -428,4 +410,18 @@ class Page {
     this.emailInput = fixture.debugElement.query(By.css('#email'));
     this.messageInput = fixture.debugElement.query(By.css('#message'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(FormComponent);
+  comp = fixture.componentInstance;
+  app.ga = jasmine.createSpy('ga');
+  page = new Page();
+  formService = new FormServiceStub();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

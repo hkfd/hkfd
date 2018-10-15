@@ -1,6 +1,6 @@
 import { Api } from '../api';
 
-export const CaseStudies: Api.CaseStudy[] = [
+export const CASE_STUDIES: Api.CaseStudy[] = [
   {
     id: 'inspiring-healthy-lifestyles',
     title: 'Inspiring Healthy Lifestyles',

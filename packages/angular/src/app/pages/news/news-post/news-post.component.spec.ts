@@ -10,6 +10,7 @@ import {
   Data
 } from 'testing';
 
+import { Prismic } from 'shared';
 import { NewsPostComponent } from './news-post.component';
 
 let activatedRoute: ActivatedRouteStub;
@@ -42,7 +43,7 @@ describe('NewsPostComponent', () => {
   });
 
   it('should call PrismicPipe with post thumbnail', () => {
-    expect(prismicPipe).toHaveBeenCalledWith(comp.post!.data);
+    expect(prismicPipe).toHaveBeenCalledWith((comp.post as Prismic.Post).data);
   });
 
   describe('Content', () => {
@@ -81,7 +82,7 @@ describe('NewsPostComponent', () => {
 
       it('should call PrismicPipe with slice primary', () => {
         expect(prismicPipe).toHaveBeenCalledWith(
-          comp.post!.data.body[0].primary
+          (comp.post as Prismic.Post).data.body[0].primary
         );
       });
     });
@@ -103,7 +104,9 @@ describe('NewsPostComponent', () => {
       });
 
       it('should call PrismicPipe with slice items', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(comp.post!.data.body[0].items);
+        expect(prismicPipe).toHaveBeenCalledWith(
+          (comp.post as Prismic.Post).data.body[0].items
+        );
       });
     });
 
@@ -124,7 +127,9 @@ describe('NewsPostComponent', () => {
       });
 
       it('should call PrismicPipe with slice items', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(comp.post!.data.body[0].items);
+        expect(prismicPipe).toHaveBeenCalledWith(
+          (comp.post as Prismic.Post).data.body[0].items
+        );
       });
     });
 
@@ -146,25 +151,12 @@ describe('NewsPostComponent', () => {
 
       it('should call PrismicPipe with slice primary', () => {
         expect(prismicPipe).toHaveBeenCalledWith(
-          comp.post!.data.body[0].primary
+          (comp.post as Prismic.Post).data.body[0].primary
         );
       });
     });
   });
 });
-
-function createComponent() {
-  fixture = TestBed.createComponent(NewsPostComponent);
-  comp = fixture.componentInstance;
-  prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
 
 class Page {
   textBlock!: DebugElement;
@@ -180,4 +172,17 @@ class Page {
     this.galleryBlock = fixture.debugElement.query(By.css('gallery-block'));
     this.videoBlock = fixture.debugElement.query(By.css('video-block'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(NewsPostComponent);
+  comp = fixture.componentInstance;
+  prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

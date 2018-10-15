@@ -36,9 +36,7 @@ describe('NewsPostResolver', () => {
   it('should call PrismicService getPost', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
-    newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      Prismic.Post
-    >;
+    newsPostResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(prismicService.getPost).toHaveBeenCalled();
   });
@@ -47,9 +45,7 @@ describe('NewsPostResolver', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      Prismic.Post
-    >;
+    newsPostResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(prismicService.getPost).toHaveBeenCalledWith('post-1');
   });

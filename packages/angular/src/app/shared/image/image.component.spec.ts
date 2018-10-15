@@ -37,6 +37,21 @@ describe('ImageComponent', () => {
   });
 });
 
+class Page {
+  img!: DebugElement;
+
+  constructor() {
+    comp.image = Data.Generic.image;
+
+    const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
+    lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);
+  }
+
+  addElements() {
+    this.img = fixture.debugElement.query(By.css('img'));
+  }
+}
+
 function createComponent() {
   fixture = TestBed.createComponent(ImageComponent);
   comp = fixture.componentInstance;
@@ -47,19 +62,4 @@ function createComponent() {
     fixture.detectChanges();
     page.addElements();
   });
-}
-
-class Page {
-  img!: DebugElement;
-
-  constructor() {
-    comp.image = Data.Generic.image;
-
-    const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
-    lazyDirective = directiveEl.injector.get(LazyDirective);
-  }
-
-  addElements() {
-    this.img = fixture.debugElement.query(By.css('img'));
-  }
 }

@@ -12,10 +12,25 @@
     }
   },
   "lint-staged": {
-    "*.{ts,js,scss,md,json}": [
-      "prettier --write",
-      "git add"
-    ]
+    "concurrent": false,
+    "linters": {
+      "**/*.{ts,js,scss,md,json}": [
+        "prettier --write",
+        "git add"
+      ],
+      "packages/angular/**/*.ts": [
+        "yarn --cwd packages/angular lint heckford-angular heckford-angular-e2e",
+        "git add"
+      ],
+      "packages/api/**/*.ts": [
+        "yarn --cwd packages/api lint",
+        "git add"
+      ],
+      "packages/email/functions/*.ts": [
+        "yarn --cwd packages/email/functions lint",
+        "git add"
+      ]
+    }
   },
   "workspaces": {
     "packages": [
@@ -40,6 +55,9 @@
     "husky": "^1.0.1",
     "lerna": "^3.1.4",
     "lint-staged": "^7.3.0",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0"
   }
 }

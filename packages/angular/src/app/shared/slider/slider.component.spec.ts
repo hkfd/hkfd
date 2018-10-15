@@ -199,17 +199,6 @@ describe('SliderComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(SliderComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-  });
-}
-
 class Page {
   sliderInit: jasmine.Spy;
   startTimer: jasmine.Spy;
@@ -234,4 +223,15 @@ class Page {
       By.css('.slide-container')
     );
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(SliderComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+  });
 }

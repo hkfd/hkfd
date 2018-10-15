@@ -44,18 +44,6 @@ describe('FooterComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(FooterComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class Page {
   currentYear!: HTMLElement;
   socialLinks!: DebugElement[];
@@ -77,4 +65,16 @@ class Page {
       By.css('#info-social img')
     );
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(FooterComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

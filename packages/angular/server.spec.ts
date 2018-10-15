@@ -20,6 +20,18 @@ let request: supertest.SuperTest<supertest.Test>;
 let Client: any;
 let server: any;
 
+const setupServer = () => {
+  Client = require('memjs').Client;
+  server = require('./dist/server');
+  request = supertest(server);
+};
+
+const teardownServer = () => {
+  server.close();
+  jest.resetModules();
+  jest.clearAllMocks();
+};
+
 describe('Server', () => {
   describe('setup', () => {
     beforeEach(() => setupServer());
@@ -302,15 +314,3 @@ describe('Server', () => {
     afterEach(() => teardownServer());
   });
 });
-
-const setupServer = () => {
-  Client = require('memjs').Client;
-  server = require('./dist/server');
-  request = supertest(server);
-};
-
-const teardownServer = () => {
-  server.close();
-  jest.resetModules();
-  jest.clearAllMocks();
-};

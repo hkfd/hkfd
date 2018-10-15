@@ -76,12 +76,6 @@ describe('TextBlockComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(TextBlockComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-}
-
 class Page {
   p!: DebugElement[];
   ul!: DebugElement[];
@@ -92,4 +86,10 @@ class Page {
     this.ul = fixture.debugElement.queryAll(By.css('ul'));
     this.text = fixture.debugElement.queryAll(By.css('text'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(TextBlockComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
 }

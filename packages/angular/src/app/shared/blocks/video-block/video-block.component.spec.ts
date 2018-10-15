@@ -29,6 +29,21 @@ describe('VideoBlockComponent', () => {
   });
 });
 
+class Page {
+  video!: DebugElement;
+
+  constructor() {
+    comp.data = Data.Generic.video;
+
+    const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
+    lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);
+  }
+
+  addElements() {
+    this.video = fixture.debugElement.query(By.css('iframe'));
+  }
+}
+
 function createComponent() {
   fixture = TestBed.createComponent(VideoBlockComponent);
   comp = fixture.componentInstance;
@@ -39,19 +54,4 @@ function createComponent() {
     fixture.detectChanges();
     page.addElements();
   });
-}
-
-class Page {
-  video!: DebugElement;
-
-  constructor() {
-    comp.data = Data.Generic.video;
-
-    const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
-    lazyDirective = directiveEl.injector.get(LazyDirective);
-  }
-
-  addElements() {
-    this.video = fixture.debugElement.query(By.css('iframe'));
-  }
 }

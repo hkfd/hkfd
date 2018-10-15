@@ -54,19 +54,6 @@ describe('CareerComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(CareerComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class Page {
   sectionTitle!: DebugElement;
   textBlock!: DebugElement;
@@ -79,4 +66,17 @@ class Page {
       By.css('section:last-of-type p')
     );
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(CareerComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

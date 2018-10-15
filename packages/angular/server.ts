@@ -34,16 +34,16 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: [`'self'`],
       scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
+        `'self'`,
+        `'unsafe-inline'`,
         'https://www.google-analytics.com',
         'https://connect.facebook.net'
       ],
-      styleSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: [`'self'`, `'unsafe-inline'`],
       imgSrc: [
-        "'self'",
+        `'self'`,
         'https://res.cloudinary.com',
         'https://hkfd.cdn.prismic.io',
         'https://www.google-analytics.com',
@@ -53,7 +53,7 @@ app.use(
         'https://www.facebook.com'
       ],
       connectSrc: [
-        "'self'",
+        `'self'`,
         'https://*.hkfd.co.uk',
         'https://hkfd-api-staging.firebaseapp.com',
         'https://hkfd-email-staging.firebaseapp.com',
@@ -82,7 +82,7 @@ const cacheRequest: express.RequestHandler = (
     res.sendResponse = res.send;
     res.send = body => {
       memCache.set(CACHE_KEY, body, { expires: 60 * 60 }, next);
-      return res.sendResponse!(body);
+      return res.sendResponse ? res.sendResponse(body) : body;
     };
 
     return next();

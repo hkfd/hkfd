@@ -128,19 +128,13 @@ describe('MetaService', () => {
   });
 });
 
-function createService() {
-  metaService = TestBed.get(MetaService);
-  meta = new MetaStub();
-  title = new TitleStub();
-}
-
 class TitleStub {
   setTitle: jasmine.Spy;
 
   constructor() {
-    const title = TestBed.get(Title);
+    const titleInstance = TestBed.get(Title);
 
-    this.setTitle = spyOn(title, 'setTitle').and.callThrough();
+    this.setTitle = spyOn(titleInstance, 'setTitle').and.callThrough();
   }
 }
 
@@ -148,8 +142,14 @@ class MetaStub {
   updateTag: jasmine.Spy;
 
   constructor() {
-    const meta = TestBed.get(Meta);
+    const metaInstance = TestBed.get(Meta);
 
-    this.updateTag = spyOn(meta, 'updateTag').and.callThrough();
+    this.updateTag = spyOn(metaInstance, 'updateTag').and.callThrough();
   }
+}
+
+function createService() {
+  metaService = TestBed.get(MetaService);
+  meta = new MetaStub();
+  title = new TitleStub();
 }

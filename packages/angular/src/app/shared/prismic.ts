@@ -45,6 +45,13 @@ export namespace Prismic {
   }
 
   export namespace Blocks {
+    export interface Block {
+      slice_type: 'text' | 'image' | 'duo' | 'gallery' | 'video';
+      slice_label?: string;
+      primary?: any;
+      items?: any;
+    }
+
     export interface TextBlock extends Block {
       slice_type: 'text';
       primary: {
@@ -74,13 +81,6 @@ export namespace Prismic {
       primary: {
         video: Video;
       };
-    }
-
-    export interface Block {
-      slice_type: 'text' | 'image' | 'duo' | 'gallery' | 'video';
-      slice_label?: string;
-      primary?: any;
-      items?: any;
     }
   }
 

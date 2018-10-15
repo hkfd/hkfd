@@ -30,6 +30,10 @@ export namespace Api {
   }
 
   export namespace Blocks {
+    interface Block {
+      type: 'text' | 'image' | 'gallery' | 'video' | 'audio' | 'duo';
+    }
+
     export interface TextBlock extends Block {
       type: 'text';
       data: Text[];
@@ -70,10 +74,6 @@ export namespace Api {
         audio: Audio;
       };
     }
-
-    interface Block {
-      type: 'text' | 'image' | 'gallery' | 'video' | 'audio' | 'duo';
-    }
   }
 
   export interface Client {
@@ -107,6 +107,16 @@ export namespace Api {
       | Blocks.DuoBlock)[];
   }
 
+  export interface Post {
+    id: string;
+    title: string;
+    intro: string[];
+    thumbnail: {
+      image: Image;
+    };
+    content: Content[];
+  }
+
   export interface CaseStudy extends Post {
     sector?: string;
     featured: boolean;
@@ -116,15 +126,5 @@ export namespace Api {
 
   export interface Service extends Post {
     description: string;
-  }
-
-  export interface Post {
-    id: string;
-    title: string;
-    intro: string[];
-    thumbnail: {
-      image: Image;
-    };
-    content: Content[];
   }
 }

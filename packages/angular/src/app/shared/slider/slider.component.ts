@@ -1,6 +1,7 @@
 import {
   Component,
   OnChanges,
+  OnDestroy,
   SimpleChanges,
   Input,
   HostListener,
@@ -17,16 +18,16 @@ import { Generic } from 'shared';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnChanges {
+export class SliderComponent implements OnChanges, OnDestroy {
   private timer: number | undefined;
-  currentIndex: number = 0;
+  currentIndex = 0;
 
   @Input()
-  random: boolean = false;
+  random = false;
   @Input()
-  autoplay: boolean = false;
+  autoplay = false;
   @Input()
-  delay: number = 2000;
+  delay = 2000;
   @Input()
   images!: Generic.Image[];
 
@@ -54,19 +55,21 @@ export class SliderComponent implements OnChanges {
   }
 
   startTimer() {
-    if (this.autoplay && isPlatformBrowser(this.platformId))
-      this.zone.runOutsideAngular(
-        _ =>
-          (this.timer = window.setInterval(
-            _ => this.zone.run(this.changeImage.bind(this)),
-            this.delay
-          ))
-      );
+    if (!this.autoplay || !isPlatformBrowser(this.platformId)) return;
+
+    this.zone.runOutsideAngular(
+      _ =>
+        (this.timer = window.setInterval(
+          __ => this.zone.run(this.changeImage.bind(this)),
+          this.delay
+        ))
+    );
   }
 
   endTimer() {
-    if (isPlatformBrowser(this.platformId))
-      this.zone.runOutsideAngular(_ => window.clearInterval(this.timer));
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    this.zone.runOutsideAngular(_ => window.clearInterval(this.timer));
   }
 
   sliderInit() {

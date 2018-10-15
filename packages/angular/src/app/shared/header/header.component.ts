@@ -18,7 +18,7 @@ export class HeaderComponent {
     { title: 'News', url: '/news' }
   ];
 
-  mobileShow: boolean = false;
+  mobileShow = false;
 
   navClick() {
     this.mobileShow = false;

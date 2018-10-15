@@ -45,7 +45,7 @@ describe('ContactComponent', () => {
 
 function createComponent() {
   fixture = TestBed.createComponent(ContactComponent);
-  metaService = fixture.debugElement.injector.get(MetaService);
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();

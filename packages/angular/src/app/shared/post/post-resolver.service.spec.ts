@@ -45,14 +45,14 @@ describe('PostResolver', () => {
 
   it('should call ApiService getPost', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    postResolver.resolve(<any>activatedRoute.snapshot) as Observable<Api.Post>;
+    postResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getPost).toHaveBeenCalled();
   });
 
   it('should call ApiService getPost with id arg as id param', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    postResolver.resolve(<any>activatedRoute.snapshot) as Observable<Api.Post>;
+    postResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getPost).toHaveBeenCalledWith(
       jasmine.any(String),
@@ -62,7 +62,7 @@ describe('PostResolver', () => {
 
   it('should call ApiService getPost with type arg as type param if exists', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    postResolver.resolve(<any>activatedRoute.snapshot) as Observable<Api.Post>;
+    postResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getPost).toHaveBeenCalledWith(
       'service',
@@ -73,7 +73,7 @@ describe('PostResolver', () => {
   it('should call ApiService getPost with type arg as parent path if type param doesnt exist', () => {
     activatedRoute.testParamMap = { id: 'case-study-1' };
     activatedRoute.parent.routeConfig.path = 'parent-path';
-    postResolver.resolve(<any>activatedRoute.snapshot) as Observable<Api.Post>;
+    postResolver.resolve(<any>activatedRoute.snapshot);
 
     expect(apiService.getPost).toHaveBeenCalledWith(
       'parent-path',

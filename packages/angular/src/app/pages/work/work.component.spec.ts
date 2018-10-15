@@ -10,7 +10,7 @@ import {
   MockApiPipe
 } from 'testing';
 
-import { MetaService, ApiService, ApiPipe } from 'shared';
+import { MetaService, ApiService, ApiPipe, Api } from 'shared';
 import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;
@@ -56,17 +56,17 @@ describe('WorkComponent', () => {
   });
 
   it('should call ApiPipe with case study thumbnails', () => {
-    comp.caseStudies!.forEach(caseStudy =>
+    (comp.caseStudies as Api.CaseStudy[]).forEach(caseStudy =>
       expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
     );
   });
 
   it('should set caseStudies', () => {
-    expect(comp.caseStudies!.length).toBe(3);
+    expect((comp.caseStudies as Api.CaseStudy[]).length).toBe(3);
   });
 
   it('should set case study colour', () => {
-    comp.caseStudies!.forEach((caseStudy, index) =>
+    (comp.caseStudies as Api.CaseStudy[]).forEach((caseStudy, index) =>
       expect(page.caseStudies[index].properties.className).toContain(
         caseStudy.colour
       )
@@ -74,28 +74,13 @@ describe('WorkComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(WorkComponent);
-  comp = fixture.componentInstance;
-  metaService = fixture.debugElement.injector.get(MetaService);
-  apiService = fixture.debugElement.injector.get(ApiService);
-  apiPipe = new ApiPipeStub();
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class ApiPipeStub {
   transform: jasmine.Spy;
 
   constructor() {
-    const apiPipe = fixture.debugElement.injector.get(ApiPipe);
+    const apiPipeInstance = fixture.debugElement.injector.get(ApiPipe);
 
-    this.transform = spyOn(apiPipe, 'transform').and.callThrough();
+    this.transform = spyOn(apiPipeInstance, 'transform').and.callThrough();
   }
 }
 
@@ -105,4 +90,19 @@ class Page {
   addElements() {
     this.caseStudies = fixture.debugElement.queryAll(By.css('.case-study'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(WorkComponent);
+  comp = fixture.componentInstance;
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
+  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
+  apiPipe = new ApiPipeStub();
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

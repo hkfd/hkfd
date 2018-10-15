@@ -1,15 +1,16 @@
 #!/bin/bash
 set -e
 
-RESET="\e[0m \n"
-NORMAL="\e[22m"
-BOLD="\e[1m"
-BLACK="\e[30m"
-WHITE="\e[39m"
-GREY="\e[37m"
-GREEN="\e[32m"
-GREY_BG="\e[47m"
-GREEN_BG="\e[42m"
+export RESET="\e[0m \n"
+export NORMAL="\e[22m"
+export BOLD="\e[1m"
+export BLACK="\e[30m"
+export WHITE="\e[39m"
+export GREY="\e[37m"
+export GREEN="\e[32m"
+export RED="\e[31m"
+export GREY_BG="\e[47m"
+export GREEN_BG="\e[42m"
 
 changedPackages() {
   lerna ls --since 2>/dev/null

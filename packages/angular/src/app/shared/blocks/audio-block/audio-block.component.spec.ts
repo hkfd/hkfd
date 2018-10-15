@@ -31,18 +31,6 @@ describe('AudioBlockComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(AudioBlockComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class Page {
   audio!: DebugElement;
 
@@ -53,4 +41,16 @@ class Page {
   addElements() {
     this.audio = fixture.debugElement.query(By.css('audio'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(AudioBlockComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

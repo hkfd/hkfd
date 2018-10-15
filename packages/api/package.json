@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "yarn build && yarn firebase use staging && yarn firebase serve --port 3000",
     "build": "tsc && node src/index.js",
-    "deploy": "yarn firebase use production && yarn firebase deploy"
+    "deploy": "yarn firebase use production && yarn firebase deploy",
+    "lint": "tslint --project tsconfig.json"
   },
   "dependencies": {},
   "devDependencies": {

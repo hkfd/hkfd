@@ -151,22 +151,6 @@ describe('NewsComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(NewsComponent);
-  comp = fixture.componentInstance;
-  metaService = fixture.debugElement.injector.get(MetaService);
-  prismicService = fixture.debugElement.injector.get(PrismicService);
-  prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
-  richText = new RichTextStub();
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class RichTextStub {
   asText: jasmine.Spy;
 
@@ -187,4 +171,22 @@ class Page {
   addElements() {
     this.loadMore = fixture.debugElement.query(By.css('#load-more'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(NewsComponent);
+  comp = fixture.componentInstance;
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
+  prismicService = fixture.debugElement.injector.get<PrismicService>(
+    PrismicService
+  );
+  prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
+  richText = new RichTextStub();
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

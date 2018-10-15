@@ -28,18 +28,6 @@ describe('GalleryBlockComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(GalleryBlockComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class Page {
   image!: DebugElement[];
 
@@ -50,4 +38,16 @@ class Page {
   addElements() {
     this.image = fixture.debugElement.queryAll(By.css('image-component'));
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(GalleryBlockComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

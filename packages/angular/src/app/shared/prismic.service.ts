@@ -17,8 +17,8 @@ const POST_KEY = makeStateKey<Prismic.Post>('prismic-post');
   providedIn: 'root'
 })
 export class PrismicService {
-  private postPage: number = 1;
-  private postPageSize: number = 9;
+  private postPage = 1;
+  private postPageSize = 9;
 
   constructor(
     private http: HttpClient,
@@ -28,16 +28,18 @@ export class PrismicService {
 
   getRef(): Observable<string> {
     const cache = this.state.get<string | null>(REF_KEY, null);
-    if (cache)
+    if (cache) {
       return of(cache).pipe(
         tap(ref => this.logger.log('getRef', 'cache', ref)),
         catchError(this.handleError<string>('getRef'))
       );
+    }
 
     return this.http
       .get<Prismic.RefResponse>(environment.prismic.endpoint)
       .pipe(
-        map(({ refs }) => refs.find(ref => ref.isMasterRef)!.ref),
+        map(({ refs }) => refs.find(ref => ref.isMasterRef)),
+        map(ref => (ref ? ref.ref : '')),
         tap(ref => this.logger.log('getRef', ref)),
         tap(ref => this.state.set(REF_KEY, ref)),
         catchError(this.handleError<string>('getRef'))
@@ -48,11 +50,12 @@ export class PrismicService {
     if (!firstLoad) this.postPage++;
 
     const cache = this.state.get<Prismic.PostsResponse | null>(POSTS_KEY, null);
-    if (cache && firstLoad)
+    if (cache && firstLoad) {
       return of(cache).pipe(
         tap(postsRes => this.logger.log('getPosts', 'cache', postsRes)),
         catchError(this.handleError<Prismic.PostsResponse>('getPosts'))
       );
+    }
 
     return this.getRef().pipe(
       flatMap(ref => {
@@ -83,11 +86,12 @@ export class PrismicService {
     this.logger.log(`getPost ${uid}`);
 
     const cache = this.state.get<Prismic.Post | null>(POST_KEY, null);
-    if (cache && cache.uid === uid)
+    if (cache && cache.uid === uid) {
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post)),
         catchError(this.handleError<Prismic.Post>('getPost'))
       );
+    }
 
     return this.getRef().pipe(
       flatMap(ref => {

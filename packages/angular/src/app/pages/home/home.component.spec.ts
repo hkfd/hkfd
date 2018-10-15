@@ -9,7 +9,7 @@ import {
   Data
 } from 'testing';
 
-import { MetaService, ApiService } from 'shared';
+import { MetaService, ApiService, Api } from 'shared';
 import { HomeImages } from './home.images';
 import { HomeComponent } from './home.component';
 
@@ -59,7 +59,7 @@ describe('HomeComponent', () => {
   });
 
   it('should set featured caseStudies only', () => {
-    expect(comp.caseStudies!.length).toBe(2);
+    expect((comp.caseStudies as Api.CaseStudy[]).length).toBe(2);
   });
 
   it('should call ApiPipe', () => {
@@ -80,8 +80,8 @@ describe('HomeComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(HomeComponent);
   comp = fixture.componentInstance;
-  metaService = fixture.debugElement.injector.get(MetaService);
-  apiService = fixture.debugElement.injector.get(ApiService);
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
+  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();

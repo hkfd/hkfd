@@ -52,19 +52,6 @@ describe('TextBlockComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(TextBlockComponent);
-  comp = fixture.componentInstance;
-  richText = new RichTextStub();
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
-}
-
 class RichTextStub {
   asHtml: jasmine.Spy;
 
@@ -83,4 +70,17 @@ class Page {
   addElements() {
     this.text = fixture.debugElement.query(By.css('div')).nativeElement;
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(TextBlockComponent);
+  comp = fixture.componentInstance;
+  richText = new RichTextStub();
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+    page.addElements();
+  });
 }

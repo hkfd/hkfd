@@ -8,7 +8,7 @@ import {
   MockApiPipe
 } from 'testing';
 
-import { MetaService, ApiService } from 'shared';
+import { MetaService, ApiService, Api } from 'shared';
 import { CareersImages } from './careers.images';
 import { CareersComponent } from './careers.component';
 
@@ -50,7 +50,7 @@ describe('CareersComponent', () => {
 
   it('should set careers', () => {
     expect(comp.careers).toBeDefined();
-    expect(comp.careers!.length).toBe(3);
+    expect((comp.careers as Api.Career[]).length).toBe(3);
   });
 
   it('should call ApiPipe', () => {
@@ -69,8 +69,8 @@ describe('CareersComponent', () => {
 function createComponent() {
   fixture = TestBed.createComponent(CareersComponent);
   comp = fixture.componentInstance;
-  metaService = fixture.debugElement.injector.get(MetaService);
-  apiService = fixture.debugElement.injector.get(ApiService);
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
+  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();

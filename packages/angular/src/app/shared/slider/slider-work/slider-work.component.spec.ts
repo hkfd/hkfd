@@ -51,25 +51,13 @@ describe('SliderWorkComponent', () => {
   });
 });
 
-function createComponent() {
-  fixture = TestBed.createComponent(SliderWorkComponent);
-  comp = fixture.componentInstance;
-  apiPipe = new ApiPipeStub();
-  page = new Page();
-
-  fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-  });
-}
-
 class ApiPipeStub {
   transform: jasmine.Spy;
 
   constructor() {
-    const apiPipe = fixture.debugElement.injector.get(ApiPipe);
+    const apiPipeInstance = fixture.debugElement.injector.get(ApiPipe);
 
-    this.transform = spyOn(apiPipe, 'transform').and.callThrough();
+    this.transform = spyOn(apiPipeInstance, 'transform').and.callThrough();
   }
 }
 
@@ -81,4 +69,16 @@ class Page {
 
     comp.caseStudies = Data.Api.caseStudies;
   }
+}
+
+function createComponent() {
+  fixture = TestBed.createComponent(SliderWorkComponent);
+  comp = fixture.componentInstance;
+  apiPipe = new ApiPipeStub();
+  page = new Page();
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(_ => {
+    fixture.detectChanges();
+  });
 }
