@@ -1,0 +1,24 @@
+{
+  "name": "hkfd",
+  "scripts": {},
+  "env": {
+    "ENVIRONMENT": "staging",
+    "SENTRY_DSN": {
+      "required": true
+    },
+    "YARN_PRODUCTION": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
