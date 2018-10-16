@@ -83,15 +83,6 @@ describe('CareerResolver', () => {
     >).subscribe(career => expect(career.title).toBe('Career 1'));
   }));
 
-  it('should return null if no matching career', async(() => {
-    activatedRoute.testParamMap = { id: 'no-career' };
-    activatedRoute.testQueryParamMap = {};
-
-    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      any
-    >).subscribe(career => expect(career).toBe(null));
-  }));
-
   it('should navigate to /careers if no matching career', fakeAsync(() => {
     activatedRoute.testParamMap = { id: 'no-career' };
     activatedRoute.testQueryParamMap = {};

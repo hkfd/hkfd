@@ -115,22 +115,6 @@ describe('PostResolver', () => {
     >).subscribe(post => expect(post).toEqual(Data.Api.caseStudies[0]));
   });
 
-  it('should return null if no matching post', () => {
-    activatedRoute.testParamMap = { type: 'service', id: 'service-nope' };
-
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      Api.Post
-    >).subscribe(post => expect(post).toBeNull());
-  });
-
-  it('should return null if no matching post', () => {
-    activatedRoute.testParamMap = { type: 'service', id: 'service-nope' };
-
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
-      Api.Post
-    >).subscribe(post => expect(post).toBeNull());
-  });
-
   it('should navigate to / if no matching post', fakeAsync(() => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-nope' };
     (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
