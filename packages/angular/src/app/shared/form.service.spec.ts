@@ -4,8 +4,6 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
-import { of } from 'rxjs';
-
 import { FormService } from './form.service';
 
 let formService: FormService;
@@ -23,11 +21,17 @@ describe('FormService', () => {
 
   describe('sendEmail', () => {
     it('should call HttpClient', async(() => {
-      formService
-        .sendEmail({ name: 'a', email: 'b@c', message: 'd' })
-        .then(res => expect(res).toBeDefined());
+      const email = { name: 'a', email: 'b@c', message: 'd' };
+      formService.sendEmail(email);
 
-      mockHttp.expectOne('https://email.testing').flush(of(null));
+      expect(mockHttp.expectOne('https://email.testing')).toBeTruthy();
+    }));
+
+    it('should call HttpClient with `body` as email data', async(() => {
+      const email = { name: 'a', email: 'b@c', message: 'd' };
+      formService.sendEmail(email);
+
+      expect(mockHttp.expectOne(res => res.body === email)).toBeTruthy();
     }));
   });
 });

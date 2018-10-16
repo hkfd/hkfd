@@ -10,12 +10,7 @@ import { Email } from 'email';
 export class FormService {
   constructor(private http: HttpClient) {}
 
-  sendEmail({ name, email, message }: Email): Promise<Object> {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('message', message);
-
-    return this.http.post(environment.email.url, formData).toPromise();
+  sendEmail(email: Email): Promise<Object> {
+    return this.http.post(environment.email.url, email).toPromise();
   }
 }
