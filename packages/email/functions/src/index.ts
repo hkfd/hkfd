@@ -55,7 +55,7 @@ app.post(
     };
 
     send(data)
-      .then(_ => res.sendStatus(200))
+      .then(_ => res.status(200).json('OK'))
       .catch(next);
   }
 );

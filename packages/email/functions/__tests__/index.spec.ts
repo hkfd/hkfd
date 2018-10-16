@@ -62,7 +62,7 @@ describe('routes', () => {
           email: 'example@example.com',
           message: 'Message'
         })
-        .then(res => expect(res.text).toBe('OK'));
+        .then(res => expect(res.text).toBe(`"OK"`));
     });
   });
 
