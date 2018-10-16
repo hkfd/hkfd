@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import express from 'express';
+import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import ajv from 'ajv';
@@ -18,6 +19,7 @@ config(functions.config().sentry.dsn, {
 }).install();
 
 app.use(requestHandler());
+app.use(cors({ origin: true }));
 app.use(compression());
 app.use(express.json());
 app.use(helmet());
