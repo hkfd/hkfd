@@ -1,11 +1,15 @@
 {
-  "packages": ["packages/*"],
-  "version": "0.0.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "1.0.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
     "bootstrap": {
-      "npmClientArgs": ["--ignore-engines"]
+      "npmClientArgs": [
+        "--ignore-engines"
+      ]
     },
     "publish": {
       "commitHooks": false,
