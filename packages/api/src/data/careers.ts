@@ -482,5 +482,69 @@ export const CAREERS: Api.Career[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'senior-account-managers',
+    title: 'Senior Account Managers',
+    salary: 'C£25 - £30K + BONUS SCHEME',
+    content: [
+      {
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'We are currently seeking Senior Account Managers with at least 3 years experience working in an agency environment, to develop new business as well as servicing existing clients. You will be a highly motivated driven individual with a strong sales background and possess excellent communication skills who will be keen to succeed and may have an existing client base.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'You will be joining an enthusiastic team who specialise in selling Creative Advertising & Marketing, Design for Print, Exhibitions & Signage, Digital Media & Web Design, and 3D illustration.'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Requirements',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                list: [
+                  {
+                    text:
+                      'Experience in sales and providing solutions based on customer needs with a good working knowledge in at least one of the above fields'
+                  },
+                  {
+                    text:
+                      'Highly motivated and target driven with a proven track record'
+                  },
+                  {
+                    text: 'Possess strong IT and communication skills'
+                  },
+                  {
+                    text: 'Excellent organisational skills'
+                  },
+                  {
+                    text:
+                      'Confident and enthusiastic personality and a positive can-do mentality'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
