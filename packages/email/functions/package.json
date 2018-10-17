@@ -1,6 +1,6 @@
 {
   "name": "email-functions",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "yarn --silent json2ts src/schema.json > src/schema.ts && tsc",
