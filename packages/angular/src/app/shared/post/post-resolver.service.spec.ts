@@ -45,14 +45,14 @@ describe('PostResolver', () => {
 
   it('should call ApiService getPost', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    postResolver.resolve(<any>activatedRoute.snapshot);
+    postResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getPost).toHaveBeenCalled();
   });
 
   it('should call ApiService getPost with id arg as id param', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    postResolver.resolve(<any>activatedRoute.snapshot);
+    postResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getPost).toHaveBeenCalledWith(
       jasmine.any(String),
@@ -62,7 +62,7 @@ describe('PostResolver', () => {
 
   it('should call ApiService getPost with type arg as type param if exists', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    postResolver.resolve(<any>activatedRoute.snapshot);
+    postResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getPost).toHaveBeenCalledWith(
       'service',
@@ -73,7 +73,7 @@ describe('PostResolver', () => {
   it('should call ApiService getPost with type arg as parent path if type param doesnt exist', () => {
     activatedRoute.testParamMap = { id: 'case-study-1' };
     activatedRoute.parent.routeConfig.path = 'parent-path';
-    postResolver.resolve(<any>activatedRoute.snapshot);
+    postResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getPost).toHaveBeenCalledWith(
       'parent-path',
@@ -84,7 +84,7 @@ describe('PostResolver', () => {
   it('should call MetaService setMetaTags with post args if exists', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
 
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
     >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
@@ -101,7 +101,7 @@ describe('PostResolver', () => {
   it('should return service post if exists', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
 
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
     >).subscribe(post => expect(post).toEqual(Data.Api.services[0]));
   });
@@ -110,14 +110,14 @@ describe('PostResolver', () => {
     activatedRoute.testParamMap = { id: 'case-study-1' };
     activatedRoute.parent.routeConfig.path = 'work';
 
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
     >).subscribe(post => expect(post).toEqual(Data.Api.caseStudies[0]));
   });
 
   it('should navigate to / if no matching post', fakeAsync(() => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-nope' };
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
     >).subscribe();
     tick();
@@ -127,7 +127,7 @@ describe('PostResolver', () => {
 
   it('should not navigate to / if matching post', fakeAsync(() => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
-    (postResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
     >).subscribe();
     tick();

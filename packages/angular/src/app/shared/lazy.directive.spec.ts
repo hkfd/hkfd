@@ -57,19 +57,19 @@ describe('LazyDirective', () => {
     beforeEach(() => renderer.setAttribute.calls.reset());
 
     it('should set data loaded as true if intersecting', () => {
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
       expect(comp.srcset.loaded).toBeTruthy();
     });
 
     it('should not set data loaded if not intersecting', () => {
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: false }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: false }] as any);
 
       expect(comp.srcset.loaded).toBeUndefined();
     });
 
     it('should call Renderer2 setAttribute if intersecting', () => {
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
       expect(renderer.setAttribute).toHaveBeenCalledWith(
         jasmine.anything(),
@@ -79,7 +79,7 @@ describe('LazyDirective', () => {
     });
 
     it('should call Renderer2 setAttribute with data attr and value args', () => {
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
       expect(renderer.setAttribute).toHaveBeenCalledWith(
         jasmine.any(HTMLElement),
@@ -90,7 +90,7 @@ describe('LazyDirective', () => {
 
     it('should not call Renderer2 setAttribute if no data attr', () => {
       lazyDirective.data = { attr: '', val: ['example'] };
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
       expect(renderer.setAttribute).not.toHaveBeenCalledWith(
         jasmine.anything(),
@@ -101,7 +101,7 @@ describe('LazyDirective', () => {
 
     it('should not call Renderer2 setAttribute if no data val', () => {
       lazyDirective.data = { attr: 'example', val: [''] };
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
       expect(renderer.setAttribute).not.toHaveBeenCalledWith(
         jasmine.anything(),
@@ -111,7 +111,7 @@ describe('LazyDirective', () => {
     });
 
     it('should set el attr if intersecting', () => {
-      lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
+      lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
       fixture.detectChanges();
 
       expect(page.img.srcset).toBeDefined();
