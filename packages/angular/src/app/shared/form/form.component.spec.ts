@@ -3,10 +3,10 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MockFormService } from 'testing';
+import { LoggerService, MockLoggerService, MockFormService } from 'testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
-import { LoggerService, FormService } from 'shared';
+import { FormService } from 'shared';
 import { FormComponent } from './form.component';
 
 const app = <any>window;
@@ -21,8 +21,8 @@ describe('FormComponent', () => {
       imports: [ReactiveFormsModule, NoopAnimationsModule],
       declarations: [FormComponent],
       providers: [
-        LoggerService,
         FormBuilder,
+        { provide: LoggerService, useClass: MockLoggerService },
         { provide: FormService, useClass: MockFormService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
