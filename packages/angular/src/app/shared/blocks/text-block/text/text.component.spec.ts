@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { Data } from 'testing';
 import { TextComponent } from './text.component';
@@ -22,7 +20,6 @@ describe('TextComponent', () => {
     beforeEach(() => {
       comp.text = Data.Api.sentence.url;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it(`should display 'a' element`, () => {
@@ -30,23 +27,19 @@ describe('TextComponent', () => {
     });
 
     it('should display text in element', () => {
-      expect(page.a.nativeElement.textContent).toBe('Click here');
+      expect(page.a.textContent).toBe('Click here');
     });
 
     it('should set href', () => {
-      expect(page.a.nativeElement.getAttribute('href')).toBe(
-        'http://example.com'
-      );
+      expect(page.a.getAttribute('href')).toBe('http://example.com');
     });
 
     it(`should set target as '_blank'`, () => {
-      expect(page.a.nativeElement.getAttribute('target')).toBe('_blank');
+      expect(page.a.getAttribute('target')).toBe('_blank');
     });
 
     it(`should set rel as 'nofollow'`, () => {
-      expect(page.a.nativeElement.getAttribute('rel')).toBe(
-        'nofollow noopener'
-      );
+      expect(page.a.getAttribute('rel')).toBe('nofollow noopener');
     });
   });
 
@@ -54,7 +47,6 @@ describe('TextComponent', () => {
     beforeEach(() => {
       comp.text = Data.Api.sentence.heading;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it(`should display 'h3' element`, () => {
@@ -62,7 +54,7 @@ describe('TextComponent', () => {
     });
 
     it('should display text in element', () => {
-      expect(page.h3.nativeElement.textContent).toEqual(jasmine.any(String));
+      expect(page.h3.textContent).toEqual(jasmine.any(String));
     });
   });
 
@@ -70,7 +62,6 @@ describe('TextComponent', () => {
     beforeEach(() => {
       comp.text = Data.Api.sentence.bold;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it(`should display 'i' element`, () => {
@@ -78,7 +69,7 @@ describe('TextComponent', () => {
     });
 
     it('should display text in element', () => {
-      expect(page.b.nativeElement.textContent).toBe('Bold sentence.');
+      expect(page.b.textContent).toBe('Bold sentence.');
     });
   });
 
@@ -86,7 +77,6 @@ describe('TextComponent', () => {
     beforeEach(() => {
       comp.text = Data.Api.sentence.italic;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it(`should display 'i' element`, () => {
@@ -94,7 +84,7 @@ describe('TextComponent', () => {
     });
 
     it('should display text in element', () => {
-      expect(page.i.nativeElement.textContent).toBe('Italic sentence.');
+      expect(page.i.textContent).toBe('Italic sentence.');
     });
   });
 
@@ -102,7 +92,6 @@ describe('TextComponent', () => {
     beforeEach(() => {
       comp.text = Data.Api.sentence.normal;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it('should display text', () => {
@@ -112,16 +101,21 @@ describe('TextComponent', () => {
 });
 
 class Page {
-  a!: DebugElement;
-  h3!: DebugElement;
-  b!: DebugElement;
-  i!: DebugElement;
+  get a() {
+    return this.query<HTMLAnchorElement>('a');
+  }
+  get h3() {
+    return this.query<HTMLHeadingElement>('h3');
+  }
+  get b() {
+    return this.query<HTMLElement>('b');
+  }
+  get i() {
+    return this.query<HTMLElement>('i');
+  }
 
-  addElements() {
-    this.a = fixture.debugElement.query(By.css('a'));
-    this.h3 = fixture.debugElement.query(By.css('h3'));
-    this.b = fixture.debugElement.query(By.css('b'));
-    this.i = fixture.debugElement.query(By.css('i'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 

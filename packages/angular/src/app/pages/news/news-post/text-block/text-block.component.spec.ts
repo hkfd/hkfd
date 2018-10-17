@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { Data } from 'testing';
 
@@ -61,14 +60,16 @@ class RichTextStub {
 }
 
 class Page {
-  text!: HTMLDivElement;
+  get text() {
+    return this.query<HTMLDivElement>('div');
+  }
 
   constructor() {
     comp.data = Data.Prismic.text;
   }
 
-  addElements() {
-    this.text = fixture.debugElement.query(By.css('div')).nativeElement;
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -79,8 +80,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

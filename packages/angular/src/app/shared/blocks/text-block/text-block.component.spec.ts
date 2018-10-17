@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { Data } from 'testing';
 import { TextBlockComponent } from './text-block.component';
@@ -23,7 +22,6 @@ describe('TextBlockComponent', () => {
     beforeEach(() => {
       comp.data = Data.Api.textBlocks.text;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it('should display paragraph template', () => {
@@ -51,7 +49,6 @@ describe('TextBlockComponent', () => {
     beforeEach(() => {
       comp.data = Data.Api.textBlocks.list;
       fixture.detectChanges();
-      page.addElements();
     });
 
     it('should display list template', () => {
@@ -77,14 +74,18 @@ describe('TextBlockComponent', () => {
 });
 
 class Page {
-  p!: DebugElement[];
-  ul!: DebugElement[];
-  text!: DebugElement[];
+  get p() {
+    return this.queryAll<HTMLParagraphElement>('p');
+  }
+  get ul() {
+    return this.queryAll<HTMLUListElement>('ul');
+  }
+  get text() {
+    return this.queryAll<HTMLElement>('text');
+  }
 
-  addElements() {
-    this.p = fixture.debugElement.queryAll(By.css('p'));
-    this.ul = fixture.debugElement.queryAll(By.css('ul'));
-    this.text = fixture.debugElement.queryAll(By.css('text'));
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 

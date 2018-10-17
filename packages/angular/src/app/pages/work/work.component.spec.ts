@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
@@ -67,9 +66,7 @@ describe('WorkComponent', () => {
 
   it('should set case study colour', () => {
     (comp.caseStudies as Api.CaseStudy[]).forEach((caseStudy, index) =>
-      expect(page.caseStudies[index].properties.className).toContain(
-        caseStudy.colour
-      )
+      expect(page.caseStudies[index].className).toContain(caseStudy.colour)
     );
   });
 });
@@ -85,10 +82,12 @@ class ApiPipeStub {
 }
 
 class Page {
-  caseStudies!: DebugElement[];
+  get caseStudies() {
+    return this.queryAll<HTMLElement>('.case-study');
+  }
 
-  addElements() {
-    this.caseStudies = fixture.debugElement.queryAll(By.css('.case-study'));
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 
@@ -101,8 +100,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

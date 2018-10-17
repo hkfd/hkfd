@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 
 import { FooterComponent } from './footer.component';
 
@@ -32,22 +30,28 @@ describe('FooterComponent', () => {
   });
 
   it('should set link url', () => {
-    const href = page.socialLinks[0].nativeElement.getAttribute('href');
+    const href = page.socialLinks[0].getAttribute('href');
 
     expect(href).toBe('http://example1.com');
   });
 
   it('should set link icon src', () => {
-    const src = page.socialLinkIcons[0].nativeElement.getAttribute('src');
+    const src = page.socialLinkIcons[0].getAttribute('src');
 
     expect(src).toBe('/assets/1.jpg');
   });
 });
 
 class Page {
-  currentYear!: HTMLElement;
-  socialLinks!: DebugElement[];
-  socialLinkIcons!: DebugElement[];
+  get currentYear() {
+    return this.query<HTMLElement>('small');
+  }
+  get socialLinks() {
+    return this.queryAll<HTMLAnchorElement>('#info-social a');
+  }
+  get socialLinkIcons() {
+    return this.queryAll<HTMLImageElement>('#info-social img');
+  }
 
   constructor() {
     comp.links = [
@@ -56,14 +60,11 @@ class Page {
     ];
   }
 
-  addElements() {
-    this.currentYear = fixture.debugElement.query(
-      By.css('small')
-    ).nativeElement;
-    this.socialLinks = fixture.debugElement.queryAll(By.css('#info-social a'));
-    this.socialLinkIcons = fixture.debugElement.queryAll(
-      By.css('#info-social img')
-    );
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
+  }
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 
@@ -73,8 +74,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

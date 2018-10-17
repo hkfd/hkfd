@@ -6,8 +6,7 @@ import {
   tick,
   discardPeriodicTasks
 } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 
 import { Data } from 'testing';
 import { SliderComponent } from './slider.component';
@@ -114,61 +113,61 @@ describe('SliderComponent', () => {
     });
 
     it('should be called on next click', () => {
-      page.sliderNext.triggerEventHandler('click', null);
+      page.sliderNext.click();
 
       expect(page.changeImage).toHaveBeenCalled();
     });
 
     it('should be called on previous click', () => {
-      page.sliderPrev.triggerEventHandler('click', null);
+      page.sliderPrev.click();
 
       expect(page.changeImage).toHaveBeenCalled();
     });
 
     it('should increment currentIndex on next click', () => {
       comp.currentIndex = 0;
-      page.sliderNext.triggerEventHandler('click', null);
+      page.sliderNext.click();
 
       expect(comp.currentIndex).toBe(1);
     });
 
     it('should translate slide on next click', () => {
       comp.currentIndex = 0;
-      page.sliderNext.triggerEventHandler('click', null);
+      page.sliderNext.click();
       fixture.detectChanges();
 
-      expect(page.slideContainer.styles).toEqual({
-        transform: 'translateX(-100%)'
-      });
+      expect(page.slideContainer.getAttribute('style')).toBe(
+        'transform: translateX(-100%);'
+      );
     });
 
     it('should decrement currentIndex on previous click', () => {
       comp.currentIndex = 1;
-      page.sliderPrev.triggerEventHandler('click', null);
+      page.sliderPrev.click();
 
       expect(comp.currentIndex).toBe(0);
     });
 
     it('should translate slide on previous click', () => {
       comp.currentIndex = 1;
-      page.sliderPrev.triggerEventHandler('click', null);
+      page.sliderPrev.click();
       fixture.detectChanges();
 
-      expect(page.slideContainer.styles).toEqual({
-        transform: 'translateX(0%)'
-      });
+      expect(page.slideContainer.getAttribute('style')).toBe(
+        'transform: translateX(0%);'
+      );
     });
 
     it('should set currentIndex to first image on last next click', () => {
       comp.currentIndex = 4;
-      page.sliderNext.triggerEventHandler('click', null);
+      page.sliderNext.click();
 
       expect(comp.currentIndex).toBe(0);
     });
 
     it('should set currentIndex to last image on first previous click', () => {
       comp.currentIndex = 0;
-      page.sliderPrev.triggerEventHandler('click', null);
+      page.sliderPrev.click();
 
       expect(comp.currentIndex).toBe(4);
     });
@@ -205,9 +204,15 @@ class Page {
   endTimer: jasmine.Spy;
   changeImage: jasmine.Spy;
 
-  sliderNext: DebugElement;
-  sliderPrev: DebugElement;
-  slideContainer: DebugElement;
+  get sliderNext() {
+    return this.query<HTMLButtonElement>('.slider-next');
+  }
+  get sliderPrev() {
+    return this.query<HTMLButtonElement>('.slider-prev');
+  }
+  get slideContainer() {
+    return this.query<HTMLDivElement>('.slide-container');
+  }
 
   constructor() {
     comp.images = Data.Generic.images;
@@ -216,12 +221,10 @@ class Page {
     this.startTimer = spyOn(comp, 'startTimer').and.callThrough();
     this.endTimer = spyOn(comp, 'endTimer').and.callThrough();
     this.changeImage = spyOn(comp, 'changeImage').and.callThrough();
+  }
 
-    this.sliderNext = fixture.debugElement.query(By.css('.slider-next'));
-    this.sliderPrev = fixture.debugElement.query(By.css('.slider-prev'));
-    this.slideContainer = fixture.debugElement.query(
-      By.css('.slide-container')
-    );
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 

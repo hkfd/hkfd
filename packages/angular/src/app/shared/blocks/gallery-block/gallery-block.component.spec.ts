@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { Data } from 'testing';
 import { GalleryBlockComponent } from './gallery-block.component';
@@ -29,14 +28,16 @@ describe('GalleryBlockComponent', () => {
 });
 
 class Page {
-  image!: DebugElement[];
+  get image() {
+    return this.queryAll<HTMLElement>('image-component');
+  }
 
   constructor() {
     comp.data = Data.Generic.images;
   }
 
-  addElements() {
-    this.image = fixture.debugElement.queryAll(By.css('image-component'));
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 
@@ -46,8 +47,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

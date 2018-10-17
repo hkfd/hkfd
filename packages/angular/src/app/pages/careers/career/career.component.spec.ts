@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -39,7 +38,7 @@ describe('CareerComponent', () => {
 
   describe('Content', () => {
     it('should display title', () => {
-      expect(page.sectionTitle.nativeElement.textContent).toEqual('TextBlock');
+      expect(page.sectionTitle.textContent).toEqual('TextBlock');
     });
 
     describe('Text', () => {
@@ -55,16 +54,18 @@ describe('CareerComponent', () => {
 });
 
 class Page {
-  sectionTitle!: DebugElement;
-  textBlock!: DebugElement;
-  benefitsInfo!: DebugElement;
+  get sectionTitle() {
+    return this.query<HTMLHeadingElement>('h2');
+  }
+  get textBlock() {
+    return this.query<HTMLElement>('text-block');
+  }
+  get benefitsInfo() {
+    return this.query<HTMLParagraphElement>('section:last-of-type p');
+  }
 
-  addElements() {
-    this.sectionTitle = fixture.debugElement.query(By.css('h2'));
-    this.textBlock = fixture.debugElement.query(By.css('text-block'));
-    this.benefitsInfo = fixture.debugElement.query(
-      By.css('section:last-of-type p')
-    );
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -75,8 +76,5 @@ function createComponent() {
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

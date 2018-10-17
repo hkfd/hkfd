@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -52,7 +51,6 @@ describe('NewsPostComponent', () => {
         activatedRoute.testData = { post: Data.Prismic.posts[1] };
         prismicPipe.calls.reset();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display Prismic TextBlockComponent', () => {
@@ -69,7 +67,6 @@ describe('NewsPostComponent', () => {
         activatedRoute.testData = { post: Data.Prismic.posts[2] };
         prismicPipe.calls.reset();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display ImageBlockComponent', () => {
@@ -92,7 +89,6 @@ describe('NewsPostComponent', () => {
         activatedRoute.testData = { post: Data.Prismic.posts[3] };
         prismicPipe.calls.reset();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display DuoBlockComponent', () => {
@@ -115,7 +111,6 @@ describe('NewsPostComponent', () => {
         activatedRoute.testData = { post: Data.Prismic.posts[4] };
         prismicPipe.calls.reset();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display GalleryBlockComponent', () => {
@@ -138,7 +133,6 @@ describe('NewsPostComponent', () => {
         activatedRoute.testData = { post: Data.Prismic.posts[5] };
         prismicPipe.calls.reset();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display VideoBlockComponent', () => {
@@ -159,18 +153,24 @@ describe('NewsPostComponent', () => {
 });
 
 class Page {
-  textBlock!: DebugElement;
-  imageBlock!: DebugElement;
-  galleryBlock!: DebugElement;
-  duoBlock!: DebugElement;
-  videoBlock!: DebugElement;
+  get textBlock() {
+    return this.query<HTMLElement>('prismic-text-block');
+  }
+  get imageBlock() {
+    return this.query<HTMLElement>('image-block');
+  }
+  get duoBlock() {
+    return this.query<HTMLElement>('duo-block');
+  }
+  get galleryBlock() {
+    return this.query<HTMLElement>('gallery-block');
+  }
+  get videoBlock() {
+    return this.query<HTMLElement>('video-block');
+  }
 
-  addElements() {
-    this.textBlock = fixture.debugElement.query(By.css('prismic-text-block'));
-    this.imageBlock = fixture.debugElement.query(By.css('image-block'));
-    this.duoBlock = fixture.debugElement.query(By.css('duo-block'));
-    this.galleryBlock = fixture.debugElement.query(By.css('gallery-block'));
-    this.videoBlock = fixture.debugElement.query(By.css('video-block'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -181,8 +181,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -57,29 +56,22 @@ describe('PostComponent', () => {
       activatedRoute.testData = { post: Data.Api.caseStudies[0] };
       comp.ngOnInit();
       fixture.detectChanges();
-      page.addElements();
 
-      expect(page.sectionTitle.nativeElement.textContent).toEqual(
-        jasmine.any(String)
-      );
+      expect(page.sectionTitle.textContent).toEqual(jasmine.any(String));
     });
 
     it('should display intro', () => {
       activatedRoute.testData = { post: Data.Api.caseStudies[0] };
       comp.ngOnInit();
       fixture.detectChanges();
-      page.addElements();
 
-      expect(page.introText.nativeElement.textContent).toBe(
-        'Case Study 1 intro'
-      );
+      expect(page.introText.textContent).toBe('Case Study 1 intro');
     });
 
     describe('Text', () => {
       beforeEach(() => {
         activatedRoute.testData = { post: Data.Api.caseStudies[0] };
         comp.ngOnInit();
-        page.addElements();
       });
 
       it('should display TextBlockComponent', () => {
@@ -96,7 +88,6 @@ describe('PostComponent', () => {
         activatedRoute.testData = { post: Data.Api.caseStudies[1] };
         comp.ngOnInit();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display ImageBlockComponent', () => {
@@ -119,9 +110,7 @@ describe('PostComponent', () => {
         )).fullBleed = true;
         fixture.detectChanges();
 
-        expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
-          'true'
-        );
+        expect(page.imageBlock.getAttribute('full-bleed')).toBe('true');
       });
 
       it(`should not set full-bleed attibute if no fullBleed`, () => {
@@ -130,9 +119,7 @@ describe('PostComponent', () => {
         )).fullBleed = undefined;
         fixture.detectChanges();
 
-        expect(page.imageBlock.nativeElement.getAttribute('full-bleed')).toBe(
-          null
-        );
+        expect(page.imageBlock.getAttribute('full-bleed')).toBe(null);
       });
     });
 
@@ -141,7 +128,6 @@ describe('PostComponent', () => {
         activatedRoute.testData = { post: Data.Api.caseStudies[2] };
         comp.ngOnInit();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display GalleryBlockComponent', () => {
@@ -164,7 +150,6 @@ describe('PostComponent', () => {
         activatedRoute.testData = { post: Data.Api.services[0] };
         comp.ngOnInit();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display DuoBlockComponent', () => {
@@ -187,7 +172,6 @@ describe('PostComponent', () => {
         activatedRoute.testData = { post: Data.Api.services[1] };
         comp.ngOnInit();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display VideoBlockComponent', () => {
@@ -210,7 +194,6 @@ describe('PostComponent', () => {
         activatedRoute.testData = { post: Data.Api.services[2] };
         comp.ngOnInit();
         fixture.detectChanges();
-        page.addElements();
       });
 
       it('should display AudioBlockComponent', () => {
@@ -231,24 +214,33 @@ describe('PostComponent', () => {
 });
 
 class Page {
-  introText!: DebugElement;
-  sectionTitle!: DebugElement;
-  textBlock!: DebugElement;
-  imageBlock!: DebugElement;
-  galleryBlock!: DebugElement;
-  duoBlock!: DebugElement;
-  videoBlock!: DebugElement;
-  audioBlock!: DebugElement;
+  get introText() {
+    return this.query<HTMLParagraphElement>('#text-intro p');
+  }
+  get sectionTitle() {
+    return this.query<HTMLHeadingElement>('h2');
+  }
+  get textBlock() {
+    return this.query<HTMLElement>('text-block');
+  }
+  get imageBlock() {
+    return this.query<HTMLElement>('image-block');
+  }
+  get galleryBlock() {
+    return this.query<HTMLElement>('gallery-block');
+  }
+  get duoBlock() {
+    return this.query<HTMLElement>('duo-block');
+  }
+  get videoBlock() {
+    return this.query<HTMLElement>('video-block');
+  }
+  get audioBlock() {
+    return this.query<HTMLElement>('audio-block');
+  }
 
-  addElements() {
-    this.introText = fixture.debugElement.query(By.css('#text-intro p'));
-    this.sectionTitle = fixture.debugElement.query(By.css('h2'));
-    this.textBlock = fixture.debugElement.query(By.css('text-block'));
-    this.imageBlock = fixture.debugElement.query(By.css('image-block'));
-    this.galleryBlock = fixture.debugElement.query(By.css('gallery-block'));
-    this.duoBlock = fixture.debugElement.query(By.css('duo-block'));
-    this.videoBlock = fixture.debugElement.query(By.css('video-block'));
-    this.audioBlock = fixture.debugElement.query(By.css('audio-block'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -259,8 +251,5 @@ function createComponent() {
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

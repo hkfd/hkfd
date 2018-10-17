@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 
 import { Data } from 'testing';
 import { AudioBlockComponent } from './audio-block.component';
@@ -23,23 +21,25 @@ describe('AudioBlockComponent', () => {
   });
 
   it('should set element src', () => {
-    expect(page.audio.nativeElement.src).toBe('http://example.com/');
+    expect(page.audio.src).toBe('http://example.com/');
   });
 
   it(`should set element preload as 'none'`, () => {
-    expect(page.audio.nativeElement.getAttribute('preload')).toBe('none');
+    expect(page.audio.getAttribute('preload')).toBe('none');
   });
 });
 
 class Page {
-  audio!: DebugElement;
+  get audio() {
+    return this.query<HTMLAudioElement>('audio');
+  }
 
   constructor() {
     comp.data = Data.Generic.audio;
   }
 
-  addElements() {
-    this.audio = fixture.debugElement.query(By.css('audio'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -49,8 +49,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }
