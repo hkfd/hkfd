@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { Data } from 'testing';
 import { LazyDirective } from 'shared';
@@ -30,7 +29,9 @@ describe('VideoBlockComponent', () => {
 });
 
 class Page {
-  video!: DebugElement;
+  get video() {
+    return this.query<HTMLIFrameElement>('iframe');
+  }
 
   constructor() {
     comp.data = Data.Generic.video;
@@ -39,8 +40,8 @@ class Page {
     lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);
   }
 
-  addElements() {
-    this.video = fixture.debugElement.query(By.css('iframe'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -50,8 +51,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

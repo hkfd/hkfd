@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
@@ -118,8 +117,7 @@ describe('NewsComponent', () => {
     it('should call getPosts', () => {
       comp.hasNextPage = true;
       fixture.detectChanges();
-      page.addElements();
-      page.loadMore.triggerEventHandler('click', {});
+      page.loadMore.click();
 
       expect(page.getPosts).toHaveBeenCalled();
     });
@@ -127,8 +125,7 @@ describe('NewsComponent', () => {
     it(`should call getPosts with no onInit arg`, () => {
       comp.hasNextPage = true;
       fixture.detectChanges();
-      page.addElements();
-      page.loadMore.triggerEventHandler('click', {});
+      page.loadMore.click();
 
       expect(page.getPosts).toHaveBeenCalledWith();
     });
@@ -136,7 +133,6 @@ describe('NewsComponent', () => {
     it(`should display load more button if hasNextPage is 'true'`, () => {
       comp.hasNextPage = true;
       fixture.detectChanges();
-      page.addElements();
 
       expect(page.loadMore).toBeTruthy();
     });
@@ -144,7 +140,6 @@ describe('NewsComponent', () => {
     it(`should not display load more button if hasNextPage is 'false'`, () => {
       comp.hasNextPage = false;
       fixture.detectChanges();
-      page.addElements();
 
       expect(page.loadMore).toBeFalsy();
     });
@@ -162,14 +157,16 @@ class RichTextStub {
 class Page {
   getPosts: jasmine.Spy;
 
-  loadMore!: DebugElement;
+  get loadMore() {
+    return this.query<HTMLButtonElement>('#load-more');
+  }
 
   constructor() {
     this.getPosts = spyOn(comp, 'getPosts').and.callThrough();
   }
 
-  addElements() {
-    this.loadMore = fixture.debugElement.query(By.css('#load-more'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -185,8 +182,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

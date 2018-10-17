@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { ImageBlockComponent } from './image-block.component';
 
@@ -24,7 +23,9 @@ describe('ImageBlockComponent', () => {
 });
 
 class Page {
-  image!: DebugElement;
+  get image() {
+    return this.query<HTMLElement>('image-component');
+  }
 
   constructor() {
     comp.data = {
@@ -37,8 +38,8 @@ class Page {
     };
   }
 
-  addElements() {
-    this.image = fixture.debugElement.query(By.css('image-component'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -48,8 +49,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

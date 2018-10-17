@@ -2,7 +2,7 @@ import { Generic as GenericType } from 'shared';
 
 export namespace Generic {
   export const image: GenericType.Image = {
-    src: 'example.jpg',
+    src: 'http://testing/example.jpg',
     srcset: {
       attr: 'srcset',
       val: ['']

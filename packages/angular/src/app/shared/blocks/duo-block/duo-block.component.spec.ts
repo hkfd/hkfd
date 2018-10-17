@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { SlicePipe } from '@angular/common';
 
 import { Data } from 'testing';
@@ -36,21 +35,22 @@ describe('DuoBlockComponent', () => {
   it(`should only display two ImageComponent's`, () => {
     comp.data = Data.Generic.images;
     fixture.detectChanges();
-    page.addElements();
 
     expect(page.image.length).toBe(2);
   });
 });
 
 class Page {
-  image!: DebugElement[];
+  get image() {
+    return this.queryAll<HTMLElement>('image-component');
+  }
 
   constructor() {
     comp.data = Data.Generic.duo;
   }
 
-  addElements() {
-    this.image = fixture.debugElement.queryAll(By.css('image-component'));
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 
@@ -61,8 +61,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

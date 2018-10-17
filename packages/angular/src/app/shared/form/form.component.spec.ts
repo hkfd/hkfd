@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -65,7 +65,7 @@ describe('FormComponent', () => {
     });
 
     it('should display empty name field', () => {
-      expect(page.nameInput.nativeElement.textContent).toBe('');
+      expect(page.nameInput.textContent).toBe('');
     });
 
     it('should not display name error', () => {
@@ -97,7 +97,7 @@ describe('FormComponent', () => {
     });
 
     it('should display empty email field', () => {
-      expect(page.emailInput.nativeElement.textContent).toBe('');
+      expect(page.emailInput.textContent).toBe('');
     });
 
     it('should not display email error', () => {
@@ -138,7 +138,7 @@ describe('FormComponent', () => {
     });
 
     it('should display empty message field', () => {
-      expect(page.messageInput.nativeElement.textContent).toBe('');
+      expect(page.messageInput.textContent).toBe('');
     });
 
     it('should not display message error', () => {
@@ -397,18 +397,22 @@ class FormServiceStub {
 class Page {
   submitForm: jasmine.Spy;
 
-  nameInput!: DebugElement;
-  emailInput!: DebugElement;
-  messageInput!: DebugElement;
+  get nameInput() {
+    return this.query<HTMLInputElement>('#name');
+  }
+  get emailInput() {
+    return this.query<HTMLInputElement>('#email');
+  }
+  get messageInput() {
+    return this.query<HTMLInputElement>('#message');
+  }
 
   constructor() {
     this.submitForm = spyOn(comp, 'submitForm').and.callThrough();
   }
 
-  addElements() {
-    this.nameInput = fixture.debugElement.query(By.css('#name'));
-    this.emailInput = fixture.debugElement.query(By.css('#email'));
-    this.messageInput = fixture.debugElement.query(By.css('#message'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -420,8 +424,5 @@ function createComponent() {
   formService = new FormServiceStub();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

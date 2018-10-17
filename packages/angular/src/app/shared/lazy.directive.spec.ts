@@ -1,4 +1,4 @@
-import { Component, DebugElement, PLATFORM_ID } from '@angular/core';
+import { Component, PLATFORM_ID } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -114,8 +114,8 @@ describe('LazyDirective', () => {
       lazyDirective.intersectionCallback(<any>[{ isIntersecting: true }]);
       fixture.detectChanges();
 
-      expect(page.img.attributes.srcset).toBeDefined();
-      expect(page.img.attributes.srcset).toEqual(
+      expect(page.img.srcset).toBeDefined();
+      expect(page.img.srcset).toEqual(
         'example-xs.jpg 100w,example-sm.jpg 200w'
       );
     });
@@ -145,10 +145,12 @@ class RendererStub {
 }
 
 class Page {
-  img!: DebugElement;
+  get img() {
+    return this.query<HTMLImageElement>('img');
+  }
 
-  addElements() {
-    this.img = fixture.debugElement.query(By.css('img'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -162,8 +164,5 @@ function createComponent() {
   lazyDirective = image.injector.get<LazyDirective>(LazyDirective);
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NgModule, Component, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { NgModule, Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, SlicePipe } from '@angular/common';
 
@@ -56,7 +55,7 @@ describe('HeaderComponent', () => {
     location.go('/page-1');
     expect(location.path()).toBe('/page-1');
 
-    page.navLogo.nativeElement.click();
+    page.navLogo.click();
     fixture.detectChanges();
 
     return fixture.whenStable().then(() => {
@@ -68,7 +67,7 @@ describe('HeaderComponent', () => {
     location.go('/');
     expect(location.path()).toBe('/');
 
-    page.navLink.nativeElement.click();
+    page.navLink.click();
     fixture.detectChanges();
 
     return fixture.whenStable().then(() => {
@@ -80,26 +79,24 @@ describe('HeaderComponent', () => {
     location.go('/');
     expect(location.path()).toBe('/');
 
-    const link: HTMLAnchorElement = page.navLink.nativeElement;
-
-    link.click();
+    page.navLink.click();
     fixture.detectChanges();
 
     return fixture.whenStable().then(() => {
-      expect(link.className).toContain('active');
+      expect(page.navLink.className).toContain('active');
     });
   }));
 
   describe('navClick', () => {
     it('should be called on link click', () => {
-      page.navLink.triggerEventHandler('click', {});
+      page.navLink.click();
 
       expect(page.navClick).toHaveBeenCalled();
     });
 
     it('should set mobileShow to false', () => {
       comp.mobileShow = true;
-      page.navLink.triggerEventHandler('click', {});
+      page.navLink.click();
 
       expect(comp.mobileShow).toBe(false);
     });
@@ -107,7 +104,7 @@ describe('HeaderComponent', () => {
 
   describe('toggleMobile', () => {
     it('should be called on button click', () => {
-      page.navButton.triggerEventHandler('click', {});
+      page.navButton.click();
 
       expect(page.toggleMobile).toHaveBeenCalled();
     });
@@ -132,9 +129,15 @@ class Page {
   navClick: jasmine.Spy;
   toggleMobile: jasmine.Spy;
 
-  navLogo!: DebugElement;
-  navLink!: DebugElement;
-  navButton!: DebugElement;
+  get navLogo() {
+    return this.query<HTMLAnchorElement>('#nav-logo');
+  }
+  get navLink() {
+    return this.query<HTMLAnchorElement>('.nav-link');
+  }
+  get navButton() {
+    return this.query<HTMLButtonElement>('#nav-button');
+  }
 
   constructor() {
     comp.pages = [
@@ -147,10 +150,8 @@ class Page {
     this.toggleMobile = spyOn(comp, 'toggleMobile').and.callThrough();
   }
 
-  addElements() {
-    this.navLogo = fixture.debugElement.query(By.css('#nav-logo'));
-    this.navLink = fixture.debugElement.query(By.css('.nav-link'));
-    this.navButton = fixture.debugElement.query(By.css('#nav-button'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -162,8 +163,5 @@ function createComponent() {
   slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

@@ -1,4 +1,3 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -25,11 +24,11 @@ describe('ImageComponent', () => {
   });
 
   it('should set img src', () => {
-    expect(page.img.properties.src).toBe('example.jpg');
+    expect(page.img.src).toBe('http://testing/example.jpg');
   });
 
   it('should set img alt', () => {
-    expect(page.img.properties.alt).toBe('Example image');
+    expect(page.img.alt).toBe('Example image');
   });
 
   it('should set LazyDirective data', () => {
@@ -38,7 +37,9 @@ describe('ImageComponent', () => {
 });
 
 class Page {
-  img!: DebugElement;
+  get img() {
+    return this.query<HTMLImageElement>('img');
+  }
 
   constructor() {
     comp.image = Data.Generic.image;
@@ -47,8 +48,8 @@ class Page {
     lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);
   }
 
-  addElements() {
-    this.img = fixture.debugElement.query(By.css('img'));
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -58,8 +59,5 @@ function createComponent() {
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-    page.addElements();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }
