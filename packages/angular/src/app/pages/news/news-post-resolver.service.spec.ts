@@ -36,7 +36,7 @@ describe('NewsPostResolver', () => {
   it('should call PrismicService getPost', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
-    newsPostResolver.resolve(<any>activatedRoute.snapshot);
+    newsPostResolver.resolve(activatedRoute.snapshot as any);
 
     expect(prismicService.getPost).toHaveBeenCalled();
   });
@@ -45,7 +45,7 @@ describe('NewsPostResolver', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
-    newsPostResolver.resolve(<any>activatedRoute.snapshot);
+    newsPostResolver.resolve(activatedRoute.snapshot as any);
 
     expect(prismicService.getPost).toHaveBeenCalledWith('post-1');
   });
@@ -54,7 +54,7 @@ describe('NewsPostResolver', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
     activatedRoute.testQueryParamMap = {};
 
-    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Prismic.Post
     >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
@@ -77,7 +77,7 @@ describe('NewsPostResolver', () => {
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
-    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Prismic.Post
     >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
@@ -99,7 +99,7 @@ describe('NewsPostResolver', () => {
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
-    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Prismic.Post
     >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
@@ -121,7 +121,7 @@ describe('NewsPostResolver', () => {
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
-    (newsPostResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Prismic.Post
     >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({

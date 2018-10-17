@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 import { AppComponent } from './app.component';
 
-const app = <any>window;
+const app = window as any;
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
 let page: Page;

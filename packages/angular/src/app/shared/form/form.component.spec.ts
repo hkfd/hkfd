@@ -9,7 +9,7 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { FormService } from 'shared';
 import { FormComponent } from './form.component';
 
-const app = <any>window;
+const app = window as any;
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
 let page: Page;

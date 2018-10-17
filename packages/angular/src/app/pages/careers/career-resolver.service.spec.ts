@@ -45,7 +45,7 @@ describe('CareerResolver', () => {
   it('should call ApiService getCareer', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot);
+    careerResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getCareer).toHaveBeenCalled();
   });
@@ -53,7 +53,7 @@ describe('CareerResolver', () => {
   it('should call ApiService getCareer with id arg', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(<any>activatedRoute.snapshot);
+    careerResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getCareer).toHaveBeenCalledWith('career-1');
   });
@@ -62,7 +62,7 @@ describe('CareerResolver', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
 
-    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Career
     >).subscribe(_ =>
       expect(metaService.setMetaTags).toHaveBeenCalledWith({
@@ -78,7 +78,7 @@ describe('CareerResolver', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
 
-    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Career
     >).subscribe(career => expect(career.title).toBe('Career 1'));
   }));
@@ -86,7 +86,7 @@ describe('CareerResolver', () => {
   it('should navigate to /careers if no matching career', fakeAsync(() => {
     activatedRoute.testParamMap = { id: 'no-career' };
     activatedRoute.testQueryParamMap = {};
-    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Career
     >).subscribe();
     tick();
@@ -97,7 +97,7 @@ describe('CareerResolver', () => {
   it('should not navigate to /careers if matching career', fakeAsync(() => {
     activatedRoute.testParamMap = { id: 'career-1' };
     activatedRoute.testQueryParamMap = {};
-    (careerResolver.resolve(<any>activatedRoute.snapshot) as Observable<
+    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Career
     >).subscribe();
     tick();
