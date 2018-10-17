@@ -4,8 +4,14 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
-import { TransferState, MockTransferState, Data } from 'testing';
-import { ApiService, LoggerService, Api } from 'shared';
+import {
+  TransferState,
+  MockTransferState,
+  LoggerService,
+  MockLoggerService,
+  Data
+} from 'testing';
+import { ApiService, Api } from 'shared';
 
 let mockHttp: HttpTestingController;
 let transferState: MockTransferState;
@@ -17,7 +23,7 @@ describe('ApiService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         ApiService,
-        LoggerService,
+        { provide: LoggerService, useClass: MockLoggerService },
         { provide: TransferState, useClass: MockTransferState }
       ]
     }).compileComponents();

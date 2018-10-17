@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { Meta, Title } from '@angular/platform-browser';
 
+import { LoggerService, MockLoggerService } from 'testing';
 import { MetaService } from './meta.service';
 
 let metaService: MetaService;
@@ -10,7 +11,10 @@ let title: TitleStub;
 describe('MetaService', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
-      providers: [MetaService]
+      providers: [
+        MetaService,
+        { provide: LoggerService, useClass: MockLoggerService }
+      ]
     }).compileComponents()));
 
   beforeEach(async(() => createService()));

@@ -3,10 +3,15 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
-import { TransferState, MockTransferState, Data } from 'testing';
+import {
+  TransferState,
+  MockTransferState,
+  LoggerService,
+  MockLoggerService,
+  Data
+} from 'testing';
 
 import { environment } from 'environment';
-import { LoggerService } from './logger.service';
 import { PrismicService } from './prismic.service';
 
 let mockHttp: HttpTestingController;
@@ -19,7 +24,7 @@ describe('PrismicService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         PrismicService,
-        LoggerService,
+        { provide: LoggerService, useClass: MockLoggerService },
         { provide: TransferState, useClass: MockTransferState }
       ]
     }).compileComponents();
