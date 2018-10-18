@@ -33,12 +33,12 @@ describe('SliderWork', () => {
     expect(page.getNextArrow().isDisplayed()).toBe(true);
   });
 
-  xit('should display title', () => {
-    expect(page.getTitle().getText()).toBeTruthy();
+  it('should display title', () => {
+    expect(page.getSlideTitle()).toBeTruthy();
   });
 
-  xit('should display sector', () => {
-    expect(page.getSector().getText()).toBeTruthy();
+  it('should display sector', () => {
+    expect(page.getSlideSector()).toBeTruthy();
   });
 
   it('should have link', () => {
