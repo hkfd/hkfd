@@ -20,6 +20,10 @@ export class SliderWork {
     return element(by.css('slider-work'));
   }
 
+  getSlides() {
+    return this.getSlider().all(by.css('.slide'));
+  }
+
   getImages() {
     return this.getSlider().all(by.css('image-component'));
   }
@@ -32,18 +36,18 @@ export class SliderWork {
     return this.getSlider().element(by.css('.slider-next'));
   }
 
-  getTitle() {
-    return this.getSlider()
-      .all(by.css('.info-meta'))
+  getSlideTitle() {
+    return this.getSlides()
       .first()
-      .element(by.css('a'));
+      .element(by.css('.info-meta a'))
+      .getAttribute('textContent');
   }
 
-  getSector() {
-    return this.getSlider()
-      .all(by.css('.info-meta'))
+  getSlideSector() {
+    return this.getSlides()
       .first()
-      .element(by.css('span'));
+      .element(by.css('.info-meta span'))
+      .getAttribute('textContent');
   }
 
   getLink() {
