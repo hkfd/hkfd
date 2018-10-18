@@ -22,7 +22,7 @@ describe('TextComponent', () => {
       fixture.detectChanges();
     });
 
-    it(`should display 'a' element`, () => {
+    it('should display a element', () => {
       expect(page.a).toBeTruthy();
     });
 
@@ -34,11 +34,11 @@ describe('TextComponent', () => {
       expect(page.a.getAttribute('href')).toBe('http://example.com');
     });
 
-    it(`should set target as '_blank'`, () => {
+    it('should set target as `_blank`', () => {
       expect(page.a.getAttribute('target')).toBe('_blank');
     });
 
-    it(`should set rel as 'nofollow'`, () => {
+    it('should set rel as `nofollow`', () => {
       expect(page.a.getAttribute('rel')).toBe('nofollow noopener');
     });
   });
@@ -49,7 +49,7 @@ describe('TextComponent', () => {
       fixture.detectChanges();
     });
 
-    it(`should display 'h3' element`, () => {
+    it('should display h3 element', () => {
       expect(page.h3).toBeTruthy();
     });
 
@@ -64,7 +64,7 @@ describe('TextComponent', () => {
       fixture.detectChanges();
     });
 
-    it(`should display 'i' element`, () => {
+    it('should display b element', () => {
       expect(page.b).toBeTruthy();
     });
 
@@ -79,7 +79,7 @@ describe('TextComponent', () => {
       fixture.detectChanges();
     });
 
-    it(`should display 'i' element`, () => {
+    it('should display i element', () => {
       expect(page.i).toBeTruthy();
     });
 

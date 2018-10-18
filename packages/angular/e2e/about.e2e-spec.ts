@@ -47,15 +47,15 @@ describe('About', () => {
       expect(page.getPeople().count()).toBeGreaterThan(1);
     });
 
-    it(`should display person's image`, () => {
+    it('should display persons image', () => {
       expect(page.getPersonImage().isDisplayed()).toBe(true);
     });
 
-    it(`should display person's name`, () => {
+    it('should display persons name', () => {
       expect(page.getPersonName()).toBeTruthy();
     });
 
-    it(`should display person's position`, () => {
+    it('should display persons position', () => {
       expect(page.getPersonPosition()).toBeTruthy();
     });
 

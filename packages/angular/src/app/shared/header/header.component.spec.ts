@@ -75,7 +75,7 @@ describe('HeaderComponent', () => {
     });
   }));
 
-  it(`should set class 'active' on link click`, async(() => {
+  it('should set class `active` on link click', async(() => {
     location.go('/');
     expect(location.path()).toBe('/');
 

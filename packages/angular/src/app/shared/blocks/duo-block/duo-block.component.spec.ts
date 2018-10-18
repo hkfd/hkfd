@@ -20,7 +20,7 @@ describe('DuoBlockComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it(`should display two ImageComponent's`, () => {
+  it('should only display two ImageComponents', () => {
     expect(page.image.length).toBe(2);
   });
 
@@ -32,7 +32,7 @@ describe('DuoBlockComponent', () => {
     expect(slicePipe).toHaveBeenCalledWith(Data.Generic.duo, 0, 2);
   });
 
-  it(`should only display two ImageComponent's`, () => {
+  it('should only display two ImageComponents', () => {
     comp.data = Data.Generic.images;
     fixture.detectChanges();
 

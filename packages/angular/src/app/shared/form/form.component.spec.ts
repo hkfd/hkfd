@@ -230,7 +230,7 @@ describe('FormComponent', () => {
     });
 
     describe('resolve', () => {
-      it(`should set formSent as 'true'`, async(() => {
+      it('should set formSent as true', async(() => {
         comp.form.markAsTouched();
         comp.form.controls.name.setValue('a');
         comp.form.controls.email.setValue('b@c');
@@ -327,7 +327,7 @@ describe('FormComponent', () => {
     });
 
     describe('reject', () => {
-      it(`should set formSent as 'false'`, async(() => {
+      it('should set formSent as false', async(() => {
         comp.submitForm();
         fixture.detectChanges();
 
