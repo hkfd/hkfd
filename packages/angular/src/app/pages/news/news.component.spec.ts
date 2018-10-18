@@ -52,7 +52,7 @@ describe('NewsComponent', () => {
     expect(page.getPosts).toHaveBeenCalled();
   });
 
-  it(`should call getPosts with 'true' onInit arg`, () => {
+  it('should call getPosts with true onInit arg', () => {
     expect(page.getPosts).toHaveBeenCalledWith(true);
   });
 
@@ -60,7 +60,7 @@ describe('NewsComponent', () => {
     expect(prismicService.getPosts).toHaveBeenCalled();
   });
 
-  it(`should call PrismicService getPosts with 'true' firstLoad arg`, () => {
+  it('should call PrismicService getPosts with true firstLoad arg', () => {
     expect(prismicService.getPosts).toHaveBeenCalledWith(true);
   });
 
@@ -73,7 +73,7 @@ describe('NewsComponent', () => {
     return fixture.whenStable().then(_ => expect(comp.posts.length).toBe(6));
   });
 
-  it(`should set hasNextPage as 'true' if 'next_page' is string`, () => {
+  it('should set hasNextPage as true if `next_page` is string', () => {
     (prismicService.getPosts as jasmine.Spy).and.returnValue(
       of({ results: null, next_page: 'page2' })
     );
@@ -84,7 +84,7 @@ describe('NewsComponent', () => {
       .then(_ => expect(comp.hasNextPage).toBeTruthy());
   });
 
-  it(`should set hasNextPage as 'false' if 'next_page' is empty`, () => {
+  it('should set hasNextPage as false if `next_page` is empty', () => {
     (prismicService.getPosts as jasmine.Spy).and.returnValue(
       of({ results: null, next_page: null })
     );
@@ -122,7 +122,7 @@ describe('NewsComponent', () => {
       expect(page.getPosts).toHaveBeenCalled();
     });
 
-    it(`should call getPosts with no onInit arg`, () => {
+    it('should call getPosts with no onInit arg', () => {
       comp.hasNextPage = true;
       fixture.detectChanges();
       page.loadMore.click();
@@ -130,14 +130,14 @@ describe('NewsComponent', () => {
       expect(page.getPosts).toHaveBeenCalledWith();
     });
 
-    it(`should display load more button if hasNextPage is 'true'`, () => {
+    it('should display load more button if hasNextPage is true', () => {
       comp.hasNextPage = true;
       fixture.detectChanges();
 
       expect(page.loadMore).toBeTruthy();
     });
 
-    it(`should not display load more button if hasNextPage is 'false'`, () => {
+    it('should not display load more button if hasNextPage is false', () => {
       comp.hasNextPage = false;
       fixture.detectChanges();
 

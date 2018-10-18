@@ -59,7 +59,7 @@ describe('PrismicPipe', () => {
       expect(res.srcset).toBeDefined();
     });
 
-    it(`should set srcset attr as 'srcset'`, () => {
+    it('should set srcset attr as `srcset`', () => {
       const res = pipe.transform({ image: Data.Prismic.image });
 
       expect(res.srcset.attr).toBe('srcset');
@@ -89,13 +89,13 @@ describe('PrismicPipe', () => {
       expect(res.src).toBeDefined();
     });
 
-    it(`should set src attr as 'src'`, () => {
+    it('should set src attr as `src`', () => {
       const res = pipe.transform({ video: Data.Prismic.video });
 
       expect(res.src.attr).toBe('src');
     });
 
-    it('should set src val as video url ', () => {
+    it('should set src val as video url', () => {
       const res = pipe.transform({ video: Data.Prismic.video });
 
       expect(res.src.val).toEqual([Data.Prismic.video.url]);

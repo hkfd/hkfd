@@ -46,7 +46,7 @@ describe('Header', () => {
       });
   });
 
-  it(`should set 'active' class on current page link`, () => {
+  it('should set `active` class on current page link', () => {
     page
       .getLinks()
       .get(1)

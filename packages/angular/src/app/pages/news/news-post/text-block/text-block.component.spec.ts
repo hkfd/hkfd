@@ -34,13 +34,13 @@ describe('TextBlockComponent', () => {
   });
 
   describe('linkResolver', () => {
-    it(`should return '/' by default`, () => {
+    it('should return `/` by default', () => {
       const linkResolver = comp.linkResolver({ type: '' } as any);
 
       expect(linkResolver).toBe('/');
     });
 
-    it(`should return '/news/$uid' if news post type`, () => {
+    it('should return `/news/$uid` if news post type', () => {
       const linkResolver = comp.linkResolver({
         type: 'news',
         uid: 'post'

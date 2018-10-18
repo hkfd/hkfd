@@ -69,7 +69,7 @@ describe('AppComponent', () => {
               )
             )));
 
-        it(`should call ga set with title as 'Heckford'`, async(() =>
+        it('should call ga set with title as `Heckford`', async(() =>
           router
             .navigateByUrl('page-1')
             .then(_ =>

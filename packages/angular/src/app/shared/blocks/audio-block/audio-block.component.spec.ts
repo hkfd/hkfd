@@ -16,7 +16,7 @@ describe('AudioBlockComponent', () => {
 
   beforeEach(async(() => createComponent()));
 
-  it(`should display 'audio' element`, () => {
+  it('should display audio element', () => {
     expect(page.audio).toBeTruthy();
   });
 
@@ -24,7 +24,7 @@ describe('AudioBlockComponent', () => {
     expect(page.audio.src).toBe('http://example.com/');
   });
 
-  it(`should set element preload as 'none'`, () => {
+  it('should set element preload as `none`', () => {
     expect(page.audio.getAttribute('preload')).toBe('none');
   });
 });

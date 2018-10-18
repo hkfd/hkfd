@@ -83,7 +83,7 @@ describe('ApiPipe', () => {
       expect(res.srcset).toBeDefined();
     });
 
-    it(`should set srcset attr as 'srcset'`, () => {
+    it('should set srcset attr as `srcset`', () => {
       const res = pipe.transform({ image: Data.Api.image });
 
       expect(res.srcset.attr).toBe('srcset');
@@ -137,7 +137,7 @@ describe('ApiPipe', () => {
       expect(res.src).toBeDefined();
     });
 
-    it(`should set src attr as 'src'`, () => {
+    it('should set src attr as `src`', () => {
       const res = pipe.transform({ video: Data.Api.video });
 
       expect(res.src.attr).toBe('src');

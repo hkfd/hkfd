@@ -487,7 +487,7 @@ describe('ApiService', () => {
     });
 
     describe('no cache', () => {
-      it(`should set url to services if type is 'service'`, async(() => {
+      it('should set url to services if type is `service`', async(() => {
         apiService
           .getPost('service', '')
           .subscribe(res => expect(res).toBeUndefined());
@@ -497,7 +497,7 @@ describe('ApiService', () => {
           .flush(Data.Api.services);
       }));
 
-      it(`should set url to caseStudies if type is 'work'`, async(() => {
+      it('should set url to caseStudies if type is `work`', async(() => {
         apiService
           .getPost('work', '')
           .subscribe(res => expect(res).toBeUndefined());

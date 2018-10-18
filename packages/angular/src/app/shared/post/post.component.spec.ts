@@ -46,7 +46,7 @@ describe('PostComponent', () => {
       expect(comp.layout).toBeDefined();
     });
 
-    it(`should set layout as 'layout-'`, () => {
+    it('should set layout as `layout-`', () => {
       expect(comp.layout).toMatch(/layout-[1-3]/);
     });
   });
@@ -104,7 +104,7 @@ describe('PostComponent', () => {
         );
       });
 
-      it(`should set full-bleed attibute as 'true' if fullBleed is true`, () => {
+      it('should set full-bleed attibute as true if fullBleed is true', () => {
         (<Api.Blocks.ImageBlock>(
           (comp.post as Api.Post).content[0].data[0]
         )).fullBleed = true;
@@ -113,7 +113,7 @@ describe('PostComponent', () => {
         expect(page.imageBlock.getAttribute('full-bleed')).toBe('true');
       });
 
-      it(`should not set full-bleed attibute if no fullBleed`, () => {
+      it('should not set full-bleed attibute if no fullBleed', () => {
         (<Api.Blocks.ImageBlock>(
           (comp.post as Api.Post).content[0].data[0]
         )).fullBleed = undefined;
