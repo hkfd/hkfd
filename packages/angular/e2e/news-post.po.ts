@@ -7,40 +7,57 @@ import {
 } from 'protractor';
 
 export class NewsPostPage {
-  isVisible(el: ElementFinder = this.getPostDate()) {
+  constructor() {
+    this.navigateTo();
+  }
+
+  isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
+  }
+
+  isClickable(el: ElementFinder) {
+    const isClickable = ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
   }
 
   getUrl() {
     return browser.getCurrentUrl();
   }
 
-  navigateTo() {
-    return browser
-      .get('/news/how-to-build-an-online-campaign')
-      .then(_ => this.isVisible());
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo() {
+    const el = this.getNewsPost();
+
+    return browser
+      .get('/news')
+      .then(() => this.isClickable(el))
+      .then(() => el.click())
+      .then(_ => this.isVisible(this.getPostDate()));
+  }
+
+  private getNewsPost() {
+    return element.all(by.css('.post')).last();
+  }
+
+  getPost() {
+    return element(by.css('app-news-post'));
   }
 
   getPostDate() {
-    return element(by.id('info-date'));
+    return this.getPost().element(by.css('#info-date'));
   }
 
   getPostTitle() {
-    return element(by.css('h1'));
+    return this.getPost().element(by.css('h1'));
   }
 
   getPostThumbnail() {
-    return element.all(by.css('image-component')).first();
+    return this.getPost()
+      .all(by.css('img'))
+      .first();
   }
 }

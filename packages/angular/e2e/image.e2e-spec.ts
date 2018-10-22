@@ -3,46 +3,45 @@ import { Image } from './image.po';
 describe('Image', () => {
   let page: Image;
 
-  beforeEach(() => {
-    page = new Image();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new Image()));
 
-  it('should be present', () => {
+  it('should display img', () => {
     expect(
       page
-        .getImages()
-        .first()
-        .isPresent()
-    ).toBe(true);
-  });
-
-  it('should display image img', () => {
-    expect(
-      page
-        .getImgs()
+        .getImagesImg()
         .first()
         .isDisplayed()
-    ).toBe(true);
+    ).toBeTruthy();
   });
 
   describe('Lazyload', () => {
-    it('should have loaded first img', () => {
+    it('should load visible img', () => {
       expect(
         page
-          .getImgs()
+          .getImagesImg()
           .first()
           .getAttribute('srcset')
       ).toBeTruthy();
     });
 
-    it('should not have loaded last img', () => {
+    it('should not load not visible img', () => {
       expect(
         page
-          .getImgs()
+          .getImagesImg()
           .last()
           .getAttribute('srcset')
       ).toBeFalsy();
+    });
+
+    it('should load not visible img when it becomes visible', () => {
+      page.scrollTo(page.getImages().last()).then(_ =>
+        expect(
+          page
+            .getImagesImg()
+            .last()
+            .getAttribute('srcset')
+        ).toBeTruthy()
+      );
     });
   });
 });

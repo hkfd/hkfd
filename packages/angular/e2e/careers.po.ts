@@ -7,9 +7,18 @@ import {
 } from 'protractor';
 
 export class CareersPage {
-  isVisible(el: ElementFinder = this.getCareers().first()) {
+  constructor() {
+    this.navigateTo();
+  }
+
+  isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
+  }
+
+  isNotVisible(el: ElementFinder) {
+    const isNotVisible = ExpectedConditions.invisibilityOf(el);
+    return browser.wait(isNotVisible, 3000);
   }
 
   isClickable(el: ElementFinder) {
@@ -21,46 +30,41 @@ export class CareersPage {
     return browser.getCurrentUrl();
   }
 
-  navigateTo() {
-    return browser.get('/careers').then(_ => this.isVisible());
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo() {
+    return browser
+      .get('/careers')
+      .then(_ => this.isVisible(this.getCareers().last()));
   }
 
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getIntroImage() {
-    return element.all(by.css('image-component')).first();
+    return element.all(by.css('img')).first();
   }
 
   getCareers() {
     return element.all(by.css('.career'));
   }
 
+  getCareer() {
+    return this.getCareers().first();
+  }
+
   getCareerTitle() {
-    return this.getCareers()
-      .last()
-      .getText();
+    return this.getCareer().element(by.css('h3'));
   }
 
   getCareerSalary() {
-    return this.getCareers()
-      .last()
-      .element(by.css('span'))
-      .getText();
+    return this.getCareer().element(by.css('span'));
   }
 
   getCareersImage() {
-    return element(by.id('careers')).element(by.css('image-component'));
+    return element(by.id('careers')).element(by.css('img'));
   }
 }

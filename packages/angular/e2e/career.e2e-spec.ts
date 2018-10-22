@@ -3,23 +3,13 @@ import { CareerPage } from './career.po';
 describe('Career', () => {
   let page: CareerPage;
 
-  beforeEach(() => {
-    page = new CareerPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new CareerPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     page
       .getPageTitle()
       .getAttribute('textContent')
       .then(title => expect(page.getTitle()).toBe(`Heckford – ${title}`));
-  });
-
-  it('should set og:title', () => {
-    page
-      .getPageTitle()
-      .getAttribute('textContent')
-      .then(title => expect(page.getMetaTagTitle()).toBe(title));
   });
 
   it('should display page title', () => {
@@ -27,40 +17,42 @@ describe('Career', () => {
   });
 
   describe('Content', () => {
-    it('should have section', () => {
-      expect(
-        page
-          .getSections()
-          .get(1)
-          .isPresent()
-      ).toBe(true);
-    });
-
-    it('should display section', () => {
-      expect(
-        page
-          .getSections()
-          .get(1)
-          .isDisplayed()
-      ).toBe(true);
-    });
-
-    it('should have more than 1 section', () => {
+    it('should have multiple sections', () => {
       expect(page.getSections().count()).toBeGreaterThan(1);
     });
 
-    it('should display section title', () => {
-      expect(page.getSectionTitle()).toBeTruthy();
+    describe('Section', () => {
+      it('should be displayed', () => {
+        expect(page.getSection().isDisplayed()).toBeTruthy();
+      });
+
+      it('should display section title', () => {
+        expect(page.getSectionTitle().getText()).toBeTruthy();
+      });
     });
 
-    it('should display benefits title', () => {
-      expect(page.getBenefitsTitle()).toBeTruthy();
+    describe('Benefits', () => {
+      it('should be displayed', () => {
+        expect(page.getBenefitsSection().isDisplayed()).toBeTruthy();
+      });
+
+      it('should display benefits title', () => {
+        expect(page.getBenefitsSectionTitle().getText()).toBeTruthy();
+      });
+
+      it('should display benefits content', () => {
+        expect(page.getBenefitsSectionContent().getText()).toBeTruthy();
+      });
     });
   });
 
   describe('Apply', () => {
-    it('should display apply button', () => {
-      expect(page.getApplyButton().isDisplayed()).toBe(true);
+    it('should be displayed', () => {
+      expect(page.getApplyButton().isDisplayed()).toBeTruthy();
+    });
+
+    it('should be clickable', () => {
+      expect(page.isClickable(page.getApplyButton())).toBeTruthy();
     });
 
     it('should have href mailto', () => {

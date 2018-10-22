@@ -7,12 +7,16 @@ import {
 } from 'protractor';
 
 export class NewsPage {
+  constructor() {
+    this.navigateTo();
+  }
+
   isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 5000);
   }
 
-  isNotVisible(el: ElementFinder = this.getPosts().first()) {
+  isNotVisible(el: ElementFinder) {
     const isNotVisible = ExpectedConditions.invisibilityOf(el);
     return browser.wait(isNotVisible, 5000);
   }
@@ -24,7 +28,9 @@ export class NewsPage {
 
   hasLoadedPosts() {
     const hasLoadedPosts = () =>
-      this.getPosts().then(posts => posts.length > 9);
+      this.getPosts()
+        .count()
+        .then(count => count > 9);
 
     return browser.wait(hasLoadedPosts, 5000);
   }
@@ -33,51 +39,41 @@ export class NewsPage {
     return browser.getCurrentUrl();
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
   navigateTo() {
     return browser
       .get('/news')
       .then(_ => this.isVisible(this.getPosts().last()));
   }
 
-  getTitle() {
-    return browser.getTitle();
-  }
-
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
-  }
-
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getPosts() {
     return element.all(by.css('.post'));
   }
 
-  getPostImage() {
-    return this.getPosts()
-      .last()
-      .element(by.css('image-component'));
+  getPost() {
+    return this.getPosts().last();
+  }
+
+  getPostThumbnail() {
+    return this.getPost().element(by.css('img'));
   }
 
   getPostDate() {
-    return this.getPosts()
-      .last()
-      .element(by.css('.post-date'))
-      .getText();
+    return this.getPost().element(by.css('.post-date'));
   }
 
   getPostTitle() {
-    return this.getPosts()
-      .last()
-      .element(by.css('h2'))
-      .getText();
+    return this.getPost().element(by.css('h2'));
   }
 
   getLoadMoreButton() {
-    return element(by.id('load-more'));
+    return element(by.css('#load-more'));
   }
 }

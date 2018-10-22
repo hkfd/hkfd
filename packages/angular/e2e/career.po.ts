@@ -7,7 +7,11 @@ import {
 } from 'protractor';
 
 export class CareerPage {
-  isVisible(el: ElementFinder = this.getPageTitle()) {
+  constructor() {
+    this.navigateTo();
+  }
+
+  isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 5000);
   }
@@ -17,55 +21,59 @@ export class CareerPage {
     return browser.wait(isClickable, 3000);
   }
 
-  navigateTo() {
-    return browser
-      .get('/careers')
-      .then(() => this.isClickable(this.getCareers().last()))
-      .then(() =>
-        this.getCareers()
-          .last()
-          .click()
-      )
-      .then(_ => this.isVisible());
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo() {
+    const el = this.getCareers().last();
+
+    return browser
+      .get('/careers')
+      .then(() => this.isClickable(el))
+      .then(() => el.click())
+      .then(_ => this.isVisible(this.getPageTitle()));
   }
 
-  getCareers() {
+  private getCareers() {
     return element.all(by.css('.career'));
   }
 
+  getCareer() {
+    return element(by.css('app-career'));
+  }
+
   getPageTitle() {
-    return element(by.css('app-career h1'));
+    return this.getCareer().element(by.css('h1'));
   }
 
   getSections() {
-    return element.all(by.css('app-career section'));
+    return this.getCareer().all(by.css('section'));
+  }
+
+  getSection() {
+    return this.getSections().get(-1);
   }
 
   getSectionTitle() {
-    return this.getSections()
-      .get(-1)
-      .element(by.css('h2'))
-      .getText();
+    return this.getSection().element(by.css('h2'));
   }
 
-  getBenefitsTitle() {
-    return this.getSections()
-      .last()
-      .element(by.css('h2'))
-      .getText();
+  getBenefitsSection() {
+    return this.getSections().last();
+  }
+
+  getBenefitsSectionTitle() {
+    return this.getBenefitsSection().element(by.css('h2'));
+  }
+
+  getBenefitsSectionContent() {
+    return this.getBenefitsSection()
+      .all(by.css('ul li'))
+      .first();
   }
 
   getApplyButton() {
-    return element(by.css('app-career a'));
+    return this.getCareer().element(by.css('a'));
   }
 }

@@ -3,67 +3,52 @@ import { CareersPage } from './careers.po';
 describe('Careers', () => {
   let page: CareersPage;
 
-  beforeEach(() => {
-    page = new CareersPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new CareersPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     expect(page.getTitle()).toBe('Heckford – Careers');
   });
 
-  it('should set og:title', () => {
-    expect(page.getMetaTagTitle()).toBe('Careers');
-  });
-
   it('should display page title', () => {
-    expect(page.getPageTitle()).toBeTruthy();
+    expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
   it('should display intro image', () => {
-    expect(page.getIntroImage().isDisplayed()).toBe(true);
+    expect(page.getIntroImage().isDisplayed()).toBeTruthy();
   });
 
-  describe('careers', () => {
-    it('should have career', () => {
-      expect(
-        page
-          .getCareers()
-          .first()
-          .isPresent()
-      ).toBe(true);
-    });
-
-    it('should display career', () => {
-      expect(
-        page
-          .getCareers()
-          .first()
-          .isDisplayed()
-      ).toBe(true);
-    });
-
-    it('should display career title', () => {
-      expect(page.getCareerTitle()).toBeTruthy();
-    });
-
-    it('should display career salary', () => {
-      expect(page.getCareerSalary()).toBeTruthy();
-    });
-
-    it('should link to career', () => {
-      const el = page.getCareers().first();
-
-      return page
-        .isClickable(el)
-        .then(() => el.click())
-        .then(_ => {
-          expect(page.getUrl()).toContain('/careers/');
-        });
-    });
-
+  describe('Careers', () => {
     it('should display careers image', () => {
-      expect(page.getCareersImage().isDisplayed()).toBe(true);
+      expect(page.getCareersImage().isDisplayed()).toBeTruthy();
+    });
+
+    describe('Career', () => {
+      it('should be displayed', () => {
+        expect(
+          page
+            .getCareers()
+            .first()
+            .isDisplayed()
+        ).toBeTruthy();
+      });
+
+      it('should display title', () => {
+        expect(page.getCareerTitle().getText()).toBeTruthy();
+      });
+
+      it('should display salary', () => {
+        expect(page.getCareerSalary().getText()).toBeTruthy();
+      });
+
+      it('should route to career on click', () => {
+        const el = page.getCareer();
+
+        return page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(() => page.isNotVisible(page.getCareer()))
+          .then(_ => expect(page.getUrl()).toContain('/careers/'));
+      });
     });
   });
 });

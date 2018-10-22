@@ -7,9 +7,18 @@ import {
 } from 'protractor';
 
 export class HomePage {
+  constructor() {
+    this.navigateTo();
+  }
+
   isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
+  }
+
+  isNotVisible(el: ElementFinder) {
+    const isNotVisible = ExpectedConditions.invisibilityOf(el);
+    return browser.wait(isNotVisible, 3000);
   }
 
   isClickable(el: ElementFinder) {
@@ -21,6 +30,10 @@ export class HomePage {
     return browser.getCurrentUrl();
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
   navigateTo() {
     return browser
       .get('/')
@@ -30,18 +43,8 @@ export class HomePage {
       .then(_ => this.isVisible(this.getClients().first()));
   }
 
-  getTitle() {
-    return browser.getTitle();
-  }
-
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
-  }
-
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getIntroSlider() {
@@ -49,53 +52,74 @@ export class HomePage {
   }
 
   getIntroSliderLogo() {
-    return element(by.id('icon-40'));
+    return this.getIntroSlider().element(by.id('icon-40'));
   }
 
-  getHelpButton() {
-    return element(by.id('help-container')).element(by.css('a'));
+  getHelpSection() {
+    return element(by.css('#help'));
+  }
+
+  getHelpSectionTitle() {
+    return this.getHelpSection().element(by.css('h2'));
+  }
+
+  getHelpSectionLink() {
+    return this.getHelpSection().element(by.css('a'));
+  }
+
+  getServicesSection() {
+    return element(by.css('#services'));
+  }
+
+  getServicesSectionTitle() {
+    return this.getServicesSection().element(by.css('h2'));
   }
 
   getServices() {
-    return element.all(by.css('.service'));
+    return this.getServicesSection().all(by.css('.service'));
+  }
+
+  getService() {
+    return this.getServices().first();
   }
 
   getServiceThumbnail() {
-    return this.getServices()
-      .first()
-      .element(by.css('image-component'));
+    return this.getService().element(by.css('img'));
   }
 
   getServiceTitle() {
-    return this.getServices()
-      .first()
-      .element(by.css('h3'))
-      .getText();
+    return this.getService().element(by.css('h3'));
   }
 
   getServiceDescription() {
-    return this.getServices()
-      .first()
-      .element(by.css('p'))
-      .getText();
+    return this.getService().element(by.css('p'));
   }
 
   getCaseStudiesSlider() {
     return element(by.css('slider-work'));
   }
 
+  getClientsSection() {
+    return element(by.css('#clients'));
+  }
+
+  getClientsSectionTitle() {
+    return this.getClientsSection().element(by.css('h2'));
+  }
+
   getClients() {
-    return element(by.id('client-list')).all(by.css('.client'));
+    return this.getClientsSection().all(by.css('.client'));
+  }
+
+  getClient() {
+    return this.getClients().first();
   }
 
   getClientSector() {
-    return this.getClients();
+    return this.getClient();
   }
 
   getClientNames() {
-    return this.getClients()
-      .first()
-      .element(by.css('ul'))
-      .all(by.css('li'));
+    return this.getClient().all(by.css('ul li'));
   }
 }

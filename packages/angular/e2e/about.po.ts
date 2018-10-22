@@ -7,9 +7,18 @@ import {
 } from 'protractor';
 
 export class AboutPage {
-  isVisible(el: ElementFinder = this.getPeople().first()) {
+  constructor() {
+    this.navigateTo();
+  }
+
+  isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
+  }
+
+  isNotVisible(el: ElementFinder) {
+    const isNotVisible = ExpectedConditions.invisibilityOf(el);
+    return browser.wait(isNotVisible, 3000);
   }
 
   isClickable(el: ElementFinder) {
@@ -21,22 +30,18 @@ export class AboutPage {
     return browser.getCurrentUrl();
   }
 
-  navigateTo() {
-    return browser.get('/about').then(_ => this.isVisible());
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo() {
+    return browser
+      .get('/about')
+      .then(_ => this.isVisible(this.getPeople().first()));
   }
 
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getIntroImage() {
@@ -47,23 +52,19 @@ export class AboutPage {
     return element.all(by.css('.person'));
   }
 
+  getPerson() {
+    return this.getPeople().first();
+  }
+
   getPersonImage() {
-    return this.getPeople()
-      .first()
-      .element(by.css('img'));
+    return this.getPerson().element(by.css('img'));
   }
 
   getPersonName() {
-    return this.getPeople()
-      .first()
-      .element(by.css('h4'))
-      .getText();
+    return this.getPerson().element(by.css('h4'));
   }
 
   getPersonPosition() {
-    return this.getPeople()
-      .first()
-      .element(by.css('span'))
-      .getText();
+    return this.getPerson().element(by.css('span'));
   }
 }

@@ -3,26 +3,23 @@ import { ContactPage } from './contact.po';
 describe('Contact', () => {
   let page: ContactPage;
 
-  beforeEach(() => {
-    page = new ContactPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new ContactPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     expect(page.getTitle()).toBe('Heckford – Contact');
   });
 
-  it('should set og:title', () => {
-    expect(page.getMetaTagTitle()).toBe('Contact');
-  });
-
   it('should display page title', () => {
-    expect(page.getPageTitle()).toBeTruthy();
+    expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
   describe('Telephone', () => {
     it('should be displayed', () => {
-      expect(page.getTelLink().isDisplayed()).toBe(true);
+      expect(page.getTelLink().isDisplayed()).toBeTruthy();
+    });
+
+    it('should be clickable', () => {
+      expect(page.isClickable(page.getTelLink())).toBeTruthy();
     });
 
     it('should have href tel', () => {
@@ -31,10 +28,10 @@ describe('Contact', () => {
   });
 
   it('should display contact form', () => {
-    expect(page.getContactForm().isDisplayed()).toBe(true);
+    expect(page.getContactForm().isDisplayed()).toBeTruthy();
   });
 
   it('should display contact image', () => {
-    expect(page.getContactImage().isDisplayed()).toBe(true);
+    expect(page.getContactImage().isDisplayed()).toBeTruthy();
   });
 });

@@ -7,6 +7,10 @@ import {
 } from 'protractor';
 
 export class Form {
+  constructor() {
+    this.navigateTo();
+  }
+
   isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
@@ -37,7 +41,7 @@ export class Form {
     return this.getForm().element(by.id('message'));
   }
 
-  getLegal() {
+  getLegalText() {
     return this.getForm().element(by.css('small'));
   }
 

@@ -7,9 +7,18 @@ import {
 } from 'protractor';
 
 export class WorkPage {
-  isVisible(el: ElementFinder = this.getCaseStudies().first()) {
+  constructor() {
+    this.navigateTo();
+  }
+
+  isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
+  }
+
+  isNotVisible(el: ElementFinder) {
+    const isNotVisible = ExpectedConditions.invisibilityOf(el);
+    return browser.wait(isNotVisible, 3000);
   }
 
   isClickable(el: ElementFinder) {
@@ -21,38 +30,33 @@ export class WorkPage {
     return browser.getCurrentUrl();
   }
 
-  navigateTo() {
-    return browser.get('/work').then(_ => this.isVisible());
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo() {
+    return browser
+      .get('/work')
+      .then(_ => this.isVisible(this.getCaseStudies().last()));
   }
 
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getCaseStudies() {
     return element.all(by.css('.case-study'));
   }
 
-  getCaseStudyTitle() {
-    return this.getCaseStudies()
-      .first()
-      .element(by.css('h2'))
-      .getText();
+  getCaseStudy() {
+    return this.getCaseStudies().first();
   }
 
-  getCaseStudyImage() {
-    return this.getCaseStudies()
-      .first()
-      .element(by.css('image-component'));
+  getCaseStudyTitle() {
+    return this.getCaseStudy().element(by.css('h2'));
+  }
+
+  getCaseStudyThumbnail() {
+    return this.getCaseStudy().element(by.css('img'));
   }
 }

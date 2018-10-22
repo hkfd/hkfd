@@ -1,36 +1,46 @@
-import { browser, by, element } from 'protractor';
+import {
+  browser,
+  by,
+  element,
+  ElementFinder,
+  ExpectedConditions
+} from 'protractor';
 
 export class ContactPage {
   constructor() {
-    browser.waitForAngularEnabled(false);
+    this.navigateTo();
+  }
+
+  isVisible(el: ElementFinder) {
+    const isVisible = ExpectedConditions.visibilityOf(el);
+    return browser.wait(isVisible, 3000);
+  }
+
+  isClickable(el: ElementFinder) {
+    const isClickable = ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
   }
 
   getUrl() {
     return browser.getCurrentUrl();
   }
 
-  navigateTo() {
-    return browser.get('/contact');
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo() {
+    return browser
+      .get('/contact')
+      .then(_ => this.isVisible(this.getContactForm()));
   }
 
   getPageTitle() {
-    return element(by.css('h1')).getText();
+    return element(by.css('h1'));
   }
 
   getTelLink() {
-    return element(by.id('page-intro'))
-      .all(by.css('a'))
-      .first();
+    return element(by.id('page-intro')).element(by.css('a'));
   }
 
   getContactForm() {
@@ -38,6 +48,6 @@ export class ContactPage {
   }
 
   getContactImage() {
-    return element(by.css('image-component'));
+    return element(by.css('#contact-image image-component img'));
   }
 }
