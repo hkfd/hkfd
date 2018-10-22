@@ -3,85 +3,63 @@ import { NewsPage } from './news.po';
 describe('News', () => {
   let page: NewsPage;
 
-  beforeEach(() => {
-    page = new NewsPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new NewsPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     expect(page.getTitle()).toBe('Heckford – News');
   });
 
-  it('should set og:title', () => {
-    expect(page.getMetaTagTitle()).toBe('News');
+  it('should display page title', () => {
+    expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
-  it('should display title', () => {
-    expect(page.getPageTitle()).toBeTruthy();
-  });
+  describe('Posts', () => {
+    it('should have 9 initial posts', () => {
+      expect(page.getPosts().count()).toBe(9);
+    });
 
-  it('should have 9 initial posts', () => {
-    expect(page.getPosts().count()).toBe(9);
-  });
+    describe('Post', () => {
+      it('should be displayed', () => {
+        expect(page.getPost().isDisplayed()).toBeTruthy();
+      });
 
-  describe('Post', () => {
-    it('should have post', () => {
-      expect(
+      it('should display thumbnail', () => {
+        expect(page.getPostThumbnail().isDisplayed()).toBeTruthy();
+      });
+
+      it('should display date', () => {
+        expect(page.getPostDate().getText()).toBeTruthy();
+      });
+
+      it('should display title', () => {
+        expect(page.getPostTitle().getText()).toBeTruthy();
+      });
+
+      it('should route to post on click', () => {
+        const el = page.getPost();
+
         page
-          .getPosts()
-          .first()
-          .isPresent()
-      ).toBe(true);
+          .isClickable(el)
+          .then(() => el.click())
+          .then(() => page.isNotVisible(el))
+          .then(_ => expect(page.getUrl()).toContain('/news/'));
+      });
     });
 
-    it('should display post', () => {
-      expect(
+    describe('Load More', () => {
+      it('should be displayed', () => {
+        expect(page.getLoadMoreButton().isDisplayed()).toBeTruthy();
+      });
+
+      it('should load more posts on click', () => {
+        const el = page.getLoadMoreButton();
+
         page
-          .getPosts()
-          .first()
-          .isDisplayed()
-      ).toBe(true);
+          .isClickable(el)
+          .then(() => el.click())
+          .then(() => page.hasLoadedPosts())
+          .then(_ => expect(page.getPosts().count()).toBeGreaterThan(9));
+      });
     });
-
-    it('should have more than 1 post', () => {
-      expect(page.getPosts().count()).toBeGreaterThan(1);
-    });
-
-    it('should display post image', () => {
-      expect(page.getPostImage().isDisplayed()).toBe(true);
-    });
-
-    it('should display post date', () => {
-      expect(page.getPostDate()).toBeTruthy();
-    });
-
-    it('should display post title', () => {
-      expect(page.getPostTitle()).toBeTruthy();
-    });
-
-    it('should route on click', () => {
-      const originalUrl = page.getUrl();
-      const el = page.getPosts().first();
-
-      page
-        .isClickable(el)
-        .then(() => el.click())
-        .then(() => page.isNotVisible())
-        .then(_ => expect(page.getUrl()).not.toBe(originalUrl));
-    });
-  });
-
-  it('should display load more button', () => {
-    expect(page.getLoadMoreButton().isDisplayed()).toBe(true);
-  });
-
-  it('should load more posts on button click', () => {
-    const el = page.getLoadMoreButton();
-
-    page
-      .isClickable(el)
-      .then(() => el.click())
-      .then(() => page.hasLoadedPosts())
-      .then(() => expect(page.getPosts().count()).toBeGreaterThan(9));
   });
 });

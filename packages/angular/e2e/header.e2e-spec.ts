@@ -3,122 +3,151 @@ import { Header } from './header.po';
 describe('Header', () => {
   let page: Header;
 
-  beforeEach(() => {
-    page = new Header();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new Header()));
 
-  it('should have link', () => {
-    expect(
-      page
-        .getLinks()
-        .first()
-        .isPresent()
-    ).toBe(true);
-  });
+  describe('Links', () => {
+    describe('Home', () => {
+      beforeEach(() => page.navigateTo('/about'));
 
-  it('should have 6 links', () => {
-    expect(page.getLinks().count()).toBe(6);
-  });
+      it('should route to home on click', () => {
+        const el = page.getHomeLink();
 
-  it('should display link title', () => {
-    expect(page.getLinkTitle()).toBeTruthy();
-  });
+        expect(page.getUrl()).not.toBe('http://localhost:4200/');
 
-  it('should route on page click', () => {
-    page
-      .getLinks()
-      .get(1)
-      .click()
-      .then(_ => {
-        expect(page.getUrl()).toContain('/about');
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(_ => expect(page.getUrl()).toBe('http://localhost:4200/'));
       });
-  });
-
-  it('should route on logo click', () => {
-    page.navigateTo('/about');
-    page
-      .getLinks()
-      .first()
-      .click()
-      .then(_ => {
-        expect(page.getUrl()).not.toContain('/about');
-      });
-  });
-
-  it('should set `active` class on current page link', () => {
-    page
-      .getLinks()
-      .get(1)
-      .click()
-      .then(_ => {
-        expect(
-          page
-            .getLinks()
-            .get(1)
-            .getAttribute('class')
-        ).toContain('active');
-      });
-  });
-
-  it('should not show toggle', () => {
-    expect(page.getToggle().isDisplayed()).toBe(false);
-  });
-
-  describe('Toggle', () => {
-    beforeAll(() => page.setSize(200, 300));
-
-    it('should show toggle', () => {
-      expect(page.getToggle().isDisplayed()).toBe(true);
     });
 
-    it('should hide links', () => {
-      expect(page.getNavLinks().isDisplayed()).toBe(false);
-    });
+    describe('Page', () => {
+      it('should display link title', () => {
+        expect(page.getPageLink().getText()).toBeTruthy();
+      });
 
-    it('should show links on open', () => {
-      page
-        .getToggle()
-        .click()
-        .then(_ => {
-          expect(page.getNavLinks().isDisplayed()).toBe(true);
+      it('should route to page on click', () => {
+        const el = page.getPageLinks().first();
+
+        expect(page.getUrl()).toBe('http://localhost:4200/');
+
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(_ => expect(page.getUrl()).not.toBe('http://localhost:4200/'));
+      });
+
+      describe('Active', () => {
+        beforeEach(() => page.navigateTo('/careers'));
+
+        it('should set current page as active', () => {
+          const pageLink = page.getPageLinks().get(2);
+
+          expect(pageLink.getAttribute('class')).toContain('active');
         });
-    });
 
-    it('should hide links on close', () => {
-      page
-        .getToggle()
-        .click()
-        .then(() => page.getToggle().click())
-        .then(_ => {
-          expect(page.getNavLinks().isDisplayed()).toBe(false);
-        });
-    });
+        it('should set routed page as active on page link click', () => {
+          const pageLink = page.getPageLinks().get(2);
+          const newPageLink = page.getPageLinks().get(3);
 
-    it('should hide links on page click', () => {
-      const el = page.getLinks().get(1);
-
-      page
-        .getToggle()
-        .click()
-        .then(() => page.isClickable(el))
-        .then(() => el.click())
-        .then(_ => expect(page.getNavLinks().isDisplayed()).toBe(false));
-    });
-
-    it('should hide links on logo click', () => {
-      page
-        .getToggle()
-        .click()
-        .then(() =>
           page
-            .getLinks()
-            .first()
-            .click()
-        )
-        .then(_ => expect(page.getNavLinks().isDisplayed()).toBe(false));
+            .isClickable(newPageLink)
+            .then(() => newPageLink.click())
+            .then(_ => {
+              expect(pageLink.getAttribute('class')).not.toContain('active');
+              expect(newPageLink.getAttribute('class')).toContain('active');
+            });
+        });
+
+        it('should unset current page as active on home link click', () => {
+          const pageLink = page.getPageLinks().get(2);
+          const homeLink = page.getHomeLink();
+
+          page
+            .isClickable(homeLink)
+            .then(() => homeLink.click())
+            .then(_ =>
+              expect(pageLink.getAttribute('class')).not.toContain('active')
+            );
+        });
+      });
+    });
+  });
+
+  describe('Desktop', () => {
+    it('should display home link', () => {
+      expect(page.getHomeLink().isDisplayed()).toBeTruthy();
     });
 
-    afterAll(() => page.setSize());
+    it('should display page links', () => {
+      expect(page.getPageLink().isDisplayed()).toBeTruthy();
+    });
+
+    it('should not display toggle', () => {
+      expect(page.getNavToggle().isDisplayed()).toBeFalsy();
+    });
+  });
+
+  describe('Menu', () => {
+    beforeEach(() => page.setWindowSize(200, 300));
+
+    describe('Closed', () => {
+      it('should show toggle', () => {
+        expect(page.getNavToggle().isDisplayed()).toBeTruthy();
+      });
+
+      it('should show home link', () => {
+        expect(page.getHomeLink().isDisplayed()).toBeTruthy();
+      });
+
+      it('should not show page links', () => {
+        expect(page.getPageLink().isDisplayed()).toBeFalsy();
+      });
+    });
+
+    describe('Open', () => {
+      beforeEach(() =>
+        page
+          .isClickable(page.getNavToggle())
+          .then(_ => page.getNavToggle().click()));
+
+      it('should show toggle', () => {
+        expect(page.getNavToggle().isDisplayed()).toBeTruthy();
+      });
+
+      it('should show home link', () => {
+        expect(page.getHomeLink().isDisplayed()).toBeTruthy();
+      });
+
+      it('should show page links', () => {
+        expect(page.getPageLink().isDisplayed()).toBeTruthy();
+      });
+
+      it('should close menu on home click', () => {
+        const el = page.getHomeLink();
+
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(_ => {
+            expect(page.getHomeLink().isDisplayed()).toBeTruthy();
+            expect(page.getPageLink().isDisplayed()).toBeFalsy();
+          });
+      });
+
+      it('should close menu on page click', () => {
+        const el = page.getPageLinks().first();
+
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(_ => {
+            expect(page.getHomeLink().isDisplayed()).toBeTruthy();
+            expect(page.getPageLink().isDisplayed()).toBeFalsy();
+          });
+      });
+    });
+
+    afterEach(() => page.setWindowSize());
   });
 });

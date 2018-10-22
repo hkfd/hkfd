@@ -3,62 +3,43 @@ import { WorkPage } from './work.po';
 describe('Work', () => {
   let page: WorkPage;
 
-  beforeEach(() => {
-    page = new WorkPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new WorkPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     expect(page.getTitle()).toBe('Heckford – Our Work');
   });
 
-  it('should set og:title', () => {
-    expect(page.getMetaTagTitle()).toBe('Our Work');
-  });
-
-  it('should display post title', () => {
-    expect(page.getPageTitle()).toBeTruthy();
+  it('should display page title', () => {
+    expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
   describe('Case Studies', () => {
-    it('should have case study', () => {
-      expect(
-        page
-          .getCaseStudies()
-          .first()
-          .isPresent()
-      ).toBe(true);
-    });
-
-    it('should display case study', () => {
-      expect(
-        page
-          .getCaseStudies()
-          .first()
-          .isDisplayed()
-      ).toBe(true);
-    });
-
-    it('should have more than 1 case study', () => {
+    it('should have multiple case studies', () => {
       expect(page.getCaseStudies().count()).toBeGreaterThan(1);
     });
 
-    it('should display case study title', () => {
-      expect(page.getCaseStudyTitle()).toBeTruthy();
-    });
+    describe('Case Study', () => {
+      it('should be displayed', () => {
+        expect(page.getCaseStudy().isDisplayed()).toBeTruthy();
+      });
 
-    it('should display case study image', () => {
-      expect(page.getCaseStudyImage().isDisplayed()).toBe(true);
-    });
+      it('should display title', () => {
+        expect(page.getCaseStudyTitle().getText()).toBeTruthy();
+      });
 
-    it('should route on click', () => {
-      const originalUrl = page.getUrl();
-      const el = page.getCaseStudies().first();
+      it('should display thumbnail', () => {
+        expect(page.getCaseStudyThumbnail().isDisplayed()).toBeTruthy();
+      });
 
-      page
-        .isClickable(el)
-        .then(() => el.click())
-        .then(_ => expect(page.getUrl()).not.toBe(originalUrl));
+      it('should route to case study on click', () => {
+        const el = page.getCaseStudy();
+
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(() => page.isNotVisible(el))
+          .then(_ => expect(page.getUrl()).toContain('/work/'));
+      });
     });
   });
 });

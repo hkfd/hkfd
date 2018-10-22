@@ -3,34 +3,26 @@ import { NewsPostPage } from './news-post.po';
 describe('NewsPost', () => {
   let page: NewsPostPage;
 
-  beforeEach(() => {
-    page = new NewsPostPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new NewsPostPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     page
       .getPostTitle()
       .getAttribute('textContent')
       .then(title => expect(page.getTitle()).toBe(`Heckford – ${title}`));
   });
 
-  it('should set og:title', () => {
-    page
-      .getPostTitle()
-      .getAttribute('textContent')
-      .then(title => expect(page.getMetaTagTitle()).toBe(title));
-  });
+  describe('Post', () => {
+    it('should display date', () => {
+      expect(page.getPostDate().getText()).toBeTruthy();
+    });
 
-  it('should display post date', () => {
-    expect(page.getPostDate().getText()).toBeTruthy();
-  });
+    it('should display title', () => {
+      expect(page.getPostTitle().getText()).toBeTruthy();
+    });
 
-  it('should display post title', () => {
-    expect(page.getPostTitle().getText()).toBeTruthy();
-  });
-
-  it('should display post thumbnail', () => {
-    expect(page.getPostThumbnail().isDisplayed()).toBe(true);
+    it('should display thumbnail', () => {
+      expect(page.getPostThumbnail().isDisplayed()).toBeTruthy();
+    });
   });
 });

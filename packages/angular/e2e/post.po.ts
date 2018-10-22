@@ -7,27 +7,25 @@ import {
 } from 'protractor';
 
 export class PostPage {
-  isVisible(el: ElementFinder = this.getPageTitle()) {
+  constructor() {
+    this.navigateTo('/work/wainhomes');
+  }
+
+  isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
-    return browser.wait(isVisible, 5000);
+    return browser.wait(isVisible, 3000);
   }
 
   getUrl() {
     return browser.getCurrentUrl();
   }
 
-  navigateTo(url: string = '/work/tomy') {
-    return browser.get(url).then(_ => this.isVisible());
-  }
-
   getTitle() {
     return browser.getTitle();
   }
 
-  getMetaTagTitle() {
-    return browser.driver
-      .findElement(by.xpath('//meta[@property="og:title"]'))
-      .getAttribute('content');
+  navigateTo(url: string) {
+    return browser.get(url).then(_ => this.isVisible(this.getPageIntro()));
   }
 
   getPageTitle() {
@@ -35,20 +33,15 @@ export class PostPage {
   }
 
   getPageIntro() {
-    return element(by.id('text-intro'))
-      .all(by.css('p'))
-      .first()
-      .getText();
+    return element(by.css('#text-intro'));
   }
 
   getOverview() {
-    return element(by.id('info-overview'));
+    return element(by.css('#info-overview'));
   }
 
   getOverviewTitle() {
-    return this.getOverview()
-      .element(by.css('span'))
-      .getText();
+    return this.getOverview().element(by.css('span'));
   }
 
   getOverviewList() {
@@ -59,10 +52,11 @@ export class PostPage {
     return element.all(by.css('section'));
   }
 
+  getSection() {
+    return this.getSections().last();
+  }
+
   getSectionTitle() {
-    return this.getSections()
-      .last()
-      .element(by.css('h2'))
-      .getText();
+    return this.getSection().element(by.css('h2'));
   }
 }

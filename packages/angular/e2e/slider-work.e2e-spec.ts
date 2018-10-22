@@ -3,45 +3,61 @@ import { SliderWork } from './slider-work.po';
 describe('SliderWork', () => {
   let page: SliderWork;
 
-  beforeEach(() => {
-    page = new SliderWork();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new SliderWork()));
 
-  it('should be present', () => {
-    expect(page.getSlider().isPresent()).toBe(true);
-  });
-
-  it('should have image', () => {
-    expect(
-      page
-        .getImages()
-        .first()
-        .isPresent()
-    ).toBe(true);
-  });
-
-  it('should have more than 1 image', () => {
-    expect(page.getImages().count()).toBeGreaterThan(1);
+  it('should be displayed', () => {
+    expect(page.getSlider().isDisplayed()).toBeTruthy();
   });
 
   it('should display previous arrow', () => {
-    expect(page.getPrevArrow().isDisplayed()).toBe(true);
+    expect(page.getSliderPrevArrow().isDisplayed()).toBeTruthy();
   });
 
   it('should display next arrow', () => {
-    expect(page.getNextArrow().isDisplayed()).toBe(true);
+    expect(page.getSliderNextArrow().isDisplayed()).toBeTruthy();
   });
 
-  it('should display title', () => {
-    expect(page.getSlideTitle()).toBeTruthy();
-  });
+  describe('Slide', () => {
+    it('should display image', () => {
+      expect(page.getSliderImage().isDisplayed()).toBeTruthy();
+    });
 
-  it('should display sector', () => {
-    expect(page.getSlideSector()).toBeTruthy();
-  });
+    it('should display sector', () => {
+      expect(page.getSlideSector().getText()).toBeTruthy();
+    });
 
-  it('should have link', () => {
-    expect(page.getLink().isPresent()).toBe(true);
+    describe('Title', () => {
+      it('should be displayed', () => {
+        expect(page.getSlideTitle().getText()).toBeTruthy();
+      });
+
+      it('should route on click', async () => {
+        const el = page.getSlideTitle();
+        const pageUrl = await page.getSlideLink().getAttribute('href');
+
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(() => page.isNotVisible(page.getSlider()))
+          .then(_ => expect(page.getUrl()).toBe(pageUrl));
+      });
+    });
+
+    describe('Link', () => {
+      it('should be displayed', () => {
+        expect(page.getSlideLink().isDisplayed()).toBeTruthy();
+      });
+
+      it('should route on click', async () => {
+        const el = page.getSlideLink();
+        const pageUrl = await page.getSlideLink().getAttribute('href');
+
+        page
+          .isClickable(el)
+          .then(() => el.click())
+          .then(() => page.isNotVisible(page.getSlider()))
+          .then(_ => expect(page.getUrl()).toBe(pageUrl));
+      });
+    });
   });
 });

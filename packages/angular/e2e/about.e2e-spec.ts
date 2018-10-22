@@ -3,69 +3,65 @@ import { AboutPage } from './about.po';
 describe('About', () => {
   let page: AboutPage;
 
-  beforeEach(() => {
-    page = new AboutPage();
-    page.navigateTo();
-  });
+  beforeEach(() => (page = new AboutPage()));
 
-  it('should set title', () => {
+  it('should display title', () => {
     expect(page.getTitle()).toBe('Heckford – About');
   });
 
-  it('should set og:title', () => {
-    expect(page.getMetaTagTitle()).toBe('About');
-  });
-
   it('should display page title', () => {
-    expect(page.getPageTitle()).toBeTruthy();
+    expect(page.getPageTitle().getText()).toBeTruthy();
   });
 
   it('should display intro image', () => {
-    expect(page.getIntroImage().isDisplayed()).toBe(true);
+    expect(page.getIntroImage().isDisplayed()).toBeTruthy();
   });
 
   describe('Team', () => {
-    it('should have person', () => {
-      expect(
-        page
-          .getPeople()
-          .first()
-          .isPresent()
-      ).toBe(true);
-    });
-
-    it('should display person', () => {
-      expect(
-        page
-          .getPeople()
-          .first()
-          .isDisplayed()
-      ).toBe(true);
-    });
-
-    it('should have more than 1 person', () => {
+    it('should have multiple people', () => {
       expect(page.getPeople().count()).toBeGreaterThan(1);
     });
 
-    it('should display persons image', () => {
-      expect(page.getPersonImage().isDisplayed()).toBe(true);
-    });
+    describe('Person', () => {
+      it('should be displayed', () => {
+        expect(
+          page
+            .getPeople()
+            .first()
+            .isDisplayed()
+        ).toBeTruthy();
+      });
 
-    it('should display persons name', () => {
-      expect(page.getPersonName()).toBeTruthy();
-    });
+      it('should display image', () => {
+        expect(page.getPersonImage().isDisplayed()).toBeTruthy();
+      });
 
-    it('should display persons position', () => {
-      expect(page.getPersonPosition()).toBeTruthy();
+      it('should display name', () => {
+        expect(page.getPersonName().getText()).toBeTruthy();
+      });
+
+      it('should display position', () => {
+        expect(page.getPersonPosition().getText()).toBeTruthy();
+      });
     });
 
     describe('Join', () => {
-      it('should link to /careers', () => {
+      it('should be displayed', () => {
+        expect(
+          page
+            .getPeople()
+            .last()
+            .isDisplayed()
+        ).toBeTruthy();
+      });
+
+      it('should route to /careers on click', () => {
         const el = page.getPeople().last();
 
         page
           .isClickable(el)
           .then(() => el.click())
+          .then(() => page.isNotVisible(page.getPerson()))
           .then(_ => expect(page.getUrl()).toContain('/careers'));
       });
     });
