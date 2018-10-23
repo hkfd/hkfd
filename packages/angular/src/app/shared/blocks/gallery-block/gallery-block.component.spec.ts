@@ -33,7 +33,7 @@ class Page {
   }
 
   constructor() {
-    comp.data = Data.Generic.images;
+    comp.data = Data.Generic.getImages();
   }
 
   private queryAll<T>(selector: string): T[] {

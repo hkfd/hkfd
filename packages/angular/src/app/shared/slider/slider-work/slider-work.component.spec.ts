@@ -67,7 +67,7 @@ class Page {
   constructor() {
     this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
 
-    comp.caseStudies = Data.Api.caseStudies;
+    comp.caseStudies = Data.Api.getCaseStudies<void>();
   }
 }
 

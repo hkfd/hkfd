@@ -63,7 +63,7 @@ describe('AboutComponent', () => {
   });
 
   it('should call ApiPipe with team thumbnails', () => {
-    Data.Api.team.forEach(person =>
+    Data.Api.getTeam<void>().forEach(person =>
       expect(apiPipe).toHaveBeenCalledWith(person.thumbnail)
     );
   });

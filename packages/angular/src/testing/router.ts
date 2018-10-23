@@ -8,6 +8,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { convertToParamMap, ParamMap } from '@angular/router';
 
+import { makeImmutable } from 'testing';
+
 @Injectable()
 export class ActivatedRouteStub {
   private queryParamSubject = new BehaviorSubject(
@@ -51,7 +53,7 @@ export class ActivatedRouteStub {
 
   private _testData: any;
   get testData() {
-    return this._testData;
+    return makeImmutable(this._testData);
   }
   set testData(data: any) {
     this._testData = data;

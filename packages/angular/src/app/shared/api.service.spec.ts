@@ -33,7 +33,8 @@ describe('ApiService', () => {
 
   describe('getServices', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-services', Data.Api.services));
+      beforeEach(() =>
+        transferState.set('api-services', Data.Api.getServices<void>()));
 
       it('should not call HttpClient get', async(() => {
         apiService.getServices().subscribe();
@@ -46,7 +47,7 @@ describe('ApiService', () => {
       it('should return services', async(() => {
         apiService
           .getServices()
-          .subscribe(res => expect(res).toEqual(Data.Api.services));
+          .subscribe(res => expect(res).toEqual(Data.Api.getServices<void>()));
       }));
     });
 
@@ -56,7 +57,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.services);
+          .flush(Data.Api.getServices<void>());
       }));
 
       it('should call HttpClient again on error', async(() => {
@@ -67,17 +68,17 @@ describe('ApiService', () => {
           .error(new ErrorEvent('err'));
         mockHttp
           .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.services);
+          .flush(Data.Api.getServices<void>());
       }));
 
       it('should return services', async(() => {
         apiService
           .getServices()
-          .subscribe(res => expect(res).toEqual(Data.Api.services));
+          .subscribe(res => expect(res).toEqual(Data.Api.getServices<void>()));
 
         mockHttp
           .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.services);
+          .flush(Data.Api.getServices<void>());
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -96,7 +97,8 @@ describe('ApiService', () => {
 
   describe('getCareers', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-careers', Data.Api.careers));
+      beforeEach(() =>
+        transferState.set('api-careers', Data.Api.getCareers<void>()));
 
       it('should not call HttpClient get', async(() => {
         apiService.getCareers().subscribe();
@@ -109,7 +111,7 @@ describe('ApiService', () => {
       it('should return careers', async(() => {
         apiService
           .getCareers()
-          .subscribe(res => expect(res).toEqual(Data.Api.careers));
+          .subscribe(res => expect(res).toEqual(Data.Api.getCareers<void>()));
       }));
     });
 
@@ -119,7 +121,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.careers);
+          .flush(Data.Api.getCareers<void>());
       }));
 
       it('should call HttpClient again on error', async(() => {
@@ -130,17 +132,17 @@ describe('ApiService', () => {
           .error(new ErrorEvent('err'));
         mockHttp
           .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.careers);
+          .flush(Data.Api.getCareers<void>());
       }));
 
       it('should return careers', async(() => {
         apiService
           .getCareers()
-          .subscribe(res => expect(res).toEqual(Data.Api.careers));
+          .subscribe(res => expect(res).toEqual(Data.Api.getCareers<void>()));
 
         mockHttp
           .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.careers);
+          .flush(Data.Api.getCareers<void>());
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -159,7 +161,8 @@ describe('ApiService', () => {
 
   describe('getCareer', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-career', Data.Api.careers[0]));
+      beforeEach(() =>
+        transferState.set('api-career', Data.Api.getCareers<void>()[0]));
 
       describe('same id', () => {
         it('should not call HttpClient get', async(() => {
@@ -173,7 +176,9 @@ describe('ApiService', () => {
         it('should return career', async(() => {
           apiService
             .getCareer('career-1')
-            .subscribe(res => expect(res).toEqual(Data.Api.careers[0]));
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getCareers<void>()[0])
+            );
         }));
       });
 
@@ -195,7 +200,7 @@ describe('ApiService', () => {
 
           mockHttp
             .expectOne('https://api.testing/careers.json')
-            .flush(Data.Api.careers);
+            .flush(Data.Api.getCareers<void>());
         }));
       });
     });
@@ -208,7 +213,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.careers);
+          .flush(Data.Api.getCareers<void>());
       }));
 
       it('should call HttpClient again on error', async(() => {
@@ -221,17 +226,19 @@ describe('ApiService', () => {
           .error(new ErrorEvent('err'));
         mockHttp
           .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.careers);
+          .flush(Data.Api.getCareers<void>());
       }));
 
       it('should return career', async(() => {
         apiService
           .getCareer('career-1')
-          .subscribe(res => expect(res).toEqual(Data.Api.careers[0]));
+          .subscribe(res =>
+            expect(res).toEqual(Data.Api.getCareers<void>()[0])
+          );
 
         mockHttp
           .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.careers);
+          .flush(Data.Api.getCareers<void>());
       }));
 
       it('should return undefined on last retry error', async(() => {
@@ -253,7 +260,7 @@ describe('ApiService', () => {
   describe('getCaseStudies', () => {
     describe('cache', () => {
       beforeEach(() =>
-        transferState.set('api-case-studies', Data.Api.caseStudies));
+        transferState.set('api-case-studies', Data.Api.getCaseStudies<void>()));
 
       it('should not call HttpClient get', async(() => {
         apiService.getCaseStudies().subscribe();
@@ -266,7 +273,9 @@ describe('ApiService', () => {
       it('should return case studies', async(() => {
         apiService
           .getCaseStudies()
-          .subscribe(res => expect(res).toEqual(Data.Api.caseStudies));
+          .subscribe(res =>
+            expect(res).toEqual(Data.Api.getCaseStudies<void>())
+          );
       }));
     });
 
@@ -276,7 +285,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.caseStudies);
+          .flush(Data.Api.getCaseStudies<void>());
       }));
 
       it('should call HttpClient again on error', async(() => {
@@ -287,17 +296,19 @@ describe('ApiService', () => {
           .error(new ErrorEvent('err'));
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.caseStudies);
+          .flush(Data.Api.getCaseStudies<void>());
       }));
 
       it('should return case studies', async(() => {
         apiService
           .getCaseStudies()
-          .subscribe(res => expect(res).toEqual(Data.Api.caseStudies));
+          .subscribe(res =>
+            expect(res).toEqual(Data.Api.getCaseStudies<void>())
+          );
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.caseStudies);
+          .flush(Data.Api.getCaseStudies<void>());
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -316,7 +327,7 @@ describe('ApiService', () => {
 
   describe('getTeam', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-team', Data.Api.team));
+      beforeEach(() => transferState.set('api-team', Data.Api.getTeam<void>()));
 
       it('should not call HttpClient get', async(() => {
         apiService.getTeam().subscribe();
@@ -329,7 +340,7 @@ describe('ApiService', () => {
       it('should return team', async(() => {
         apiService
           .getTeam()
-          .subscribe(res => expect(res).toEqual(Data.Api.team));
+          .subscribe(res => expect(res).toEqual(Data.Api.getTeam<void>()));
       }));
     });
 
@@ -339,7 +350,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/team.json')
-          .flush(Data.Api.team);
+          .flush(Data.Api.getTeam<void>());
       }));
 
       it('should call HttpClient again on error', async(() => {
@@ -350,17 +361,17 @@ describe('ApiService', () => {
           .error(new ErrorEvent('err'));
         mockHttp
           .expectOne('https://api.testing/team.json')
-          .flush(Data.Api.team);
+          .flush(Data.Api.getTeam<void>());
       }));
 
       it('should return team', async(() => {
         apiService
           .getTeam()
-          .subscribe(res => expect(res).toEqual(Data.Api.team));
+          .subscribe(res => expect(res).toEqual(Data.Api.getTeam<void>()));
 
         mockHttp
           .expectOne('https://api.testing/team.json')
-          .flush(Data.Api.team);
+          .flush(Data.Api.getTeam<void>());
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -379,7 +390,7 @@ describe('ApiService', () => {
 
   describe('getClients', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-clients', Data.Api.clients));
+      beforeEach(() => transferState.set('api-clients', Data.Api.getClients()));
 
       it('should not call HttpClient get', async(() => {
         apiService.getClients().subscribe();
@@ -392,7 +403,7 @@ describe('ApiService', () => {
       it('should return clients', async(() => {
         apiService
           .getClients()
-          .subscribe(res => expect(res).toEqual(Data.Api.clients));
+          .subscribe(res => expect(res).toEqual(Data.Api.getClients()));
       }));
     });
 
@@ -402,7 +413,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/clients.json')
-          .flush(Data.Api.clients);
+          .flush(Data.Api.getClients());
       }));
 
       it('should call HttpClient again on error', async(() => {
@@ -413,17 +424,17 @@ describe('ApiService', () => {
           .error(new ErrorEvent('err'));
         mockHttp
           .expectOne('https://api.testing/clients.json')
-          .flush(Data.Api.clients);
+          .flush(Data.Api.getClients());
       }));
 
       it('should return clients', async(() => {
         apiService
           .getClients()
-          .subscribe(res => expect(res).toEqual(Data.Api.clients));
+          .subscribe(res => expect(res).toEqual(Data.Api.getClients()));
 
         mockHttp
           .expectOne('https://api.testing/clients.json')
-          .flush(Data.Api.clients);
+          .flush(Data.Api.getClients());
       }));
 
       it('should return empty array on last retry error', async(() => {
@@ -442,7 +453,8 @@ describe('ApiService', () => {
 
   describe('getPost', () => {
     describe('cache', () => {
-      beforeEach(() => transferState.set('api-post', Data.Api.caseStudies[0]));
+      beforeEach(() =>
+        transferState.set('api-post', Data.Api.getCaseStudies<void>()[0]));
 
       describe('same id', () => {
         it('should not call HttpClient get', async(() => {
@@ -459,7 +471,9 @@ describe('ApiService', () => {
         it('should return post', async(() => {
           apiService
             .getPost('work', 'case-study-1')
-            .subscribe(res => expect(res).toEqual(Data.Api.caseStudies[0]));
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getCaseStudies<void>()[0])
+            );
         }));
       });
 
@@ -481,7 +495,7 @@ describe('ApiService', () => {
 
           mockHttp
             .expectOne('https://api.testing/case-studies.json')
-            .flush(Data.Api.caseStudies);
+            .flush(Data.Api.getCaseStudies<void>());
         }));
       });
     });
@@ -494,7 +508,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.services);
+          .flush(Data.Api.getServices<void>());
       }));
 
       it('should set url to caseStudies if type is `work`', async(() => {
@@ -504,7 +518,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.caseStudies);
+          .flush(Data.Api.getCaseStudies<void>());
       }));
 
       it('should return service post', async(() => {
@@ -514,7 +528,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.services);
+          .flush(Data.Api.getServices<void>());
       }));
 
       it('should return case study post', async(() => {
@@ -526,7 +540,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.caseStudies);
+          .flush(Data.Api.getCaseStudies<void>());
       }));
 
       it('should return undefined if no type arg', async(() => {
@@ -542,7 +556,7 @@ describe('ApiService', () => {
 
         mockHttp
           .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.caseStudies);
+          .flush(Data.Api.getCaseStudies<void>());
       }));
 
       it('should return undefined on last retry error', async(() => {

@@ -183,7 +183,7 @@ describe('SliderComponent', () => {
 
   describe('mouseLeave', () => {
     it('should call startTimer if images', () => {
-      comp.images = Data.Generic.images;
+      comp.images = Data.Generic.getImages();
       comp.mouseLeave();
 
       expect(page.startTimer).toHaveBeenCalled();
@@ -215,7 +215,7 @@ class Page {
   }
 
   constructor() {
-    comp.images = Data.Generic.images;
+    comp.images = Data.Generic.getImages();
 
     this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
     this.startTimer = spyOn(comp, 'startTimer').and.callThrough();

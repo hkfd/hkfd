@@ -16,23 +16,23 @@ export class MockApiService {
   }
 
   getServices(): Observable<Api.Service[]> {
-    return of(Data.Api.services);
+    return of(Data.Api.getServices<void>());
   }
 
   getCaseStudies(): Observable<Api.CaseStudy[]> {
-    return of(Data.Api.caseStudies);
+    return of(Data.Api.getCaseStudies<void>());
   }
 
   getClients(): Observable<Api.Client[]> {
-    return of(Data.Api.clients);
+    return of(Data.Api.getClients());
   }
 
   getCareers(): Observable<Api.Career[]> {
-    return of(Data.Api.careers);
+    return of(Data.Api.getCareers<void>());
   }
 
   getCareer(id: string): Observable<Api.Career | undefined> {
-    return of(Data.Api.careers).pipe(
+    return of(Data.Api.getCareers<void>()).pipe(
       flatMap((careers: Api.Career[]) => careers),
       find((career: Api.Career) => career.id === id),
       catchError(_ => of(undefined))
@@ -40,13 +40,13 @@ export class MockApiService {
   }
 
   getTeam(): Observable<Api.Team[]> {
-    return of(Data.Api.team);
+    return of(Data.Api.getTeam<void>());
   }
 
   getPost(type: string, id: string): Observable<Api.Post | undefined> {
     let url;
-    if (type === 'service') url = Data.Api.services;
-    if (type === 'work') url = Data.Api.caseStudies;
+    if (type === 'service') url = Data.Api.getServices<void>();
+    if (type === 'work') url = Data.Api.getCaseStudies<void>();
 
     return of(<Api.Post[]>url).pipe(
       flatMap((posts: Api.Post[]) => posts),

@@ -34,7 +34,7 @@ class Page {
   }
 
   constructor() {
-    comp.data = Data.Generic.video;
+    comp.data = Data.Generic.getVideo();
 
     const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
     lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);

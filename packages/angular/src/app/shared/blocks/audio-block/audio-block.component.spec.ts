@@ -35,7 +35,7 @@ class Page {
   }
 
   constructor() {
-    comp.data = Data.Generic.audio;
+    comp.data = Data.Generic.getAudio();
   }
 
   private query<T>(selector: string): T {

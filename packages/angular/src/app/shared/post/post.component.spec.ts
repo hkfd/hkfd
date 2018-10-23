@@ -21,7 +21,7 @@ let apiPipe: jasmine.Spy;
 describe('PostComponent', () => {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
-    activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+    activatedRoute.testData = { post: Data.Api.getCaseStudies('Case Study 1') };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -39,7 +39,7 @@ describe('PostComponent', () => {
 
   describe('OnInit', () => {
     it('should set post', () => {
-      expect(comp.post).toEqual(Data.Api.caseStudies[0]);
+      expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
     });
 
     it('should set layout', () => {
@@ -53,7 +53,9 @@ describe('PostComponent', () => {
 
   describe('Content', () => {
     it('should display title', () => {
-      activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+      activatedRoute.testData = {
+        post: Data.Api.getCaseStudies('Case Study 1')
+      };
       comp.ngOnInit();
       fixture.detectChanges();
 
@@ -61,7 +63,9 @@ describe('PostComponent', () => {
     });
 
     it('should display intro', () => {
-      activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+      activatedRoute.testData = {
+        post: Data.Api.getCaseStudies('Case Study 1')
+      };
       comp.ngOnInit();
       fixture.detectChanges();
 
@@ -70,7 +74,9 @@ describe('PostComponent', () => {
 
     describe('Text', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.caseStudies[0] };
+        activatedRoute.testData = {
+          post: Data.Api.getCaseStudies('Case Study 1')
+        };
         comp.ngOnInit();
       });
 
@@ -85,7 +91,9 @@ describe('PostComponent', () => {
 
     describe('Image', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.caseStudies[1] };
+        activatedRoute.testData = {
+          post: Data.Api.getCaseStudies('Case Study 2')
+        };
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -125,7 +133,9 @@ describe('PostComponent', () => {
 
     describe('Gallery', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.caseStudies[2] };
+        activatedRoute.testData = {
+          post: Data.Api.getCaseStudies('Case Study 3')
+        };
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -147,7 +157,7 @@ describe('PostComponent', () => {
 
     describe('Duo', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.services[0] };
+        activatedRoute.testData = { post: Data.Api.getServices('Service 1') };
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -169,7 +179,7 @@ describe('PostComponent', () => {
 
     describe('Video', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.services[1] };
+        activatedRoute.testData = { post: Data.Api.getServices('Service 2') };
         comp.ngOnInit();
         fixture.detectChanges();
       });
@@ -191,7 +201,7 @@ describe('PostComponent', () => {
 
     describe('Audio', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.services[2] };
+        activatedRoute.testData = { post: Data.Api.getServices('Service 3') };
         comp.ngOnInit();
         fixture.detectChanges();
       });
