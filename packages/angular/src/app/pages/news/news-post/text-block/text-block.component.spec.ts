@@ -65,7 +65,7 @@ class Page {
   }
 
   constructor() {
-    comp.data = Data.Prismic.text;
+    comp.data = Data.Prismic.getText();
   }
 
   private query<T>(selector: string): T {

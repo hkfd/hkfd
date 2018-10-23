@@ -42,7 +42,7 @@ class Page {
   }
 
   constructor() {
-    comp.image = Data.Generic.image;
+    comp.image = Data.Generic.getImage();
 
     const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
     lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);

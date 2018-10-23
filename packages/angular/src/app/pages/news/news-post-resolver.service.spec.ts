@@ -72,8 +72,8 @@ describe('NewsPostResolver', () => {
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
-      ...Data.Prismic.post,
-      data: { ...Data.Prismic.post.data, title: null as any }
+      ...Data.Prismic.getPost(),
+      data: { ...Data.Prismic.getPost().data, title: null as any }
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
@@ -94,8 +94,8 @@ describe('NewsPostResolver', () => {
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
-      ...Data.Prismic.post,
-      data: { ...Data.Prismic.post.data, description: null as any }
+      ...Data.Prismic.getPost(),
+      data: { ...Data.Prismic.getPost().data, description: null as any }
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
@@ -116,8 +116,8 @@ describe('NewsPostResolver', () => {
     activatedRoute.testQueryParamMap = {};
 
     const post: Prismic.Post = {
-      ...Data.Prismic.post,
-      data: { ...Data.Prismic.post.data, image: null as any }
+      ...Data.Prismic.getPost(),
+      data: { ...Data.Prismic.getPost().data, image: null as any }
     };
     (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 

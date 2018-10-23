@@ -103,7 +103,9 @@ describe('PostResolver', () => {
 
     (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
-    >).subscribe(post => expect(post).toEqual(Data.Api.services[0]));
+    >).subscribe(post =>
+      expect(post).toEqual(Data.Api.getServices('Service 1'))
+    );
   });
 
   it('should return case study post if exists', () => {
@@ -112,7 +114,9 @@ describe('PostResolver', () => {
 
     (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
       Api.Post
-    >).subscribe(post => expect(post).toEqual(Data.Api.caseStudies[0]));
+    >).subscribe(post =>
+      expect(post).toEqual(Data.Api.getCaseStudies('Case Study 1'))
+    );
   });
 
   it('should navigate to / if no matching post', fakeAsync(() => {

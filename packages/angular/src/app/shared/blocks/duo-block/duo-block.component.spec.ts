@@ -29,11 +29,11 @@ describe('DuoBlockComponent', () => {
   });
 
   it('should call SlicePipe with 0:2', () => {
-    expect(slicePipe).toHaveBeenCalledWith(Data.Generic.duo, 0, 2);
+    expect(slicePipe).toHaveBeenCalledWith(Data.Generic.getDuo(), 0, 2);
   });
 
   it('should only display two ImageComponents', () => {
-    comp.data = Data.Generic.images;
+    comp.data = Data.Generic.getImages();
     fixture.detectChanges();
 
     expect(page.image.length).toBe(2);
@@ -46,7 +46,7 @@ class Page {
   }
 
   constructor() {
-    comp.data = Data.Generic.duo;
+    comp.data = Data.Generic.getDuo();
   }
 
   private queryAll<T>(selector: string): T[] {

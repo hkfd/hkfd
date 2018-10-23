@@ -20,7 +20,7 @@ let apiPipe: jasmine.Spy;
 describe('CareerComponent', () => {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
-    activatedRoute.testData = { career: Data.Api.careers[0] };
+    activatedRoute.testData = { career: Data.Api.getCareers('Career 1') };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -33,7 +33,7 @@ describe('CareerComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should set career', () => {
-    expect(comp.career).toEqual(Data.Api.careers[0]);
+    expect(comp.career).toEqual(Data.Api.getCareers('Career 1'));
   });
 
   describe('Content', () => {

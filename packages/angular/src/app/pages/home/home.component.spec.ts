@@ -71,7 +71,7 @@ describe('HomeComponent', () => {
   });
 
   it('should call ApiPipe with service thumbnails', () => {
-    Data.Api.services.forEach(service =>
+    Data.Api.getServices<void>().forEach(service =>
       expect(apiPipe).toHaveBeenCalledWith(service.thumbnail)
     );
   });

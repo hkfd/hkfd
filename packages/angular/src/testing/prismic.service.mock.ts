@@ -15,10 +15,10 @@ export class MockPrismicService {
   }
 
   getPosts(): Observable<Prismic.PostsResponse> {
-    return of(Data.Prismic.postsResponse);
+    return of(Data.Prismic.getPostsResponse());
   }
 
   getPost(): Observable<Prismic.Post> {
-    return of(Data.Prismic.posts[0]);
+    return of(Data.Prismic.getPosts('post-1'));
   }
 }

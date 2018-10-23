@@ -98,7 +98,7 @@ describe('NewsComponent', () => {
   });
 
   it('should call PrismicPipe with post thumbnails', () => {
-    Data.Prismic.postsResponse.results.forEach(post =>
+    Data.Prismic.getPostsResponse().results.forEach(post =>
       expect(prismicPipe).toHaveBeenCalledWith(post.data)
     );
   });
@@ -108,7 +108,7 @@ describe('NewsComponent', () => {
   });
 
   it('should call RichText asText with post titles', () => {
-    Data.Prismic.postsResponse.results.forEach(post =>
+    Data.Prismic.getPostsResponse().results.forEach(post =>
       expect(richText.asText).toHaveBeenCalledWith(post.data.title)
     );
   });

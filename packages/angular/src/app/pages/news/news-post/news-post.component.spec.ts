@@ -21,7 +21,7 @@ let page: Page;
 describe('NewsPostComponent', () => {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
-    activatedRoute.testData = { post: Data.Prismic.posts[0] };
+    activatedRoute.testData = { post: Data.Prismic.getPosts('post-1') };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -34,7 +34,7 @@ describe('NewsPostComponent', () => {
   beforeEach(async(() => createComponent()));
 
   it('should set post', () => {
-    expect(comp.post).toEqual(Data.Prismic.posts[0]);
+    expect(comp.post).toEqual(Data.Prismic.getPosts('post-1'));
   });
 
   it('should call PrismicPipe', () => {
@@ -48,7 +48,7 @@ describe('NewsPostComponent', () => {
   describe('Content', () => {
     describe('Text', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.posts[1] };
+        activatedRoute.testData = { post: Data.Prismic.getPosts('post-2') };
         prismicPipe.calls.reset();
         fixture.detectChanges();
       });
@@ -64,7 +64,7 @@ describe('NewsPostComponent', () => {
 
     describe('Image', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.posts[2] };
+        activatedRoute.testData = { post: Data.Prismic.getPosts('post-3') };
         prismicPipe.calls.reset();
         fixture.detectChanges();
       });
@@ -86,7 +86,7 @@ describe('NewsPostComponent', () => {
 
     describe('Duo', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.posts[3] };
+        activatedRoute.testData = { post: Data.Prismic.getPosts('post-4') };
         prismicPipe.calls.reset();
         fixture.detectChanges();
       });
@@ -108,7 +108,7 @@ describe('NewsPostComponent', () => {
 
     describe('Gallery', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.posts[4] };
+        activatedRoute.testData = { post: Data.Prismic.getPosts('post-5') };
         prismicPipe.calls.reset();
         fixture.detectChanges();
       });
@@ -130,7 +130,7 @@ describe('NewsPostComponent', () => {
 
     describe('Video', () => {
       beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.posts[5] };
+        activatedRoute.testData = { post: Data.Prismic.getPosts('post-6') };
         prismicPipe.calls.reset();
         fixture.detectChanges();
       });

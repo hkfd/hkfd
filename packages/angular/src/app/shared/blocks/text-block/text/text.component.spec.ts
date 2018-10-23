@@ -18,7 +18,7 @@ describe('TextComponent', () => {
 
   describe('URL', () => {
     beforeEach(() => {
-      comp.text = Data.Api.sentence.url;
+      comp.text = Data.Api.getSentence('url');
       fixture.detectChanges();
     });
 
@@ -45,7 +45,7 @@ describe('TextComponent', () => {
 
   describe('Heading', () => {
     beforeEach(() => {
-      comp.text = Data.Api.sentence.heading;
+      comp.text = Data.Api.getSentence('heading');
       fixture.detectChanges();
     });
 
@@ -60,7 +60,7 @@ describe('TextComponent', () => {
 
   describe('Bold', () => {
     beforeEach(() => {
-      comp.text = Data.Api.sentence.bold;
+      comp.text = Data.Api.getSentence('bold');
       fixture.detectChanges();
     });
 
@@ -75,7 +75,7 @@ describe('TextComponent', () => {
 
   describe('Italic', () => {
     beforeEach(() => {
-      comp.text = Data.Api.sentence.italic;
+      comp.text = Data.Api.getSentence('italic');
       fixture.detectChanges();
     });
 
@@ -90,7 +90,7 @@ describe('TextComponent', () => {
 
   describe('Normal', () => {
     beforeEach(() => {
-      comp.text = Data.Api.sentence.normal;
+      comp.text = Data.Api.getSentence('normal');
       fixture.detectChanges();
     });
 

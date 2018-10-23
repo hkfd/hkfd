@@ -61,7 +61,7 @@ describe('PrismicService', () => {
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
       }));
     });
   });
@@ -70,7 +70,7 @@ describe('PrismicService', () => {
     describe('cache', () => {
       beforeEach(() => {
         transferState.set('prismic-ref', 'abc');
-        transferState.set('prismic-posts', Data.Prismic.postsResponse);
+        transferState.set('prismic-posts', Data.Prismic.getPostsResponse());
       });
 
       it('should not call HttpClient get if `firstLoad` is true', async(() => {
@@ -82,7 +82,9 @@ describe('PrismicService', () => {
       it('should return posts', async(() => {
         prismicService
           .getPosts(true)
-          .subscribe(res => expect(res).toEqual(Data.Prismic.postsResponse));
+          .subscribe(res =>
+            expect(res).toEqual(Data.Prismic.getPostsResponse())
+          );
       }));
 
       it('should call HttpClient get if `firstLoad` is false', async(() => {
@@ -109,7 +111,7 @@ describe('PrismicService', () => {
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -124,7 +126,7 @@ describe('PrismicService', () => {
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -139,7 +141,7 @@ describe('PrismicService', () => {
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -158,7 +160,7 @@ describe('PrismicService', () => {
         prismicService.getPosts(true).subscribe();
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -175,7 +177,7 @@ describe('PrismicService', () => {
         prismicService.getPosts().subscribe();
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -192,7 +194,7 @@ describe('PrismicService', () => {
         prismicService.getPosts(true).subscribe();
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -209,7 +211,7 @@ describe('PrismicService', () => {
         prismicService.getPosts().subscribe();
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -223,18 +225,18 @@ describe('PrismicService', () => {
         prismicService
           .getPosts()
           .subscribe(postsRes =>
-            expect(postsRes).toEqual(Data.Prismic.postsResponse)
+            expect(postsRes).toEqual(Data.Prismic.getPostsResponse())
           );
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         mockHttp
           .expectOne(
             req =>
               req.url === `${environment.prismic.endpoint}/documents/search`
           )
-          .flush(Data.Prismic.postsResponse);
+          .flush(Data.Prismic.getPostsResponse());
       }));
     });
   });
@@ -243,7 +245,7 @@ describe('PrismicService', () => {
     describe('cache', () => {
       beforeEach(() => {
         transferState.set('prismic-ref', 'abc');
-        transferState.set('prismic-post', Data.Prismic.posts[0]);
+        transferState.set('prismic-post', Data.Prismic.getPosts('post-1'));
       });
 
       describe('same uid', () => {
@@ -256,7 +258,9 @@ describe('PrismicService', () => {
         it('should return post', async(() => {
           prismicService
             .getPost('post-1')
-            .subscribe(res => expect(res).toEqual(Data.Prismic.posts[0]));
+            .subscribe(res =>
+              expect(res).toEqual(Data.Prismic.getPosts('post-1'))
+            );
         }));
       });
 
@@ -282,14 +286,16 @@ describe('PrismicService', () => {
         it('should return post', async(() => {
           prismicService
             .getPost('post-2')
-            .subscribe(post => expect(post).toEqual(Data.Prismic.posts[0]));
+            .subscribe(post =>
+              expect(post).toEqual(Data.Prismic.getPosts('post-1'))
+            );
 
           mockHttp
             .expectOne(
               req =>
                 req.url === `${environment.prismic.endpoint}/documents/search`
             )
-            .flush(Data.Prismic.postsResponse);
+            .flush(Data.Prismic.getPostsResponse());
         }));
       });
     });
@@ -307,7 +313,7 @@ describe('PrismicService', () => {
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -322,7 +328,7 @@ describe('PrismicService', () => {
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         const {
           request: { params }
         } = mockHttp.expectOne(
@@ -335,17 +341,19 @@ describe('PrismicService', () => {
       it('should return post', async(() => {
         prismicService
           .getPost('')
-          .subscribe(post => expect(post).toEqual(Data.Prismic.posts[0]));
+          .subscribe(post =>
+            expect(post).toEqual(Data.Prismic.getPosts('post-1'))
+          );
 
         mockHttp
           .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.refResponse);
+          .flush(Data.Prismic.getRefResponse());
         mockHttp
           .expectOne(
             req =>
               req.url === `${environment.prismic.endpoint}/documents/search`
           )
-          .flush(Data.Prismic.postsResponse);
+          .flush(Data.Prismic.getPostsResponse());
       }));
     });
   });
