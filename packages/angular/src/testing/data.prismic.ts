@@ -122,7 +122,7 @@ export namespace Prismic {
             },
             body: []
           },
-          first_publication_date: null,
+          first_publication_date: new Date('1 Jan'),
           href: '',
           id: '',
           last_publication_date: null,
@@ -320,7 +320,7 @@ export namespace Prismic {
           },
           body: []
         },
-        first_publication_date: null,
+        first_publication_date: new Date('1 Jan'),
         href: '',
         id: '',
         last_publication_date: null,
@@ -541,6 +541,18 @@ export namespace Prismic {
           isMasterRef: true,
           label: '',
           ref: 'abc'
+        },
+        {
+          id: '2',
+          isMasterRef: false,
+          label: '',
+          ref: 'def'
+        },
+        {
+          id: '3',
+          isMasterRef: false,
+          label: '',
+          ref: 'ghi'
         }
       ],
       tags: [],

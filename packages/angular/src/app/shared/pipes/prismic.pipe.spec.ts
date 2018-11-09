@@ -6,99 +6,165 @@ let pipe: PrismicPipe;
 describe('PrismicPipe', () => {
   beforeEach(() => (pipe = new PrismicPipe()));
 
-  it('should create an instance', () => expect(pipe).toBeTruthy());
+  it('should create pipe', () => {
+    expect(pipe).toBeTruthy();
+  });
 
-  describe('transform', () => {
-    it('should call transformImage if image', () => {
-      const res = pipe.transform({ image: Data.Prismic.getImage() });
-
-      expect(res).toEqual({
-        src: jasmine.anything(),
-        srcset: jasmine.anything(),
-        alt: jasmine.anything()
+  describe('`transform`', () => {
+    it('should return `Generic.Image` if passed `image` arg', () => {
+      const res = pipe.transform({
+        image: {
+          proxy: {},
+          xs: { dimensions: {} },
+          sm: { dimensions: {} },
+          md: { dimensions: {} },
+          lg: { dimensions: {} },
+          dimensions: {}
+        }
       });
+
+      expect(Data.Generic.isImage(res)).toBeTruthy();
     });
 
-    it('should call transformVideo if video', () => {
-      const res = pipe.transform({ video: Data.Prismic.getVideo() });
+    it('should return `Generic.Video` if passed `video` arg', () => {
+      const res = pipe.transform({ video: {} });
 
-      expect(res).toEqual({
-        src: { attr: jasmine.anything(), val: jasmine.anything() }
-      });
+      expect(Data.Generic.isVideo(res)).toBeTruthy();
     });
 
-    it('should call map transformImage if array', () => {
-      const res = pipe.transform([{ image: Data.Prismic.getImage() }]);
-
-      expect(res).toEqual([
+    it('should return `Generic.Image` array if passed `[]` arg', () => {
+      const [res] = pipe.transform([
         {
-          src: jasmine.anything(),
-          srcset: jasmine.anything(),
-          alt: jasmine.anything()
+          image: {
+            proxy: {},
+            xs: { dimensions: {} },
+            sm: { dimensions: {} },
+            md: { dimensions: {} },
+            lg: { dimensions: {} },
+            dimensions: {}
+          }
         }
       ]);
+
+      expect(Data.Generic.isImage(res)).toBeTruthy();
     });
 
-    it('should return unchanged input if no compatible structure', () => {
+    it('should return arg without transforming by default', () => {
       const res = pipe.transform({ test: 'test' });
 
       expect(res).toEqual({ test: 'test' });
     });
   });
 
-  describe('transformImage', () => {
-    it('should set proxy url as src', () => {
-      const res = pipe.transform({ image: Data.Prismic.getImage() });
+  describe('`transformImage`', () => {
+    let res: any;
 
-      expect(res.src).toBe(Data.Prismic.getImage().proxy.url);
+    beforeEach(() =>
+      (res = pipe.transform({ image: Data.Prismic.getImage() })));
+
+    describe('`src`', () => {
+      it('should be set', () => {
+        expect(res.src).toBeDefined();
+      });
+
+      it('should be set as `proxy.url`', () => {
+        expect(res.src).toBe(Data.Prismic.getImage().proxy.url);
+      });
     });
 
-    it('should set srcset', () => {
-      const res = pipe.transform({ image: Data.Prismic.getImage() });
+    describe('`srcset`', () => {
+      it('should be set', () => {
+        expect(res.srcset).toBeDefined();
+      });
 
-      expect(res.srcset).toBeDefined();
+      it('should set `attr`', () => {
+        expect(res.srcset.attr).toBe('srcset');
+      });
+
+      describe('`val`', () => {
+        it('should be set', () => {
+          expect(res.srcset.val.length).toBe(5);
+        });
+
+        it('should be set with `xs.url`', () => {
+          expect(res.srcset.val.join()).toContain(
+            Data.Prismic.getImage().xs.url
+          );
+        });
+
+        it('should be set with `sm.url`', () => {
+          expect(res.srcset.val.join()).toContain(
+            Data.Prismic.getImage().sm.url
+          );
+        });
+
+        it('should be set with `md.url`', () => {
+          expect(res.srcset.val.join()).toContain(
+            Data.Prismic.getImage().md.url
+          );
+        });
+
+        it('should be set with `lg.url`', () => {
+          expect(res.srcset.val.join()).toContain(
+            Data.Prismic.getImage().lg.url
+          );
+        });
+
+        it('should be set with `url`', () => {
+          expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().url);
+        });
+      });
     });
 
-    it('should set srcset attr as `srcset`', () => {
-      const res = pipe.transform({ image: Data.Prismic.getImage() });
+    describe('`alt`', () => {
+      it('should be set`', () => {
+        expect(res.alt).toBeDefined();
+      });
 
-      expect(res.srcset.attr).toBe('srcset');
-    });
+      it('should set as `alt` if `alt`', () => {
+        res = pipe.transform({
+          image: { ...Data.Prismic.getImage(), alt: 'Alt' }
+        });
 
-    it('should set srcset val as image url array', () => {
-      const res = pipe.transform({ image: Data.Prismic.getImage() });
+        expect(res.alt).toBe('Alt');
+      });
 
-      expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().xs.url);
-      expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().sm.url);
-      expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().md.url);
-      expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().lg.url);
-      expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().url);
-    });
+      it('should set as `` if no `alt`', () => {
+        res = pipe.transform({
+          image: { ...Data.Prismic.getImage(), alt: undefined }
+        });
 
-    it('should set alt', () => {
-      const res = pipe.transform({ image: Data.Prismic.getImage() });
-
-      expect(res.alt).toBe(Data.Prismic.getImage().alt);
+        expect(res.alt).toBe('');
+      });
     });
   });
 
-  describe('transformVideo', () => {
-    it('should set src', () => {
-      const res = pipe.transform({ video: Data.Prismic.getVideo() });
+  describe('`transformVideo`', () => {
+    let res: any;
 
-      expect(res.src).toBeDefined();
-    });
+    beforeEach(() =>
+      (res = pipe.transform({ video: Data.Prismic.getVideo() })));
 
-    it('should set src attr as `src`', () => {
-      const res = pipe.transform({ video: Data.Prismic.getVideo() });
+    describe('`src`', () => {
+      it('should be set', () => {
+        expect(res.src).toBeDefined();
+      });
 
-      expect(res.src.attr).toBe('src');
-    });
+      it('should set `attr`', () => {
+        expect(res.src.attr).toBe('src');
+      });
 
-    it('should set src val as video url', () => {
-      const res = pipe.transform({ video: Data.Prismic.getVideo() });
+      describe('`val`', () => {
+        it('should be set', () => {
+          expect(res.src.val).toBeDefined();
+        });
 
-      expect(res.src.val).toEqual([Data.Prismic.getVideo().url]);
+        it('should be set as `url`', () => {
+          const [val] = res.src.val;
+
+          expect(val).toBe(Data.Prismic.getVideo().url);
+        });
+      });
     });
   });
 });

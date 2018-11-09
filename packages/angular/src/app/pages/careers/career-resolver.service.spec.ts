@@ -1,114 +1,126 @@
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
-import { Location } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { Observable } from 'rxjs';
 import {
-  RouterTestingModule,
   MockMetaService,
   MockApiService,
-  MockApiPipe,
-  ActivatedRouteStub
+  ActivatedRouteStub,
+  Router,
+  RouterStub,
+  Data
 } from 'testing';
+import { Observable } from 'rxjs';
+import { timeout } from 'rxjs/operators';
+
 import { MetaService, ApiService, Api } from 'shared';
 import { CareerResolver } from './career-resolver.service';
-import { CareersComponent } from './careers.component';
 
 let activatedRoute: ActivatedRouteStub;
 let careerResolver: CareerResolver;
 let metaService: MetaService;
 let apiService: ApiService;
-let location: Location;
+let router: Router;
 
 describe('CareerResolver', () => {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([
-          { path: 'careers', component: CareersComponent }
-        ])
-      ],
-      declarations: [CareersComponent, MockApiPipe],
       providers: [
         CareerResolver,
+        { provide: Router, useClass: RouterStub },
         { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService }
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      ]
     }).compileComponents();
   }));
 
   beforeEach(async(() => createService()));
 
-  it('should call ApiService getCareer', () => {
-    activatedRoute.testParamMap = { id: 'career-1' };
-    activatedRoute.testQueryParamMap = {};
-    careerResolver.resolve(activatedRoute.snapshot as any);
-
-    expect(apiService.getCareer).toHaveBeenCalled();
+  it('should create service', () => {
+    expect(careerResolver).toBeTruthy();
   });
 
-  it('should call ApiService getCareer with id arg', () => {
+  it('should call `ApiService` `getCareer` with `id` arg if `id`', () => {
     activatedRoute.testParamMap = { id: 'career-1' };
-    activatedRoute.testQueryParamMap = {};
     careerResolver.resolve(activatedRoute.snapshot as any);
 
     expect(apiService.getCareer).toHaveBeenCalledWith('career-1');
   });
 
-  it('should call MetaService setMetaTags with career args if matching career', () => {
-    activatedRoute.testParamMap = { id: 'career-1' };
-    activatedRoute.testQueryParamMap = {};
+  it('should call `ApiService` `getCareer` with `` arg if no `id`', () => {
+    activatedRoute.testParamMap = {};
+    careerResolver.resolve(activatedRoute.snapshot as any);
 
-    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Api.Career
-    >).subscribe(_ =>
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        type: 'article',
-        title: 'Career 1',
-        description: '£0',
-        url: 'careers/career-1'
-      })
-    );
+    expect(apiService.getCareer).toHaveBeenCalledWith('');
   });
 
-  it('should return career if matching career', async(() => {
-    activatedRoute.testParamMap = { id: 'career-1' };
-    activatedRoute.testQueryParamMap = {};
+  describe('Has `career`', () => {
+    beforeEach(() => (activatedRoute.testParamMap = { id: 'career-1' }));
 
-    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Api.Career
-    >).subscribe(career => expect(career.title).toBe('Career 1'));
-  }));
+    it('should call `MetaService` `setMetaTags` with career args', () => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Api.Career
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith({
+            type: 'article',
+            title: 'Career 1',
+            description: '£0',
+            url: 'careers/career-1'
+          })
+        );
+    });
 
-  it('should navigate to /careers if no matching career', fakeAsync(() => {
-    activatedRoute.testParamMap = { id: 'no-career' };
-    activatedRoute.testQueryParamMap = {};
-    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Api.Career
-    >).subscribe();
-    tick();
+    it('should not call `Router` `navigate`', () => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Api.Career
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ => expect(router.navigate).not.toHaveBeenCalled());
+    });
 
-    return expect(location.path()).toBe('/careers');
-  }));
+    it('should return `career`', () => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Api.Career
+      >)
+        .pipe(timeout(100))
+        .subscribe(career =>
+          expect(career).toEqual(Data.Api.getCareers('Career 1'))
+        );
+    });
+  });
 
-  it('should not navigate to /careers if matching career', fakeAsync(() => {
-    activatedRoute.testParamMap = { id: 'career-1' };
-    activatedRoute.testQueryParamMap = {};
-    (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Api.Career
-    >).subscribe();
-    tick();
+  describe('No `career`', () => {
+    beforeEach(() => (activatedRoute.testParamMap = { id: 'no-career' }));
 
-    return expect(location.path()).toBe('');
-  }));
+    it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Api.Career
+      >)
+        .pipe(timeout(100))
+        .subscribe();
+
+      tick(100);
+      expect(metaService.setMetaTags).not.toHaveBeenCalled();
+    }));
+
+    it('should call `Router` `navigate` with `[/careers]` arg', fakeAsync(() => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Api.Career
+      >)
+        .pipe(timeout(100))
+        .subscribe();
+
+      tick(100);
+      expect(router.navigate).toHaveBeenCalledWith(['/careers']);
+    }));
+  });
 });
 
 function createService() {
   careerResolver = TestBed.get(CareerResolver);
   metaService = TestBed.get(MetaService);
   apiService = TestBed.get(ApiService);
-  location = TestBed.get(Location);
+  router = TestBed.get(Router);
 }

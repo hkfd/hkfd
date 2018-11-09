@@ -1,24 +1,53 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
+
+import { StubImageComponent, Data } from 'testing';
 
 import { ImageBlockComponent } from './image-block.component';
 
+let compHost: TestHostComponent;
 let comp: ImageBlockComponent;
-let fixture: ComponentFixture<ImageBlockComponent>;
+let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 
+@Component({
+  selector: 'app-host',
+  template: '<image-block [data]="data"></image-block>'
+})
+class TestHostComponent {
+  data: any;
+}
+
 describe('ImageBlockComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [ImageBlockComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      declarations: [TestHostComponent, ImageBlockComponent, StubImageComponent]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should display ImageComponent', () => {
-    expect(page.image).toBeTruthy();
+  beforeEach(() => {
+    compHost.data = Data.Generic.getImage();
+    fixture.detectChanges();
+  });
+
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
+  });
+
+  it('should set `data`', () => {
+    expect(comp.data).toEqual(Data.Generic.getImage());
+  });
+
+  describe('Template', () => {
+    it('should display image', () => {
+      expect(page.image).toBeTruthy();
+    });
+
+    it('should set `ImageComponent` `image` as `data`', () => {
+      expect(page.imageComponent.image).toEqual(Data.Generic.getImage());
+    });
   });
 });
 
@@ -27,15 +56,11 @@ class Page {
     return this.query<HTMLElement>('image-component');
   }
 
-  constructor() {
-    comp.data = {
-      src: '',
-      srcset: {
-        attr: 'srcset',
-        val: ['']
-      },
-      alt: ''
-    };
+  get imageComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageComponent)
+    );
+    return directiveEl.injector.get<StubImageComponent>(StubImageComponent);
   }
 
   private query<T>(selector: string): T {
@@ -44,8 +69,10 @@ class Page {
 }
 
 function createComponent() {
-  fixture = TestBed.createComponent(ImageBlockComponent);
-  comp = fixture.componentInstance;
+  fixture = TestBed.createComponent(TestHostComponent);
+  compHost = fixture.componentInstance;
+  comp = fixture.debugElement.query(By.directive(ImageBlockComponent))
+    .componentInstance;
   page = new Page();
 
   fixture.detectChanges();

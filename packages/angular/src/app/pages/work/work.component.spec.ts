@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
   MockMetaService,
   MockApiService,
-  MockApiPipe
+  MockApiPipe,
+  StubImageComponent,
+  Data
 } from 'testing';
 
 import { MetaService, ApiService, ApiPipe, Api } from 'shared';
@@ -20,54 +22,115 @@ let apiPipe: ApiPipeStub;
 let page: Page;
 
 describe('WorkComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, NoopAnimationsModule],
-      declarations: [WorkComponent],
+      declarations: [WorkComponent, StubImageComponent],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService },
         { provide: ApiPipe, useClass: MockApiPipe }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      ]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should call MetaService setMetaTags', () => {
-    expect(metaService.setMetaTags).toHaveBeenCalled();
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should call MetaService setMetaTags with title and url args', () => {
-    expect(metaService.setMetaTags).toHaveBeenCalledWith({
-      title: jasmine.any(String),
-      url: jasmine.any(String)
+  describe('`ngOnInit`', () => {
+    it('should call `MetaService` `setMetaTags` with `title` and `url` args', () => {
+      expect(metaService.setMetaTags).toHaveBeenCalledWith({
+        title: 'Our Work',
+        url: 'work'
+      });
+    });
+
+    describe('Case Studies', () => {
+      it('should set `caseStudies$`', () => {
+        expect(comp.caseStudies$).toBeDefined();
+      });
+
+      it('should call `ApiService` `getCaseStudies`', () => {
+        expect(apiService.getCaseStudies).toHaveBeenCalled();
+      });
+
+      it('should set `caseStudies`', () => {
+        expect((comp.caseStudies as Api.CaseStudy[]).length).toBe(
+          Data.Api.getCaseStudies<void>().length
+        );
+      });
+
+      it('should call `ApiPipe` with case study `thumbnail`s', () => {
+        (comp.caseStudies as Api.CaseStudy[]).forEach(caseStudy =>
+          expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
+        );
+      });
     });
   });
 
-  it('should call ApiService getCaseStudies', () => {
-    expect(apiService.getCaseStudies).toHaveBeenCalled();
+  describe('`ngOnDestroy`', () => {
+    it('should call `caseStudies$` `unsubscribe`', () => {
+      const spy = spyOn(comp.caseStudies$, 'unsubscribe').and.callThrough();
+      comp.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
-  it('should call ApiPipe', () => {
-    expect(apiPipe.transform).toHaveBeenCalled();
-  });
+  describe('Template', () => {
+    it('should display title', () => {
+      expect(page.title.textContent).toBeTruthy();
+    });
 
-  it('should call ApiPipe with case study thumbnails', () => {
-    (comp.caseStudies as Api.CaseStudy[]).forEach(caseStudy =>
-      expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
-    );
-  });
+    describe('Case Studies', () => {
+      it('should be displayed', () => {
+        expect(page.caseStudies.length).toBe(
+          Data.Api.getCaseStudies<void>().length
+        );
+      });
 
-  it('should set caseStudies', () => {
-    expect((comp.caseStudies as Api.CaseStudy[]).length).toBe(3);
-  });
+      describe('Case Study', () => {
+        it('should display title', () => {
+          expect(page.caseStudyTitle.textContent).toBe(
+            Data.Api.getCaseStudies('Case Study 1').title
+          );
+        });
 
-  it('should set case study colour', () => {
-    (comp.caseStudies as Api.CaseStudy[]).forEach((caseStudy, index) =>
-      expect(page.caseStudies[index].className).toContain(caseStudy.colour)
-    );
+        describe('Thumbnail', () => {
+          it('should be displayed', () => {
+            expect(page.caseStudyThumbnail).toBeTruthy();
+          });
+
+          it('should set `ImageComponent` `image` as `thumbnail`', () => {
+            expect(page.imageComponent.image).toEqual(Data.Api.getCaseStudies(
+              'Case Study 1'
+            ).thumbnail as any);
+          });
+
+          it('should set `ImageComponent` `full-height` attribute', () => {
+            expect(
+              page.caseStudyThumbnail.hasAttribute('full-height')
+            ).toBeTruthy();
+          });
+        });
+
+        it('should set colour class', () => {
+          expect(page.caseStudies[0].className).toContain(
+            Data.Api.getCaseStudies('Case Study 1').colour
+          );
+        });
+
+        it('should set href', () => {
+          expect(page.caseStudies[0].href).toBe(
+            `http://localhost:9876/${
+              Data.Api.getCaseStudies('Case Study 1').id
+            }`
+          );
+        });
+      });
+    });
   });
 });
 
@@ -82,10 +145,29 @@ class ApiPipeStub {
 }
 
 class Page {
+  get title() {
+    return this.query<HTMLHeadingElement>('h1');
+  }
   get caseStudies() {
-    return this.queryAll<HTMLElement>('.case-study');
+    return this.queryAll<HTMLAnchorElement>('.case-study');
+  }
+  get caseStudyTitle() {
+    return this.query<HTMLHeadingElement>('.case-study h2');
+  }
+  get caseStudyThumbnail() {
+    return this.query<HTMLElement>('.case-study image-component');
   }
 
+  get imageComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageComponent)
+    );
+    return directiveEl.injector.get<StubImageComponent>(StubImageComponent);
+  }
+
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
+  }
   private queryAll<T>(selector: string): T[] {
     return fixture.nativeElement.querySelectorAll(selector);
   }

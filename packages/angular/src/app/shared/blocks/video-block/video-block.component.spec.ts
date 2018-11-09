@@ -1,30 +1,73 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Data } from 'testing';
-import { LazyDirective } from 'shared';
+import { StubLazyDirective, Data } from 'testing';
+
 import { VideoBlockComponent } from './video-block.component';
 
+let compHost: TestHostComponent;
 let comp: VideoBlockComponent;
-let fixture: ComponentFixture<VideoBlockComponent>;
+let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
-let lazyDirective: LazyDirective;
+
+@Component({
+  selector: 'app-host',
+  template: '<video-block [data]="data"></video-block>'
+})
+class TestHostComponent {
+  data: any;
+}
 
 describe('VideoBlockComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [VideoBlockComponent, LazyDirective]
-    }).compileComponents();
-  }));
+      declarations: [TestHostComponent, VideoBlockComponent, StubLazyDirective]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should display iframe', () => {
-    expect(page.video).toBeTruthy();
+  beforeEach(() => {
+    compHost.data = Data.Generic.getVideo();
+    fixture.detectChanges();
   });
 
-  it('should set LazyDirective data', () => {
-    expect(lazyDirective.data).toEqual(comp.data.src);
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
+  });
+
+  it('should set `data`', () => {
+    expect(comp.data).toEqual(Data.Generic.getVideo());
+  });
+
+  describe('Template', () => {
+    describe('iframe', () => {
+      describe('has `data`', () => {
+        beforeEach(() => {
+          compHost.data = Data.Generic.getVideo();
+          fixture.detectChanges();
+        });
+
+        it('should be displayed', () => {
+          expect(page.video).toBeTruthy();
+        });
+
+        it('should set `LazyDirective` `data` as `src`', () => {
+          expect(page.lazyDirective.data).toEqual(comp.data.src);
+        });
+      });
+
+      describe('no `data`', () => {
+        beforeEach(() => {
+          (compHost.data as any) = undefined;
+          fixture.detectChanges();
+        });
+
+        it('should not be displayed', () => {
+          expect(page.video).toBeFalsy();
+        });
+      });
+    });
   });
 });
 
@@ -33,11 +76,11 @@ class Page {
     return this.query<HTMLIFrameElement>('iframe');
   }
 
-  constructor() {
-    comp.data = Data.Generic.getVideo();
-
-    const directiveEl = fixture.debugElement.query(By.directive(LazyDirective));
-    lazyDirective = directiveEl.injector.get<LazyDirective>(LazyDirective);
+  get lazyDirective() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubLazyDirective)
+    );
+    return directiveEl.injector.get<StubLazyDirective>(StubLazyDirective);
   }
 
   private query<T>(selector: string): T {
@@ -46,8 +89,11 @@ class Page {
 }
 
 function createComponent() {
-  fixture = TestBed.createComponent(VideoBlockComponent);
-  comp = fixture.componentInstance;
+  fixture = TestBed.createComponent(TestHostComponent);
+  compHost = fixture.componentInstance;
+  comp = fixture.debugElement.query(By.directive(VideoBlockComponent))
+    .componentInstance;
+
   page = new Page();
 
   fixture.detectChanges();

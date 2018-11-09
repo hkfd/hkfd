@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LoggerService, MockLoggerService, MockFormService } from 'testing';
@@ -12,11 +10,11 @@ import { FormComponent } from './form.component';
 const app = window as any;
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
+let formService: FormService;
 let page: Page;
-let formService: FormServiceStub;
 
 describe('FormComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, NoopAnimationsModule],
       declarations: [FormComponent],
@@ -24,199 +22,25 @@ describe('FormComponent', () => {
         FormBuilder,
         { provide: LoggerService, useClass: MockLoggerService },
         { provide: FormService, useClass: MockFormService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      ]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should set form', () => {
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
+  });
+
+  it('should set `form`', () => {
     expect(comp.form).toBeDefined();
   });
 
-  it('should not set formSent', () => {
+  it('should not set `formSent`', () => {
     expect(comp.formSent).toBeUndefined();
   });
 
-  it('should not display form sent', () => {
-    const formSent = fixture.debugElement.query(By.css('#form-sent'));
-
-    expect(formSent).toBeFalsy();
-  });
-
-  it('should not display legal text', () => {
-    const legal = fixture.debugElement.query(By.css('small'));
-
-    expect(legal).toBeFalsy();
-  });
-
-  it('should not display submit button', () => {
-    const submitButton = fixture.debugElement.query(
-      By.css('button[type="submit"]')
-    );
-
-    expect(submitButton).toBeFalsy();
-  });
-
-  describe('name', () => {
-    it('should display name field', () => {
-      expect(page.nameInput).toBeTruthy();
-    });
-
-    it('should display empty name field', () => {
-      expect(page.nameInput.textContent).toBe('');
-    });
-
-    it('should not display name error', () => {
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeFalsy();
-    });
-
-    it('should set form name on input', () => {
-      comp.form.controls.name.setValue('Name Surname');
-      fixture.detectChanges();
-
-      expect(comp.form.value.name).toBe('Name Surname');
-    });
-
-    it('should display name error on touched and invalid', () => {
-      comp.form.controls.name.markAsTouched();
-      comp.form.controls.name.setErrors({ invalid: true });
-      fixture.detectChanges();
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeTruthy();
-    });
-  });
-
-  describe('email', () => {
-    it('should display email field', () => {
-      expect(page.emailInput).toBeTruthy();
-    });
-
-    it('should display empty email field', () => {
-      expect(page.emailInput.textContent).toBe('');
-    });
-
-    it('should not display email error', () => {
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeFalsy();
-    });
-
-    it('should set form email on input', () => {
-      comp.form.controls.email.setValue('name@example.com');
-      fixture.detectChanges();
-
-      expect(comp.form.value.email).toBe('name@example.com');
-    });
-
-    it('should display email error on touched and invalid', () => {
-      comp.form.controls.email.markAsTouched();
-      comp.form.controls.email.setErrors({ invalid: true });
-      fixture.detectChanges();
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeTruthy();
-    });
-
-    it('should display email error on touched and invalid email', () => {
-      comp.form.controls.email.markAsTouched();
-      comp.form.controls.email.setValue('email');
-      fixture.detectChanges();
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeTruthy();
-    });
-  });
-
-  describe('message', () => {
-    it('should display message field', () => {
-      expect(page.messageInput).toBeTruthy();
-    });
-
-    it('should display empty message field', () => {
-      expect(page.messageInput.textContent).toBe('');
-    });
-
-    it('should not display message error', () => {
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeFalsy();
-    });
-
-    it('should set form message on input', () => {
-      comp.form.controls.message.setValue('Hello');
-      fixture.detectChanges();
-
-      expect(comp.form.value.message).toBe('Hello');
-    });
-
-    it('should display message error on touched and invalid', () => {
-      comp.form.controls.message.markAsTouched();
-      comp.form.controls.message.setErrors({ invalid: true });
-      fixture.detectChanges();
-      const inputError = fixture.debugElement.query(By.css('.error'));
-
-      expect(inputError).toBeTruthy();
-    });
-  });
-
-  it('should display legal text on touched', () => {
-    comp.form.markAsTouched();
-    fixture.detectChanges();
-
-    const legal = fixture.debugElement.query(By.css('small'));
-
-    expect(legal).toBeTruthy();
-  });
-
-  it('should display submit button on touched', () => {
-    comp.form.markAsTouched();
-    fixture.detectChanges();
-
-    const submitButton = fixture.debugElement.query(
-      By.css('button[type="submit"]')
-    );
-
-    expect(submitButton).toBeTruthy();
-  });
-
-  it('should display disabled submit button on touched', () => {
-    comp.form.markAsTouched();
-    fixture.detectChanges();
-
-    const submitButton: HTMLButtonElement = fixture.debugElement.query(
-      By.css('button[type="submit"]')
-    ).nativeElement;
-
-    expect(submitButton.disabled).toBe(true);
-  });
-
-  it('should display enabled submit button on touched and valid', () => {
-    comp.form.markAsTouched();
-    comp.form.controls.name.setValue('a');
-    comp.form.controls.email.setValue('b@c');
-    comp.form.controls.message.setValue('d');
-    fixture.detectChanges();
-
-    const submitButton: HTMLButtonElement = fixture.debugElement.query(
-      By.css('button[type="submit"]')
-    ).nativeElement;
-
-    expect(submitButton.disabled).toBe(false);
-  });
-
-  describe('submitForm', () => {
-    it('should call FormService sendEmail', () => {
-      comp.submitForm();
-
-      expect(formService.sendEmail).toHaveBeenCalled();
-    });
-
-    it('should call FormService sendEmail with form value arg', () => {
+  describe('`submitForm`', () => {
+    it('should call `FormService` `sendEmail` with `form.value` arg', () => {
       comp.form.controls.name.setValue('a');
       comp.form.controls.email.setValue('b@c');
       comp.form.controls.message.setValue('d');
@@ -229,185 +53,343 @@ describe('FormComponent', () => {
       });
     });
 
-    describe('resolve', () => {
-      it('should set formSent as true', async(() => {
-        comp.form.markAsTouched();
-        comp.form.controls.name.setValue('a');
-        comp.form.controls.email.setValue('b@c');
-        comp.form.controls.message.setValue('d');
-        comp.submitForm();
-        fixture.detectChanges();
+    describe('Resolve', () => {
+      beforeEach(() => comp.submitForm());
 
+      it('should set `formSent` as `true`', () => {
         return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-
           expect(comp.formSent).toBe(true);
         });
-      }));
+      });
 
-      it('should show form sent', async(() => {
-        comp.form.markAsTouched();
-        comp.form.controls.name.setValue('a');
-        comp.form.controls.email.setValue('b@c');
-        comp.form.controls.message.setValue('d');
-        comp.submitForm();
-        fixture.detectChanges();
-
+      it('should call `ga` with args', () => {
         return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-          const formSent = fixture.debugElement.query(By.css('#form-sent'));
-
-          expect(formSent).toBeTruthy();
-        });
-      }));
-
-      it('should not show error', async(() => {
-        comp.form.markAsTouched();
-        comp.form.controls.name.setValue('a');
-        comp.form.controls.email.setValue('b@c');
-        comp.form.controls.message.setValue('d');
-        comp.submitForm();
-        fixture.detectChanges();
-
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-          const error = fixture.debugElement.query(By.css('.error'));
-
-          expect(error).toBeFalsy();
-        });
-      }));
-
-      it('should disable submit button', async(() => {
-        comp.form.markAsTouched();
-        comp.submitForm();
-        fixture.detectChanges();
-
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-          const submitButton: HTMLButtonElement = fixture.debugElement.query(
-            By.css('button[type="submit"]')
-          ).nativeElement;
-
-          expect(submitButton.disabled).toBe(true);
-        });
-      }));
-
-      it('should call ga', async(() => {
-        comp.form.controls.name.setValue('a');
-        comp.form.controls.email.setValue('b@c');
-        comp.form.controls.message.setValue('d');
-        comp.submitForm();
-        fixture.detectChanges();
-
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-
-          expect(app.ga).toHaveBeenCalled();
-        });
-      }));
-
-      it('should call ga with params', async(() => {
-        comp.form.controls.name.setValue('a');
-        comp.form.controls.email.setValue('b@c');
-        comp.form.controls.message.setValue('d');
-        comp.submitForm();
-        fixture.detectChanges();
-
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-
           expect(app.ga).toHaveBeenCalledWith(
             'send',
             'event',
             'Contact Form',
-            jasmine.any(String)
+            'sent'
           );
         });
-      }));
+      });
     });
 
-    describe('reject', () => {
-      it('should set formSent as false', async(() => {
+    describe('Reject', () => {
+      beforeEach(() => {
+        (formService.sendEmail as jasmine.Spy).and.returnValue(
+          Promise.reject()
+        );
         comp.submitForm();
-        fixture.detectChanges();
+      });
 
+      it('should set `formSent` as `false`', () => {
         return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-
           expect(comp.formSent).toBe(false);
         });
-      }));
+      });
+    });
+  });
 
-      it('should show error', async(() => {
-        comp.form.markAsTouched();
-        comp.submitForm();
+  describe('Template', () => {
+    describe('Form sent', () => {
+      it('should be displayed if `formSent` is `true`', () => {
+        comp.formSent = true;
         fixture.detectChanges();
 
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-          const error = fixture.debugElement.query(By.css('.error'));
+        expect(page.formSentText).toBeTruthy();
+      });
 
-          expect(error).toBeTruthy();
-        });
-      }));
-
-      it('should not show form sent', async(() => {
-        comp.form.markAsTouched();
-        comp.submitForm();
+      it('should not be displayed if `formSent` is `false`', () => {
+        comp.formSent = false;
         fixture.detectChanges();
 
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-          const formSent = fixture.debugElement.query(By.css('#form-sent'));
+        expect(page.formSentText).toBeFalsy();
+      });
+    });
 
-          expect(formSent).toBeFalsy();
+    describe('Form', () => {
+      describe('Name', () => {
+        it('should be displayed', () => {
+          expect(page.nameInput).toBeTruthy();
         });
-      }));
 
-      it('should disable submit button', async(() => {
-        comp.form.markAsTouched();
-        comp.submitForm();
-        fixture.detectChanges();
+        describe('Error', () => {
+          it('should not be displayed', () => {
+            expect(page.nameError).toBeFalsy();
+          });
 
-        return fixture.whenStable().then(_ => {
-          fixture.detectChanges();
-          const submitButton: HTMLButtonElement = fixture.debugElement.query(
-            By.css('button[type="submit"]')
-          ).nativeElement;
+          describe('`invalid`', () => {
+            beforeEach(() => {
+              comp.form.controls.name.markAsPristine();
+              comp.form.controls.name.setErrors({ invalid: true });
+              fixture.detectChanges();
+            });
 
-          expect(submitButton.disabled).toBe(true);
+            it('should not be displayed', () => {
+              expect(page.nameError).toBeFalsy();
+            });
+          });
+
+          describe('`touched`', () => {
+            beforeEach(() => {
+              comp.form.controls.name.markAsTouched();
+              comp.form.controls.name.setErrors(null);
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.nameError).toBeFalsy();
+            });
+          });
+
+          describe('`invalid` and `touched`', () => {
+            beforeEach(() => {
+              comp.form.controls.name.markAsTouched();
+              comp.form.controls.name.setErrors({ invalid: true });
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.nameError).toBeTruthy();
+            });
+          });
         });
-      }));
+      });
+
+      describe('Email', () => {
+        it('should be displayed', () => {
+          expect(page.emailInput).toBeTruthy();
+        });
+
+        describe('Error', () => {
+          it('should not be displayed', () => {
+            expect(page.emailError).toBeFalsy();
+          });
+
+          describe('`invalid`', () => {
+            beforeEach(() => {
+              comp.form.controls.email.markAsPristine();
+              comp.form.controls.email.setErrors({ invalid: true });
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.emailError).toBeFalsy();
+            });
+          });
+
+          describe('`touched`', () => {
+            beforeEach(() => {
+              comp.form.controls.email.markAsTouched();
+              comp.form.controls.email.setErrors(null);
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.emailError).toBeFalsy();
+            });
+          });
+
+          describe('`invalid` and `touched`', () => {
+            beforeEach(() => {
+              comp.form.controls.email.markAsTouched();
+              comp.form.controls.email.setErrors({ invalid: true });
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.emailError).toBeTruthy();
+            });
+          });
+        });
+      });
+
+      describe('Message', () => {
+        it('should be displayed', () => {
+          expect(page.messageInput).toBeTruthy();
+        });
+
+        describe('Error', () => {
+          it('should not be displayed', () => {
+            expect(page.messageError).toBeFalsy();
+          });
+
+          describe('`invalid`', () => {
+            beforeEach(() => {
+              comp.form.controls.message.markAsPristine();
+              comp.form.controls.message.setErrors({ invalid: true });
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.messageError).toBeFalsy();
+            });
+          });
+
+          describe('`touched`', () => {
+            beforeEach(() => {
+              comp.form.controls.message.markAsTouched();
+              comp.form.controls.message.setErrors(null);
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.messageError).toBeFalsy();
+            });
+          });
+
+          describe('`invalid` and `touched`', () => {
+            beforeEach(() => {
+              comp.form.controls.message.markAsTouched();
+              comp.form.controls.message.setErrors({ invalid: true });
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.messageError).toBeTruthy();
+            });
+          });
+        });
+      });
+
+      describe('Footer', () => {
+        it('should not be displayed', () => {
+          expect(page.formFooter).toBeFalsy();
+        });
+
+        it('should be displayed if `dirty`', () => {
+          comp.form.controls.message.markAsDirty();
+          fixture.detectChanges();
+
+          expect(page.formFooter).toBeTruthy();
+        });
+
+        it('should be displayed if `touched`', () => {
+          comp.form.controls.message.markAsTouched();
+          fixture.detectChanges();
+
+          expect(page.formFooter).toBeTruthy();
+        });
+
+        describe('Legal text', () => {
+          beforeEach(() => {
+            comp.form.controls.message.markAsDirty();
+            fixture.detectChanges();
+          });
+
+          it('should be displayed', () => {
+            expect(page.legalText).toBeTruthy();
+          });
+        });
+
+        describe('Send', () => {
+          beforeEach(() => {
+            comp.form.controls.message.markAsDirty();
+            fixture.detectChanges();
+          });
+
+          it('should be displayed', () => {
+            expect(page.formSend).toBeTruthy();
+          });
+
+          describe('Disabled', () => {
+            it('should not be disabled', () => {
+              comp.form.controls.name.setValue('a');
+              comp.form.controls.email.setValue('b@c');
+              comp.form.controls.message.setValue('d');
+              fixture.detectChanges();
+
+              expect(page.formSend.disabled).toBe(false);
+            });
+
+            it('should be disabled if `invalid`', () => {
+              comp.form.controls.name.setValue('');
+              comp.form.controls.email.setValue('a');
+              comp.form.controls.message.setValue('');
+              fixture.detectChanges();
+
+              expect(page.formSend.disabled).toBe(true);
+            });
+
+            it('should be disabled if `formSent` is `true`', () => {
+              comp.form.controls.name.setValue('a');
+              comp.form.controls.email.setValue('b@c');
+              comp.form.controls.message.setValue('d');
+              comp.formSent = true;
+              fixture.detectChanges();
+
+              expect(page.formSend.disabled).toBe(true);
+            });
+
+            it('should be disabled if `formSent` is `false`', () => {
+              comp.form.controls.name.setValue('a');
+              comp.form.controls.email.setValue('b@c');
+              comp.form.controls.message.setValue('d');
+              comp.formSent = false;
+              fixture.detectChanges();
+
+              expect(page.formSend.disabled).toBe(true);
+            });
+          });
+
+          describe('Error', () => {
+            it('should not be displayed', () => {
+              expect(page.formSendError).toBeFalsy();
+            });
+
+            it('should be displayed if `formSent` is `false`', () => {
+              comp.formSent = false;
+              fixture.detectChanges();
+
+              expect(page.formSendError).toBeTruthy();
+            });
+          });
+        });
+      });
     });
   });
 });
 
-class FormServiceStub {
-  sendEmail: jasmine.Spy;
-
-  constructor() {
-    const formServiceInstance = fixture.debugElement.injector.get<FormService>(
-      FormService
-    );
-
-    this.sendEmail = spyOn(formServiceInstance, 'sendEmail').and.callThrough();
-  }
-}
-
 class Page {
+  createForm: jasmine.Spy;
   submitForm: jasmine.Spy;
 
+  get formSentText() {
+    return this.query<HTMLParagraphElement>('#form-sent');
+  }
   get nameInput() {
-    return this.query<HTMLInputElement>('#name');
+    return this.query<HTMLInputElement>('.input:nth-of-type(1) #name');
+  }
+  get nameError() {
+    return this.query<HTMLParagraphElement>('.input:nth-of-type(1) .error');
   }
   get emailInput() {
-    return this.query<HTMLInputElement>('#email');
+    return this.query<HTMLInputElement>('.input:nth-of-type(2) #email');
+  }
+  get emailError() {
+    return this.query<HTMLParagraphElement>('.input:nth-of-type(2) .error');
   }
   get messageInput() {
-    return this.query<HTMLInputElement>('#message');
+    return this.query<HTMLTextAreaElement>('.input:nth-of-type(3) #message');
+  }
+  get messageError() {
+    return this.query<HTMLParagraphElement>('.input:nth-of-type(3) .error');
+  }
+  get formFooter() {
+    return this.query<HTMLDivElement>('#form-footer');
+  }
+  get legalText() {
+    return this.query<HTMLElement>('#form-footer small');
+  }
+  get formSend() {
+    return this.query<HTMLButtonElement>('#form-footer button');
+  }
+  get formSendError() {
+    return this.query<HTMLParagraphElement>('#form-footer .error');
   }
 
   constructor() {
+    this.createForm = spyOn(comp, 'createForm').and.callThrough();
     this.submitForm = spyOn(comp, 'submitForm').and.callThrough();
   }
 
@@ -420,8 +402,8 @@ function createComponent() {
   fixture = TestBed.createComponent(FormComponent);
   comp = fixture.componentInstance;
   app.ga = jasmine.createSpy('ga');
+  formService = fixture.debugElement.injector.get<FormService>(FormService);
   page = new Page();
-  formService = new FormServiceStub();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

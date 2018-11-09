@@ -1,31 +1,52 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { Data } from 'testing';
 import { AudioBlockComponent } from './audio-block.component';
 
+let compHost: TestHostComponent;
 let comp: AudioBlockComponent;
-let fixture: ComponentFixture<AudioBlockComponent>;
+let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 
+@Component({
+  selector: 'app-host',
+  template: '<audio-block [data]="data"></audio-block>'
+})
+class TestHostComponent {
+  data: any;
+}
+
 describe('AudioBlockComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [AudioBlockComponent]
-    }).compileComponents();
-  }));
+      declarations: [TestHostComponent, AudioBlockComponent]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should display audio element', () => {
-    expect(page.audio).toBeTruthy();
+  beforeEach(() => {
+    compHost.data = Data.Generic.getAudio();
+    fixture.detectChanges();
   });
 
-  it('should set element src', () => {
-    expect(page.audio.src).toBe('http://example.com/');
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should set element preload as `none`', () => {
-    expect(page.audio.getAttribute('preload')).toBe('none');
+  it('should set `data`', () => {
+    expect(comp.data).toEqual(Data.Generic.getAudio());
+  });
+
+  describe('Template', () => {
+    it('should display audio', () => {
+      expect(page.audio).toBeTruthy();
+    });
+
+    it('should set src as `url`', () => {
+      expect(page.audio.src).toBe(Data.Generic.getAudio().url);
+    });
   });
 });
 
@@ -33,19 +54,16 @@ class Page {
   get audio() {
     return this.query<HTMLAudioElement>('audio');
   }
-
-  constructor() {
-    comp.data = Data.Generic.getAudio();
-  }
-
   private query<T>(selector: string): T {
     return fixture.nativeElement.querySelector(selector);
   }
 }
 
 function createComponent() {
-  fixture = TestBed.createComponent(AudioBlockComponent);
-  comp = fixture.componentInstance;
+  fixture = TestBed.createComponent(TestHostComponent);
+  compHost = fixture.componentInstance;
+  comp = fixture.debugElement.query(By.directive(AudioBlockComponent))
+    .componentInstance;
   page = new Page();
 
   fixture.detectChanges();

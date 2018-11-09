@@ -1,11 +1,17 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
   ActivatedRoute,
   ActivatedRouteStub,
   MockPrismicPipe,
+  StubPrismicTextBlockComponent,
+  StubImageBlockComponent,
+  StubDuoBlockComponent,
+  StubGalleryBlockComponent,
+  StubVideoBlockComponent,
+  StubImageComponent,
   Data
 } from 'testing';
 
@@ -16,6 +22,7 @@ let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
 let prismicPipe: jasmine.Spy;
+let richText: RichTextStub;
 let page: Page;
 
 describe('NewsPostComponent', () => {
@@ -25,134 +32,264 @@ describe('NewsPostComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [NewsPostComponent, MockPrismicPipe],
-      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [
+        NewsPostComponent,
+        MockPrismicPipe,
+        StubPrismicTextBlockComponent,
+        StubImageBlockComponent,
+        StubDuoBlockComponent,
+        StubGalleryBlockComponent,
+        StubVideoBlockComponent,
+        StubImageComponent
+      ],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }]
     }).compileComponents();
   }));
 
   beforeEach(async(() => createComponent()));
 
-  it('should set post', () => {
-    expect(comp.post).toEqual(Data.Prismic.getPosts('post-1'));
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should call PrismicPipe', () => {
-    expect(prismicPipe).toHaveBeenCalled();
+  describe('`ngOnInit`', () => {
+    it('should set `post$`', () => {
+      expect(comp.post$).toBeDefined();
+    });
+
+    it('should subscribe to `ActivatedRoute` `data`', () => {
+      expect(activatedRoute.data.subscribe).toHaveBeenCalled();
+    });
+
+    it('should set `post`', () => {
+      expect(comp.post).toEqual(Data.Prismic.getPosts('post-1'));
+    });
   });
 
-  it('should call PrismicPipe with post thumbnail', () => {
-    expect(prismicPipe).toHaveBeenCalledWith((comp.post as Prismic.Post).data);
+  describe('`ngOnDestroy`', () => {
+    it('should call `post$` `unsubscribe`', () => {
+      const spy = spyOn(comp.post$, 'unsubscribe').and.callThrough();
+      comp.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
-  describe('Content', () => {
-    describe('Text', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.getPosts('post-2') };
-        prismicPipe.calls.reset();
-        fixture.detectChanges();
+  describe('Template', () => {
+    describe('Intro', () => {
+      it('should display date', () => {
+        expect(page.date.textContent).toBe('01 January');
       });
 
-      it('should display Prismic TextBlockComponent', () => {
-        expect(page.textBlock).toBeTruthy();
+      describe('Title', () => {
+        describe('has `title`', () => {
+          beforeEach(() => {
+            comp.post = Data.Prismic.getPost();
+            fixture.detectChanges();
+          });
+
+          it('should be displayed', () => {
+            expect(page.title.innerHTML).toBe('Post 1');
+          });
+
+          it('should call `RichText` `asText` with `title`', () => {
+            expect(richText.asText).toHaveBeenCalledWith(
+              Data.Prismic.getPost().data.title
+            );
+          });
+        });
+
+        describe('no `title`', () => {
+          beforeEach(() => {
+            ((comp.post as Prismic.Post).data.title as any) = undefined;
+            fixture.detectChanges();
+          });
+
+          it('should not be displayed', () => {
+            expect(page.title).toBeFalsy();
+          });
+        });
       });
 
-      it('should not call ApiPipe', () => {
-        expect(prismicPipe).not.toHaveBeenCalled();
-      });
-    });
+      describe('Thumbnail', () => {
+        describe('has `image.proxy.url`', () => {
+          beforeEach(() => {
+            (comp.post as Prismic.Post).data.image.proxy.url = 'test.jpg';
+            fixture.detectChanges();
+          });
 
-    describe('Image', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.getPosts('post-3') };
-        prismicPipe.calls.reset();
-        fixture.detectChanges();
-      });
+          it('should be displayed', () => {
+            expect(page.thumbnail).toBeTruthy();
+          });
 
-      it('should display ImageBlockComponent', () => {
-        expect(page.imageBlock).toBeTruthy();
-      });
+          it('should call `PrismicPipe` with `data`', () => {
+            expect(prismicPipe).toHaveBeenCalledWith(
+              (comp.post as Prismic.Post).data
+            );
+          });
 
-      it('should call PrismicPipe', () => {
-        expect(prismicPipe).toHaveBeenCalledTimes(1);
-      });
+          it('should set `ImageComponent` `image` as `data`', () => {
+            expect(page.imageComponent.image).toEqual(
+              (comp.post as Prismic.Post).data as any
+            );
+          });
 
-      it('should call PrismicPipe with slice primary', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(
-          (comp.post as Prismic.Post).data.body[0].primary
-        );
-      });
-    });
+          it('should set `ImageComponent` `full-height` attribute', () => {
+            expect(page.thumbnail.hasAttribute('full-height')).toBeTruthy();
+          });
+        });
 
-    describe('Duo', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.getPosts('post-4') };
-        prismicPipe.calls.reset();
-        fixture.detectChanges();
-      });
+        describe('no `image.proxy.url`', () => {
+          beforeEach(() => {
+            ((comp.post as Prismic.Post).data.image.proxy
+              .url as any) = undefined;
+            fixture.detectChanges();
+          });
 
-      it('should display DuoBlockComponent', () => {
-        expect(page.duoBlock).toBeTruthy();
-      });
-
-      it('should call PrismicPipe', () => {
-        expect(prismicPipe).toHaveBeenCalledTimes(1);
-      });
-
-      it('should call PrismicPipe with slice items', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(
-          (comp.post as Prismic.Post).data.body[0].items
-        );
-      });
-    });
-
-    describe('Gallery', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.getPosts('post-5') };
-        prismicPipe.calls.reset();
-        fixture.detectChanges();
-      });
-
-      it('should display GalleryBlockComponent', () => {
-        expect(page.galleryBlock).toBeTruthy();
-      });
-
-      it('should call PrismicPipe', () => {
-        expect(prismicPipe).toHaveBeenCalledTimes(1);
-      });
-
-      it('should call PrismicPipe with slice items', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(
-          (comp.post as Prismic.Post).data.body[0].items
-        );
+          it('should not be displayed', () => {
+            expect(page.thumbnail).toBeFalsy();
+          });
+        });
       });
     });
 
-    describe('Video', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Prismic.getPosts('post-6') };
-        prismicPipe.calls.reset();
-        fixture.detectChanges();
+    describe('Content', () => {
+      describe('Text', () => {
+        beforeEach(() => {
+          comp.post = Data.Prismic.getPosts('post-2');
+          fixture.detectChanges();
+        });
+
+        it('should display Prismic `TextBlockComponent`', () => {
+          expect(page.textBlock).toBeTruthy();
+        });
+
+        it('should not call `PrismicPipe` with `primary`', () => {
+          expect(prismicPipe).not.toHaveBeenCalledWith(
+            (comp.post as Prismic.Post).data.body[0].primary
+          );
+        });
+
+        it('should set `TextBlockComponent` `data` as `primary.text`', () => {
+          expect(page.textBlockComponent.data).toEqual(
+            (comp.post as Prismic.Post).data.body[0].primary.text
+          );
+        });
       });
 
-      it('should display VideoBlockComponent', () => {
-        expect(page.videoBlock).toBeTruthy();
+      describe('Image', () => {
+        beforeEach(() => {
+          comp.post = Data.Prismic.getPosts('post-3');
+          fixture.detectChanges();
+        });
+
+        it('should display `ImageBlockComponent`', () => {
+          expect(page.imageBlock).toBeTruthy();
+        });
+
+        it('should call `PrismicPipe` with `primary`', () => {
+          expect(prismicPipe).toHaveBeenCalledWith(
+            (comp.post as Prismic.Post).data.body[0].primary
+          );
+        });
+
+        it('should set `ImageBlockComponent` `data` as `primary`', () => {
+          expect(page.imageBlockComponent.data).toEqual(
+            (comp.post as Prismic.Post).data.body[0].primary
+          );
+        });
       });
 
-      it('should call PrismicPipe', () => {
-        expect(prismicPipe).toHaveBeenCalledTimes(1);
+      describe('Duo', () => {
+        beforeEach(() => {
+          comp.post = Data.Prismic.getPosts('post-4');
+          fixture.detectChanges();
+        });
+
+        it('should display `DuoBlockComponent`', () => {
+          expect(page.duoBlock).toBeTruthy();
+        });
+
+        it('should call `PrismicPipe` with `items`', () => {
+          expect(prismicPipe).toHaveBeenCalledWith(
+            (comp.post as Prismic.Post).data.body[0].items
+          );
+        });
+
+        it('should set `DuoBlockComponent` `data` as `items`', () => {
+          expect(page.duoBlockComponent.data).toEqual(
+            (comp.post as Prismic.Post).data.body[0].items
+          );
+        });
       });
 
-      it('should call PrismicPipe with slice primary', () => {
-        expect(prismicPipe).toHaveBeenCalledWith(
-          (comp.post as Prismic.Post).data.body[0].primary
-        );
+      describe('Gallery', () => {
+        beforeEach(() => {
+          comp.post = Data.Prismic.getPosts('post-5');
+          fixture.detectChanges();
+        });
+
+        it('should display `GalleryBlockComponent`', () => {
+          expect(page.galleryBlock).toBeTruthy();
+        });
+
+        it('should call `PrismicPipe` with `items`', () => {
+          expect(prismicPipe).toHaveBeenCalledWith(
+            (comp.post as Prismic.Post).data.body[0].items
+          );
+        });
+
+        it('should set `GalleryBlockComponent` `data` as `items`', () => {
+          expect(page.galleryBlockComponent.data).toEqual(
+            (comp.post as Prismic.Post).data.body[0].items
+          );
+        });
+      });
+
+      describe('Video', () => {
+        beforeEach(() => {
+          comp.post = Data.Prismic.getPosts('post-6');
+          fixture.detectChanges();
+        });
+
+        it('should display `VideoBlockComponent`', () => {
+          expect(page.videoBlock).toBeTruthy();
+        });
+
+        it('should call `PrismicPipe` with `primary`', () => {
+          expect(prismicPipe).toHaveBeenCalledWith(
+            (comp.post as Prismic.Post).data.body[0].primary
+          );
+        });
+
+        it('should set `VideoBlockComponent` `data` as `primary`', () => {
+          expect(page.videoBlockComponent.data).toEqual(
+            (comp.post as Prismic.Post).data.body[0].primary
+          );
+        });
       });
     });
   });
 });
 
+class RichTextStub {
+  asText: jasmine.Spy;
+
+  constructor() {
+    this.asText = spyOn(comp.richText, 'asText').and.callThrough();
+  }
+}
+
 class Page {
+  get date() {
+    return this.query<HTMLSpanElement>('#intro #info-date');
+  }
+  get title() {
+    return this.query<HTMLHeadingElement>('#intro h1');
+  }
+  get thumbnail() {
+    return this.query<HTMLImageElement>('#intro image-component');
+  }
   get textBlock() {
     return this.query<HTMLElement>('prismic-text-block');
   }
@@ -169,6 +306,53 @@ class Page {
     return this.query<HTMLElement>('video-block');
   }
 
+  get imageComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageComponent)
+    );
+    return directiveEl.injector.get<StubImageComponent>(StubImageComponent);
+  }
+  get textBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubPrismicTextBlockComponent)
+    );
+    return directiveEl.injector.get<StubPrismicTextBlockComponent>(
+      StubPrismicTextBlockComponent
+    );
+  }
+  get imageBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageBlockComponent)
+    );
+    return directiveEl.injector.get<StubImageBlockComponent>(
+      StubImageBlockComponent
+    );
+  }
+  get duoBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubDuoBlockComponent)
+    );
+    return directiveEl.injector.get<StubDuoBlockComponent>(
+      StubDuoBlockComponent
+    );
+  }
+  get galleryBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubGalleryBlockComponent)
+    );
+    return directiveEl.injector.get<StubGalleryBlockComponent>(
+      StubGalleryBlockComponent
+    );
+  }
+  get videoBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubVideoBlockComponent)
+    );
+    return directiveEl.injector.get<StubVideoBlockComponent>(
+      StubVideoBlockComponent
+    );
+  }
+
   private query<T>(selector: string): T {
     return fixture.nativeElement.querySelector(selector);
   }
@@ -178,6 +362,7 @@ function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
   prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
+  richText = new RichTextStub();
   page = new Page();
 
   fixture.detectChanges();

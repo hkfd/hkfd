@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+import { find, catchError, flatMap } from 'rxjs/operators';
 
 import { Data } from './';
 import { Prismic } from 'shared';
@@ -18,7 +19,11 @@ export class MockPrismicService {
     return of(Data.Prismic.getPostsResponse());
   }
 
-  getPost(): Observable<Prismic.Post> {
-    return of(Data.Prismic.getPosts('post-1'));
+  getPost(uid: string): Observable<Prismic.Post | undefined> {
+    return of(Data.Prismic.getPosts<void>()).pipe(
+      flatMap(posts => posts),
+      find(post => post.uid === uid),
+      catchError(_ => of(undefined))
+    );
   }
 }

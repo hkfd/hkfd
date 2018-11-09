@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
-  MockApiPipe,
   ActivatedRoute,
   ActivatedRouteStub,
+  StubTextBlockComponent,
   Data
 } from 'testing';
 
+import { Api } from 'api';
 import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;
 let fixture: ComponentFixture<CareerComponent>;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
-let apiPipe: jasmine.Spy;
 
 describe('CareerComponent', () => {
   beforeEach(async(() => {
@@ -24,44 +24,90 @@ describe('CareerComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [CareerComponent, MockApiPipe],
-      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [CareerComponent, StubTextBlockComponent],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }]
     }).compileComponents();
   }));
 
   beforeEach(async(() => createComponent()));
 
-  it('should set career', () => {
-    expect(comp.career).toEqual(Data.Api.getCareers('Career 1'));
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  describe('Content', () => {
-    it('should display title', () => {
-      expect(page.sectionTitle.textContent).toEqual('TextBlock');
+  describe('`ngOnInit`', () => {
+    it('should set `career$`', () => {
+      expect(comp.career$).toBeDefined();
     });
 
-    describe('Text', () => {
-      it('should display TextBlockComponent', () => {
+    it('should subscribe to `ActivatedRoute` `data`', () => {
+      expect(activatedRoute.data.subscribe).toHaveBeenCalled();
+    });
+
+    it('should set `career`', () => {
+      expect(comp.career).toEqual(Data.Api.getCareers('Career 1'));
+    });
+  });
+
+  describe('`ngOnDestroy`', () => {
+    it('should call `career$` `unsubscribe`', () => {
+      const spy = spyOn(comp.career$, 'unsubscribe').and.callThrough();
+      comp.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe('Template', () => {
+    it('should display title', () => {
+      expect(page.title.textContent).toEqual('Career 1');
+    });
+
+    describe('Section', () => {
+      it('should display title if `title`', () => {
+        (comp.career as Api.Career).content[0].title = 'Section Title';
+        fixture.detectChanges();
+
+        expect(page.sectionTitle.textContent).toEqual('Section Title');
+      });
+
+      it('should not display title if no `title`', () => {
+        (comp.career as Api.Career).content[0].title = undefined;
+        fixture.detectChanges();
+
+        expect(page.sectionTitle).toBeFalsy();
+      });
+
+      it('should display `TextBlockComponent`', () => {
         expect(page.textBlock).toBeTruthy();
       });
 
-      it('should not call ApiPipe', () => {
-        expect(apiPipe).not.toHaveBeenCalled();
+      it('should set `TextBlockComponent` `data` as `data`', () => {
+        expect(page.textBlockComponent.data).toEqual((comp.career as Api.Career)
+          .content[0].data[0] as any);
       });
     });
   });
 });
 
 class Page {
+  get title() {
+    return this.query<HTMLHeadingElement>('h1');
+  }
   get sectionTitle() {
-    return this.query<HTMLHeadingElement>('h2');
+    return this.query<HTMLHeadingElement>('section:nth-of-type(2) h2');
   }
   get textBlock() {
     return this.query<HTMLElement>('text-block');
   }
-  get benefitsInfo() {
-    return this.query<HTMLParagraphElement>('section:last-of-type p');
+
+  get textBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubTextBlockComponent)
+    );
+    return directiveEl.injector.get<StubTextBlockComponent>(
+      StubTextBlockComponent
+    );
   }
 
   private query<T>(selector: string): T {
@@ -73,7 +119,6 @@ function createComponent() {
   fixture = TestBed.createComponent(CareerComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

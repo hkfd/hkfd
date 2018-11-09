@@ -10,43 +10,69 @@ let richText: RichTextStub;
 let page: Page;
 
 describe('TextBlockComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       declarations: [TextBlockComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should call RichText asHtml with data arg', () => {
-    expect(richText.asHtml).toHaveBeenCalledWith(comp.data, jasmine.anything());
+  beforeEach(() => {
+    comp.data = Data.Prismic.getText();
+    fixture.detectChanges();
   });
 
-  it('should display text', () => {
-    expect(page.text.innerText).toContain('This is a sentence.');
-    expect(page.text.innerText).toContain('This is a bold sentence.');
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should display HTML', () => {
-    expect(page.text.innerHTML).toContain(
-      '<p>This is a sentence.</p><p><strong>This is a bold sentence.</strong></p>'
-    );
-  });
-
-  describe('linkResolver', () => {
-    it('should return `/` by default', () => {
-      const linkResolver = comp.linkResolver({ type: '' } as any);
-
-      expect(linkResolver).toBe('/');
-    });
-
-    it('should return `/news/$uid` if news post type', () => {
-      const linkResolver = comp.linkResolver({
+  describe('`linkResolver`', () => {
+    it('should return `/news/$uid` if `type` arg is `news`', () => {
+      const res = comp.linkResolver({
         type: 'news',
         uid: 'post'
       } as any);
 
-      expect(linkResolver).toBe('/news/post');
+      expect(res).toBe('/news/post');
+    });
+
+    it('should return `/` by default', () => {
+      const res = comp.linkResolver({} as any);
+
+      expect(res).toBe('/');
+    });
+  });
+
+  describe('Template', () => {
+    describe('Has `data`', () => {
+      beforeEach(() => {
+        comp.data = Data.Prismic.getText();
+        fixture.detectChanges();
+      });
+
+      it('should be displayed', () => {
+        expect(page.text.innerHTML).toBe(
+          '<p>This is a sentence.</p><p><strong>This is a bold sentence.</strong></p>'
+        );
+      });
+
+      it('should call RichText `asHtml` with `data` and `linkResolver` args', () => {
+        expect(richText.asHtml).toHaveBeenCalledWith(
+          comp.data,
+          comp.linkResolver
+        );
+      });
+    });
+
+    describe('No `data`', () => {
+      beforeEach(() => {
+        (comp.data as any) = undefined;
+        fixture.detectChanges();
+      });
+
+      it('should not be displayed', () => {
+        expect(page.text).toBeFalsy();
+      });
     });
   });
 });
@@ -62,10 +88,6 @@ class RichTextStub {
 class Page {
   get text() {
     return this.query<HTMLDivElement>('div');
-  }
-
-  constructor() {
-    comp.data = Data.Prismic.getText();
   }
 
   private query<T>(selector: string): T {

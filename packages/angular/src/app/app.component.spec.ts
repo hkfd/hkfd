@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Router, RouterTestingModule } from 'testing';
 import { Subscription } from 'rxjs';
 
+import { environment } from 'environment';
 import { AppComponent } from './app.component';
 
 const app = window as any;
@@ -13,6 +14,7 @@ let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
 let page: Page;
 let router: Router;
+let routerStub: RouterStub;
 let mockPlatformId: 'browser' | 'server';
 
 @Component({
@@ -26,84 +28,63 @@ class Page1Component {}
 class Page2Component {}
 
 describe('AppComponent', () => {
-  describe('getState', () => {
-    beforeEach(async(() => setupTest()));
-    beforeEach(async(() => createComponent()));
+  it('should create component', () => {
+    setupTest();
+    createComponent();
 
-    it('should be called on route change', async(() =>
-      router
-        .navigateByUrl('page-1')
-        .then(_ => expect(page.getState).toHaveBeenCalled())));
-
-    it('should return state', async(() =>
-      router.navigateByUrl('page-2').then(_ => {
-        const outlet = page.getState.calls.mostRecent().args[0];
-
-        expect(comp.getState(outlet)).toBe('page2');
-      })));
+    expect(comp).toBeTruthy();
   });
 
-  describe('OnInit', () => {
+  describe('`ngOnInit`', () => {
     describe('browser', () => {
       beforeEach(() => (mockPlatformId = 'browser'));
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
 
-      it('should set up Google Analytics', () => {
-        expect(app.ga).toHaveBeenCalledWith('create', 'def', 'auto');
+      it('should call `ga` with `create`, `environment.analyticsId`, and `auto` args', () => {
+        expect(app.ga).toHaveBeenCalledWith(
+          'create',
+          environment.analyticsId,
+          'auto'
+        );
       });
 
-      it('should subscribe to Router events', () => {
+      it('should set `router$`', () => {
         expect(comp.router$).toBeDefined();
       });
 
-      describe('Routing', () => {
-        it('should call ga', async(() =>
-          router
-            .navigateByUrl('page-1')
-            .then(_ =>
-              expect(app.ga).toHaveBeenCalledWith(
-                'set',
-                jasmine.anything(),
-                jasmine.anything()
-              )
-            )));
+      it('should subscribe to `Router` `events`', () => {
+        expect(routerStub.events.subscribe).toHaveBeenCalled();
+      });
 
-        it('should call ga set with title as `Heckford`', async(() =>
+      describe('Routing', () => {
+        it('should call `ga` with `set`, `title`, and `Heckford` args', () =>
           router
             .navigateByUrl('page-1')
             .then(_ =>
               expect(app.ga).toHaveBeenCalledWith('set', 'title', 'Heckford')
-            )));
+            ));
 
-        it('should call ga set with page as URL on first route change', async(() =>
+        it('should call `ga` with `set`, `page`, and `urlAfterRedirects` args', () =>
           router
-            .navigateByUrl('page-1')
-            .then(_ =>
-              expect(app.ga).toHaveBeenCalledWith('set', 'page', '/page-1')
-            )));
-
-        it('should call ga set with page as URL on second route change', async(() =>
-          router
-            .navigateByUrl('page-1')
-            .then(() => router.navigateByUrl('page-2'))
+            .navigateByUrl('page-2')
             .then(_ =>
               expect(app.ga).toHaveBeenCalledWith('set', 'page', '/page-2')
-            )));
+            ));
 
-        it('should call ga set with page as URL on redirect', async(() =>
+        it('should call `ga` with `send` and `pageview` args', () =>
           router
-            .navigateByUrl('')
+            .navigateByUrl('page-2')
             .then(_ =>
-              expect(app.ga).toHaveBeenCalledWith('set', 'page', '/page-1')
-            )));
+              expect(app.ga).toHaveBeenCalledWith('send', 'pageview')
+            ));
 
-        it('should not call ga set with page as redirected URL', async(() =>
+        it('should not call `ga` with `set`, `page`, and redirected url args', () =>
           router
-            .navigateByUrl('')
+            .navigateByUrl('no-page')
             .then(_ =>
-              expect(app.ga).not.toHaveBeenCalledWith('set', 'page', '/page-3')
-            )));
+              expect(app.ga).not.toHaveBeenCalledWith('set', 'page', '/no-page')
+            ));
       });
     });
 
@@ -112,23 +93,23 @@ describe('AppComponent', () => {
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
 
-      it('should not set up Google Analytics', () => {
+      it('should not call `ga`', () => {
         expect(app.ga).not.toHaveBeenCalled();
       });
 
-      it('should not subscribe to Router events', () => {
+      it('should not set `router$`', () => {
         expect(comp.router$).toBeUndefined();
       });
     });
   });
 
-  describe('OnDestroy', () => {
+  describe('`ngOnDestroy`', () => {
     describe('browser', () => {
       beforeEach(() => (mockPlatformId = 'browser'));
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
 
-      it('should call router$ unsubscribe', () => {
+      it('should call `router$` `unsubscribe`', () => {
         const spy = spyOn(
           comp.router$ as Subscription,
           'unsubscribe'
@@ -137,6 +118,41 @@ describe('AppComponent', () => {
 
         expect(spy).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('`getState`', () => {
+    beforeEach(async(() => setupTest()));
+    beforeEach(async(() => createComponent()));
+
+    it('should be called on route change', () =>
+      router
+        .navigateByUrl('page-1')
+        .then(_ => expect(page.getState).toHaveBeenCalled()));
+
+    it('should return `activatedRouteData` `state`', () => {
+      const res = comp.getState({
+        activatedRouteData: { state: 'state' }
+      } as any);
+
+      expect(res).toBe('state');
+    });
+  });
+
+  describe('Template', () => {
+    beforeEach(async(() => setupTest()));
+    beforeEach(async(() => createComponent()));
+
+    it('should display header', () => {
+      expect(page.header).toBeTruthy();
+    });
+
+    it('should display router outlet', () => {
+      expect(page.routerOutlet).toBeTruthy();
+    });
+
+    it('should display footer', () => {
+      expect(page.footer).toBeTruthy();
     });
   });
 });
@@ -160,7 +176,7 @@ function setupTest() {
           }
         },
         {
-          path: '',
+          path: '**',
           redirectTo: 'page-1',
           pathMatch: 'full'
         }
@@ -172,13 +188,35 @@ function setupTest() {
   }).compileComponents();
 }
 
+class RouterStub {
+  events = {
+    subscribe: jasmine.createSpy()
+  };
+
+  constructor() {
+    this.events.subscribe = spyOn(router.events, 'subscribe').and.callThrough();
+  }
+}
+
 class Page {
   getState: jasmine.Spy;
 
-  constructor() {
-    router = fixture.debugElement.injector.get<Router>(Router);
+  get header() {
+    return this.query<HTMLElement>('header');
+  }
+  get routerOutlet() {
+    return this.query<HTMLElement>('router-outlet');
+  }
+  get footer() {
+    return this.query<HTMLElement>('footer');
+  }
 
+  constructor() {
     this.getState = spyOn(comp, 'getState').and.callThrough();
+  }
+
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
   }
 }
 
@@ -186,10 +224,10 @@ function createComponent() {
   fixture = TestBed.createComponent(AppComponent);
   comp = fixture.componentInstance;
   app.ga = jasmine.createSpy('ga');
+  router = fixture.debugElement.injector.get<Router>(Router);
+  routerStub = new RouterStub();
   page = new Page();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

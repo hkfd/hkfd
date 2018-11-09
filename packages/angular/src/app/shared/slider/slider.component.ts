@@ -9,7 +9,7 @@ import {
   Inject,
   PLATFORM_ID
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 
 import { Generic } from 'shared';
 
@@ -54,22 +54,31 @@ export class SliderComponent implements OnChanges, OnDestroy {
     return (this.currentIndex = index);
   }
 
-  startTimer() {
-    if (!this.autoplay || !isPlatformBrowser(this.platformId)) return;
+  intervalChangeImage() {
+    this.zone.run(this.changeImage.bind(this));
+  }
 
-    this.zone.runOutsideAngular(
-      _ =>
-        (this.timer = window.setInterval(
-          __ => this.zone.run(this.changeImage.bind(this)),
-          this.delay
-        ))
+  setInterval() {
+    this.timer = window.setInterval(
+      this.intervalChangeImage.bind(this),
+      this.delay
     );
   }
 
-  endTimer() {
-    if (!isPlatformBrowser(this.platformId)) return;
+  startTimer() {
+    if (!this.autoplay || isPlatformServer(this.platformId)) return;
 
-    this.zone.runOutsideAngular(_ => window.clearInterval(this.timer));
+    this.zone.runOutsideAngular(this.setInterval.bind(this));
+  }
+
+  clearInterval() {
+    window.clearInterval(this.timer);
+  }
+
+  endTimer() {
+    if (isPlatformServer(this.platformId)) return;
+
+    this.zone.runOutsideAngular(this.clearInterval.bind(this));
   }
 
   sliderInit() {

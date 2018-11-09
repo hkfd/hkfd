@@ -12,6 +12,10 @@ import { makeImmutable } from 'testing';
 
 @Injectable()
 export class ActivatedRouteStub {
+  constructor() {
+    this.data.subscribe = spyOn(this.data, 'subscribe').and.callThrough();
+  }
+
   private queryParamSubject = new BehaviorSubject(
     convertToParamMap(this.testQueryParamMap)
   );
@@ -65,4 +69,14 @@ export class ActivatedRouteStub {
       path: ''
     }
   };
+}
+
+export class RouterStub {
+  constructor() {
+    this.navigate = spyOn(this, 'navigate').and.callThrough();
+  }
+
+  navigate() {
+    return;
+  }
 }

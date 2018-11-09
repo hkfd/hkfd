@@ -108,6 +108,7 @@ export namespace Api {
         title: 'Case Study 1',
         featured: true,
         colour: 'white',
+        sector: 'Sector 1',
         thumbnail: {
           image: {
             name: '',
@@ -132,6 +133,7 @@ export namespace Api {
         title: 'Case Study 2',
         featured: true,
         colour: 'black',
+        sector: 'Sector 2',
         thumbnail: {
           image: {
             name: '',
@@ -163,6 +165,7 @@ export namespace Api {
         title: 'Case Study 3',
         featured: false,
         colour: 'white',
+        sector: 'Sector 3',
         thumbnail: {
           image: {
             name: '',
@@ -440,7 +443,7 @@ export namespace Api {
     const sentences: { [name: string]: ApiTypes.Sentence } = {
       url: {
         text: 'Click here',
-        url: 'http://example.com'
+        url: 'http://example.com/'
       },
       heading: {
         text: 'Heading',

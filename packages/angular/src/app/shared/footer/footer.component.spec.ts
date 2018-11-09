@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
+import { makeImmutable } from 'testing';
+
 import { FooterComponent } from './footer.component';
 
 let comp: FooterComponent;
@@ -7,57 +9,75 @@ let fixture: ComponentFixture<FooterComponent>;
 let page: Page;
 
 describe('FooterComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       declarations: [FooterComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should set currentYear', () => {
-    expect(comp.currentYear).toBeDefined();
+  beforeEach(() => {
+    comp.links = makeImmutable([
+      {
+        url: 'http://example1.com/',
+        icon: 'http://testing/assets/1.jpg',
+        alt: 'Image'
+      },
+      {
+        url: 'http://example2.com/',
+        icon: 'http://testing/assets/2.jpg',
+        alt: 'Image'
+      }
+    ]);
+    fixture.detectChanges();
   });
 
-  it('should display current year', () => {
-    expect(page.currentYear.textContent).toContain(
-      new Date().getFullYear().toString()
-    );
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should display links', () => {
-    expect(page.socialLinks.length).toBe(2);
-  });
+  describe('Template', () => {
+    it('should display `currentYear`', () => {
+      expect(page.currentYear.textContent).toContain(
+        new Date().getFullYear().toString()
+      );
+    });
 
-  it('should set link url', () => {
-    const href = page.socialLinks[0].getAttribute('href');
+    describe('Social links', () => {
+      it('should be displayed', () => {
+        expect(page.socialLinks.length).toBe(comp.links.length);
+      });
 
-    expect(href).toBe('http://example1.com');
-  });
+      describe('Link', () => {
+        it('should set href', () => {
+          expect(page.socialLinks[0].href).toBe('http://example1.com/');
+        });
 
-  it('should set link icon src', () => {
-    const src = page.socialLinkIcons[0].getAttribute('src');
+        describe('Icon', () => {
+          it('should set src', () => {
+            expect(page.socialLinkIcons[0].src).toBe(
+              'http://testing/assets/1.jpg'
+            );
+          });
 
-    expect(src).toBe('/assets/1.jpg');
+          it('should set alt', () => {
+            expect(page.socialLinkIcons[0].alt).toBe('Image');
+          });
+        });
+      });
+    });
   });
 });
 
 class Page {
   get currentYear() {
-    return this.query<HTMLElement>('small');
+    return this.query<HTMLElement>('#footer-info small');
   }
   get socialLinks() {
     return this.queryAll<HTMLAnchorElement>('#info-social a');
   }
   get socialLinkIcons() {
     return this.queryAll<HTMLImageElement>('#info-social img');
-  }
-
-  constructor() {
-    comp.links = [
-      { url: 'http://example1.com', icon: '/assets/1.jpg', alt: 'Image' },
-      { url: 'http://example2.com', icon: '/assets/2.jpg', alt: 'Image' }
-    ];
   }
 
   private query<T>(selector: string): T {
