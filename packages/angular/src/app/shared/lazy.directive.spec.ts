@@ -116,7 +116,8 @@ describe('LazyDirective', () => {
 
     describe('`isIntersecting` is `false`', () => {
       beforeEach(() =>
-        lazyDirective.intersectionCallback([{ isIntersecting: false }] as any));
+        lazyDirective.intersectionCallback([{ isIntersecting: false }] as any)
+      );
 
       it('should not set `data` `loaded', () => {
         expect(comp.lazy.loaded).toBeUndefined();

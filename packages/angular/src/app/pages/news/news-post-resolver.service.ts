@@ -18,25 +18,24 @@ export class NewsPostResolver implements Resolve<Prismic.Post> {
   ): Observable<Prismic.Post> | Observable<never> {
     return this.prismicService.getPost(route.paramMap.get('uid') || '').pipe(
       take(1),
-      tap(
-        post =>
-          post
-            ? this.metaService.setMetaTags({
-                type: 'article',
-                ...(post.data.title &&
-                  post.data.title[0] &&
-                  post.data.title[0].text && {
-                    title: post.data.title[0].text
-                  }),
-                ...(post.data.description && {
-                  description: post.data.description
+      tap(post =>
+        post
+          ? this.metaService.setMetaTags({
+              type: 'article',
+              ...(post.data.title &&
+                post.data.title[0] &&
+                post.data.title[0].text && {
+                  title: post.data.title[0].text
                 }),
-                url: `news/${post.uid}`,
-                ...(post.data.image &&
-                  post.data.image.lg &&
-                  post.data.image.lg.url && { image: post.data.image.lg.url })
-              })
-            : undefined
+              ...(post.data.description && {
+                description: post.data.description
+              }),
+              url: `news/${post.uid}`,
+              ...(post.data.image &&
+                post.data.image.lg &&
+                post.data.image.lg.url && { image: post.data.image.lg.url })
+            })
+          : undefined
       ),
       mergeMap(post => {
         if (post) return of(post);

@@ -15,12 +15,15 @@ let page: Page;
 
 @Component({
   selector: 'app-host',
-  template: `<slider
-    [images]="images"
-    [random]="random"
-    [autoplay]="autoplay"
-    [delay]="delay"
-  ><main>Content</main></slider>`
+  template: `
+    <slider
+      [images]="images"
+      [random]="random"
+      [autoplay]="autoplay"
+      [delay]="delay"
+      ><main>Content</main></slider
+    >
+  `
 })
 class TestHostComponent {
   images: any;
@@ -95,7 +98,8 @@ describe('SliderComponent', () => {
       beforeEach(() =>
         comp.ngOnChanges({
           images: { currentValue: Data.Generic.getImages() } as any
-        }));
+        })
+      );
 
       it('should call `sliderInit`', () => {
         expect(page.sliderInit).toHaveBeenCalled();
@@ -391,7 +395,8 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() =>
-      (comp.startTimer as jasmine.Spy).and.callFake(() => undefined));
+      (comp.startTimer as jasmine.Spy).and.callFake(() => undefined)
+    );
 
     describe('Has `images`', () => {
       beforeEach(() => {

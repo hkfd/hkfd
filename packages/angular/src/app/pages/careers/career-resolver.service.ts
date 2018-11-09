@@ -19,16 +19,15 @@ export class CareerResolver implements Resolve<Api.Career> {
   ): Observable<Api.Career> | Observable<never> {
     return this.apiService.getCareer(route.paramMap.get('id') || '').pipe(
       take(1),
-      tap(
-        career =>
-          career
-            ? this.metaService.setMetaTags({
-                type: 'article',
-                title: career.title,
-                description: career.salary,
-                url: `careers/${career.id}`
-              })
-            : undefined
+      tap(career =>
+        career
+          ? this.metaService.setMetaTags({
+              type: 'article',
+              title: career.title,
+              description: career.salary,
+              url: `careers/${career.id}`
+            })
+          : undefined
       ),
       mergeMap(career => {
         if (career) return of(career);

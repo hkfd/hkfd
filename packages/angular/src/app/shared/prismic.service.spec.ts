@@ -154,7 +154,8 @@ describe('PrismicService', () => {
 
   describe('`getPosts`', () => {
     beforeEach(() =>
-      spyOn(prismicService, 'getRef').and.returnValue(of('abc')));
+      spyOn(prismicService, 'getRef').and.returnValue(of('abc'))
+    );
 
     it('should call `TransferState` `get` with `POSTS_KEY` and `null` args', () => {
       prismicService.getPosts(true).subscribe();
@@ -168,7 +169,8 @@ describe('PrismicService', () => {
     describe('Cache', () => {
       describe('Has `cache` and `firstLoad` is `true`', () => {
         beforeEach(() =>
-          transferState.set('prismic-posts', Data.Prismic.getPostsResponse()));
+          transferState.set('prismic-posts', Data.Prismic.getPostsResponse())
+        );
 
         it('should not call `HttpClient` `get`', () => {
           prismicService.getPosts(true).subscribe();
@@ -349,7 +351,8 @@ describe('PrismicService', () => {
 
   describe('`getPost`', () => {
     beforeEach(() =>
-      spyOn(prismicService, 'getRef').and.returnValue(of('abc')));
+      spyOn(prismicService, 'getRef').and.returnValue(of('abc'))
+    );
 
     it('should call `TransferState` `get` with `POST_KEY` and `null` args', () => {
       prismicService.getPost('post-1').subscribe();
@@ -363,7 +366,8 @@ describe('PrismicService', () => {
     describe('Cache', () => {
       describe('Has `cache` and `firstLoad` is `true`', () => {
         beforeEach(() =>
-          transferState.set('prismic-post', Data.Prismic.getPosts('post-1')));
+          transferState.set('prismic-post', Data.Prismic.getPosts('post-1'))
+        );
 
         it('should not call `HttpClient` `get`', () => {
           prismicService.getPost('post-1').subscribe();

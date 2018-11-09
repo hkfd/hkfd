@@ -103,8 +103,9 @@ describe('PostResolver', () => {
   });
 
   describe('Has `post`', () => {
-    beforeEach(() =>
-      (activatedRoute.testParamMap = { type: 'service', id: 'service-1' }));
+    beforeEach(
+      () => (activatedRoute.testParamMap = { type: 'service', id: 'service-1' })
+    );
 
     it('should call `MetaService` `setMetaTags`', () => {
       (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
@@ -151,8 +152,9 @@ describe('PostResolver', () => {
   });
 
   describe('No `post`', () => {
-    beforeEach(() =>
-      (activatedRoute.testParamMap = { type: 'test', id: 'test' }));
+    beforeEach(
+      () => (activatedRoute.testParamMap = { type: 'test', id: 'test' })
+    );
 
     it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
       (postResolver.resolve(activatedRoute.snapshot as any) as Observable<

@@ -109,7 +109,8 @@ describe('Header', () => {
       beforeEach(() =>
         page
           .isClickable(page.getNavToggle())
-          .then(_ => page.getNavToggle().click()));
+          .then(_ => page.getNavToggle().click())
+      );
 
       it('should show toggle', () => {
         expect(page.getNavToggle().isDisplayed()).toBeTruthy();
