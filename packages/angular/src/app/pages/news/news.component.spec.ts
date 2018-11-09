@@ -152,7 +152,7 @@ describe('NewsComponent', () => {
         });
 
         it('should display date', () => {
-          expect(page.postDate.textContent).toBe('01/01');
+          expect((page.postDate.textContent as string).trim()).toBe('01/01');
         });
 
         it('should display title', () => {

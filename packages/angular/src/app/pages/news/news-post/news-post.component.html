@@ -1,17 +1,38 @@
 <section id="intro">
   <div id="intro-info">
-    <span id="info-date">{{ post?.first_publication_date | date: 'dd LLLL' }}</span>
+    <span id="info-date">
+      {{ post?.first_publication_date | date: 'dd LLLL' }}
+    </span>
     <h1 *ngIf="post?.data?.title">{{ richText.asText(post?.data?.title) }}</h1>
   </div>
-  <image-component *ngIf="post?.data?.image?.proxy?.url" full-height [image]="post?.data | prismic"></image-component>
+  <image-component
+    *ngIf="post?.data?.image?.proxy?.url"
+    [image]="post?.data | prismic"
+    full-height
+  ></image-component>
 </section>
 
 <ng-container *ngFor="let slice of post?.data?.body">
   <ng-container [ngSwitch]="slice?.slice_type">
-    <prismic-text-block *ngSwitchCase="'text'" [data]="slice?.primary?.text"></prismic-text-block>
-    <image-block *ngSwitchCase="'image'" [data]="slice?.primary | prismic"></image-block>
-    <duo-block *ngSwitchCase="'duo'" [data]="slice?.items | prismic"></duo-block>
-    <gallery-block *ngSwitchCase="'gallery'" [data]="slice?.items | prismic"></gallery-block>
-    <video-block *ngSwitchCase="'video'" [data]="slice?.primary | prismic"></video-block>
+    <prismic-text-block
+      *ngSwitchCase="'text'"
+      [data]="slice?.primary?.text"
+    ></prismic-text-block>
+    <image-block
+      *ngSwitchCase="'image'"
+      [data]="slice?.primary | prismic"
+    ></image-block>
+    <duo-block
+      *ngSwitchCase="'duo'"
+      [data]="slice?.items | prismic"
+    ></duo-block>
+    <gallery-block
+      *ngSwitchCase="'gallery'"
+      [data]="slice?.items | prismic"
+    ></gallery-block>
+    <video-block
+      *ngSwitchCase="'video'"
+      [data]="slice?.primary | prismic"
+    ></video-block>
   </ng-container>
 </ng-container>

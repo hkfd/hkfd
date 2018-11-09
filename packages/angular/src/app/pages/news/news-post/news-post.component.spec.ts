@@ -78,7 +78,7 @@ describe('NewsPostComponent', () => {
   describe('Template', () => {
     describe('Intro', () => {
       it('should display date', () => {
-        expect(page.date.textContent).toBe('01 January');
+        expect((page.date.textContent as string).trim()).toBe('01 January');
       });
 
       describe('Title', () => {

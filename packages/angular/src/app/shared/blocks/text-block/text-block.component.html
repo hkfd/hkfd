@@ -1,11 +1,8 @@
 <ng-container *ngFor="let content of data?.data">
   <ng-container [ngSwitch]="true">
-
     <ng-template [ngSwitchCase]="!!content.list">
       <ul>
-        <li *ngFor="let text of content?.list">
-          <text [text]="text"></text>
-        </li>
+        <li *ngFor="let text of content?.list"><text [text]="text"></text></li>
       </ul>
     </ng-template>
 
@@ -16,6 +13,5 @@
         </ng-container>
       </p>
     </ng-template>
-
   </ng-container>
 </ng-container>

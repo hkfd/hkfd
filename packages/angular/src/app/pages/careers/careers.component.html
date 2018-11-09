@@ -1,31 +1,59 @@
 <section id="intro">
   <h1>FANCY JOINING THE TEAM?</h1>
   <div class="text">
-    <p>We’re always on the lookout for new talent and people to join us. If you like what you see and fancy joining the Heckford Team, read on and see who we’re currently hiring.</p>
+    <p>
+      We’re always on the lookout for new talent and people to join us. If you
+      like what you see and fancy joining the Heckford Team, read on and see who
+      we’re currently hiring.
+    </p>
   </div>
 </section>
 
 <section id="hiring">
   <div id="hiring-image">
-    <image-component full-height [image]="images?.hiring | api"></image-component>
+    <image-component
+      [image]="images?.hiring | api"
+      full-height
+    ></image-component>
   </div>
   <div id="hiring-text">
     <h2>WE'RE CURRENTLY HIRING&hellip;</h2>
     <div class="text">
-      <p>If you talk to anyone on the Heckford team, we’re pretty sure that they’ll agree on Heckford being a pretty cool place to work. We’re definitely not your standard agency. You’ve obviously read over our site and seen who we work with, what we do and had a gander at what we get up to on a regular basis.</p>
-      <p>The next step is to view our current job vacancies (listed below)&hellip; but don’t worry, if you can’t see one that suits you please drop us an email at
-      <a href="mailto:hello@heckford-advertising.co.uk" attr.aria-label="Email">hello@heckford-advertising.co.uk</a>
-      and we’ll keep you on file in case something pops up for you in the future.</p>
+      <p>
+        If you talk to anyone on the Heckford team, we’re pretty sure that
+        they’ll agree on Heckford being a pretty cool place to work. We’re
+        definitely not your standard agency. You’ve obviously read over our site
+        and seen who we work with, what we do and had a gander at what we get up
+        to on a regular basis.
+      </p>
+      <p>
+        The next step is to view our current job vacancies (listed
+        below)&hellip; but don’t worry, if you can’t see one that suits you
+        please drop us an email at
+        <a
+          href="mailto:hello@heckford-advertising.co.uk"
+          attr.aria-label="Email"
+        >
+          hello@heckford-advertising.co.uk
+        </a>
+        and we’ll keep you on file in case something pops up for you in the
+        future.
+      </p>
     </div>
   </div>
 </section>
 
 <section id="careers">
-  <a class="career" *ngFor="let career of careers" [routerLink]="career?.id" [attr.aria-label]="career?.title">
+  <a
+    class="career"
+    *ngFor="let career of careers"
+    [routerLink]="career?.id"
+    [attr.aria-label]="career?.title"
+  >
     <div class="career-info">
       <h3>{{ career?.title }}</h3>
       <span>{{ career?.salary }}</span>
     </div>
   </a>
-  <image-component full-height [image]="images?.career | api"></image-component>
+  <image-component [image]="images?.career | api" full-height></image-component>
 </section>

@@ -1,26 +1,53 @@
 <section id="intro">
-  <h1>LANCASHIRE'S LEADERS<span>Independent advertising &amp; marketing agency</span></h1>
+  <h1>
+    LANCASHIRE'S LEADERS
+    <span>Independent advertising &amp; marketing agency</span>
+  </h1>
 </section>
 
-<slider [images]="images?.intro | api" [autoplay]="true"><img class="icon-40" src="/assets/icons/40-years-white.svg" alt="40 Years of Creativity"></slider>
+<slider [images]="images?.intro | api" [autoplay]="true">
+  <img
+    class="icon-40"
+    src="/assets/icons/40-years-white.svg"
+    alt="40 Years of Creativity"
+  />
+</slider>
 
 <section id="help">
   <div id="help-container">
     <h2>WE CAN HELP YOU</h2>
-    <p>We’re a creative agency based in Lancashire. For over 40 years our team have worked with organisations of all sizes and types. We focus on one thing: delivering creative that works.</p>
-    <a class="button" routerLink="/about" attr.aria-label="Read More">READ MORE</a>
+    <p>
+      We’re a creative agency based in Lancashire. For over 40 years our team
+      have worked with organisations of all sizes and types. We focus on one
+      thing: delivering creative that works.
+    </p>
+    <a class="button" routerLink="/about" attr.aria-label="Read More">
+      READ MORE
+    </a>
   </div>
 </section>
 
 <section id="services">
   <div class="text">
     <h2>OUR SERVICES</h2>
-    <p>Our team provides you with a complete range of corporate marketing services, including advertising, design &amp; print, digital, illustration, 3D CGI, exhibitions and signage.</p>
+    <p>
+      Our team provides you with a complete range of corporate marketing
+      services, including advertising, design &amp; print, digital,
+      illustration, 3D CGI, exhibitions and signage.
+    </p>
   </div>
 
   <div id="services-list">
-    <a *ngFor="let service of services$ | async" class="service" [routerLink]="[ 'service', service?.id ]" [attr.aria-label]="service?.title">
-      <image-component full-height [image]="service?.thumbnail | api"></image-component>
+    <a
+      class="service"
+      *ngFor="let service of (services$ | async)"
+      [routerLink]="['service', service?.id]"
+      [attr.aria-label]="service?.title"
+    >
+      <image-component
+        [image]="service?.thumbnail | api"
+        full-height
+      ></image-component>
       <div class="service-info">
         <h3>{{ service?.title }}</h3>
         <p>{{ service?.description }}</p>
@@ -30,21 +57,35 @@
   </div>
 </section>
 
-<slider-work [caseStudies]="caseStudies" [autoplay]="true" [random]="true"></slider-work>
+<slider-work
+  [caseStudies]="caseStudies"
+  [autoplay]="true"
+  [random]="true"
+></slider-work>
 
 <section id="clients">
   <div class="text">
     <h2>OUR CLIENTS</h2>
-    <p>Just a few of the brands that we have been privileged to work with over the years</p>
+    <p>
+      Just a few of the brands that we have been privileged to work with over
+      the years
+    </p>
   </div>
 
   <ul id="client-list">
-    <li class="client" *ngFor="let client of clients$ | async">
-      {{ client?.sector }}:
+    <li class="client" *ngFor="let client of (clients$ | async)">
+      {{ client?.sector }}
+      :
       <ul class="client-list">
-        <li class="client-name" *ngFor="let name of client?.list">{{ name }}</li>
+        <li class="client-name" *ngFor="let name of client?.list">
+          {{ name }}
+        </li>
       </ul>
     </li>
   </ul>
-  <img class="icon-40" src="/assets/icons/40-years-black.svg" alt="40 Years of Creativity">
+  <img
+    class="icon-40"
+    src="/assets/icons/40-years-black.svg"
+    alt="40 Years of Creativity"
+  />
 </section>

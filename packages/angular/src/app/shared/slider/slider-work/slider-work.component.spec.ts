@@ -144,7 +144,7 @@ describe('SliderWorkComponent', () => {
       describe('Slide', () => {
         describe('Title', () => {
           it('should be displayed', () => {
-            expect(page.slideTitle.textContent).toBe(
+            expect((page.slideTitle.textContent as string).trim()).toBe(
               Data.Api.getCaseStudies('Case Study 1').title
             );
           });
