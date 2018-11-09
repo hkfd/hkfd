@@ -16,11 +16,13 @@ import { AppAnimations } from './app.animations';
 
 @Component({
   selector: 'app-root',
-  template: `<header></header>
-  <main [@routeTransition]="getState(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-  </main>
-  <footer></footer>`,
+  template: `
+    <header></header>
+    <main [@routeTransition]="getState(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </main>
+    <footer></footer>
+  `,
   animations: AppAnimations
 })
 export class AppComponent implements OnInit, OnDestroy {

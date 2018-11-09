@@ -47,7 +47,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache`', () => {
         beforeEach(() =>
-          transferState.set('api-services', Data.Api.getServices<void>()));
+          transferState.set('api-services', Data.Api.getServices<void>())
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getServices().subscribe();
@@ -152,7 +153,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache`', () => {
         beforeEach(() =>
-          transferState.set('api-careers', Data.Api.getCareers<void>()));
+          transferState.set('api-careers', Data.Api.getCareers<void>())
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getCareers().subscribe();
@@ -255,7 +257,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache` and `cache.id` is `id`', () => {
         beforeEach(() =>
-          transferState.set('api-career', Data.Api.getCareers('Career 1')));
+          transferState.set('api-career', Data.Api.getCareers('Career 1'))
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getCareer('career-1').subscribe();
@@ -404,7 +407,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache` and `cache.id` is `id`', () => {
         beforeEach(() =>
-          transferState.set('api-post', Data.Api.getServices('Service 2')));
+          transferState.set('api-post', Data.Api.getServices('Service 2'))
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getPost('service', 'service-2').subscribe();
@@ -551,10 +555,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache`', () => {
         beforeEach(() =>
-          transferState.set(
-            'api-case-studies',
-            Data.Api.getCaseStudies<void>()
-          ));
+          transferState.set('api-case-studies', Data.Api.getCaseStudies<void>())
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getCaseStudies().subscribe();
@@ -659,7 +661,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache`', () => {
         beforeEach(() =>
-          transferState.set('api-team', Data.Api.getTeam<void>()));
+          transferState.set('api-team', Data.Api.getTeam<void>())
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getTeam().subscribe();
@@ -762,7 +765,8 @@ describe('ApiService', () => {
     describe('Cache', () => {
       describe('Has `cache`', () => {
         beforeEach(() =>
-          transferState.set('api-clients', Data.Api.getClients()));
+          transferState.set('api-clients', Data.Api.getClients())
+        );
 
         it('should not call `HttpClient` `get`', () => {
           apiService.getClients().subscribe();

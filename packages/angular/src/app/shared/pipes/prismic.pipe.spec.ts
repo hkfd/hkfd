@@ -59,8 +59,9 @@ describe('PrismicPipe', () => {
   describe('`transformImage`', () => {
     let res: any;
 
-    beforeEach(() =>
-      (res = pipe.transform({ image: Data.Prismic.getImage() })));
+    beforeEach(
+      () => (res = pipe.transform({ image: Data.Prismic.getImage() }))
+    );
 
     describe('`src`', () => {
       it('should be set', () => {
@@ -142,8 +143,9 @@ describe('PrismicPipe', () => {
   describe('`transformVideo`', () => {
     let res: any;
 
-    beforeEach(() =>
-      (res = pipe.transform({ video: Data.Prismic.getVideo() })));
+    beforeEach(
+      () => (res = pipe.transform({ video: Data.Prismic.getVideo() }))
+    );
 
     describe('`src`', () => {
       it('should be set', () => {

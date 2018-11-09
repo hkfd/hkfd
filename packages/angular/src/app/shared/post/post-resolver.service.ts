@@ -32,21 +32,20 @@ export class PostResolver implements Resolve<Api.Post> {
 
     return this.apiService.getPost(type, id).pipe(
       take(1),
-      tap(
-        post =>
-          post
-            ? this.metaService.setMetaTags({
-                type: 'article',
-                title: post.title,
-                description: post.intro[0],
-                url: `${type}/${id}`,
-                image: `https://res.cloudinary.com/${
-                  environment.cloudinaryName
-                }/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/${
-                  post.thumbnail.image.name
-                }`
-              })
-            : undefined
+      tap(post =>
+        post
+          ? this.metaService.setMetaTags({
+              type: 'article',
+              title: post.title,
+              description: post.intro[0],
+              url: `${type}/${id}`,
+              image: `https://res.cloudinary.com/${
+                environment.cloudinaryName
+              }/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/${
+                post.thumbnail.image.name
+              }`
+            })
+          : undefined
       ),
       mergeMap(post => {
         if (post) return of(post);
