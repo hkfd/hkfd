@@ -1,14 +1,26 @@
 <section id="page-intro">
   <h1>OUR WORK</h1>
   <div id="intro-container">
-    <p>Our Case Studies provide more in-depth information and examples of how we work with our clients.</p>
+    <p>
+      Our Case Studies provide more in-depth information and examples of how we
+      work with our clients.
+    </p>
   </div>
 </section>
 
 <section id="case-studies">
-  <a *ngFor="let caseStudy of caseStudies" class="case-study {{ caseStudy?.colour }}" [@caseStudyList]="caseStudy?.thumbnail?.srcset?.loaded" [routerLink]="[caseStudy?.id]" [attr.aria-label]="caseStudy?.title">
+  <a
+    class="case-study {{ caseStudy?.colour }}"
+    *ngFor="let caseStudy of caseStudies"
+    [routerLink]="[caseStudy?.id]"
+    [@caseStudyList]="caseStudy?.thumbnail?.srcset?.loaded"
+    [attr.aria-label]="caseStudy?.title"
+  >
     <h2>{{ caseStudy?.title }}</h2>
     <span class="button">READ MORE</span>
-    <image-component full-height [image]="caseStudy?.thumbnail"></image-component>
+    <image-component
+      [image]="caseStudy?.thumbnail"
+      full-height
+    ></image-component>
   </a>
 </section>

@@ -7,13 +7,20 @@
       </div>
     </div>
     <div id="info-overview" *ngIf="$any(post)?.overview">
-      <span>OUR SERVICES TO {{ post?.title }}</span>
+      <span>
+        OUR SERVICES TO
+        {{ post?.title }}
+      </span>
       <ul>
         <li *ngFor="let service of post?.overview">{{ service }}</li>
       </ul>
     </div>
   </div>
-  <img class="icon-40" src="/assets/icons/40-years-white.svg" alt="40 Years of Creativity">
+  <img
+    class="icon-40"
+    src="/assets/icons/40-years-white.svg"
+    alt="40 Years of Creativity"
+  />
 </section>
 
 <section *ngFor="let section of post?.content">
@@ -22,11 +29,24 @@
   <ng-container *ngFor="let block of section?.data">
     <ng-container [ngSwitch]="block?.type">
       <text-block *ngSwitchCase="'text'" [data]="block"></text-block>
-      <image-block *ngSwitchCase="'image'" [data]="block?.data | api" [attr.full-bleed]="block?.fullBleed"></image-block>
+      <image-block
+        *ngSwitchCase="'image'"
+        [data]="block?.data | api"
+        [attr.full-bleed]="block?.fullBleed"
+      ></image-block>
       <duo-block *ngSwitchCase="'duo'" [data]="block?.data | api"></duo-block>
-      <gallery-block *ngSwitchCase="'gallery'" [data]="block?.data | api"></gallery-block>
-      <video-block *ngSwitchCase="'video'" [data]="block?.data | api"></video-block>
-      <audio-block *ngSwitchCase="'audio'" [data]="block?.data | api"></audio-block>
+      <gallery-block
+        *ngSwitchCase="'gallery'"
+        [data]="block?.data | api"
+      ></gallery-block>
+      <video-block
+        *ngSwitchCase="'video'"
+        [data]="block?.data | api"
+      ></video-block>
+      <audio-block
+        *ngSwitchCase="'audio'"
+        [data]="block?.data | api"
+      ></audio-block>
     </ng-container>
   </ng-container>
 </section>

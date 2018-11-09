@@ -1,26 +1,46 @@
 <section id="page-intro">
   <h1>40 YEARS OF INNOVATION</h1>
   <div id="intro-container">
-    <p>Life was very different back in 1978. Whilst the tools of our trade have changed over the last four decades, the creativity behind our work hasn’t. It’s what drives us on. As an experienced full-service agency, our in-house team strives to create innovative ideas that really work. Nothing feels better than seeing results.</p>
+    <p>
+      Life was very different back in 1978. Whilst the tools of our trade have
+      changed over the last four decades, the creativity behind our work hasn’t.
+      It’s what drives us on. As an experienced full-service agency, our
+      in-house team strives to create innovative ideas that really work. Nothing
+      feels better than seeing results.
+    </p>
   </div>
 </section>
 
 <div id="intro-image">
-  <img class="icon-40" src="/assets/icons/40-years-white.svg" alt="40 Years of Creativity">
-  <image-component full-height [image]="images?.intro | api"></image-component>
+  <img
+    class="icon-40"
+    src="/assets/icons/40-years-white.svg"
+    alt="40 Years of Creativity"
+  />
+  <image-component [image]="images?.intro | api" full-height></image-component>
 </div>
 
 <section id="team">
   <h2>MEET THE TEAM</h2>
   <div class="text">
-    <p>Whether you’re a small business with big ambitions or a big business with grander ideas, we’d love to get our thinking caps on and come up with bespoke marketing strategies; whether that’s in the form of advertising, design &amp; print, digital, exhibitions, illustration, signage or 3D &amp; CGI.</p>
-    <p>We are a full service agency, covering any form of advertising. Our extensive knowledge, skilful design and thorough account management ensure we always deliver high level results that enable your company to grow. Take a look at our professionals behind the scenes&hellip;</p>
+    <p>
+      Whether you’re a small business with big ambitions or a big business with
+      grander ideas, we’d love to get our thinking caps on and come up with
+      bespoke marketing strategies; whether that’s in the form of advertising,
+      design &amp; print, digital, exhibitions, illustration, signage or 3D
+      &amp; CGI.
+    </p>
+    <p>
+      We are a full service agency, covering any form of advertising. Our
+      extensive knowledge, skilful design and thorough account management ensure
+      we always deliver high level results that enable your company to grow.
+      Take a look at our professionals behind the scenes&hellip;
+    </p>
   </div>
 
   <div id="people">
     <div class="person" *ngFor="let person of team">
       <div class="person-container">
-
         <image-component [image]="person?.thumbnail | api"></image-component>
 
         <div class="person-info">

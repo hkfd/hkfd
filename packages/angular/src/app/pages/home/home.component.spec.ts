@@ -205,7 +205,9 @@ describe('HomeComponent', () => {
 
       describe('Client', () => {
         it('should display name', () => {
-          expect(page.clientName.textContent).toBe('Client 1');
+          expect((page.clientName.textContent as string).trim()).toBe(
+            'Client 1'
+          );
         });
       });
     });

@@ -10,24 +10,42 @@
     <div class="location">
       <h5>NORTH WEST</h5>
       <p>
-        <a href="tel:+441772884444" attr.aria-label="'Telephone'">01772 88 44 44</a><br>
-        <a href="mailto:hello@heckford-advertising.co.uk" attr.aria-label="'Email'">hello@heckford-advertising.co.uk</a>
+        <a href="tel:+441772884444" attr.aria-label="'Telephone'">
+          01772 88 44 44
+        </a>
+        <br />
+        <a
+          href="mailto:hello@heckford-advertising.co.uk"
+          attr.aria-label="'Email'"
+        >
+          hello@heckford-advertising.co.uk
+        </a>
       </p>
       <address>
-        Heckford, 6 St Mark's Place East,<br>
-        Ashton, Preston,<br>
+        Heckford, 6 St Mark's Place East,
+        <br />
+        Ashton, Preston,
+        <br />
         Lancashire PR1 8TN
       </address>
     </div>
     <div class="location">
       <h5>SOUTH WEST</h5>
       <p>
-        <a href="tel:+448445220003" attr.aria-label="Telephone">08445 220003</a><br>
-        <a href="mailto:hello@heckford-advertising.co.uk" attr.aria-label="Email">hello@heckford-advertising.co.uk</a>
+        <a href="tel:+448445220003" attr.aria-label="Telephone">08445 220003</a>
+        <br />
+        <a
+          href="mailto:hello@heckford-advertising.co.uk"
+          attr.aria-label="Email"
+        >
+          hello@heckford-advertising.co.uk
+        </a>
       </p>
       <address>
-        Unit 21, Teignbridge Business Centre<br>
-        Building One, Cavalier Road, Heathfield,<br>
+        Unit 21, Teignbridge Business Centre
+        <br />
+        Building One, Cavalier Road, Heathfield,
+        <br />
         Newton Abbot, Devon TQ12 6TZ
       </address>
     </div>
@@ -35,16 +53,48 @@
 
   <div id="footer-info">
     <p>
-      <small>Copyright &copy; {{ currentYear }} Heckford Printers Limited. All rights reserved. Registered in England. Company No: 1402909. VAT Registration No: 322 9116 80.
-        <a href="https://legal.hkfd.co.uk/privacy-policy" target="_blank" rel="nofollow noopener" attr.aria-label="Privacy Policy">Privacy Policy</a>
-        <a href="https://legal.hkfd.co.uk/gdpr" target="_blank" rel="nofollow noopener" attr.aria-label="GDPR Data Privacy Notice">GDPR Data Privacy Notice</a>
-        <a href="https://legal.hkfd.co.uk/terms-conditions" target="_blank" rel="nofollow noopener" attr.aria-label="Terms and Conditions">Terms &amp; Conditions</a>
+      <small>
+        Copyright &copy;
+        {{ currentYear }}
+        Heckford Printers Limited. All rights reserved. Registered in England.
+        Company No: 1402909. VAT Registration No: 322 9116 80.
+        <a
+          href="https://legal.hkfd.co.uk/privacy-policy"
+          target="_blank"
+          rel="nofollow noopener"
+          attr.aria-label="Privacy Policy"
+        >
+          Privacy Policy
+        </a>
+        <a
+          href="https://legal.hkfd.co.uk/gdpr"
+          target="_blank"
+          rel="nofollow noopener"
+          attr.aria-label="GDPR Data Privacy Notice"
+        >
+          GDPR Data Privacy Notice
+        </a>
+        <a
+          href="https://legal.hkfd.co.uk/terms-conditions"
+          target="_blank"
+          rel="nofollow noopener"
+          attr.aria-label="Terms and Conditions"
+        >
+          Terms &amp; Conditions
+        </a>
       </small>
     </p>
 
     <div id="info-social">
       <div class="social-link" *ngFor="let link of links">
-        <a href="{{ link?.url }}" target="_blank" rel="nofollow noopener" [attr.aria-label]="link?.alt"><img src="{{ link?.icon }}" alt="{{ link?.alt }}"></a>
+        <a
+          href="{{ link?.url }}"
+          target="_blank"
+          rel="nofollow noopener"
+          [attr.aria-label]="link?.alt"
+        >
+          <img src="{{ link?.icon }}" alt="{{ link?.alt }}" />
+        </a>
       </div>
     </div>
   </div>

@@ -50,7 +50,9 @@ describe('TextComponent', () => {
       });
 
       it('should display text', () => {
-        expect(page.a.textContent).toBe(Data.Api.getSentence('url').text);
+        expect((page.a.textContent as string).trim()).toBe(
+          Data.Api.getSentence('url').text
+        );
       });
 
       it('should set href', () => {

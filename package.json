@@ -17,7 +17,7 @@
   "lint-staged": {
     "concurrent": false,
     "linters": {
-      "**/*.{ts,js,scss,md,json}": [
+      "**/*.{ts,js,scss,md,json,html}": [
         "prettier --write",
         "git add"
       ],
