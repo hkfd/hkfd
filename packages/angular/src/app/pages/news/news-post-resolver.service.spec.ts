@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, tick, fakeAsync } from '@angular/core/testing';
 import {
   RouterTestingModule,
   MockMetaService,
@@ -8,6 +8,7 @@ import {
 } from 'testing';
 
 import { Observable, of } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 import { MetaService, PrismicService, Prismic } from 'shared';
 import { NewsPostResolver } from './news-post-resolver.service';
@@ -33,104 +34,130 @@ describe('NewsPostResolver', () => {
 
   beforeEach(async(() => createService()));
 
-  it('should call PrismicService getPost', () => {
-    activatedRoute.testParamMap = { uid: 'post-1' };
-    activatedRoute.testQueryParamMap = {};
-    newsPostResolver.resolve(activatedRoute.snapshot as any);
-
-    expect(prismicService.getPost).toHaveBeenCalled();
+  it('should create service', () => {
+    expect(prismicService).toBeTruthy();
   });
 
-  it('should call PrismicService getPost with `uid` arg', () => {
+  it('should call `PrismicService` `getPost` with `uid` arg if `uid`', () => {
     activatedRoute.testParamMap = { uid: 'post-1' };
-    activatedRoute.testQueryParamMap = {};
-
     newsPostResolver.resolve(activatedRoute.snapshot as any);
 
     expect(prismicService.getPost).toHaveBeenCalledWith('post-1');
   });
 
-  it('should call MetaService setMetaTags with post args', () => {
-    activatedRoute.testParamMap = { uid: 'post-1' };
-    activatedRoute.testQueryParamMap = {};
+  it('should call `PrismicService` `getPost` with `` arg if no `uid`', () => {
+    activatedRoute.testParamMap = {};
+    newsPostResolver.resolve(activatedRoute.snapshot as any);
 
-    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Prismic.Post
-    >).subscribe(_ =>
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        type: 'article',
-        title: 'Post 1',
-        description: 'Post 1 description',
-        url: 'news/post-1',
-        image: 'post-1'
-      })
-    );
+    expect(prismicService.getPost).toHaveBeenCalledWith('');
   });
 
-  it('should not call MetaService setMetaTags with `meta.title` arg if no title', () => {
-    activatedRoute.testParamMap = { uid: 'post-1' };
-    activatedRoute.testQueryParamMap = {};
+  describe('has post', () => {
+    beforeEach(() => (activatedRoute.testParamMap = { uid: 'post-1' }));
 
-    const post: Prismic.Post = {
-      ...Data.Prismic.getPost(),
-      data: { ...Data.Prismic.getPost().data, title: null as any }
-    };
-    (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+    it('should call `MetaService` `setMetaTags` with post args', () => {
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Prismic.Post
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith({
+            type: 'article',
+            title: 'Post 1',
+            description: 'Post 1 description',
+            url: 'news/post-1',
+            image: 'post-1'
+          })
+        );
+    });
 
-    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Prismic.Post
-    >).subscribe(_ =>
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        type: 'article',
-        description: 'Post 1 description',
-        url: 'news/post-1',
-        image: 'post-1'
-      })
-    );
+    it('should not call `MetaService` `setMetaTags` with `meta.title` arg if no `title`', () => {
+      const post: Prismic.Post = {
+        ...Data.Prismic.getPost(),
+        data: { ...Data.Prismic.getPost().data, title: null as any }
+      };
+      (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Prismic.Post
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith({
+            type: 'article',
+            description: 'Post 1 description',
+            url: 'news/post-1',
+            image: 'post-1'
+          })
+        );
+    });
+
+    it('should not call `MetaService` `setMetaTags` with `meta.description` arg if no `description`', () => {
+      const post: Prismic.Post = {
+        ...Data.Prismic.getPost(),
+        data: { ...Data.Prismic.getPost().data, description: null as any }
+      };
+      (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Prismic.Post
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith({
+            type: 'article',
+            title: 'Post 1',
+            url: 'news/post-1',
+            image: 'post-1'
+          })
+        );
+    });
+
+    it('should not call `MetaService` `setMetaTags` with `meta.image` arg if no `image`', () => {
+      const post: Prismic.Post = {
+        ...Data.Prismic.getPost(),
+        data: { ...Data.Prismic.getPost().data, image: null as any }
+      };
+      (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Prismic.Post
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith({
+            type: 'article',
+            title: 'Post 1',
+            description: 'Post 1 description',
+            url: 'news/post-1'
+          })
+        );
+    });
+
+    it('should return `post`', () => {
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Prismic.Post
+      >)
+        .pipe(timeout(100))
+        .subscribe(post =>
+          expect(post).toEqual(Data.Prismic.getPosts('post-1'))
+        );
+    });
   });
 
-  it('should not call MetaService setMetaTags with `meta.description` arg if no description', () => {
-    activatedRoute.testParamMap = { uid: 'post-1' };
-    activatedRoute.testQueryParamMap = {};
+  describe('no post', () => {
+    beforeEach(() => (activatedRoute.testParamMap = { uid: 'no-post' }));
 
-    const post: Prismic.Post = {
-      ...Data.Prismic.getPost(),
-      data: { ...Data.Prismic.getPost().data, description: null as any }
-    };
-    (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+    it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Prismic.Post
+      >)
+        .pipe(timeout(100))
+        .subscribe();
 
-    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Prismic.Post
-    >).subscribe(_ =>
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        type: 'article',
-        title: 'Post 1',
-        url: 'news/post-1',
-        image: 'post-1'
-      })
-    );
-  });
-
-  it('should not call MetaService setMetaTags with `meta.image` arg if no image', () => {
-    activatedRoute.testParamMap = { uid: 'post-1' };
-    activatedRoute.testQueryParamMap = {};
-
-    const post: Prismic.Post = {
-      ...Data.Prismic.getPost(),
-      data: { ...Data.Prismic.getPost().data, image: null as any }
-    };
-    (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
-
-    (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-      Prismic.Post
-    >).subscribe(_ =>
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        type: 'article',
-        title: 'Post 1',
-        description: 'Post 1 description',
-        url: 'news/post-1'
-      })
-    );
+      tick(100);
+      expect(metaService.setMetaTags).not.toHaveBeenCalled();
+    }));
   });
 });
 

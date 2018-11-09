@@ -3,18 +3,17 @@ import { NgModule, Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, SlicePipe } from '@angular/common';
 
-import { RouterTestingModule, Location, SpyLocation } from '../../../testing';
+import { RouterTestingModule, makeImmutable } from 'testing';
 
 import { HeaderComponent } from './header.component';
 
 let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
 let page: Page;
-let location: SpyLocation;
 let slicePipe: jasmine.Spy;
 
 @Component({
-  template: `<div></div>`
+  template: ''
 })
 class TestComponent {}
 
@@ -25,7 +24,7 @@ class TestComponent {}
 export class TestModule {}
 
 describe('HeaderComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([
@@ -34,93 +33,132 @@ describe('HeaderComponent', () => {
         NoopAnimationsModule
       ],
       declarations: [HeaderComponent, TestComponent]
-    }).compileComponents();
-  }));
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should call SlicePipe', () => {
-    expect(slicePipe).toHaveBeenCalled();
+  beforeEach(() => {
+    comp.pages = makeImmutable([
+      { url: '/' },
+      { title: 'Page 1', url: '/page-1' },
+      { title: 'Page 2', url: '/page-2' }
+    ]);
+    fixture.detectChanges();
   });
 
-  it('should call SlicePipe with 0:1', () => {
-    expect(slicePipe).toHaveBeenCalledWith(comp.pages, 0, 1);
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should call SlicePipe with 1', () => {
-    expect(slicePipe).toHaveBeenCalledWith(comp.pages, 1);
+  it('should set `mobileShow` as `false`', () => {
+    expect(comp.mobileShow).toBe(false);
   });
 
-  it('should route on logo click', async(() => {
-    location.go('/page-1');
-    expect(location.path()).toBe('/page-1');
+  describe('`navClick`', () => {
+    beforeEach(() => ((comp.mobileShow as any) = undefined));
 
-    page.navLogo.click();
-    fixture.detectChanges();
-
-    return fixture.whenStable().then(() => {
-      expect(location.path()).toBe('/');
-    });
-  }));
-
-  it('should route on link click', async(() => {
-    location.go('/');
-    expect(location.path()).toBe('/');
-
-    page.navLink.click();
-    fixture.detectChanges();
-
-    return fixture.whenStable().then(() => {
-      expect(location.path()).toBe('/page-1');
-    });
-  }));
-
-  it('should set class `active` on link click', async(() => {
-    location.go('/');
-    expect(location.path()).toBe('/');
-
-    page.navLink.click();
-    fixture.detectChanges();
-
-    return fixture.whenStable().then(() => {
-      expect(page.navLink.className).toContain('active');
-    });
-  }));
-
-  describe('navClick', () => {
-    it('should be called on link click', () => {
-      page.navLink.click();
-
-      expect(page.navClick).toHaveBeenCalled();
-    });
-
-    it('should set mobileShow to false', () => {
-      comp.mobileShow = true;
-      page.navLink.click();
+    it('should set `mobileShow` as `false`', () => {
+      comp.navClick();
 
       expect(comp.mobileShow).toBe(false);
     });
   });
 
-  describe('toggleMobile', () => {
-    it('should be called on button click', () => {
-      page.navButton.click();
+  describe('`toggleMobile`', () => {
+    describe('`false`', () => {
+      beforeEach(() => (comp.mobileShow = false));
 
-      expect(page.toggleMobile).toHaveBeenCalled();
+      it('should set `mobileShow` as `true`', () => {
+        comp.toggleMobile();
+
+        expect(comp.mobileShow).toBe(true);
+      });
     });
 
-    it('should set mobileShow to true if false', () => {
-      comp.mobileShow = false;
-      comp.toggleMobile();
+    describe('`true`', () => {
+      beforeEach(() => (comp.mobileShow = true));
 
-      expect(comp.mobileShow).toBe(true);
+      it('should set `mobileShow` as `false`', () => {
+        comp.toggleMobile();
+
+        expect(comp.mobileShow).toBe(false);
+      });
+    });
+  });
+
+  describe('Template', () => {
+    describe('Logo', () => {
+      it('should be displayed', () => {
+        expect(page.navLogo).toBeTruthy();
+      });
+
+      it('should call `SlicePipe` with `0:1` arg', () => {
+        expect(slicePipe).toHaveBeenCalledWith(comp.pages, 0, 1);
+      });
+
+      it('should set href', () => {
+        expect(page.navLogo.href).toBe('http://localhost:9876/');
+      });
+
+      it('should call `navClick` on click', () => {
+        page.navLogo.click();
+
+        expect(page.navClick).toHaveBeenCalled();
+      });
     });
 
-    it('should set mobileShow to false if true', () => {
-      comp.mobileShow = true;
-      comp.toggleMobile();
+    describe('Toggle', () => {
+      it('should be displayed', () => {
+        expect(page.navToggle).toBeTruthy();
+      });
 
-      expect(comp.mobileShow).toBe(false);
+      it('should call `toggleMobile` on click', () => {
+        page.navToggle.click();
+
+        expect(page.toggleMobile).toHaveBeenCalled();
+      });
+    });
+
+    describe('Links', () => {
+      it('should be displayed', () => {
+        expect(page.navLinks.length).toBe(2);
+      });
+
+      describe('Link', () => {
+        it('should call `SlicePipe` with `1` arg', () => {
+          expect(slicePipe).toHaveBeenCalledWith(comp.pages, 1);
+        });
+
+        it('should display title', () => {
+          expect(page.navLinks[0].textContent).toBe('PAGE 1');
+        });
+
+        it('should set href', () => {
+          expect(page.navLinks[0].href).toBe('http://localhost:9876/page-1');
+        });
+
+        it('should call `navClick` on click', () => {
+          page.navLinks[0].click();
+
+          expect(page.navClick).toHaveBeenCalled();
+        });
+
+        describe('Active', () => {
+          it('should not have class `active`', () => {
+            expect(page.navLinks[0].classList.contains('active')).toBeFalsy();
+          });
+
+          it('should have class `active` on click', () => {
+            page.navLinks[0].click();
+
+            return fixture.whenStable().then(_ => {
+              expect(
+                page.navLinks[0].classList.contains('active')
+              ).toBeTruthy();
+            });
+          });
+        });
+      });
     });
   });
 });
@@ -132,20 +170,14 @@ class Page {
   get navLogo() {
     return this.query<HTMLAnchorElement>('#nav-logo');
   }
-  get navLink() {
-    return this.query<HTMLAnchorElement>('.nav-link');
-  }
-  get navButton() {
+  get navToggle() {
     return this.query<HTMLButtonElement>('#nav-button');
+  }
+  get navLinks() {
+    return this.queryAll<HTMLAnchorElement>('.nav-link');
   }
 
   constructor() {
-    comp.pages = [
-      { url: '/' },
-      { title: 'Page 1', url: '/page-1' },
-      { title: 'Page 2', url: '/page-2' }
-    ];
-
     this.navClick = spyOn(comp, 'navClick').and.callThrough();
     this.toggleMobile = spyOn(comp, 'toggleMobile').and.callThrough();
   }
@@ -153,14 +185,16 @@ class Page {
   private query<T>(selector: string): T {
     return fixture.nativeElement.querySelector(selector);
   }
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
+  }
 }
 
 function createComponent() {
   fixture = TestBed.createComponent(HeaderComponent);
   comp = fixture.componentInstance;
-  location = fixture.debugElement.injector.get<SpyLocation>(Location as any);
-  page = new Page();
   slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
+  page = new Page();
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

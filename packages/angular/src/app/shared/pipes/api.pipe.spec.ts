@@ -1,162 +1,158 @@
 import { Data } from 'testing';
 import { ApiPipe, Sizes } from './api.pipe';
 
+import { environment } from 'environment';
+
 let pipe: ApiPipe;
 
 describe('ApiPipe', () => {
   beforeEach(() => (pipe = new ApiPipe()));
 
-  it('should create an instance', () => expect(pipe).toBeTruthy());
+  it('should create pipe', () => {
+    expect(pipe).toBeTruthy();
+  });
 
-  describe('transform', () => {
-    it('should call transformImage if image', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
+  describe('`transform`', () => {
+    it('should return `Generic.Image` if passed `image` arg', () => {
+      const res = pipe.transform({ image: {} });
 
-      expect(res).toEqual({
-        src: jasmine.anything(),
-        srcset: jasmine.anything(),
-        alt: jasmine.anything()
-      });
+      expect(Data.Generic.isImage(res)).toBeTruthy();
     });
 
-    it('should call transformVideo if video', () => {
-      const res = pipe.transform({ video: Data.Api.getVideo() });
+    it('should return `Generic.Video` if passed `video` arg', () => {
+      const res = pipe.transform({ video: {} });
 
-      expect(res).toEqual({
-        src: { attr: jasmine.anything(), val: jasmine.anything() }
-      });
+      expect(Data.Generic.isVideo(res)).toBeTruthy();
     });
 
-    it('should call transformAudio if audio', () => {
-      const res = pipe.transform({ audio: Data.Api.getAudio() });
+    it('should return `Generic.Audio` if passed `audio` arg', () => {
+      const res = pipe.transform({ audio: {} });
 
-      expect(res).toEqual({ url: jasmine.anything() });
+      expect(Data.Generic.isAudio(res)).toBeTruthy();
     });
 
-    it('should call map transformImage if array', () => {
-      const res = pipe.transform([{ image: Data.Api.getImage() }]);
+    it('should return `Generic.Image` array if passed `[]` arg', () => {
+      const [res] = pipe.transform([{ image: {} }]);
 
-      expect(res).toEqual([
-        {
-          src: jasmine.anything(),
-          srcset: jasmine.anything(),
-          alt: jasmine.anything()
-        }
-      ]);
+      expect(Data.Generic.isImage(res)).toBeTruthy();
     });
 
-    it('should return unchanged input if no compatible structure', () => {
+    it('should return arg without transforming by default', () => {
       const res = pipe.transform({ test: 'test' });
 
       expect(res).toEqual({ test: 'test' });
     });
   });
 
-  describe('transformImage', () => {
-    it('should set src', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
+  describe('`transformImage`', () => {
+    let res: any;
 
-      expect(res.src).toBeDefined();
+    beforeEach(() => (res = pipe.transform({ image: Data.Api.getImage() })));
+
+    describe('`src`', () => {
+      it('should be set', () => {
+        expect(res.src).toBeDefined();
+      });
+
+      it('should be set with `environment.cloudinaryName`', () => {
+        expect(res.src).toContain(environment.cloudinaryName);
+      });
+
+      it('should be set with `name`', () => {
+        expect(res.src).toContain(Data.Api.getImage().name);
+      });
     });
 
-    it('should set src with env cloudinaryName', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
+    describe('`srcset`', () => {
+      it('should be set', () => {
+        expect(res.srcset).toBeDefined();
+      });
 
-      expect(res.src).toContain('https://res.cloudinary.com/dv8oeiozq/');
-    });
+      it('should set `attr`', () => {
+        expect(res.srcset.attr).toBe('srcset');
+      });
 
-    it('should set src with width as 64', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
+      describe('`val`', () => {
+        it('should be set', () => {
+          expect(res.srcset.val.length).toBe(Sizes.length);
+        });
 
-      expect(res.src).toContain('w_64');
-    });
+        it('should be set with `environment.cloudinaryName`', () => {
+          res.srcset.val.forEach((val: any) =>
+            expect(val).toContain(environment.cloudinaryName)
+          );
+        });
 
-    it('should set src with image name', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
+        it('should be set with `name`', () => {
+          res.srcset.val.forEach((val: any) =>
+            expect(val).toContain(Data.Api.getImage().name)
+          );
+        });
 
-      expect(res.src).toContain(Data.Api.getImage().name);
-    });
+        it('should be set with `Sizes` `width`', () => {
+          Sizes.forEach((size, i) =>
+            expect(res.srcset.val[i]).toContain(`w_${size.width}`)
+          );
+        });
 
-    it('should set srcset', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
+        it('should be set with `Sizes` `height`', () => {
+          Sizes.forEach((size, i) =>
+            expect(res.srcset.val[i]).toContain(`h_${size.height}`)
+          );
+        });
+      });
 
-      expect(res.srcset).toBeDefined();
-    });
+      it('should set `alt`', () => {
+        expect(res.alt).toBeDefined();
+      });
 
-    it('should set srcset attr as `srcset`', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
-
-      expect(res.srcset.attr).toBe('srcset');
-    });
-
-    it('should set srcset val with env cloudinaryName', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
-
-      Sizes.forEach((_, i) =>
-        expect(res.srcset.val[i]).toContain(
-          'https://res.cloudinary.com/dv8oeiozq/'
-        )
-      );
-    });
-
-    it('should set srcset val with Sizes width', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
-
-      Sizes.forEach((size, i) =>
-        expect(res.srcset.val[i]).toContain(`w_${size.width}`)
-      );
-    });
-
-    it('should set srcset val with Sizes height', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
-
-      Sizes.forEach((size, i) =>
-        expect(res.srcset.val[i]).toContain(`h_${size.height}`)
-      );
-    });
-
-    it('should set srcset val with image name', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
-
-      Sizes.forEach((_, i) =>
-        expect(res.srcset.val[i]).toContain(Data.Api.getImage().name)
-      );
-    });
-
-    it('should set alt', () => {
-      const res = pipe.transform({ image: Data.Api.getImage() });
-
-      expect(res.alt).toBe(Data.Api.getImage().alt);
+      it('should set `alt` as `alt`', () => {
+        expect(res.alt).toBe(Data.Api.getImage().alt);
+      });
     });
   });
 
-  describe('transformVideo', () => {
-    it('should set src', () => {
-      const res = pipe.transform({ video: Data.Api.getVideo() });
+  describe('`transformVideo`', () => {
+    let res: any;
 
-      expect(res.src).toBeDefined();
-    });
+    beforeEach(() => (res = pipe.transform({ video: Data.Api.getVideo() })));
 
-    it('should set src attr as `src`', () => {
-      const res = pipe.transform({ video: Data.Api.getVideo() });
+    describe('`src`', () => {
+      it('should be set', () => {
+        expect(res.src).toBeDefined();
+      });
 
-      expect(res.src.attr).toBe('src');
-    });
+      it('should set `attr`', () => {
+        expect(res.src.attr).toBe('src');
+      });
 
-    it('should set src val with video id', () => {
-      const res = pipe.transform({ video: Data.Api.getVideo() });
+      describe('`val`', () => {
+        it('should be set', () => {
+          expect(res.src.val).toBeDefined();
+        });
 
-      expect(res.src.val.join()).toContain(
-        `https://www.youtube.com/embed/${Data.Api.getVideo().id}`
-      );
+        it('should be set with `id`', () => {
+          const [val] = res.src.val;
+
+          expect(val).toContain(Data.Api.getVideo().id);
+        });
+      });
     });
   });
 
-  describe('transformAudio', () => {
-    it('should set url as audio url', () => {
-      const res = pipe.transform({ audio: Data.Api.getAudio() });
+  describe('`transformAudio`', () => {
+    let res: any;
 
-      expect(res.url).toBe(Data.Api.getAudio().url);
+    beforeEach(() => (res = pipe.transform({ audio: Data.Api.getAudio() })));
+
+    describe('`url`', () => {
+      it('should be set', () => {
+        expect(res.url).toBeDefined();
+      });
+
+      it('should be set as `url`', () => {
+        expect(res.url).toBe(Data.Api.getAudio().url);
+      });
     });
   });
 });

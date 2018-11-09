@@ -6,8 +6,10 @@ export * from './logger.service.mock';
 export * from './api.pipe.mock';
 export * from './prismic.pipe.mock';
 export * from './router';
-export * from './native';
 export * from './state';
+
+export * from './directives';
+export * from './components';
 
 import { Iterable } from 'immutable';
 

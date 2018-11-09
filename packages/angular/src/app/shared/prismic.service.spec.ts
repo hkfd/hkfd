@@ -11,6 +11,8 @@ import {
   Data
 } from 'testing';
 
+import { of } from 'rxjs';
+
 import { environment } from 'environment';
 import { PrismicService } from './prismic.service';
 
@@ -19,7 +21,7 @@ let transferState: MockTransferState;
 let prismicService: PrismicService;
 
 describe('PrismicService', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -27,336 +29,465 @@ describe('PrismicService', () => {
         { provide: LoggerService, useClass: MockLoggerService },
         { provide: TransferState, useClass: MockTransferState }
       ]
-    }).compileComponents();
-  }));
+    }).compileComponents()));
 
   beforeEach(async(() => createService()));
 
-  describe('getRef', () => {
-    describe('cache', () => {
-      beforeEach(() => transferState.set('prismic-ref', 'abc'));
+  it('should create service', () => {
+    expect(prismicService).toBeTruthy();
+  });
 
-      it('should not call HttpClient get', async(() => {
-        prismicService.getRef().subscribe();
+  describe('`getRef`', () => {
+    it('should call `TransferState` `get` with `REF_KEY` and `null` args', () => {
+      prismicService.getRef().subscribe();
+      mockHttp.expectOne(environment.prismic.endpoint);
 
-        expect(
-          mockHttp.expectNone(environment.prismic.endpoint)
-        ).toBeUndefined();
-      }));
-
-      it('should return ref', async(() => {
-        prismicService.getRef().subscribe(res => expect(res).toBe('abc'));
-      }));
+      expect(transferState.get).toHaveBeenCalledWith('prismic-ref', null);
     });
 
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
+    describe('Cache', () => {
+      describe('Has `cache`', () => {
+        beforeEach(() => transferState.set('prismic-ref', 'abc'));
+
+        it('should not call `HttpClient` `get`', () => {
+          prismicService.getRef().subscribe();
+
+          expect(
+            mockHttp.expectNone(environment.prismic.endpoint)
+          ).toBeUndefined();
+        });
+
+        it('should return `ref`', () => {
+          prismicService.getRef().subscribe(res => expect(res).toBe('abc'));
+        });
+      });
+
+      describe('No `cache`', () => {
+        it('should call `HttpClient` `get``', () => {
+          prismicService.getRef().subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne(environment.prismic.endpoint);
+
+          expect(method).toBe('GET');
+        });
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
         prismicService.getRef().subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(environment.prismic.endpoint);
 
-        expect(mockHttp.expectOne(environment.prismic.endpoint)).toBeTruthy();
-      }));
+        expect(method).toBe('GET');
+      });
 
-      it('should return ref', async(() => {
-        prismicService.getRef().subscribe(ref => expect(ref).toBe('abc'));
+      describe('Response', () => {
+        describe('Error', () => {
+          let res: any = 'fail';
 
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-      }));
+          beforeEach(() => {
+            prismicService.getRef().subscribe(response => (res = response));
+            mockHttp
+              .expectOne(environment.prismic.endpoint)
+              .error(new ErrorEvent(''));
+          });
+
+          it('should not call `TransferState` `set`', () => {
+            expect(transferState.set).not.toHaveBeenCalled();
+          });
+
+          it('should return `undefined`', () => {
+            expect(res).toBeUndefined();
+          });
+        });
+
+        describe('No error', () => {
+          it('should call `TransferState` `set` with `REF_KEY` and `ref` args', () => {
+            prismicService.getRef().subscribe();
+            mockHttp
+              .expectOne(environment.prismic.endpoint)
+              .flush(Data.Prismic.getRefResponse());
+
+            expect(transferState.set).toHaveBeenCalledWith(
+              'prismic-ref',
+              'abc'
+            );
+          });
+
+          describe('No `isMasterRef`', () => {
+            it('should return ``', () => {
+              prismicService.getRef().subscribe(res => expect(res).toBe(''));
+
+              mockHttp.expectOne(environment.prismic.endpoint).flush({
+                refs: [
+                  {
+                    ...Data.Prismic.getRefResponse().refs[0],
+                    isMasterRef: false
+                  },
+                  { ...Data.Prismic.getRefResponse().refs[1] },
+                  { ...Data.Prismic.getRefResponse().refs[2] }
+                ]
+              });
+            });
+          });
+
+          describe('Has `isMasterRef`', () => {
+            it('should return `ref`', () => {
+              prismicService
+                .getRef()
+                .subscribe(res =>
+                  expect(res).toEqual(Data.Prismic.getRefResponse().refs[0].ref)
+                );
+
+              mockHttp
+                .expectOne(environment.prismic.endpoint)
+                .flush(Data.Prismic.getRefResponse());
+            });
+          });
+        });
+      });
     });
   });
 
-  describe('getPosts', () => {
-    describe('cache', () => {
-      beforeEach(() => {
-        transferState.set('prismic-ref', 'abc');
-        transferState.set('prismic-posts', Data.Prismic.getPostsResponse());
-      });
+  describe('`getPosts`', () => {
+    beforeEach(() =>
+      spyOn(prismicService, 'getRef').and.returnValue(of('abc')));
 
-      it('should not call HttpClient get if `firstLoad` is true', async(() => {
-        prismicService.getPosts(true).subscribe();
+    it('should call `TransferState` `get` with `POSTS_KEY` and `null` args', () => {
+      prismicService.getPosts(true).subscribe();
+      mockHttp.expectOne(
+        req => req.url === `${environment.prismic.endpoint}/documents/search`
+      );
 
-        expect(mockHttp.verify()).toBeUndefined();
-      }));
-
-      it('should return posts', async(() => {
-        prismicService
-          .getPosts(true)
-          .subscribe(res =>
-            expect(res).toEqual(Data.Prismic.getPostsResponse())
-          );
-      }));
-
-      it('should call HttpClient get if `firstLoad` is false', async(() => {
-        prismicService.getPosts().subscribe();
-
-        expect(
-          mockHttp.expectOne(req =>
-            req.url.includes(environment.prismic.endpoint)
-          )
-        ).toBeTruthy();
-      }));
+      expect(transferState.get).toHaveBeenCalledWith('prismic-posts', null);
     });
 
-    describe('no cache', () => {
-      it('should call PrismicService getRef', () => {
-        const spy = spyOn(prismicService, 'getRef').and.callThrough();
-        prismicService.getPosts();
+    describe('Cache', () => {
+      describe('Has `cache` and `firstLoad` is `true`', () => {
+        beforeEach(() =>
+          transferState.set('prismic-posts', Data.Prismic.getPostsResponse()));
 
-        expect(spy).toHaveBeenCalled();
+        it('should not call `HttpClient` `get`', () => {
+          prismicService.getPosts(true).subscribe();
+
+          expect(
+            mockHttp.expectNone(
+              req =>
+                req.url === `${environment.prismic.endpoint}/documents/search`
+            )
+          ).toBeUndefined();
+        });
+
+        it('should return `postsRes`', () => {
+          prismicService
+            .getPosts(true)
+            .subscribe(res =>
+              expect(res).toEqual(Data.Prismic.getPostsResponse())
+            );
+        });
       });
 
-      it('should call HttpClient get with `ref` param', async(() => {
-        prismicService.getPosts().subscribe();
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        const {
-          request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(params.get('ref')).toBe('abc');
-      }));
-
-      it('should call HttpClient get with `q` param', async(() => {
-        prismicService.getPosts().subscribe();
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        const {
-          request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(params.get('q')).toBe('[[at(document.type,"news")]]');
-      }));
-
-      it('should call HttpClient get with `orderings` param', async(() => {
-        prismicService.getPosts().subscribe();
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        const {
-          request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(params.get('orderings')).toBe(
-          '[document.first_publication_date desc]'
-        );
-      }));
-
-      it('should call HttpClient get with `pageSize` param as `postPage` times `postPageSize` if `firstLoad` is true', async(() => {
-        prismicService.getPosts().subscribe();
-        mockHttp.expectOne(environment.prismic.endpoint);
-
+      it('should call `HttpClient` `get` if no `cache`', () => {
         prismicService.getPosts(true).subscribe();
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
         const {
-          request: { params }
+          request: { method }
         } = mockHttp.expectOne(
           req => req.url === `${environment.prismic.endpoint}/documents/search`
         );
 
-        expect(params.get('pageSize')).toBe('18');
-      }));
+        expect(method).toBe('GET');
+      });
 
-      it('should call HttpClient get with `pageSize` param as `postPageSize` if `firstLoad` is false', async(() => {
-        prismicService.getPosts().subscribe();
-        mockHttp.expectOne(environment.prismic.endpoint);
-
-        prismicService.getPosts().subscribe();
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
+      it('should call `HttpClient` `get` if `firstLoad` is `false`', () => {
+        transferState.set('prismic-posts', Data.Prismic.getPostsResponse());
+        prismicService.getPosts(false).subscribe();
         const {
-          request: { params }
+          request: { method }
         } = mockHttp.expectOne(
           req => req.url === `${environment.prismic.endpoint}/documents/search`
         );
 
-        expect(params.get('pageSize')).toBe('9');
-      }));
+        expect(method).toBe('GET');
+      });
+    });
 
-      it('should call HttpClient get with `page` param as `1` if `firstLoad` is true', async(() => {
-        prismicService.getPosts().subscribe();
-        mockHttp.expectOne(environment.prismic.endpoint);
-
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
         prismicService.getPosts(true).subscribe();
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
         const {
-          request: { params }
+          request: { method }
         } = mockHttp.expectOne(
           req => req.url === `${environment.prismic.endpoint}/documents/search`
         );
 
-        expect(params.get('page')).toBe('1');
-      }));
+        expect(method).toBe('GET');
+      });
 
-      it('should call HttpClient get with `page` param as `postPage` if `firstLoad` is false', async(() => {
-        prismicService.getPosts().subscribe();
-        mockHttp.expectOne(environment.prismic.endpoint);
-
-        prismicService.getPosts().subscribe();
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        const {
-          request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(params.get('page')).toBe('3');
-      }));
-
-      it('should return posts', async(() => {
-        prismicService
-          .getPosts()
-          .subscribe(postsRes =>
-            expect(postsRes).toEqual(Data.Prismic.getPostsResponse())
-          );
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        mockHttp
-          .expectOne(
+      describe('`firstLoad` is `true`', () => {
+        beforeEach(() => {
+          prismicService.getPosts(true).subscribe();
+          mockHttp.expectOne(
             req =>
               req.url === `${environment.prismic.endpoint}/documents/search`
-          )
-          .flush(Data.Prismic.getPostsResponse());
-      }));
+          );
+          prismicService.getPosts(true).subscribe();
+        });
+
+        it('should call `HttpClient` `get` with `pageSize` param as `postPage * postPageSize`', () => {
+          const {
+            request: { params }
+          } = mockHttp.expectOne(
+            req =>
+              req.url === `${environment.prismic.endpoint}/documents/search`
+          );
+
+          expect(params.get('pageSize')).toBe('9');
+        });
+
+        it('should call `HttpClient` `get` with `page` param as `1`', () => {
+          const {
+            request: { params }
+          } = mockHttp.expectOne(
+            req =>
+              req.url === `${environment.prismic.endpoint}/documents/search`
+          );
+
+          expect(params.get('page')).toBe('1');
+        });
+      });
+
+      describe('`firstLoad` is `false`', () => {
+        beforeEach(() => {
+          prismicService.getPosts(true).subscribe();
+          mockHttp.expectOne(
+            req =>
+              req.url === `${environment.prismic.endpoint}/documents/search`
+          );
+          prismicService.getPosts(false).subscribe();
+        });
+
+        it('should call `HttpClient` `get` with `pageSize` param as `postPageSize`', () => {
+          const {
+            request: { params }
+          } = mockHttp.expectOne(
+            req =>
+              req.url === `${environment.prismic.endpoint}/documents/search`
+          );
+
+          expect(params.get('pageSize')).toBe('9');
+        });
+
+        it('should call `HttpClient` `get` with `page` param as `postPage`', () => {
+          const {
+            request: { params }
+          } = mockHttp.expectOne(
+            req =>
+              req.url === `${environment.prismic.endpoint}/documents/search`
+          );
+
+          expect(params.get('page')).toBe('2');
+        });
+      });
+
+      describe('Response', () => {
+        describe('Error', () => {
+          let res: any = 'fail';
+
+          beforeEach(() => {
+            prismicService
+              .getPosts(true)
+              .subscribe(response => (res = response));
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .error(new ErrorEvent(''));
+          });
+
+          it('should not call `TransferState` `set`', () => {
+            expect(transferState.set).not.toHaveBeenCalled();
+          });
+
+          it('should return `undefined`', () => {
+            expect(res).toBeUndefined();
+          });
+        });
+
+        describe('No error', () => {
+          let res: any;
+
+          beforeEach(() => {
+            prismicService
+              .getPosts(true)
+              .subscribe(response => (res = response));
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .flush(Data.Prismic.getPostsResponse());
+          });
+
+          it('should call `TransferState` `set` with `POSTS_KEY` and `postsRes` args', () => {
+            expect(transferState.set).toHaveBeenCalledWith(
+              'prismic-posts',
+              Data.Prismic.getPostsResponse()
+            );
+          });
+
+          it('should return `postsRes`', () => {
+            expect(res).toEqual(Data.Prismic.getPostsResponse());
+          });
+        });
+      });
     });
   });
 
-  describe('getPost', () => {
-    describe('cache', () => {
-      beforeEach(() => {
-        transferState.set('prismic-ref', 'abc');
-        transferState.set('prismic-post', Data.Prismic.getPosts('post-1'));
-      });
+  describe('`getPost`', () => {
+    beforeEach(() =>
+      spyOn(prismicService, 'getRef').and.returnValue(of('abc')));
 
-      describe('same uid', () => {
-        it('should not call HttpClient get', async(() => {
+    it('should call `TransferState` `get` with `POST_KEY` and `null` args', () => {
+      prismicService.getPost('post-1').subscribe();
+      mockHttp.expectOne(
+        req => req.url === `${environment.prismic.endpoint}/documents/search`
+      );
+
+      expect(transferState.get).toHaveBeenCalledWith('prismic-post', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache` and `firstLoad` is `true`', () => {
+        beforeEach(() =>
+          transferState.set('prismic-post', Data.Prismic.getPosts('post-1')));
+
+        it('should not call `HttpClient` `get`', () => {
           prismicService.getPost('post-1').subscribe();
 
-          expect(mockHttp.verify()).toBeUndefined();
-        }));
+          expect(
+            mockHttp.expectNone(
+              req =>
+                req.url === `${environment.prismic.endpoint}/documents/search`
+            )
+          ).toBeUndefined();
+        });
 
-        it('should return post', async(() => {
+        it('should return `post`', () => {
           prismicService
             .getPost('post-1')
             .subscribe(res =>
               expect(res).toEqual(Data.Prismic.getPosts('post-1'))
             );
-        }));
+        });
       });
 
-      describe('different uid', () => {
-        it('should call PrismicService getRef', () => {
-          const spy = spyOn(prismicService, 'getRef').and.callThrough();
-          prismicService.getPost('post-2');
+      it('should call `HttpClient` `get` if no `cache`', () => {
+        prismicService.getPost('post-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(
+          req => req.url === `${environment.prismic.endpoint}/documents/search`
+        );
 
-          expect(spy).toHaveBeenCalled();
+        expect(method).toBe('GET');
+      });
+
+      it('should call `HttpClient` `get` if `cache.uid` is not `uid`', () => {
+        transferState.set('prismic-post', Data.Prismic.getPosts('post-1'));
+        prismicService.getPost('post-2').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(
+          req => req.url === `${environment.prismic.endpoint}/documents/search`
+        );
+
+        expect(method).toBe('GET');
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
+        prismicService.getPost('post-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(
+          req => req.url === `${environment.prismic.endpoint}/documents/search`
+        );
+
+        expect(method).toBe('GET');
+      });
+
+      it('should call `HttpClient` `get` with `q` param as `uid`', () => {
+        prismicService.getPost('post-1').subscribe();
+        const {
+          request: { params }
+        } = mockHttp.expectOne(
+          req => req.url === `${environment.prismic.endpoint}/documents/search`
+        );
+
+        expect(params.get('q')).toContain('post-1');
+      });
+
+      describe('Response', () => {
+        describe('Error', () => {
+          let res: any = 'fail';
+
+          beforeEach(() => {
+            prismicService
+              .getPost('post-1')
+              .subscribe(response => (res = response));
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .error(new ErrorEvent(''));
+          });
+
+          it('should not call `TransferState` `set`', () => {
+            expect(transferState.set).not.toHaveBeenCalled();
+          });
+
+          it('should return `undefined`', () => {
+            expect(res).toBeUndefined();
+          });
         });
 
-        it('should call HttpClient get', async(() => {
-          prismicService.getPost('post-2').subscribe();
+        describe('No error', () => {
+          let res: any;
 
-          expect(
-            mockHttp.expectOne(
-              req =>
-                req.url === `${environment.prismic.endpoint}/documents/search`
-            )
-          ).toBeTruthy();
-        }));
+          beforeEach(() => {
+            prismicService
+              .getPost('post-1')
+              .subscribe(response => (res = response));
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .flush(Data.Prismic.getPostsResponse());
+          });
 
-        it('should return post', async(() => {
-          prismicService
-            .getPost('post-2')
-            .subscribe(post =>
-              expect(post).toEqual(Data.Prismic.getPosts('post-1'))
+          it('should call `TransferState` `set` with `POST_KEY` and `post` args', () => {
+            expect(transferState.set).toHaveBeenCalledWith(
+              'prismic-post',
+              Data.Prismic.getPosts('post-1')
             );
+          });
 
-          mockHttp
-            .expectOne(
-              req =>
-                req.url === `${environment.prismic.endpoint}/documents/search`
-            )
-            .flush(Data.Prismic.getPostsResponse());
-        }));
+          it('should return `post`', () => {
+            expect(res).toEqual(Data.Prismic.getPosts('post-1'));
+          });
+        });
       });
-    });
-
-    describe('no cache', () => {
-      it('should call PrismicService getRef', () => {
-        const spy = spyOn(prismicService, 'getRef').and.callThrough();
-        prismicService.getPost('');
-
-        expect(spy).toHaveBeenCalled();
-      });
-
-      it('should call HttpClient get with `ref` param', async(() => {
-        prismicService.getPost('').subscribe();
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        const {
-          request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(params.get('ref')).toBe('abc');
-      }));
-
-      it('should call HttpClient get with `q` param as `uid`', async(() => {
-        prismicService.getPost('post-1').subscribe();
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        const {
-          request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(params.get('q')).toBe('[[at(my.news.uid,"post-1")]]');
-      }));
-
-      it('should return post', async(() => {
-        prismicService
-          .getPost('')
-          .subscribe(post =>
-            expect(post).toEqual(Data.Prismic.getPosts('post-1'))
-          );
-
-        mockHttp
-          .expectOne(environment.prismic.endpoint)
-          .flush(Data.Prismic.getRefResponse());
-        mockHttp
-          .expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          )
-          .flush(Data.Prismic.getPostsResponse());
-      }));
     });
   });
+
+  afterEach(() => mockHttp.verify());
 });
 
 function createService() {

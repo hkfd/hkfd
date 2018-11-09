@@ -1,83 +1,200 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
   MockMetaService,
   MockApiService,
   MockApiPipe,
+  StubImageComponent,
   Data
 } from 'testing';
 
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
 import { AboutImages } from './about.images';
 import { AboutComponent } from './about.component';
 
 let comp: AboutComponent;
 let fixture: ComponentFixture<AboutComponent>;
+let page: Page;
 let metaService: MetaService;
 let apiService: ApiService;
 let apiPipe: jasmine.Spy;
 
 describe('AboutComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [AboutComponent, MockApiPipe],
+      declarations: [AboutComponent, StubImageComponent, MockApiPipe],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      ]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should call MetaService setMetaTags', () => {
-    expect(metaService.setMetaTags).toHaveBeenCalled();
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should call MetaService setMetaTags with title and url args', () => {
-    expect(metaService.setMetaTags).toHaveBeenCalledWith({
-      title: jasmine.any(String),
-      url: jasmine.any(String)
+  describe('`ngOnInit`', () => {
+    it('should call MetaService `setMetaTags` with `title` and `url` args', () => {
+      expect(metaService.setMetaTags).toHaveBeenCalledWith({
+        title: 'About',
+        url: 'about'
+      });
+    });
+
+    it('should set `team$`', () => {
+      expect(comp.team$).toBeDefined();
+    });
+
+    it('should call `ApiService` `getTeam`', () => {
+      expect(apiService.getTeam).toHaveBeenCalledWith();
+    });
+
+    it('should set `team`', () => {
+      expect(comp.team).toEqual(Data.Api.getTeam<void>());
     });
   });
 
-  it('should call ApiService getTeam', () => {
-    expect(apiService.getTeam).toHaveBeenCalledWith();
+  describe('`ngOnDestroy`', () => {
+    it('should call `team$` `unsubscribe`', () => {
+      const spy = spyOn(comp.team$, 'unsubscribe').and.callThrough();
+      comp.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
-  it('should set team', () => {
-    expect(comp.team).toBeDefined();
-    expect((comp.team as Api.Team[]).length).toBe(5);
-  });
+  describe('Template', () => {
+    it('should display title', () => {
+      expect(page.title).toBeTruthy();
+    });
 
-  it('should call ApiPipe', () => {
-    expect(apiPipe).toHaveBeenCalled();
-  });
+    describe('Intro', () => {
+      describe('Image', () => {
+        it('should be displayed', () => {
+          expect(page.introImage).toBeTruthy();
+        });
 
-  it('should call ApiPipe with intro image', () => {
-    expect(apiPipe).toHaveBeenCalledWith(AboutImages.intro);
-  });
+        it('should call `ApiPipe`', () => {
+          expect(apiPipe).toHaveBeenCalledWith(AboutImages.intro);
+        });
 
-  it('should call ApiPipe with team thumbnails', () => {
-    Data.Api.getTeam<void>().forEach(person =>
-      expect(apiPipe).toHaveBeenCalledWith(person.thumbnail)
-    );
+        it('should set `ImageComponent` `image` as image', () => {
+          expect(page.imageComponents[0].image).toEqual(
+            AboutImages.intro as any
+          );
+        });
+
+        it('should set `ImageComponent` `full-height` attribute', () => {
+          expect(page.introImage.hasAttribute('full-height')).toBeTruthy();
+        });
+      });
+    });
+
+    describe('People', () => {
+      it('should be displayed', () => {
+        expect(page.people.length).toBe(Data.Api.getTeam<void>().length + 1);
+      });
+
+      describe('Person', () => {
+        describe('Thumbnail', () => {
+          it('should be displayed', () => {
+            expect(page.personThumbnail).toBeTruthy();
+          });
+
+          it('should call `ApiPipe`', () => {
+            expect(apiPipe).toHaveBeenCalledWith(
+              Data.Api.getTeam('Person 1').thumbnail
+            );
+          });
+
+          it('should set ImageComponent `image` as `thumbnail`', () => {
+            expect(page.imageComponents[1].image).toEqual(Data.Api.getTeam(
+              'Person 1'
+            ).thumbnail as any);
+          });
+        });
+
+        it('should display name', () => {
+          expect(page.personName.textContent).toBe(
+            Data.Api.getTeam('Person 1').name
+          );
+        });
+
+        it('should display position', () => {
+          expect(page.personPosition.textContent).toBe(
+            Data.Api.getTeam('Person 1').position
+          );
+        });
+      });
+
+      describe('Join the team', () => {
+        it('should be displayed', () => {
+          expect(page.personJoinTeam).toBeTruthy();
+        });
+
+        it('should set href', () => {
+          expect(page.personJoinTeam.href).toBe(
+            'http://localhost:9876/careers'
+          );
+        });
+      });
+    });
   });
 });
+
+class Page {
+  get title() {
+    return this.query<HTMLHeadingElement>('h1');
+  }
+  get introImage() {
+    return this.query<HTMLElement>('#intro-image image-component');
+  }
+  get people() {
+    return this.queryAll<HTMLDivElement>('.person');
+  }
+  get personThumbnail() {
+    return this.query<HTMLElement>('.person image-component');
+  }
+  get personName() {
+    return this.query<HTMLHeadingElement>('.person h4');
+  }
+  get personPosition() {
+    return this.query<HTMLSpanElement>('.person span');
+  }
+  get personJoinTeam() {
+    return this.query<HTMLAnchorElement>('a.person');
+  }
+
+  get imageComponents() {
+    const directiveEls = fixture.debugElement.queryAll(
+      By.directive(StubImageComponent)
+    );
+    return directiveEls.map(el =>
+      el.injector.get<StubImageComponent>(StubImageComponent)
+    );
+  }
+
+  private query<T>(selector: string): T {
+    return fixture.nativeElement.querySelector(selector);
+  }
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
+  }
+}
 
 function createComponent() {
   fixture = TestBed.createComponent(AboutComponent);
   comp = fixture.componentInstance;
+  page = new Page();
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
 
   fixture.detectChanges();
-  return fixture.whenStable().then(_ => {
-    fixture.detectChanges();
-  });
+  return fixture.whenStable().then(_ => fixture.detectChanges());
 }

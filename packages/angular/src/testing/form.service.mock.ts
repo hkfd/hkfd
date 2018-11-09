@@ -1,15 +1,9 @@
 export class MockFormService {
-  sendEmail({
-    name,
-    email,
-    message
-  }: {
-    name: string;
-    email: string;
-    message: string;
-  }): Promise<Object> {
-    if (!name || !email || !message) return Promise.reject(null);
+  constructor() {
+    this.sendEmail = spyOn(this, 'sendEmail').and.callThrough();
+  }
 
+  sendEmail(): Promise<Object> {
     return Promise.resolve({});
   }
 }

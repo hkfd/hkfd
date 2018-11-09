@@ -11,14 +11,14 @@ import {
   MockLoggerService,
   Data
 } from 'testing';
-import { ApiService, Api } from 'shared';
+import { ApiService } from 'shared';
 
 let mockHttp: HttpTestingController;
 let transferState: MockTransferState;
 let apiService: ApiService;
 
 describe('ApiService', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -26,554 +26,824 @@ describe('ApiService', () => {
         { provide: LoggerService, useClass: MockLoggerService },
         { provide: TransferState, useClass: MockTransferState }
       ]
-    }).compileComponents();
-  }));
+    }).compileComponents()));
 
   beforeEach(async(() => createService()));
 
-  describe('getServices', () => {
-    describe('cache', () => {
-      beforeEach(() =>
-        transferState.set('api-services', Data.Api.getServices<void>()));
+  it('should create service', () => {
+    expect(apiService).toBeTruthy();
+  });
 
-      it('should not call HttpClient get', async(() => {
+  describe('`getServices`', () => {
+    const url = 'https://api.testing/services.json';
+
+    it('should call `TransferState` `get` with `SERVICES_KEY` and `null` args', () => {
+      apiService.getServices().subscribe();
+      mockHttp.expectOne(url);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-services', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache`', () => {
+        beforeEach(() =>
+          transferState.set('api-services', Data.Api.getServices<void>()));
+
+        it('should not call `HttpClient` `get`', () => {
+          apiService.getServices().subscribe();
+
+          expect(mockHttp.expectNone(url)).toBeUndefined();
+        });
+
+        it('should return `services`', () => {
+          apiService
+            .getServices()
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getServices<void>())
+            );
+        });
+      });
+
+      describe('No `cache`', () => {
+        it('should call `HttpClient` `get`', () => {
+          apiService.getServices().subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
         apiService.getServices().subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
 
-        expect(
-          mockHttp.expectNone('https://api.testing/services.json')
-        ).toBeUndefined();
-      }));
+        expect(method).toBe('GET');
+      });
 
-      it('should return services', async(() => {
-        apiService
-          .getServices()
-          .subscribe(res => expect(res).toEqual(Data.Api.getServices<void>()));
-      }));
-    });
+      describe('No error', () => {
+        let res: any;
 
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
-        apiService.getServices().subscribe(res => expect(res).toBeDefined());
+        beforeEach(() => {
+          apiService.getServices().subscribe(response => (res = response));
+          mockHttp.expectOne(url).flush(Data.Api.getServices<void>());
+        });
 
-        mockHttp
-          .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.getServices<void>());
-      }));
-
-      it('should call HttpClient again on error', async(() => {
-        apiService.getServices().subscribe(res => expect(res).toBeDefined());
-
-        mockHttp
-          .expectOne('https://api.testing/services.json')
-          .error(new ErrorEvent('err'));
-        mockHttp
-          .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.getServices<void>());
-      }));
-
-      it('should return services', async(() => {
-        apiService
-          .getServices()
-          .subscribe(res => expect(res).toEqual(Data.Api.getServices<void>()));
-
-        mockHttp
-          .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.getServices<void>());
-      }));
-
-      it('should return empty array on last retry error', async(() => {
-        apiService.getServices().subscribe(res => expect(res).toEqual([]));
-
-        Array(4)
-          .fill(0)
-          .forEach(_ =>
-            mockHttp
-              .expectOne('https://api.testing/services.json')
-              .error(new ErrorEvent('err'))
+        it('should call `TransferState` `set` with `SERVICES_KEY` and `services` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-services',
+            Data.Api.getServices<void>()
           );
-      }));
+        });
+
+        it('should return `services`', () => {
+          expect(res).toEqual(Data.Api.getServices<void>());
+        });
+      });
+
+      describe('Error', () => {
+        let res: any = 'fail';
+
+        beforeEach(() => {
+          apiService.getServices().subscribe(response => (res = response));
+          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+        });
+
+        it('should call `HttpClient` `get`', () => {
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(url);
+
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
+
+        it('should return `[]`', () => {
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+
+          expect(res).toEqual([]);
+        });
+      });
     });
   });
 
-  describe('getCareers', () => {
-    describe('cache', () => {
-      beforeEach(() =>
-        transferState.set('api-careers', Data.Api.getCareers<void>()));
+  describe('`getCareers`', () => {
+    const url = 'https://api.testing/careers.json';
 
-      it('should not call HttpClient get', async(() => {
+    it('should call `TransferState` `get` with `CAREERS_KEY` and `null` args', () => {
+      apiService.getCareers().subscribe();
+      mockHttp.expectOne(url);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-careers', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache`', () => {
+        beforeEach(() =>
+          transferState.set('api-careers', Data.Api.getCareers<void>()));
+
+        it('should not call `HttpClient` `get`', () => {
+          apiService.getCareers().subscribe();
+
+          expect(mockHttp.expectNone(url)).toBeUndefined();
+        });
+
+        it('should return `careers`', () => {
+          apiService
+            .getCareers()
+            .subscribe(res => expect(res).toEqual(Data.Api.getCareers<void>()));
+        });
+      });
+
+      describe('No `cache`', () => {
+        it('should call `HttpClient` `get`', () => {
+          apiService.getCareers().subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
         apiService.getCareers().subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
 
-        expect(
-          mockHttp.expectNone('https://api.testing/careers.json')
-        ).toBeUndefined();
-      }));
+        expect(method).toBe('GET');
+      });
 
-      it('should return careers', async(() => {
-        apiService
-          .getCareers()
-          .subscribe(res => expect(res).toEqual(Data.Api.getCareers<void>()));
-      }));
-    });
+      describe('No error', () => {
+        let res: any;
 
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
-        apiService.getCareers().subscribe(res => expect(res).toBeDefined());
+        beforeEach(() => {
+          apiService.getCareers().subscribe(response => (res = response));
+          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+        });
 
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.getCareers<void>());
-      }));
-
-      it('should call HttpClient again on error', async(() => {
-        apiService.getCareers().subscribe(res => expect(res).toBeDefined());
-
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .error(new ErrorEvent('err'));
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.getCareers<void>());
-      }));
-
-      it('should return careers', async(() => {
-        apiService
-          .getCareers()
-          .subscribe(res => expect(res).toEqual(Data.Api.getCareers<void>()));
-
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.getCareers<void>());
-      }));
-
-      it('should return empty array on last retry error', async(() => {
-        apiService.getCareers().subscribe(res => expect(res).toEqual([]));
-
-        Array(4)
-          .fill(0)
-          .forEach(_ =>
-            mockHttp
-              .expectOne('https://api.testing/careers.json')
-              .error(new ErrorEvent('err'))
+        it('should call `TransferState` `set` with `CAREERS_KEY` and `careers` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-careers',
+            Data.Api.getCareers<void>()
           );
-      }));
+        });
+
+        it('should return `careers`', () => {
+          expect(res).toEqual(Data.Api.getCareers<void>());
+        });
+      });
+
+      describe('Error', () => {
+        let res: any = 'fail';
+
+        beforeEach(() => {
+          apiService.getCareers().subscribe(response => (res = response));
+          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+        });
+
+        it('should call `HttpClient` `get`', () => {
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(url);
+
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
+
+        it('should return `[]`', () => {
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+
+          expect(res).toEqual([]);
+        });
+      });
     });
   });
 
-  describe('getCareer', () => {
-    describe('cache', () => {
-      beforeEach(() =>
-        transferState.set('api-career', Data.Api.getCareers<void>()[0]));
+  describe('`getCareer`', () => {
+    const url = 'https://api.testing/careers.json';
 
-      describe('same id', () => {
-        it('should not call HttpClient get', async(() => {
+    it('should call `TransferState` `get` with `CAREER_KEY` and `null` args', () => {
+      apiService.getCareer('career-1').subscribe();
+      mockHttp.expectOne(url);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-career', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache` and `cache.id` is `id`', () => {
+        beforeEach(() =>
+          transferState.set('api-career', Data.Api.getCareers('Career 1')));
+
+        it('should not call `HttpClient` `get`', () => {
           apiService.getCareer('career-1').subscribe();
 
-          expect(
-            mockHttp.expectNone('https://api.testing/careers.json')
-          ).toBeUndefined();
-        }));
+          expect(mockHttp.expectNone(url)).toBeUndefined();
+        });
 
-        it('should return career', async(() => {
+        it('should return `career`', () => {
           apiService
             .getCareer('career-1')
             .subscribe(res =>
-              expect(res).toEqual(Data.Api.getCareers<void>()[0])
+              expect(res).toEqual(Data.Api.getCareers('Career 1'))
             );
-        }));
+        });
       });
 
-      describe('different id', () => {
-        it('should call HttpClient get', async(() => {
-          apiService.getCareer('career-2').subscribe();
+      it('should call `HttpClient` `get` if no `cache`', () => {
+        apiService.getCareer('career-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
 
-          expect(
-            mockHttp.expectOne('https://api.testing/careers.json')
-          ).toBeTruthy();
-        }));
+        expect(method).toBe('GET');
+      });
 
-        it('should return career', async(() => {
+      it('should call `HttpClient` `get` if `cache.id` is not `id`', () => {
+        transferState.set('api-career', Data.Api.getCareers('Career 2'));
+        apiService.getCareer('career-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
+
+        expect(method).toBe('GET');
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
+        apiService.getCareer('career-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
+
+        expect(method).toBe('GET');
+      });
+
+      describe('No error', () => {
+        let res: any;
+
+        beforeEach(() => {
+          apiService
+            .getCareer('career-3')
+            .subscribe(response => (res = response));
+          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+        });
+
+        it('should call `TransferState` `set` with `CAREER_KEY` and `career` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-career',
+            Data.Api.getCareers('Career 3')
+          );
+        });
+
+        it('should return `career`', () => {
+          expect(res).toEqual(Data.Api.getCareers('Career 3'));
+        });
+      });
+
+      describe('Error', () => {
+        let res: any = 'fail';
+
+        beforeEach(() => {
           apiService
             .getCareer('career-2')
-            .subscribe(res =>
-              expect((res as Api.Career).title).toBe('Career 2')
-            );
+            .subscribe(response => (res = response));
+          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+        });
 
-          mockHttp
-            .expectOne('https://api.testing/careers.json')
-            .flush(Data.Api.getCareers<void>());
-        }));
+        it('should call `HttpClient` `get`', () => {
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(url);
+
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
+
+        it('should return `undefined`', () => {
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+
+          expect(res).toBeUndefined();
+        });
       });
     });
 
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
-        apiService
-          .getCareer('career-1')
-          .subscribe(res => expect(res).toBeDefined());
+    describe('No `cache`', () => {
+      it('should call `TransferState` `get`', () => {
+        apiService.getCareer('career-1').subscribe();
+        mockHttp.expectOne(url);
 
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.getCareers<void>());
-      }));
+        expect(transferState.get).toHaveBeenCalled();
+      });
 
-      it('should call HttpClient again on error', async(() => {
-        apiService
-          .getCareer('career-1')
-          .subscribe(res => expect(res).toBeDefined());
+      it('should call `TransferState` `get` with `CAREER_KEY` and `null` args', () => {
+        apiService.getCareer('career-1').subscribe();
+        mockHttp.expectOne(url);
 
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .error(new ErrorEvent('err'));
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.getCareers<void>());
-      }));
+        expect(transferState.get).toHaveBeenCalledWith('api-career', null);
+      });
 
-      it('should return career', async(() => {
-        apiService
-          .getCareer('career-1')
-          .subscribe(res =>
-            expect(res).toEqual(Data.Api.getCareers<void>()[0])
-          );
+      it('should call `HttpClient` `get`', () => {
+        apiService.getCareer('career-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
 
-        mockHttp
-          .expectOne('https://api.testing/careers.json')
-          .flush(Data.Api.getCareers<void>());
-      }));
-
-      it('should return undefined on last retry error', async(() => {
-        apiService
-          .getCareer('career-1')
-          .subscribe(res => expect(res).toBe(undefined));
-
-        Array(4)
-          .fill(0)
-          .forEach(_ =>
-            mockHttp
-              .expectOne('https://api.testing/careers.json')
-              .error(new ErrorEvent('err'))
-          );
-      }));
+        expect(method).toBe('GET');
+      });
     });
   });
 
-  describe('getCaseStudies', () => {
-    describe('cache', () => {
-      beforeEach(() =>
-        transferState.set('api-case-studies', Data.Api.getCaseStudies<void>()));
+  describe('`getPost`', () => {
+    const servicesUrl = 'https://api.testing/services.json';
+    const caseStudiesUrl = 'https://api.testing/case-studies.json';
 
-      it('should not call HttpClient get', async(() => {
+    it('should call `TransferState` `get` with `POST_KEY` and `null` args if valid `type`', () => {
+      apiService.getPost('service', 'service-1').subscribe();
+      mockHttp.expectOne(servicesUrl);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-post', null);
+    });
+
+    it('should not call `TransferState` `get` if invalid `type`', () => {
+      apiService.getPost('', '').subscribe();
+
+      expect(transferState.get).not.toHaveBeenCalled();
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache` and `cache.id` is `id`', () => {
+        beforeEach(() =>
+          transferState.set('api-post', Data.Api.getServices('Service 2')));
+
+        it('should not call `HttpClient` `get`', () => {
+          apiService.getPost('service', 'service-2').subscribe();
+
+          expect(mockHttp.expectNone(servicesUrl)).toBeUndefined();
+        });
+
+        it('should return `post`', () => {
+          apiService
+            .getPost('service', 'service-2')
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getServices('Service 2'))
+            );
+        });
+      });
+
+      it('should call `HttpClient` `get` if has `cache` and `cache.id` is not `id`', () => {
+        transferState.set('api-post', Data.Api.getServices('Service 1'));
+        apiService.getPost('service', 'service-2').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(servicesUrl);
+
+        expect(method).toBe('GET');
+      });
+
+      it('should call `HttpClient` `get` if no `cache`', () => {
+        apiService.getPost('service', 'service-2').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(servicesUrl);
+
+        expect(method).toBe('GET');
+      });
+    });
+
+    describe('Request', () => {
+      describe('`type`', () => {
+        describe('`service`', () => {
+          it('should call `HttpClient` `get` with `SERVICES` url', () => {
+            apiService.getPost('service', 'service-1').subscribe();
+            const {
+              request: { method }
+            } = mockHttp.expectOne(servicesUrl);
+
+            expect(method).toBe('GET');
+          });
+        });
+
+        describe('`work`', () => {
+          it('should call `HttpClient` `get` with `CASE_STUDIES` url', () => {
+            apiService.getPost('work', 'case-study-1').subscribe();
+            const {
+              request: { method }
+            } = mockHttp.expectOne(caseStudiesUrl);
+
+            expect(method).toBe('GET');
+          });
+        });
+
+        describe('other', () => {
+          it('should not call `HttpClient` `get`', () => {
+            apiService.getPost('', 'service-1').subscribe();
+
+            expect(mockHttp.verify()).toBeUndefined();
+          });
+
+          it('should return `undefined`', () => {
+            apiService
+              .getPost('', 'service-1')
+              .subscribe(res => expect(res).toBeUndefined());
+          });
+        });
+      });
+
+      describe('No error', () => {
+        let res: any;
+
+        beforeEach(() => {
+          apiService
+            .getPost('service', 'service-3')
+            .subscribe(response => (res = response));
+          mockHttp.expectOne(servicesUrl).flush(Data.Api.getServices<void>());
+        });
+
+        it('should call `TransferState` `set` with `POST_KEY` and `post` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-post',
+            Data.Api.getServices('Service 3')
+          );
+        });
+
+        it('should return `post`', () => {
+          expect(res).toEqual(Data.Api.getServices('Service 3'));
+        });
+      });
+
+      describe('Error', () => {
+        let res: any = 'fail';
+
+        beforeEach(() => {
+          apiService
+            .getPost('service', 'service-1')
+            .subscribe(response => (res = response));
+          mockHttp.expectOne(servicesUrl).error(new ErrorEvent('err'));
+        });
+
+        it('should call `HttpClient` `get`', () => {
+          mockHttp.expectOne(servicesUrl).error(new ErrorEvent('err'));
+          const {
+            request: { method }
+          } = mockHttp.expectOne(servicesUrl);
+
+          expect(method).toBe('GET');
+        });
+
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(servicesUrl);
+
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
+
+        it('should return `undefined`', () => {
+          mockHttp.expectOne(servicesUrl).error(new ErrorEvent(''));
+          mockHttp.expectOne(servicesUrl).error(new ErrorEvent(''));
+          mockHttp.expectOne(servicesUrl).error(new ErrorEvent(''));
+
+          expect(res).toBeUndefined();
+        });
+      });
+    });
+  });
+
+  describe('`getCaseStudies`', () => {
+    const url = 'https://api.testing/case-studies.json';
+
+    it('should call `TransferState` `get` with `CASE_STUDIES_KEY` and `null` args', () => {
+      apiService.getCaseStudies().subscribe();
+      mockHttp.expectOne(url);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-case-studies', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache`', () => {
+        beforeEach(() =>
+          transferState.set(
+            'api-case-studies',
+            Data.Api.getCaseStudies<void>()
+          ));
+
+        it('should not call `HttpClient` `get`', () => {
+          apiService.getCaseStudies().subscribe();
+
+          expect(mockHttp.expectNone(url)).toBeUndefined();
+        });
+
+        it('should return `caseStudies`', () => {
+          apiService
+            .getCaseStudies()
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getCaseStudies<void>())
+            );
+        });
+      });
+
+      describe('No `cache`', () => {
+        it('should call `HttpClient` `get`', () => {
+          apiService.getCaseStudies().subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
         apiService.getCaseStudies().subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
 
-        expect(
-          mockHttp.expectNone('https://api.testing/case-studies.json')
-        ).toBeUndefined();
-      }));
+        expect(method).toBe('GET');
+      });
 
-      it('should return case studies', async(() => {
-        apiService
-          .getCaseStudies()
-          .subscribe(res =>
-            expect(res).toEqual(Data.Api.getCaseStudies<void>())
+      describe('No error', () => {
+        let res: any;
+
+        beforeEach(() => {
+          apiService.getCaseStudies().subscribe(response => (res = response));
+          mockHttp.expectOne(url).flush(Data.Api.getCaseStudies<void>());
+        });
+
+        it('should call `TransferState` `set` with `CASE_STUDIES_KEY` and `caseStudies` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-case-studies',
+            Data.Api.getCaseStudies<void>()
           );
-      }));
-    });
+        });
 
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
-        apiService.getCaseStudies().subscribe(res => expect(res).toBeDefined());
+        it('should return `caseStudies`', () => {
+          expect(res).toEqual(Data.Api.getCaseStudies<void>());
+        });
+      });
 
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.getCaseStudies<void>());
-      }));
+      describe('Error', () => {
+        let res: any = 'fail';
 
-      it('should call HttpClient again on error', async(() => {
-        apiService.getCaseStudies().subscribe(res => expect(res).toBeDefined());
+        beforeEach(() => {
+          apiService.getCaseStudies().subscribe(response => (res = response));
+          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+        });
 
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .error(new ErrorEvent('err'));
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.getCaseStudies<void>());
-      }));
+        it('should call `HttpClient` `get`', () => {
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
 
-      it('should return case studies', async(() => {
-        apiService
-          .getCaseStudies()
-          .subscribe(res =>
-            expect(res).toEqual(Data.Api.getCaseStudies<void>())
-          );
+          expect(method).toBe('GET');
+        });
 
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.getCaseStudies<void>());
-      }));
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(url);
 
-      it('should return empty array on last retry error', async(() => {
-        apiService.getCaseStudies().subscribe(res => expect(res).toEqual([]));
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
 
-        Array(4)
-          .fill(0)
-          .forEach(_ =>
-            mockHttp
-              .expectOne('https://api.testing/case-studies.json')
-              .error(new ErrorEvent('err'))
-          );
-      }));
+        it('should return `[]`', () => {
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+
+          expect(res).toEqual([]);
+        });
+      });
     });
   });
 
-  describe('getTeam', () => {
-    describe('cache', () => {
-      beforeEach(() => transferState.set('api-team', Data.Api.getTeam<void>()));
+  describe('`getTeam`', () => {
+    const url = 'https://api.testing/team.json';
 
-      it('should not call HttpClient get', async(() => {
+    it('should call `TransferState` `get` with `TEAM_KEY` and `null` args', () => {
+      apiService.getTeam().subscribe();
+      mockHttp.expectOne(url);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-team', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache`', () => {
+        beforeEach(() =>
+          transferState.set('api-team', Data.Api.getTeam<void>()));
+
+        it('should not call `HttpClient` `get`', () => {
+          apiService.getTeam().subscribe();
+
+          expect(mockHttp.expectNone(url)).toBeUndefined();
+        });
+
+        it('should return `team`', () => {
+          apiService
+            .getTeam()
+            .subscribe(res => expect(res).toEqual(Data.Api.getTeam<void>()));
+        });
+      });
+
+      describe('No `cache`', () => {
+        it('should call `HttpClient` `get`', () => {
+          apiService.getTeam().subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+      });
+    });
+
+    describe('Request', () => {
+      it('should call `HttpClient` `get`', () => {
         apiService.getTeam().subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne(url);
 
-        expect(
-          mockHttp.expectNone('https://api.testing/team.json')
-        ).toBeUndefined();
-      }));
-
-      it('should return team', async(() => {
-        apiService
-          .getTeam()
-          .subscribe(res => expect(res).toEqual(Data.Api.getTeam<void>()));
-      }));
-    });
-
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
-        apiService.getTeam().subscribe(res => expect(res).toBeDefined());
-
-        mockHttp
-          .expectOne('https://api.testing/team.json')
-          .flush(Data.Api.getTeam<void>());
-      }));
-
-      it('should call HttpClient again on error', async(() => {
-        apiService.getTeam().subscribe(res => expect(res).toBeDefined());
-
-        mockHttp
-          .expectOne('https://api.testing/team.json')
-          .error(new ErrorEvent('err'));
-        mockHttp
-          .expectOne('https://api.testing/team.json')
-          .flush(Data.Api.getTeam<void>());
-      }));
-
-      it('should return team', async(() => {
-        apiService
-          .getTeam()
-          .subscribe(res => expect(res).toEqual(Data.Api.getTeam<void>()));
-
-        mockHttp
-          .expectOne('https://api.testing/team.json')
-          .flush(Data.Api.getTeam<void>());
-      }));
-
-      it('should return empty array on last retry error', async(() => {
-        apiService.getTeam().subscribe(res => expect(res).toEqual([]));
-
-        Array(4)
-          .fill(0)
-          .forEach(_ =>
-            mockHttp
-              .expectOne('https://api.testing/team.json')
-              .error(new ErrorEvent('err'))
-          );
-      }));
-    });
-  });
-
-  describe('getClients', () => {
-    describe('cache', () => {
-      beforeEach(() => transferState.set('api-clients', Data.Api.getClients()));
-
-      it('should not call HttpClient get', async(() => {
-        apiService.getClients().subscribe();
-
-        expect(
-          mockHttp.expectNone('https://api.testing/clients.json')
-        ).toBeUndefined();
-      }));
-
-      it('should return clients', async(() => {
-        apiService
-          .getClients()
-          .subscribe(res => expect(res).toEqual(Data.Api.getClients()));
-      }));
-    });
-
-    describe('no cache', () => {
-      it('should call HttpClient get', async(() => {
-        apiService.getClients().subscribe(res => expect(res).toBeDefined());
-
-        mockHttp
-          .expectOne('https://api.testing/clients.json')
-          .flush(Data.Api.getClients());
-      }));
-
-      it('should call HttpClient again on error', async(() => {
-        apiService.getClients().subscribe(res => expect(res).toBeDefined());
-
-        mockHttp
-          .expectOne('https://api.testing/clients.json')
-          .error(new ErrorEvent('err'));
-        mockHttp
-          .expectOne('https://api.testing/clients.json')
-          .flush(Data.Api.getClients());
-      }));
-
-      it('should return clients', async(() => {
-        apiService
-          .getClients()
-          .subscribe(res => expect(res).toEqual(Data.Api.getClients()));
-
-        mockHttp
-          .expectOne('https://api.testing/clients.json')
-          .flush(Data.Api.getClients());
-      }));
-
-      it('should return empty array on last retry error', async(() => {
-        apiService.getClients().subscribe(res => expect(res).toEqual([]));
-
-        Array(4)
-          .fill(0)
-          .forEach(_ =>
-            mockHttp
-              .expectOne('https://api.testing/clients.json')
-              .error(new ErrorEvent('err'))
-          );
-      }));
-    });
-  });
-
-  describe('getPost', () => {
-    describe('cache', () => {
-      beforeEach(() =>
-        transferState.set('api-post', Data.Api.getCaseStudies<void>()[0]));
-
-      describe('same id', () => {
-        it('should not call HttpClient get', async(() => {
-          apiService.getPost('work', 'case-study-1').subscribe();
-
-          expect(
-            mockHttp.expectNone('https://api.testing/services.json')
-          ).toBeUndefined();
-          expect(
-            mockHttp.expectNone('https://api.testing/case-studies.json')
-          ).toBeUndefined();
-        }));
-
-        it('should return post', async(() => {
-          apiService
-            .getPost('work', 'case-study-1')
-            .subscribe(res =>
-              expect(res).toEqual(Data.Api.getCaseStudies<void>()[0])
-            );
-        }));
+        expect(method).toBe('GET');
       });
 
-      describe('different id', () => {
-        it('should call HttpClient get', async(() => {
-          apiService.getPost('work', 'case-study-2').subscribe();
+      describe('No error', () => {
+        let res: any;
 
-          expect(
-            mockHttp.expectOne('https://api.testing/case-studies.json')
-          ).toBeTruthy();
-        }));
+        beforeEach(() => {
+          apiService.getTeam().subscribe(response => (res = response));
+          mockHttp.expectOne(url).flush(Data.Api.getTeam<void>());
+        });
 
-        it('should return post', async(() => {
+        it('should call `TransferState` `set` with `TEAM_KEY` and `team` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-team',
+            Data.Api.getTeam<void>()
+          );
+        });
+
+        it('should return `team`', () => {
+          expect(res).toEqual(Data.Api.getTeam<void>());
+        });
+      });
+
+      describe('Error', () => {
+        let res: any = 'fail';
+
+        beforeEach(() => {
+          apiService.getTeam().subscribe(response => (res = response));
+          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+        });
+
+        it('should call `HttpClient` `get`', () => {
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
+
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(url);
+
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
+
+        it('should return `[]`', () => {
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+
+          expect(res).toEqual([]);
+        });
+      });
+    });
+  });
+
+  describe('`getClients`', () => {
+    const url = 'https://api.testing/clients.json';
+
+    it('should call `TransferState` `get` with `CLIENTS_KEY` and `null` args', () => {
+      apiService.getClients().subscribe();
+      mockHttp.expectOne(url);
+
+      expect(transferState.get).toHaveBeenCalledWith('api-clients', null);
+    });
+
+    describe('Cache', () => {
+      describe('Has `cache`', () => {
+        beforeEach(() =>
+          transferState.set('api-clients', Data.Api.getClients()));
+
+        it('should not call `HttpClient` `get`', () => {
+          apiService.getClients().subscribe();
+
+          expect(mockHttp.expectNone(url)).toBeUndefined();
+        });
+
+        it('should return `clients`', () => {
           apiService
-            .getPost('work', 'case-study-2')
-            .subscribe(res =>
-              expect((res as Api.Post).title).toBe('Case Study 2')
-            );
+            .getClients()
+            .subscribe(res => expect(res).toEqual(Data.Api.getClients()));
+        });
+      });
 
-          mockHttp
-            .expectOne('https://api.testing/case-studies.json')
-            .flush(Data.Api.getCaseStudies<void>());
-        }));
+      describe('No `cache`', () => {
+        it('should call `HttpClient` `get`', () => {
+          apiService.getClients().subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
+
+          expect(method).toBe('GET');
+        });
       });
     });
 
-    describe('no cache', () => {
-      it('should set url to services if type is `service`', async(() => {
-        apiService
-          .getPost('service', '')
-          .subscribe(res => expect(res).toBeUndefined());
+    describe('Request', () => {
+      describe('No error', () => {
+        let res: any;
 
-        mockHttp
-          .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.getServices<void>());
-      }));
+        beforeEach(() => {
+          apiService.getClients().subscribe(request => (res = request));
+          mockHttp.expectOne(url).flush(Data.Api.getClients());
+        });
 
-      it('should set url to caseStudies if type is `work`', async(() => {
-        apiService
-          .getPost('work', '')
-          .subscribe(res => expect(res).toBeUndefined());
-
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.getCaseStudies<void>());
-      }));
-
-      it('should return service post', async(() => {
-        apiService
-          .getPost('service', 'service-2')
-          .subscribe(res => expect((res as Api.Post).title).toBe('Service 2'));
-
-        mockHttp
-          .expectOne('https://api.testing/services.json')
-          .flush(Data.Api.getServices<void>());
-      }));
-
-      it('should return case study post', async(() => {
-        apiService
-          .getPost('work', 'case-study-1')
-          .subscribe(res =>
-            expect((res as Api.Post).title).toBe('Case Study 1')
+        it('should call `TransferState` `set` with `CLIENTS_KEY` and `clients` args', () => {
+          expect(transferState.set).toHaveBeenCalledWith(
+            'api-clients',
+            Data.Api.getClients()
           );
+        });
 
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.getCaseStudies<void>());
-      }));
+        it('should return `clients`', () => {
+          expect(res).toEqual(Data.Api.getClients());
+        });
+      });
 
-      it('should return undefined if no type arg', async(() => {
-        apiService
-          .getPost('', 'service-1')
-          .subscribe(res => expect(res).toBe(undefined));
-      }));
+      describe('Error', () => {
+        let res: any = 'fail';
 
-      it('should return undefined if no id arg', async(() => {
-        apiService
-          .getPost('work', '')
-          .subscribe(res => expect(res).toBe(undefined));
+        beforeEach(() => {
+          apiService.getClients().subscribe(request => (res = request));
+          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+        });
 
-        mockHttp
-          .expectOne('https://api.testing/case-studies.json')
-          .flush(Data.Api.getCaseStudies<void>());
-      }));
+        it('should call `HttpClient` `get`', () => {
+          const {
+            request: { method }
+          } = mockHttp.expectOne(url);
 
-      it('should return undefined on last retry error', async(() => {
-        apiService
-          .getPost('work', 'case-study-1')
-          .subscribe(res => expect(res).toBe(undefined));
+          expect(method).toBe('GET');
+        });
 
-        Array(4)
-          .fill(0)
-          .forEach(() =>
-            mockHttp
-              .expectOne('https://api.testing/case-studies.json')
-              .error(new ErrorEvent('err'))
-          );
-      }));
+        it('should not call `TransferState` `set`', () => {
+          mockHttp.expectOne(url);
+
+          expect(transferState.set).not.toHaveBeenCalled();
+        });
+
+        it('should return `[]`', () => {
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+          mockHttp.expectOne(url).error(new ErrorEvent(''));
+
+          expect(res).toEqual([]);
+        });
+      });
     });
   });
+
+  afterEach(() => mockHttp.verify());
 });
 
 function createService() {

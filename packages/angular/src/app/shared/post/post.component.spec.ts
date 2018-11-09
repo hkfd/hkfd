@@ -1,11 +1,17 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
   MockApiPipe,
   ActivatedRoute,
   ActivatedRouteStub,
+  StubTextBlockComponent,
+  StubImageBlockComponent,
+  StubDuoBlockComponent,
+  StubGalleryBlockComponent,
+  StubVideoBlockComponent,
+  StubAudioBlockComponent,
   Data
 } from 'testing';
 
@@ -25,9 +31,17 @@ describe('PostComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [PostComponent, MockApiPipe],
-      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [
+        PostComponent,
+        StubTextBlockComponent,
+        StubImageBlockComponent,
+        StubDuoBlockComponent,
+        StubGalleryBlockComponent,
+        StubVideoBlockComponent,
+        StubAudioBlockComponent,
+        MockApiPipe
+      ],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }]
     }).compileComponents();
   }));
 
@@ -37,198 +51,302 @@ describe('PostComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  describe('OnInit', () => {
-    it('should set post', () => {
+  describe('`ngOnInit`', () => {
+    it('should set `post$`', () => {
+      expect(comp.post$).toBeDefined();
+    });
+
+    it('should subscribe to `ActivatedRoute` `data`', () => {
+      expect(activatedRoute.data.subscribe).toHaveBeenCalled();
+    });
+
+    it('should set `post`', () => {
       expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
     });
 
-    it('should set layout', () => {
-      expect(comp.layout).toBeDefined();
-    });
+    describe('`layout`', () => {
+      it('should be set', () => {
+        expect(comp.layout).toBeDefined();
+      });
 
-    it('should set layout as `layout-`', () => {
-      expect(comp.layout).toMatch(/layout-[1-3]/);
+      it('should be set as `layout-`', () => {
+        expect(comp.layout).toMatch(/layout-[1-3]/);
+      });
     });
   });
 
-  describe('Content', () => {
-    it('should display title', () => {
-      activatedRoute.testData = {
-        post: Data.Api.getCaseStudies('Case Study 1')
-      };
-      comp.ngOnInit();
-      fixture.detectChanges();
+  describe('`ngOnDestroy`', () => {
+    it('should call `post$` `unsubscribe`', () => {
+      const spy = spyOn(comp.post$, 'unsubscribe').and.callThrough();
+      comp.ngOnDestroy();
 
-      expect(page.sectionTitle.textContent).toEqual(jasmine.any(String));
+      expect(spy).toHaveBeenCalled();
     });
+  });
 
-    it('should display intro', () => {
-      activatedRoute.testData = {
-        post: Data.Api.getCaseStudies('Case Study 1')
-      };
-      comp.ngOnInit();
-      fixture.detectChanges();
-
-      expect(page.introText.textContent).toBe('Case Study 1 intro');
-    });
-
-    describe('Text', () => {
-      beforeEach(() => {
-        activatedRoute.testData = {
-          post: Data.Api.getCaseStudies('Case Study 1')
-        };
-        comp.ngOnInit();
-      });
-
-      it('should display TextBlockComponent', () => {
-        expect(page.textBlock).toBeTruthy();
-      });
-
-      it('should not call ApiPipe', () => {
-        expect(apiPipe).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('Image', () => {
-      beforeEach(() => {
-        activatedRoute.testData = {
-          post: Data.Api.getCaseStudies('Case Study 2')
-        };
-        comp.ngOnInit();
-        fixture.detectChanges();
-      });
-
-      it('should display ImageBlockComponent', () => {
-        expect(page.imageBlock).toBeTruthy();
-      });
-
-      it('should call ApiPipe', () => {
-        expect(apiPipe).toHaveBeenCalled();
-      });
-
-      it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(
-          (comp.post as Api.Post).content[0].data[0].data
+  describe('Template', () => {
+    describe('Intro', () => {
+      it('should display title', () => {
+        expect(page.title.textContent).toBe(
+          Data.Api.getCaseStudies('Case Study 1').title
         );
       });
 
-      it('should set full-bleed attibute as true if fullBleed is true', () => {
-        (<Api.Blocks.ImageBlock>(
-          (comp.post as Api.Post).content[0].data[0]
-        )).fullBleed = true;
-        fixture.detectChanges();
+      describe('Texts', () => {
+        it('should be displayed', () => {
+          expect(page.introText.length).toBe(
+            Data.Api.getCaseStudies('Case Study 1').intro.length
+          );
+        });
 
-        expect(page.imageBlock.getAttribute('full-bleed')).toBe('true');
+        describe('Text', () => {
+          it('should display text', () => {
+            expect(page.introText[0].textContent).toBe(
+              Data.Api.getCaseStudies('Case Study 1').intro[0]
+            );
+          });
+        });
       });
 
-      it('should not set full-bleed attibute if no fullBleed', () => {
-        (<Api.Blocks.ImageBlock>(
-          (comp.post as Api.Post).content[0].data[0]
-        )).fullBleed = undefined;
-        fixture.detectChanges();
+      describe('Overview', () => {
+        describe('`CaseStudy`', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getCaseStudies('Case Study 1');
+            fixture.detectChanges();
+          });
 
-        expect(page.imageBlock.getAttribute('full-bleed')).toBe(null);
-      });
-    });
+          it('should be displayed', () => {
+            expect(page.introOverview.textContent).toContain(
+              Data.Api.getCaseStudies('Case Study 1').title
+            );
+          });
 
-    describe('Gallery', () => {
-      beforeEach(() => {
-        activatedRoute.testData = {
-          post: Data.Api.getCaseStudies('Case Study 3')
-        };
-        comp.ngOnInit();
-        fixture.detectChanges();
-      });
+          describe('Services', () => {
+            it('should be displayed', () => {
+              expect(page.introOverviewServices.length).toBe(
+                Data.Api.getCaseStudies('Case Study 1').overview.length
+              );
+            });
 
-      it('should display GalleryBlockComponent', () => {
-        expect(page.galleryBlock).toBeTruthy();
-      });
+            describe('Service', () => {
+              it('should display title', () => {
+                expect(page.introOverviewServices[0].textContent).toBe(
+                  Data.Api.getCaseStudies('Case Study 1').overview[0]
+                );
+              });
+            });
+          });
+        });
 
-      it('should call ApiPipe', () => {
-        expect(apiPipe).toHaveBeenCalled();
-      });
+        describe('`Service`', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getServices('Service 1');
+            fixture.detectChanges();
+          });
 
-      it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(
-          (comp.post as Api.Post).content[0].data[0].data
-        );
-      });
-    });
-
-    describe('Duo', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.getServices('Service 1') };
-        comp.ngOnInit();
-        fixture.detectChanges();
-      });
-
-      it('should display DuoBlockComponent', () => {
-        expect(page.duoBlock).toBeTruthy();
-      });
-
-      it('should call ApiPipe', () => {
-        expect(apiPipe).toHaveBeenCalled();
-      });
-
-      it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(
-          (comp.post as Api.Post).content[0].data[0].data
-        );
+          it('should not be displayed', () => {
+            expect(page.introOverview).toBeFalsy();
+          });
+        });
       });
     });
 
-    describe('Video', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.getServices('Service 2') };
-        comp.ngOnInit();
-        fixture.detectChanges();
+    describe('Content', () => {
+      describe('Title', () => {
+        describe('Has `title`', () => {
+          beforeEach(() => {
+            (comp.post as Api.Post).content[0].title = 'Title';
+            fixture.detectChanges();
+          });
+
+          it('should be displayed', () => {
+            expect(page.sectionTitle.textContent).toBe('Title');
+          });
+        });
+
+        describe('No `title`', () => {
+          beforeEach(() => {
+            (comp.post as Api.Post).content[0].title = undefined;
+            fixture.detectChanges();
+          });
+
+          it('should not be displayed', () => {
+            expect(page.sectionTitle).toBeFalsy();
+          });
+        });
       });
 
-      it('should display VideoBlockComponent', () => {
-        expect(page.videoBlock).toBeTruthy();
+      describe('Text', () => {
+        beforeEach(() => {
+          comp.post = Data.Api.getCaseStudies('Case Study 1');
+          fixture.detectChanges();
+        });
+
+        it('should display `TextBlockComponent`', () => {
+          expect(page.textBlock).toBeTruthy();
+        });
+
+        it('should not call `ApiPipe`', () => {
+          expect(apiPipe).not.toHaveBeenCalled();
+        });
+
+        it('should set `TextBlockComponent` `data` as `content.data`', () => {
+          expect(page.textBlockComponent.data).toEqual(Data.Api.getCaseStudies(
+            'Case Study 1'
+          ).content[0].data[0] as any);
+        });
       });
 
-      it('should call ApiPipe', () => {
-        expect(apiPipe).toHaveBeenCalled();
+      describe('Image', () => {
+        beforeEach(() => {
+          comp.post = Data.Api.getCaseStudies('Case Study 2');
+          fixture.detectChanges();
+        });
+
+        it('should display `ImageBlockComponent`', () => {
+          expect(page.imageBlock).toBeTruthy();
+        });
+
+        it('should call `ApiPipe` with `content.data.data`', () => {
+          expect(apiPipe).toHaveBeenCalledWith(
+            Data.Api.getCaseStudies('Case Study 2').content[0].data[0].data
+          );
+        });
+
+        it('should set `ImageBlockComponent` `data` as `content.data.data`', () => {
+          expect(page.imageBlockComponent.data).toEqual(Data.Api.getCaseStudies(
+            'Case Study 2'
+          ).content[0].data[0].data as any);
+        });
+
+        it('should set `ImageBlockComponent` `full-bleed` attribute if `content.data.fullBleed`', () => {
+          ((comp.post as Api.Post).content[0]
+            .data[0] as Api.Blocks.ImageBlock).fullBleed = true;
+          fixture.detectChanges();
+
+          expect(page.imageBlock.getAttribute('full-bleed')).toBeTruthy();
+        });
+
+        it('should not set `ImageBlockComponent` `full-bleed` attribute if no `content.data.fullBleed`', () => {
+          ((comp.post as Api.Post).content[0]
+            .data[0] as Api.Blocks.ImageBlock).fullBleed = undefined;
+          fixture.detectChanges();
+
+          expect(page.imageBlock.getAttribute('full-bleed')).toBeFalsy();
+        });
       });
 
-      it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(
-          (comp.post as Api.Post).content[0].data[0].data
-        );
-      });
-    });
+      describe('Gallery', () => {
+        beforeEach(() => {
+          comp.post = Data.Api.getCaseStudies('Case Study 3');
+          fixture.detectChanges();
+        });
 
-    describe('Audio', () => {
-      beforeEach(() => {
-        activatedRoute.testData = { post: Data.Api.getServices('Service 3') };
-        comp.ngOnInit();
-        fixture.detectChanges();
+        it('should display `GalleryBlockComponent`', () => {
+          expect(page.galleryBlock).toBeTruthy();
+        });
+
+        it('should call `ApiPipe` with `content.data.data`', () => {
+          expect(apiPipe).toHaveBeenCalledWith(
+            Data.Api.getCaseStudies('Case Study 3').content[0].data[0].data
+          );
+        });
+
+        it('should set `GalleryBlockComponent` `data` as `content.data.data`', () => {
+          expect(page.galleryBlockComponent.data).toEqual(
+            Data.Api.getCaseStudies('Case Study 3').content[0].data[0]
+              .data as any
+          );
+        });
       });
 
-      it('should display AudioBlockComponent', () => {
-        expect(page.audioBlock).toBeTruthy();
+      describe('Duo', () => {
+        beforeEach(() => {
+          comp.post = Data.Api.getServices('Service 1');
+          fixture.detectChanges();
+        });
+
+        it('should display `DuoBlockComponent`', () => {
+          expect(page.duoBlock).toBeTruthy();
+        });
+
+        it('should call `ApiPipe` with `content.data.data`', () => {
+          expect(apiPipe).toHaveBeenCalledWith(
+            Data.Api.getServices('Service 1').content[0].data[0].data
+          );
+        });
+
+        it('should set `DuoBlockComponent` `data` as `content.data.data`', () => {
+          expect(page.duoBlockComponent.data).toEqual(Data.Api.getServices(
+            'Service 1'
+          ).content[0].data[0].data as any);
+        });
       });
 
-      it('should call ApiPipe', () => {
-        expect(apiPipe).toHaveBeenCalled();
+      describe('Video', () => {
+        beforeEach(() => {
+          comp.post = Data.Api.getServices('Service 2');
+          fixture.detectChanges();
+        });
+
+        it('should display `VideoBlockComponent`', () => {
+          expect(page.videoBlock).toBeTruthy();
+        });
+
+        it('should call `ApiPipe` with `content.data.data`', () => {
+          expect(apiPipe).toHaveBeenCalledWith(
+            Data.Api.getServices('Service 2').content[0].data[0].data
+          );
+        });
+
+        it('should set `VideoBlockComponent` `data` as `content.data.data`', () => {
+          expect(page.videoBlockComponent.data).toEqual(Data.Api.getServices(
+            'Service 2'
+          ).content[0].data[0].data as any);
+        });
       });
 
-      it('should call ApiPipe with block data', () => {
-        expect(apiPipe).toHaveBeenCalledWith(
-          (comp.post as Api.Post).content[0].data[0].data
-        );
+      describe('Audio', () => {
+        beforeEach(() => {
+          comp.post = Data.Api.getServices('Service 3');
+          fixture.detectChanges();
+        });
+
+        it('should display `AudioBlockComponent`', () => {
+          expect(page.audioBlock).toBeTruthy();
+        });
+
+        it('should call `ApiPipe` with `content.data.data`', () => {
+          expect(apiPipe).toHaveBeenCalledWith(
+            Data.Api.getServices('Service 3').content[0].data[0].data
+          );
+        });
+
+        it('should set `VideoBlockComponent` `data` as `content.data.data`', () => {
+          expect(page.audioBlockComponent.data).toEqual(Data.Api.getServices(
+            'Service 3'
+          ).content[0].data[0].data as any);
+        });
       });
     });
   });
 });
 
 class Page {
+  get title() {
+    return this.query<HTMLHeadingElement>('#intro h1');
+  }
   get introText() {
-    return this.query<HTMLParagraphElement>('#text-intro p');
+    return this.queryAll<HTMLParagraphElement>('#text-intro p');
+  }
+  get introOverview() {
+    return this.query<HTMLDivElement>('#info-overview');
+  }
+  get introOverviewServices() {
+    return this.queryAll<HTMLLIElement>('#info-overview li');
   }
   get sectionTitle() {
-    return this.query<HTMLHeadingElement>('h2');
+    return this.query<HTMLHeadingElement>('section:nth-of-type(2) h2');
   }
   get textBlock() {
     return this.query<HTMLElement>('text-block');
@@ -249,8 +367,60 @@ class Page {
     return this.query<HTMLElement>('audio-block');
   }
 
+  get textBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubTextBlockComponent)
+    );
+    return directiveEl.injector.get<StubTextBlockComponent>(
+      StubTextBlockComponent
+    );
+  }
+  get imageBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageBlockComponent)
+    );
+    return directiveEl.injector.get<StubImageBlockComponent>(
+      StubImageBlockComponent
+    );
+  }
+  get duoBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubDuoBlockComponent)
+    );
+    return directiveEl.injector.get<StubDuoBlockComponent>(
+      StubDuoBlockComponent
+    );
+  }
+  get galleryBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubGalleryBlockComponent)
+    );
+    return directiveEl.injector.get<StubGalleryBlockComponent>(
+      StubGalleryBlockComponent
+    );
+  }
+  get videoBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubVideoBlockComponent)
+    );
+    return directiveEl.injector.get<StubVideoBlockComponent>(
+      StubVideoBlockComponent
+    );
+  }
+  get audioBlockComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubAudioBlockComponent)
+    );
+    return directiveEl.injector.get<StubAudioBlockComponent>(
+      StubAudioBlockComponent
+    );
+  }
+
   private query<T>(selector: string): T {
     return fixture.nativeElement.querySelector(selector);
+  }
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 

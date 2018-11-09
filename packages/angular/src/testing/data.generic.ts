@@ -3,6 +3,28 @@ import { makeImmutable } from 'testing';
 import { Generic as GenericType } from 'shared';
 
 export namespace Generic {
+  export const isImage = (data: any): data is GenericType.Image => {
+    return (
+      data.hasOwnProperty('src') &&
+      data.hasOwnProperty('srcset') &&
+      data.srcset.hasOwnProperty('attr') &&
+      data.srcset.hasOwnProperty('val') &&
+      data.hasOwnProperty('alt')
+    );
+  };
+
+  export const isVideo = (data: any): data is GenericType.Video => {
+    return (
+      data.hasOwnProperty('src') &&
+      data.src.hasOwnProperty('attr') &&
+      data.src.hasOwnProperty('val')
+    );
+  };
+
+  export const isAudio = (data: any): data is GenericType.Audio => {
+    return data.hasOwnProperty('url');
+  };
+
   export const getImage = () => {
     const image: GenericType.Image = {
       src: 'http://testing/example.jpg',
@@ -103,5 +125,14 @@ export namespace Generic {
     };
 
     return makeImmutable(audio);
+  };
+
+  export const getLazy = () => {
+    const lazy: GenericType.Lazy = {
+      attr: 'srcset',
+      val: ['example-xs.jpg 100w', 'example-sm.jpg 200w']
+    };
+
+    return makeImmutable(lazy);
   };
 }

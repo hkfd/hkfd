@@ -23,111 +23,121 @@ describe('MetaService', () => {
     expect(metaService).toBeTruthy();
   });
 
-  it('should call Title setTitle', () => {
-    metaService.setMetaTags({});
+  describe('`setMetaTags`', () => {
+    describe('args', () => {
+      describe('`type`', () => {
+        it('should call `Meta` `updateTag` with `og:type` and `type` args if passed', () => {
+          metaService.setMetaTags({ type: 'article' });
 
-    expect(title.setTitle).toHaveBeenCalled();
-  });
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:type',
+            content: 'article'
+          });
+        });
 
-  it('should call Title setTitle with `Heckford – {title}` if title arg', () => {
-    metaService.setMetaTags({ title: 'Title' });
+        it('should call `Meta` `updateTag` with `og:type` and `website` args if not passed', () => {
+          metaService.setMetaTags({});
 
-    expect(title.setTitle).toHaveBeenCalledWith('Heckford – Title');
-  });
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:type',
+            content: 'website'
+          });
+        });
+      });
 
-  it('should call Title setTitle with `Heckford` if no title arg', () => {
-    metaService.setMetaTags({});
+      describe('`title`', () => {
+        describe('Is passed', () => {
+          beforeEach(() => metaService.setMetaTags({ title: 'Title' }));
 
-    expect(title.setTitle).toHaveBeenCalledWith('Heckford');
-  });
+          it('should call `Title` `setTitle` with `Heckford – {title}` arg', () => {
+            expect(title.setTitle).toHaveBeenCalledWith('Heckford – Title');
+          });
 
-  it('should call Meta updateTag with `og:type` and `type` args if passed type', () => {
-    metaService.setMetaTags({ type: 'article' });
+          it('should call `Meta` `updateTag` with `og:title` and `title` args', () => {
+            expect(meta.updateTag).toHaveBeenCalledWith({
+              property: 'og:title',
+              content: 'Title'
+            });
+          });
+        });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:type',
-      content: 'article'
-    });
-  });
+        describe('Is not passed', () => {
+          beforeEach(() => metaService.setMetaTags({}));
 
-  it('should call Meta updateTag with `og:type` and `website` args if not passed type', () => {
-    metaService.setMetaTags({});
+          it('should call `Title` `setTitle` with `Heckford` arg', () => {
+            expect(title.setTitle).toHaveBeenCalledWith('Heckford');
+          });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:type',
-      content: 'website'
-    });
-  });
+          it('should call `Meta` `updateTag` with `og:title` and `Heckford` arg', () => {
+            metaService.setMetaTags({});
 
-  it('should call Meta updateTag with `og:title` and `title` args if passed title', () => {
-    metaService.setMetaTags({ title: 'Title' });
+            expect(meta.updateTag).toHaveBeenCalledWith({
+              property: 'og:title',
+              content: 'Heckford'
+            });
+          });
+        });
+      });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:title',
-      content: 'Title'
-    });
-  });
+      describe('`description`', () => {
+        it('should call `Meta` `updateTag` with `og:description` and `description` args if passed', () => {
+          metaService.setMetaTags({ description: 'Description.' });
 
-  it('should call Meta updateTag with `og:title` and `website` args if not passed title', () => {
-    metaService.setMetaTags({});
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:description',
+            content: 'Description.'
+          });
+        });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:title',
-      content: 'Heckford'
-    });
-  });
+        it('should call `Meta` `updateTag` with `og:description` and `Independent advertising...` args if not passed', () => {
+          metaService.setMetaTags({});
 
-  it('should call Meta updateTag with `og:description` and `description` args if passed description', () => {
-    metaService.setMetaTags({ description: 'Description.' });
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:description',
+            content: 'Independent advertising & marketing agency'
+          });
+        });
+      });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:description',
-      content: 'Description.'
-    });
-  });
+      describe('`image`', () => {
+        it('should call `Meta` `updateTag` with `og:image` and `image` args if passed', () => {
+          metaService.setMetaTags({ image: 'image.jpg' });
 
-  it('should call Meta updateTag with `og:description` and `Independent advertising...` args if not passed description', () => {
-    metaService.setMetaTags({});
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:image',
+            content: 'image.jpg'
+          });
+        });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:description',
-      content: 'Independent advertising & marketing agency'
-    });
-  });
+        it('should call `Meta` `updateTag` with `og:image` and combined `environment.deployUrl` fallback image args if not passed', () => {
+          metaService.setMetaTags({});
 
-  it('should call Meta updateTag with `og:url` and combined `environment.deployUrl` `url` args if passed url', () => {
-    metaService.setMetaTags({ url: 'page' });
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:image',
+            content: 'https://testing/assets/heckford.png'
+          });
+        });
+      });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:url',
-      content: 'https://testing/page'
-    });
-  });
+      describe('`url`', () => {
+        it('should call `Meta` `updateTag` with `og:url` and combined `environment.deployUrl` `url` args if passed', () => {
+          metaService.setMetaTags({ url: 'page' });
 
-  it('should call Meta updateTag with `og:url` and `environment.deployUrl` args if not passed url', () => {
-    metaService.setMetaTags({});
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:url',
+            content: 'https://testing/page'
+          });
+        });
 
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:url',
-      content: 'https://testing/'
-    });
-  });
+        it('should call `Meta` `updateTag` with `og:url` and `environment.deployUrl` args if not passed', () => {
+          metaService.setMetaTags({});
 
-  it('should call Meta updateTag with `og:image` and combined `environment.deployUrl` `image` args if passed image', () => {
-    metaService.setMetaTags({ image: 'image.jpg' });
-
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:image',
-      content: 'image.jpg'
-    });
-  });
-
-  it('should call Meta updateTag with `og:image` and combined `environment.deployUrl` fallback image args if not passed image', () => {
-    metaService.setMetaTags({});
-
-    expect(meta.updateTag).toHaveBeenCalledWith({
-      property: 'og:image',
-      content: 'https://testing/assets/heckford.png'
+          expect(meta.updateTag).toHaveBeenCalledWith({
+            property: 'og:url',
+            content: 'https://testing/'
+          });
+        });
+      });
     });
   });
 });

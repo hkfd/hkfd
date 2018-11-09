@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
   MockMetaService,
   MockPrismicService,
   MockPrismicPipe,
+  StubImageComponent,
   Data
 } from 'testing';
 import { of } from 'rxjs';
@@ -23,125 +24,183 @@ let richText: RichTextStub;
 let page: Page;
 
 describe('NewsComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, NoopAnimationsModule],
-      declarations: [NewsComponent, MockPrismicPipe],
+      declarations: [NewsComponent, StubImageComponent, MockPrismicPipe],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
         { provide: PrismicService, useClass: MockPrismicService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      ]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should call MetaService setMetaTags', () => {
-    expect(metaService.setMetaTags).toHaveBeenCalled();
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  it('should call MetaService setMetaTags with title and url args', () => {
-    expect(metaService.setMetaTags).toHaveBeenCalledWith({
-      title: jasmine.any(String),
-      url: jasmine.any(String)
+  describe('`ngOnInit`', () => {
+    it('should call `MetaService` `setMetaTags` with `title` and `url` args', () => {
+      expect(metaService.setMetaTags).toHaveBeenCalledWith({
+        title: 'News',
+        url: 'news'
+      });
+    });
+
+    it('should call `getPosts` with `true` arg', () => {
+      expect(page.getPosts).toHaveBeenCalledWith(true);
     });
   });
 
-  it('should call getPosts', () => {
-    expect(page.getPosts).toHaveBeenCalled();
-  });
+  describe('`getPosts`', () => {
+    it('should call PrismicService `getPosts` with `onInit` arg', () => {
+      comp.getPosts(false);
 
-  it('should call getPosts with true onInit arg', () => {
-    expect(page.getPosts).toHaveBeenCalledWith(true);
-  });
-
-  it('should call PrismicService getPosts', () => {
-    expect(prismicService.getPosts).toHaveBeenCalled();
-  });
-
-  it('should call PrismicService getPosts with true firstLoad arg', () => {
-    expect(prismicService.getPosts).toHaveBeenCalledWith(true);
-  });
-
-  it('should set posts', () => {
-    expect(comp.posts.length).toBe(3);
-  });
-
-  it('should set posts as concat of existing posts', () => {
-    comp.getPosts();
-    return fixture.whenStable().then(_ => expect(comp.posts.length).toBe(6));
-  });
-
-  it('should set hasNextPage as true if `next_page` is string', () => {
-    (prismicService.getPosts as jasmine.Spy).and.returnValue(
-      of({ results: null, next_page: 'page2' })
-    );
-
-    comp.getPosts();
-    return fixture
-      .whenStable()
-      .then(_ => expect(comp.hasNextPage).toBeTruthy());
-  });
-
-  it('should set hasNextPage as false if `next_page` is empty', () => {
-    (prismicService.getPosts as jasmine.Spy).and.returnValue(
-      of({ results: null, next_page: null })
-    );
-
-    comp.getPosts();
-    return fixture.whenStable().then(_ => expect(comp.hasNextPage).toBeFalsy());
-  });
-
-  it('should call PrismicPipe', () => {
-    expect(prismicPipe).toHaveBeenCalled();
-  });
-
-  it('should call PrismicPipe with post thumbnails', () => {
-    Data.Prismic.getPostsResponse().results.forEach(post =>
-      expect(prismicPipe).toHaveBeenCalledWith(post.data)
-    );
-  });
-
-  it('should call RichText asText', () => {
-    expect(richText.asText).toHaveBeenCalled();
-  });
-
-  it('should call RichText asText with post titles', () => {
-    Data.Prismic.getPostsResponse().results.forEach(post =>
-      expect(richText.asText).toHaveBeenCalledWith(post.data.title)
-    );
-  });
-
-  describe('load more', () => {
-    it('should call getPosts', () => {
-      comp.hasNextPage = true;
-      fixture.detectChanges();
-      page.loadMore.click();
-
-      expect(page.getPosts).toHaveBeenCalled();
+      expect(prismicService.getPosts).toHaveBeenCalledWith(false);
     });
 
-    it('should call getPosts with no onInit arg', () => {
-      comp.hasNextPage = true;
-      fixture.detectChanges();
-      page.loadMore.click();
+    it('should set `posts`', () => {
+      comp.posts = [];
+      comp.getPosts();
 
-      expect(page.getPosts).toHaveBeenCalledWith();
+      expect(comp.posts).toEqual(Data.Prismic.getPostsResponse().results);
     });
 
-    it('should display load more button if hasNextPage is true', () => {
-      comp.hasNextPage = true;
-      fixture.detectChanges();
+    it('should not overwrite existing `posts`', () => {
+      (comp.posts as any) = ['post'];
+      comp.getPosts();
 
-      expect(page.loadMore).toBeTruthy();
+      expect(comp.posts).toEqual([
+        'post',
+        ...Data.Prismic.getPostsResponse().results
+      ] as any);
     });
 
-    it('should not display load more button if hasNextPage is false', () => {
-      comp.hasNextPage = false;
-      fixture.detectChanges();
+    it('should set `hasNextPage` as true if `next_page`', () => {
+      (prismicService.getPosts as jasmine.Spy).and.returnValue(
+        of({ results: null, next_page: 'page2' })
+      );
 
-      expect(page.loadMore).toBeFalsy();
+      comp.getPosts();
+      expect(comp.hasNextPage).toBe(true);
+    });
+
+    it('should set `hasNextPage` as false if no `next_page`', () => {
+      (prismicService.getPosts as jasmine.Spy).and.returnValue(
+        of({ results: null, next_page: null })
+      );
+
+      comp.getPosts();
+      expect(comp.hasNextPage).toBe(false);
+    });
+  });
+
+  describe('Template', () => {
+    it('should display title', () => {
+      expect(page.title.textContent).toBeTruthy();
+    });
+
+    describe('Posts', () => {
+      it('should be displayed', () => {
+        expect(page.posts.length).toBe(
+          Data.Prismic.getPostsResponse().results.length
+        );
+      });
+
+      describe('Post', () => {
+        describe('Thumbnail', () => {
+          describe('has `image.proxy.url`', () => {
+            beforeEach(() => {
+              comp.posts = Data.Prismic.getPosts<void>();
+              fixture.detectChanges();
+            });
+
+            it('should be displayed`', () => {
+              expect(page.postThumbnail).toBeTruthy();
+            });
+
+            it('should set `ImageComponent` `image` as `data`', () => {
+              expect(page.imageComponent.image).toEqual(Data.Prismic.getPosts(
+                'post-1'
+              ).data as any);
+            });
+
+            it('should set `ImageComponent` `full-height` attribute', () => {
+              expect(
+                page.postThumbnail.hasAttribute('full-height')
+              ).toBeTruthy();
+            });
+
+            it('should call `PrismicPipe` with `data`', () => {
+              expect(prismicPipe).toHaveBeenCalledWith(
+                Data.Prismic.getPosts('post-1').data
+              );
+            });
+          });
+
+          describe('no `image.proxy.url`', () => {
+            beforeEach(() => {
+              (comp.posts[0].data.image.proxy.url as any) = undefined;
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.postThumbnail).toBeFalsy();
+            });
+          });
+        });
+
+        it('should display date', () => {
+          expect(page.postDate.textContent).toBe('01/01');
+        });
+
+        it('should display title', () => {
+          expect(page.postTitle.innerHTML).toBe('Post 1');
+        });
+
+        it('should call RichText `asText` with `title`', () => {
+          expect(richText.asText).toHaveBeenCalledWith(
+            Data.Prismic.getPosts('post-1').data.title
+          );
+        });
+
+        it('should set href', () => {
+          expect(page.posts[0].href).toBe(
+            `http://localhost:9876/news/${Data.Prismic.getPosts('post-1').uid}`
+          );
+        });
+      });
+    });
+  });
+
+  describe('Load more', () => {
+    describe('`hasNextPage` is `true`', () => {
+      beforeEach(() => {
+        comp.hasNextPage = true;
+        fixture.detectChanges();
+      });
+
+      it('should be displayed', () => {
+        expect(page.loadMore).toBeTruthy();
+      });
+
+      it('should call `getPosts` on click', () => {
+        page.loadMore.click();
+
+        expect(page.getPosts).toHaveBeenCalled();
+      });
+    });
+
+    describe('`hasNextPage` is `false`', () => {
+      beforeEach(() => {
+        comp.hasNextPage = false;
+        fixture.detectChanges();
+      });
+
+      it('should not be displayed', () => {
+        expect(page.loadMore).toBeFalsy();
+      });
     });
   });
 });
@@ -157,8 +216,30 @@ class RichTextStub {
 class Page {
   getPosts: jasmine.Spy;
 
+  get title() {
+    return this.query<HTMLHeadingElement>('h1');
+  }
+  get posts() {
+    return this.queryAll<HTMLAnchorElement>('.post');
+  }
+  get postThumbnail() {
+    return this.query<HTMLElement>('.post:first-of-type image-component');
+  }
+  get postDate() {
+    return this.query<HTMLSpanElement>('.post:first-of-type .post-date');
+  }
+  get postTitle() {
+    return this.query<HTMLHeadingElement>('.post:first-of-type h2');
+  }
   get loadMore() {
     return this.query<HTMLButtonElement>('#load-more');
+  }
+
+  get imageComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageComponent)
+    );
+    return directiveEl.injector.get<StubImageComponent>(StubImageComponent);
   }
 
   constructor() {
@@ -167,6 +248,9 @@ class Page {
 
   private query<T>(selector: string): T {
     return fixture.nativeElement.querySelector(selector);
+  }
+  private queryAll<T>(selector: string): T[] {
+    return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 

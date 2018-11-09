@@ -6,129 +6,108 @@ import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 
 let loggerService: LoggerService;
-let service: Service;
-let _console: ConsoleStub;
+let consoleStub: ConsoleStub;
 let raven: RavenStub;
 
 describe('LoggerService', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
       providers: [LoggerService]
-    }).compileComponents();
-  }));
+    }).compileComponents()));
 
   beforeEach(async(() => createService()));
 
-  describe('log', () => {
-    it('should be called', () => {
-      loggerService.log('');
-
-      expect(service.log).toHaveBeenCalled();
-    });
-
-    it('should call console log in dev environment', () => {
-      environment.production = false;
-      loggerService.log('');
-
-      expect(_console.log).toHaveBeenCalled();
-    });
-
-    it('should call console log with val and param args in dev environment', () => {
-      environment.production = false;
-      loggerService.log('val', 'param');
-
-      expect(_console.log).toHaveBeenCalledWith('val', 'param');
-    });
-
-    it('should not call console log in prod environment', () => {
-      environment.production = true;
-      loggerService.log('');
-
-      expect(_console.log).not.toHaveBeenCalled();
-    });
+  it('should create service', () => {
+    expect(loggerService).toBeTruthy();
   });
 
-  describe('warn', () => {
-    it('should be called', () => {
-      loggerService.warn('');
+  describe('`log`', () => {
+    describe('Is `production`', () => {
+      beforeEach(() => {
+        environment.production = true;
+        loggerService.log('val', 'param');
+      });
 
-      expect(service.warn).toHaveBeenCalled();
-    });
-
-    it('should call console warn', () => {
-      loggerService.warn('');
-
-      expect(_console.warn).toHaveBeenCalled();
-    });
-
-    it('should call console warn with val and param args', () => {
-      loggerService.warn('val', 'param');
-
-      expect(_console.warn).toHaveBeenCalledWith('val', 'param');
-    });
-
-    it('should call Raven captureMessage in prod environment', () => {
-      environment.production = true;
-      loggerService.warn('');
-
-      expect(raven.captureMessage).toHaveBeenCalled();
-    });
-
-    it('should call Raven captureMessage with val and level param args in prod environment', () => {
-      environment.production = true;
-      loggerService.warn('val');
-
-      expect(raven.captureMessage).toHaveBeenCalledWith('val', {
-        level: 'warning'
+      it('should not call `console` `log`', () => {
+        expect(consoleStub.log).not.toHaveBeenCalled();
       });
     });
 
-    it('should not call Raven captureMessage in dev environment', () => {
-      environment.production = false;
-      loggerService.warn('val');
+    describe('Not `production`', () => {
+      beforeEach(() => {
+        environment.production = false;
+        loggerService.log('val', 'param');
+      });
 
-      expect(raven.captureMessage).not.toHaveBeenCalled();
+      it('should call `console` `log` with args', () => {
+        expect(consoleStub.log).toHaveBeenCalledWith('val', 'param');
+      });
     });
   });
 
-  describe('error', () => {
-    it('should be called', () => {
-      loggerService.error('');
+  describe('`warn`', () => {
+    describe('Is `production`', () => {
+      beforeEach(() => {
+        environment.production = true;
+        loggerService.warn('val', 'param');
+      });
 
-      expect(service.error).toHaveBeenCalled();
+      it('should call `console` `warn` with args', () => {
+        expect(consoleStub.warn).toHaveBeenCalledWith('val', 'param');
+      });
+
+      it('should call `Raven` `captureMessage` with `val` and `warning` level args', () => {
+        expect(raven.captureMessage).toHaveBeenCalledWith('val', {
+          level: 'warning'
+        });
+      });
     });
 
-    it('should call console error', () => {
-      loggerService.error('');
+    describe('Not `production`', () => {
+      beforeEach(() => {
+        environment.production = false;
+        loggerService.warn('val', 'param');
+      });
 
-      expect(_console.error).toHaveBeenCalled();
+      it('should call `console` `warn` with args', () => {
+        expect(consoleStub.warn).toHaveBeenCalledWith('val', 'param');
+      });
+
+      it('should not call `Raven` `captureMessage`', () => {
+        expect(raven.captureMessage).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('`error`', () => {
+    describe('Is `production`', () => {
+      beforeEach(() => {
+        environment.production = true;
+        loggerService.error('val', 'param');
+      });
+
+      it('should call `console` `error` with args', () => {
+        expect(consoleStub.error).toHaveBeenCalledWith('val', 'param');
+      });
+
+      it('should call `Raven` `captureException` with args', () => {
+        expect(raven.captureException).toHaveBeenCalledWith('val', 'param');
+      });
     });
 
-    it('should call console error with val and param args', () => {
-      loggerService.error('val', 'param');
+    describe('Not `production`', () => {
+      beforeEach(() => {
+        environment.production = false;
+        loggerService.error('val', 'param');
+      });
 
-      expect(_console.error).toHaveBeenCalledWith('val', 'param');
-    });
+      it('should call `console` `error` with args', () => {
+        expect(consoleStub.error).toHaveBeenCalledWith('val', 'param');
+      });
 
-    it('should call Raven captureMessage in prod environment', () => {
-      environment.production = true;
-      loggerService.error('');
-
-      expect(raven.captureException).toHaveBeenCalled();
-    });
-
-    it('should call Raven captureMessage with val and param args in prod environment', () => {
-      environment.production = true;
-      loggerService.error('val', 'param');
-
-      expect(raven.captureException).toHaveBeenCalledWith('val', 'param');
-    });
-
-    it('should not call Raven captureMessage in dev environment', () => {
-      environment.production = false;
-      loggerService.error('val', 'param');
-
-      expect(raven.captureException).not.toHaveBeenCalled();
+      it('should not call `Raven` `captureException`', () => {
+        expect(raven.captureException).not.toHaveBeenCalled();
+      });
     });
   });
 });
@@ -159,21 +138,8 @@ class RavenStub {
   }
 }
 
-class Service {
-  log: jasmine.Spy;
-  warn: jasmine.Spy;
-  error: jasmine.Spy;
-
-  constructor() {
-    this.log = spyOn(loggerService, 'log').and.callThrough();
-    this.warn = spyOn(loggerService, 'warn').and.callThrough();
-    this.error = spyOn(loggerService, 'error').and.callThrough();
-  }
-}
-
 function createService() {
   loggerService = TestBed.get(LoggerService);
-  _console = new ConsoleStub();
+  consoleStub = new ConsoleStub();
   raven = new RavenStub();
-  service = new Service();
 }

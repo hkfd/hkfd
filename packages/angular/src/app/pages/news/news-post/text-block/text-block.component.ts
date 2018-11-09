@@ -18,8 +18,8 @@ export class TextBlockComponent {
   @Input()
   data!: Prismic.Text[];
 
-  linkResolver(post: Prismic.Post) {
-    if (post.type === 'news') return `/news/${post.uid}`;
+  linkResolver({ type, uid }: Prismic.Post) {
+    if (type === 'news') return `/news/${uid}`;
 
     return '/';
   }

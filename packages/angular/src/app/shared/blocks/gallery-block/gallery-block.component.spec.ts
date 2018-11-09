@@ -1,39 +1,76 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
-import { Data } from 'testing';
+import { StubImageComponent, Data } from 'testing';
+
 import { GalleryBlockComponent } from './gallery-block.component';
 
+let compHost: TestHostComponent;
 let comp: GalleryBlockComponent;
-let fixture: ComponentFixture<GalleryBlockComponent>;
+let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 
+@Component({
+  selector: 'app-host',
+  template: '<gallery-block [data]="data"></gallery-block>'
+})
+class TestHostComponent {
+  data: any;
+}
+
 describe('GalleryBlockComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [GalleryBlockComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      declarations: [
+        TestHostComponent,
+        GalleryBlockComponent,
+        StubImageComponent
+      ]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  it('should display ImageComponent', () => {
-    expect(page.image.length).toBeGreaterThan(0);
+  beforeEach(() => {
+    compHost.data = Data.Generic.getImages();
+    fixture.detectChanges();
   });
 
-  it('should display ImageComponent for every image', () => {
-    expect(page.image.length).toBe(5);
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
+  });
+
+  it('should set `data`', () => {
+    expect(comp.data).toEqual(Data.Generic.getImages());
+  });
+
+  describe('Template', () => {
+    it('should display images', () => {
+      expect(page.images.length).toBe(Data.Generic.getImages().length);
+    });
+
+    describe('Image', () => {
+      it('should set `ImageComponent` `image` as `data`', () => {
+        expect(page.imageComponent.image).toEqual(Data.Generic.getImages()[0]);
+      });
+
+      it('should set `ImageComponent` `gallery` attribute', () => {
+        expect(page.images[0].hasAttribute('gallery')).toBeTruthy();
+      });
+    });
   });
 });
 
 class Page {
-  get image() {
+  get images() {
     return this.queryAll<HTMLElement>('image-component');
   }
 
-  constructor() {
-    comp.data = Data.Generic.getImages();
+  get imageComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubImageComponent)
+    );
+    return directiveEl.injector.get<StubImageComponent>(StubImageComponent);
   }
 
   private queryAll<T>(selector: string): T[] {
@@ -42,8 +79,10 @@ class Page {
 }
 
 function createComponent() {
-  fixture = TestBed.createComponent(GalleryBlockComponent);
-  comp = fixture.componentInstance;
+  fixture = TestBed.createComponent(TestHostComponent);
+  compHost = fixture.componentInstance;
+  comp = fixture.debugElement.query(By.directive(GalleryBlockComponent))
+    .componentInstance;
   page = new Page();
 
   fixture.detectChanges();

@@ -1,74 +1,94 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
-import { Data } from 'testing';
+import { StubTextComponent, Data } from 'testing';
+import { Api } from 'shared';
+
 import { TextBlockComponent } from './text-block.component';
 
+let compHost: TestHostComponent;
 let comp: TextBlockComponent;
-let fixture: ComponentFixture<TextBlockComponent>;
+let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 
+@Component({
+  selector: 'app-host',
+  template: '<text-block [data]="data"></text-block>'
+})
+class TestHostComponent {
+  data: any;
+}
+
 describe('TextBlockComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [TextBlockComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-  }));
+      declarations: [TestHostComponent, TextBlockComponent, StubTextComponent]
+    }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
-  describe('Paragraph', () => {
-    beforeEach(() => {
-      comp.data = Data.Api.getTextBlocks('text');
-      fixture.detectChanges();
-    });
-
-    it('should display paragraph template', () => {
-      expect(page.p.length).toBeGreaterThan(0);
-    });
-
-    it('should display TextComponent', () => {
-      expect(page.text.length).toBeGreaterThan(0);
-    });
-
-    it('should display template per paragraph', () => {
-      expect(page.p.length).toBe(2);
-    });
-
-    it('should display TextComponent per sentence', () => {
-      expect(page.text.length).toBe(5);
-    });
-
-    it('should not display list template', () => {
-      expect(page.ul.length).toBe(0);
-    });
+  it('should create component', () => {
+    expect(comp).toBeTruthy();
   });
 
-  describe('List', () => {
-    beforeEach(() => {
-      comp.data = Data.Api.getTextBlocks('list');
-      fixture.detectChanges();
+  it('should set `data`', () => {
+    compHost.data = Data.Api.getTextBlocks('list');
+    fixture.detectChanges();
+
+    expect(comp.data).toEqual(Data.Api.getTextBlocks('list'));
+  });
+
+  describe('Template', () => {
+    describe('Paragraph', () => {
+      beforeEach(() => {
+        compHost.data = Data.Api.getTextBlocks('text');
+        fixture.detectChanges();
+      });
+
+      it('should display paragraphs', () => {
+        expect(page.p.length).toBe(2);
+      });
+
+      it('should display sentences', () => {
+        expect(page.text.length).toBe(5);
+      });
+
+      it('should set `TextComponent` `text` as `text`', () => {
+        expect(page.textComponent.text).toEqual(
+          (Data.Api.getTextBlocks('text').data[0]
+            .paragraph as Api.Sentence[])[0]
+        );
+      });
+
+      it('should not display list', () => {
+        expect(page.ul.length).toBeFalsy();
+      });
     });
 
-    it('should display list template', () => {
-      expect(page.ul.length).toBeGreaterThan(0);
-    });
+    describe('List', () => {
+      beforeEach(() => {
+        compHost.data = Data.Api.getTextBlocks('list');
+        fixture.detectChanges();
+      });
 
-    it('should display TextComponent', () => {
-      expect(page.text.length).toBeGreaterThan(0);
-    });
+      it('should display lists', () => {
+        expect(page.ul.length).toBe(2);
+      });
 
-    it('should display template per list', () => {
-      expect(page.ul.length).toBe(2);
-    });
+      it('should display list items', () => {
+        expect(page.text.length).toBe(5);
+      });
 
-    it('should display TextComponent per item', () => {
-      expect(page.text.length).toBe(5);
-    });
+      it('should set `TextComponent` `text` as `text`', () => {
+        expect(page.textComponent.text).toEqual(
+          (Data.Api.getTextBlocks('list').data[0].list as Api.Sentence[])[0]
+        );
+      });
 
-    it('should not display paragraph template', () => {
-      expect(page.p.length).toBe(0);
+      it('should not display paragraph', () => {
+        expect(page.p.length).toBeFalsy();
+      });
     });
   });
 });
@@ -84,13 +104,22 @@ class Page {
     return this.queryAll<HTMLElement>('text');
   }
 
+  get textComponent() {
+    const directiveEl = fixture.debugElement.query(
+      By.directive(StubTextComponent)
+    );
+    return directiveEl.injector.get<StubTextComponent>(StubTextComponent);
+  }
+
   private queryAll<T>(selector: string): T[] {
     return fixture.nativeElement.querySelectorAll(selector);
   }
 }
 
 function createComponent() {
-  fixture = TestBed.createComponent(TextBlockComponent);
-  comp = fixture.componentInstance;
+  fixture = TestBed.createComponent(TestHostComponent);
+  compHost = fixture.componentInstance;
+  comp = fixture.debugElement.query(By.directive(TextBlockComponent))
+    .componentInstance;
   page = new Page();
 }
