@@ -5,6 +5,9 @@
     "commit": "commit",
     "heroku-postbuild": "lerna run build:ssr --scope=angular"
   },
+  "engines": {
+    "node": "8.x"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
