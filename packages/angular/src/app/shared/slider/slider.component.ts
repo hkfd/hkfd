@@ -45,7 +45,7 @@ export class SliderComponent implements OnChanges, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  changeImage(offset: number = 1) {
+  changeImage(offset = 1) {
     const index = this.currentIndex + offset;
 
     if (index < 0) return (this.currentIndex = this.images.length - 1);

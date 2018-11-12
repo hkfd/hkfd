@@ -30,7 +30,7 @@ export class SliderWorkComponent extends SliderComponent {
 
     this.sliderInit();
   }
-  get caseStudies(): Api.CaseStudy[] {
+  get caseStudies() {
     return this._caseStudies;
   }
 }

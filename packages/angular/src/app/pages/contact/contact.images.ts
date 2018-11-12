@@ -1,6 +1,6 @@
 import { Api } from 'shared';
 
-export const ContactImages: { [name: string]: { image: Api.Image } } = {
+export const ContactImages: { contact: { image: Api.Image } } = {
   contact: {
     image: {
       name: 'heckford-building',
