@@ -15,40 +15,49 @@ export const Sizes = [
   name: 'api'
 })
 export class ApiPipe implements PipeTransform {
-  private transformImage({ image }: { image: Api.Image }): Generic.Image {
+  private transformImage({
+    image: { name, alt }
+  }: {
+    image: Api.Image;
+  }): Generic.Image {
     return {
       src: `https://res.cloudinary.com/${
         environment.cloudinaryName
-      }/image/upload/w_64,h_ih,c_limit,q_auto,f_auto/${image.name}`,
+      }/image/upload/w_64,h_ih,c_limit,q_auto,f_auto/${name}`,
       srcset: {
         attr: 'srcset',
         val: Sizes.map(
-          size =>
+          ({ width, height }) =>
             `https://res.cloudinary.com/${
               environment.cloudinaryName
-            }/image/upload/w_${size.width},h_${size.height},c_limit/${
-              image.name
-            } ${size.width - 400}w`
+            }/image/upload/w_${width},h_${height},c_limit/${name} ${width -
+              400}w`
         )
       },
-      alt: image.alt
+      alt
     };
   }
 
-  private transformVideo({ video }: { video: Api.Video }): Generic.Video {
+  private transformVideo({
+    video: { id }
+  }: {
+    video: Api.Video;
+  }): Generic.Video {
     return {
       src: {
         attr: 'src',
-        val: [
-          `https://www.youtube.com/embed/${video.id}?&origin=https://hkfd.co.uk`
-        ]
+        val: [`https://www.youtube.com/embed/${id}?&origin=https://hkfd.co.uk`]
       }
     };
   }
 
-  private transformAudio({ audio }: { audio: Api.Audio }): Generic.Audio {
+  private transformAudio({
+    audio: { url }
+  }: {
+    audio: Api.Audio;
+  }): Generic.Audio {
     return {
-      url: audio.url
+      url
     };
   }
 
