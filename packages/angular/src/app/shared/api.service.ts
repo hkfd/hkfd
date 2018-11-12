@@ -44,10 +44,8 @@ export class ApiService {
 
     return this.http.get<Api.Service[]>(SERVICES).pipe(
       retry(3),
-      tap((services: Api.Service[]) =>
-        this.logger.log('getServices', services)
-      ),
-      tap((services: Api.Service[]) => this.state.set(SERVICES_KEY, services)),
+      tap(services => this.logger.log('getServices', services)),
+      tap(services => this.state.set(SERVICES_KEY, services)),
       catchError(this.handleError<Api.Service[]>('getServices', []))
     );
   }
@@ -63,8 +61,8 @@ export class ApiService {
 
     return this.http.get<Api.Career[]>(CAREERS).pipe(
       retry(3),
-      tap((careers: Api.Career[]) => this.logger.log('getCareers', careers)),
-      tap((careers: Api.Career[]) => this.state.set(CAREERS_KEY, careers)),
+      tap(careers => this.logger.log('getCareers', careers)),
+      tap(careers => this.state.set(CAREERS_KEY, careers)),
       catchError(this.handleError<Api.Career[]>('getCareers', []))
     );
   }
@@ -80,8 +78,8 @@ export class ApiService {
 
     return this.http.get<Api.Career[]>(CAREERS).pipe(
       retry(3),
-      flatMap((careers: Api.Career[]) => careers),
-      find((career: Api.Career) => career.id === id),
+      flatMap(careers => careers),
+      find(career => career.id === id),
       tap(career => this.logger.log('getCareer', career)),
       tap(career => this.state.set(CAREER_KEY, career)),
       catchError(this.handleError<Api.Career>('getCareer'))
@@ -111,8 +109,8 @@ export class ApiService {
 
     return this.http.get<Api.Post[]>(url).pipe(
       retry(3),
-      flatMap((posts: Api.Post[]) => posts),
-      find((post: Api.Post) => post.id === id),
+      flatMap(posts => posts),
+      find(post => post.id === id),
       tap(post => this.logger.log('getPost', post)),
       tap(post => this.state.set(POST_KEY, post)),
       catchError(this.handleError<Api.Post>('getPost'))
@@ -135,12 +133,8 @@ export class ApiService {
 
     return this.http.get<Api.CaseStudy[]>(CASE_STUDIES).pipe(
       retry(3),
-      tap((caseStudies: Api.CaseStudy[]) =>
-        this.logger.log('getCaseStudies', caseStudies)
-      ),
-      tap((caseStudies: Api.CaseStudy[]) =>
-        this.state.set(CASE_STUDIES_KEY, caseStudies)
-      ),
+      tap(caseStudies => this.logger.log('getCaseStudies', caseStudies)),
+      tap(caseStudies => this.state.set(CASE_STUDIES_KEY, caseStudies)),
       catchError(this.handleError<Api.CaseStudy[]>('getCaseStudies', []))
     );
   }
@@ -156,8 +150,8 @@ export class ApiService {
 
     return this.http.get<Api.Team[]>(TEAM).pipe(
       retry(3),
-      tap((team: Api.Team[]) => this.logger.log('getTeam', team)),
-      tap((team: Api.Team[]) => this.state.set(TEAM_KEY, team)),
+      tap(team => this.logger.log('getTeam', team)),
+      tap(team => this.state.set(TEAM_KEY, team)),
       catchError(this.handleError<Api.Team[]>('getTeam', []))
     );
   }
@@ -173,8 +167,8 @@ export class ApiService {
 
     return this.http.get<Api.Client[]>(CLIENTS).pipe(
       retry(3),
-      tap((clients: Api.Client[]) => this.logger.log('getClients', clients)),
-      tap((clients: Api.Client[]) => this.state.set(CLIENTS_KEY, clients)),
+      tap(clients => this.logger.log('getClients', clients)),
+      tap(clients => this.state.set(CLIENTS_KEY, clients)),
       catchError(this.handleError<Api.Client[]>('getClients', []))
     );
   }
