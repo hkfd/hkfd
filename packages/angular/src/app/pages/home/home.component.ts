@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(
         caseStudies =>
           (this.caseStudies = caseStudies.filter(
-            caseStudy => caseStudy.featured === true
+            ({ featured }) => featured === true
           ))
       );
   }

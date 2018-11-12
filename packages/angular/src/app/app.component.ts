@@ -33,8 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  getState(outlet: RouterOutlet) {
-    return outlet.activatedRouteData.state;
+  getState({ activatedRouteData: { state } }: RouterOutlet) {
+    return state;
   }
 
   ngOnInit() {
@@ -49,9 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
           (event): event is NavigationEnd => event instanceof NavigationEnd
         )
       )
-      .subscribe(event => {
+      .subscribe(({ urlAfterRedirects }) => {
         ga('set', 'title', 'Heckford');
-        ga('set', 'page', event.urlAfterRedirects);
+        ga('set', 'page', urlAfterRedirects);
         ga('send', 'pageview');
       });
   }

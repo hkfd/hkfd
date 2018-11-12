@@ -23,11 +23,15 @@ export class PrismicPipe implements PipeTransform {
     };
   }
 
-  private transformVideo({ video }: { video: Prismic.Video }): Generic.Video {
+  private transformVideo({
+    video: { url }
+  }: {
+    video: Prismic.Video;
+  }): Generic.Video {
     return {
       src: {
         attr: 'src',
-        val: [video.url]
+        val: [url]
       }
     };
   }

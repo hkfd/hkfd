@@ -26,8 +26,11 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  intersectionCallback([entry]: [IntersectionObserverEntry, any[]]) {
-    if (!entry.isIntersecting) return;
+  intersectionCallback([{ isIntersecting }]: [
+    IntersectionObserverEntry,
+    any[]
+  ]) {
+    if (!isIntersecting) return;
 
     this.data.loaded = true;
     if (this.observer) this.observer.disconnect();

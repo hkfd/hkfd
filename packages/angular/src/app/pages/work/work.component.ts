@@ -24,13 +24,15 @@ export class WorkComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Our Work', url: 'work' });
 
-    this.caseStudies$ = this.apiService.getCaseStudies().subscribe(
-      caseStudies =>
-        (this.caseStudies = caseStudies.map(caseStudy => {
-          caseStudy.thumbnail = this.apiPipe.transform(caseStudy.thumbnail);
-          return caseStudy;
-        }))
-    );
+    this.caseStudies$ = this.apiService
+      .getCaseStudies()
+      .subscribe(
+        caseStudies =>
+          (this.caseStudies = caseStudies.map(caseStudy => ({
+            ...caseStudy,
+            thumbnail: this.apiPipe.transform(caseStudy.thumbnail)
+          })))
+      );
   }
 
   ngOnDestroy() {
