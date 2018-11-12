@@ -50,24 +50,22 @@ describe('SliderWorkComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should set `caseStudies`', () => {
+      it('should call `ApiPipe` with `thumbnail`', () => {
+        comp.caseStudies.forEach(caseStudy =>
+          expect(apiPipe).toHaveBeenCalledWith(caseStudy.thumbnail)
+        );
+      });
+
+      it('should set `caseStudies` with transformed `thumbnail`', () => {
         expect(comp.caseStudies).toEqual(Data.Api.getCaseStudies<void>());
       });
 
-      describe('`images`', () => {
-        it('should call `ApiPipe` with `thumbnail`', () => {
-          comp.caseStudies.forEach(caseStudy =>
-            expect(apiPipe).toHaveBeenCalledWith(caseStudy.thumbnail)
-          );
-        });
-
-        it('should be set as transformed `thumbnail` array', () => {
-          expect(comp.images).toEqual([
-            Data.Api.getCaseStudies('Case Study 1').thumbnail,
-            Data.Api.getCaseStudies('Case Study 2').thumbnail,
-            Data.Api.getCaseStudies('Case Study 3').thumbnail
-          ] as any);
-        });
+      it('should set `images` as transformed `thumbnail` array', () => {
+        expect(comp.images).toEqual([
+          Data.Api.getCaseStudies('Case Study 1').thumbnail,
+          Data.Api.getCaseStudies('Case Study 2').thumbnail,
+          Data.Api.getCaseStudies('Case Study 3').thumbnail
+        ] as any);
       });
 
       it('should call `sliderInit`', () => {
