@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   deployUrl: 'https://testing/',
   cloudinaryName: 'dv8oeiozq',
   analyticsId: 'def',
