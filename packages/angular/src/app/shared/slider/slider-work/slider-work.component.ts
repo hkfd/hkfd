@@ -23,10 +23,11 @@ export class SliderWorkComponent extends SliderComponent {
   set caseStudies(caseStudies: Api.CaseStudy[]) {
     if (!caseStudies) return;
 
-    this._caseStudies = caseStudies;
-    this.images = caseStudies.map(
-      ({ thumbnail }) => (thumbnail = this.apiPipe.transform(thumbnail))
-    );
+    this._caseStudies = caseStudies.map(caseStudy => ({
+      ...caseStudy,
+      thumbnail: this.apiPipe.transform(caseStudy.thumbnail)
+    }));
+    this.images = caseStudies.map(({ thumbnail }) => thumbnail as any);
 
     this.sliderInit();
   }
