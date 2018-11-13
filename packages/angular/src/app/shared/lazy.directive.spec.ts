@@ -9,6 +9,7 @@ import { LazyDirective } from './lazy.directive';
 let comp: TestHostComponent;
 let fixture: ComponentFixture<TestHostComponent>;
 let lazyDirective: LazyDirective;
+let directive: Directive;
 let renderer: RendererStub;
 let elementRef: ElementRef;
 let mockPlatformId: 'browser' | 'server';
@@ -82,6 +83,16 @@ describe('LazyDirective', () => {
   });
 
   describe('`ngOnDestroy`', () => {
+    beforeEach(async(() => setupTest()));
+    beforeEach(async(() => createComponent()));
+    beforeEach(() => lazyDirective.ngOnDestroy());
+
+    it('should call `disconnectObserver`', () => {
+      expect(directive.disconnectObserver).toHaveBeenCalled();
+    });
+  });
+
+  describe('`disconnectObserver`', () => {
     describe('Has `observer`', () => {
       let disconnectSpy: jasmine.Spy;
 
@@ -96,7 +107,7 @@ describe('LazyDirective', () => {
           'disconnect'
         ).and.callThrough();
 
-        lazyDirective.ngOnDestroy();
+        lazyDirective.disconnectObserver();
       });
 
       it('should call `observer` `disconnect`', () => {
@@ -131,24 +142,10 @@ describe('LazyDirective', () => {
         expect(comp.lazy.loaded).toBe(true);
       });
 
-      describe('Has `observer`', () => {
-        let disconnectSpy: jasmine.Spy;
+      it('should call `disconnectObserver`', () => {
+        lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
-        beforeEach(() => {
-          (lazyDirective as any).observer = new IntersectionObserver(
-            () => undefined
-          );
-          disconnectSpy = spyOn(
-            (lazyDirective as any).observer,
-            'disconnect'
-          ).and.callThrough();
-
-          lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
-        });
-
-        it('should call `observer` `disconnect`', () => {
-          expect(disconnectSpy).toHaveBeenCalled();
-        });
+        expect(directive.disconnectObserver).toHaveBeenCalled();
       });
 
       describe('No `data.attr` and `data.val`', () => {
@@ -234,13 +231,26 @@ class RendererStub {
   }
 }
 
+class Directive {
+  disconnectObserver: jasmine.Spy;
+
+  constructor() {
+    const imageEl = fixture.debugElement.query(By.directive(LazyDirective));
+    lazyDirective = imageEl.injector.get<LazyDirective>(LazyDirective);
+    this.disconnectObserver = spyOn(
+      lazyDirective,
+      'disconnectObserver'
+    ).and.callThrough();
+  }
+}
+
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   comp = fixture.componentInstance;
   renderer = new RendererStub();
+  directive = new Directive();
 
   const imageEl = fixture.debugElement.query(By.directive(LazyDirective));
-  lazyDirective = imageEl.injector.get<LazyDirective>(LazyDirective);
   elementRef = imageEl.injector.get<ElementRef>(ElementRef);
 
   fixture.detectChanges();
