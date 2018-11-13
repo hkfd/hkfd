@@ -37,8 +37,7 @@ export class ApiService {
     const cache = this.state.get<Api.Service[] | null>(SERVICES_KEY, null);
     if (cache) {
       return of(cache).pipe(
-        tap(services => this.logger.log('getServices', 'cache', services)),
-        catchError(this.handleError<Api.Service[]>('getServices', []))
+        tap(services => this.logger.log('getServices', 'cache', services))
       );
     }
 
@@ -53,8 +52,7 @@ export class ApiService {
     const cache = this.state.get<Api.Career[] | null>(CAREERS_KEY, null);
     if (cache) {
       return of(cache).pipe(
-        tap(careers => this.logger.log('getCareers', 'cache', careers)),
-        catchError(this.handleError<Api.Career[]>('getCareers', []))
+        tap(careers => this.logger.log('getCareers', 'cache', careers))
       );
     }
 
@@ -69,8 +67,7 @@ export class ApiService {
     const cache = this.state.get<Api.Career | null>(CAREER_KEY, null);
     if (cache && cache.id === id) {
       return of(cache).pipe(
-        tap(career => this.logger.log('getCareer', 'cache', career)),
-        catchError(this.handleError<Api.Career>('getCareer'))
+        tap(career => this.logger.log('getCareer', 'cache', career))
       );
     }
 
@@ -99,8 +96,7 @@ export class ApiService {
     const cache = this.state.get<Api.Post | null>(POST_KEY, null);
     if (cache && cache.id === id) {
       return of(cache).pipe(
-        tap(post => this.logger.log('getPost', 'cache', post)),
-        catchError(this.handleError<Api.Post>('getPost'))
+        tap(post => this.logger.log('getPost', 'cache', post))
       );
     }
 
@@ -122,8 +118,7 @@ export class ApiService {
       return of(cache).pipe(
         tap(caseStudies =>
           this.logger.log('getCaseStudies', 'cache', caseStudies)
-        ),
-        catchError(this.handleError<Api.CaseStudy[]>('getCaseStudies', []))
+        )
       );
     }
 
@@ -138,8 +133,7 @@ export class ApiService {
     const cache = this.state.get<Api.Team[] | null>(TEAM_KEY, null);
     if (cache) {
       return of(cache).pipe(
-        tap(team => this.logger.log('getTeam', 'cache', team)),
-        catchError(this.handleError<Api.Team[]>('getTeam', []))
+        tap(team => this.logger.log('getTeam', 'cache', team))
       );
     }
 
@@ -154,8 +148,7 @@ export class ApiService {
     const cache = this.state.get<Api.Client[] | null>(CLIENTS_KEY, null);
     if (cache) {
       return of(cache).pipe(
-        tap(clients => this.logger.log('getClients', 'cache', clients)),
-        catchError(this.handleError<Api.Client[]>('getClients', []))
+        tap(clients => this.logger.log('getClients', 'cache', clients))
       );
     }
 
