@@ -29,6 +29,11 @@ export class MetaService {
 
     this.title.setTitle(`Heckford${tags.title ? ` – ${tags.title}` : ''}`);
 
+    this.meta.updateTag({
+      name: 'description',
+      content: metaTags.description
+    });
+
     this.meta.updateTag({ property: 'og:type', content: metaTags.type });
     this.meta.updateTag({ property: 'og:title', content: metaTags.title });
     this.meta.updateTag({
