@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   deployUrl: 'https://staging.hkfd.co.uk/',
   cloudinaryName: 'dv8oeiozq',
-  analyticsId: 'UA-31794450-2',
+  analyticsId: 'UA-129149231-1',
   api: {
     url: 'https://hkfd-api-staging.firebaseapp.com/'
   },
