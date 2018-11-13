@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/hkfd/hkfd/compare/v1.1.2...v1.1.3) (2018-11-13)
+
+
+### Bug Fixes
+
+* **angular:** `MetaService` change meta description ([eef5535](https://github.com/hkfd/hkfd/commit/eef5535))
+
+
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/hkfd/hkfd/compare/v1.1.1...v1.1.2) (2018-11-12)
 
