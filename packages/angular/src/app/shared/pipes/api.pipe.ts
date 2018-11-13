@@ -30,7 +30,7 @@ export class ApiPipe implements PipeTransform {
           ({ width, height }) =>
             `https://res.cloudinary.com/${
               environment.cloudinaryName
-            }/image/upload/w_${width},h_${height},c_limit/${name} ${width -
+            }/image/upload/w_${width},h_${height},c_limit,q_auto,f_auto/${name} ${width -
               400}w`
         )
       },
