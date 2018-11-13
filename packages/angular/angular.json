@@ -16,7 +16,7 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/assets", "src/legal"],
+            "assets": ["src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
@@ -108,7 +108,7 @@
             "scripts": [],
             "sourceMap": true,
             "styles": ["src/styles.scss"],
-            "assets": ["src/assets", "src/legal"],
+            "assets": ["src/assets"],
             "codeCoverageExclude": ["src/testing/**"],
             "fileReplacements": [
               {
