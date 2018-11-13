@@ -26,11 +26,15 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
+  disconnectObserver() {
+    if (this.observer) this.observer.disconnect();
+  }
+
   intersectionCallback([{ isIntersecting }]: [IntersectionObserverEntry]) {
     if (!isIntersecting) return;
 
     this.data.loaded = true;
-    if (this.observer) this.observer.disconnect();
+    this.disconnectObserver();
 
     if (!this.data.attr || !this.data.val) return;
 
@@ -58,6 +62,6 @@ export class LazyDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.observer) this.observer.disconnect();
+    this.disconnectObserver();
   }
 }
