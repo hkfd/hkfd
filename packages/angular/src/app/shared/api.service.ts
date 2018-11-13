@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import { Observable, of } from 'rxjs';
-import { catchError, retry, tap, flatMap, find } from 'rxjs/operators';
+import { catchError, tap, flatMap, find } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
@@ -43,7 +43,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.Service[]>(SERVICES).pipe(
-      retry(3),
       tap(services => this.logger.log('getServices', services)),
       tap(services => this.state.set(SERVICES_KEY, services)),
       catchError(this.handleError<Api.Service[]>('getServices', []))
@@ -60,7 +59,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.Career[]>(CAREERS).pipe(
-      retry(3),
       tap(careers => this.logger.log('getCareers', careers)),
       tap(careers => this.state.set(CAREERS_KEY, careers)),
       catchError(this.handleError<Api.Career[]>('getCareers', []))
@@ -77,7 +75,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.Career[]>(CAREERS).pipe(
-      retry(3),
       flatMap(careers => careers),
       find(career => career.id === id),
       tap(career => this.logger.log('getCareer', career)),
@@ -108,7 +105,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.Post[]>(url).pipe(
-      retry(3),
       flatMap(posts => posts),
       find(post => post.id === id),
       tap(post => this.logger.log('getPost', post)),
@@ -132,7 +128,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.CaseStudy[]>(CASE_STUDIES).pipe(
-      retry(3),
       tap(caseStudies => this.logger.log('getCaseStudies', caseStudies)),
       tap(caseStudies => this.state.set(CASE_STUDIES_KEY, caseStudies)),
       catchError(this.handleError<Api.CaseStudy[]>('getCaseStudies', []))
@@ -149,7 +144,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.Team[]>(TEAM).pipe(
-      retry(3),
       tap(team => this.logger.log('getTeam', team)),
       tap(team => this.state.set(TEAM_KEY, team)),
       catchError(this.handleError<Api.Team[]>('getTeam', []))
@@ -166,7 +160,6 @@ export class ApiService {
     }
 
     return this.http.get<Api.Client[]>(CLIENTS).pipe(
-      retry(3),
       tap(clients => this.logger.log('getClients', clients)),
       tap(clients => this.state.set(CLIENTS_KEY, clients)),
       catchError(this.handleError<Api.Client[]>('getClients', []))
