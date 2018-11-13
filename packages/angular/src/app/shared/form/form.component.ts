@@ -11,7 +11,7 @@ import { FormAnimations } from './form.animations';
   animations: FormAnimations
 })
 export class FormComponent {
-  form!: FormGroup;
+  form: FormGroup;
   formSent: boolean | undefined;
 
   get name() {
@@ -29,7 +29,11 @@ export class FormComponent {
     private emailService: EmailService,
     private formBuilder: FormBuilder
   ) {
-    this.createForm();
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', Validators.required]
+    });
   }
 
   submitForm() {
@@ -45,13 +49,5 @@ export class FormComponent {
         this.formSent = false;
       }
     );
-  }
-
-  createForm() {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required]
-    });
   }
 }
