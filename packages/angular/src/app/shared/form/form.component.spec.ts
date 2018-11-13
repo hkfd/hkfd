@@ -351,7 +351,6 @@ describe('FormComponent', () => {
 });
 
 class Page {
-  createForm: jasmine.Spy;
   submitForm: jasmine.Spy;
 
   get formSentText() {
@@ -389,7 +388,6 @@ class Page {
   }
 
   constructor() {
-    this.createForm = spyOn(comp, 'createForm').and.callThrough();
     this.submitForm = spyOn(comp, 'submitForm').and.callThrough();
   }
 
