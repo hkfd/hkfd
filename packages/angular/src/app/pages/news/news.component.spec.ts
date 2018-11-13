@@ -10,7 +10,7 @@ import {
   StubImageComponent,
   Data
 } from 'testing';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 
 import { MetaService, PrismicService } from 'shared';
 import { NewsComponent } from './news.component';
@@ -53,11 +53,31 @@ describe('NewsComponent', () => {
     });
   });
 
+  describe('`ngOnDestroy`', () => {
+    describe('Has `post$`', () => {
+      beforeEach(() => (comp.post$ = new Subscription()));
+
+      it('should call `post$` `unsubscribe`', () => {
+        const spy = spyOn(comp.post$ as any, 'unsubscribe').and.callThrough();
+        comp.ngOnDestroy();
+
+        expect(spy).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('`getPosts`', () => {
     it('should call PrismicService `getPosts` with `onInit` arg', () => {
       comp.getPosts(false);
 
       expect(prismicService.getPosts).toHaveBeenCalledWith(false);
+    });
+
+    it('should set `posts$`', () => {
+      comp.post$ = undefined;
+      comp.getPosts();
+
+      expect(comp.post$).toBeDefined();
     });
 
     it('should set `posts`', () => {

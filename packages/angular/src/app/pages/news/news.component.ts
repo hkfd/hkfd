@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { Subscription } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService, Prismic } from 'shared';
@@ -11,9 +12,10 @@ import { NewsAnimations } from './news.animations';
   styleUrls: ['./news.component.scss'],
   animations: NewsAnimations
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
   richText = RichText;
 
+  post$: Subscription | undefined;
   posts: Prismic.Post[] = [];
   hasNextPage: boolean | undefined;
 
@@ -23,15 +25,21 @@ export class NewsComponent implements OnInit {
   ) {}
 
   getPosts(onInit?: boolean) {
-    this.prismicService.getPosts(onInit).subscribe(({ results, next_page }) => {
-      this.posts = this.posts.concat(results);
-      this.hasNextPage = !!next_page;
-    });
+    this.post$ = this.prismicService
+      .getPosts(onInit)
+      .subscribe(({ results, next_page }) => {
+        this.posts = this.posts.concat(results);
+        this.hasNextPage = !!next_page;
+      });
   }
 
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'News', url: 'news' });
 
     this.getPosts(true);
+  }
+
+  ngOnDestroy() {
+    if (this.post$) this.post$.unsubscribe();
   }
 }
