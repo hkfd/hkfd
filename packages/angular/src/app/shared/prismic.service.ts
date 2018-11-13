@@ -10,7 +10,6 @@ import { Prismic } from './prismic';
 import { environment } from 'environment';
 
 const REF_KEY = makeStateKey<string>('prismic-ref');
-const POSTS_KEY = makeStateKey<Prismic.PostsResponse>('prismic-posts');
 const POST_KEY = makeStateKey<Prismic.Post>('prismic-post');
 
 @Injectable({
@@ -49,14 +48,6 @@ export class PrismicService {
   getPosts(firstLoad: boolean = false): Observable<Prismic.PostsResponse> {
     if (!firstLoad) this.postPage++;
 
-    const cache = this.state.get<Prismic.PostsResponse | null>(POSTS_KEY, null);
-    if (cache && firstLoad) {
-      return of(cache).pipe(
-        tap(postsRes => this.logger.log('getPosts', 'cache', postsRes)),
-        catchError(this.handleError<Prismic.PostsResponse>('getPosts'))
-      );
-    }
-
     return this.getRef().pipe(
       flatMap(ref => {
         const params = new HttpParams()
@@ -77,7 +68,6 @@ export class PrismicService {
         );
       }),
       tap(postsRes => this.logger.log('getPosts', postsRes)),
-      tap(postsRes => this.state.set(POSTS_KEY, postsRes)),
       catchError(this.handleError<Prismic.PostsResponse>('getPosts'))
     );
   }

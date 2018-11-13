@@ -49,6 +49,10 @@ export class NewsPage {
       .then(_ => this.isVisible(this.getPosts().last()));
   }
 
+  navigateBack() {
+    return browser.navigate().back();
+  }
+
   getPageTitle() {
     return element(by.css('h1'));
   }

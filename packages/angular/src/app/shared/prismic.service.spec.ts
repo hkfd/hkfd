@@ -157,65 +157,6 @@ describe('PrismicService', () => {
       spyOn(prismicService, 'getRef').and.returnValue(of('abc'))
     );
 
-    it('should call `TransferState` `get` with `POSTS_KEY` and `null` args', () => {
-      prismicService.getPosts(true).subscribe();
-      mockHttp.expectOne(
-        req => req.url === `${environment.prismic.endpoint}/documents/search`
-      );
-
-      expect(transferState.get).toHaveBeenCalledWith('prismic-posts', null);
-    });
-
-    describe('Cache', () => {
-      describe('Has `cache` and `firstLoad` is `true`', () => {
-        beforeEach(() =>
-          transferState.set('prismic-posts', Data.Prismic.getPostsResponse())
-        );
-
-        it('should not call `HttpClient` `get`', () => {
-          prismicService.getPosts(true).subscribe();
-
-          expect(
-            mockHttp.expectNone(
-              req =>
-                req.url === `${environment.prismic.endpoint}/documents/search`
-            )
-          ).toBeUndefined();
-        });
-
-        it('should return `postsRes`', () => {
-          prismicService
-            .getPosts(true)
-            .subscribe(res =>
-              expect(res).toEqual(Data.Prismic.getPostsResponse())
-            );
-        });
-      });
-
-      it('should call `HttpClient` `get` if no `cache`', () => {
-        prismicService.getPosts(true).subscribe();
-        const {
-          request: { method }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(method).toBe('GET');
-      });
-
-      it('should call `HttpClient` `get` if `firstLoad` is `false`', () => {
-        transferState.set('prismic-posts', Data.Prismic.getPostsResponse());
-        prismicService.getPosts(false).subscribe();
-        const {
-          request: { method }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
-
-        expect(method).toBe('GET');
-      });
-    });
-
     describe('Request', () => {
       it('should call `HttpClient` `get`', () => {
         prismicService.getPosts(true).subscribe();
@@ -310,10 +251,6 @@ describe('PrismicService', () => {
               .error(new ErrorEvent(''));
           });
 
-          it('should not call `TransferState` `set`', () => {
-            expect(transferState.set).not.toHaveBeenCalled();
-          });
-
           it('should return `undefined`', () => {
             expect(res).toBeUndefined();
           });
@@ -332,13 +269,6 @@ describe('PrismicService', () => {
                   req.url === `${environment.prismic.endpoint}/documents/search`
               )
               .flush(Data.Prismic.getPostsResponse());
-          });
-
-          it('should call `TransferState` `set` with `POSTS_KEY` and `postsRes` args', () => {
-            expect(transferState.set).toHaveBeenCalledWith(
-              'prismic-posts',
-              Data.Prismic.getPostsResponse()
-            );
           });
 
           it('should return `postsRes`', () => {
