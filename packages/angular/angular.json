@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "heckford-angular": {
+    "angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -77,25 +77,25 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "heckford-angular:build",
+            "browserTarget": "angular:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "heckford-angular:build:production"
+              "browserTarget": "angular:build:production"
             },
             "staging": {
-              "browserTarget": "heckford-angular:build:staging"
+              "browserTarget": "angular:build:staging"
             },
             "testing": {
-              "browserTarget": "heckford-angular:build:testing"
+              "browserTarget": "angular:build:testing"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "heckford-angular:build"
+            "browserTarget": "angular:build"
           }
         },
         "test": {
@@ -153,7 +153,7 @@
         }
       }
     },
-    "heckford-angular-e2e": {
+    "angular-e2e": {
       "root": "",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -162,7 +162,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "heckford-angular:serve:staging"
+            "devServerTarget": "angular:serve:staging"
           }
         },
         "lint": {
@@ -175,7 +175,7 @@
       }
     }
   },
-  "defaultProject": "heckford-angular",
+  "defaultProject": "angular",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
