@@ -80,21 +80,41 @@ describe('MetaService', () => {
       });
 
       describe('`description`', () => {
-        it('should call `Meta` `updateTag` with `og:description` and `description` args if passed', () => {
-          metaService.setMetaTags({ description: 'Description.' });
+        describe('Is passed', () => {
+          beforeEach(() =>
+            metaService.setMetaTags({ description: 'Description.' })
+          );
 
-          expect(meta.updateTag).toHaveBeenCalledWith({
-            property: 'og:description',
-            content: 'Description.'
+          it('should call `Meta` `updateTag` with `description` and `description` args', () => {
+            expect(meta.updateTag).toHaveBeenCalledWith({
+              name: 'description',
+              content: 'Description.'
+            });
+          });
+
+          it('should call `Meta` `updateTag` with `og:description` and `description` args', () => {
+            expect(meta.updateTag).toHaveBeenCalledWith({
+              property: 'og:description',
+              content: 'Description.'
+            });
           });
         });
 
-        it('should call `Meta` `updateTag` with `og:description` and `Independent advertising...` args if not passed', () => {
-          metaService.setMetaTags({});
+        describe('Is not passed', () => {
+          beforeEach(() => metaService.setMetaTags({}));
 
-          expect(meta.updateTag).toHaveBeenCalledWith({
-            property: 'og:description',
-            content: 'Independent advertising & marketing agency'
+          it('should call `Meta` `updateTag` with `description` and `Independent advertising...` args', () => {
+            expect(meta.updateTag).toHaveBeenCalledWith({
+              name: 'description',
+              content: 'Independent advertising & marketing agency'
+            });
+          });
+
+          it('should call `Meta` `updateTag` with `og:description` and `Independent advertising...` args', () => {
+            expect(meta.updateTag).toHaveBeenCalledWith({
+              property: 'og:description',
+              content: 'Independent advertising & marketing agency'
+            });
           });
         });
       });
