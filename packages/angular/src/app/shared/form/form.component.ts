@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { LoggerService, FormService } from 'shared';
+import { LoggerService, EmailService } from 'shared';
 import { FormAnimations } from './form.animations';
 
 @Component({
@@ -26,7 +26,7 @@ export class FormComponent {
 
   constructor(
     private logger: LoggerService,
-    private formService: FormService,
+    private emailService: EmailService,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -35,7 +35,7 @@ export class FormComponent {
   submitForm() {
     this.logger.log('submitForm', this.form.value);
 
-    this.formService.sendEmail(this.form.value).then(
+    this.emailService.sendEmail(this.form.value).then(
       _ => {
         this.formSent = true;
         ga('send', 'event', 'Contact Form', 'sent');

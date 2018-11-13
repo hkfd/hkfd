@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { LoggerService, MockLoggerService, MockFormService } from 'testing';
+import { LoggerService, MockLoggerService, MockEmailService } from 'testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
-import { FormService } from 'shared';
+import { EmailService } from 'shared';
 import { FormComponent } from './form.component';
 
 const app = window as any;
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
-let formService: FormService;
+let emailService: EmailService;
 let page: Page;
 
 describe('FormComponent', () => {
@@ -21,7 +21,7 @@ describe('FormComponent', () => {
       providers: [
         FormBuilder,
         { provide: LoggerService, useClass: MockLoggerService },
-        { provide: FormService, useClass: MockFormService }
+        { provide: EmailService, useClass: MockEmailService }
       ]
     }).compileComponents()));
 
@@ -40,13 +40,13 @@ describe('FormComponent', () => {
   });
 
   describe('`submitForm`', () => {
-    it('should call `FormService` `sendEmail` with `form.value` arg', () => {
+    it('should call `EmailService` `sendEmail` with `form.value` arg', () => {
       comp.form.controls.name.setValue('a');
       comp.form.controls.email.setValue('b@c');
       comp.form.controls.message.setValue('d');
       comp.submitForm();
 
-      expect(formService.sendEmail).toHaveBeenCalledWith({
+      expect(emailService.sendEmail).toHaveBeenCalledWith({
         name: 'a',
         email: 'b@c',
         message: 'd'
@@ -76,7 +76,7 @@ describe('FormComponent', () => {
 
     describe('Reject', () => {
       beforeEach(() => {
-        (formService.sendEmail as jasmine.Spy).and.returnValue(
+        (emailService.sendEmail as jasmine.Spy).and.returnValue(
           Promise.reject()
         );
         comp.submitForm();
@@ -402,7 +402,7 @@ function createComponent() {
   fixture = TestBed.createComponent(FormComponent);
   comp = fixture.componentInstance;
   app.ga = jasmine.createSpy('ga');
-  formService = fixture.debugElement.injector.get<FormService>(FormService);
+  emailService = fixture.debugElement.injector.get<EmailService>(EmailService);
   page = new Page();
 
   fixture.detectChanges();

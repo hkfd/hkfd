@@ -1,6 +1,6 @@
 export * from './api.service.mock';
 export * from './prismic.service.mock';
-export * from './form.service.mock';
+export * from './email.service.mock';
 export * from './meta.service.mock';
 export * from './logger.service.mock';
 export * from './api.pipe.mock';

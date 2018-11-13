@@ -1,4 +1,4 @@
-export class MockFormService {
+export class MockEmailService {
   constructor() {
     this.sendEmail = spyOn(this, 'sendEmail').and.callThrough();
   }
