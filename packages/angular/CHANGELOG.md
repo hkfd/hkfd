@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.5"></a>
+## [1.1.5](https://github.com/hkfd/hkfd/compare/v1.1.4...v1.1.5) (2018-11-13)
+
+
+### Bug Fixes
+
+* **angular:** `NewsComponent` call `unsubscribe` ([b34d800](https://github.com/hkfd/hkfd/commit/b34d800))
+* **angular:** retain `postPage` position on route ([317011a](https://github.com/hkfd/hkfd/commit/317011a))
+
+
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/hkfd/hkfd/compare/v1.1.3...v1.1.4) (2018-11-13)
 
