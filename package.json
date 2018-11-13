@@ -22,7 +22,7 @@
         "git add"
       ],
       "packages/angular/**/*.ts": [
-        "yarn --cwd packages/angular lint heckford-angular heckford-angular-e2e",
+        "yarn --cwd packages/angular lint angular angular-e2e",
         "git add"
       ],
       "packages/api/**/*.ts": [
