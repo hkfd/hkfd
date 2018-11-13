@@ -13,6 +13,7 @@
     "baseUrl": "src",
     "paths": {
       "shared": ["app/shared"],
+      "shared/*": ["app/shared/*"],
       "environment": ["environments/environment"],
       "testing": ["testing"]
     }
