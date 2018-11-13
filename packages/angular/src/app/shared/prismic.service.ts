@@ -29,8 +29,7 @@ export class PrismicService {
     const cache = this.state.get<string | null>(REF_KEY, null);
     if (cache) {
       return of(cache).pipe(
-        tap(ref => this.logger.log('getRef', 'cache', ref)),
-        catchError(this.handleError<string>('getRef'))
+        tap(ref => this.logger.log('getRef', 'cache', ref))
       );
     }
 
@@ -78,8 +77,7 @@ export class PrismicService {
     const cache = this.state.get<Prismic.Post | null>(POST_KEY, null);
     if (cache && cache.uid === uid) {
       return of(cache).pipe(
-        tap(post => this.logger.log('getPost', 'cache', post)),
-        catchError(this.handleError<Prismic.Post>('getPost'))
+        tap(post => this.logger.log('getPost', 'cache', post))
       );
     }
 
