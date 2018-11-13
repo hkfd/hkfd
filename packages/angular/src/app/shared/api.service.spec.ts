@@ -115,25 +115,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(url).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          const {
-            request: { method }
-          } = mockHttp.expectOne(url);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(url);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `[]`', () => {
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-
           expect(res).toEqual([]);
         });
       });
@@ -219,25 +205,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(url).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          const {
-            request: { method }
-          } = mockHttp.expectOne(url);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(url);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `[]`', () => {
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-
           expect(res).toEqual([]);
         });
       });
@@ -337,25 +309,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(url).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          const {
-            request: { method }
-          } = mockHttp.expectOne(url);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(url);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `undefined`', () => {
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-
           expect(res).toBeUndefined();
         });
       });
@@ -516,26 +474,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(servicesUrl).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          mockHttp.expectOne(servicesUrl).error(new ErrorEvent('err'));
-          const {
-            request: { method }
-          } = mockHttp.expectOne(servicesUrl);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(servicesUrl);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `undefined`', () => {
-          mockHttp.expectOne(servicesUrl).error(new ErrorEvent(''));
-          mockHttp.expectOne(servicesUrl).error(new ErrorEvent(''));
-          mockHttp.expectOne(servicesUrl).error(new ErrorEvent(''));
-
           expect(res).toBeUndefined();
         });
       });
@@ -623,25 +566,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(url).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          const {
-            request: { method }
-          } = mockHttp.expectOne(url);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(url);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `[]`', () => {
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-
           expect(res).toEqual([]);
         });
       });
@@ -727,25 +656,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(url).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          const {
-            request: { method }
-          } = mockHttp.expectOne(url);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(url);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `[]`', () => {
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-
           expect(res).toEqual([]);
         });
       });
@@ -822,25 +737,11 @@ describe('ApiService', () => {
           mockHttp.expectOne(url).error(new ErrorEvent('err'));
         });
 
-        it('should call `HttpClient` `get`', () => {
-          const {
-            request: { method }
-          } = mockHttp.expectOne(url);
-
-          expect(method).toBe('GET');
-        });
-
         it('should not call `TransferState` `set`', () => {
-          mockHttp.expectOne(url);
-
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
         it('should return `[]`', () => {
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-          mockHttp.expectOne(url).error(new ErrorEvent(''));
-
           expect(res).toEqual([]);
         });
       });
