@@ -5,27 +5,27 @@ import {
 } from '@angular/common/http/testing';
 import { makeImmutable } from 'testing';
 
-import { FormService } from './form.service';
+import { EmailService } from './email.service';
 
-let formService: FormService;
+let emailService: EmailService;
 let mockHttp: HttpTestingController;
 
-describe('FormService', () => {
+describe('EmailService', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [FormService]
+      providers: [EmailService]
     }).compileComponents()));
 
   beforeEach(async(() => createService()));
 
   it('should create service', () => {
-    expect(formService).toBeTruthy();
+    expect(emailService).toBeTruthy();
   });
 
   describe('`sendEmail`', () => {
     it('should call `HttpClient` `post`', () => {
-      formService.sendEmail({} as any);
+      emailService.sendEmail({} as any);
       const {
         request: { method }
       } = mockHttp.expectOne('https://email.testing');
@@ -35,7 +35,7 @@ describe('FormService', () => {
 
     it('should call `HttpClient` `post` with `body` as `email` arg', () => {
       const email = makeImmutable({ name: 'a', email: 'b@c', message: 'd' });
-      formService.sendEmail(email);
+      emailService.sendEmail(email);
       const {
         request: { body }
       } = mockHttp.expectOne('https://email.testing');
@@ -45,7 +45,7 @@ describe('FormService', () => {
 
     describe('Has error', () => {
       it('should reject promise', async(() => {
-        formService
+        emailService
           .sendEmail({} as any)
           .then(fail)
           .catch(err => expect(err).toBeDefined());
@@ -56,7 +56,7 @@ describe('FormService', () => {
 
     describe('No error', () => {
       it('should resolve promise', async(() => {
-        formService
+        emailService
           .sendEmail({} as any)
           .then(res => expect(res).toBeDefined())
           .catch(fail);
@@ -70,6 +70,6 @@ describe('FormService', () => {
 });
 
 function createService() {
-  formService = TestBed.get(FormService);
+  emailService = TestBed.get(EmailService);
   mockHttp = TestBed.get(HttpTestingController);
 }

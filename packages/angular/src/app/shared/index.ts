@@ -3,7 +3,7 @@ export * from './post/post.component';
 export * from './post/post-resolver.service';
 export * from './api.service';
 export * from './prismic.service';
-export * from './form.service';
+export * from './email.service';
 export * from './meta.service';
 export * from './logger.service';
 

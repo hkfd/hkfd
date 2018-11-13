@@ -7,7 +7,7 @@ import { Email } from 'email';
 @Injectable({
   providedIn: 'root'
 })
-export class FormService {
+export class EmailService {
   constructor(private http: HttpClient) {}
 
   sendEmail(email: Email): Promise<Object> {
