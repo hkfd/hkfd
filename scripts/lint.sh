@@ -4,10 +4,10 @@ source ./scripts/helpers.sh
 
 lintCommitMessage() {
   if commitlint-travis; then
-    printf "${GREEN}Commit message passed lint${RESET}"
+    printf "${PASS}Commit message passed lint${RESET}"
     return 0;
   else
-    printf "${RED}Commit message failed lint${RESET}"
+    printf "${FAIL}Commit message failed lint${RESET}"
     return 1
   fi
 }
@@ -18,10 +18,10 @@ lintPackageAngular() {
   if ! isChangedPackage $PACKAGE; then return 0; fi;
 
   if yarn --cwd packages/$PACKAGE lint > /dev/null; then
-    printf "${GREEN}Package ${BOLD}${WHITE}\`${PACKAGE} \`${NORMAL}${GREEN} passed lint${RESET}"
+    printf "${PASS}Package ${WHITE}\`${PACKAGE} \`${PASS} passed lint${RESET}"
     return 0;
   else
-    printf "${RED}Package ${BOLD}${WHITE}\`${PACKAGE}\`${NORMAL}${RED} failed lint${RESET}"
+    printf "${FAIL}Package ${WHITE}\`${PACKAGE}\`${FAIL} failed lint${RESET}"
     return 1
   fi
 }
@@ -32,10 +32,10 @@ lintPackageApi() {
   if ! isChangedPackage $PACKAGE; then return 0; fi;
 
   if yarn --cwd packages/$PACKAGE lint > /dev/null; then
-    printf "${GREEN}Package ${BOLD}${WHITE}\`${PACKAGE} \`${NORMAL}${GREEN} passed lint${RESET}"
+    printf "${PASS}Package ${WHITE}\`${PACKAGE} \`${PASS} passed lint${RESET}"
     return 0;
   else
-    printf "${RED}Package ${BOLD}${WHITE}\`${PACKAGE}\`${NORMAL}${RED} failed lint${RESET}"
+    printf "${FAIL}Package ${WHITE}\`${PACKAGE}\`${FAIL} failed lint${RESET}"
     return 1
   fi
 }
@@ -46,10 +46,10 @@ lintPackageEmail() {
   if ! isChangedPackage $PACKAGE; then return 0; fi;
 
   if yarn --cwd packages/$PACKAGE/functions lint > /dev/null; then
-    printf "${GREEN}Package ${BOLD}${WHITE}\`${PACKAGE} \`${NORMAL}${GREEN} passed lint${RESET}"
+    printf "${PASS}Package ${WHITE}\`${PACKAGE} \`${PASS} passed lint${RESET}"
     return 0;
   else
-    printf "${RED}Package ${BOLD}${WHITE}\`${PACKAGE}\`${NORMAL}${RED} failed lint${RESET}"
+    printf "${FAIL}Package ${WHITE}\`${PACKAGE}\`${FAIL} failed lint${RESET}"
     return 1
   fi
 }
