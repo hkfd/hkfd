@@ -8,6 +8,20 @@ export FAIL="\e[31m"
 export SKIP="\e[33m"
 export PASS_BG="\e[42m"
 export SKIP_BG="\e[43m"
+export FAIL_BG="\e[41m"
+
+isReleaseCommit() {
+  local regex
+  regex="(chore\(release\):)"
+
+  if [[ "$(eval $COMMIT_MESSAGE)" =~ $regex ]]; then
+    printf "${SKIP}Release commit${RESET}"
+    return 0
+  else
+    printf "${PASS}Not release commit${RESET}"
+    return 1
+  fi
+}
 
 changedPackages() {
   yarn --silent lerna ls --since 2>/dev/null
@@ -24,17 +38,17 @@ isChangedPackage() {
 }
 
 isPullRequest() {
-   if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-     printf "${SKIP}This is not a pull request${RESET}"
-     return 1;
-   else
+   if [ $CI_PULL_REQUEST ]; then
      printf "${PASS}This is a pull request${RESET}"
      return 0
+   else
+     printf "${SKIP}This is not a pull request${RESET}"
+     return 1;
    fi
 }
 
 shouldRunTest() {
-  if isPullRequest || isChangedPackage $1; then
+  if ! isReleaseCommit && (isPullRequest || isChangedPackage $1); then
     printf "${PASS_BG} Running test ${RESET}"
     return 0;
   else
@@ -49,7 +63,7 @@ shouldRunDeploy() {
   }
 
   resetToReleaseCommit() {
-    git checkout ${TRAVIS_COMMIT} -q
+    git checkout $CIRCLE_SHA1 -q
   }
 
   checkoutPreviousCommit
@@ -60,6 +74,37 @@ shouldRunDeploy() {
     return 0;
   else
     printf "${SKIP_BG} Not deploying ${RESET}"
+    return 1;
+  fi
+}
+
+shouldRunRelease() {
+  isBuildableCommit() {
+    local typeRegex
+    typeRegex="([a-z]+)(\(\w+\))?:"
+
+    if [[ "$2" =~ $typeRegex ]]; then
+      local commitType
+      commitType=${BASH_REMATCH[1]}
+
+      if [[ $commitType =~ (feat|fix|perf|refactor) ]]; then
+        printf "${PASS}Commit type: ${commitType}${RESET}"
+        return 0
+      else
+        printf "${SKIP}Commit type: ${commitType}${RESET}"
+        return 1
+      fi
+    else
+      printf "${FAIL}No commit type found${RESET}"
+      return 1
+    fi
+  }
+
+  if isBuildableCommit "$(eval $COMMIT_MESSAGE)"; then
+    printf "${PASS_BG} Releasing ${RESET}"
+    return 0;
+  else
+    printf "${SKIP_BG} Not releasing ${RESET}"
     return 1;
   fi
 }

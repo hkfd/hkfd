@@ -1,0 +1,177 @@
+constants:
+  - &setup
+    working_directory: ~/hkfd
+    docker:
+      - image: circleci/node:8.12-browsers
+    environment:
+      COMMIT_MESSAGE: git log -1 --pretty=%s $CIRCLE_SHA1
+
+  - &cache_paths
+    paths:
+      - node_modules
+      - packages/angular/node_modules
+      - packages/api/node_modules
+      - packages/email/node_modules
+      - packages/email/functions/node_modules
+
+  - &restore_cache
+    restore_cache:
+      keys:
+        - yarn-{{ checksum "yarn.lock" }}
+        - yarn-
+
+  - &persist_to_workspace
+    persist_to_workspace:
+      root: ~/hkfd
+      <<: *cache_paths
+
+  - &attach_workspace
+    attach_workspace:
+      at: ~/hkfd
+
+  - &is_release
+    filters:
+      branches:
+        ignore: /.*/
+      tags:
+        only: /^v[0-9]+(\.[0-9]+)*$/
+
+version: 2
+jobs:
+  build:
+    <<: *setup
+    steps:
+      - checkout
+      - *restore_cache
+      - *persist_to_workspace
+
+  build-lint:
+    <<: *setup
+    steps:
+      - checkout
+      - *restore_cache
+      - run: yarn
+      - run:
+          name: lint
+          command: ./scripts/lint.sh
+      - save_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+          <<: *cache_paths
+      - *persist_to_workspace
+
+  test-angular-spec-browser:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: '(angular) spec:browser'
+          command: ./scripts/angular/spec-browser.sh
+
+  test-angular-spec-server:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: '(angular) spec:server'
+          command: ./scripts/angular/spec-server.sh
+
+  test-angular-e2e:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: '(angular) e2e'
+          command: ./scripts/angular/e2e.sh
+
+  test-email:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: (email)
+          command: ./scripts/email/test.sh
+
+  release:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - run: ./scripts/release.sh
+
+  deploy-angular:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - deploy: ./scripts/angular/deploy.sh
+
+  deploy-api:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - deploy: ./scripts/api/deploy.sh
+
+  deploy-email:
+    <<: *setup
+    steps:
+      - checkout
+      - *attach_workspace
+      - deploy: ./scripts/email/deploy.sh
+
+workflows:
+  version: 2
+  build-lint-test-release:
+    jobs:
+      - build-lint
+
+      - test-angular-spec-browser:
+          requires:
+            - build-lint
+
+      - test-angular-spec-server:
+          requires:
+            - build-lint
+
+      - test-angular-e2e:
+          requires:
+            - build-lint
+
+      - test-email:
+          requires:
+            - build-lint
+
+      - release:
+          requires:
+            - test-angular-spec-browser
+            - test-angular-spec-server
+            - test-angular-e2e
+            - test-email
+          filters:
+            branches:
+              only:
+                - master
+
+  build-deploy:
+    jobs:
+      - build:
+          <<: *is_release
+
+      - deploy-angular:
+          <<: *is_release
+          requires:
+            - build
+
+      - deploy-api:
+          <<: *is_release
+          requires:
+            - build
+
+      - deploy-email:
+          <<: *is_release
+          requires:
+            - build
