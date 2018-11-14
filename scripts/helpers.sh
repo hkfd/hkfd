@@ -13,7 +13,7 @@ export GREY_BG="\e[47m"
 export GREEN_BG="\e[42m"
 
 changedPackages() {
-  lerna ls --since 2>/dev/null
+  yarn --silent lerna ls --since 2>/dev/null
 }
 
 isChangedPackage() {

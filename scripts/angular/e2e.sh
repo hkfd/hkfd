@@ -4,5 +4,5 @@ source ./scripts/angular/.env
 source ./scripts/helpers.sh
 
 if shouldRunTest $PACKAGE; then
-  lerna run e2e --scope=$PACKAGE -- --protractor-config=protractor-ci.conf.js
+  yarn --cwd packages/$PACKAGE e2e --protractor-config=protractor-ci.conf.js
 fi
