@@ -3,7 +3,7 @@ set -e
 source ./scripts/helpers.sh
 
 lintCommitMessage() {
-  if commitlint-travis; then
+  if echo "$(eval $COMMIT_MESSAGE)" | yarn commitlint; then
     printf "${PASS}Commit message passed lint${RESET}"
     return 0;
   else
