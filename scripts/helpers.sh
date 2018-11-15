@@ -83,7 +83,7 @@ shouldRunRelease() {
     local typeRegex
     typeRegex="([a-z]+)(\(\w+\))?:"
 
-    if [[ "$2" =~ $typeRegex ]]; then
+    if [[ "$1" =~ $typeRegex ]]; then
       local commitType
       commitType=${BASH_REMATCH[1]}
 
