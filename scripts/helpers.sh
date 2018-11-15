@@ -37,18 +37,8 @@ isChangedPackage() {
   fi
 }
 
-isPullRequest() {
-   if [ $CI_PULL_REQUEST ]; then
-     printf "${PASS}This is a pull request${RESET}"
-     return 0
-   else
-     printf "${SKIP}This is not a pull request${RESET}"
-     return 1;
-   fi
-}
-
 shouldRunTest() {
-  if ! isReleaseCommit && (isPullRequest || isChangedPackage $1); then
+  if ! isReleaseCommit && isChangedPackage $1; then
     printf "${PASS_BG} Running test ${RESET}"
     return 0;
   else
