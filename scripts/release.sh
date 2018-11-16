@@ -10,7 +10,7 @@ release() {
   git reset --hard
 
   git remote add release https://${GH_ACCESS_TOKEN}@github.com/hkfd/hkfd.git
-  lerna version --yes --git-remote release
+  yarn lerna version --yes --git-remote release
 }
 
 if shouldRunRelease; then
