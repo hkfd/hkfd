@@ -131,7 +131,7 @@ describe('HeaderComponent', () => {
 
         it('should display title', () => {
           expect((page.navLinks[0].textContent as string).trim()).toBe(
-            'PAGE 1'
+            'Page 1'
           );
         });
 
