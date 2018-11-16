@@ -5,5 +5,6 @@ source ./scripts/helpers.sh
 
 if shouldRunTest $PACKAGE; then
   ENVIRONMENT=staging yarn --cwd packages/$PACKAGE build:ssr
-  yarn --cwd packages/$PACKAGE test:server --coverage --coverageReporters=text-lcov | yarn coveralls
+  yarn --cwd packages/$PACKAGE test:server --coverage
+  bash <(curl -s https://codecov.io/bash)
 fi
