@@ -107,21 +107,24 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
-      - deploy: ./scripts/angular/deploy.sh
+      - deploy:
+          command: ./scripts/angular/deploy.sh
 
   deploy-api:
     <<: *setup
     steps:
       - checkout
       - *attach_workspace
-      - deploy: ./scripts/api/deploy.sh
+      - deploy:
+          command: ./scripts/api/deploy.sh
 
   deploy-email:
     <<: *setup
     steps:
       - checkout
       - *attach_workspace
-      - deploy: ./scripts/email/deploy.sh
+      - deploy:
+          command: ./scripts/email/deploy.sh
 
 workflows:
   version: 2
