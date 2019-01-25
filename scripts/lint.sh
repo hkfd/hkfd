@@ -54,13 +54,25 @@ lintPackageEmail() {
   fi
 }
 
-lint_functions=(
-  lintCommitMessage
-  lintPackageAngular
-  lintPackageApi
-  lintPackageEmail
-)
+shouldRunLint() {
+  if ! isReleaseCommit; then
+    printf "${PASS_BG} Running lint ${RESET}"
+    return 0;
+  else
+    printf "${SKIP_BG} Not running lint ${RESET}"
+    return 1;
+  fi
+}
 
-for test in "${lint_functions[@]}"; do
-  $test
-done
+if shouldRunLint; then
+  lint_functions=(
+    lintCommitMessage
+    lintPackageAngular
+    lintPackageApi
+    lintPackageEmail
+  )
+
+  for test in "${lint_functions[@]}"; do
+    $test
+  done
+fi
