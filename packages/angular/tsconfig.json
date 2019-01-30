@@ -17,5 +17,6 @@
       "environment": ["environments/environment"],
       "testing": ["testing"]
     }
-  }
+  },
+  "exclude": ["cypress"]
 }
