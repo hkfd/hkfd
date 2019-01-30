@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Generic } from 'shared';
+import { Image } from 'generic';
 
 @Component({
   selector: 'image-block',
@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class ImageBlockComponent {
   @Input()
-  data!: Generic.Image;
+  data!: Image;
 }

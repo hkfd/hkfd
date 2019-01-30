@@ -1,11 +1,11 @@
 import { Directive, Input } from '@angular/core';
 
-import { Generic } from 'shared';
+import { Lazy } from 'generic';
 
 @Directive({
   selector: '[lazy]'
 })
 export class StubLazyDirective {
   @Input('lazy')
-  data!: Generic.Lazy;
+  data!: Lazy;
 }

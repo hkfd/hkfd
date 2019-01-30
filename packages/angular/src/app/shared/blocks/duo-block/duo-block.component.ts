@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Generic } from 'shared';
+import { Image } from 'generic';
 
 @Component({
   selector: 'duo-block',
@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class DuoBlockComponent {
   @Input()
-  data!: Generic.Image[];
+  data!: Image[];
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Generic } from 'shared';
+import { Video } from 'generic';
 
 @Component({
   selector: 'video-block',
@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class VideoBlockComponent {
   @Input()
-  data!: Generic.Video;
+  data!: Video;
 }

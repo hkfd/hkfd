@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
+import { Team } from 'api';
 import { AboutImages } from './about.images';
 
 @Component({
@@ -12,7 +13,7 @@ import { AboutImages } from './about.images';
 })
 export class AboutComponent implements OnInit, OnDestroy {
   team$!: Subscription;
-  team: Api.Team[] | undefined;
+  team: Team[] | undefined;
 
   images = AboutImages;
 

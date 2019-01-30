@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Api } from 'shared';
+import { TextBlock } from 'api';
 
 @Component({
   selector: 'text-block',
@@ -9,5 +9,5 @@ import { Api } from 'shared';
 })
 export class TextBlockComponent {
   @Input()
-  data!: Api.Blocks.TextBlock;
+  data!: TextBlock;
 }

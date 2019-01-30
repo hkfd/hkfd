@@ -7,21 +7,19 @@ import { take, mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'environment';
 import { MetaService } from '../meta.service';
 import { ApiService } from '../api.service';
-import { Api } from 'shared';
+import { Post } from 'api';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostResolver implements Resolve<Api.Post> {
+export class PostResolver implements Resolve<Post> {
   constructor(
     private router: Router,
     private metaService: MetaService,
     private apiService: ApiService
   ) {}
 
-  resolve(
-    route: ActivatedRouteSnapshot
-  ): Observable<Api.Post> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Post> | Observable<never> {
     const type =
       route.paramMap.get('type') ||
       (route.parent && route.parent.routeConfig

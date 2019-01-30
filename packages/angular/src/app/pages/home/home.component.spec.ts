@@ -12,7 +12,8 @@ import {
   Data
 } from 'testing';
 
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
+import { CaseStudy } from 'api';
 import { HomeImages } from './home.images';
 import { HomeComponent } from './home.component';
 
@@ -81,7 +82,7 @@ describe('HomeComponent', () => {
       });
 
       it('should be set as `featured` only', () => {
-        (comp.caseStudies as Api.CaseStudy[]).forEach(caseStudy =>
+        (comp.caseStudies as CaseStudy[]).forEach(caseStudy =>
           expect(caseStudy.featured).toBe(true)
         );
       });
@@ -185,7 +186,7 @@ describe('HomeComponent', () => {
 
       it('should set `SliderWorkComponent` `caseStudies` as `caseStudies`', () => {
         expect(page.sliderWorkComponent.caseStudies).toEqual(
-          comp.caseStudies as Api.CaseStudy[]
+          comp.caseStudies as CaseStudy[]
         );
       });
 

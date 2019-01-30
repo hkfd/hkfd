@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Prismic, Generic } from 'shared';
+import { Image as GenericImage, Video as GenericVideo } from 'generic';
+import { Image as PrismicImage, Video as PrismicVideo } from 'prismic';
 
 @Pipe({
   name: 'prismic'
 })
 export class PrismicPipe implements PipeTransform {
-  private transformImage({ image }: { image: Prismic.Image }): Generic.Image {
+  private transformImage({ image }: { image: PrismicImage }): GenericImage {
     return {
       src: image.proxy.url,
       srcset: {
@@ -26,8 +27,8 @@ export class PrismicPipe implements PipeTransform {
   private transformVideo({
     video: { url }
   }: {
-    video: Prismic.Video;
-  }): Generic.Video {
+    video: PrismicVideo;
+  }): GenericVideo {
     return {
       src: {
         attr: 'src',

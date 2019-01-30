@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Generic } from 'shared';
+import { Audio } from 'generic';
 
 @Component({
   selector: 'audio-block',
@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class AudioBlockComponent {
   @Input()
-  data!: Generic.Audio;
+  data!: Audio;
 }

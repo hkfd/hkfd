@@ -1,6 +1,6 @@
-import { Api } from '../api';
+import { Service } from '../api';
 
-export const SERVICES: Api.Service[] = [
+export const SERVICES: Service[] = [
   {
     id: '3d-cgi',
     title: '3D & CGI',

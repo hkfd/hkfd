@@ -1,6 +1,6 @@
-import { Api } from 'shared';
+import { Image } from 'api';
 
-export const CareersImages: { [name: string]: { image: Api.Image } } = {
+export const CareersImages: { [name: string]: { image: Image } } = {
   hiring: {
     image: {
       name: 'careers-hiring',

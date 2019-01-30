@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { Api } from 'shared';
+import { Career } from 'api';
 
 @Component({
   selector: 'app-career',
@@ -12,7 +12,7 @@ import { Api } from 'shared';
 })
 export class CareerComponent implements OnInit, OnDestroy {
   career$!: Subscription;
-  career: Api.Career | undefined;
+  career: Career | undefined;
 
   constructor(private route: ActivatedRoute) {}
 

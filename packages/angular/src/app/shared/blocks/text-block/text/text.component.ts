@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Api } from 'shared';
+import { Sentence } from 'api';
 
 @Component({
   selector: 'text',
@@ -8,5 +8,5 @@ import { Api } from 'shared';
 })
 export class TextComponent {
   @Input()
-  text!: Api.Sentence;
+  text!: Sentence;
 }

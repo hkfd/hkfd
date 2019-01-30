@@ -10,7 +10,8 @@ import {
   RouterStub,
   Data
 } from 'testing';
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
+import { Post } from 'api';
 import { PostResolver } from './post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
@@ -108,17 +109,13 @@ describe('PostResolver', () => {
     );
 
     it('should call `MetaService` `setMetaTags`', () => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Post
-      >)
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe(_ => expect(metaService.setMetaTags).toHaveBeenCalled());
     });
 
     it('should call `MetaService` `setMetaTags` with args', () => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Post
-      >)
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe(_ =>
           expect(metaService.setMetaTags).toHaveBeenCalledWith({
@@ -133,17 +130,13 @@ describe('PostResolver', () => {
     });
 
     it('should not call `Router` `navigate`', () => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Post
-      >)
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe(_ => expect(router.navigate).not.toHaveBeenCalled());
     });
 
     it('should return `post`', () => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Post
-      >)
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe(res =>
           expect(res).toEqual(Data.Api.getServices('Service 1'))
@@ -157,9 +150,7 @@ describe('PostResolver', () => {
     );
 
     it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Post
-      >)
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe();
 
@@ -168,9 +159,7 @@ describe('PostResolver', () => {
     }));
 
     it('should call `Router` `navigate` with `/` arg', fakeAsync(() => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Post
-      >)
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe();
 

@@ -1,6 +1,6 @@
-import { Api } from 'shared';
+import { Image } from 'api';
 
-export const AboutImages: { intro: { image: Api.Image } } = {
+export const AboutImages: { intro: { image: Image } } = {
   intro: {
     image: {
       name: 'heckford-studio',

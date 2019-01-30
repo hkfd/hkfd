@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
-import { Generic } from 'shared';
+import { Image } from 'generic';
 
 @Component({
   selector: 'slider',
@@ -29,7 +29,7 @@ export class SliderComponent implements OnChanges, OnDestroy {
   @Input()
   delay = 2000;
   @Input()
-  images!: Generic.Image[];
+  images!: Image[];
 
   @HostListener('mouseenter')
   mouseEnter() {

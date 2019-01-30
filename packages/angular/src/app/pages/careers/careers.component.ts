@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
+import { Career } from 'api';
 import { CareersImages } from './careers.images';
 
 @Component({
@@ -12,7 +13,7 @@ import { CareersImages } from './careers.images';
 })
 export class CareersComponent implements OnInit, OnDestroy {
   careers$!: Subscription;
-  careers: Api.Career[] | undefined;
+  careers: Career[] | undefined;
 
   images = CareersImages;
 

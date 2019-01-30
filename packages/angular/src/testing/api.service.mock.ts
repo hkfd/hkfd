@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { flatMap, find, catchError } from 'rxjs/operators';
 
-import { Api } from 'shared';
+import { Service, Career, Post, CaseStudy, Team, Client } from 'api';
 import { Data } from './';
 
 export class MockApiService {
@@ -15,42 +15,42 @@ export class MockApiService {
     this.getPost = spyOn(this, 'getPost').and.callThrough();
   }
 
-  getServices(): Observable<Api.Service[]> {
+  getServices(): Observable<Service[]> {
     return of(Data.Api.getServices<void>());
   }
 
-  getCaseStudies(): Observable<Api.CaseStudy[]> {
+  getCaseStudies(): Observable<CaseStudy[]> {
     return of(Data.Api.getCaseStudies<void>());
   }
 
-  getClients(): Observable<Api.Client[]> {
+  getClients(): Observable<Client[]> {
     return of(Data.Api.getClients());
   }
 
-  getCareers(): Observable<Api.Career[]> {
+  getCareers(): Observable<Career[]> {
     return of(Data.Api.getCareers<void>());
   }
 
-  getCareer(id: string): Observable<Api.Career | undefined> {
+  getCareer(id: string): Observable<Career | undefined> {
     return of(Data.Api.getCareers<void>()).pipe(
-      flatMap((careers: Api.Career[]) => careers),
-      find((career: Api.Career) => career.id === id),
+      flatMap((careers: Career[]) => careers),
+      find((career: Career) => career.id === id),
       catchError(_ => of(undefined))
     );
   }
 
-  getTeam(): Observable<Api.Team[]> {
+  getTeam(): Observable<Team[]> {
     return of(Data.Api.getTeam<void>());
   }
 
-  getPost(type: string, id: string): Observable<Api.Post | undefined> {
+  getPost(type: string, id: string): Observable<Post | undefined> {
     let url;
     if (type === 'service') url = Data.Api.getServices<void>();
     if (type === 'work') url = Data.Api.getCaseStudies<void>();
 
-    return of(<Api.Post[]>url).pipe(
-      flatMap((posts: Api.Post[]) => posts),
-      find((post: Api.Post) => post.id === id),
+    return of(<Post[]>url).pipe(
+      flatMap((posts: Post[]) => posts),
+      find((post: Post) => post.id === id),
       catchError(_ => of(undefined))
     );
   }

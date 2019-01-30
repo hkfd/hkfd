@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Generic } from 'shared';
+import { Image } from 'generic';
 
 @Component({
   selector: 'image-component',
@@ -9,5 +9,5 @@ import { Generic } from 'shared';
 })
 export class ImageComponent {
   @Input()
-  image!: Generic.Image;
+  image!: Image;
 }

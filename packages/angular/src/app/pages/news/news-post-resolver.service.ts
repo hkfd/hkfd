@@ -4,18 +4,17 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
 
-import { MetaService, PrismicService, Prismic } from 'shared';
+import { MetaService, PrismicService } from 'shared';
+import { Post } from 'prismic';
 
 @Injectable()
-export class NewsPostResolver implements Resolve<Prismic.Post> {
+export class NewsPostResolver implements Resolve<Post> {
   constructor(
     private metaService: MetaService,
     private prismicService: PrismicService
   ) {}
 
-  resolve(
-    route: ActivatedRouteSnapshot
-  ): Observable<Prismic.Post> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Post> | Observable<never> {
     return this.prismicService.getPost(route.paramMap.get('uid') || '').pipe(
       take(1),
       tap(post =>

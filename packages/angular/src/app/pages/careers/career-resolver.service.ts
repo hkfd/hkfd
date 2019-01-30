@@ -4,10 +4,11 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
 
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
+import { Career } from 'api';
 
 @Injectable()
-export class CareerResolver implements Resolve<Api.Career> {
+export class CareerResolver implements Resolve<Career> {
   constructor(
     private router: Router,
     private metaService: MetaService,
@@ -16,7 +17,7 @@ export class CareerResolver implements Resolve<Api.Career> {
 
   resolve(
     route: ActivatedRouteSnapshot
-  ): Observable<Api.Career> | Observable<never> {
+  ): Observable<Career> | Observable<never> {
     return this.apiService.getCareer(route.paramMap.get('id') || '').pipe(
       take(1),
       tap(career =>

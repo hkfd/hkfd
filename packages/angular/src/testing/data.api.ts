@@ -1,14 +1,30 @@
 import { makeImmutable } from 'testing';
 
-import { Api as ApiTypes } from 'shared';
+import {
+  DuoBlock,
+  VideoBlock,
+  AudioBlock,
+  TextBlock,
+  ImageBlock,
+  GalleryBlock,
+  Service,
+  CaseStudy,
+  Client,
+  Career,
+  Team,
+  Image,
+  Sentence,
+  Video,
+  Audio
+} from 'api';
 
 export namespace Api {
   export const getServices = <
     T extends void | 'Service 1' | 'Service 2' | 'Service 3'
   >(
     title?: T
-  ): T extends string ? ApiTypes.Service : ApiTypes.Service[] => {
-    const services: ApiTypes.Service[] = [
+  ): T extends string ? Service : Service[] => {
+    const services: Service[] = [
       {
         id: 'service-1',
         title: 'Service 1',
@@ -23,7 +39,7 @@ export namespace Api {
         content: [
           {
             title: 'DuoBlock',
-            data: <ApiTypes.Blocks.DuoBlock[]>[
+            data: <DuoBlock[]>[
               {
                 type: 'duo',
                 data: [
@@ -49,7 +65,7 @@ export namespace Api {
         content: [
           {
             title: 'VideoBlock',
-            data: <ApiTypes.Blocks.VideoBlock[]>[
+            data: <VideoBlock[]>[
               {
                 type: 'video',
                 data: {
@@ -76,7 +92,7 @@ export namespace Api {
         content: [
           {
             title: 'AudioBlock',
-            data: <ApiTypes.Blocks.AudioBlock[]>[
+            data: <AudioBlock[]>[
               {
                 type: 'audio',
                 data: {
@@ -101,8 +117,8 @@ export namespace Api {
     T extends void | 'Case Study 1' | 'Case Study 2' | 'Case Study 3'
   >(
     title?: T
-  ): T extends string ? ApiTypes.CaseStudy : ApiTypes.CaseStudy[] => {
-    const caseStudies: ApiTypes.CaseStudy[] = [
+  ): T extends string ? CaseStudy : CaseStudy[] => {
+    const caseStudies: CaseStudy[] = [
       {
         id: 'case-study-1',
         title: 'Case Study 1',
@@ -120,7 +136,7 @@ export namespace Api {
         content: [
           {
             title: 'TextBlock',
-            data: <ApiTypes.Blocks.TextBlock[]>[
+            data: <TextBlock[]>[
               {
                 type: 'text'
               }
@@ -145,7 +161,7 @@ export namespace Api {
         content: [
           {
             title: 'ImageBlock',
-            data: <ApiTypes.Blocks.ImageBlock[]>[
+            data: <ImageBlock[]>[
               {
                 type: 'image',
                 data: {
@@ -177,7 +193,7 @@ export namespace Api {
         content: [
           {
             title: 'GalleryBlock',
-            data: <ApiTypes.Blocks.GalleryBlock[]>[
+            data: <GalleryBlock[]>[
               {
                 type: 'gallery',
                 data: [
@@ -201,7 +217,7 @@ export namespace Api {
   };
 
   export const getClients = () => {
-    const clients: ApiTypes.Client[] = [
+    const clients: Client[] = [
       {
         sector: 'Sector 1',
         list: ['Client 1', 'Client 2', 'Client 3']
@@ -219,8 +235,8 @@ export namespace Api {
     T extends void | 'Career 1' | 'Career 2' | 'Career 3'
   >(
     title?: T
-  ): T extends string ? ApiTypes.Career : ApiTypes.Career[] => {
-    const careers: ApiTypes.Career[] = [
+  ): T extends string ? Career : Career[] => {
+    const careers: Career[] = [
       {
         id: 'career-1',
         title: 'Career 1',
@@ -228,7 +244,7 @@ export namespace Api {
         content: [
           {
             title: 'TextBlock',
-            data: <ApiTypes.Blocks.TextBlock[]>[
+            data: <TextBlock[]>[
               {
                 type: 'text'
               }
@@ -242,7 +258,7 @@ export namespace Api {
         salary: '£0',
         content: [
           {
-            data: <ApiTypes.Blocks.TextBlock[]>[
+            data: <TextBlock[]>[
               {
                 type: 'text'
               }
@@ -256,7 +272,7 @@ export namespace Api {
         salary: '£0',
         content: [
           {
-            data: <ApiTypes.Blocks.TextBlock[]>[
+            data: <TextBlock[]>[
               {
                 type: 'text'
               }
@@ -282,8 +298,8 @@ export namespace Api {
       | 'Person 5'
   >(
     name?: T
-  ): T extends string ? ApiTypes.Team : ApiTypes.Team[] => {
-    const team: ApiTypes.Team[] = [
+  ): T extends string ? Team : Team[] => {
+    const team: Team[] = [
       {
         name: 'Person 1',
         position: 'Position 1',
@@ -343,7 +359,7 @@ export namespace Api {
   };
 
   export const getImages = () => {
-    const images: ApiTypes.Image[] = [
+    const images: Image[] = [
       {
         name: 'image-1',
         alt: ''
@@ -371,8 +387,8 @@ export namespace Api {
 
   export const getTextBlocks = <T extends 'text' | 'list'>(
     type: T
-  ): ApiTypes.Blocks.TextBlock => {
-    const textBlocks: { [name: string]: ApiTypes.Blocks.TextBlock } = {
+  ): TextBlock => {
+    const textBlocks: { [name: string]: TextBlock } = {
       text: {
         type: 'text',
         data: [
@@ -439,8 +455,8 @@ export namespace Api {
     T extends 'url' | 'heading' | 'bold' | 'italic' | 'normal'
   >(
     type: T
-  ): ApiTypes.Sentence => {
-    const sentences: { [name: string]: ApiTypes.Sentence } = {
+  ): Sentence => {
+    const sentences: { [name: string]: Sentence } = {
       url: {
         text: 'Click here',
         url: 'http://example.com/'
@@ -467,7 +483,7 @@ export namespace Api {
   };
 
   export const getGalleryBlock = () => {
-    const galleryBlock: ApiTypes.Blocks.GalleryBlock = {
+    const galleryBlock: GalleryBlock = {
       type: 'gallery',
       data: [
         { image: { name: 'image1', alt: '' } },
@@ -482,7 +498,7 @@ export namespace Api {
   };
 
   export const getDuoBlock = () => {
-    const duoBlock: ApiTypes.Blocks.DuoBlock = {
+    const duoBlock: DuoBlock = {
       type: 'duo',
       data: [
         { image: { name: 'image1', alt: '' } },
@@ -495,7 +511,7 @@ export namespace Api {
   };
 
   export const getImage = () => {
-    const image: ApiTypes.Image = {
+    const image: Image = {
       name: 'image',
       alt: 'Image'
     };
@@ -504,7 +520,7 @@ export namespace Api {
   };
 
   export const getVideo = () => {
-    const video: ApiTypes.Video = {
+    const video: Video = {
       id: '123'
     };
 
@@ -512,7 +528,7 @@ export namespace Api {
   };
 
   export const getAudio = () => {
-    const audio: ApiTypes.Audio = {
+    const audio: Audio = {
       url: 'soundcloud.com'
     };
 

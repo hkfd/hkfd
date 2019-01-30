@@ -11,7 +11,8 @@ import {
 import { Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 
-import { MetaService, ApiService, Api } from 'shared';
+import { MetaService, ApiService } from 'shared';
+import { Career } from 'api';
 import { CareerResolver } from './career-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
@@ -59,7 +60,7 @@ describe('CareerResolver', () => {
 
     it('should call `MetaService` `setMetaTags` with career args', () => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Career
+        Career
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
@@ -74,7 +75,7 @@ describe('CareerResolver', () => {
 
     it('should not call `Router` `navigate`', () => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Career
+        Career
       >)
         .pipe(timeout(100))
         .subscribe(_ => expect(router.navigate).not.toHaveBeenCalled());
@@ -82,7 +83,7 @@ describe('CareerResolver', () => {
 
     it('should return `career`', () => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Career
+        Career
       >)
         .pipe(timeout(100))
         .subscribe(career =>
@@ -96,7 +97,7 @@ describe('CareerResolver', () => {
 
     it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Career
+        Career
       >)
         .pipe(timeout(100))
         .subscribe();
@@ -107,7 +108,7 @@ describe('CareerResolver', () => {
 
     it('should call `Router` `navigate` with `[/careers]` arg', fakeAsync(() => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Api.Career
+        Career
       >)
         .pipe(timeout(100))
         .subscribe();
