@@ -18,30 +18,6 @@
     "build:ssr": "yarn build:client-and-server-bundles && yarn compile:server",
     "serve:ssr": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 dist/server"
   },
-  "jest": {
-    "moduleDirectories": [
-      "dist",
-      "node_modules"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testMatch": [
-      "**/*.spec.ts"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/server/"
-    ]
-  },
   "dependencies": {
     "@angular/animations": "6.1.7",
     "@angular/common": "6.1.7",
