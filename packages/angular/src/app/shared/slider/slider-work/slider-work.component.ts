@@ -1,7 +1,8 @@
 import { Component, Input, NgZone, Inject, PLATFORM_ID } from '@angular/core';
 
 import { SliderComponent } from '../slider.component';
-import { ApiPipe, Api } from 'shared';
+import { ApiPipe } from 'shared';
+import { CaseStudy } from 'api';
 
 @Component({
   selector: 'slider-work',
@@ -9,7 +10,7 @@ import { ApiPipe, Api } from 'shared';
   styleUrls: ['../slider.component.scss', './slider-work.component.scss']
 })
 export class SliderWorkComponent extends SliderComponent {
-  private _caseStudies!: Api.CaseStudy[];
+  private _caseStudies!: CaseStudy[];
 
   constructor(
     zone: NgZone,
@@ -20,7 +21,7 @@ export class SliderWorkComponent extends SliderComponent {
   }
 
   @Input()
-  set caseStudies(caseStudies: Api.CaseStudy[]) {
+  set caseStudies(caseStudies: CaseStudy[]) {
     if (!caseStudies) return;
 
     this._caseStudies = caseStudies.map(caseStudy => ({

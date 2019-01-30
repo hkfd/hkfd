@@ -7,7 +7,7 @@ import { catchError, tap, flatMap, find } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
-import { Api } from 'api';
+import { Service, Career, Post, CaseStudy, Team, Client } from 'api';
 
 const SERVICES = `${environment.api.url}services.json`;
 const CASE_STUDIES = `${environment.api.url}case-studies.json`;
@@ -15,13 +15,13 @@ const TEAM = `${environment.api.url}team.json`;
 const CAREERS = `${environment.api.url}careers.json`;
 const CLIENTS = `${environment.api.url}clients.json`;
 
-const SERVICES_KEY = makeStateKey<Api.Service[]>('api-services');
-const CAREERS_KEY = makeStateKey<Api.Career[]>('api-careers');
-const CAREER_KEY = makeStateKey<Api.Career>('api-career');
-const POST_KEY = makeStateKey<Api.Post>('api-post');
-const CASE_STUDIES_KEY = makeStateKey<Api.CaseStudy[]>('api-case-studies');
-const TEAM_KEY = makeStateKey<Api.Team[]>('api-team');
-const CLIENTS_KEY = makeStateKey<Api.Client[]>('api-clients');
+const SERVICES_KEY = makeStateKey<Service[]>('api-services');
+const CAREERS_KEY = makeStateKey<Career[]>('api-careers');
+const CAREER_KEY = makeStateKey<Career>('api-career');
+const POST_KEY = makeStateKey<Post>('api-post');
+const CASE_STUDIES_KEY = makeStateKey<CaseStudy[]>('api-case-studies');
+const TEAM_KEY = makeStateKey<Team[]>('api-team');
+const CLIENTS_KEY = makeStateKey<Client[]>('api-clients');
 
 @Injectable({
   providedIn: 'root'
@@ -33,54 +33,54 @@ export class ApiService {
     private state: TransferState
   ) {}
 
-  getServices(): Observable<Api.Service[]> {
-    const cache = this.state.get<Api.Service[] | null>(SERVICES_KEY, null);
+  getServices(): Observable<Service[]> {
+    const cache = this.state.get<Service[] | null>(SERVICES_KEY, null);
     if (cache) {
       return of(cache).pipe(
         tap(services => this.logger.log('getServices', 'cache', services))
       );
     }
 
-    return this.http.get<Api.Service[]>(SERVICES).pipe(
+    return this.http.get<Service[]>(SERVICES).pipe(
       tap(services => this.logger.log('getServices', services)),
       tap(services => this.state.set(SERVICES_KEY, services)),
-      catchError(this.handleError<Api.Service[]>('getServices', []))
+      catchError(this.handleError<Service[]>('getServices', []))
     );
   }
 
-  getCareers(): Observable<Api.Career[]> {
-    const cache = this.state.get<Api.Career[] | null>(CAREERS_KEY, null);
+  getCareers(): Observable<Career[]> {
+    const cache = this.state.get<Career[] | null>(CAREERS_KEY, null);
     if (cache) {
       return of(cache).pipe(
         tap(careers => this.logger.log('getCareers', 'cache', careers))
       );
     }
 
-    return this.http.get<Api.Career[]>(CAREERS).pipe(
+    return this.http.get<Career[]>(CAREERS).pipe(
       tap(careers => this.logger.log('getCareers', careers)),
       tap(careers => this.state.set(CAREERS_KEY, careers)),
-      catchError(this.handleError<Api.Career[]>('getCareers', []))
+      catchError(this.handleError<Career[]>('getCareers', []))
     );
   }
 
-  getCareer(id: string): Observable<Api.Career | undefined> {
-    const cache = this.state.get<Api.Career | null>(CAREER_KEY, null);
+  getCareer(id: string): Observable<Career | undefined> {
+    const cache = this.state.get<Career | null>(CAREER_KEY, null);
     if (cache && cache.id === id) {
       return of(cache).pipe(
         tap(career => this.logger.log('getCareer', 'cache', career))
       );
     }
 
-    return this.http.get<Api.Career[]>(CAREERS).pipe(
+    return this.http.get<Career[]>(CAREERS).pipe(
       flatMap(careers => careers),
       find(career => career.id === id),
       tap(career => this.logger.log('getCareer', career)),
       tap(career => this.state.set(CAREER_KEY, career)),
-      catchError(this.handleError<Api.Career>('getCareer'))
+      catchError(this.handleError<Career>('getCareer'))
     );
   }
 
-  getPost(type: string, id: string): Observable<Api.Post | undefined> {
+  getPost(type: string, id: string): Observable<Post | undefined> {
     let url: string;
     switch (type) {
       case 'service':
@@ -93,27 +93,24 @@ export class ApiService {
         return of(undefined);
     }
 
-    const cache = this.state.get<Api.Post | null>(POST_KEY, null);
+    const cache = this.state.get<Post | null>(POST_KEY, null);
     if (cache && cache.id === id) {
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post))
       );
     }
 
-    return this.http.get<Api.Post[]>(url).pipe(
+    return this.http.get<Post[]>(url).pipe(
       flatMap(posts => posts),
       find(post => post.id === id),
       tap(post => this.logger.log('getPost', post)),
       tap(post => this.state.set(POST_KEY, post)),
-      catchError(this.handleError<Api.Post>('getPost'))
+      catchError(this.handleError<Post>('getPost'))
     );
   }
 
-  getCaseStudies(): Observable<Api.CaseStudy[]> {
-    const cache = this.state.get<Api.CaseStudy[] | null>(
-      CASE_STUDIES_KEY,
-      null
-    );
+  getCaseStudies(): Observable<CaseStudy[]> {
+    const cache = this.state.get<CaseStudy[] | null>(CASE_STUDIES_KEY, null);
     if (cache) {
       return of(cache).pipe(
         tap(caseStudies =>
@@ -122,40 +119,40 @@ export class ApiService {
       );
     }
 
-    return this.http.get<Api.CaseStudy[]>(CASE_STUDIES).pipe(
+    return this.http.get<CaseStudy[]>(CASE_STUDIES).pipe(
       tap(caseStudies => this.logger.log('getCaseStudies', caseStudies)),
       tap(caseStudies => this.state.set(CASE_STUDIES_KEY, caseStudies)),
-      catchError(this.handleError<Api.CaseStudy[]>('getCaseStudies', []))
+      catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
     );
   }
 
-  getTeam(): Observable<Api.Team[]> {
-    const cache = this.state.get<Api.Team[] | null>(TEAM_KEY, null);
+  getTeam(): Observable<Team[]> {
+    const cache = this.state.get<Team[] | null>(TEAM_KEY, null);
     if (cache) {
       return of(cache).pipe(
         tap(team => this.logger.log('getTeam', 'cache', team))
       );
     }
 
-    return this.http.get<Api.Team[]>(TEAM).pipe(
+    return this.http.get<Team[]>(TEAM).pipe(
       tap(team => this.logger.log('getTeam', team)),
       tap(team => this.state.set(TEAM_KEY, team)),
-      catchError(this.handleError<Api.Team[]>('getTeam', []))
+      catchError(this.handleError<Team[]>('getTeam', []))
     );
   }
 
-  getClients(): Observable<Api.Client[]> {
-    const cache = this.state.get<Api.Client[] | null>(CLIENTS_KEY, null);
+  getClients(): Observable<Client[]> {
+    const cache = this.state.get<Client[] | null>(CLIENTS_KEY, null);
     if (cache) {
       return of(cache).pipe(
         tap(clients => this.logger.log('getClients', 'cache', clients))
       );
     }
 
-    return this.http.get<Api.Client[]>(CLIENTS).pipe(
+    return this.http.get<Client[]>(CLIENTS).pipe(
       tap(clients => this.logger.log('getClients', clients)),
       tap(clients => this.state.set(CLIENTS_KEY, clients)),
-      catchError(this.handleError<Api.Client[]>('getClients', []))
+      catchError(this.handleError<Client[]>('getClients', []))
     );
   }
 

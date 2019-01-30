@@ -11,7 +11,8 @@ import {
   Data
 } from 'testing';
 
-import { MetaService, ApiService, ApiPipe, Api } from 'shared';
+import { MetaService, ApiService, ApiPipe } from 'shared';
+import { CaseStudy } from 'api';
 import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;
@@ -57,13 +58,13 @@ describe('WorkComponent', () => {
       });
 
       it('should set `caseStudies`', () => {
-        expect((comp.caseStudies as Api.CaseStudy[]).length).toBe(
+        expect((comp.caseStudies as CaseStudy[]).length).toBe(
           Data.Api.getCaseStudies<void>().length
         );
       });
 
       it('should call `ApiPipe` with case study `thumbnail`s', () => {
-        (comp.caseStudies as Api.CaseStudy[]).forEach(caseStudy =>
+        (comp.caseStudies as CaseStudy[]).forEach(caseStudy =>
           expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
         );
       });

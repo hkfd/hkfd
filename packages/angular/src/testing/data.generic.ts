@@ -1,9 +1,9 @@
 import { makeImmutable } from 'testing';
 
-import { Generic as GenericType } from 'shared';
+import { Image, Video, Audio, Lazy } from 'generic';
 
 export namespace Generic {
-  export const isImage = (data: any): data is GenericType.Image => {
+  export const isImage = (data: any): data is Image => {
     return (
       data.hasOwnProperty('src') &&
       data.hasOwnProperty('srcset') &&
@@ -13,7 +13,7 @@ export namespace Generic {
     );
   };
 
-  export const isVideo = (data: any): data is GenericType.Video => {
+  export const isVideo = (data: any): data is Video => {
     return (
       data.hasOwnProperty('src') &&
       data.src.hasOwnProperty('attr') &&
@@ -21,12 +21,12 @@ export namespace Generic {
     );
   };
 
-  export const isAudio = (data: any): data is GenericType.Audio => {
+  export const isAudio = (data: any): data is Audio => {
     return data.hasOwnProperty('url');
   };
 
   export const getImage = () => {
-    const image: GenericType.Image = {
+    const image: Image = {
       src: 'http://testing/example.jpg',
       srcset: {
         attr: 'srcset',
@@ -39,7 +39,7 @@ export namespace Generic {
   };
 
   export const getDuo = () => {
-    const duo: GenericType.Image[] = [
+    const duo: Image[] = [
       {
         src: '',
         srcset: {
@@ -62,7 +62,7 @@ export namespace Generic {
   };
 
   export const getImages = () => {
-    const images: GenericType.Image[] = [
+    const images: Image[] = [
       {
         src: 'image-1',
         srcset: {
@@ -109,7 +109,7 @@ export namespace Generic {
   };
 
   export const getVideo = () => {
-    const video: GenericType.Video = {
+    const video: Video = {
       src: {
         attr: 'src',
         val: ['']
@@ -120,7 +120,7 @@ export namespace Generic {
   };
 
   export const getAudio = () => {
-    const audio: GenericType.Audio = {
+    const audio: Audio = {
       url: 'http://example.com/'
     };
 
@@ -128,7 +128,7 @@ export namespace Generic {
   };
 
   export const getLazy = () => {
-    const lazy: GenericType.Lazy = {
+    const lazy: Lazy = {
       attr: 'srcset',
       val: ['example-xs.jpg 100w', 'example-sm.jpg 200w']
     };

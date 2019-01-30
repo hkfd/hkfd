@@ -3,7 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
-import { MetaService, PrismicService, Prismic } from 'shared';
+import { MetaService, PrismicService } from 'shared';
+import { Post } from 'prismic';
 import { NewsAnimations } from './news.animations';
 
 @Component({
@@ -16,7 +17,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   richText = RichText;
 
   post$: Subscription | undefined;
-  posts: Prismic.Post[] = [];
+  posts: Post[] = [];
   hasNextPage: boolean | undefined;
 
   constructor(

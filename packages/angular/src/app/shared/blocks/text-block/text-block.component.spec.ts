@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { StubTextComponent, Data } from 'testing';
-import { Api } from 'shared';
+import { Sentence } from 'api';
 
 import { TextBlockComponent } from './text-block.component';
 
@@ -56,8 +56,7 @@ describe('TextBlockComponent', () => {
 
       it('should set `TextComponent` `text` as `text`', () => {
         expect(page.textComponent.text).toEqual(
-          (Data.Api.getTextBlocks('text').data[0]
-            .paragraph as Api.Sentence[])[0]
+          (Data.Api.getTextBlocks('text').data[0].paragraph as Sentence[])[0]
         );
       });
 
@@ -82,7 +81,7 @@ describe('TextBlockComponent', () => {
 
       it('should set `TextComponent` `text` as `text`', () => {
         expect(page.textComponent.text).toEqual(
-          (Data.Api.getTextBlocks('list').data[0].list as Api.Sentence[])[0]
+          (Data.Api.getTextBlocks('list').data[0].list as Sentence[])[0]
         );
       });
 

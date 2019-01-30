@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { MetaService, ApiService, ApiPipe, Api } from 'shared';
+import { MetaService, ApiService, ApiPipe } from 'shared';
+import { CaseStudy } from 'api';
 import { WorkAnimations } from './work.animations';
 
 @Component({
@@ -13,7 +14,7 @@ import { WorkAnimations } from './work.animations';
 })
 export class WorkComponent implements OnInit, OnDestroy {
   caseStudies$!: Subscription;
-  caseStudies: Api.CaseStudy[] | undefined;
+  caseStudies: CaseStudy[] | undefined;
 
   constructor(
     private metaService: MetaService,
@@ -24,15 +25,13 @@ export class WorkComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Our Work', url: 'work' });
 
-    this.caseStudies$ = this.apiService
-      .getCaseStudies()
-      .subscribe(
-        caseStudies =>
-          (this.caseStudies = caseStudies.map(caseStudy => ({
-            ...caseStudy,
-            thumbnail: this.apiPipe.transform(caseStudy.thumbnail)
-          })))
-      );
+    this.caseStudies$ = this.apiService.getCaseStudies().subscribe(
+      caseStudies =>
+        (this.caseStudies = caseStudies.map(caseStudy => ({
+          ...caseStudy,
+          thumbnail: this.apiPipe.transform(caseStudy.thumbnail)
+        })))
+    );
   }
 
   ngOnDestroy() {

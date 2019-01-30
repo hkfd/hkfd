@@ -9,7 +9,7 @@ import {
   Data
 } from 'testing';
 
-import { Api } from 'api';
+import { Career } from 'api';
 import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;
@@ -65,14 +65,14 @@ describe('CareerComponent', () => {
 
     describe('Section', () => {
       it('should display title if `title`', () => {
-        (comp.career as Api.Career).content[0].title = 'Section Title';
+        (comp.career as Career).content[0].title = 'Section Title';
         fixture.detectChanges();
 
         expect(page.sectionTitle.textContent).toEqual('Section Title');
       });
 
       it('should not display title if no `title`', () => {
-        (comp.career as Api.Career).content[0].title = undefined;
+        (comp.career as Career).content[0].title = undefined;
         fixture.detectChanges();
 
         expect(page.sectionTitle).toBeFalsy();
@@ -83,7 +83,7 @@ describe('CareerComponent', () => {
       });
 
       it('should set `TextBlockComponent` `data` as `data`', () => {
-        expect(page.textBlockComponent.data).toEqual((comp.career as Api.Career)
+        expect(page.textBlockComponent.data).toEqual((comp.career as Career)
           .content[0].data[0] as any);
       });
     });

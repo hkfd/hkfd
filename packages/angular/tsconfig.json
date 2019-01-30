@@ -15,6 +15,8 @@
       "shared": ["app/shared"],
       "shared/*": ["app/shared/*"],
       "environment": ["environments/environment"],
+      "generic": ["app/shared/generic"],
+      "prismic": ["app/shared/prismic"],
       "testing": ["testing"]
     }
   }

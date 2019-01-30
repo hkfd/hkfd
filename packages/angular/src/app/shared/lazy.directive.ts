@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
-import { Generic } from './generic';
+import { Lazy } from 'generic';
 
 @Directive({
   selector: '[lazy]'
 })
 export class LazyDirective implements AfterViewInit, OnDestroy {
   @Input('lazy')
-  data!: Generic.Lazy;
+  data!: Lazy;
   private observer: IntersectionObserver | undefined;
 
   constructor(

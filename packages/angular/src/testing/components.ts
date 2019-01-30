@@ -1,6 +1,16 @@
 import { Component, Input } from '@angular/core';
 
-import { Api, Prismic, Generic } from 'shared';
+import {
+  Sentence as ApiSentence,
+  CaseStudy as ApiCaseStudy,
+  TextBlock as ApiTextBlock
+} from 'api';
+import { Text as PrismicText } from 'prismic';
+import {
+  Image as GenericImage,
+  Video as GenericVideo,
+  Audio as GenericAudio
+} from 'generic';
 
 @Component({
   selector: 'image-component',
@@ -8,7 +18,7 @@ import { Api, Prismic, Generic } from 'shared';
 })
 export class StubImageComponent {
   @Input()
-  image!: Generic.Image;
+  image!: GenericImage;
 }
 
 @Component({
@@ -17,7 +27,7 @@ export class StubImageComponent {
 })
 export class StubTextComponent {
   @Input()
-  text!: Api.Sentence;
+  text!: ApiSentence;
 }
 
 @Component({
@@ -26,7 +36,7 @@ export class StubTextComponent {
 })
 export class StubPrismicTextBlockComponent {
   @Input()
-  data!: Prismic.Text[];
+  data!: PrismicText[];
 }
 
 @Component({
@@ -35,7 +45,7 @@ export class StubPrismicTextBlockComponent {
 })
 export class StubImageBlockComponent {
   @Input()
-  data!: Generic.Image;
+  data!: GenericImage;
 }
 
 @Component({
@@ -44,7 +54,7 @@ export class StubImageBlockComponent {
 })
 export class StubDuoBlockComponent {
   @Input()
-  data!: Generic.Image[];
+  data!: GenericImage[];
 }
 
 @Component({
@@ -53,7 +63,7 @@ export class StubDuoBlockComponent {
 })
 export class StubGalleryBlockComponent {
   @Input()
-  data!: Generic.Image[];
+  data!: GenericImage[];
 }
 
 @Component({
@@ -62,7 +72,7 @@ export class StubGalleryBlockComponent {
 })
 export class StubVideoBlockComponent {
   @Input()
-  data!: Generic.Video;
+  data!: GenericVideo;
 }
 
 @Component({
@@ -71,7 +81,7 @@ export class StubVideoBlockComponent {
 })
 export class StubAudioBlockComponent {
   @Input()
-  data!: Generic.Audio;
+  data!: GenericAudio;
 }
 
 @Component({
@@ -86,7 +96,7 @@ export class StubSliderComponent {
   @Input()
   delay = 2000;
   @Input()
-  images!: Generic.Image[];
+  images!: GenericImage[];
 }
 
 @Component({
@@ -95,7 +105,7 @@ export class StubSliderComponent {
 })
 export class StubSliderWorkComponent extends StubSliderComponent {
   @Input()
-  caseStudies!: Api.CaseStudy[];
+  caseStudies!: ApiCaseStudy[];
 }
 
 @Component({
@@ -110,5 +120,5 @@ export class StubFormComponent {}
 })
 export class StubTextBlockComponent {
   @Input()
-  data!: Api.Blocks.TextBlock;
+  data!: ApiTextBlock;
 }

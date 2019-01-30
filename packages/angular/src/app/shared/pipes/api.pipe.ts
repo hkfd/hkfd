@@ -1,7 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { environment } from 'environment';
-import { Api, Generic } from 'shared';
+import {
+  Image as GenericImage,
+  Video as GenericVideo,
+  Audio as GenericAudio
+} from 'generic';
+import { Image as ApiImage, Video as ApiVideo, Audio as ApiAudio } from 'api';
 
 export const Sizes = [
   { width: 550, height: 300 },
@@ -18,8 +23,8 @@ export class ApiPipe implements PipeTransform {
   private transformImage({
     image: { name, alt }
   }: {
-    image: Api.Image;
-  }): Generic.Image {
+    image: ApiImage;
+  }): GenericImage {
     return {
       src: `https://res.cloudinary.com/${
         environment.cloudinaryName
@@ -38,11 +43,7 @@ export class ApiPipe implements PipeTransform {
     };
   }
 
-  private transformVideo({
-    video: { id }
-  }: {
-    video: Api.Video;
-  }): Generic.Video {
+  private transformVideo({ video: { id } }: { video: ApiVideo }): GenericVideo {
     return {
       src: {
         attr: 'src',
@@ -54,8 +55,8 @@ export class ApiPipe implements PipeTransform {
   private transformAudio({
     audio: { url }
   }: {
-    audio: Api.Audio;
-  }): Generic.Audio {
+    audio: ApiAudio;
+  }): GenericAudio {
     return {
       url
     };

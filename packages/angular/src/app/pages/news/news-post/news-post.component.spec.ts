@@ -15,7 +15,7 @@ import {
   Data
 } from 'testing';
 
-import { Prismic } from 'shared';
+import { Post } from 'prismic';
 import { NewsPostComponent } from './news-post.component';
 
 let activatedRoute: ActivatedRouteStub;
@@ -101,7 +101,7 @@ describe('NewsPostComponent', () => {
 
         describe('no `title`', () => {
           beforeEach(() => {
-            ((comp.post as Prismic.Post).data.title as any) = undefined;
+            ((comp.post as Post).data.title as any) = undefined;
             fixture.detectChanges();
           });
 
@@ -114,7 +114,7 @@ describe('NewsPostComponent', () => {
       describe('Thumbnail', () => {
         describe('has `image.proxy.url`', () => {
           beforeEach(() => {
-            (comp.post as Prismic.Post).data.image.proxy.url = 'test.jpg';
+            (comp.post as Post).data.image.proxy.url = 'test.jpg';
             fixture.detectChanges();
           });
 
@@ -123,15 +123,12 @@ describe('NewsPostComponent', () => {
           });
 
           it('should call `PrismicPipe` with `data`', () => {
-            expect(prismicPipe).toHaveBeenCalledWith(
-              (comp.post as Prismic.Post).data
-            );
+            expect(prismicPipe).toHaveBeenCalledWith((comp.post as Post).data);
           });
 
           it('should set `ImageComponent` `image` as `data`', () => {
-            expect(page.imageComponent.image).toEqual(
-              (comp.post as Prismic.Post).data as any
-            );
+            expect(page.imageComponent.image).toEqual((comp.post as Post)
+              .data as any);
           });
 
           it('should set `ImageComponent` `full-height` attribute', () => {
@@ -141,8 +138,7 @@ describe('NewsPostComponent', () => {
 
         describe('no `image.proxy.url`', () => {
           beforeEach(() => {
-            ((comp.post as Prismic.Post).data.image.proxy
-              .url as any) = undefined;
+            ((comp.post as Post).data.image.proxy.url as any) = undefined;
             fixture.detectChanges();
           });
 
@@ -166,13 +162,13 @@ describe('NewsPostComponent', () => {
 
         it('should not call `PrismicPipe` with `primary`', () => {
           expect(prismicPipe).not.toHaveBeenCalledWith(
-            (comp.post as Prismic.Post).data.body[0].primary
+            (comp.post as Post).data.body[0].primary
           );
         });
 
         it('should set `TextBlockComponent` `data` as `primary.text`', () => {
           expect(page.textBlockComponent.data).toEqual(
-            (comp.post as Prismic.Post).data.body[0].primary.text
+            (comp.post as Post).data.body[0].primary.text
           );
         });
       });
@@ -189,13 +185,13 @@ describe('NewsPostComponent', () => {
 
         it('should call `PrismicPipe` with `primary`', () => {
           expect(prismicPipe).toHaveBeenCalledWith(
-            (comp.post as Prismic.Post).data.body[0].primary
+            (comp.post as Post).data.body[0].primary
           );
         });
 
         it('should set `ImageBlockComponent` `data` as `primary`', () => {
           expect(page.imageBlockComponent.data).toEqual(
-            (comp.post as Prismic.Post).data.body[0].primary
+            (comp.post as Post).data.body[0].primary
           );
         });
       });
@@ -212,13 +208,13 @@ describe('NewsPostComponent', () => {
 
         it('should call `PrismicPipe` with `items`', () => {
           expect(prismicPipe).toHaveBeenCalledWith(
-            (comp.post as Prismic.Post).data.body[0].items
+            (comp.post as Post).data.body[0].items
           );
         });
 
         it('should set `DuoBlockComponent` `data` as `items`', () => {
           expect(page.duoBlockComponent.data).toEqual(
-            (comp.post as Prismic.Post).data.body[0].items
+            (comp.post as Post).data.body[0].items
           );
         });
       });
@@ -235,13 +231,13 @@ describe('NewsPostComponent', () => {
 
         it('should call `PrismicPipe` with `items`', () => {
           expect(prismicPipe).toHaveBeenCalledWith(
-            (comp.post as Prismic.Post).data.body[0].items
+            (comp.post as Post).data.body[0].items
           );
         });
 
         it('should set `GalleryBlockComponent` `data` as `items`', () => {
           expect(page.galleryBlockComponent.data).toEqual(
-            (comp.post as Prismic.Post).data.body[0].items
+            (comp.post as Post).data.body[0].items
           );
         });
       });
@@ -258,13 +254,13 @@ describe('NewsPostComponent', () => {
 
         it('should call `PrismicPipe` with `primary`', () => {
           expect(prismicPipe).toHaveBeenCalledWith(
-            (comp.post as Prismic.Post).data.body[0].primary
+            (comp.post as Post).data.body[0].primary
           );
         });
 
         it('should set `VideoBlockComponent` `data` as `primary`', () => {
           expect(page.videoBlockComponent.data).toEqual(
-            (comp.post as Prismic.Post).data.body[0].primary
+            (comp.post as Post).data.body[0].primary
           );
         });
       });

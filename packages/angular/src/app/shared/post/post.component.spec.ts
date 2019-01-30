@@ -15,7 +15,7 @@ import {
   Data
 } from 'testing';
 
-import { Api } from 'shared';
+import { Post, ImageBlock } from 'api';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;
@@ -155,7 +155,7 @@ describe('PostComponent', () => {
       describe('Title', () => {
         describe('Has `title`', () => {
           beforeEach(() => {
-            (comp.post as Api.Post).content[0].title = 'Title';
+            (comp.post as Post).content[0].title = 'Title';
             fixture.detectChanges();
           });
 
@@ -166,7 +166,7 @@ describe('PostComponent', () => {
 
         describe('No `title`', () => {
           beforeEach(() => {
-            (comp.post as Api.Post).content[0].title = undefined;
+            (comp.post as Post).content[0].title = undefined;
             fixture.detectChanges();
           });
 
@@ -220,16 +220,16 @@ describe('PostComponent', () => {
         });
 
         it('should set `ImageBlockComponent` `full-bleed` attribute if `content.data.fullBleed`', () => {
-          ((comp.post as Api.Post).content[0]
-            .data[0] as Api.Blocks.ImageBlock).fullBleed = true;
+          ((comp.post as Post).content[0]
+            .data[0] as ImageBlock).fullBleed = true;
           fixture.detectChanges();
 
           expect(page.imageBlock.getAttribute('full-bleed')).toBeTruthy();
         });
 
         it('should not set `ImageBlockComponent` `full-bleed` attribute if no `content.data.fullBleed`', () => {
-          ((comp.post as Api.Post).content[0]
-            .data[0] as Api.Blocks.ImageBlock).fullBleed = undefined;
+          ((comp.post as Post).content[0]
+            .data[0] as ImageBlock).fullBleed = undefined;
           fixture.detectChanges();
 
           expect(page.imageBlock.getAttribute('full-bleed')).toBeFalsy();

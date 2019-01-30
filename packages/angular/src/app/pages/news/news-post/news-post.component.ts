@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
-import { Prismic } from 'shared';
+import { Post } from 'prismic';
 
 @Component({
   selector: 'app-news-post',
@@ -15,7 +15,7 @@ export class NewsPostComponent implements OnInit, OnDestroy {
   richText = RichText;
 
   post$!: Subscription;
-  post: Prismic.Post | undefined;
+  post: Post | undefined;
 
   constructor(private route: ActivatedRoute) {}
 

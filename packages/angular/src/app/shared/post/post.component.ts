@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { Api } from 'shared';
+import { Post } from 'api';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +12,7 @@ import { Api } from 'shared';
 })
 export class PostComponent implements OnInit, OnDestroy {
   post$!: Subscription;
-  post: Api.Post | undefined;
+  post: Post | undefined;
 
   @HostBinding('class')
   layout!: string;

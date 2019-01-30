@@ -1,10 +1,10 @@
 import { makeImmutable } from 'testing';
 
-import { Prismic as PrismicType } from 'shared';
+import { Post, PostsResponse, RefResponse, Image, Video, Text } from 'prismic';
 
 export namespace Prismic {
   export const getPost = () => {
-    const post: PrismicType.Post = {
+    const post: Post = {
       alternate_languages: [],
       data: {
         title: [{ spans: [], text: 'Post 1', type: 'h1' }],
@@ -67,7 +67,7 @@ export namespace Prismic {
   };
 
   export const getPostsResponse = () => {
-    const postsResponse: PrismicType.PostsResponse = {
+    const postsResponse: PostsResponse = {
       license: '',
       next_page: null,
       page: 1,
@@ -269,8 +269,8 @@ export namespace Prismic {
       | 'post-6'
   >(
     uid?: T
-  ): T extends string ? PrismicType.Post : PrismicType.Post[] => {
-    const posts: PrismicType.Post[] = [
+  ): T extends string ? Post : Post[] => {
+    const posts: Post[] = [
       {
         alternate_languages: [],
         data: {
@@ -528,7 +528,7 @@ export namespace Prismic {
   };
 
   export const getRefResponse = () => {
-    const refResponse: PrismicType.RefResponse = {
+    const refResponse: RefResponse = {
       bookmarks: {},
       experiments: {},
       forms: {},
@@ -564,7 +564,7 @@ export namespace Prismic {
   };
 
   export const getText = () => {
-    const text: PrismicType.Text[] = [
+    const text: Text[] = [
       {
         spans: [],
         text: 'This is a sentence.',
@@ -581,7 +581,7 @@ export namespace Prismic {
   };
 
   export const getImage = () => {
-    const image: PrismicType.Image = {
+    const image: Image = {
       dimensions: {
         width: 1,
         height: 1
@@ -629,7 +629,7 @@ export namespace Prismic {
   };
 
   export const getVideo = () => {
-    const video: PrismicType.Video = {
+    const video: Video = {
       link_type: 'external',
       url: 'youtube.com'
     };

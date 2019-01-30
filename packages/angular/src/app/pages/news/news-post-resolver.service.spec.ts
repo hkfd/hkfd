@@ -10,7 +10,8 @@ import {
 import { Observable, of } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 
-import { MetaService, PrismicService, Prismic } from 'shared';
+import { MetaService, PrismicService } from 'shared';
+import { Post } from 'prismic';
 import { NewsPostResolver } from './news-post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
@@ -57,7 +58,7 @@ describe('NewsPostResolver', () => {
 
     it('should call `MetaService` `setMetaTags` with post args', () => {
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Prismic.Post
+        Post
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
@@ -72,14 +73,14 @@ describe('NewsPostResolver', () => {
     });
 
     it('should not call `MetaService` `setMetaTags` with `meta.title` arg if no `title`', () => {
-      const post: Prismic.Post = {
+      const post: Post = {
         ...Data.Prismic.getPost(),
         data: { ...Data.Prismic.getPost().data, title: null as any }
       };
       (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Prismic.Post
+        Post
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
@@ -93,14 +94,14 @@ describe('NewsPostResolver', () => {
     });
 
     it('should not call `MetaService` `setMetaTags` with `meta.description` arg if no `description`', () => {
-      const post: Prismic.Post = {
+      const post: Post = {
         ...Data.Prismic.getPost(),
         data: { ...Data.Prismic.getPost().data, description: null as any }
       };
       (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Prismic.Post
+        Post
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
@@ -114,14 +115,14 @@ describe('NewsPostResolver', () => {
     });
 
     it('should not call `MetaService` `setMetaTags` with `meta.image` arg if no `image`', () => {
-      const post: Prismic.Post = {
+      const post: Post = {
         ...Data.Prismic.getPost(),
         data: { ...Data.Prismic.getPost().data, image: null as any }
       };
       (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
 
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Prismic.Post
+        Post
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
@@ -136,7 +137,7 @@ describe('NewsPostResolver', () => {
 
     it('should return `post`', () => {
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Prismic.Post
+        Post
       >)
         .pipe(timeout(100))
         .subscribe(post =>
@@ -150,7 +151,7 @@ describe('NewsPostResolver', () => {
 
     it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Prismic.Post
+        Post
       >)
         .pipe(timeout(100))
         .subscribe();

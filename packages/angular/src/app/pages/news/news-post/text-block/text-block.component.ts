@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { RichText } from 'prismic-dom';
 
-import { Prismic } from 'shared';
+import { Post, Text } from 'prismic';
 
 @Component({
   selector: 'prismic-text-block',
@@ -16,9 +16,9 @@ export class TextBlockComponent {
   richText = RichText;
 
   @Input()
-  data!: Prismic.Text[];
+  data!: Text[];
 
-  linkResolver({ type, uid }: Prismic.Post) {
+  linkResolver({ type, uid }: Post) {
     if (type === 'news') return `/news/${uid}`;
 
     return '/';

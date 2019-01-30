@@ -6,11 +6,11 @@ import { Observable, of } from 'rxjs';
 import { map, flatMap, tap, catchError } from 'rxjs/operators';
 
 import { LoggerService } from './logger.service';
-import { Prismic } from './prismic';
+import { Post, RefResponse, PostsResponse } from 'prismic';
 import { environment } from 'environment';
 
 const REF_KEY = makeStateKey<string>('prismic-ref');
-const POST_KEY = makeStateKey<Prismic.Post>('prismic-post');
+const POST_KEY = makeStateKey<Post>('prismic-post');
 
 @Injectable({
   providedIn: 'root'
@@ -33,18 +33,16 @@ export class PrismicService {
       );
     }
 
-    return this.http
-      .get<Prismic.RefResponse>(environment.prismic.endpoint)
-      .pipe(
-        map(({ refs }) => refs.find(ref => ref.isMasterRef)),
-        map(ref => (ref ? ref.ref : '')),
-        tap(ref => this.logger.log('getRef', ref)),
-        tap(ref => this.state.set(REF_KEY, ref)),
-        catchError(this.handleError<string>('getRef'))
-      );
+    return this.http.get<RefResponse>(environment.prismic.endpoint).pipe(
+      map(({ refs }) => refs.find(ref => ref.isMasterRef)),
+      map(ref => (ref ? ref.ref : '')),
+      tap(ref => this.logger.log('getRef', ref)),
+      tap(ref => this.state.set(REF_KEY, ref)),
+      catchError(this.handleError<string>('getRef'))
+    );
   }
 
-  getPosts(firstLoad: boolean = false): Observable<Prismic.PostsResponse> {
+  getPosts(firstLoad: boolean = false): Observable<PostsResponse> {
     if (!firstLoad) this.postPage++;
 
     return this.getRef().pipe(
@@ -61,20 +59,20 @@ export class PrismicService {
           )
           .append('page', `${firstLoad ? 1 : this.postPage}`);
 
-        return this.http.get<Prismic.PostsResponse>(
+        return this.http.get<PostsResponse>(
           `${environment.prismic.endpoint}/documents/search`,
           { params }
         );
       }),
       tap(postsRes => this.logger.log('getPosts', postsRes)),
-      catchError(this.handleError<Prismic.PostsResponse>('getPosts'))
+      catchError(this.handleError<PostsResponse>('getPosts'))
     );
   }
 
-  getPost(uid: string): Observable<Prismic.Post> {
+  getPost(uid: string): Observable<Post> {
     this.logger.log(`getPost ${uid}`);
 
-    const cache = this.state.get<Prismic.Post | null>(POST_KEY, null);
+    const cache = this.state.get<Post | null>(POST_KEY, null);
     if (cache && cache.uid === uid) {
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post))
@@ -87,7 +85,7 @@ export class PrismicService {
           .append('ref', ref)
           .append('q', `[[at(my.news.uid,"${uid}")]]`);
 
-        return this.http.get<Prismic.PostsResponse>(
+        return this.http.get<PostsResponse>(
           `${environment.prismic.endpoint}/documents/search`,
           { params }
         );
@@ -95,7 +93,7 @@ export class PrismicService {
       map(({ results }) => results[0]),
       tap(post => this.logger.log('getPost', post)),
       tap(post => this.state.set(POST_KEY, post)),
-      catchError(this.handleError<Prismic.Post>('getPost'))
+      catchError(this.handleError<Post>('getPost'))
     );
   }
 
