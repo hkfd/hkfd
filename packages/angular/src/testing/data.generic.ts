@@ -1,5 +1,3 @@
-import { makeImmutable } from 'testing';
-
 import { Image, Video, Audio, Lazy } from 'generic';
 
 export namespace Generic {
@@ -35,7 +33,7 @@ export namespace Generic {
       alt: 'Example image'
     };
 
-    return makeImmutable(image);
+    return image;
   };
 
   export const getDuo = () => {
@@ -58,7 +56,7 @@ export namespace Generic {
       }
     ];
 
-    return makeImmutable(duo);
+    return duo;
   };
 
   export const getImages = () => {
@@ -105,7 +103,7 @@ export namespace Generic {
       }
     ];
 
-    return makeImmutable(images);
+    return images;
   };
 
   export const getVideo = () => {
@@ -116,7 +114,7 @@ export namespace Generic {
       }
     };
 
-    return makeImmutable(video);
+    return video;
   };
 
   export const getAudio = () => {
@@ -124,7 +122,7 @@ export namespace Generic {
       url: 'http://example.com/'
     };
 
-    return makeImmutable(audio);
+    return audio;
   };
 
   export const getLazy = () => {
@@ -133,6 +131,6 @@ export namespace Generic {
       val: ['example-xs.jpg 100w', 'example-sm.jpg 200w']
     };
 
-    return makeImmutable(lazy);
+    return lazy;
   };
 }

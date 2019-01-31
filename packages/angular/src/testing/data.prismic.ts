@@ -1,5 +1,3 @@
-import { makeImmutable } from 'testing';
-
 import { Post, PostsResponse, RefResponse, Image, Video, Text } from 'prismic';
 
 export namespace Prismic {
@@ -63,7 +61,7 @@ export namespace Prismic {
       uid: 'post-1'
     };
 
-    return makeImmutable(post);
+    return post;
   };
 
   export const getPostsResponse = () => {
@@ -255,7 +253,7 @@ export namespace Prismic {
       version: ''
     };
 
-    return makeImmutable(postsResponse);
+    return postsResponse;
   };
 
   export const getPosts = <
@@ -521,10 +519,10 @@ export namespace Prismic {
       }
     ];
 
-    if (!uid) return makeImmutable(posts) as any;
+    if (!uid) return posts as any;
 
     const foundPost = posts.find(post => post.uid === uid);
-    return makeImmutable(foundPost) as any;
+    return foundPost as any;
   };
 
   export const getRefResponse = () => {
@@ -560,7 +558,7 @@ export namespace Prismic {
       version: ''
     };
 
-    return makeImmutable(refResponse);
+    return refResponse;
   };
 
   export const getText = () => {
@@ -577,7 +575,7 @@ export namespace Prismic {
       }
     ];
 
-    return makeImmutable(text);
+    return text;
   };
 
   export const getImage = () => {
@@ -625,7 +623,7 @@ export namespace Prismic {
       }
     };
 
-    return makeImmutable(image);
+    return image;
   };
 
   export const getVideo = () => {
@@ -634,6 +632,6 @@ export namespace Prismic {
       url: 'youtube.com'
     };
 
-    return makeImmutable(video);
+    return video;
   };
 }

@@ -9,7 +9,7 @@ import { NgModule, Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, SlicePipe } from '@angular/common';
 
-import { RouterTestingModule, makeImmutable } from 'testing';
+import { RouterTestingModule } from 'testing';
 
 import { HeaderComponent } from './header.component';
 
@@ -43,11 +43,12 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => createComponent()));
 
   beforeEach(() => {
-    comp.pages = makeImmutable([
+    const pages = () => [
       { url: '/' },
       { title: 'Page 1', url: '/page-1' },
       { title: 'Page 2', url: '/page-2' }
-    ]);
+    ];
+    comp.pages = pages();
     fixture.detectChanges();
   });
 

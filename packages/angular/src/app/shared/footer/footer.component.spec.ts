@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
-import { makeImmutable } from 'testing';
-
 import { FooterComponent } from './footer.component';
 
 let comp: FooterComponent;
@@ -17,7 +15,7 @@ describe('FooterComponent', () => {
   beforeEach(async(() => createComponent()));
 
   beforeEach(() => {
-    comp.links = makeImmutable([
+    const links = () => [
       {
         url: 'http://example1.com/',
         icon: 'http://testing/assets/1.jpg',
@@ -28,7 +26,8 @@ describe('FooterComponent', () => {
         icon: 'http://testing/assets/2.jpg',
         alt: 'Image'
       }
-    ]);
+    ];
+    comp.links = links();
     fixture.detectChanges();
   });
 
