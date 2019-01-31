@@ -67,34 +67,3 @@ shouldRunDeploy() {
     return 1;
   fi
 }
-
-shouldRunRelease() {
-  isBuildableCommit() {
-    local typeRegex
-    typeRegex="([a-z]+)(\(\w+\))?:"
-
-    if [[ "$1" =~ $typeRegex ]]; then
-      local commitType
-      commitType=${BASH_REMATCH[1]}
-
-      if [[ $commitType =~ (feat|fix|perf|refactor) ]]; then
-        printf "${PASS}Commit type: ${commitType}${RESET}"
-        return 0
-      else
-        printf "${SKIP}Commit type: ${commitType}${RESET}"
-        return 1
-      fi
-    else
-      printf "${FAIL}No commit type found${RESET}"
-      return 1
-    fi
-  }
-
-  if isBuildableCommit "$(eval $COMMIT_MESSAGE)"; then
-    printf "${PASS_BG} Releasing ${RESET}"
-    return 0;
-  else
-    printf "${SKIP_BG} Not releasing ${RESET}"
-    return 1;
-  fi
-}
