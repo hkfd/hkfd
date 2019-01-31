@@ -10,7 +10,6 @@ import { DuoBlockComponent } from './duo-block.component';
 let compHost: TestHostComponent;
 let comp: DuoBlockComponent;
 let fixture: ComponentFixture<TestHostComponent>;
-let slicePipe: jasmine.Spy;
 let page: Page;
 
 @Component({
@@ -44,7 +43,11 @@ describe('DuoBlockComponent', () => {
 
   describe('Template', () => {
     it('should call `SlicePipe` with `images` and `0:2` args', () => {
-      expect(slicePipe).toHaveBeenCalledWith(Data.Generic.getDuo(), 0, 2);
+      expect(SlicePipe.prototype.transform).toHaveBeenCalledWith(
+        Data.Generic.getDuo(),
+        0,
+        2
+      );
     });
 
     it('should display images', () => {
@@ -85,7 +88,7 @@ function createComponent() {
   compHost = fixture.componentInstance;
   comp = fixture.debugElement.query(By.directive(DuoBlockComponent))
     .componentInstance;
-  slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(SlicePipe.prototype, 'transform');
   page = new Page();
 
   fixture.detectChanges();

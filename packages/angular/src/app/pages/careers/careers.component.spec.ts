@@ -19,7 +19,6 @@ let fixture: ComponentFixture<CareersComponent>;
 let page: Page;
 let metaService: MetaService;
 let apiService: ApiService;
-let apiPipe: jasmine.Spy;
 
 describe('CareersComponent', () => {
   beforeEach(async(() =>
@@ -61,10 +60,10 @@ describe('CareersComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `careers$` `unsubscribe`', () => {
-      const spy = spyOn(comp.careers$, 'unsubscribe').and.callThrough();
+      jest.spyOn(comp.careers$, 'unsubscribe');
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect(comp.careers$.unsubscribe).toHaveBeenCalled();
     });
   });
 
@@ -80,7 +79,9 @@ describe('CareersComponent', () => {
         });
 
         it('should call `ApiPipe` with image', () => {
-          expect(apiPipe).toHaveBeenCalledWith(CareersImages.hiring);
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+            CareersImages.hiring
+          );
         });
 
         it('should set `ImageComponent` `image` as `image`', () => {
@@ -102,7 +103,9 @@ describe('CareersComponent', () => {
         });
 
         it('should call `ApiPipe` with image', () => {
-          expect(apiPipe).toHaveBeenCalledWith(CareersImages.career);
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+            CareersImages.career
+          );
         });
 
         it('should set `ImageComponent` `image` as `image`', () => {
@@ -136,7 +139,7 @@ describe('CareersComponent', () => {
 
           it('should set href', () => {
             expect(page.careers[0].href).toBe(
-              `http://localhost:9876/${Data.Api.getCareers('Career 1').id}`
+              `http://localhost/${Data.Api.getCareers('Career 1').id}`
             );
           });
         });
@@ -188,7 +191,7 @@ function createComponent() {
   page = new Page();
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

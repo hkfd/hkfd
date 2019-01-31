@@ -6,9 +6,9 @@ import { PostsResponse, Post } from 'prismic';
 
 export class MockPrismicService {
   constructor() {
-    this.getRef = spyOn(this, 'getRef').and.callThrough();
-    this.getPosts = spyOn(this, 'getPosts').and.callThrough();
-    this.getPost = spyOn(this, 'getPost').and.callThrough();
+    jest.spyOn(this, 'getRef');
+    jest.spyOn(this, 'getPosts');
+    jest.spyOn(this, 'getPost');
   }
 
   getRef(): Observable<string> {

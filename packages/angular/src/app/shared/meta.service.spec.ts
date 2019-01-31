@@ -5,8 +5,8 @@ import { LoggerService, MockLoggerService } from 'testing';
 import { MetaService } from './meta.service';
 
 let metaService: MetaService;
-let meta: MetaStub;
-let title: TitleStub;
+let meta: Meta;
+let title: Title;
 
 describe('MetaService', () => {
   beforeEach(async(() =>
@@ -162,28 +162,10 @@ describe('MetaService', () => {
   });
 });
 
-class TitleStub {
-  setTitle: jasmine.Spy;
-
-  constructor() {
-    const titleInstance = TestBed.get(Title);
-
-    this.setTitle = spyOn(titleInstance, 'setTitle').and.callThrough();
-  }
-}
-
-class MetaStub {
-  updateTag: jasmine.Spy;
-
-  constructor() {
-    const metaInstance = TestBed.get(Meta);
-
-    this.updateTag = spyOn(metaInstance, 'updateTag').and.callThrough();
-  }
-}
-
 function createService() {
   metaService = TestBed.get(MetaService);
-  meta = new MetaStub();
-  title = new TitleStub();
+  meta = TestBed.get(Meta);
+  jest.spyOn(meta, 'updateTag');
+  title = TestBed.get(Title);
+  jest.spyOn(title, 'setTitle');
 }

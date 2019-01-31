@@ -17,7 +17,6 @@ let comp: ContactComponent;
 let fixture: ComponentFixture<ContactComponent>;
 let page: Page;
 let metaService: MetaService;
-let apiPipe: jasmine.Spy;
 
 describe('ContactComponent', () => {
   beforeEach(async(() =>
@@ -64,7 +63,9 @@ describe('ContactComponent', () => {
       });
 
       it('should call `ApiPipe` with `image`', () => {
-        expect(apiPipe).toHaveBeenCalledWith(ContactImages.contact);
+        expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+          ContactImages.contact
+        );
       });
 
       it('should set `ImageComponent` `image` as `image`', () => {
@@ -106,7 +107,7 @@ function createComponent() {
   comp = fixture.componentInstance;
   page = new Page();
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

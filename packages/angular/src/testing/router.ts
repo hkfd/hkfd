@@ -13,7 +13,7 @@ import { makeImmutable } from 'testing';
 @Injectable()
 export class ActivatedRouteStub {
   constructor() {
-    this.data.subscribe = spyOn(this.data, 'subscribe').and.callThrough();
+    jest.spyOn(this.data, 'subscribe');
   }
 
   private queryParamSubject = new BehaviorSubject(
@@ -73,7 +73,7 @@ export class ActivatedRouteStub {
 
 export class RouterStub {
   constructor() {
-    this.navigate = spyOn(this, 'navigate').and.callThrough();
+    jest.spyOn(this, 'navigate');
   }
 
   navigate() {

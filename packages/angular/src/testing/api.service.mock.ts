@@ -6,13 +6,13 @@ import { Data } from './';
 
 export class MockApiService {
   constructor() {
-    this.getServices = spyOn(this, 'getServices').and.callThrough();
-    this.getCaseStudies = spyOn(this, 'getCaseStudies').and.callThrough();
-    this.getClients = spyOn(this, 'getClients').and.callThrough();
-    this.getCareers = spyOn(this, 'getCareers').and.callThrough();
-    this.getCareer = spyOn(this, 'getCareer').and.callThrough();
-    this.getTeam = spyOn(this, 'getTeam').and.callThrough();
-    this.getPost = spyOn(this, 'getPost').and.callThrough();
+    jest.spyOn(this, 'getServices');
+    jest.spyOn(this, 'getCaseStudies');
+    jest.spyOn(this, 'getClients');
+    jest.spyOn(this, 'getCareers');
+    jest.spyOn(this, 'getCareer');
+    jest.spyOn(this, 'getTeam');
+    jest.spyOn(this, 'getPost');
   }
 
   getServices(): Observable<Service[]> {

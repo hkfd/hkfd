@@ -11,6 +11,7 @@ import {
   Data
 } from 'testing';
 import { of, Subscription } from 'rxjs';
+import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
 import { NewsComponent } from './news.component';
@@ -19,8 +20,6 @@ let comp: NewsComponent;
 let fixture: ComponentFixture<NewsComponent>;
 let metaService: MetaService;
 let prismicService: PrismicService;
-let prismicPipe: jasmine.Spy;
-let richText: RichTextStub;
 let page: Page;
 
 describe('NewsComponent', () => {
@@ -49,7 +48,7 @@ describe('NewsComponent', () => {
     });
 
     it('should call `getPosts` with `true` arg', () => {
-      expect(page.getPosts).toHaveBeenCalledWith(true);
+      expect(comp.getPosts).toHaveBeenCalledWith(true);
     });
   });
 
@@ -58,10 +57,10 @@ describe('NewsComponent', () => {
       beforeEach(() => (comp.post$ = new Subscription()));
 
       it('should call `post$` `unsubscribe`', () => {
-        const spy = spyOn(comp.post$ as any, 'unsubscribe').and.callThrough();
+        jest.spyOn(comp.post$ as any, 'unsubscribe');
         comp.ngOnDestroy();
 
-        expect(spy).toHaveBeenCalled();
+        expect((comp.post$ as any).unsubscribe).toHaveBeenCalled();
       });
     });
   });
@@ -98,7 +97,7 @@ describe('NewsComponent', () => {
     });
 
     it('should set `hasNextPage` as true if `next_page`', () => {
-      (prismicService.getPosts as jasmine.Spy).and.returnValue(
+      (prismicService.getPosts as jest.Mock).mockReturnValue(
         of({ results: null, next_page: 'page2' })
       );
 
@@ -107,7 +106,7 @@ describe('NewsComponent', () => {
     });
 
     it('should set `hasNextPage` as false if no `next_page`', () => {
-      (prismicService.getPosts as jasmine.Spy).and.returnValue(
+      (prismicService.getPosts as jest.Mock).mockReturnValue(
         of({ results: null, next_page: null })
       );
 
@@ -153,7 +152,7 @@ describe('NewsComponent', () => {
             });
 
             it('should call `PrismicPipe` with `data`', () => {
-              expect(prismicPipe).toHaveBeenCalledWith(
+              expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
                 Data.Prismic.getPosts('post-1').data
               );
             });
@@ -180,14 +179,14 @@ describe('NewsComponent', () => {
         });
 
         it('should call RichText `asText` with `title`', () => {
-          expect(richText.asText).toHaveBeenCalledWith(
+          expect(RichText.asText).toHaveBeenCalledWith(
             Data.Prismic.getPosts('post-1').data.title
           );
         });
 
         it('should set href', () => {
           expect(page.posts[0].href).toBe(
-            `http://localhost:9876/news/${Data.Prismic.getPosts('post-1').uid}`
+            `http://localhost/news/${Data.Prismic.getPosts('post-1').uid}`
           );
         });
       });
@@ -208,7 +207,7 @@ describe('NewsComponent', () => {
       it('should call `getPosts` on click', () => {
         page.loadMore.click();
 
-        expect(page.getPosts).toHaveBeenCalled();
+        expect(comp.getPosts).toHaveBeenCalled();
       });
     });
 
@@ -225,17 +224,7 @@ describe('NewsComponent', () => {
   });
 });
 
-class RichTextStub {
-  asText: jasmine.Spy;
-
-  constructor() {
-    this.asText = spyOn(comp.richText, 'asText').and.callThrough();
-  }
-}
-
 class Page {
-  getPosts: jasmine.Spy;
-
   get title() {
     return this.query<HTMLHeadingElement>('h1');
   }
@@ -263,7 +252,7 @@ class Page {
   }
 
   constructor() {
-    this.getPosts = spyOn(comp, 'getPosts').and.callThrough();
+    jest.spyOn(comp, 'getPosts');
   }
 
   private query<T>(selector: string): T {
@@ -281,8 +270,8 @@ function createComponent() {
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );
-  prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
-  richText = new RichTextStub();
+  jest.spyOn(MockPrismicPipe.prototype, 'transform');
+  jest.spyOn(RichText, 'asText');
   page = new Page();
 
   fixture.detectChanges();

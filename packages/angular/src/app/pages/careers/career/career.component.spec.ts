@@ -51,10 +51,10 @@ describe('CareerComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `career$` `unsubscribe`', () => {
-      const spy = spyOn(comp.career$, 'unsubscribe').and.callThrough();
+      jest.spyOn(comp.career$, 'unsubscribe');
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect(comp.career$.unsubscribe).toHaveBeenCalled();
     });
   });
 

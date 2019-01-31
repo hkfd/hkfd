@@ -1,4 +1,10 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  async,
+  fakeAsync,
+  tick
+} from '@angular/core/testing';
 import { NgModule, Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, SlicePipe } from '@angular/common';
@@ -10,7 +16,6 @@ import { HeaderComponent } from './header.component';
 let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
 let page: Page;
-let slicePipe: jasmine.Spy;
 
 @Component({
   template: ''
@@ -93,17 +98,21 @@ describe('HeaderComponent', () => {
       });
 
       it('should call `SlicePipe` with `0:1` arg', () => {
-        expect(slicePipe).toHaveBeenCalledWith(comp.pages, 0, 1);
+        expect(SlicePipe.prototype.transform).toHaveBeenCalledWith(
+          comp.pages,
+          0,
+          1
+        );
       });
 
       it('should set href', () => {
-        expect(page.navLogo.href).toBe('http://localhost:9876/');
+        expect(page.navLogo.href).toBe('http://localhost/');
       });
 
       it('should call `navClick` on click', () => {
         page.navLogo.click();
 
-        expect(page.navClick).toHaveBeenCalled();
+        expect(comp.navClick).toHaveBeenCalled();
       });
     });
 
@@ -115,7 +124,7 @@ describe('HeaderComponent', () => {
       it('should call `toggleMobile` on click', () => {
         page.navToggle.click();
 
-        expect(page.toggleMobile).toHaveBeenCalled();
+        expect(comp.toggleMobile).toHaveBeenCalled();
       });
     });
 
@@ -126,7 +135,10 @@ describe('HeaderComponent', () => {
 
       describe('Link', () => {
         it('should call `SlicePipe` with `1` arg', () => {
-          expect(slicePipe).toHaveBeenCalledWith(comp.pages, 1);
+          expect(SlicePipe.prototype.transform).toHaveBeenCalledWith(
+            comp.pages,
+            1
+          );
         });
 
         it('should display title', () => {
@@ -136,13 +148,13 @@ describe('HeaderComponent', () => {
         });
 
         it('should set href', () => {
-          expect(page.navLinks[0].href).toBe('http://localhost:9876/page-1');
+          expect(page.navLinks[0].href).toBe('http://localhost/page-1');
         });
 
         it('should call `navClick` on click', () => {
           page.navLinks[0].click();
 
-          expect(page.navClick).toHaveBeenCalled();
+          expect(comp.navClick).toHaveBeenCalled();
         });
 
         describe('Active', () => {
@@ -150,15 +162,13 @@ describe('HeaderComponent', () => {
             expect(page.navLinks[0].classList.contains('active')).toBeFalsy();
           });
 
-          it('should have class `active` on click', () => {
+          it('should have class `active` on click', fakeAsync(() => {
             page.navLinks[0].click();
+            fixture.detectChanges();
+            tick();
 
-            return fixture.whenStable().then(_ => {
-              expect(
-                page.navLinks[0].classList.contains('active')
-              ).toBeTruthy();
-            });
-          });
+            expect(page.navLinks[0].classList.contains('active')).toBeTruthy();
+          }));
         });
       });
     });
@@ -166,9 +176,6 @@ describe('HeaderComponent', () => {
 });
 
 class Page {
-  navClick: jasmine.Spy;
-  toggleMobile: jasmine.Spy;
-
   get navLogo() {
     return this.query<HTMLAnchorElement>('#nav-logo');
   }
@@ -180,8 +187,8 @@ class Page {
   }
 
   constructor() {
-    this.navClick = spyOn(comp, 'navClick').and.callThrough();
-    this.toggleMobile = spyOn(comp, 'toggleMobile').and.callThrough();
+    jest.spyOn(comp, 'navClick');
+    jest.spyOn(comp, 'toggleMobile');
   }
 
   private query<T>(selector: string): T {
@@ -195,7 +202,7 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(HeaderComponent);
   comp = fixture.componentInstance;
-  slicePipe = spyOn(SlicePipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(SlicePipe.prototype, 'transform');
   page = new Page();
 
   fixture.detectChanges();

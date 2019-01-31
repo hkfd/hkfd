@@ -154,7 +154,7 @@ describe('PrismicService', () => {
 
   describe('`getPosts`', () => {
     beforeEach(() =>
-      spyOn(prismicService, 'getRef').and.returnValue(of('abc'))
+      jest.spyOn(prismicService, 'getRef').mockReturnValue(of('abc'))
     );
 
     describe('Request', () => {
@@ -281,7 +281,7 @@ describe('PrismicService', () => {
 
   describe('`getPost`', () => {
     beforeEach(() =>
-      spyOn(prismicService, 'getRef').and.returnValue(of('abc'))
+      jest.spyOn(prismicService, 'getRef').mockReturnValue(of('abc'))
     );
 
     it('should call `TransferState` `get` with `POST_KEY` and `null` args', () => {

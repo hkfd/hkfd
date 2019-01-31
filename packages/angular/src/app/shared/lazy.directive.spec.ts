@@ -9,8 +9,7 @@ import { LazyDirective } from './lazy.directive';
 let comp: TestHostComponent;
 let fixture: ComponentFixture<TestHostComponent>;
 let lazyDirective: LazyDirective;
-let directive: Directive;
-let renderer: RendererStub;
+let renderer: Renderer2;
 let elementRef: ElementRef;
 let mockPlatformId: 'browser' | 'server';
 
@@ -26,9 +25,6 @@ describe('LazyDirective', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() => {
-      spyOn(lazyDirective, 'intersectionCallback').and.callFake(
-        () => undefined
-      );
       comp.lazy = Data.Generic.getLazy();
       fixture.detectChanges();
     });
@@ -48,9 +44,6 @@ describe('LazyDirective', () => {
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
       beforeEach(() => {
-        spyOn(lazyDirective, 'intersectionCallback').and.callFake(
-          () => undefined
-        );
         comp.lazy = Data.Generic.getLazy();
         fixture.detectChanges();
       });
@@ -67,9 +60,6 @@ describe('LazyDirective', () => {
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
       beforeEach(() => {
-        spyOn(lazyDirective, 'intersectionCallback').and.callFake(
-          () => undefined
-        );
         comp.lazy = Data.Generic.getLazy();
         fixture.detectChanges();
       });
@@ -88,30 +78,23 @@ describe('LazyDirective', () => {
     beforeEach(() => lazyDirective.ngOnDestroy());
 
     it('should call `disconnectObserver`', () => {
-      expect(directive.disconnectObserver).toHaveBeenCalled();
+      expect(lazyDirective.disconnectObserver).toHaveBeenCalled();
     });
   });
 
   describe('`disconnectObserver`', () => {
     describe('Has `observer`', () => {
-      let disconnectSpy: jasmine.Spy;
-
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
       beforeEach(() => {
-        (lazyDirective as any).observer = new IntersectionObserver(
-          () => undefined
-        );
-        disconnectSpy = spyOn(
-          (lazyDirective as any).observer,
-          'disconnect'
-        ).and.callThrough();
+        (lazyDirective as any).observer = new IntersectionObserver(jest.fn());
+        (lazyDirective as any).observer.disconnect = jest.fn();
 
         lazyDirective.disconnectObserver();
       });
 
       it('should call `observer` `disconnect`', () => {
-        expect(disconnectSpy).toHaveBeenCalled();
+        expect((lazyDirective as any).observer.disconnect).toHaveBeenCalled();
       });
     });
   });
@@ -145,12 +128,12 @@ describe('LazyDirective', () => {
       it('should call `disconnectObserver`', () => {
         lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
 
-        expect(directive.disconnectObserver).toHaveBeenCalled();
+        expect(lazyDirective.disconnectObserver).toHaveBeenCalled();
       });
 
       describe('No `data.attr` and `data.val`', () => {
         beforeEach(() => {
-          renderer.setAttribute.calls.reset();
+          jest.clearAllMocks();
           lazyDirective.data = {
             ...Data.Generic.getLazy(),
             attr: undefined
@@ -165,7 +148,7 @@ describe('LazyDirective', () => {
 
       describe('`data.attr` and no `data.val`', () => {
         beforeEach(() => {
-          renderer.setAttribute.calls.reset();
+          jest.clearAllMocks();
           lazyDirective.data = {
             ...Data.Generic.getLazy(),
             val: undefined
@@ -180,7 +163,7 @@ describe('LazyDirective', () => {
 
       describe('No `data.attr` and no `data.val`', () => {
         beforeEach(() => {
-          renderer.setAttribute.calls.reset();
+          jest.clearAllMocks();
           lazyDirective.data = {
             ...Data.Generic.getLazy(),
             attr: undefined,
@@ -196,7 +179,7 @@ describe('LazyDirective', () => {
 
       describe('`data.attr` and `data.val`', () => {
         beforeEach(() => {
-          renderer.setAttribute.calls.reset();
+          jest.clearAllMocks();
           lazyDirective.data = Data.Generic.getLazy();
           lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
         });
@@ -220,38 +203,16 @@ function setupTest() {
   }).compileComponents();
 }
 
-class RendererStub {
-  setAttribute: jasmine.Spy;
-
-  constructor() {
-    const image = fixture.debugElement.query(By.directive(LazyDirective));
-    const renderer2 = image.injector.get<Renderer2>(Renderer2 as any);
-
-    this.setAttribute = spyOn(renderer2, 'setAttribute').and.callThrough();
-  }
-}
-
-class Directive {
-  disconnectObserver: jasmine.Spy;
-
-  constructor() {
-    const imageEl = fixture.debugElement.query(By.directive(LazyDirective));
-    lazyDirective = imageEl.injector.get<LazyDirective>(LazyDirective);
-    this.disconnectObserver = spyOn(
-      lazyDirective,
-      'disconnectObserver'
-    ).and.callThrough();
-  }
-}
-
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   comp = fixture.componentInstance;
-  renderer = new RendererStub();
-  directive = new Directive();
 
   const imageEl = fixture.debugElement.query(By.directive(LazyDirective));
   elementRef = imageEl.injector.get<ElementRef>(ElementRef);
+  lazyDirective = imageEl.injector.get<LazyDirective>(LazyDirective);
+  jest.spyOn(lazyDirective, 'disconnectObserver');
+  renderer = imageEl.injector.get<Renderer2>(Renderer2 as any);
+  jest.spyOn(renderer, 'setAttribute');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

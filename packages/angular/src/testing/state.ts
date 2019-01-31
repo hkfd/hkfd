@@ -4,8 +4,8 @@ export class MockTransferState {
   data: any = {};
 
   constructor() {
-    this.get = spyOn(this, 'get').and.callThrough();
-    this.set = spyOn(this, 'set').and.callThrough();
+    jest.spyOn(this, 'get');
+    jest.spyOn(this, 'set');
   }
 
   get(key: string, defaultReturn: any) {

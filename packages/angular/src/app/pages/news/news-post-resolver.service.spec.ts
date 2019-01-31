@@ -77,7 +77,7 @@ describe('NewsPostResolver', () => {
         ...Data.Prismic.getPost(),
         data: { ...Data.Prismic.getPost().data, title: null as any }
       };
-      (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+      (prismicService.getPost as jest.Mock).mockReturnValue(of(post));
 
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
         Post
@@ -98,7 +98,7 @@ describe('NewsPostResolver', () => {
         ...Data.Prismic.getPost(),
         data: { ...Data.Prismic.getPost().data, description: null as any }
       };
-      (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+      (prismicService.getPost as jest.Mock).mockReturnValue(of(post));
 
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
         Post
@@ -119,7 +119,7 @@ describe('NewsPostResolver', () => {
         ...Data.Prismic.getPost(),
         data: { ...Data.Prismic.getPost().data, image: null as any }
       };
-      (prismicService.getPost as jasmine.Spy).and.returnValue(of(post));
+      (prismicService.getPost as jest.Mock).mockReturnValue(of(post));
 
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
         Post

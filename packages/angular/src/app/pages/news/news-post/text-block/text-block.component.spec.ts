@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-
 import { Data } from 'testing';
+
+import { RichText } from 'prismic-dom';
 
 import { TextBlockComponent } from './text-block.component';
 
 let comp: TextBlockComponent;
 let fixture: ComponentFixture<TextBlockComponent>;
-let richText: RichTextStub;
 let page: Page;
 
 describe('TextBlockComponent', () => {
@@ -57,7 +57,7 @@ describe('TextBlockComponent', () => {
       });
 
       it('should call RichText `asHtml` with `data` and `linkResolver` args', () => {
-        expect(richText.asHtml).toHaveBeenCalledWith(
+        expect(RichText.asHtml).toHaveBeenCalledWith(
           comp.data,
           comp.linkResolver
         );
@@ -77,14 +77,6 @@ describe('TextBlockComponent', () => {
   });
 });
 
-class RichTextStub {
-  asHtml: jasmine.Spy;
-
-  constructor() {
-    this.asHtml = spyOn(comp.richText, 'asHtml').and.callThrough();
-  }
-}
-
 class Page {
   get text() {
     return this.query<HTMLDivElement>('div');
@@ -98,7 +90,7 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(TextBlockComponent);
   comp = fixture.componentInstance;
-  richText = new RichTextStub();
+  jest.spyOn(RichText, 'asHtml');
   page = new Page();
 
   fixture.detectChanges();

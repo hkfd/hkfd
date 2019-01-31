@@ -6,10 +6,12 @@ import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 
 let loggerService: LoggerService;
-let consoleStub: ConsoleStub;
-let raven: RavenStub;
+
+jest.mock('raven-js');
 
 describe('LoggerService', () => {
+  beforeEach(jest.clearAllMocks);
+
   beforeEach(async(() =>
     TestBed.configureTestingModule({
       providers: [LoggerService]
@@ -29,7 +31,7 @@ describe('LoggerService', () => {
       });
 
       it('should not call `console` `log`', () => {
-        expect(consoleStub.log).not.toHaveBeenCalled();
+        expect(console.log).not.toHaveBeenCalled();
       });
     });
 
@@ -40,7 +42,7 @@ describe('LoggerService', () => {
       });
 
       it('should call `console` `log` with args', () => {
-        expect(consoleStub.log).toHaveBeenCalledWith('val', 'param');
+        expect(console.log).toHaveBeenCalledWith('val', 'param');
       });
     });
   });
@@ -53,11 +55,11 @@ describe('LoggerService', () => {
       });
 
       it('should call `console` `warn` with args', () => {
-        expect(consoleStub.warn).toHaveBeenCalledWith('val', 'param');
+        expect(console.warn).toHaveBeenCalledWith('val', 'param');
       });
 
       it('should call `Raven` `captureMessage` with `val` and `warning` level args', () => {
-        expect(raven.captureMessage).toHaveBeenCalledWith('val', {
+        expect(Raven.captureMessage).toHaveBeenCalledWith('val', {
           level: 'warning'
         });
       });
@@ -70,11 +72,11 @@ describe('LoggerService', () => {
       });
 
       it('should call `console` `warn` with args', () => {
-        expect(consoleStub.warn).toHaveBeenCalledWith('val', 'param');
+        expect(console.warn).toHaveBeenCalledWith('val', 'param');
       });
 
       it('should not call `Raven` `captureMessage`', () => {
-        expect(raven.captureMessage).not.toHaveBeenCalled();
+        expect(Raven.captureMessage).not.toHaveBeenCalled();
       });
     });
   });
@@ -87,11 +89,11 @@ describe('LoggerService', () => {
       });
 
       it('should call `console` `error` with args', () => {
-        expect(consoleStub.error).toHaveBeenCalledWith('val', 'param');
+        expect(console.error).toHaveBeenCalledWith('val', 'param');
       });
 
       it('should call `Raven` `captureException` with args', () => {
-        expect(raven.captureException).toHaveBeenCalledWith('val', 'param');
+        expect(Raven.captureException).toHaveBeenCalledWith('val', 'param');
       });
     });
 
@@ -102,44 +104,19 @@ describe('LoggerService', () => {
       });
 
       it('should call `console` `error` with args', () => {
-        expect(consoleStub.error).toHaveBeenCalledWith('val', 'param');
+        expect(console.error).toHaveBeenCalledWith('val', 'param');
       });
 
       it('should not call `Raven` `captureException`', () => {
-        expect(raven.captureException).not.toHaveBeenCalled();
+        expect(Raven.captureException).not.toHaveBeenCalled();
       });
     });
   });
 });
 
-class ConsoleStub {
-  log: jasmine.Spy;
-  warn: jasmine.Spy;
-  error: jasmine.Spy;
-
-  constructor() {
-    const noop = () => undefined;
-
-    this.log = spyOn(console, 'log').and.callFake(noop);
-    this.warn = spyOn(console, 'warn').and.callFake(noop);
-    this.error = spyOn(console, 'error').and.callFake(noop);
-  }
-}
-
-class RavenStub {
-  captureMessage: jasmine.Spy;
-  captureException: jasmine.Spy;
-
-  constructor() {
-    const noop = () => undefined;
-
-    this.captureMessage = spyOn(Raven, 'captureMessage').and.callFake(noop);
-    this.captureException = spyOn(Raven, 'captureException').and.callFake(noop);
-  }
-}
-
 function createService() {
   loggerService = TestBed.get(LoggerService);
-  consoleStub = new ConsoleStub();
-  raven = new RavenStub();
+  console.log = jest.fn();
+  console.warn = jest.fn();
+  console.error = jest.fn();
 }

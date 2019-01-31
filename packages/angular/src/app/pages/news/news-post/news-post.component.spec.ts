@@ -14,6 +14,7 @@ import {
   StubImageComponent,
   Data
 } from 'testing';
+import { RichText } from 'prismic-dom';
 
 import { Post } from 'prismic';
 import { NewsPostComponent } from './news-post.component';
@@ -21,8 +22,6 @@ import { NewsPostComponent } from './news-post.component';
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
-let prismicPipe: jasmine.Spy;
-let richText: RichTextStub;
 let page: Page;
 
 describe('NewsPostComponent', () => {
@@ -68,10 +67,10 @@ describe('NewsPostComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `post$` `unsubscribe`', () => {
-      const spy = spyOn(comp.post$, 'unsubscribe').and.callThrough();
+      jest.spyOn(comp.post$, 'unsubscribe');
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect(comp.post$.unsubscribe).toHaveBeenCalled();
     });
   });
 
@@ -93,7 +92,7 @@ describe('NewsPostComponent', () => {
           });
 
           it('should call `RichText` `asText` with `title`', () => {
-            expect(richText.asText).toHaveBeenCalledWith(
+            expect(RichText.asText).toHaveBeenCalledWith(
               Data.Prismic.getPost().data.title
             );
           });
@@ -123,7 +122,9 @@ describe('NewsPostComponent', () => {
           });
 
           it('should call `PrismicPipe` with `data`', () => {
-            expect(prismicPipe).toHaveBeenCalledWith((comp.post as Post).data);
+            expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
+              (comp.post as Post).data
+            );
           });
 
           it('should set `ImageComponent` `image` as `data`', () => {
@@ -161,7 +162,7 @@ describe('NewsPostComponent', () => {
         });
 
         it('should not call `PrismicPipe` with `primary`', () => {
-          expect(prismicPipe).not.toHaveBeenCalledWith(
+          expect(MockPrismicPipe.prototype.transform).not.toHaveBeenCalledWith(
             (comp.post as Post).data.body[0].primary
           );
         });
@@ -184,7 +185,7 @@ describe('NewsPostComponent', () => {
         });
 
         it('should call `PrismicPipe` with `primary`', () => {
-          expect(prismicPipe).toHaveBeenCalledWith(
+          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
             (comp.post as Post).data.body[0].primary
           );
         });
@@ -207,7 +208,7 @@ describe('NewsPostComponent', () => {
         });
 
         it('should call `PrismicPipe` with `items`', () => {
-          expect(prismicPipe).toHaveBeenCalledWith(
+          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
             (comp.post as Post).data.body[0].items
           );
         });
@@ -230,7 +231,7 @@ describe('NewsPostComponent', () => {
         });
 
         it('should call `PrismicPipe` with `items`', () => {
-          expect(prismicPipe).toHaveBeenCalledWith(
+          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
             (comp.post as Post).data.body[0].items
           );
         });
@@ -253,7 +254,7 @@ describe('NewsPostComponent', () => {
         });
 
         it('should call `PrismicPipe` with `primary`', () => {
-          expect(prismicPipe).toHaveBeenCalledWith(
+          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
             (comp.post as Post).data.body[0].primary
           );
         });
@@ -267,14 +268,6 @@ describe('NewsPostComponent', () => {
     });
   });
 });
-
-class RichTextStub {
-  asText: jasmine.Spy;
-
-  constructor() {
-    this.asText = spyOn(comp.richText, 'asText').and.callThrough();
-  }
-}
 
 class Page {
   get date() {
@@ -357,8 +350,8 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
-  prismicPipe = spyOn(MockPrismicPipe.prototype, 'transform').and.callThrough();
-  richText = new RichTextStub();
+  jest.spyOn(MockPrismicPipe.prototype, 'transform');
+  jest.spyOn(RichText, 'asText');
   page = new Page();
 
   fixture.detectChanges();
