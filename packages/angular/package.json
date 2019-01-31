@@ -1,6 +1,6 @@
 {
   "name": "angular",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -31,7 +31,7 @@
     "@angular/router": "6.1.7",
     "@nguniversal/express-engine": "^6.0.0",
     "@nguniversal/module-map-ngfactory-loader": "^6.0.0",
-    "api": "^1.2.2",
+    "api": "^1.2.3",
     "compression": "^1.7.3",
     "core-js": "^2.5.7",
     "email": "^1.2.0",
