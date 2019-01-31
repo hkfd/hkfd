@@ -1,5 +1,3 @@
-import { makeImmutable } from 'testing';
-
 import {
   DuoBlock,
   VideoBlock,
@@ -107,10 +105,10 @@ export namespace Api {
       }
     ];
 
-    if (!title) return makeImmutable(services) as any;
+    if (!title) return services as any;
 
     const foundService = services.find(service => service.title === title);
-    return makeImmutable(foundService) as any;
+    return foundService as any;
   };
 
   export const getCaseStudies = <
@@ -208,12 +206,12 @@ export namespace Api {
       }
     ];
 
-    if (!title) return makeImmutable(caseStudies) as any;
+    if (!title) return caseStudies as any;
 
     const foundCaseStudy = caseStudies.find(
       caseStudy => caseStudy.title === title
     );
-    return makeImmutable(foundCaseStudy) as any;
+    return foundCaseStudy as any;
   };
 
   export const getClients = () => {
@@ -228,7 +226,7 @@ export namespace Api {
       }
     ];
 
-    return makeImmutable(clients);
+    return clients;
   };
 
   export const getCareers = <
@@ -282,10 +280,10 @@ export namespace Api {
       }
     ];
 
-    if (!title) return makeImmutable(careers) as any;
+    if (!title) return careers as any;
 
     const foundCareer = careers.find(career => career.title === title);
-    return makeImmutable(foundCareer) as any;
+    return foundCareer as any;
   };
 
   export const getTeam = <
@@ -352,10 +350,10 @@ export namespace Api {
       }
     ];
 
-    if (!name) return makeImmutable(team) as any;
+    if (!name) return team as any;
 
     const foundPerson = team.find(person => person.name === name);
-    return makeImmutable(foundPerson) as any;
+    return foundPerson as any;
   };
 
   export const getImages = () => {
@@ -382,7 +380,7 @@ export namespace Api {
       }
     ];
 
-    return makeImmutable(images);
+    return images;
   };
 
   export const getTextBlocks = <T extends 'text' | 'list'>(
@@ -448,7 +446,7 @@ export namespace Api {
     };
 
     const textBlock = textBlocks[type];
-    return makeImmutable(textBlock) as any;
+    return textBlock as any;
   };
 
   export const getSentence = <
@@ -479,7 +477,7 @@ export namespace Api {
     };
 
     const sentence = sentences[type];
-    return makeImmutable(sentence) as any;
+    return sentence as any;
   };
 
   export const getGalleryBlock = () => {
@@ -494,7 +492,7 @@ export namespace Api {
       ]
     };
 
-    return makeImmutable(galleryBlock);
+    return galleryBlock;
   };
 
   export const getDuoBlock = () => {
@@ -507,7 +505,7 @@ export namespace Api {
       ]
     };
 
-    return makeImmutable(duoBlock);
+    return duoBlock;
   };
 
   export const getImage = () => {
@@ -516,7 +514,7 @@ export namespace Api {
       alt: 'Image'
     };
 
-    return makeImmutable(image);
+    return image;
   };
 
   export const getVideo = () => {
@@ -524,7 +522,7 @@ export namespace Api {
       id: '123'
     };
 
-    return makeImmutable(video);
+    return video;
   };
 
   export const getAudio = () => {
@@ -532,6 +530,6 @@ export namespace Api {
       url: 'soundcloud.com'
     };
 
-    return makeImmutable(audio);
+    return audio;
   };
 }

@@ -3,7 +3,6 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
-import { makeImmutable } from 'testing';
 
 import { EmailService } from './email.service';
 
@@ -34,13 +33,13 @@ describe('EmailService', () => {
     });
 
     it('should call `HttpClient` `post` with `body` as `email` arg', () => {
-      const email = makeImmutable({ name: 'a', email: 'b@c', message: 'd' });
-      emailService.sendEmail(email);
+      const email = () => ({ name: 'a', email: 'b@c', message: 'd' });
+      emailService.sendEmail(email());
       const {
         request: { body }
       } = mockHttp.expectOne('https://email.testing');
 
-      expect(body).toEqual(email);
+      expect(body).toEqual(email());
     });
 
     describe('Has error', () => {

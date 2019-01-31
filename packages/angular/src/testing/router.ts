@@ -8,8 +8,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { convertToParamMap, ParamMap } from '@angular/router';
 
-import { makeImmutable } from 'testing';
-
 @Injectable()
 export class ActivatedRouteStub {
   constructor() {
@@ -57,7 +55,8 @@ export class ActivatedRouteStub {
 
   private _testData: any;
   get testData() {
-    return makeImmutable(this._testData);
+    const data = () => this._testData;
+    return data();
   }
   set testData(data: any) {
     this._testData = data;
