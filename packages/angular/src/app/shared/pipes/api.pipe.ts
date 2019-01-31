@@ -68,6 +68,6 @@ export class ApiPipe implements PipeTransform {
     if (val.audio) return this.transformAudio(val);
     if (Array.isArray(val)) return val.map(image => this.transformImage(image));
 
-    return val;
+    throw new Error('Unknown type');
   }
 }

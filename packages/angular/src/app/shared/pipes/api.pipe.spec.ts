@@ -37,10 +37,10 @@ describe('ApiPipe', () => {
       expect(Data.Generic.isImage(res)).toBeTruthy();
     });
 
-    it('should return arg without transforming by default', () => {
-      const res = pipe.transform({ test: 'test' });
-
-      expect(res).toEqual({ test: 'test' });
+    it('should throw error by default', () => {
+      expect(() => pipe.transform({ test: 'test' })).toThrowError(
+        'Unknown type'
+      );
     });
   });
 
