@@ -120,7 +120,7 @@ describe('TextComponent', () => {
       });
 
       it('should display text', () => {
-        expect(fixture.nativeElement.innerText).toBe(
+        expect(fixture.nativeElement.textContent).toBe(
           Data.Api.getSentence('normal').text
         );
       });

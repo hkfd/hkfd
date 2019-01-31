@@ -2,7 +2,7 @@ import { MetaTags } from 'shared';
 
 export class MockMetaService {
   constructor() {
-    this.setMetaTags = spyOn(this, 'setMetaTags').and.callThrough();
+    jest.spyOn(this, 'setMetaTags');
   }
 
   setMetaTags(_tags: Partial<MetaTags>) {

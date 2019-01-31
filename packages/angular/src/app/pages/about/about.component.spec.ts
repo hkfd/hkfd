@@ -19,7 +19,6 @@ let fixture: ComponentFixture<AboutComponent>;
 let page: Page;
 let metaService: MetaService;
 let apiService: ApiService;
-let apiPipe: jasmine.Spy;
 
 describe('AboutComponent', () => {
   beforeEach(async(() =>
@@ -61,10 +60,10 @@ describe('AboutComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `team$` `unsubscribe`', () => {
-      const spy = spyOn(comp.team$, 'unsubscribe').and.callThrough();
+      jest.spyOn(comp.team$, 'unsubscribe');
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect(comp.team$.unsubscribe).toHaveBeenCalled();
     });
   });
 
@@ -80,7 +79,9 @@ describe('AboutComponent', () => {
         });
 
         it('should call `ApiPipe`', () => {
-          expect(apiPipe).toHaveBeenCalledWith(AboutImages.intro);
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+            AboutImages.intro
+          );
         });
 
         it('should set `ImageComponent` `image` as image', () => {
@@ -107,7 +108,7 @@ describe('AboutComponent', () => {
           });
 
           it('should call `ApiPipe`', () => {
-            expect(apiPipe).toHaveBeenCalledWith(
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
               Data.Api.getTeam('Person 1').thumbnail
             );
           });
@@ -138,9 +139,7 @@ describe('AboutComponent', () => {
         });
 
         it('should set href', () => {
-          expect(page.personJoinTeam.href).toBe(
-            'http://localhost:9876/careers'
-          );
+          expect(page.personJoinTeam.href).toBe('http://localhost/careers');
         });
       });
     });
@@ -193,7 +192,7 @@ function createComponent() {
   page = new Page();
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

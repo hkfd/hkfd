@@ -22,7 +22,6 @@ let fixture: ComponentFixture<HomeComponent>;
 let page: Page;
 let metaService: MetaService;
 let apiService: ApiService;
-let apiPipe: jasmine.Spy;
 
 describe('HomeComponent', () => {
   beforeEach(async(() =>
@@ -91,10 +90,10 @@ describe('HomeComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `caseStudies$` `unsubscribe`', () => {
-      const spy = spyOn(comp.caseStudies$, 'unsubscribe').and.callThrough();
+      jest.spyOn(comp.caseStudies$, 'unsubscribe');
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect(comp.caseStudies$.unsubscribe).toHaveBeenCalled();
     });
   });
 
@@ -109,7 +108,9 @@ describe('HomeComponent', () => {
       });
 
       it('should call `ApiPipe` with intro images', () => {
-        expect(apiPipe).toHaveBeenCalledWith(HomeImages.intro);
+        expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+          HomeImages.intro
+        );
       });
 
       it('should set `SliderComponent` `images` as intro images', () => {
@@ -123,7 +124,7 @@ describe('HomeComponent', () => {
 
     describe('Help', () => {
       it('should set href', () => {
-        expect(page.helpButton.href).toBe('http://localhost:9876/about');
+        expect(page.helpButton.href).toBe('http://localhost/about');
       });
     });
 
@@ -139,7 +140,7 @@ describe('HomeComponent', () => {
           });
 
           it('should call `ApiPipe` with `thumbnail`', () => {
-            expect(apiPipe).toHaveBeenCalledWith(
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
               Data.Api.getServices('Service 1').thumbnail
             );
           });
@@ -171,9 +172,7 @@ describe('HomeComponent', () => {
 
         it('should set href', () => {
           expect(page.services[0].href).toBe(
-            `http://localhost:9876/service/${
-              Data.Api.getServices('Service 1').id
-            }`
+            `http://localhost/service/${Data.Api.getServices('Service 1').id}`
           );
         });
       });
@@ -282,7 +281,7 @@ function createComponent() {
   page = new Page();
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

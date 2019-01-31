@@ -22,9 +22,10 @@ let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
-let apiPipe: jasmine.Spy;
 
 describe('PostComponent', () => {
+  beforeEach(jest.clearAllMocks);
+
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
     activatedRoute.testData = { post: Data.Api.getCaseStudies('Case Study 1') };
@@ -77,10 +78,10 @@ describe('PostComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `post$` `unsubscribe`', () => {
-      const spy = spyOn(comp.post$, 'unsubscribe').and.callThrough();
+      jest.spyOn(comp.post$, 'unsubscribe');
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect(comp.post$.unsubscribe).toHaveBeenCalled();
     });
   });
 
@@ -187,7 +188,7 @@ describe('PostComponent', () => {
         });
 
         it('should not call `ApiPipe`', () => {
-          expect(apiPipe).not.toHaveBeenCalled();
+          expect(MockApiPipe.prototype.transform).not.toHaveBeenCalled();
         });
 
         it('should set `TextBlockComponent` `data` as `content.data`', () => {
@@ -208,7 +209,7 @@ describe('PostComponent', () => {
         });
 
         it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(apiPipe).toHaveBeenCalledWith(
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
             Data.Api.getCaseStudies('Case Study 2').content[0].data[0].data
           );
         });
@@ -247,7 +248,7 @@ describe('PostComponent', () => {
         });
 
         it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(apiPipe).toHaveBeenCalledWith(
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
             Data.Api.getCaseStudies('Case Study 3').content[0].data[0].data
           );
         });
@@ -271,7 +272,7 @@ describe('PostComponent', () => {
         });
 
         it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(apiPipe).toHaveBeenCalledWith(
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
             Data.Api.getServices('Service 1').content[0].data[0].data
           );
         });
@@ -294,7 +295,7 @@ describe('PostComponent', () => {
         });
 
         it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(apiPipe).toHaveBeenCalledWith(
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
             Data.Api.getServices('Service 2').content[0].data[0].data
           );
         });
@@ -317,7 +318,7 @@ describe('PostComponent', () => {
         });
 
         it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(apiPipe).toHaveBeenCalledWith(
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
             Data.Api.getServices('Service 3').content[0].data[0].data
           );
         });
@@ -428,7 +429,7 @@ function createComponent() {
   fixture = TestBed.createComponent(PostComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

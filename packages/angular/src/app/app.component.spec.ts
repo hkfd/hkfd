@@ -9,12 +9,10 @@ import { Subscription } from 'rxjs';
 import { environment } from 'environment';
 import { AppComponent } from './app.component';
 
-const app = window as any;
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
 let page: Page;
 let router: Router;
-let routerStub: RouterStub;
 let mockPlatformId: 'browser' | 'server';
 
 @Component({
@@ -42,7 +40,7 @@ describe('AppComponent', () => {
       beforeEach(async(() => createComponent()));
 
       it('should call `ga` with `create`, `environment.analyticsId`, and `auto` args', () => {
-        expect(app.ga).toHaveBeenCalledWith(
+        expect((window as any).ga).toHaveBeenCalledWith(
           'create',
           environment.analyticsId,
           'auto'
@@ -54,7 +52,7 @@ describe('AppComponent', () => {
       });
 
       it('should subscribe to `Router` `events`', () => {
-        expect(routerStub.events.subscribe).toHaveBeenCalled();
+        expect(router.events.subscribe).toHaveBeenCalled();
       });
 
       describe('Routing', () => {
@@ -62,28 +60,43 @@ describe('AppComponent', () => {
           router
             .navigateByUrl('page-1')
             .then(_ =>
-              expect(app.ga).toHaveBeenCalledWith('set', 'title', 'Heckford')
+              expect((window as any).ga).toHaveBeenCalledWith(
+                'set',
+                'title',
+                'Heckford'
+              )
             ));
 
         it('should call `ga` with `set`, `page`, and `urlAfterRedirects` args', () =>
           router
             .navigateByUrl('page-2')
             .then(_ =>
-              expect(app.ga).toHaveBeenCalledWith('set', 'page', '/page-2')
+              expect((window as any).ga).toHaveBeenCalledWith(
+                'set',
+                'page',
+                '/page-2'
+              )
             ));
 
         it('should call `ga` with `send` and `pageview` args', () =>
           router
             .navigateByUrl('page-2')
             .then(_ =>
-              expect(app.ga).toHaveBeenCalledWith('send', 'pageview')
+              expect((window as any).ga).toHaveBeenCalledWith(
+                'send',
+                'pageview'
+              )
             ));
 
         it('should not call `ga` with `set`, `page`, and redirected url args', () =>
           router
             .navigateByUrl('no-page')
             .then(_ =>
-              expect(app.ga).not.toHaveBeenCalledWith('set', 'page', '/no-page')
+              expect((window as any).ga).not.toHaveBeenCalledWith(
+                'set',
+                'page',
+                '/no-page'
+              )
             ));
       });
     });
@@ -94,7 +107,7 @@ describe('AppComponent', () => {
       beforeEach(async(() => createComponent()));
 
       it('should not call `ga`', () => {
-        expect(app.ga).not.toHaveBeenCalled();
+        expect((window as any).ga).not.toHaveBeenCalled();
       });
 
       it('should not set `router$`', () => {
@@ -110,13 +123,10 @@ describe('AppComponent', () => {
       beforeEach(async(() => createComponent()));
 
       it('should call `router$` `unsubscribe`', () => {
-        const spy = spyOn(
-          comp.router$ as Subscription,
-          'unsubscribe'
-        ).and.callThrough();
+        jest.spyOn(comp.router$ as Subscription, 'unsubscribe');
         comp.ngOnDestroy();
 
-        expect(spy).toHaveBeenCalled();
+        expect((comp.router$ as Subscription).unsubscribe).toHaveBeenCalled();
       });
     });
   });
@@ -128,7 +138,7 @@ describe('AppComponent', () => {
     it('should be called on route change', () =>
       router
         .navigateByUrl('page-1')
-        .then(_ => expect(page.getState).toHaveBeenCalled()));
+        .then(_ => expect(comp.getState).toHaveBeenCalled()));
 
     it('should return `activatedRouteData` `state`', () => {
       const res = comp.getState({
@@ -188,19 +198,7 @@ function setupTest() {
   }).compileComponents();
 }
 
-class RouterStub {
-  events = {
-    subscribe: jasmine.createSpy()
-  };
-
-  constructor() {
-    this.events.subscribe = spyOn(router.events, 'subscribe').and.callThrough();
-  }
-}
-
 class Page {
-  getState: jasmine.Spy;
-
   get header() {
     return this.query<HTMLElement>('header');
   }
@@ -212,7 +210,7 @@ class Page {
   }
 
   constructor() {
-    this.getState = spyOn(comp, 'getState').and.callThrough();
+    jest.spyOn(comp, 'getState');
   }
 
   private query<T>(selector: string): T {
@@ -223,9 +221,9 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(AppComponent);
   comp = fixture.componentInstance;
-  app.ga = jasmine.createSpy('ga');
+  (global as any).ga = jest.fn();
   router = fixture.debugElement.injector.get<Router>(Router);
-  routerStub = new RouterStub();
+  jest.spyOn(router.events, 'subscribe');
   page = new Page();
 
   fixture.detectChanges();

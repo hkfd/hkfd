@@ -7,7 +7,6 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EmailService } from 'shared';
 import { FormComponent } from './form.component';
 
-const app = window as any;
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
 let emailService: EmailService;
@@ -64,7 +63,7 @@ describe('FormComponent', () => {
 
       it('should call `ga` with args', () => {
         return fixture.whenStable().then(_ => {
-          expect(app.ga).toHaveBeenCalledWith(
+          expect((window as any).ga).toHaveBeenCalledWith(
             'send',
             'event',
             'Contact Form',
@@ -76,9 +75,7 @@ describe('FormComponent', () => {
 
     describe('Reject', () => {
       beforeEach(() => {
-        (emailService.sendEmail as jasmine.Spy).and.returnValue(
-          Promise.reject()
-        );
+        (emailService.sendEmail as jest.Mock).mockReturnValue(Promise.reject());
         comp.submitForm();
       });
 
@@ -351,8 +348,6 @@ describe('FormComponent', () => {
 });
 
 class Page {
-  submitForm: jasmine.Spy;
-
   get formSentText() {
     return this.query<HTMLParagraphElement>('#form-sent');
   }
@@ -388,7 +383,7 @@ class Page {
   }
 
   constructor() {
-    this.submitForm = spyOn(comp, 'submitForm').and.callThrough();
+    jest.spyOn(comp, 'submitForm');
   }
 
   private query<T>(selector: string): T {
@@ -399,7 +394,7 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(FormComponent);
   comp = fixture.componentInstance;
-  app.ga = jasmine.createSpy('ga');
+  (global as any).ga = jest.fn();
   emailService = fixture.debugElement.injector.get<EmailService>(EmailService);
   page = new Page();
 

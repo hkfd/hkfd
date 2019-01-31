@@ -9,8 +9,7 @@ let compHost: TestHostComponent;
 let comp: SliderComponent;
 let fixture: ComponentFixture<TestHostComponent>;
 let mockPlatformId: 'browser' | 'server';
-let windowStub: WindowStub;
-let ngZone: NgZoneStub;
+let ngZone: NgZone;
 let page: Page;
 
 @Component({
@@ -21,8 +20,9 @@ let page: Page;
       [random]="random"
       [autoplay]="autoplay"
       [delay]="delay"
-      ><main>Content</main></slider
     >
+      <main>Content</main>
+    </slider>
   `
 })
 class TestHostComponent {
@@ -70,7 +70,7 @@ describe('SliderComponent', () => {
     });
 
     it('should not call `sliderInit`', () => {
-      expect(page.sliderInit).not.toHaveBeenCalled();
+      expect(comp.sliderInit).not.toHaveBeenCalled();
     });
   });
 
@@ -82,7 +82,7 @@ describe('SliderComponent', () => {
       beforeEach(() => comp.ngOnChanges({}));
 
       it('should not call `sliderInit`', () => {
-        expect(page.sliderInit).not.toHaveBeenCalled();
+        expect(comp.sliderInit).not.toHaveBeenCalled();
       });
     });
 
@@ -90,7 +90,7 @@ describe('SliderComponent', () => {
       beforeEach(() => comp.ngOnChanges({ images: {} as any }));
 
       it('should not call `sliderInit`', () => {
-        expect(page.sliderInit).not.toHaveBeenCalled();
+        expect(comp.sliderInit).not.toHaveBeenCalled();
       });
     });
 
@@ -102,7 +102,7 @@ describe('SliderComponent', () => {
       );
 
       it('should call `sliderInit`', () => {
-        expect(page.sliderInit).toHaveBeenCalled();
+        expect(comp.sliderInit).toHaveBeenCalled();
       });
     });
   });
@@ -114,7 +114,7 @@ describe('SliderComponent', () => {
     it('should call `endTimer`', () => {
       comp.ngOnDestroy();
 
-      expect(page.endTimer).toHaveBeenCalled();
+      expect(comp.endTimer).toHaveBeenCalled();
     });
   });
 
@@ -158,7 +158,7 @@ describe('SliderComponent', () => {
     it('should call `startTimer`', () => {
       comp.sliderInit();
 
-      expect(page.startTimer).toHaveBeenCalled();
+      expect(comp.startTimer).toHaveBeenCalled();
     });
   });
 
@@ -168,12 +168,14 @@ describe('SliderComponent', () => {
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
       beforeEach(() => {
-        (comp.clearInterval as jasmine.Spy).and.returnValue('clearIntervalFn');
+        (comp.clearInterval as jest.Mock).mockReturnValue('clearIntervalFn');
         comp.endTimer();
       });
 
       it('should call `NgZone` `runOutsideAngular` with `clearInterval` arg', () => {
-        const [fnArg] = ngZone.runOutsideAngular.calls.mostRecent().args;
+        const [
+          fnArg
+        ] = (ngZone.runOutsideAngular as jest.Mock).mock.calls.pop() as any;
 
         expect(fnArg()).toBe('clearIntervalFn');
       });
@@ -198,13 +200,15 @@ describe('SliderComponent', () => {
       beforeEach(async(() => createComponent()));
       beforeEach(() => {
         comp.autoplay = true;
-        (comp.setInterval as jasmine.Spy).and.returnValue('setIntervalFn');
+        (comp.setInterval as jest.Mock).mockReturnValue('setIntervalFn');
 
         comp.startTimer();
       });
 
       it('should call `NgZone` `runOutsideAngular` with `setInterval` arg', () => {
-        const [fnArg] = ngZone.runOutsideAngular.calls.mostRecent().args;
+        const [
+          fnArg
+        ] = (ngZone.runOutsideAngular as jest.Mock).mock.calls.pop() as any;
 
         expect(fnArg()).toBe('setIntervalFn');
       });
@@ -266,7 +270,7 @@ describe('SliderComponent', () => {
     });
 
     it('should call `window` `clearInterval` with `timer` arg', () => {
-      expect(windowStub.clearInterval).toHaveBeenCalledWith('timer');
+      expect(window.clearInterval).toHaveBeenCalledWith('timer');
     });
   });
 
@@ -276,7 +280,7 @@ describe('SliderComponent', () => {
     beforeEach(() => {
       (comp as any).timer = undefined;
       comp.delay = 0;
-      (comp.intervalChangeImage as jasmine.Spy).and.returnValue(
+      (comp.intervalChangeImage as jest.Mock).mockReturnValue(
         'intervalChangeImageFn'
       );
 
@@ -291,7 +295,7 @@ describe('SliderComponent', () => {
       const [
         fnArg,
         ...delayArg
-      ] = windowStub.setInterval.calls.mostRecent().args;
+      ] = (window.setInterval as jest.Mock).mock.calls.pop() as any;
 
       expect(fnArg()).toBe('intervalChangeImageFn');
       expect(delayArg).toEqual([0]);
@@ -302,13 +306,13 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() => {
-      (comp.changeImage as jasmine.Spy).and.returnValue('changeImageFn');
+      (comp.changeImage as jest.Mock).mockReturnValue('changeImageFn');
 
       comp.intervalChangeImage();
     });
 
     it('should call `NgZone` `run` with `changeImage` arg', () => {
-      const [fnArg] = ngZone.run.calls.mostRecent().args;
+      const [fnArg] = (ngZone.run as jest.Mock).mock.calls.pop() as any;
 
       expect(fnArg()).toBe('changeImageFn');
     });
@@ -318,7 +322,7 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() => {
-      (comp.sliderInit as jasmine.Spy).and.callFake(() => undefined);
+      (comp.sliderInit as jest.Mock).mockImplementation(() => undefined);
       comp.images = Data.Generic.getImages();
     });
 
@@ -380,14 +384,14 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() => {
-      (comp.endTimer as jasmine.Spy).and.callFake(() => undefined);
+      (comp.endTimer as jest.Mock).mockImplementation(() => undefined);
       comp.images = Data.Generic.getImages();
 
       comp.mouseEnter();
     });
 
     it('should call `endTimer`', () => {
-      expect(page.endTimer).toHaveBeenCalled();
+      expect(comp.endTimer).toHaveBeenCalled();
     });
   });
 
@@ -395,7 +399,7 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() =>
-      (comp.startTimer as jasmine.Spy).and.callFake(() => undefined)
+      (comp.startTimer as jest.Mock).mockImplementation(() => undefined)
     );
 
     describe('Has `images`', () => {
@@ -406,7 +410,7 @@ describe('SliderComponent', () => {
       });
 
       it('should call `startTimer`', () => {
-        expect(page.startTimer).toHaveBeenCalled();
+        expect(comp.startTimer).toHaveBeenCalled();
       });
     });
 
@@ -418,7 +422,7 @@ describe('SliderComponent', () => {
       });
 
       it('should not call `startTimer`', () => {
-        expect(page.startTimer).not.toHaveBeenCalled();
+        expect(comp.startTimer).not.toHaveBeenCalled();
       });
     });
   });
@@ -440,7 +444,7 @@ describe('SliderComponent', () => {
         it('should call `changeImage` on click with `-1` arg', () => {
           page.sliderPrev.click();
 
-          expect(page.changeImage).toHaveBeenCalledWith(-1);
+          expect(comp.changeImage).toHaveBeenCalledWith(-1);
         });
       });
 
@@ -452,7 +456,7 @@ describe('SliderComponent', () => {
         it('should call `changeImage` on click with `1` arg', () => {
           page.sliderNext.click();
 
-          expect(page.changeImage).toHaveBeenCalledWith(1);
+          expect(comp.changeImage).toHaveBeenCalledWith(1);
         });
       });
     });
@@ -498,41 +502,7 @@ describe('SliderComponent', () => {
   });
 });
 
-class WindowStub {
-  clearInterval: jasmine.Spy;
-  setInterval: jasmine.Spy;
-
-  constructor() {
-    this.clearInterval = spyOn(window, 'clearInterval').and.callFake(
-      () => undefined
-    );
-    this.setInterval = spyOn(window, 'setInterval').and.callThrough();
-  }
-}
-
-class NgZoneStub {
-  runOutsideAngular: jasmine.Spy;
-  run: jasmine.Spy;
-
-  constructor() {
-    const ngZoneInstance = fixture.debugElement.injector.get<NgZone>(NgZone);
-    this.runOutsideAngular = spyOn(
-      ngZoneInstance,
-      'runOutsideAngular'
-    ).and.callFake((fn: any) => fn());
-    this.run = spyOn(ngZoneInstance, 'run').and.callFake((fn: any) => fn());
-  }
-}
-
 class Page {
-  sliderInit: jasmine.Spy;
-  startTimer: jasmine.Spy;
-  setInterval: jasmine.Spy;
-  intervalChangeImage: jasmine.Spy;
-  endTimer: jasmine.Spy;
-  clearInterval: jasmine.Spy;
-  changeImage: jasmine.Spy;
-
   get sliderPrev() {
     return this.query<HTMLButtonElement>('.slider-prev');
   }
@@ -560,16 +530,13 @@ class Page {
   }
 
   constructor() {
-    this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
-    this.startTimer = spyOn(comp, 'startTimer').and.callThrough();
-    this.setInterval = spyOn(comp, 'setInterval').and.callThrough();
-    this.intervalChangeImage = spyOn(
-      comp,
-      'intervalChangeImage'
-    ).and.callThrough();
-    this.endTimer = spyOn(comp, 'endTimer').and.callThrough();
-    this.changeImage = spyOn(comp, 'changeImage').and.callThrough();
-    this.clearInterval = spyOn(comp, 'clearInterval').and.callThrough();
+    jest.spyOn(comp, 'sliderInit');
+    jest.spyOn(comp, 'startTimer');
+    jest.spyOn(comp, 'setInterval');
+    jest.spyOn(comp, 'endTimer');
+    jest.spyOn(comp, 'changeImage');
+    jest.spyOn(comp, 'clearInterval');
+    jest.spyOn(comp, 'intervalChangeImage');
   }
 
   private query<T>(selector: string): T {
@@ -592,8 +559,11 @@ function createComponent() {
   compHost = fixture.componentInstance;
   comp = fixture.debugElement.query(By.directive(SliderComponent))
     .componentInstance;
-  windowStub = new WindowStub();
-  ngZone = new NgZoneStub();
+  global.clearInterval = jest.fn();
+  jest.spyOn(global, 'setInterval').mockImplementation(() => 'setInterval');
+  ngZone = fixture.debugElement.injector.get<NgZone>(NgZone);
+  ngZone.runOutsideAngular = jest.fn().mockImplementation((fn: any) => fn());
+  ngZone.run = jest.fn().mockImplementation((fn: any) => fn());
   page = new Page();
 
   fixture.detectChanges();

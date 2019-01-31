@@ -1,6 +1,6 @@
 export class MockEmailService {
   constructor() {
-    this.sendEmail = spyOn(this, 'sendEmail').and.callThrough();
+    jest.spyOn(this, 'sendEmail');
   }
 
   sendEmail(): Promise<Object> {

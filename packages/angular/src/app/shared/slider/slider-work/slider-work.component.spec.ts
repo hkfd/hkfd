@@ -14,7 +14,6 @@ import { SliderWorkComponent } from './slider-work.component';
 let compHost: TestHostComponent;
 let comp: SliderWorkComponent;
 let fixture: ComponentFixture<TestHostComponent>;
-let apiPipe: jasmine.Spy;
 let page: Page;
 
 @Component({
@@ -52,7 +51,9 @@ describe('SliderWorkComponent', () => {
 
       it('should call `ApiPipe` with `thumbnail`', () => {
         comp.caseStudies.forEach(caseStudy =>
-          expect(apiPipe).toHaveBeenCalledWith(caseStudy.thumbnail)
+          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+            caseStudy.thumbnail
+          )
         );
       });
 
@@ -69,7 +70,7 @@ describe('SliderWorkComponent', () => {
       });
 
       it('should call `sliderInit`', () => {
-        expect(page.sliderInit).toHaveBeenCalled();
+        expect(comp.sliderInit).toHaveBeenCalled();
       });
     });
 
@@ -88,7 +89,7 @@ describe('SliderWorkComponent', () => {
       });
 
       it('should not call `sliderInit`', () => {
-        expect(page.sliderInit).not.toHaveBeenCalled();
+        expect(comp.sliderInit).not.toHaveBeenCalled();
       });
     });
   });
@@ -108,7 +109,7 @@ describe('SliderWorkComponent', () => {
         it('should call `changeImage` on click with `-1` arg', () => {
           page.sliderPrev.click();
 
-          expect(page.changeImage).toHaveBeenCalledWith(-1);
+          expect(comp.changeImage).toHaveBeenCalledWith(-1);
         });
       });
 
@@ -120,7 +121,7 @@ describe('SliderWorkComponent', () => {
         it('should call `changeImage` on click with `1` arg', () => {
           page.sliderNext.click();
 
-          expect(page.changeImage).toHaveBeenCalledWith(1);
+          expect(comp.changeImage).toHaveBeenCalledWith(1);
         });
       });
     });
@@ -149,7 +150,7 @@ describe('SliderWorkComponent', () => {
 
           it('should set href', () => {
             expect(page.slideTitle.href).toBe(
-              `http://localhost:9876/work/${
+              `http://localhost/work/${
                 Data.Api.getCaseStudies('Case Study 1').id
               }`
             );
@@ -169,7 +170,7 @@ describe('SliderWorkComponent', () => {
 
           it('should set href', () => {
             expect(page.slideButton.href).toBe(
-              `http://localhost:9876/work/${
+              `http://localhost/work/${
                 Data.Api.getCaseStudies('Case Study 1').id
               }`
             );
@@ -207,9 +208,6 @@ describe('SliderWorkComponent', () => {
 });
 
 class Page {
-  sliderInit: jasmine.Spy;
-  changeImage: jasmine.Spy;
-
   get sliderPrev() {
     return this.query<HTMLButtonElement>('.slider-prev');
   }
@@ -243,8 +241,8 @@ class Page {
   }
 
   constructor() {
-    this.sliderInit = spyOn(comp, 'sliderInit').and.callThrough();
-    this.changeImage = spyOn(comp, 'changeImage').and.callThrough();
+    jest.spyOn(comp, 'sliderInit');
+    jest.spyOn(comp, 'changeImage');
   }
 
   private query<T>(selector: string): T {
@@ -261,7 +259,7 @@ function createComponent() {
   comp = fixture.debugElement.query(By.directive(SliderWorkComponent))
     .componentInstance;
   page = new Page();
-  apiPipe = spyOn(MockApiPipe.prototype, 'transform').and.callThrough();
+  jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

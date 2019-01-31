@@ -19,7 +19,7 @@ let comp: WorkComponent;
 let fixture: ComponentFixture<WorkComponent>;
 let metaService: MetaService;
 let apiService: ApiService;
-let apiPipe: ApiPipeStub;
+let apiPipe: ApiPipe;
 let page: Page;
 
 describe('WorkComponent', () => {
@@ -73,7 +73,7 @@ describe('WorkComponent', () => {
 
   describe('`ngOnDestroy`', () => {
     it('should call `caseStudies$` `unsubscribe`', () => {
-      const spy = spyOn(comp.caseStudies$, 'unsubscribe').and.callThrough();
+      const spy = jest.spyOn(comp.caseStudies$, 'unsubscribe');
       comp.ngOnDestroy();
 
       expect(spy).toHaveBeenCalled();
@@ -125,25 +125,13 @@ describe('WorkComponent', () => {
 
         it('should set href', () => {
           expect(page.caseStudies[0].href).toBe(
-            `http://localhost:9876/${
-              Data.Api.getCaseStudies('Case Study 1').id
-            }`
+            `http://localhost/${Data.Api.getCaseStudies('Case Study 1').id}`
           );
         });
       });
     });
   });
 });
-
-class ApiPipeStub {
-  transform: jasmine.Spy;
-
-  constructor() {
-    const apiPipeInstance = fixture.debugElement.injector.get(ApiPipe);
-
-    this.transform = spyOn(apiPipeInstance, 'transform').and.callThrough();
-  }
-}
 
 class Page {
   get title() {
@@ -179,7 +167,8 @@ function createComponent() {
   comp = fixture.componentInstance;
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
-  apiPipe = new ApiPipeStub();
+  apiPipe = fixture.debugElement.injector.get(ApiPipe);
+  jest.spyOn(apiPipe, 'transform');
   page = new Page();
 
   fixture.detectChanges();
