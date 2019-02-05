@@ -33,40 +33,46 @@ export interface TextBlock extends Block {
   data: Text[];
 }
 
+export interface ImageBlockData {
+  image: Image;
+}
+
 export interface ImageBlock extends Block {
   type: 'image';
-  data: {
-    image: Image;
-  };
+  data: ImageBlockData;
   fullBleed?: boolean;
 }
 
+export interface DuoBlockData extends Array<ImageBlockData> {}
+
 export interface DuoBlock extends Block {
   type: 'duo';
-  data: {
-    image: Image;
-  }[];
+  data: DuoBlockData;
 }
+
+export interface GalleryBlockData extends Array<ImageBlockData> {}
 
 export interface GalleryBlock extends Block {
   type: 'gallery';
-  data: {
-    image: Image;
-  }[];
+  data: GalleryBlockData;
+}
+
+export interface VideoBlockData {
+  video: Video;
 }
 
 export interface VideoBlock extends Block {
   type: 'video';
-  data: {
-    video: Video;
-  };
+  data: VideoBlockData;
+}
+
+export interface AudioBlockData {
+  audio: Audio;
 }
 
 export interface AudioBlock extends Block {
   type: 'audio';
-  data: {
-    audio: Audio;
-  };
+  data: AudioBlockData;
 }
 
 interface Block {
@@ -88,9 +94,7 @@ export interface Career {
 export interface Team {
   name: string;
   position: string;
-  thumbnail: {
-    image: Image;
-  };
+  thumbnail: ImageBlockData;
 }
 
 interface Content {
@@ -109,6 +113,7 @@ export interface CaseStudy extends Post {
   featured: boolean;
   colour: string;
   overview: string[];
+  thumbnail: ImageBlockData;
 }
 
 export interface Service extends Post {
@@ -119,8 +124,6 @@ export interface Post {
   id: string;
   title: string;
   intro: string[];
-  thumbnail: {
-    image: Image;
-  };
+  thumbnail: ImageBlockData;
   content: Content[];
 }
