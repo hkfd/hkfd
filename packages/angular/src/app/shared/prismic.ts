@@ -57,28 +57,36 @@ export interface TextBlock extends Block {
   };
 }
 
+export interface ImageBlockData {
+  image: Image;
+}
+
 export interface ImageBlock extends Block {
   slice_type: 'image';
-  primary: {
-    image: Image;
-  };
+  primary: ImageBlockData;
 }
+
+export interface DuoBlockData extends Array<ImageBlockData> {}
 
 export interface DuoBlock extends Block {
   slice_type: 'duo';
-  items: { image: Image }[];
+  items: DuoBlockData;
 }
+
+export interface GalleryBlockData extends Array<ImageBlockData> {}
 
 export interface GalleryBlock extends Block {
   slice_type: 'gallery';
-  items: { image: Image }[];
+  items: GalleryBlockData;
+}
+
+export interface VideoBlockData {
+  video: Video;
 }
 
 export interface VideoBlock extends Block {
   slice_type: 'video';
-  primary: {
-    video: Video;
-  };
+  primary: VideoBlockData;
 }
 
 export interface News {
