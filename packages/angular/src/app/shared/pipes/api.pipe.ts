@@ -6,7 +6,23 @@ import {
   Video as GenericVideo,
   Audio as GenericAudio
 } from 'generic';
-import { Image as ApiImage, Video as ApiVideo, Audio as ApiAudio } from 'api';
+import {
+  Image as ApiImage,
+  Video as ApiVideo,
+  Audio as ApiAudio,
+  ImageBlockData,
+  DuoBlockData,
+  GalleryBlockData,
+  VideoBlockData,
+  AudioBlockData
+} from 'api';
+import {
+  isImageInput,
+  isVideoInput,
+  isAudioInput,
+  isArrayInput,
+  PipeReturn
+} from './helpers';
 
 export const Sizes = [
   { width: 550, height: 300 },
@@ -16,15 +32,18 @@ export const Sizes = [
   { width: 2400, height: 1600 }
 ];
 
+export type ApiPipeInput =
+  | ImageBlockData
+  | DuoBlockData
+  | GalleryBlockData
+  | VideoBlockData
+  | AudioBlockData;
+
 @Pipe({
   name: 'api'
 })
 export class ApiPipe implements PipeTransform {
-  private transformImage({
-    image: { name, alt }
-  }: {
-    image: ApiImage;
-  }): GenericImage {
+  private transformImage({ name, alt }: ApiImage): GenericImage {
     return {
       src: `https://res.cloudinary.com/${
         environment.cloudinaryName
@@ -43,7 +62,7 @@ export class ApiPipe implements PipeTransform {
     };
   }
 
-  private transformVideo({ video: { id } }: { video: ApiVideo }): GenericVideo {
+  private transformVideo({ id }: ApiVideo): GenericVideo {
     return {
       src: {
         attr: 'src',
@@ -52,21 +71,27 @@ export class ApiPipe implements PipeTransform {
     };
   }
 
-  private transformAudio({
-    audio: { url }
-  }: {
-    audio: ApiAudio;
-  }): GenericAudio {
+  private transformAudio({ url }: ApiAudio): GenericAudio {
     return {
       url
     };
   }
 
-  transform(val: any): any {
-    if (val.image) return this.transformImage(val);
-    if (val.video) return this.transformVideo(val);
-    if (val.audio) return this.transformAudio(val);
-    if (Array.isArray(val)) return val.map(image => this.transformImage(image));
+  transform<T extends ApiPipeInput>(val: T): PipeReturn<T> {
+    if (isImageInput<ImageBlockData>(val)) {
+      return this.transformImage(val.image) as PipeReturn<T>;
+    }
+    if (isVideoInput<VideoBlockData>(val)) {
+      return this.transformVideo(val.video) as PipeReturn<T>;
+    }
+    if (isAudioInput<AudioBlockData>(val)) {
+      return this.transformAudio(val.audio) as PipeReturn<T>;
+    }
+    if (isArrayInput<DuoBlockData | GalleryBlockData>(val)) {
+      return val.map(({ image }) => this.transformImage(image)) as PipeReturn<
+        T
+      >;
+    }
 
     throw new Error('Unknown type');
   }

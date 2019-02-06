@@ -1,7 +1,15 @@
 import { Data } from 'testing';
 import { PrismicPipe } from './prismic.pipe';
+import { Image, Video } from 'generic';
+import { ImageBlockData, GalleryBlockData, VideoBlockData } from 'prismic';
+import * as Helpers from './helpers';
+import { isImageInput, isVideoInput } from './helpers';
 
 let pipe: PrismicPipe;
+
+jest.spyOn(Helpers, 'isImageInput');
+jest.spyOn(Helpers, 'isVideoInput');
+jest.spyOn(Helpers, 'isArrayInput');
 
 describe('PrismicPipe', () => {
   beforeEach(() => (pipe = new PrismicPipe()));
@@ -11,30 +19,9 @@ describe('PrismicPipe', () => {
   });
 
   describe('`transform`', () => {
-    it('should return `Generic.Image` if passed `image` arg', () => {
-      const res = pipe.transform({
-        image: {
-          proxy: {},
-          xs: { dimensions: {} },
-          sm: { dimensions: {} },
-          md: { dimensions: {} },
-          lg: { dimensions: {} },
-          dimensions: {}
-        }
-      });
-
-      expect(Data.Generic.isImage(res)).toBeTruthy();
-    });
-
-    it('should return `Generic.Video` if passed `video` arg', () => {
-      const res = pipe.transform({ video: {} });
-
-      expect(Data.Generic.isVideo(res)).toBeTruthy();
-    });
-
-    it('should return `Generic.Image` array if passed `[]` arg', () => {
-      const [res] = pipe.transform([
-        {
+    describe('Image', () => {
+      it('should call `isImageInput` with `val` arg', () => {
+        const data = {
           image: {
             proxy: {},
             xs: { dimensions: {} },
@@ -43,21 +30,91 @@ describe('PrismicPipe', () => {
             lg: { dimensions: {} },
             dimensions: {}
           }
-        }
-      ]);
+        };
 
-      expect(Data.Generic.isImage(res)).toBeTruthy();
+        pipe.transform(data as ImageBlockData);
+
+        expect(isImageInput).toHaveBeenCalledWith(data);
+      });
+
+      it('should return `Generic.Image`', () => {
+        const res = pipe.transform({
+          image: {
+            proxy: {},
+            xs: { dimensions: {} },
+            sm: { dimensions: {} },
+            md: { dimensions: {} },
+            lg: { dimensions: {} },
+            dimensions: {}
+          }
+        } as ImageBlockData);
+
+        expect(Data.Generic.isImage(res)).toBeTruthy();
+      });
+    });
+
+    describe('Video', () => {
+      it('should call `isVideoInput` with `val` arg', () => {
+        pipe.transform({
+          video: {}
+        } as VideoBlockData);
+
+        expect(isVideoInput).toHaveBeenCalledWith({ video: {} });
+      });
+
+      it('should return `Generic.Video`', () => {
+        const res = pipe.transform({ video: {} } as VideoBlockData);
+
+        expect(Data.Generic.isVideo(res)).toBeTruthy();
+      });
+    });
+
+    describe('Array', () => {
+      it('should call `isImageInput` with `val` arg', () => {
+        const data = [
+          {
+            image: {
+              proxy: {},
+              xs: { dimensions: {} },
+              sm: { dimensions: {} },
+              md: { dimensions: {} },
+              lg: { dimensions: {} },
+              dimensions: {}
+            }
+          }
+        ];
+        pipe.transform(data as GalleryBlockData);
+
+        expect(isImageInput).toHaveBeenCalledWith(data);
+      });
+
+      it('should return `Generic.Image` array', () => {
+        const [res] = pipe.transform([
+          {
+            image: {
+              proxy: {},
+              xs: { dimensions: {} },
+              sm: { dimensions: {} },
+              md: { dimensions: {} },
+              lg: { dimensions: {} },
+              dimensions: {}
+            }
+          }
+        ] as GalleryBlockData);
+
+        expect(Data.Generic.isImage(res)).toBeTruthy();
+      });
     });
 
     it('should throw error by default', () => {
-      expect(() => pipe.transform({ test: 'test' })).toThrowError(
+      expect(() => pipe.transform({ test: 'test' } as any)).toThrowError(
         'Unknown type'
       );
     });
   });
 
   describe('`transformImage`', () => {
-    let res: any;
+    let res: Image;
 
     beforeEach(
       () => (res = pipe.transform({ image: Data.Prismic.getImage() }))
@@ -141,7 +198,7 @@ describe('PrismicPipe', () => {
   });
 
   describe('`transformVideo`', () => {
-    let res: any;
+    let res: Video;
 
     beforeEach(
       () => (res = pipe.transform({ video: Data.Prismic.getVideo() }))

@@ -1,4 +1,15 @@
-import { Post, PostsResponse, RefResponse, Image, Video, Text } from 'prismic';
+import {
+  Post,
+  PostsResponse,
+  RefResponse,
+  Image,
+  Video,
+  Text,
+  ImageBlockData,
+  VideoBlockData,
+  DuoBlockData,
+  GalleryBlockData
+} from 'prismic';
 
 export namespace Prismic {
   export const getPost = () => {
@@ -626,6 +637,49 @@ export namespace Prismic {
     return image;
   };
 
+  export const getImageBlockData = () => {
+    const data: ImageBlockData = {
+      image: getImage()
+    };
+
+    return data;
+  };
+
+  export const getGalleryBlockData = () => {
+    const data: GalleryBlockData = [
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      }
+    ];
+
+    return data;
+  };
+
+  export const getDuoBlockData = () => {
+    const data: DuoBlockData = [
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      }
+    ];
+
+    return data;
+  };
+
   export const getVideo = () => {
     const video: Video = {
       link_type: 'external',
@@ -633,5 +687,13 @@ export namespace Prismic {
     };
 
     return video;
+  };
+
+  export const getVideoBlockData = () => {
+    const data: VideoBlockData = {
+      video: getVideo()
+    };
+
+    return data;
   };
 }
