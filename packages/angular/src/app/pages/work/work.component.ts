@@ -29,7 +29,7 @@ export class WorkComponent implements OnInit, OnDestroy {
       caseStudies =>
         (this.caseStudies = caseStudies.map(caseStudy => ({
           ...caseStudy,
-          thumbnail: this.apiPipe.transform(caseStudy.thumbnail)
+          thumbnail: this.apiPipe.transform(caseStudy.thumbnail) as any
         })))
     );
   }

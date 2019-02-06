@@ -13,7 +13,12 @@ import {
   Image,
   Sentence,
   Video,
-  Audio
+  Audio,
+  ImageBlockData,
+  VideoBlockData,
+  AudioBlockData,
+  DuoBlockData,
+  GalleryBlockData
 } from 'api';
 
 export namespace Api {
@@ -480,6 +485,23 @@ export namespace Api {
     return sentence as any;
   };
 
+  export const getImage = () => {
+    const image: Image = {
+      name: 'image',
+      alt: 'Image'
+    };
+
+    return image;
+  };
+
+  export const getImageBlockData = () => {
+    const data: ImageBlockData = {
+      image: getImage()
+    };
+
+    return data;
+  };
+
   export const getGalleryBlock = () => {
     const galleryBlock: GalleryBlock = {
       type: 'gallery',
@@ -495,6 +517,28 @@ export namespace Api {
     return galleryBlock;
   };
 
+  export const getGalleryBlockData = () => {
+    const data: GalleryBlockData = [
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      }
+    ];
+
+    return data;
+  };
+
   export const getDuoBlock = () => {
     const duoBlock: DuoBlock = {
       type: 'duo',
@@ -508,13 +552,17 @@ export namespace Api {
     return duoBlock;
   };
 
-  export const getImage = () => {
-    const image: Image = {
-      name: 'image',
-      alt: 'Image'
-    };
+  export const getDuoBlockData = () => {
+    const data: DuoBlockData = [
+      {
+        image: getImage()
+      },
+      {
+        image: getImage()
+      }
+    ];
 
-    return image;
+    return data;
   };
 
   export const getVideo = () => {
@@ -525,11 +573,27 @@ export namespace Api {
     return video;
   };
 
+  export const getVideoBlockData = () => {
+    const data: VideoBlockData = {
+      video: getVideo()
+    };
+
+    return data;
+  };
+
   export const getAudio = () => {
     const audio: Audio = {
       url: 'soundcloud.com'
     };
 
     return audio;
+  };
+
+  export const getAudioBlockData = () => {
+    const data: AudioBlockData = {
+      audio: getAudio()
+    };
+
+    return data;
   };
 }

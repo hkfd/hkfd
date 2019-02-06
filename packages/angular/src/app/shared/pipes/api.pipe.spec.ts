@@ -1,9 +1,28 @@
 import { Data } from 'testing';
 import { ApiPipe, Sizes } from './api.pipe';
+import { Image, Video, Audio } from 'generic';
+import {
+  ImageBlockData,
+  GalleryBlockData,
+  VideoBlockData,
+  AudioBlockData
+} from 'api';
+import * as Helpers from './helpers';
+import {
+  isImageInput,
+  isVideoInput,
+  isAudioInput,
+  isArrayInput
+} from './helpers';
 
 import { environment } from 'environment';
 
 let pipe: ApiPipe;
+
+jest.spyOn(Helpers, 'isImageInput');
+jest.spyOn(Helpers, 'isVideoInput');
+jest.spyOn(Helpers, 'isAudioInput');
+jest.spyOn(Helpers, 'isArrayInput');
 
 describe('ApiPipe', () => {
   beforeEach(() => (pipe = new ApiPipe()));
@@ -13,39 +32,71 @@ describe('ApiPipe', () => {
   });
 
   describe('`transform`', () => {
-    it('should return `Generic.Image` if passed `image` arg', () => {
-      const res = pipe.transform({ image: {} });
-
-      expect(Data.Generic.isImage(res)).toBeTruthy();
-    });
-
-    it('should return `Generic.Video` if passed `video` arg', () => {
-      const res = pipe.transform({ video: {} });
-
-      expect(Data.Generic.isVideo(res)).toBeTruthy();
-    });
-
-    it('should return `Generic.Audio` if passed `audio` arg', () => {
-      const res = pipe.transform({ audio: {} });
-
-      expect(Data.Generic.isAudio(res)).toBeTruthy();
-    });
-
-    it('should return `Generic.Image` array if passed `[]` arg', () => {
-      const [res] = pipe.transform([{ image: {} }]);
-
-      expect(Data.Generic.isImage(res)).toBeTruthy();
-    });
-
     it('should throw error by default', () => {
-      expect(() => pipe.transform({ test: 'test' })).toThrowError(
+      expect(() => pipe.transform({ test: 'test' } as any)).toThrowError(
         'Unknown type'
       );
+    });
+
+    describe('Image', () => {
+      it('should call `isImageInput` with `val` arg', () => {
+        pipe.transform({ image: {} } as ImageBlockData);
+
+        expect(isImageInput).toHaveBeenCalledWith({ image: {} });
+      });
+
+      it('should return `Generic.Image`', () => {
+        const res = pipe.transform({ image: {} } as ImageBlockData);
+
+        expect(Data.Generic.isImage(res)).toBeTruthy();
+      });
+    });
+
+    describe('Video', () => {
+      it('should call `isVideoInput` with `val` arg', () => {
+        pipe.transform({ video: {} } as VideoBlockData);
+
+        expect(isVideoInput).toHaveBeenCalledWith({ video: {} });
+      });
+
+      it('should return `Generic.Video`', () => {
+        const res = pipe.transform({ video: {} } as VideoBlockData);
+
+        expect(Data.Generic.isVideo(res)).toBeTruthy();
+      });
+    });
+
+    describe('Audio', () => {
+      it('should call `isAudioInput` with `val` arg', () => {
+        pipe.transform({ audio: {} } as AudioBlockData);
+
+        expect(isAudioInput).toHaveBeenCalledWith({ audio: {} });
+      });
+
+      it('should return `Generic.Audio`', () => {
+        const res = pipe.transform({ audio: {} } as AudioBlockData);
+
+        expect(Data.Generic.isAudio(res)).toBeTruthy();
+      });
+    });
+
+    describe('Array', () => {
+      it('should call `isArrayInput` with `val` arg', () => {
+        pipe.transform([{ image: {} }] as GalleryBlockData);
+
+        expect(isArrayInput).toHaveBeenCalledWith([{ image: {} }]);
+      });
+
+      it('should return `Generic.Image` array', () => {
+        const [res] = pipe.transform([{ image: {} }] as GalleryBlockData);
+
+        expect(Data.Generic.isImage(res)).toBeTruthy();
+      });
     });
   });
 
   describe('`transformImage`', () => {
-    let res: any;
+    let res: Image;
 
     beforeEach(() => (res = pipe.transform({ image: Data.Api.getImage() })));
 
@@ -113,7 +164,7 @@ describe('ApiPipe', () => {
   });
 
   describe('`transformVideo`', () => {
-    let res: any;
+    let res: Video;
 
     beforeEach(() => (res = pipe.transform({ video: Data.Api.getVideo() })));
 
@@ -141,7 +192,7 @@ describe('ApiPipe', () => {
   });
 
   describe('`transformAudio`', () => {
-    let res: any;
+    let res: Audio;
 
     beforeEach(() => (res = pipe.transform({ audio: Data.Api.getAudio() })));
 

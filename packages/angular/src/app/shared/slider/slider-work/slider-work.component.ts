@@ -26,7 +26,7 @@ export class SliderWorkComponent extends SliderComponent {
 
     this._caseStudies = caseStudies.map(caseStudy => ({
       ...caseStudy,
-      thumbnail: this.apiPipe.transform(caseStudy.thumbnail)
+      thumbnail: this.apiPipe.transform(caseStudy.thumbnail) as any
     }));
     this.images = caseStudies.map(({ thumbnail }) => thumbnail as any);
 
