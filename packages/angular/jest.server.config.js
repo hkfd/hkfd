@@ -5,5 +5,14 @@ module.exports = {
   },
   testMatch: ['**/*.spec.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/server/']
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/server/'],
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        output: '<rootDir>/jest/results.xml'
+      }
+    ]
+  ]
 };
