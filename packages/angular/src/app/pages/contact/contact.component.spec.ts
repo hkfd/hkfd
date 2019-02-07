@@ -68,8 +68,10 @@ describe('ContactComponent', () => {
         );
       });
 
-      it('should set `ImageComponent` `image` as `image`', () => {
-        expect(page.imageComponent.image).toEqual(comp.images.contact as any);
+      it('should set `ImageComponent` `image` as transformed `image`', () => {
+        expect(page.imageComponent.image).toEqual({
+          'mock-api-pipe': comp.images.contact
+        } as any);
       });
 
       it('should set `ImageComponent` `full-height` attribute', () => {

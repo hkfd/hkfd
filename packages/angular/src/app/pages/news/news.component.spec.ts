@@ -139,10 +139,10 @@ describe('NewsComponent', () => {
               expect(page.postThumbnail).toBeTruthy();
             });
 
-            it('should set `ImageComponent` `image` as `data`', () => {
-              expect(page.imageComponent.image).toEqual(Data.Prismic.getPosts(
-                'post-1'
-              ).data as any);
+            it('should set `ImageComponent` `image` as transformed `data`', () => {
+              expect(page.imageComponent.image).toEqual({
+                'mock-prismic-pipe': Data.Prismic.getPosts('post-1').data
+              } as any);
             });
 
             it('should set `ImageComponent` `full-height` attribute', () => {

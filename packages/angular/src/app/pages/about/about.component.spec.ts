@@ -85,9 +85,9 @@ describe('AboutComponent', () => {
         });
 
         it('should set `ImageComponent` `image` as image', () => {
-          expect(page.imageComponents[0].image).toEqual(
-            AboutImages.intro as any
-          );
+          expect(page.imageComponents[0].image).toEqual({
+            'mock-api-pipe': AboutImages.intro
+          } as any);
         });
 
         it('should set `ImageComponent` `full-height` attribute', () => {
@@ -113,10 +113,10 @@ describe('AboutComponent', () => {
             );
           });
 
-          it('should set ImageComponent `image` as `thumbnail`', () => {
-            expect(page.imageComponents[1].image).toEqual(Data.Api.getTeam(
-              'Person 1'
-            ).thumbnail as any);
+          it('should set ImageComponent `image` as transformed `thumbnail`', () => {
+            expect(page.imageComponents[1].image).toEqual({
+              'mock-api-pipe': Data.Api.getTeam('Person 1').thumbnail
+            } as any);
           });
         });
 

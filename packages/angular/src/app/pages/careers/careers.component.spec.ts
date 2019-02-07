@@ -84,10 +84,10 @@ describe('CareersComponent', () => {
           );
         });
 
-        it('should set `ImageComponent` `image` as `image`', () => {
-          expect(page.imageComponents[0].image).toEqual(
-            CareersImages.hiring as any
-          );
+        it('should set `ImageComponent` `image` as transformed `image`', () => {
+          expect(page.imageComponents[0].image).toEqual({
+            'mock-api-pipe': CareersImages.hiring
+          } as any);
         });
 
         it('should set `ImageComponent` `full-height` attribute', () => {
@@ -108,10 +108,10 @@ describe('CareersComponent', () => {
           );
         });
 
-        it('should set `ImageComponent` `image` as `image`', () => {
-          expect(page.imageComponents[1].image).toEqual(
-            CareersImages.career as any
-          );
+        it('should set `ImageComponent` `image` as transformed `image`', () => {
+          expect(page.imageComponents[1].image).toEqual({
+            'mock-api-pipe': CareersImages.career
+          } as any);
         });
 
         it('should set `ImageComponent` `full-height` attribute', () => {

@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MockApiPipe implements PipeTransform {
   transform(val: any): any {
-    return val;
+    return { 'mock-api-pipe': val };
   }
 }

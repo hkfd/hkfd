@@ -214,10 +214,11 @@ describe('PostComponent', () => {
           );
         });
 
-        it('should set `ImageBlockComponent` `data` as `content.data.data`', () => {
-          expect(page.imageBlockComponent.data).toEqual(Data.Api.getCaseStudies(
-            'Case Study 2'
-          ).content[0].data[0].data as any);
+        it('should set `ImageBlockComponent` `data` as transformed `content.data.data`', () => {
+          expect(page.imageBlockComponent.data).toEqual({
+            'mock-api-pipe': Data.Api.getCaseStudies('Case Study 2').content[0]
+              .data[0].data
+          } as any);
         });
 
         it('should set `ImageBlockComponent` `full-bleed` attribute if `content.data.fullBleed`', () => {
@@ -253,11 +254,11 @@ describe('PostComponent', () => {
           );
         });
 
-        it('should set `GalleryBlockComponent` `data` as `content.data.data`', () => {
-          expect(page.galleryBlockComponent.data).toEqual(
-            Data.Api.getCaseStudies('Case Study 3').content[0].data[0]
-              .data as any
-          );
+        it('should set `GalleryBlockComponent` `data` as transformed `content.data.data`', () => {
+          expect(page.galleryBlockComponent.data).toEqual({
+            'mock-api-pipe': Data.Api.getCaseStudies('Case Study 3').content[0]
+              .data[0].data
+          } as any);
         });
       });
 
@@ -277,10 +278,11 @@ describe('PostComponent', () => {
           );
         });
 
-        it('should set `DuoBlockComponent` `data` as `content.data.data`', () => {
-          expect(page.duoBlockComponent.data).toEqual(Data.Api.getServices(
-            'Service 1'
-          ).content[0].data[0].data as any);
+        it('should set `DuoBlockComponent` `data` as transformed `content.data.data`', () => {
+          expect(page.duoBlockComponent.data).toEqual({
+            'mock-api-pipe': Data.Api.getServices('Service 1').content[0]
+              .data[0].data
+          } as any);
         });
       });
 
@@ -300,10 +302,11 @@ describe('PostComponent', () => {
           );
         });
 
-        it('should set `VideoBlockComponent` `data` as `content.data.data`', () => {
-          expect(page.videoBlockComponent.data).toEqual(Data.Api.getServices(
-            'Service 2'
-          ).content[0].data[0].data as any);
+        it('should set `VideoBlockComponent` `data` as transformed `content.data.data`', () => {
+          expect(page.videoBlockComponent.data).toEqual({
+            'mock-api-pipe': Data.Api.getServices('Service 2').content[0]
+              .data[0].data
+          } as any);
         });
       });
 
@@ -323,10 +326,11 @@ describe('PostComponent', () => {
           );
         });
 
-        it('should set `VideoBlockComponent` `data` as `content.data.data`', () => {
-          expect(page.audioBlockComponent.data).toEqual(Data.Api.getServices(
-            'Service 3'
-          ).content[0].data[0].data as any);
+        it('should set `VideoBlockComponent` `data` as transformed `content.data.data`', () => {
+          expect(page.audioBlockComponent.data).toEqual({
+            'mock-api-pipe': Data.Api.getServices('Service 3').content[0]
+              .data[0].data
+          } as any);
         });
       });
     });
