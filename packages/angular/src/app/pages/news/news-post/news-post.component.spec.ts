@@ -127,9 +127,10 @@ describe('NewsPostComponent', () => {
             );
           });
 
-          it('should set `ImageComponent` `image` as `data`', () => {
-            expect(page.imageComponent.image).toEqual((comp.post as Post)
-              .data as any);
+          it('should set `ImageComponent` `image` as transformed `data`', () => {
+            expect(page.imageComponent.image).toEqual({
+              'mock-prismic-pipe': (comp.post as Post).data as any
+            });
           });
 
           it('should set `ImageComponent` `full-height` attribute', () => {
@@ -190,10 +191,10 @@ describe('NewsPostComponent', () => {
           );
         });
 
-        it('should set `ImageBlockComponent` `data` as `primary`', () => {
-          expect(page.imageBlockComponent.data).toEqual(
-            (comp.post as Post).data.body[0].primary
-          );
+        it('should set `ImageBlockComponent` `data` as transformed`primary`', () => {
+          expect(page.imageBlockComponent.data).toEqual({
+            'mock-prismic-pipe': (comp.post as Post).data.body[0].primary
+          });
         });
       });
 
@@ -213,10 +214,10 @@ describe('NewsPostComponent', () => {
           );
         });
 
-        it('should set `DuoBlockComponent` `data` as `items`', () => {
-          expect(page.duoBlockComponent.data).toEqual(
-            (comp.post as Post).data.body[0].items
-          );
+        it('should set `DuoBlockComponent` `data` as transformed `items`', () => {
+          expect(page.duoBlockComponent.data).toEqual({
+            'mock-prismic-pipe': (comp.post as Post).data.body[0].items
+          } as any);
         });
       });
 
@@ -236,10 +237,10 @@ describe('NewsPostComponent', () => {
           );
         });
 
-        it('should set `GalleryBlockComponent` `data` as `items`', () => {
-          expect(page.galleryBlockComponent.data).toEqual(
-            (comp.post as Post).data.body[0].items
-          );
+        it('should set `GalleryBlockComponent` `data` as transformed `items`', () => {
+          expect(page.galleryBlockComponent.data).toEqual({
+            'mock-prismic-pipe': (comp.post as Post).data.body[0].items
+          } as any);
         });
       });
 
@@ -259,10 +260,10 @@ describe('NewsPostComponent', () => {
           );
         });
 
-        it('should set `VideoBlockComponent` `data` as `primary`', () => {
-          expect(page.videoBlockComponent.data).toEqual(
-            (comp.post as Post).data.body[0].primary
-          );
+        it('should set `VideoBlockComponent` `data` as transformed `primary`', () => {
+          expect(page.videoBlockComponent.data).toEqual({
+            'mock-prismic-pipe': (comp.post as Post).data.body[0].primary
+          } as any);
         });
       });
     });

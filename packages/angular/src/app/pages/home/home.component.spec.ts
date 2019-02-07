@@ -113,8 +113,10 @@ describe('HomeComponent', () => {
         );
       });
 
-      it('should set `SliderComponent` `images` as intro images', () => {
-        expect(page.sliderComponent.images).toEqual(comp.images.intro as any);
+      it('should set `SliderComponent` `images` as transformed intro images', () => {
+        expect(page.sliderComponent.images).toEqual({
+          'mock-api-pipe': comp.images.intro
+        } as any);
       });
 
       it('should set `SliderComponent` `autoplay` as `true`', () => {
@@ -146,9 +148,9 @@ describe('HomeComponent', () => {
           });
 
           it('should set `ImageComponent` `image` as `thumbnail`', () => {
-            expect(page.imageComponent.image).toEqual(Data.Api.getServices(
-              'Service 1'
-            ).thumbnail as any);
+            expect(page.imageComponent.image).toEqual({
+              'mock-api-pipe': Data.Api.getServices('Service 1').thumbnail
+            } as any);
           });
 
           it('should set `ImageComponent` `full-height` attribute', () => {

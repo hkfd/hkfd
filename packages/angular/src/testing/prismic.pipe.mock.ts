@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MockPrismicPipe implements PipeTransform {
   transform(val: any): any {
-    return val;
+    return { 'mock-prismic-pipe': val };
   }
 }

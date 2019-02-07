@@ -64,7 +64,7 @@ describe('WorkComponent', () => {
       });
 
       it('should call `ApiPipe` with case study `thumbnail`s', () => {
-        (comp.caseStudies as CaseStudy[]).forEach(caseStudy =>
+        Data.Api.getCaseStudies<void>().forEach(caseStudy =>
           expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
         );
       });
@@ -104,10 +104,10 @@ describe('WorkComponent', () => {
             expect(page.caseStudyThumbnail).toBeTruthy();
           });
 
-          it('should set `ImageComponent` `image` as `thumbnail`', () => {
-            expect(page.imageComponent.image).toEqual(Data.Api.getCaseStudies(
-              'Case Study 1'
-            ).thumbnail as any);
+          it('should set `ImageComponent` `image` as transformed `thumbnail`', () => {
+            expect(page.imageComponent.image).toEqual({
+              'mock-api-pipe': Data.Api.getCaseStudies('Case Study 1').thumbnail
+            } as any);
           });
 
           it('should set `ImageComponent` `full-height` attribute', () => {
