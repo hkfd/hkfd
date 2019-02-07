@@ -67,6 +67,10 @@ jobs:
       - run:
           name: '(angular) spec:browser'
           command: ./scripts/angular/spec-browser.sh
+      - store_test_results:
+          path: packages/angular/reports
+      - store_artifacts:
+          path: packages/angular/reports
 
   test-angular-spec-server:
     <<: *setup
@@ -76,6 +80,10 @@ jobs:
       - run:
           name: '(angular) spec:server'
           command: ./scripts/angular/spec-server.sh
+      - store_test_results:
+          path: packages/angular/reports
+      - store_artifacts:
+          path: packages/angular/reports
 
   test-angular-e2e:
     <<: *setup
@@ -94,6 +102,10 @@ jobs:
       - run:
           name: (email)
           command: ./scripts/email/test.sh
+      - store_test_results:
+          path: packages/email/functions/reports
+      - store_artifacts:
+          path: packages/email/functions/reports
 
   release:
     <<: *setup

@@ -10,5 +10,14 @@ module.exports = {
     '^testing$': '<rootDir>/src/testing'
   },
   testPathIgnorePatterns: ['<rootDir>/server.spec.ts'],
-  coveragePathIgnorePatterns: ['/testing/', 'setupJest', 'jestGlobalMocks']
+  coveragePathIgnorePatterns: ['/testing/', 'setupJest', 'jestGlobalMocks'],
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        output: '<rootDir>/jest/results.xml'
+      }
+    ]
+  ]
 };
