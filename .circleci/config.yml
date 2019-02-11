@@ -10,6 +10,7 @@ constants:
     paths:
       - node_modules
       - packages/angular/node_modules
+      - packages/angular/dist
       - packages/api/node_modules
       - packages/email/node_modules
       - packages/email/functions/node_modules
@@ -54,6 +55,9 @@ jobs:
       - run:
           name: lint
           command: ./scripts/lint.sh
+      - run:
+          name: build server
+          command: ./scripts/build.sh
       - save_cache:
           key: yarn-{{ checksum "yarn.lock" }}
           <<: *cache_paths

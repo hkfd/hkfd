@@ -12,12 +12,12 @@ describe('Header', () => {
       it('should route to home on click', () => {
         const el = page.getHomeLink();
 
-        expect(page.getUrl()).not.toBe('http://localhost:4200/');
+        expect(page.getUrl()).not.toBe('http://localhost:4000/');
 
         page
           .isClickable(el)
           .then(() => el.click())
-          .then(_ => expect(page.getUrl()).toBe('http://localhost:4200/'));
+          .then(_ => expect(page.getUrl()).toBe('http://localhost:4000/'));
       });
     });
 
@@ -29,12 +29,12 @@ describe('Header', () => {
       it('should route to page on click', () => {
         const el = page.getPageLinks().first();
 
-        expect(page.getUrl()).toBe('http://localhost:4200/');
+        expect(page.getUrl()).toBe('http://localhost:4000/');
 
         page
           .isClickable(el)
           .then(() => el.click())
-          .then(_ => expect(page.getUrl()).not.toBe('http://localhost:4200/'));
+          .then(_ => expect(page.getUrl()).not.toBe('http://localhost:4000/'));
       });
 
       describe('Active', () => {
