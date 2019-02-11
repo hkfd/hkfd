@@ -4,6 +4,5 @@ source ./scripts/angular/.env
 source ./scripts/helpers.sh
 
 if shouldRunTest $PACKAGE; then
-  yarn --cwd packages/$PACKAGE test:server --coverage --maxWorkers=2
-  bash <(curl -s https://codecov.io/bash)
+  ENVIRONMENT=staging yarn --cwd packages/$PACKAGE build:ssr
 fi
