@@ -1,8 +1,6 @@
 import {
   Component,
-  OnChanges,
   OnDestroy,
-  SimpleChanges,
   Input,
   HostListener,
   NgZone,
@@ -18,8 +16,10 @@ import { Image } from 'generic';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnChanges, OnDestroy {
+export class SliderComponent implements OnDestroy {
   private timer: number | undefined;
+  private _images!: Image[];
+  slidesCount: number | undefined;
   currentIndex = 0;
 
   @Input()
@@ -29,7 +29,16 @@ export class SliderComponent implements OnChanges, OnDestroy {
   @Input()
   delay = 2000;
   @Input()
-  images!: Image[];
+  set images(images: Image[] | undefined) {
+    if (!images) return;
+
+    this._images = images;
+    this.slidesCount = images.length;
+    this.sliderInit();
+  }
+  get images(): Image[] | undefined {
+    return this._images;
+  }
 
   @HostListener('mouseenter')
   mouseEnter() {
@@ -46,10 +55,12 @@ export class SliderComponent implements OnChanges, OnDestroy {
   ) {}
 
   changeImage(offset = 1) {
+    if (!this.slidesCount) throw new Error('No `slidesCount`');
+
     const index = this.currentIndex + offset;
 
-    if (index < 0) return (this.currentIndex = this.images.length - 1);
-    if (index >= this.images.length) return (this.currentIndex = 0);
+    if (index < 0) return (this.currentIndex = this.slidesCount - 1);
+    if (index >= this.slidesCount) return (this.currentIndex = 0);
 
     return (this.currentIndex = index);
   }
@@ -82,15 +93,13 @@ export class SliderComponent implements OnChanges, OnDestroy {
   }
 
   sliderInit() {
+    if (!this.slidesCount) throw new Error('No `slidesCount`');
+
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min) + min);
 
-    if (this.random) this.currentIndex = randomInt(0, this.images.length);
+    if (this.random) this.currentIndex = randomInt(0, this.slidesCount);
     this.startTimer();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.images && changes.images.currentValue) this.sliderInit();
   }
 
   ngOnDestroy() {
