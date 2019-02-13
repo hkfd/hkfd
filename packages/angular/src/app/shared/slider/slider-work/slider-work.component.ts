@@ -28,7 +28,7 @@ export class SliderWorkComponent extends SliderComponent {
       ...caseStudy,
       thumbnail: this.apiPipe.transform(caseStudy.thumbnail) as any
     }));
-    this.images = caseStudies.map(({ thumbnail }) => thumbnail as any);
+    this.slidesCount = caseStudies.length;
 
     this.sliderInit();
   }

@@ -41,11 +41,44 @@ describe('SliderComponent', () => {
       expect(comp).toBeTruthy();
     });
 
-    it('should set `images`', () => {
-      compHost.images = Data.Generic.getImages();
-      fixture.detectChanges();
+    describe('`images`', () => {
+      describe('Has `images`', () => {
+        beforeEach(() => {
+          compHost.images = Data.Generic.getImages();
+          fixture.detectChanges();
+        });
 
-      expect(comp.images).toEqual(Data.Generic.getImages());
+        it('should be set', () => {
+          expect(comp.images).toEqual(Data.Generic.getImages());
+        });
+
+        it('should set `slidesCount` as `images.length`', () => {
+          expect(comp.slidesCount).toBe(Data.Generic.getImages().length);
+        });
+
+        it('should call `sliderInit`', () => {
+          expect(comp.sliderInit).toHaveBeenCalled();
+        });
+      });
+
+      describe('No `images`', () => {
+        beforeEach(() => {
+          compHost.images = null;
+          fixture.detectChanges();
+        });
+
+        it('should be `undefined`', () => {
+          expect(comp.images).toEqual(undefined);
+        });
+
+        it('should not set `slidesCount`', () => {
+          expect(comp.slidesCount).toBe(undefined);
+        });
+
+        it('should not call `sliderInit`', () => {
+          expect(comp.sliderInit).not.toHaveBeenCalled();
+        });
+      });
     });
 
     it('should set `delay`', () => {
@@ -68,43 +101,6 @@ describe('SliderComponent', () => {
 
       expect(comp.random).toBe(true);
     });
-
-    it('should not call `sliderInit`', () => {
-      expect(comp.sliderInit).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('`ngOnchanges`', () => {
-    beforeEach(async(() => setupTest()));
-    beforeEach(async(() => createComponent()));
-
-    describe('no `images`', () => {
-      beforeEach(() => comp.ngOnChanges({}));
-
-      it('should not call `sliderInit`', () => {
-        expect(comp.sliderInit).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('no `images.currentValue`', () => {
-      beforeEach(() => comp.ngOnChanges({ images: {} as any }));
-
-      it('should not call `sliderInit`', () => {
-        expect(comp.sliderInit).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('`images` and `images.currentValue`', () => {
-      beforeEach(() =>
-        comp.ngOnChanges({
-          images: { currentValue: Data.Generic.getImages() } as any
-        })
-      );
-
-      it('should call `sliderInit`', () => {
-        expect(comp.sliderInit).toHaveBeenCalled();
-      });
-    });
   });
 
   describe('`ngOnDestroy`', () => {
@@ -122,43 +118,55 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
 
-    describe('`random` is `true`', () => {
-      beforeEach(() => {
-        comp.random = true;
-        comp.images = [{}] as any;
-      });
+    describe('No `slidesCount`', () => {
+      beforeEach(() => (comp.slidesCount = undefined));
 
-      it('should set `currentIndex`', () => {
-        comp.currentIndex = undefined as any;
-        comp.sliderInit();
-
-        expect(comp.currentIndex).toBeDefined();
-      });
-
-      it('should set `currentIndex` as number between `0` and `images.length`', () => {
-        comp.currentIndex = undefined as any;
-        comp.sliderInit();
-
-        expect(comp.currentIndex).toBeLessThanOrEqual(1);
-        expect(comp.currentIndex).toBeGreaterThanOrEqual(0);
+      it('should throw error', () => {
+        expect(() => comp.sliderInit()).toThrowError('No `slidesCount`');
       });
     });
 
-    describe('`random` is `false`', () => {
-      beforeEach(() => (comp.random = false));
+    describe('Has `slidesCount`', () => {
+      beforeEach(() => (comp.slidesCount = 1));
 
-      it('should not set `currentIndex`', () => {
-        comp.currentIndex = undefined as any;
+      describe('`random` is `true`', () => {
+        beforeEach(() => {
+          comp.random = true;
+          comp.images = [{}] as any;
+        });
+
+        it('should set `currentIndex`', () => {
+          comp.currentIndex = undefined as any;
+          comp.sliderInit();
+
+          expect(comp.currentIndex).toBeDefined();
+        });
+
+        it('should set `currentIndex` as number between `0` and `slidesCount`', () => {
+          comp.currentIndex = undefined as any;
+          comp.sliderInit();
+
+          expect(comp.currentIndex).toBeLessThanOrEqual(1);
+          expect(comp.currentIndex).toBeGreaterThanOrEqual(0);
+        });
+      });
+
+      describe('`random` is `false`', () => {
+        beforeEach(() => (comp.random = false));
+
+        it('should not set `currentIndex`', () => {
+          comp.currentIndex = undefined as any;
+          comp.sliderInit();
+
+          expect(comp.currentIndex).toBeUndefined();
+        });
+      });
+
+      it('should call `startTimer`', () => {
         comp.sliderInit();
 
-        expect(comp.currentIndex).toBeUndefined();
+        expect(comp.startTimer).toHaveBeenCalled();
       });
-    });
-
-    it('should call `startTimer`', () => {
-      comp.sliderInit();
-
-      expect(comp.startTimer).toHaveBeenCalled();
     });
   });
 
@@ -326,56 +334,68 @@ describe('SliderComponent', () => {
       comp.images = Data.Generic.getImages();
     });
 
-    it('should set `currentIndex` as `currentIndex` add `offset` if positive `offset` arg', () => {
-      comp.currentIndex = 0;
-      comp.changeImage(2);
+    describe('No `slidesCount`', () => {
+      beforeEach(() => (comp.slidesCount = undefined));
 
-      expect(comp.currentIndex).toBe(2);
-    });
-
-    it('should set `currentIndex` as `currentIndex` subtract `offset` if negative `offset` arg', () => {
-      comp.currentIndex = 2;
-      comp.changeImage(-2);
-
-      expect(comp.currentIndex).toBe(0);
-    });
-
-    it('should increment `currentIndex` if no arg', () => {
-      comp.currentIndex = 0;
-      comp.changeImage();
-
-      expect(comp.currentIndex).toBe(1);
-    });
-
-    describe('`currentIndex` is `0`', () => {
-      it('should set `currentIndex` as last `images` if `-1` arg', () => {
-        comp.currentIndex = 0;
-        comp.changeImage(-1);
-
-        expect(comp.currentIndex).toBe(Data.Generic.getImages().length - 1);
-      });
-
-      it('should set `currentIndex` as `1` if `1` arg', () => {
-        comp.currentIndex = 0;
-        comp.changeImage(1);
-
-        expect(comp.currentIndex).toBe(1);
+      it('should throw error', () => {
+        expect(() => comp.changeImage()).toThrowError('No `slidesCount`');
       });
     });
 
-    describe('`currentIndex` is last `images`', () => {
-      it('should set `currentIndex` as `0` if `1` arg', () => {
-        comp.currentIndex = Data.Generic.getImages().length - 1;
-        comp.changeImage(1);
+    describe('Has `slidesCount`', () => {
+      beforeEach(() => (comp.slidesCount = Data.Generic.getImages().length));
+
+      it('should set `currentIndex` as `currentIndex` add `offset` if positive `offset` arg', () => {
+        comp.currentIndex = 0;
+        comp.changeImage(2);
+
+        expect(comp.currentIndex).toBe(2);
+      });
+
+      it('should set `currentIndex` as `currentIndex` subtract `offset` if negative `offset` arg', () => {
+        comp.currentIndex = 2;
+        comp.changeImage(-2);
 
         expect(comp.currentIndex).toBe(0);
       });
 
-      it('should set `currentIndex` as second to last `images` if `-1` arg', () => {
-        comp.currentIndex = Data.Generic.getImages().length - 1;
-        comp.changeImage(-1);
+      it('should increment `currentIndex` if no arg', () => {
+        comp.currentIndex = 0;
+        comp.changeImage();
 
-        expect(comp.currentIndex).toBe(Data.Generic.getImages().length - 2);
+        expect(comp.currentIndex).toBe(1);
+      });
+
+      describe('`currentIndex` is `0`', () => {
+        it('should set `currentIndex` as last `images` if `-1` arg', () => {
+          comp.currentIndex = 0;
+          comp.changeImage(-1);
+
+          expect(comp.currentIndex).toBe(Data.Generic.getImages().length - 1);
+        });
+
+        it('should set `currentIndex` as `1` if `1` arg', () => {
+          comp.currentIndex = 0;
+          comp.changeImage(1);
+
+          expect(comp.currentIndex).toBe(1);
+        });
+      });
+
+      describe('`currentIndex` is last `images`', () => {
+        it('should set `currentIndex` as `0` if `1` arg', () => {
+          comp.currentIndex = Data.Generic.getImages().length - 1;
+          comp.changeImage(1);
+
+          expect(comp.currentIndex).toBe(0);
+        });
+
+        it('should set `currentIndex` as second to last `images` if `-1` arg', () => {
+          comp.currentIndex = Data.Generic.getImages().length - 1;
+          comp.changeImage(-1);
+
+          expect(comp.currentIndex).toBe(Data.Generic.getImages().length - 2);
+        });
       });
     });
   });

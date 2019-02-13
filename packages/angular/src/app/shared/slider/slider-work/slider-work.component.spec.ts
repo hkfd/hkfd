@@ -66,12 +66,8 @@ describe('SliderWorkComponent', () => {
         expect(comp.caseStudies).toEqual(caseStudies);
       });
 
-      it('should set `images` as transformed `thumbnail` array', () => {
-        expect(comp.images).toEqual([
-          Data.Api.getCaseStudies('Case Study 1').thumbnail,
-          Data.Api.getCaseStudies('Case Study 2').thumbnail,
-          Data.Api.getCaseStudies('Case Study 3').thumbnail
-        ] as any);
+      it('should set `slidesCount` as `caseStudies.length`', () => {
+        expect(comp.slidesCount).toBe(Data.Api.getCaseStudies<void>().length);
       });
 
       it('should call `sliderInit`', () => {
