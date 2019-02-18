@@ -11,6 +11,8 @@ import {
   Data
 } from 'testing';
 import { MetaService, ApiService, Post } from 'shared';
+import * as Helpers from './post-resolver.helpers';
+import { isKnownPostType } from './post-resolver.helpers';
 import { PostResolver } from './post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
@@ -18,6 +20,8 @@ let postResolver: PostResolver;
 let metaService: MetaService;
 let apiService: ApiService;
 let router: Router;
+
+jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(true);
 
 describe('PostResolver', () => {
   beforeEach(async(() => {
@@ -39,6 +43,13 @@ describe('PostResolver', () => {
     expect(apiService).toBeTruthy();
   });
 
+  it('should call `isKnownPostType` with `type` arg', () => {
+    activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
+    postResolver.resolve(activatedRoute.snapshot as any);
+
+    expect(isKnownPostType).toHaveBeenCalledWith('service');
+  });
+
   it('should call `ApiService` `getPost`', () => {
     activatedRoute.testParamMap = { type: 'service', id: 'service-1' };
     postResolver.resolve(activatedRoute.snapshot as any);
@@ -47,45 +58,88 @@ describe('PostResolver', () => {
   });
 
   describe('`type`', () => {
-    describe('has `ActivatedRouteSnapshot` `paramMap.type`', () => {
-      it('should call `ApiService` `getPost` with `type` arg as `ActivatedRouteSnapshot` `paramMap.type`', () => {
-        activatedRoute.testParamMap = { type: 'service' };
-        postResolver.resolve(activatedRoute.snapshot as any);
-
-        expect(apiService.getPost).toHaveBeenCalledWith(
-          'service',
-          jasmine.anything()
+    describe('Exists', () => {
+      describe('Is `PostType`', () => {
+        beforeEach(() =>
+          jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(true)
         );
+
+        describe('has `ActivatedRouteSnapshot` `paramMap.type`', () => {
+          it('should call `ApiService` `getPost` with `type` arg as `ActivatedRouteSnapshot` `paramMap.type`', () => {
+            activatedRoute.testParamMap = {
+              id: 'id',
+              type: 'service'
+            };
+            postResolver.resolve(activatedRoute.snapshot as any);
+
+            expect(apiService.getPost).toHaveBeenCalledWith(
+              'service',
+              jasmine.anything()
+            );
+          });
+        });
+
+        describe('no `ActivatedRouteSnapshot` `paramMap.type`', () => {
+          it('should call `ApiService` `getPost` with `type` arg as `ActivatedRouteSnapshot` `parent.routeConfig.path`', () => {
+            activatedRoute.testParamMap = { id: 'id' };
+            activatedRoute.parent.routeConfig.path = 'parent-path';
+            postResolver.resolve(activatedRoute.snapshot as any);
+
+            expect(apiService.getPost).toHaveBeenCalledWith(
+              'parent-path',
+              jasmine.anything()
+            );
+          });
+        });
+      });
+
+      describe('Is not `PostType`', () => {
+        beforeEach(() =>
+          jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(false)
+        );
+
+        it('should call `Router` `navigate` with route arg', fakeAsync(() => {
+          activatedRoute.testParamMap = {
+            id: 'id',
+            type: 'service'
+          };
+          (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
+            Post
+          >)
+            .pipe(timeout(100))
+            .subscribe();
+
+          tick(100);
+          expect(router.navigate).toHaveBeenCalledWith(['/']);
+        }));
       });
     });
 
-    describe('no `ActivatedRouteSnapshot` `paramMap.type`', () => {
-      it('should call `ApiService` `getPost` with `type` arg as `ActivatedRouteSnapshot` `parent.routeConfig.path`', () => {
-        activatedRoute.testParamMap = {};
-        activatedRoute.parent.routeConfig.path = 'parent-path';
-        postResolver.resolve(activatedRoute.snapshot as any);
+    describe('Does not exist', () => {
+      it('should call `Router` `navigate` with root arg', fakeAsync(() => {
+        activatedRoute.testParamMap = {
+          id: 'id',
+          type: undefined
+        };
+        (postResolver.resolve(activatedRoute.snapshot as any) as Observable<
+          Post
+        >)
+          .pipe(timeout(100))
+          .subscribe();
 
-        expect(apiService.getPost).toHaveBeenCalledWith(
-          'parent-path',
-          jasmine.anything()
-        );
-      });
-    });
-
-    describe('no `ActivatedRouteSnapshot` `paramMap.type` or `parent.routeConfig.path`', () => {
-      it('should call `ApiService` `getPost` with `type` arg as ``', () => {
-        activatedRoute.testParamMap = {};
-        activatedRoute.parent.routeConfig.path = undefined as any;
-        postResolver.resolve(activatedRoute.snapshot as any);
-
-        expect(apiService.getPost).toHaveBeenCalledWith('', jasmine.anything());
-      });
+        tick(100);
+        expect(router.navigate).toHaveBeenCalledWith(['/']);
+      }));
     });
   });
 
   describe('`id`', () => {
+    beforeEach(() =>
+      jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(true)
+    );
+
     it('should call `ApiService` `getPost` with `id` arg if `id`', () => {
-      activatedRoute.testParamMap = { id: 'service-1' };
+      activatedRoute.testParamMap = { id: 'service-1', type: 'service' };
       postResolver.resolve(activatedRoute.snapshot as any);
 
       expect(apiService.getPost).toHaveBeenCalledWith(
@@ -94,12 +148,18 @@ describe('PostResolver', () => {
       );
     });
 
-    it('should call `ApiService` `getPost` with `` arg if no `id`', () => {
-      activatedRoute.testParamMap = {};
-      postResolver.resolve(activatedRoute.snapshot as any);
+    it('should call `Router` `navigate` with root arg if no `id`', fakeAsync(() => {
+      activatedRoute.testParamMap = {
+        id: undefined,
+        type: 'service'
+      };
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
+        .pipe(timeout(100))
+        .subscribe();
 
-      expect(apiService.getPost).toHaveBeenCalledWith(jasmine.anything(), '');
-    });
+      tick(100);
+      expect(router.navigate).toHaveBeenCalledWith(['/']);
+    }));
   });
 
   describe('Has `post`', () => {
