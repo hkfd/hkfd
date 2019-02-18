@@ -6,13 +6,13 @@
         <p *ngFor="let text of post?.intro">{{ text }}</p>
       </div>
     </div>
-    <div id="info-overview" *ngIf="$any(post)?.overview">
+    <div id="info-overview" *ngIf="overview">
       <span>
         OUR SERVICES TO
         {{ post?.title }}
       </span>
       <ul>
-        <li *ngFor="let service of post?.overview">{{ service }}</li>
+        <li *ngFor="let service of overview">{{ service }}</li>
       </ul>
     </div>
   </div>

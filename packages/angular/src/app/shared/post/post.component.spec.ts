@@ -18,11 +18,15 @@ import {
 import { Post } from 'shared';
 import { ImageBlock } from 'api';
 import { PostComponent } from './post.component';
+import * as ApiHelpers from 'shared/api.helpers';
+import { isCaseStudy } from 'shared/api.helpers';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
+
+jest.spyOn(ApiHelpers, 'isCaseStudy').mockReturnValue(true);
 
 describe('PostComponent', () => {
   beforeEach(jest.clearAllMocks);
@@ -51,6 +55,34 @@ describe('PostComponent', () => {
 
   it('should create component', () => {
     expect(comp).toBeTruthy();
+  });
+
+  describe('`post`', () => {
+    beforeEach(() => (comp.overview = undefined));
+
+    it('should call `isCaseStudy` with `post` arg', () => {
+      comp.post = Data.Api.getCaseStudies('Case Study 1');
+
+      expect(isCaseStudy).toHaveBeenCalledWith(
+        Data.Api.getCaseStudies('Case Study 1')
+      );
+    });
+
+    it('should set `overview` as `post.overview` if `isCaseStudy` returns `true`', () => {
+      ((isCaseStudy as any) as jest.Mock).mockReturnValue(true);
+      comp.post = Data.Api.getCaseStudies('Case Study 1');
+
+      expect(comp.overview).toEqual(
+        Data.Api.getCaseStudies('Case Study 1').overview
+      );
+    });
+
+    it('should not set `overview` if `isCaseStudy` returns `false`', () => {
+      ((isCaseStudy as any) as jest.Mock).mockReturnValue(false);
+      comp.post = Data.Api.getCaseStudies('Case Study 1');
+
+      expect(comp.overview).toBe(undefined);
+    });
   });
 
   describe('`ngOnInit`', () => {
@@ -111,9 +143,9 @@ describe('PostComponent', () => {
       });
 
       describe('Overview', () => {
-        describe('`CaseStudy`', () => {
+        describe('Has `overview`', () => {
           beforeEach(() => {
-            comp.post = Data.Api.getCaseStudies('Case Study 1');
+            comp.overview = Data.Api.getCaseStudies('Case Study 1').overview;
             fixture.detectChanges();
           });
 
@@ -140,9 +172,9 @@ describe('PostComponent', () => {
           });
         });
 
-        describe('`Service`', () => {
+        describe('No `overview`', () => {
           beforeEach(() => {
-            comp.post = Data.Api.getServices('Service 1');
+            comp.overview = undefined;
             fixture.detectChanges();
           });
 
