@@ -12,10 +12,14 @@ import {
   Data
 } from 'testing';
 import { ApiService } from 'shared';
+import * as ApiHelpers from './api.helpers';
+import { getPostUrl } from './api.helpers';
 
 let mockHttp: HttpTestingController;
 let transferState: MockTransferState;
 let apiService: ApiService;
+
+jest.spyOn(ApiHelpers, 'getPostUrl').mockReturnValue('/getPostUrl');
 
 describe('ApiService', () => {
   beforeEach(async(() =>
@@ -346,20 +350,18 @@ describe('ApiService', () => {
   });
 
   describe('`getPost`', () => {
-    const servicesUrl = 'https://api.testing/services.json';
-    const caseStudiesUrl = 'https://api.testing/case-studies.json';
+    it('should call `getPostUrl` with `type` arg', () => {
+      apiService.getPost('type' as any, 'id').subscribe();
+      mockHttp.expectOne('/getPostUrl');
 
-    it('should call `TransferState` `get` with `POST_KEY` and `null` args if valid `type`', () => {
-      apiService.getPost('service', 'service-1').subscribe();
-      mockHttp.expectOne(servicesUrl);
-
-      expect(transferState.get).toHaveBeenCalledWith('api-post', null);
+      expect(getPostUrl).toHaveBeenCalledWith('type');
     });
 
-    it('should not call `TransferState` `get` if invalid `type`', () => {
-      apiService.getPost('', '').subscribe();
+    it('should call `TransferState` `get` with `POST_KEY` and `null` args', () => {
+      apiService.getPost('type' as any, 'id').subscribe();
+      mockHttp.expectOne('/getPostUrl');
 
-      expect(transferState.get).not.toHaveBeenCalled();
+      expect(transferState.get).toHaveBeenCalledWith('api-post', null);
     });
 
     describe('Cache', () => {
@@ -371,7 +373,7 @@ describe('ApiService', () => {
         it('should not call `HttpClient` `get`', () => {
           apiService.getPost('service', 'service-2').subscribe();
 
-          expect(mockHttp.expectNone(servicesUrl)).toBeUndefined();
+          expect(mockHttp.expectNone('/getPostUrl')).toBeUndefined();
         });
 
         it('should return `post`', () => {
@@ -388,7 +390,7 @@ describe('ApiService', () => {
         apiService.getPost('service', 'service-2').subscribe();
         const {
           request: { method }
-        } = mockHttp.expectOne(servicesUrl);
+        } = mockHttp.expectOne('/getPostUrl');
 
         expect(method).toBe('GET');
       });
@@ -397,49 +399,20 @@ describe('ApiService', () => {
         apiService.getPost('service', 'service-2').subscribe();
         const {
           request: { method }
-        } = mockHttp.expectOne(servicesUrl);
+        } = mockHttp.expectOne('/getPostUrl');
 
         expect(method).toBe('GET');
       });
     });
 
     describe('Request', () => {
-      describe('`type`', () => {
-        describe('`service`', () => {
-          it('should call `HttpClient` `get` with `SERVICES` url', () => {
-            apiService.getPost('service', 'service-1').subscribe();
-            const {
-              request: { method }
-            } = mockHttp.expectOne(servicesUrl);
+      it('should call `HttpClient` `get` with `getPostUrl` return', () => {
+        apiService.getPost('service', 'service-1').subscribe();
+        const {
+          request: { method }
+        } = mockHttp.expectOne('/getPostUrl');
 
-            expect(method).toBe('GET');
-          });
-        });
-
-        describe('`work`', () => {
-          it('should call `HttpClient` `get` with `CASE_STUDIES` url', () => {
-            apiService.getPost('work', 'case-study-1').subscribe();
-            const {
-              request: { method }
-            } = mockHttp.expectOne(caseStudiesUrl);
-
-            expect(method).toBe('GET');
-          });
-        });
-
-        describe('other', () => {
-          it('should not call `HttpClient` `get`', () => {
-            apiService.getPost('', 'service-1').subscribe();
-
-            expect(mockHttp.verify()).toBeUndefined();
-          });
-
-          it('should return `undefined`', () => {
-            apiService
-              .getPost('', 'service-1')
-              .subscribe(res => expect(res).toBeUndefined());
-          });
-        });
+        expect(method).toBe('GET');
       });
 
       describe('No error', () => {
@@ -449,7 +422,7 @@ describe('ApiService', () => {
           apiService
             .getPost('service', 'service-3')
             .subscribe(response => (res = response));
-          mockHttp.expectOne(servicesUrl).flush(Data.Api.getServices<void>());
+          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
         });
 
         it('should call `TransferState` `set` with `POST_KEY` and `post` args', () => {
@@ -471,7 +444,7 @@ describe('ApiService', () => {
           apiService
             .getPost('service', 'service-1')
             .subscribe(response => (res = response));
-          mockHttp.expectOne(servicesUrl).error(new ErrorEvent('err'));
+          mockHttp.expectOne('/getPostUrl').error(new ErrorEvent('err'));
         });
 
         it('should not call `TransferState` `set`', () => {

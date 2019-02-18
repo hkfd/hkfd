@@ -5,9 +5,10 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { environment } from 'environment';
+import { Post } from 'shared';
 import { MetaService } from '../meta.service';
 import { ApiService } from '../api.service';
-import { Post } from 'shared';
+import { isKnownPostType } from './post-resolver.helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +23,15 @@ export class PostResolver implements Resolve<Post> {
   resolve(route: ActivatedRouteSnapshot): Observable<Post> | Observable<never> {
     const type =
       route.paramMap.get('type') ||
-      (route.parent && route.parent.routeConfig
-        ? route.parent.routeConfig.path
-        : null) ||
-      '';
-    const id = route.paramMap.get('id') || '';
+      (route.parent &&
+        route.parent.routeConfig &&
+        route.parent.routeConfig.path);
+    const id = route.paramMap.get('id');
+
+    if (!type || !id || !isKnownPostType(type)) {
+      this.router.navigate(['/']);
+      return EMPTY;
+    }
 
     return this.apiService.getPost(type, id).pipe(
       take(1),

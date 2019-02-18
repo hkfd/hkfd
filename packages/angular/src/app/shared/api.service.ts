@@ -8,9 +8,8 @@ import { catchError, tap, flatMap, find } from 'rxjs/operators';
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 import { Service, Career, CaseStudy, Team, Client } from 'api';
+import { SERVICES, CASE_STUDIES, getPostUrl } from './api.helpers';
 
-const SERVICES = `${environment.api.url}services.json`;
-const CASE_STUDIES = `${environment.api.url}case-studies.json`;
 const TEAM = `${environment.api.url}team.json`;
 const CAREERS = `${environment.api.url}careers.json`;
 const CLIENTS = `${environment.api.url}clients.json`;
@@ -24,6 +23,14 @@ const TEAM_KEY = makeStateKey<Team[]>('api-team');
 const CLIENTS_KEY = makeStateKey<Client[]>('api-clients');
 
 export type Post = CaseStudy | Service;
+export type PostType = 'service' | 'work';
+type getPost<T> = T extends any
+  ? T extends 'service'
+    ? Service
+    : T extends 'work'
+    ? CaseStudy
+    : never
+  : never;
 
 @Injectable({
   providedIn: 'root'
@@ -82,32 +89,25 @@ export class ApiService {
     );
   }
 
-  getPost(type: string, id: string): Observable<Post | undefined> {
-    let url: string;
-    switch (type) {
-      case 'service':
-        url = SERVICES;
-        break;
-      case 'work':
-        url = CASE_STUDIES;
-        break;
-      default:
-        return of(undefined);
-    }
+  getPost<T extends PostType>(
+    type: T,
+    id: string
+  ): Observable<getPost<T> | undefined> {
+    const url = getPostUrl(type);
 
-    const cache = this.state.get<Post | null>(POST_KEY, null);
+    const cache = this.state.get<getPost<T> | null>(POST_KEY, null);
     if (cache && cache.id === id) {
       return of(cache).pipe(
         tap(post => this.logger.log('getPost', 'cache', post))
       );
     }
 
-    return this.http.get<Post[]>(url).pipe(
+    return this.http.get<Array<getPost<T>>>(url).pipe(
       flatMap(posts => posts),
       find(post => post.id === id),
       tap(post => this.logger.log('getPost', post)),
       tap(post => this.state.set(POST_KEY, post)),
-      catchError(this.handleError<Post>('getPost'))
+      catchError(this.handleError<getPost<T>>('getPost'))
     );
   }
 
