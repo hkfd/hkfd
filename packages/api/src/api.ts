@@ -120,7 +120,7 @@ export interface Service extends Post {
   description: string;
 }
 
-export interface Post {
+interface Post {
   id: string;
   title: string;
   intro: string[];

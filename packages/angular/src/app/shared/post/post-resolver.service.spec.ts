@@ -10,8 +10,7 @@ import {
   RouterStub,
   Data
 } from 'testing';
-import { MetaService, ApiService } from 'shared';
-import { Post } from 'api';
+import { MetaService, ApiService, Post } from 'shared';
 import { PostResolver } from './post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;

@@ -7,7 +7,7 @@ import { take, mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'environment';
 import { MetaService } from '../meta.service';
 import { ApiService } from '../api.service';
-import { Post } from 'api';
+import { Post } from 'shared';
 
 @Injectable({
   providedIn: 'root'
