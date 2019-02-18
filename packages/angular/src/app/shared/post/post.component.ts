@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Post } from 'shared';
+import { isCaseStudy } from 'shared/api.helpers';
+import { CaseStudy } from 'api';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +14,17 @@ import { Post } from 'shared';
 })
 export class PostComponent implements OnInit, OnDestroy {
   post$!: Subscription;
-  post: Post | undefined;
+  private _post: Post | undefined;
+  set post(post: Post | undefined) {
+    if (!post) return;
+
+    this._post = post;
+    if (isCaseStudy(post)) this.overview = post.overview;
+  }
+  get post() {
+    return this._post;
+  }
+  overview: PickFlat<CaseStudy, 'overview'> | undefined;
 
   @HostBinding('class')
   layout!: string;

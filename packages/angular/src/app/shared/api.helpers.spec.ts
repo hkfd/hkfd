@@ -1,4 +1,19 @@
-import { getPostUrl, SERVICES, CASE_STUDIES } from './api.helpers';
+import { Data } from 'testing';
+import { CASE_STUDIES, getPostUrl, isCaseStudy, SERVICES } from './api.helpers';
+
+describe('`isCaseStudy`', () => {
+  it('should return `true` if passed `CaseStudy` arg', () => {
+    const res = isCaseStudy(Data.Api.getCaseStudies('Case Study 1'));
+
+    expect(res).toBe(true);
+  });
+
+  it('should return `false` if passed `Service` arg', () => {
+    const res = isCaseStudy(Data.Api.getServices('Service 1'));
+
+    expect(res).toBe(false);
+  });
+});
 
 describe('`getPostUrl`', () => {
   it('should return `SERVICES` if passed service arg', () => {
