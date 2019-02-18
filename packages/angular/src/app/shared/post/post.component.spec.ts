@@ -15,7 +15,8 @@ import {
   Data
 } from 'testing';
 
-import { Post, ImageBlock } from 'api';
+import { Post } from 'shared';
+import { ImageBlock } from 'api';
 import { PostComponent } from './post.component';
 
 let comp: PostComponent;

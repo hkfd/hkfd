@@ -1,7 +1,8 @@
 import { Observable, of } from 'rxjs';
 import { flatMap, find, catchError } from 'rxjs/operators';
 
-import { Service, Career, Post, CaseStudy, Team, Client } from 'api';
+import { Post } from 'shared';
+import { Service, Career, CaseStudy, Team, Client } from 'api';
 import { Data } from './';
 
 export class MockApiService {

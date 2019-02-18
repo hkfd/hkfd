@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { Post } from 'api';
+import { Post } from 'shared';
 
 @Component({
   selector: 'app-post',

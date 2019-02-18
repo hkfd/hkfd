@@ -7,7 +7,7 @@ import { catchError, tap, flatMap, find } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
-import { Service, Career, Post, CaseStudy, Team, Client } from 'api';
+import { Service, Career, CaseStudy, Team, Client } from 'api';
 
 const SERVICES = `${environment.api.url}services.json`;
 const CASE_STUDIES = `${environment.api.url}case-studies.json`;
@@ -22,6 +22,8 @@ const POST_KEY = makeStateKey<Post>('api-post');
 const CASE_STUDIES_KEY = makeStateKey<CaseStudy[]>('api-case-studies');
 const TEAM_KEY = makeStateKey<Team[]>('api-team');
 const CLIENTS_KEY = makeStateKey<Client[]>('api-clients');
+
+export type Post = CaseStudy | Service;
 
 @Injectable({
   providedIn: 'root'
