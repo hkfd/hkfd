@@ -14,11 +14,17 @@ import {
 import { of } from 'rxjs';
 
 import { environment } from 'environment';
-import { PrismicService } from './prismic.service';
+import { getNewPage, getNewPageSize } from './prismic.helpers';
+import { PrismicService, URL } from './prismic.service';
 
 let mockHttp: HttpTestingController;
 let transferState: MockTransferState;
 let prismicService: PrismicService;
+
+jest.mock('./prismic.helpers', () => ({
+  getNewPageSize: jest.fn().mockReturnValue('getNewPageSizeReturn'),
+  getNewPage: jest.fn().mockReturnValue('getNewPageReturn')
+}));
 
 describe('PrismicService', () => {
   beforeEach(async(() =>
@@ -162,77 +168,34 @@ describe('PrismicService', () => {
         prismicService.getPosts(true).subscribe();
         const {
           request: { method }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
+        } = mockHttp.expectOne(req => req.url === URL);
 
         expect(method).toBe('GET');
       });
 
-      describe('`firstLoad` is `true`', () => {
-        beforeEach(() => {
-          prismicService.getPosts(true).subscribe();
-          mockHttp.expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          );
-          prismicService.getPosts(true).subscribe();
-        });
+      it('should call `getNewPageSize` with `firstLoad` and `postPage` args', () => {
+        prismicService.getPosts(true).subscribe();
+        mockHttp.expectOne(req => req.url === URL);
 
-        it('should call `HttpClient` `get` with `pageSize` param as `postPage * postPageSize`', () => {
-          const {
-            request: { params }
-          } = mockHttp.expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          );
-
-          expect(params.get('pageSize')).toBe('9');
-        });
-
-        it('should call `HttpClient` `get` with `page` param as `1`', () => {
-          const {
-            request: { params }
-          } = mockHttp.expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          );
-
-          expect(params.get('page')).toBe('1');
-        });
+        expect(getNewPageSize).toHaveBeenCalledWith(true, 1);
       });
 
-      describe('`firstLoad` is `false`', () => {
-        beforeEach(() => {
-          prismicService.getPosts(true).subscribe();
-          mockHttp.expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          );
-          prismicService.getPosts(false).subscribe();
-        });
+      it('should call `getNewPage` with `firstLoad` and `postPage` args', () => {
+        prismicService.getPosts(true).subscribe();
+        mockHttp.expectOne(req => req.url === URL);
 
-        it('should call `HttpClient` `get` with `pageSize` param as `postPageSize`', () => {
-          const {
-            request: { params }
-          } = mockHttp.expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          );
+        expect(getNewPage).toHaveBeenCalledWith(true, 1);
+      });
 
-          expect(params.get('pageSize')).toBe('9');
-        });
+      it('should call `HttpClient` `get` with `params`', () => {
+        prismicService.getPosts(true).subscribe();
+        const {
+          request: { params }
+        } = mockHttp.expectOne(req => req.url === URL);
 
-        it('should call `HttpClient` `get` with `page` param as `postPage`', () => {
-          const {
-            request: { params }
-          } = mockHttp.expectOne(
-            req =>
-              req.url === `${environment.prismic.endpoint}/documents/search`
-          );
-
-          expect(params.get('page')).toBe('2');
-        });
+        expect(params.get('ref')).toBe('abc');
+        expect(params.get('pageSize')).toBe('getNewPageSizeReturn');
+        expect(params.get('page')).toBe('getNewPageReturn');
       });
 
       describe('Response', () => {
@@ -244,10 +207,7 @@ describe('PrismicService', () => {
               .getPosts(true)
               .subscribe(response => (res = response));
             mockHttp
-              .expectOne(
-                req =>
-                  req.url === `${environment.prismic.endpoint}/documents/search`
-              )
+              .expectOne(req => req.url === URL)
               .error(new ErrorEvent(''));
           });
 
@@ -264,10 +224,7 @@ describe('PrismicService', () => {
               .getPosts(true)
               .subscribe(response => (res = response));
             mockHttp
-              .expectOne(
-                req =>
-                  req.url === `${environment.prismic.endpoint}/documents/search`
-              )
+              .expectOne(req => req.url === URL)
               .flush(Data.Prismic.getPostsResponse());
           });
 
@@ -286,9 +243,7 @@ describe('PrismicService', () => {
 
     it('should call `TransferState` `get` with `POST_KEY` and `null` args', () => {
       prismicService.getPost('post-1').subscribe();
-      mockHttp.expectOne(
-        req => req.url === `${environment.prismic.endpoint}/documents/search`
-      );
+      mockHttp.expectOne(req => req.url === URL);
 
       expect(transferState.get).toHaveBeenCalledWith('prismic-post', null);
     });
@@ -302,12 +257,7 @@ describe('PrismicService', () => {
         it('should not call `HttpClient` `get`', () => {
           prismicService.getPost('post-1').subscribe();
 
-          expect(
-            mockHttp.expectNone(
-              req =>
-                req.url === `${environment.prismic.endpoint}/documents/search`
-            )
-          ).toBeUndefined();
+          expect(mockHttp.expectNone(req => req.url === URL)).toBeUndefined();
         });
 
         it('should return `post`', () => {
@@ -323,9 +273,7 @@ describe('PrismicService', () => {
         prismicService.getPost('post-1').subscribe();
         const {
           request: { method }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
+        } = mockHttp.expectOne(req => req.url === URL);
 
         expect(method).toBe('GET');
       });
@@ -335,9 +283,7 @@ describe('PrismicService', () => {
         prismicService.getPost('post-2').subscribe();
         const {
           request: { method }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
+        } = mockHttp.expectOne(req => req.url === URL);
 
         expect(method).toBe('GET');
       });
@@ -348,9 +294,7 @@ describe('PrismicService', () => {
         prismicService.getPost('post-1').subscribe();
         const {
           request: { method }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
+        } = mockHttp.expectOne(req => req.url === URL);
 
         expect(method).toBe('GET');
       });
@@ -359,9 +303,7 @@ describe('PrismicService', () => {
         prismicService.getPost('post-1').subscribe();
         const {
           request: { params }
-        } = mockHttp.expectOne(
-          req => req.url === `${environment.prismic.endpoint}/documents/search`
-        );
+        } = mockHttp.expectOne(req => req.url === URL);
 
         expect(params.get('q')).toContain('post-1');
       });
@@ -375,10 +317,7 @@ describe('PrismicService', () => {
               .getPost('post-1')
               .subscribe(response => (res = response));
             mockHttp
-              .expectOne(
-                req =>
-                  req.url === `${environment.prismic.endpoint}/documents/search`
-              )
+              .expectOne(req => req.url === URL)
               .error(new ErrorEvent(''));
           });
 
@@ -399,10 +338,7 @@ describe('PrismicService', () => {
               .getPost('post-1')
               .subscribe(response => (res = response));
             mockHttp
-              .expectOne(
-                req =>
-                  req.url === `${environment.prismic.endpoint}/documents/search`
-              )
+              .expectOne(req => req.url === URL)
               .flush(Data.Prismic.getPostsResponse());
           });
 

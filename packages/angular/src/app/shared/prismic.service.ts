@@ -8,6 +8,9 @@ import { map, flatMap, tap, catchError } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 import { Post, RefResponse, PostsResponse } from 'prismic';
 import { environment } from 'environment';
+import { getNewPage, getNewPageSize } from './prismic.helpers';
+
+export const URL = `${environment.prismic.endpoint}/documents/search`;
 
 const REF_KEY = makeStateKey<string>('prismic-ref');
 const POST_KEY = makeStateKey<Post>('prismic-post');
@@ -17,7 +20,6 @@ const POST_KEY = makeStateKey<Post>('prismic-post');
 })
 export class PrismicService {
   private postPage = 1;
-  private postPageSize = 9;
 
   constructor(
     private http: HttpClient,
@@ -51,18 +53,10 @@ export class PrismicService {
           .append('ref', ref)
           .append('q', '[[at(document.type,"news")]]')
           .append('orderings', '[document.first_publication_date desc]')
-          .append(
-            'pageSize',
-            `${
-              firstLoad ? this.postPage * this.postPageSize : this.postPageSize
-            }`
-          )
-          .append('page', `${firstLoad ? 1 : this.postPage}`);
+          .append('pageSize', `${getNewPageSize(firstLoad, this.postPage)}`)
+          .append('page', `${getNewPage(firstLoad, this.postPage)}`);
 
-        return this.http.get<PostsResponse>(
-          `${environment.prismic.endpoint}/documents/search`,
-          { params }
-        );
+        return this.http.get<PostsResponse>(URL, { params });
       }),
       tap(postsRes => this.logger.log('getPosts', postsRes)),
       catchError(this.handleError<PostsResponse>('getPosts'))
@@ -85,10 +79,7 @@ export class PrismicService {
           .append('ref', ref)
           .append('q', `[[at(my.news.uid,"${uid}")]]`);
 
-        return this.http.get<PostsResponse>(
-          `${environment.prismic.endpoint}/documents/search`,
-          { params }
-        );
+        return this.http.get<PostsResponse>(URL, { params });
       }),
       map(({ results }) => results[0]),
       tap(post => this.logger.log('getPost', post)),
