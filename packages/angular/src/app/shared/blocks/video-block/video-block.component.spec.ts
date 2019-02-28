@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { By, DomSanitizer } from '@angular/platform-browser';
 
-import { StubLazyDirective, Data } from 'testing';
+import { StubLazyDirective, StubDomSanitizer, Data } from 'testing';
 
 import { VideoBlockComponent } from './video-block.component';
 
 let compHost: TestHostComponent;
 let comp: VideoBlockComponent;
 let fixture: ComponentFixture<TestHostComponent>;
+let domSanitizer: DomSanitizer;
 let page: Page;
 
 @Component({
@@ -22,7 +23,8 @@ class TestHostComponent {
 describe('VideoBlockComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, VideoBlockComponent, StubLazyDirective]
+      declarations: [TestHostComponent, VideoBlockComponent, StubLazyDirective],
+      providers: [{ provide: DomSanitizer, useClass: StubDomSanitizer }]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
@@ -40,31 +42,68 @@ describe('VideoBlockComponent', () => {
     expect(comp.data).toEqual(Data.Generic.getVideo());
   });
 
+  describe('`setVideoSrc`', () => {
+    beforeEach(() => comp.setVideoSrc('src'));
+
+    it('should call `DomSanitizer` `bypassSecurityTrustResourceUrl` with `src` arg', () => {
+      expect(domSanitizer.bypassSecurityTrustResourceUrl).toHaveBeenCalledWith(
+        'src'
+      );
+    });
+
+    it('should set `videoSrc` as  `DomSanitizer` `bypassSecurityTrustResourceUrl` return', () => {
+      expect(comp.videoSrc).toBe('bypassSecurityTrustResourceUrl: src');
+    });
+  });
+
+  describe('`handleVisible`', () => {
+    beforeEach(() => {
+      comp.data = { src: 'src' };
+      comp.handleVisible();
+    });
+
+    it('should call `setVideoSrc` with `data.src` arg', () => {
+      expect(comp.setVideoSrc).toHaveBeenCalledWith('src');
+    });
+  });
+
   describe('Template', () => {
-    describe('iframe', () => {
-      describe('has `data`', () => {
-        beforeEach(() => {
-          compHost.data = Data.Generic.getVideo();
-          fixture.detectChanges();
-        });
-
-        it('should be displayed', () => {
-          expect(page.video).toBeTruthy();
-        });
-
-        it('should set `LazyDirective` `data` as `src`', () => {
-          expect(page.lazyDirective.data).toEqual(comp.data.src);
-        });
+    describe('Container', () => {
+      it('should be displayed', () => {
+        expect(page.container).toBeTruthy();
       });
 
-      describe('no `data`', () => {
-        beforeEach(() => {
-          (compHost.data as any) = undefined;
-          fixture.detectChanges();
+      it('should call `handleVisible` on `isVisible`', () => {
+        page.container.dispatchEvent(new Event('isVisible'));
+
+        expect(comp.handleVisible).toHaveBeenCalled();
+      });
+
+      describe('iframe', () => {
+        describe('Has `videoSrc`', () => {
+          beforeEach(() => {
+            comp.videoSrc = 'about:blank';
+            fixture.detectChanges();
+          });
+
+          it('should be displayed', () => {
+            expect(page.video).toBeTruthy();
+          });
+
+          it('should set src as `src`', () => {
+            expect(page.video.src).toBe('about:blank');
+          });
         });
 
-        it('should not be displayed', () => {
-          expect(page.video).toBeFalsy();
+        describe('No `videoSrc`', () => {
+          beforeEach(() => {
+            comp.videoSrc = undefined;
+            fixture.detectChanges();
+          });
+
+          it('should not be displayed', () => {
+            expect(page.video).toBeFalsy();
+          });
         });
       });
     });
@@ -72,6 +111,9 @@ describe('VideoBlockComponent', () => {
 });
 
 class Page {
+  get container() {
+    return this.query<HTMLDivElement>('div');
+  }
   get video() {
     return this.query<HTMLIFrameElement>('iframe');
   }
@@ -93,8 +135,11 @@ function createComponent() {
   compHost = fixture.componentInstance;
   comp = fixture.debugElement.query(By.directive(VideoBlockComponent))
     .componentInstance;
-
+  domSanitizer = fixture.debugElement.injector.get<DomSanitizer>(DomSanitizer);
   page = new Page();
+
+  jest.spyOn(comp, 'setVideoSrc');
+  jest.spyOn(comp, 'handleVisible');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

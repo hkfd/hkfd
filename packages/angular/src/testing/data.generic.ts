@@ -1,22 +1,16 @@
-import { Image, Video, Audio, Lazy } from 'generic';
+import { Image, Video, Audio } from 'generic';
 
 export namespace Generic {
   export const isImage = (data: any): data is Image => {
     return (
       data.hasOwnProperty('src') &&
       data.hasOwnProperty('srcset') &&
-      data.srcset.hasOwnProperty('attr') &&
-      data.srcset.hasOwnProperty('val') &&
       data.hasOwnProperty('alt')
     );
   };
 
   export const isVideo = (data: any): data is Video => {
-    return (
-      data.hasOwnProperty('src') &&
-      data.src.hasOwnProperty('attr') &&
-      data.src.hasOwnProperty('val')
-    );
+    return data.hasOwnProperty('src');
   };
 
   export const isAudio = (data: any): data is Audio => {
@@ -26,10 +20,7 @@ export namespace Generic {
   export const getImage = () => {
     const image: Image = {
       src: 'http://testing/example.jpg',
-      srcset: {
-        attr: 'srcset',
-        val: ['']
-      },
+      srcset: 'srcset',
       alt: 'Example image'
     };
 
@@ -40,18 +31,12 @@ export namespace Generic {
     const duo: Image[] = [
       {
         src: '',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       },
       {
         src: '',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       }
     ];
@@ -63,42 +48,27 @@ export namespace Generic {
     const images: Image[] = [
       {
         src: 'image-1',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       },
       {
         src: 'image-2',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       },
       {
         src: 'image-3',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       },
       {
         src: 'image-4',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       },
       {
         src: 'image-5',
-        srcset: {
-          attr: 'srcset',
-          val: ['']
-        },
+        srcset: 'srcset',
         alt: ''
       }
     ];
@@ -108,10 +78,7 @@ export namespace Generic {
 
   export const getVideo = () => {
     const video: Video = {
-      src: {
-        attr: 'src',
-        val: ['']
-      }
+      src: 'src'
     };
 
     return video;
@@ -123,14 +90,5 @@ export namespace Generic {
     };
 
     return audio;
-  };
-
-  export const getLazy = () => {
-    const lazy: Lazy = {
-      attr: 'srcset',
-      val: ['example-xs.jpg 100w', 'example-sm.jpg 200w']
-    };
-
-    return lazy;
   };
 }

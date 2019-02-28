@@ -14,13 +14,17 @@ import { WorkAnimations } from './work.animations';
 })
 export class WorkComponent implements OnInit, OnDestroy {
   caseStudies$!: Subscription;
-  caseStudies: CaseStudy[] | undefined;
+  caseStudies: Visible<CaseStudy>[] | undefined;
 
   constructor(
     private metaService: MetaService,
     private apiService: ApiService,
     private apiPipe: ApiPipe
   ) {}
+
+  handleVisible(caseStudy: Visible<CaseStudy>) {
+    caseStudy.isVisible = true;
+  }
 
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Our Work', url: 'work' });

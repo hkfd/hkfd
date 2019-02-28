@@ -1,1 +1,7 @@
-<img src="{{ image?.src }}" [lazy]="image?.srcset" alt="{{ image?.alt }}" />
+<img
+  [src]="img?.src"
+  srcset="{{ img?.srcset }}"
+  lazy
+  (isVisible)="handleVisible()"
+  alt="{{ img?.alt }}"
+/>

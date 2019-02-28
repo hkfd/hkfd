@@ -25,40 +25,12 @@ describe('`transformImage`', () => {
     });
   });
 
-  describe('`srcset`', () => {
-    it('should be set', () => {
-      expect(res.srcset).toBeDefined();
-    });
-
-    it('should set `attr`', () => {
-      expect(res.srcset.attr).toBe('srcset');
-    });
-
-    describe('`val`', () => {
-      it('should be set', () => {
-        expect(res.srcset.val.length).toBe(5);
-      });
-
-      it('should be set with `xs.url`', () => {
-        expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().xs.url);
-      });
-
-      it('should be set with `sm.url`', () => {
-        expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().sm.url);
-      });
-
-      it('should be set with `md.url`', () => {
-        expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().md.url);
-      });
-
-      it('should be set with `lg.url`', () => {
-        expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().lg.url);
-      });
-
-      it('should be set with `url`', () => {
-        expect(res.srcset.val.join()).toContain(Data.Prismic.getImage().url);
-      });
-    });
+  it('should set `srcset`', () => {
+    expect(res.srcset).toBe(`image-xs -399w,
+  image-sm -399w,
+  image-md -399w,
+  image-lg -399w,
+  image -399w`);
   });
 
   describe('`alt`', () => {
@@ -85,26 +57,8 @@ describe('`transformVideo`', () => {
 
   beforeEach(() => (res = transformVideo(Data.Prismic.getVideo())));
 
-  describe('`src`', () => {
-    it('should be set', () => {
-      expect(res.src).toBeDefined();
-    });
-
-    it('should set `attr`', () => {
-      expect(res.src.attr).toBe('src');
-    });
-
-    describe('`val`', () => {
-      it('should be set', () => {
-        expect(res.src.val).toBeDefined();
-      });
-
-      it('should be set as `url`', () => {
-        const [val] = res.src.val;
-
-        expect(val).toBe(Data.Prismic.getVideo().url);
-      });
-    });
+  it('should set `src`', () => {
+    expect(res.src).toBe(Data.Prismic.getVideo().url);
   });
 });
 

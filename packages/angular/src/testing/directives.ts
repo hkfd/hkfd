@@ -1,11 +1,9 @@
-import { Directive, Input } from '@angular/core';
-
-import { Lazy } from 'generic';
+import { Directive, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[lazy]'
 })
 export class StubLazyDirective {
-  @Input('lazy')
-  data!: Lazy;
+  @Output()
+  isVisible = new EventEmitter<true>();
 }

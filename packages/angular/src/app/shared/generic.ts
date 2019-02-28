@@ -1,17 +1,11 @@
-export interface Lazy {
-  attr: string;
-  val: string[];
-  loaded?: boolean;
-}
-
 export interface Image {
   src: string;
-  srcset: Lazy;
+  srcset: string;
   alt: string;
 }
 
 export interface Video {
-  src: Lazy;
+  src: string;
 }
 
 export interface Audio {

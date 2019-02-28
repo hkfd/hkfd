@@ -1,9 +1,10 @@
-<iframe
-  *ngIf="data"
-  type="text/html"
-  src=""
-  [lazy]="data?.src"
-  allowfullscreen
-  sandbox="allow-same-origin allow-scripts"
-  title="Video"
-></iframe>
+<div lazy (isVisible)="handleVisible()">
+  <iframe
+    *ngIf="videoSrc"
+    type="text/html"
+    [src]="videoSrc"
+    allowfullscreen
+    sandbox="allow-same-origin allow-scripts"
+    title="Video"
+  ></iframe>
+</div>

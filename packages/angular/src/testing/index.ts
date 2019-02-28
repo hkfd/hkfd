@@ -7,6 +7,7 @@ export * from './api.pipe.mock';
 export * from './prismic.pipe.mock';
 export * from './router';
 export * from './state';
+export * from './sanitizer';
 
 export * from './directives';
 export * from './components';

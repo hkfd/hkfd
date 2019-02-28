@@ -24,24 +24,18 @@ export const transformImage = ({ name, alt }: ApiImage): GenericImage => ({
   src: `https://res.cloudinary.com/${
     environment.cloudinaryName
   }/image/upload/w_64,h_ih,c_limit,q_auto,f_auto/${name}`,
-  srcset: {
-    attr: 'srcset',
-    val: Sizes.map(
-      ({ width, height }) =>
-        `https://res.cloudinary.com/${
-          environment.cloudinaryName
-        }/image/upload/w_${width},h_${height},c_limit,q_auto,f_auto/${name} ${width -
-          400}w`
-    )
-  },
+  srcset: Sizes.map(
+    ({ width, height }) =>
+      `https://res.cloudinary.com/${
+        environment.cloudinaryName
+      }/image/upload/w_${width},h_${height},c_limit,q_auto,f_auto/${name} ${width -
+        400}w`
+  ).toString(),
   alt
 });
 
 export const transformVideo = ({ id }: ApiVideo): GenericVideo => ({
-  src: {
-    attr: 'src',
-    val: [`https://www.youtube.com/embed/${id}?&origin=https://hkfd.co.uk`]
-  }
+  src: `https://www.youtube.com/embed/${id}?&origin=https://hkfd.co.uk`
 });
 
 export const transformAudio = ({ url }: ApiAudio): GenericAudio => ({
