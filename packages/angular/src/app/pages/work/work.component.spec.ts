@@ -8,6 +8,7 @@ import {
   MockApiService,
   MockApiPipe,
   StubImageComponent,
+  StubLazyDirective,
   Data
 } from 'testing';
 
@@ -26,7 +27,7 @@ describe('WorkComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, NoopAnimationsModule],
-      declarations: [WorkComponent, StubImageComponent],
+      declarations: [WorkComponent, StubImageComponent, StubLazyDirective],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService },
@@ -80,6 +81,15 @@ describe('WorkComponent', () => {
     });
   });
 
+  describe('`handleVisible`', () => {
+    it('should set `caseStudy.isVisible` as `true`', () => {
+      const caseStudy = {};
+      comp.handleVisible(caseStudy as any);
+
+      expect(caseStudy).toEqual({ isVisible: true });
+    });
+  });
+
   describe('Template', () => {
     it('should display title', () => {
       expect(page.title.textContent).toBeTruthy();
@@ -128,6 +138,18 @@ describe('WorkComponent', () => {
             `http://localhost/${Data.Api.getCaseStudies('Case Study 1').id}`
           );
         });
+
+        it('should call `handleVisible` with `caseStudy` on `isVisible`', () => {
+          comp.caseStudies = Data.Api.getCaseStudies<void>();
+          fixture.detectChanges();
+
+          page.caseStudies[1].dispatchEvent(new Event('isVisible'));
+
+          expect(comp.handleVisible).toHaveBeenCalledWith({
+            ...Data.Api.getCaseStudies('Case Study 2'),
+            isVisible: true
+          });
+        });
       });
     });
   });
@@ -169,6 +191,7 @@ function createComponent() {
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = fixture.debugElement.injector.get(ApiPipe);
   jest.spyOn(apiPipe, 'transform');
+  jest.spyOn(comp, 'handleVisible');
   page = new Page();
 
   fixture.detectChanges();

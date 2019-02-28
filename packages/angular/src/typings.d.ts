@@ -5,3 +5,5 @@ interface NodeModule {
 }
 
 type PickFlat<T, U extends keyof T> = Pick<T, U>[U];
+
+type Visible<T> = T & { isVisible?: true };

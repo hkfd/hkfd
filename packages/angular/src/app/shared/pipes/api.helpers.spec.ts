@@ -7,8 +7,7 @@ import {
   transformImage,
   transformVideo,
   transformAudio,
-  transformArray,
-  Sizes
+  transformArray
 } from './api.helpers';
 
 jest.spyOn(ApiHelpers, 'transformImage');
@@ -32,52 +31,30 @@ describe('`transformImage`', () => {
     });
   });
 
-  describe('`srcset`', () => {
-    it('should be set', () => {
-      expect(res.srcset).toBeDefined();
-    });
+  it('should set `srcset`', () => {
+    expect(res.srcset).toContain(
+      'https://res.cloudinary.com/dv8oeiozq/image/upload/w_550,h_300,c_limit,q_auto,f_auto/image 150w,'
+    );
+    expect(res.srcset).toContain(
+      'https://res.cloudinary.com/dv8oeiozq/image/upload/w_800,h_533,c_limit,q_auto,f_auto/image 400w,'
+    );
+    expect(res.srcset).toContain(
+      'https://res.cloudinary.com/dv8oeiozq/image/upload/w_1200,h_800,c_limit,q_auto,f_auto/image 800w,'
+    );
+    expect(res.srcset).toContain(
+      'https://res.cloudinary.com/dv8oeiozq/image/upload/w_1800,h_1200,c_limit,q_auto,f_auto/image 1400w,'
+    );
+    expect(res.srcset).toContain(
+      'https://res.cloudinary.com/dv8oeiozq/image/upload/w_2400,h_1600,c_limit,q_auto,f_auto/image 2000w'
+    );
+  });
 
-    it('should set `attr`', () => {
-      expect(res.srcset.attr).toBe('srcset');
-    });
+  it('should set `alt`', () => {
+    expect(res.alt).toBeDefined();
+  });
 
-    describe('`val`', () => {
-      it('should be set', () => {
-        expect(res.srcset.val.length).toBe(Sizes.length);
-      });
-
-      it('should be set with `environment.cloudinaryName`', () => {
-        res.srcset.val.forEach((val: any) =>
-          expect(val).toContain(environment.cloudinaryName)
-        );
-      });
-
-      it('should be set with `name`', () => {
-        res.srcset.val.forEach((val: any) =>
-          expect(val).toContain(Data.Api.getImage().name)
-        );
-      });
-
-      it('should be set with `Sizes` `width`', () => {
-        Sizes.forEach((size, i) =>
-          expect(res.srcset.val[i]).toContain(`w_${size.width}`)
-        );
-      });
-
-      it('should be set with `Sizes` `height`', () => {
-        Sizes.forEach((size, i) =>
-          expect(res.srcset.val[i]).toContain(`h_${size.height}`)
-        );
-      });
-    });
-
-    it('should set `alt`', () => {
-      expect(res.alt).toBeDefined();
-    });
-
-    it('should set `alt` as `alt`', () => {
-      expect(res.alt).toBe(Data.Api.getImage().alt);
-    });
+  it('should set `alt` as `alt`', () => {
+    expect(res.alt).toBe(Data.Api.getImage().alt);
   });
 });
 
@@ -86,26 +63,10 @@ describe('`transformVideo`', () => {
 
   beforeEach(() => (res = transformVideo(Data.Api.getVideo())));
 
-  describe('`src`', () => {
-    it('should be set', () => {
-      expect(res.src).toBeDefined();
-    });
-
-    it('should set `attr`', () => {
-      expect(res.src.attr).toBe('src');
-    });
-
-    describe('`val`', () => {
-      it('should be set', () => {
-        expect(res.src.val).toBeDefined();
-      });
-
-      it('should be set with `id`', () => {
-        const [val] = res.src.val;
-
-        expect(val).toContain(Data.Api.getVideo().id);
-      });
-    });
+  it('should set src', () => {
+    expect(res.src).toBe(
+      'https://www.youtube.com/embed/123?&origin=https://hkfd.co.uk'
+    );
   });
 });
 

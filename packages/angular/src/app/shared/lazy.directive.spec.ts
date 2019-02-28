@@ -1,40 +1,28 @@
-import { Component, PLATFORM_ID, Renderer2, ElementRef } from '@angular/core';
+import { Component, PLATFORM_ID } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Data } from 'testing';
-
 import { LazyDirective } from './lazy.directive';
 
-let comp: TestHostComponent;
+let compHost: TestHostComponent;
 let fixture: ComponentFixture<TestHostComponent>;
 let lazyDirective: LazyDirective;
-let renderer: Renderer2;
-let elementRef: ElementRef;
 let mockPlatformId: 'browser' | 'server';
 
 @Component({
-  template: '<img src="" [lazy]="lazy">'
+  template: '<img src="" lazy (isVisible)="isVisible()">'
 })
 class TestHostComponent {
-  lazy: any = {};
+  isVisible() {}
 }
 
 describe('LazyDirective', () => {
   describe('', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
-    beforeEach(() => {
-      comp.lazy = Data.Generic.getLazy();
-      fixture.detectChanges();
-    });
 
     it('should create directive', () => {
       expect(lazyDirective).toBeTruthy();
-    });
-
-    it('should set `data`', () => {
-      expect(lazyDirective.data).toEqual(Data.Generic.getLazy());
     });
   });
 
@@ -43,10 +31,6 @@ describe('LazyDirective', () => {
       beforeEach(() => (mockPlatformId = 'browser'));
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
-      beforeEach(() => {
-        comp.lazy = Data.Generic.getLazy();
-        fixture.detectChanges();
-      });
 
       it('should set `observer`', () => {
         lazyDirective.ngAfterViewInit();
@@ -59,10 +43,6 @@ describe('LazyDirective', () => {
       beforeEach(() => (mockPlatformId = 'server'));
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
-      beforeEach(() => {
-        comp.lazy = Data.Generic.getLazy();
-        fixture.detectChanges();
-      });
 
       it('should not set `observer`', () => {
         lazyDirective.ngAfterViewInit();
@@ -87,8 +67,7 @@ describe('LazyDirective', () => {
       beforeEach(async(() => setupTest()));
       beforeEach(async(() => createComponent()));
       beforeEach(() => {
-        (lazyDirective as any).observer = new IntersectionObserver(jest.fn());
-        (lazyDirective as any).observer.disconnect = jest.fn();
+        (lazyDirective as any).observer = { disconnect: jest.fn() };
 
         lazyDirective.disconnectObserver();
       });
@@ -103,94 +82,36 @@ describe('LazyDirective', () => {
     beforeEach(() => (mockPlatformId = 'server'));
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
-    beforeEach(() => {
-      comp.lazy = Data.Generic.getLazy();
-      fixture.detectChanges();
-    });
 
     describe('`isIntersecting` is `false`', () => {
       beforeEach(() =>
         lazyDirective.intersectionCallback([{ isIntersecting: false }] as any)
       );
 
-      it('should not set `data` `loaded', () => {
-        expect(comp.lazy.loaded).toBeUndefined();
+      it('should not call `isVisible` `emit`', () => {
+        expect(lazyDirective.isVisible.emit).not.toHaveBeenCalled();
+      });
+
+      it('should not call host component `isVisible`', () => {
+        expect(compHost.isVisible).not.toHaveBeenCalled();
       });
     });
 
     describe('`isIntersecting` is `true`', () => {
-      it('should set `data` `loaded as `true`', () => {
-        lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
+      beforeEach(() =>
+        lazyDirective.intersectionCallback([{ isIntersecting: true }] as any)
+      );
 
-        expect(comp.lazy.loaded).toBe(true);
+      it('should call `isVisible` `emit` with `true` arg', () => {
+        expect(lazyDirective.isVisible.emit).toHaveBeenCalledWith(true);
+      });
+
+      it('should call host component `isVisible`', () => {
+        expect(compHost.isVisible).toHaveBeenCalled();
       });
 
       it('should call `disconnectObserver`', () => {
-        lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
-
         expect(lazyDirective.disconnectObserver).toHaveBeenCalled();
-      });
-
-      describe('No `data.attr` and `data.val`', () => {
-        beforeEach(() => {
-          jest.clearAllMocks();
-          lazyDirective.data = {
-            ...Data.Generic.getLazy(),
-            attr: undefined
-          } as any;
-          lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
-        });
-
-        it('should not call `Renderer2` `setAttribute`', () => {
-          expect(renderer.setAttribute).not.toHaveBeenCalled();
-        });
-      });
-
-      describe('`data.attr` and no `data.val`', () => {
-        beforeEach(() => {
-          jest.clearAllMocks();
-          lazyDirective.data = {
-            ...Data.Generic.getLazy(),
-            val: undefined
-          } as any;
-          lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
-        });
-
-        it('should not call `Renderer2` `setAttribute`', () => {
-          expect(renderer.setAttribute).not.toHaveBeenCalled();
-        });
-      });
-
-      describe('No `data.attr` and no `data.val`', () => {
-        beforeEach(() => {
-          jest.clearAllMocks();
-          lazyDirective.data = {
-            ...Data.Generic.getLazy(),
-            attr: undefined,
-            val: undefined
-          } as any;
-          lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
-        });
-
-        it('should not call `Renderer2` `setAttribute`', () => {
-          expect(renderer.setAttribute).not.toHaveBeenCalled();
-        });
-      });
-
-      describe('`data.attr` and `data.val`', () => {
-        beforeEach(() => {
-          jest.clearAllMocks();
-          lazyDirective.data = Data.Generic.getLazy();
-          lazyDirective.intersectionCallback([{ isIntersecting: true }] as any);
-        });
-
-        it('should call `Renderer2` `setAttribute` with `ElementRef nativeElement`, `data.attr`, and joined `data.val` args', () => {
-          expect(renderer.setAttribute).toHaveBeenCalledWith(
-            elementRef.nativeElement,
-            Data.Generic.getLazy().attr,
-            Data.Generic.getLazy().val.join()
-          );
-        });
       });
     });
   });
@@ -205,14 +126,13 @@ function setupTest() {
 
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
-  comp = fixture.componentInstance;
+  compHost = fixture.componentInstance;
 
   const imageEl = fixture.debugElement.query(By.directive(LazyDirective));
-  elementRef = imageEl.injector.get<ElementRef>(ElementRef);
   lazyDirective = imageEl.injector.get<LazyDirective>(LazyDirective);
   jest.spyOn(lazyDirective, 'disconnectObserver');
-  renderer = imageEl.injector.get<Renderer2>(Renderer2 as any);
-  jest.spyOn(renderer, 'setAttribute');
+  jest.spyOn(lazyDirective.isVisible, 'emit');
+  jest.spyOn(compHost, 'isVisible');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

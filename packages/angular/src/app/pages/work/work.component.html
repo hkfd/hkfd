@@ -13,7 +13,9 @@
     class="case-study {{ caseStudy?.colour }}"
     *ngFor="let caseStudy of caseStudies"
     [routerLink]="[caseStudy?.id]"
-    [@caseStudyList]="caseStudy?.thumbnail?.srcset?.loaded"
+    lazy
+    (isVisible)="handleVisible(caseStudy)"
+    [@caseStudyList]="caseStudy?.isVisible"
     [attr.aria-label]="caseStudy?.title"
   >
     <h2>{{ caseStudy?.title }}</h2>

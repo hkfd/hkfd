@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Video } from 'generic';
 
@@ -10,4 +11,15 @@ import { Video } from 'generic';
 export class VideoBlockComponent {
   @Input()
   data!: Video;
+  videoSrc: SafeResourceUrl | undefined;
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  setVideoSrc(src: string) {
+    this.videoSrc = this.sanitizer.bypassSecurityTrustResourceUrl(src);
+  }
+
+  handleVisible() {
+    this.setVideoSrc(this.data.src);
+  }
 }
