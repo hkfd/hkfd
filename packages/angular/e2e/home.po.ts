@@ -84,7 +84,7 @@ export class HomePage {
   }
 
   getServiceThumbnail() {
-    return this.getService().element(by.css('img'));
+    return this.getService().element(by.css('image-component'));
   }
 
   getServiceTitle() {

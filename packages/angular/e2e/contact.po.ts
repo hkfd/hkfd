@@ -48,6 +48,6 @@ export class ContactPage {
   }
 
   getContactImage() {
-    return element(by.css('#contact-image image-component img'));
+    return element(by.css('#contact-image image-component'));
   }
 }

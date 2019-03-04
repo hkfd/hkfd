@@ -1,7 +1,9 @@
-<img
-  [src]="img?.src"
-  srcset="{{ img?.srcset }}"
-  lazy
-  (isVisible)="handleVisible()"
-  alt="{{ img?.alt }}"
-/>
+<div *ngIf="img" [class]="img?.state" lazy (isVisible)="handleImgVisible()">
+  <img
+    *ngIf="isVisible"
+    [src]="img?.src"
+    srcset="{{ img?.srcset }}"
+    alt="{{ img?.alt }}"
+    (load)="handleImgLoad()"
+  />
+</div>

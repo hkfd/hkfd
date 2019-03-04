@@ -65,6 +65,6 @@ export class CareersPage {
   }
 
   getCareersImage() {
-    return element(by.id('careers')).element(by.css('img'));
+    return element(by.id('careers')).element(by.css('image-component'));
   }
 }

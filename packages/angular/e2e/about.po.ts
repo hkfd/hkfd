@@ -26,6 +26,13 @@ export class AboutPage {
     return browser.wait(isClickable, 3000);
   }
 
+  scrollTo(el: ElementFinder) {
+    return browser
+      .actions()
+      .mouseMove(el)
+      .perform();
+  }
+
   getUrl() {
     return browser.getCurrentUrl();
   }
@@ -57,7 +64,7 @@ export class AboutPage {
   }
 
   getPersonImage() {
-    return this.getPerson().element(by.css('img'));
+    return this.getPerson().element(by.css('image-component'));
   }
 
   getPersonName() {
