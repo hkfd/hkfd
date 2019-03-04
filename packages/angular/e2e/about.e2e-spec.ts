@@ -59,9 +59,10 @@ describe('About', () => {
         const el = page.getPeople().last();
 
         page
-          .isClickable(el)
+          .scrollTo(el)
+          .then(() => page.isClickable(el))
           .then(() => el.click())
-          .then(() => page.isNotVisible(page.getPerson()))
+          .then(() => page.isNotVisible(el))
           .then(_ => expect(page.getUrl()).toContain('/careers'));
       });
     });

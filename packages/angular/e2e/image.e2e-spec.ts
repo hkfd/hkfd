@@ -5,43 +5,39 @@ describe('Image', () => {
 
   beforeEach(() => (page = new Image()));
 
-  it('should display img', () => {
-    expect(
-      page
-        .getImagesImg()
-        .first()
-        .isDisplayed()
-    ).toBeTruthy();
-  });
-
-  describe('Lazyload', () => {
-    it('should load visible img', () => {
-      expect(
-        page
-          .getImagesImg()
-          .first()
-          .getAttribute('srcset')
-      ).toBeTruthy();
+  describe('Visible', () => {
+    it('should display img', () => {
+      expect(page.getImagesImg(0).isDisplayed()).toBeTruthy();
     });
 
-    it('should not load not visible img', () => {
+    it('should display high res img', () => {
+      expect(page.getImagesImg(0).getAttribute('srcset')).toBeTruthy();
+    });
+  });
+
+  describe('Not visible', () => {
+    it('should not have img', async () => {
       expect(
-        page
-          .getImagesImg()
-          .last()
-          .getAttribute('srcset')
+        page.getImagesImg((await page.getImages().count()) - 1).isPresent()
       ).toBeFalsy();
     });
 
-    it('should load not visible img when it becomes visible', () => {
-      page.scrollTo(page.getImages().last()).then(_ =>
+    describe('-> visible', () => {
+      beforeEach(() => page.scrollTo(page.getImages().last()));
+
+      it('should display img', async () => {
+        expect(
+          page.getImagesImg((await page.getImages().count()) - 1).isDisplayed()
+        ).toBeTruthy();
+      });
+
+      it('should display high res img', async () => {
         expect(
           page
-            .getImagesImg()
-            .last()
+            .getImagesImg((await page.getImages().count()) - 1)
             .getAttribute('srcset')
-        ).toBeTruthy()
-      );
+        ).toBeTruthy();
+      });
     });
   });
 });

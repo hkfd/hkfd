@@ -66,7 +66,7 @@ export class NewsPage {
   }
 
   getPostThumbnail() {
-    return this.getPost().element(by.css('img'));
+    return this.getPost().element(by.css('image-component'));
   }
 
   getPostDate() {

@@ -33,7 +33,9 @@ export class Image {
     return element.all(by.css('image-component'));
   }
 
-  getImagesImg() {
-    return this.getImages().all(by.css('img'));
+  getImagesImg(index: number) {
+    return this.getImages()
+      .get(index)
+      .element(by.css('img'));
   }
 }

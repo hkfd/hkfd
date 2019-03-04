@@ -6,9 +6,24 @@ import {
   ExpectedConditions
 } from 'protractor';
 
+const removeImgTransform = () => {
+  const css = `div[_ngcontent-c5], img[_ngcontent-c5] {
+    -webkit-transform: none !important;
+    transform: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }`;
+  const head = document.head || document.getElementsByTagName('head')[0];
+  const style = document.createElement('style');
+
+  style.appendChild(document.createTextNode(css));
+  head.appendChild(style);
+};
+
 export class SliderWork {
   constructor() {
     this.navigateTo();
+    browser.driver.executeScript(removeImgTransform);
   }
 
   isVisible(el: ElementFinder) {
