@@ -39,7 +39,7 @@
   </div>
 
   <div id="people">
-    <div class="person" *ngFor="let person of team">
+    <div class="person" *ngFor="let person of (team$ | async)">
       <div class="person-container">
         <image-component [image]="person?.thumbnail | api"></image-component>
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { MetaService, ApiService } from 'shared';
 import { Team } from 'api';
@@ -11,9 +11,8 @@ import { AboutImages } from './about.images';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit, OnDestroy {
-  team$!: Subscription;
-  team: Team[] | undefined;
+export class AboutComponent implements OnInit {
+  team$!: Observable<Team[]>;
 
   images = AboutImages;
 
@@ -25,12 +24,6 @@ export class AboutComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'About', url: 'about' });
 
-    this.team$ = this.apiService
-      .getTeam()
-      .subscribe(team => (this.team = team));
-  }
-
-  ngOnDestroy() {
-    this.team$.unsubscribe();
+    this.team$ = this.apiService.getTeam();
   }
 }
