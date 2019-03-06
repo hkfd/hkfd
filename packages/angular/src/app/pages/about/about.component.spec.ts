@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { of } from 'rxjs';
 import {
   RouterTestingModule,
   MockMetaService,
@@ -45,25 +46,12 @@ describe('AboutComponent', () => {
       });
     });
 
-    it('should set `team$`', () => {
-      expect(comp.team$).toBeDefined();
-    });
+    it('should set `team$` as `ApiService` `getTeam`', () => {
+      const returnValue = of('getTeam');
+      (apiService.getTeam as jest.Mock).mockReturnValue(returnValue);
+      comp.ngOnInit();
 
-    it('should call `ApiService` `getTeam`', () => {
-      expect(apiService.getTeam).toHaveBeenCalledWith();
-    });
-
-    it('should set `team`', () => {
-      expect(comp.team).toEqual(Data.Api.getTeam<void>());
-    });
-  });
-
-  describe('`ngOnDestroy`', () => {
-    it('should call `team$` `unsubscribe`', () => {
-      jest.spyOn(comp.team$, 'unsubscribe');
-      comp.ngOnDestroy();
-
-      expect(comp.team$.unsubscribe).toHaveBeenCalled();
+      expect(comp.team$).toBe(returnValue);
     });
   });
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { MetaService, ApiService } from 'shared';
 import { Career } from 'api';
@@ -11,9 +11,8 @@ import { CareersImages } from './careers.images';
   templateUrl: './careers.component.html',
   styleUrls: ['./careers.component.scss']
 })
-export class CareersComponent implements OnInit, OnDestroy {
-  careers$!: Subscription;
-  careers: Career[] | undefined;
+export class CareersComponent implements OnInit {
+  careers$!: Observable<Career[]>;
 
   images = CareersImages;
 
@@ -29,12 +28,6 @@ export class CareersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Careers', url: 'careers' });
 
-    this.careers$ = this.apiService
-      .getCareers()
-      .subscribe(careers => (this.careers = careers));
-  }
-
-  ngOnDestroy() {
-    this.careers$.unsubscribe();
+    this.careers$ = this.apiService.getCareers();
   }
 }
