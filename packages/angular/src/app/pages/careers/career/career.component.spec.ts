@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -14,8 +15,11 @@ import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;
 let fixture: ComponentFixture<CareerComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
+
+beforeEach(jest.clearAllMocks);
 
 describe('CareerComponent', () => {
   beforeEach(async(() => {
@@ -47,6 +51,10 @@ describe('CareerComponent', () => {
     it('should set `career`', () => {
       expect(comp.career).toEqual(Data.Api.getCareers('Career 1'));
     });
+
+    it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+    });
   });
 
   describe('`ngOnDestroy`', () => {
@@ -66,6 +74,7 @@ describe('CareerComponent', () => {
     describe('Section', () => {
       it('should display title if `title`', () => {
         (comp.career as Career).content[0].title = 'Section Title';
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         expect(page.sectionTitle.textContent).toEqual('Section Title');
@@ -73,6 +82,7 @@ describe('CareerComponent', () => {
 
       it('should not display title if no `title`', () => {
         (comp.career as Career).content[0].title = undefined;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         expect(page.sectionTitle).toBeFalsy();
@@ -118,8 +128,10 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(CareerComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   page = new Page();
 
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -14,6 +14,7 @@ import { SliderWorkComponent } from './slider-work.component';
 let compHost: TestHostComponent;
 let comp: SliderWorkComponent;
 let fixture: ComponentFixture<TestHostComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 
 @Component({
@@ -46,6 +47,7 @@ describe('SliderWorkComponent', () => {
     describe('Has `caseStudies`', () => {
       beforeEach(() => {
         compHost.caseStudies = Data.Api.getCaseStudies<void>();
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
       });
 
@@ -78,6 +80,7 @@ describe('SliderWorkComponent', () => {
     describe('No `caseStudies`', () => {
       beforeEach(() => {
         compHost.caseStudies = undefined;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
       });
 
@@ -98,6 +101,7 @@ describe('SliderWorkComponent', () => {
   describe('Template', () => {
     beforeEach(() => {
       compHost.caseStudies = Data.Api.getCaseStudies<void>();
+      changeDetectorRef.markForCheck();
       fixture.detectChanges();
     });
 
@@ -134,6 +138,7 @@ describe('SliderWorkComponent', () => {
 
       it('should set style transform as `currentIndex` translate', () => {
         comp.currentIndex = 5;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         expect(page.slideContainer.style.transform).toBe(
@@ -257,8 +262,11 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   compHost = fixture.componentInstance;
-  comp = fixture.debugElement.query(By.directive(SliderWorkComponent))
-    .componentInstance;
+  const el = fixture.debugElement.query(By.directive(SliderWorkComponent));
+  comp = el.componentInstance;
+  changeDetectorRef = el.injector.get<ChangeDetectorRef>(
+    ChangeDetectorRef as any
+  );
   page = new Page();
   jest.spyOn(MockApiPipe.prototype, 'transform');
 

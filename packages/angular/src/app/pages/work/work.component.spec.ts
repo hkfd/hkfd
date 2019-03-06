@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -18,10 +19,13 @@ import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;
 let fixture: ComponentFixture<WorkComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let metaService: MetaService;
 let apiService: ApiService;
 let apiPipe: ApiPipe;
 let page: Page;
+
+beforeEach(jest.clearAllMocks);
 
 describe('WorkComponent', () => {
   beforeEach(async(() =>
@@ -68,6 +72,10 @@ describe('WorkComponent', () => {
         Data.Api.getCaseStudies<void>().forEach(caseStudy =>
           expect(apiPipe.transform).toHaveBeenCalledWith(caseStudy.thumbnail)
         );
+      });
+
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
       });
     });
   });
@@ -141,6 +149,7 @@ describe('WorkComponent', () => {
 
         it('should call `handleVisible` with `caseStudy` on `isVisible`', () => {
           comp.caseStudies = Data.Api.getCaseStudies<void>();
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
 
           page.caseStudies[1].dispatchEvent(new Event('isVisible'));
@@ -187,9 +196,11 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(WorkComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = fixture.debugElement.injector.get(ApiPipe);
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(apiPipe, 'transform');
   jest.spyOn(comp, 'handleVisible');
   page = new Page();

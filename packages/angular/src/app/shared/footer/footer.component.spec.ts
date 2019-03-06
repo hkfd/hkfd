@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { FooterComponent } from './footer.component';
 
 let comp: FooterComponent;
 let fixture: ComponentFixture<FooterComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 
 describe('FooterComponent', () => {
@@ -28,6 +30,7 @@ describe('FooterComponent', () => {
       }
     ];
     comp.links = links();
+    changeDetectorRef.markForCheck();
     fixture.detectChanges();
   });
 
@@ -90,6 +93,9 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(FooterComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = fixture.debugElement.injector.get<ChangeDetectorRef>(
+    ChangeDetectorRef as any
+  );
   page = new Page();
 
   fixture.detectChanges();

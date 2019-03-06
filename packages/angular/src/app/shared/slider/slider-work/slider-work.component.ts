@@ -1,4 +1,12 @@
-import { Component, Input, NgZone, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Input,
+  NgZone,
+  Inject,
+  PLATFORM_ID,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 
 import { SliderComponent } from '../slider.component';
 import { ApiPipe } from 'shared';
@@ -7,17 +15,19 @@ import { CaseStudy } from 'api';
 @Component({
   selector: 'slider-work',
   templateUrl: './slider-work.component.html',
-  styleUrls: ['../slider.component.scss', './slider-work.component.scss']
+  styleUrls: ['../slider.component.scss', './slider-work.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SliderWorkComponent extends SliderComponent {
   private _caseStudies!: CaseStudy[];
 
   constructor(
+    changeDetectorRef: ChangeDetectorRef,
     zone: NgZone,
     @Inject(PLATFORM_ID) platformId: Object,
     private apiPipe: ApiPipe
   ) {
-    super(zone, platformId);
+    super(changeDetectorRef, zone, platformId);
   }
 
   @Input()

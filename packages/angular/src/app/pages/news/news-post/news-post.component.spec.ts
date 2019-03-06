@@ -18,10 +18,12 @@ import { RichText } from 'prismic-dom';
 
 import { Post } from 'prismic';
 import { NewsPostComponent } from './news-post.component';
+import { ChangeDetectorRef } from '@angular/core';
 
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 
 describe('NewsPostComponent', () => {
@@ -63,6 +65,10 @@ describe('NewsPostComponent', () => {
     it('should set `post`', () => {
       expect(comp.post).toEqual(Data.Prismic.getPosts('post-1'));
     });
+
+    it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+    });
   });
 
   describe('`ngOnDestroy`', () => {
@@ -84,6 +90,7 @@ describe('NewsPostComponent', () => {
         describe('has `title`', () => {
           beforeEach(() => {
             comp.post = Data.Prismic.getPost();
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -101,6 +108,7 @@ describe('NewsPostComponent', () => {
         describe('no `title`', () => {
           beforeEach(() => {
             ((comp.post as Post).data.title as any) = undefined;
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -114,6 +122,7 @@ describe('NewsPostComponent', () => {
         describe('has `image.proxy.url`', () => {
           beforeEach(() => {
             (comp.post as Post).data.image.proxy.url = 'test.jpg';
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -141,6 +150,7 @@ describe('NewsPostComponent', () => {
         describe('no `image.proxy.url`', () => {
           beforeEach(() => {
             ((comp.post as Post).data.image.proxy.url as any) = undefined;
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -155,6 +165,7 @@ describe('NewsPostComponent', () => {
       describe('Text', () => {
         beforeEach(() => {
           comp.post = Data.Prismic.getPosts('post-2');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -178,6 +189,7 @@ describe('NewsPostComponent', () => {
       describe('Image', () => {
         beforeEach(() => {
           comp.post = Data.Prismic.getPosts('post-3');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -201,6 +213,7 @@ describe('NewsPostComponent', () => {
       describe('Duo', () => {
         beforeEach(() => {
           comp.post = Data.Prismic.getPosts('post-4');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -224,6 +237,7 @@ describe('NewsPostComponent', () => {
       describe('Gallery', () => {
         beforeEach(() => {
           comp.post = Data.Prismic.getPosts('post-5');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -247,6 +261,7 @@ describe('NewsPostComponent', () => {
       describe('Video', () => {
         beforeEach(() => {
           comp.post = Data.Prismic.getPosts('post-6');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -351,6 +366,8 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
   jest.spyOn(RichText, 'asText');
   page = new Page();

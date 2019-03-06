@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -23,6 +24,7 @@ import { isCaseStudy } from 'shared/api.helpers';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
 
@@ -98,6 +100,10 @@ describe('PostComponent', () => {
       expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
     });
 
+    it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+    });
+
     describe('`layout`', () => {
       it('should be set', () => {
         expect(comp.layout).toBeDefined();
@@ -146,6 +152,7 @@ describe('PostComponent', () => {
         describe('Has `overview`', () => {
           beforeEach(() => {
             comp.overview = Data.Api.getCaseStudies('Case Study 1').overview;
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -175,6 +182,7 @@ describe('PostComponent', () => {
         describe('No `overview`', () => {
           beforeEach(() => {
             comp.overview = undefined;
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -190,6 +198,7 @@ describe('PostComponent', () => {
         describe('Has `title`', () => {
           beforeEach(() => {
             (comp.post as Post).content[0].title = 'Title';
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -201,6 +210,7 @@ describe('PostComponent', () => {
         describe('No `title`', () => {
           beforeEach(() => {
             (comp.post as Post).content[0].title = undefined;
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -213,6 +223,7 @@ describe('PostComponent', () => {
       describe('Text', () => {
         beforeEach(() => {
           comp.post = Data.Api.getCaseStudies('Case Study 1');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -234,6 +245,7 @@ describe('PostComponent', () => {
       describe('Image', () => {
         beforeEach(() => {
           comp.post = Data.Api.getCaseStudies('Case Study 2');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -257,6 +269,7 @@ describe('PostComponent', () => {
         it('should set `ImageBlockComponent` `full-bleed` attribute if `content.data.fullBleed`', () => {
           ((comp.post as Post).content[0]
             .data[0] as ImageBlock).fullBleed = true;
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
 
           expect(page.imageBlock.getAttribute('full-bleed')).toBeTruthy();
@@ -265,6 +278,7 @@ describe('PostComponent', () => {
         it('should not set `ImageBlockComponent` `full-bleed` attribute if no `content.data.fullBleed`', () => {
           ((comp.post as Post).content[0]
             .data[0] as ImageBlock).fullBleed = undefined;
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
 
           expect(page.imageBlock.getAttribute('full-bleed')).toBeFalsy();
@@ -274,6 +288,7 @@ describe('PostComponent', () => {
       describe('Gallery', () => {
         beforeEach(() => {
           comp.post = Data.Api.getCaseStudies('Case Study 3');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -298,6 +313,7 @@ describe('PostComponent', () => {
       describe('Duo', () => {
         beforeEach(() => {
           comp.post = Data.Api.getServices('Service 1');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -322,6 +338,7 @@ describe('PostComponent', () => {
       describe('Video', () => {
         beforeEach(() => {
           comp.post = Data.Api.getServices('Service 2');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -346,6 +363,7 @@ describe('PostComponent', () => {
       describe('Audio', () => {
         beforeEach(() => {
           comp.post = Data.Api.getServices('Service 3');
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -465,7 +483,9 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(PostComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   page = new Page();
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();

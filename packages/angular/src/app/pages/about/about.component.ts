@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -9,7 +9,8 @@ import { AboutImages } from './about.images';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+  styleUrls: ['./about.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent implements OnInit {
   team$!: Observable<Team[]>;

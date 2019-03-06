@@ -5,7 +5,9 @@ import {
   HostListener,
   NgZone,
   Inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
@@ -14,7 +16,8 @@ import { Image } from 'generic';
 @Component({
   selector: 'slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrls: ['./slider.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SliderComponent implements OnDestroy {
   private timer: number | undefined;
@@ -50,6 +53,7 @@ export class SliderComponent implements OnDestroy {
   }
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private zone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
@@ -57,6 +61,7 @@ export class SliderComponent implements OnDestroy {
   changeImage(offset = 1) {
     if (!this.slidesCount) throw new Error('No `slidesCount`');
 
+    this.changeDetectorRef.markForCheck();
     const index = this.currentIndex + offset;
 
     if (index < 0) return (this.currentIndex = this.slidesCount - 1);

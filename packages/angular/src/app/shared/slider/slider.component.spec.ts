@@ -1,4 +1,9 @@
-import { Component, PLATFORM_ID, NgZone } from '@angular/core';
+import {
+  Component,
+  PLATFORM_ID,
+  NgZone,
+  ChangeDetectorRef
+} from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -8,6 +13,7 @@ import { SliderComponent } from './slider.component';
 let compHost: TestHostComponent;
 let comp: SliderComponent;
 let fixture: ComponentFixture<TestHostComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let mockPlatformId: 'browser' | 'server';
 let ngZone: NgZone;
 let page: Page;
@@ -31,6 +37,8 @@ class TestHostComponent {
   autoplay: any;
   delay: any;
 }
+
+beforeEach(jest.clearAllMocks);
 
 describe('SliderComponent', () => {
   describe('', () => {
@@ -345,6 +353,12 @@ describe('SliderComponent', () => {
     describe('Has `slidesCount`', () => {
       beforeEach(() => (comp.slidesCount = Data.Generic.getImages().length));
 
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        comp.changeImage(0);
+
+        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+      });
+
       it('should set `currentIndex` as `currentIndex` add `offset` if positive `offset` arg', () => {
         comp.currentIndex = 0;
         comp.changeImage(2);
@@ -451,7 +465,7 @@ describe('SliderComponent', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
     beforeEach(() => {
-      comp.images = Data.Generic.getImages();
+      compHost.images = Data.Generic.getImages();
       fixture.detectChanges();
     });
 
@@ -494,6 +508,7 @@ describe('SliderComponent', () => {
 
       it('should set style transform as `currentIndex` translate', () => {
         comp.currentIndex = 5;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         expect(page.slideContainer.style.transform).toBe(
@@ -577,14 +592,17 @@ function setupTest() {
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   compHost = fixture.componentInstance;
-  comp = fixture.debugElement.query(By.directive(SliderComponent))
-    .componentInstance;
+  const el = fixture.debugElement.query(By.directive(SliderComponent));
+  comp = el.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   global.clearInterval = jest.fn();
   jest.spyOn(global, 'setInterval').mockImplementation(() => 'setInterval');
   ngZone = fixture.debugElement.injector.get<NgZone>(NgZone);
   ngZone.runOutsideAngular = jest.fn().mockImplementation((fn: any) => fn());
   ngZone.run = jest.fn().mockImplementation((fn: any) => fn());
   page = new Page();
+
+  jest.spyOn(changeDetectorRef, 'markForCheck');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

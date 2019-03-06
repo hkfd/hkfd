@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -9,7 +15,8 @@ import { HomeImages } from './home.images';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit, OnDestroy {
   services$!: Observable<Service[]>;
@@ -20,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   images = HomeImages;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private metaService: MetaService,
     private apiService: ApiService
   ) {}
@@ -32,12 +40,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.caseStudies$ = this.apiService
       .getCaseStudies()
-      .subscribe(
-        caseStudies =>
-          (this.caseStudies = caseStudies.filter(
-            ({ featured }) => featured === true
-          ))
-      );
+      .subscribe(caseStudies => {
+        this.caseStudies = caseStudies.filter(
+          ({ featured }) => featured === true
+        );
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
   ngOnDestroy() {

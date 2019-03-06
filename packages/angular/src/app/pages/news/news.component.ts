@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { RichText } from 'prismic-dom';
@@ -11,7 +17,8 @@ import { NewsAnimations } from './news.animations';
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
-  animations: NewsAnimations
+  animations: NewsAnimations,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsComponent implements OnInit, OnDestroy {
   richText = RichText;
@@ -21,6 +28,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   hasNextPage: boolean | undefined;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private prismicService: PrismicService,
     private metaService: MetaService
   ) {}
@@ -35,6 +43,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       .subscribe(({ results, next_page }) => {
         this.posts = this.posts.concat(results);
         this.hasNextPage = !!next_page;
+        this.changeDetectorRef.markForCheck();
       });
   }
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -18,9 +19,12 @@ import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;
 let fixture: ComponentFixture<NewsComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let metaService: MetaService;
 let prismicService: PrismicService;
 let page: Page;
+
+beforeEach(jest.clearAllMocks);
 
 describe('NewsComponent', () => {
   beforeEach(async(() =>
@@ -121,6 +125,12 @@ describe('NewsComponent', () => {
       comp.getPosts();
       expect(comp.hasNextPage).toBe(false);
     });
+
+    it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      comp.getPosts();
+
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+    });
   });
 
   describe('Template', () => {
@@ -140,6 +150,7 @@ describe('NewsComponent', () => {
           describe('has `image.proxy.url`', () => {
             beforeEach(() => {
               comp.posts = Data.Prismic.getPosts<void>();
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -169,6 +180,7 @@ describe('NewsComponent', () => {
           describe('no `image.proxy.url`', () => {
             beforeEach(() => {
               (comp.posts[0].data.image.proxy.url as any) = undefined;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -205,6 +217,7 @@ describe('NewsComponent', () => {
     describe('`hasNextPage` is `true`', () => {
       beforeEach(() => {
         comp.hasNextPage = true;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
       });
 
@@ -222,6 +235,7 @@ describe('NewsComponent', () => {
     describe('`hasNextPage` is `false`', () => {
       beforeEach(() => {
         comp.hasNextPage = false;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
       });
 
@@ -274,10 +288,12 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
   jest.spyOn(RichText, 'asText');
   page = new Page();

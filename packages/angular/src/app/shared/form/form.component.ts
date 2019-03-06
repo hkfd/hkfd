@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoggerService, EmailService } from 'shared';
@@ -8,7 +12,8 @@ import { FormAnimations } from './form.animations';
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  animations: FormAnimations
+  animations: FormAnimations,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent {
   form: FormGroup;
@@ -25,6 +30,7 @@ export class FormComponent {
   }
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private logger: LoggerService,
     private emailService: EmailService,
     private formBuilder: FormBuilder
@@ -43,10 +49,12 @@ export class FormComponent {
       _ => {
         this.formSent = true;
         ga('send', 'event', 'Contact Form', 'sent');
+        this.changeDetectorRef.markForCheck();
       },
       err => {
         this.logger.error('submitForm', err);
         this.formSent = false;
+        this.changeDetectorRef.markForCheck();
       }
     );
   }

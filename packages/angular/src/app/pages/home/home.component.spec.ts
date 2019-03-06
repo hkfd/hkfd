@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -20,8 +21,11 @@ import { HomeComponent } from './home.component';
 let comp: HomeComponent;
 let fixture: ComponentFixture<HomeComponent>;
 let page: Page;
+let changeDetectorRef: ChangeDetectorRef;
 let metaService: MetaService;
 let apiService: ApiService;
+
+beforeEach(jest.clearAllMocks);
 
 describe('HomeComponent', () => {
   beforeEach(async(() =>
@@ -84,6 +88,10 @@ describe('HomeComponent', () => {
         (comp.caseStudies as CaseStudy[]).forEach(caseStudy =>
           expect(caseStudy.featured).toBe(true)
         );
+      });
+
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
       });
     });
   });
@@ -281,8 +289,10 @@ function createComponent() {
   fixture = TestBed.createComponent(HomeComponent);
   comp = fixture.componentInstance;
   page = new Page();
+  changeDetectorRef = (comp as any).changeDetectorRef;
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();
