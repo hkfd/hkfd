@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By, DomSanitizer } from '@angular/platform-browser';
 
@@ -9,6 +9,7 @@ import { VideoBlockComponent } from './video-block.component';
 let compHost: TestHostComponent;
 let comp: VideoBlockComponent;
 let fixture: ComponentFixture<TestHostComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let domSanitizer: DomSanitizer;
 let page: Page;
 
@@ -83,6 +84,7 @@ describe('VideoBlockComponent', () => {
         describe('Has `videoSrc`', () => {
           beforeEach(() => {
             comp.videoSrc = 'about:blank';
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -98,6 +100,7 @@ describe('VideoBlockComponent', () => {
         describe('No `videoSrc`', () => {
           beforeEach(() => {
             comp.videoSrc = undefined;
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -133,9 +136,14 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   compHost = fixture.componentInstance;
-  comp = fixture.debugElement.query(By.directive(VideoBlockComponent))
-    .componentInstance;
-  domSanitizer = fixture.debugElement.injector.get<DomSanitizer>(DomSanitizer);
+  const el = fixture.debugElement.query(By.directive(VideoBlockComponent));
+  comp = el.componentInstance;
+  changeDetectorRef = el.injector.get<ChangeDetectorRef>(
+    ChangeDetectorRef as any
+  );
+  domSanitizer = fixture.debugElement.injector.get<DomSanitizer>(
+    DomSanitizer as any
+  );
   page = new Page();
 
   jest.spyOn(comp, 'setVideoSrc');

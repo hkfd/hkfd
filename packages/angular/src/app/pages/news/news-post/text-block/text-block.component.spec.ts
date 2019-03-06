@@ -1,29 +1,44 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { Component } from '@angular/core';
 import { Data } from 'testing';
 
 import { RichText } from 'prismic-dom';
 
 import { TextBlockComponent } from './text-block.component';
+import { By } from '@angular/platform-browser';
 
+let compHost: TestHostComponent;
 let comp: TextBlockComponent;
-let fixture: ComponentFixture<TextBlockComponent>;
+let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
+
+@Component({
+  selector: 'app-host',
+  template: '<prismic-text-block [data]="data"></prismic-text-block>'
+})
+export class TestHostComponent {
+  data: any;
+}
 
 describe('TextBlockComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [TextBlockComponent]
+      declarations: [TestHostComponent, TextBlockComponent]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
   beforeEach(() => {
-    comp.data = Data.Prismic.getText();
+    compHost.data = Data.Prismic.getText();
     fixture.detectChanges();
   });
 
   it('should create component', () => {
     expect(comp).toBeTruthy();
+  });
+
+  it('should set `data`', () => {
+    expect(comp.data).toEqual(Data.Prismic.getText());
   });
 
   describe('`linkResolver`', () => {
@@ -46,7 +61,7 @@ describe('TextBlockComponent', () => {
   describe('Template', () => {
     describe('Has `data`', () => {
       beforeEach(() => {
-        comp.data = Data.Prismic.getText();
+        compHost.data = Data.Prismic.getText();
         fixture.detectChanges();
       });
 
@@ -66,7 +81,7 @@ describe('TextBlockComponent', () => {
 
     describe('No `data`', () => {
       beforeEach(() => {
-        (comp.data as any) = undefined;
+        compHost.data = undefined;
         fixture.detectChanges();
       });
 
@@ -88,8 +103,10 @@ class Page {
 }
 
 function createComponent() {
-  fixture = TestBed.createComponent(TextBlockComponent);
-  comp = fixture.componentInstance;
+  fixture = TestBed.createComponent(TestHostComponent);
+  compHost = fixture.componentInstance;
+  const el = fixture.debugElement.query(By.directive(TextBlockComponent));
+  comp = el.injector.get<TextBlockComponent>(TextBlockComponent);
   jest.spyOn(RichText, 'asHtml');
   page = new Page();
 

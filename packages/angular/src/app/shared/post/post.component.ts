@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -10,7 +17,8 @@ import { CaseStudy } from 'api';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrls: ['./post.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit, OnDestroy {
   post$!: Subscription;
@@ -29,10 +37,16 @@ export class PostComponent implements OnInit, OnDestroy {
   @HostBinding('class')
   layout!: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.post$ = this.route.data.subscribe(({ post }) => (this.post = post));
+    this.post$ = this.route.data.subscribe(({ post }) => {
+      this.post = post;
+      this.changeDetectorRef.markForCheck();
+    });
 
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min + 1) + min);

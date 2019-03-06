@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { RichText } from 'prismic-dom';
 
@@ -10,7 +10,8 @@ import { Post, Text } from 'prismic';
   styleUrls: [
     '../../../../shared/blocks/text-block/text-block.component.scss',
     './text-block.component.scss'
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextBlockComponent {
   richText = RichText;

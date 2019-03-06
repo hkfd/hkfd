@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { HeaderAnimations } from './header.animations';
 
@@ -6,7 +6,8 @@ import { HeaderAnimations } from './header.animations';
   selector: 'header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  animations: HeaderAnimations
+  animations: HeaderAnimations,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
   pages = [

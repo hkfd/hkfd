@@ -3,7 +3,8 @@ import {
   OnInit,
   OnDestroy,
   Inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
@@ -23,7 +24,8 @@ import { AppAnimations } from './app.animations';
     </main>
     <footer></footer>
   `,
-  animations: AppAnimations
+  animations: AppAnimations,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy {
   router$: Subscription | undefined;

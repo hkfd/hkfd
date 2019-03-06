@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Image } from 'generic';
 import { createPlaceholderImg, createFullImg } from './image.helpers';
@@ -17,7 +17,8 @@ export type FullImg = Omit<PlaceholderImg, 'state'> & {
 @Component({
   selector: 'image-component',
   templateUrl: './image.component.html',
-  styleUrls: ['./image.component.scss']
+  styleUrls: ['./image.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageComponent {
   private _image: Image | undefined;

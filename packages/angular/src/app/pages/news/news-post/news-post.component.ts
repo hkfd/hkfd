@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -9,7 +15,8 @@ import { Post } from 'prismic';
 @Component({
   selector: 'app-news-post',
   templateUrl: './news-post.component.html',
-  styleUrls: ['./news-post.component.scss']
+  styleUrls: ['./news-post.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsPostComponent implements OnInit, OnDestroy {
   richText = RichText;
@@ -17,10 +24,16 @@ export class NewsPostComponent implements OnInit, OnDestroy {
   post$!: Subscription;
   post: Post | undefined;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.post$ = this.route.data.subscribe(({ post }) => (this.post = post));
+    this.post$ = this.route.data.subscribe(({ post }) => {
+      this.post = post;
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   ngOnDestroy() {

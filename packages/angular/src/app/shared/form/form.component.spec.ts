@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { LoggerService, MockLoggerService, MockEmailService } from 'testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
@@ -9,8 +10,11 @@ import { FormComponent } from './form.component';
 
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let emailService: EmailService;
 let page: Page;
+
+beforeEach(jest.clearAllMocks);
 
 describe('FormComponent', () => {
   beforeEach(async(() =>
@@ -71,6 +75,12 @@ describe('FormComponent', () => {
           );
         });
       });
+
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        return fixture.whenStable().then(_ => {
+          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+        });
+      });
     });
 
     describe('Reject', () => {
@@ -84,6 +94,12 @@ describe('FormComponent', () => {
           expect(comp.formSent).toBe(false);
         });
       });
+
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        return fixture.whenStable().then(_ => {
+          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+        });
+      });
     });
   });
 
@@ -91,6 +107,7 @@ describe('FormComponent', () => {
     describe('Form sent', () => {
       it('should be displayed if `formSent` is `true`', () => {
         comp.formSent = true;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         expect(page.formSentText).toBeTruthy();
@@ -98,6 +115,7 @@ describe('FormComponent', () => {
 
       it('should not be displayed if `formSent` is `false`', () => {
         comp.formSent = false;
+        changeDetectorRef.markForCheck();
         fixture.detectChanges();
 
         expect(page.formSentText).toBeFalsy();
@@ -119,6 +137,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.name.markAsPristine();
               comp.form.controls.name.setErrors({ invalid: true });
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -131,6 +150,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.name.markAsTouched();
               comp.form.controls.name.setErrors(null);
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -143,6 +163,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.name.markAsTouched();
               comp.form.controls.name.setErrors({ invalid: true });
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -167,6 +188,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.email.markAsPristine();
               comp.form.controls.email.setErrors({ invalid: true });
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -179,6 +201,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.email.markAsTouched();
               comp.form.controls.email.setErrors(null);
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -191,6 +214,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.email.markAsTouched();
               comp.form.controls.email.setErrors({ invalid: true });
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -215,6 +239,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.message.markAsPristine();
               comp.form.controls.message.setErrors({ invalid: true });
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -227,6 +252,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.message.markAsTouched();
               comp.form.controls.message.setErrors(null);
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -239,6 +265,7 @@ describe('FormComponent', () => {
             beforeEach(() => {
               comp.form.controls.message.markAsTouched();
               comp.form.controls.message.setErrors({ invalid: true });
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -256,6 +283,7 @@ describe('FormComponent', () => {
 
         it('should be displayed if `dirty`', () => {
           comp.form.controls.message.markAsDirty();
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
 
           expect(page.formFooter).toBeTruthy();
@@ -263,6 +291,7 @@ describe('FormComponent', () => {
 
         it('should be displayed if `touched`', () => {
           comp.form.controls.message.markAsTouched();
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
 
           expect(page.formFooter).toBeTruthy();
@@ -271,6 +300,7 @@ describe('FormComponent', () => {
         describe('Legal text', () => {
           beforeEach(() => {
             comp.form.controls.message.markAsDirty();
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -282,6 +312,7 @@ describe('FormComponent', () => {
         describe('Send', () => {
           beforeEach(() => {
             comp.form.controls.message.markAsDirty();
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
@@ -294,6 +325,7 @@ describe('FormComponent', () => {
               comp.form.controls.name.setValue('a');
               comp.form.controls.email.setValue('b@c');
               comp.form.controls.message.setValue('d');
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
 
               expect(page.formSend.disabled).toBe(false);
@@ -303,6 +335,7 @@ describe('FormComponent', () => {
               comp.form.controls.name.setValue('');
               comp.form.controls.email.setValue('a');
               comp.form.controls.message.setValue('');
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
 
               expect(page.formSend.disabled).toBe(true);
@@ -313,6 +346,7 @@ describe('FormComponent', () => {
               comp.form.controls.email.setValue('b@c');
               comp.form.controls.message.setValue('d');
               comp.formSent = true;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
 
               expect(page.formSend.disabled).toBe(true);
@@ -323,6 +357,7 @@ describe('FormComponent', () => {
               comp.form.controls.email.setValue('b@c');
               comp.form.controls.message.setValue('d');
               comp.formSent = false;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
 
               expect(page.formSend.disabled).toBe(true);
@@ -336,6 +371,7 @@ describe('FormComponent', () => {
 
             it('should be displayed if `formSent` is `false`', () => {
               comp.formSent = false;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
 
               expect(page.formSendError).toBeTruthy();
@@ -394,9 +430,12 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(FormComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   (global as any).ga = jest.fn();
   emailService = fixture.debugElement.injector.get<EmailService>(EmailService);
   page = new Page();
+
+  jest.spyOn(changeDetectorRef, 'markForCheck');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

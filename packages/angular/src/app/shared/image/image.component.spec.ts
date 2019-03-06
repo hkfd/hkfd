@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { StubLazyDirective, Data } from 'testing';
 import { createPlaceholderImg, createFullImg } from './image.helpers';
@@ -6,6 +7,7 @@ import { ImageComponent } from './image.component';
 
 let comp: ImageComponent;
 let fixture: ComponentFixture<ImageComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 
 jest.mock('./image.helpers', () => ({
@@ -252,6 +254,7 @@ describe('ImageComponent', () => {
       describe('Has `img`', () => {
         beforeEach(() => {
           comp.img = {} as any;
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
         });
 
@@ -261,6 +264,7 @@ describe('ImageComponent', () => {
 
         it('should set className as `img.state`', () => {
           comp.img = { state: 'state' } as any;
+          changeDetectorRef.markForCheck();
           fixture.detectChanges();
 
           expect(page.container.className).toBe('state');
@@ -276,6 +280,7 @@ describe('ImageComponent', () => {
           describe('`isVisible` is `false`', () => {
             beforeEach(() => {
               comp.isVisible = false;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -287,6 +292,7 @@ describe('ImageComponent', () => {
           describe('`isVisible` is `true`', () => {
             beforeEach(() => {
               comp.isVisible = true;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
 
@@ -296,6 +302,7 @@ describe('ImageComponent', () => {
 
             it('should set src as `img.src`', () => {
               comp.img = { src: 'src' } as any;
+              changeDetectorRef.markForCheck();
               fixture.detectChanges();
 
               expect(page.img.src).toBe('http://localhost/src');
@@ -304,6 +311,7 @@ describe('ImageComponent', () => {
             describe('`srcset`', () => {
               it('should set srcset as `img.srcset` if `img.srcset`', () => {
                 comp.img = { srcset: 'srcset' } as any;
+                changeDetectorRef.markForCheck();
                 fixture.detectChanges();
 
                 expect(page.img.srcset).toBe('srcset');
@@ -311,6 +319,7 @@ describe('ImageComponent', () => {
 
               it('should not set srcset if `img.srcset` is `undefined`', () => {
                 comp.img = { srcset: undefined } as any;
+                changeDetectorRef.markForCheck();
                 fixture.detectChanges();
 
                 expect(page.img.srcset).toBe('');
@@ -320,6 +329,7 @@ describe('ImageComponent', () => {
             describe('`alt`', () => {
               it('should set alt as `img.alt` if `img.alt`', () => {
                 comp.img = { alt: 'alt' } as any;
+                changeDetectorRef.markForCheck();
                 fixture.detectChanges();
 
                 expect(page.img.alt).toBe('alt');
@@ -327,6 +337,7 @@ describe('ImageComponent', () => {
 
               it('should not set alt if `img.alt` is `undefined`', () => {
                 comp.img = { alt: undefined } as any;
+                changeDetectorRef.markForCheck();
                 fixture.detectChanges();
 
                 expect(page.img.alt).toBe('');
@@ -372,6 +383,9 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(ImageComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = fixture.debugElement.injector.get<ChangeDetectorRef>(
+    ChangeDetectorRef as any
+  );
   page = new Page();
 
   jest.spyOn(comp, 'displayImage');

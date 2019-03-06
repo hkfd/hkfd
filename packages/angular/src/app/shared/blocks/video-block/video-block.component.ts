@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Video } from 'generic';
@@ -6,7 +6,8 @@ import { Video } from 'generic';
 @Component({
   selector: 'video-block',
   templateUrl: './video-block.component.html',
-  styleUrls: ['./video-block.component.scss']
+  styleUrls: ['./video-block.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoBlockComponent {
   @Input()

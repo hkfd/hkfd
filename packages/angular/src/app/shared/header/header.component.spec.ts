@@ -5,7 +5,7 @@ import {
   fakeAsync,
   tick
 } from '@angular/core/testing';
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, ChangeDetectorRef } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, SlicePipe } from '@angular/common';
 
@@ -15,6 +15,7 @@ import { HeaderComponent } from './header.component';
 
 let comp: HeaderComponent;
 let fixture: ComponentFixture<HeaderComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 
 @Component({
@@ -49,6 +50,7 @@ describe('HeaderComponent', () => {
       { title: 'Page 2', url: '/page-2' }
     ];
     comp.pages = pages();
+    changeDetectorRef.markForCheck();
     fixture.detectChanges();
   });
 
@@ -203,6 +205,9 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(HeaderComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = fixture.debugElement.injector.get<ChangeDetectorRef>(
+    ChangeDetectorRef as any
+  );
   jest.spyOn(SlicePipe.prototype, 'transform');
   page = new Page();
 

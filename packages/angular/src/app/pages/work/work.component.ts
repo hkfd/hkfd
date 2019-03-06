@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -10,13 +16,15 @@ import { WorkAnimations } from './work.animations';
   selector: 'app-work',
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.scss'],
-  animations: WorkAnimations
+  animations: WorkAnimations,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkComponent implements OnInit, OnDestroy {
   caseStudies$!: Subscription;
   caseStudies: Visible<CaseStudy>[] | undefined;
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private metaService: MetaService,
     private apiService: ApiService,
     private apiPipe: ApiPipe
@@ -29,13 +37,15 @@ export class WorkComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Our Work', url: 'work' });
 
-    this.caseStudies$ = this.apiService.getCaseStudies().subscribe(
-      caseStudies =>
-        (this.caseStudies = caseStudies.map(caseStudy => ({
+    this.caseStudies$ = this.apiService
+      .getCaseStudies()
+      .subscribe(caseStudies => {
+        this.caseStudies = caseStudies.map(caseStudy => ({
           ...caseStudy,
           thumbnail: this.apiPipe.transform(caseStudy.thumbnail) as any
-        })))
-    );
+        }));
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -9,7 +9,8 @@ import { CareersImages } from './careers.images';
 @Component({
   selector: 'app-careers',
   templateUrl: './careers.component.html',
-  styleUrls: ['./careers.component.scss']
+  styleUrls: ['./careers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CareersComponent implements OnInit {
   careers$!: Observable<Career[]>;
