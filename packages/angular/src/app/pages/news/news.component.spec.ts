@@ -65,6 +65,14 @@ describe('NewsComponent', () => {
     });
   });
 
+  describe('`postTrackBy`', () => {
+    it('should return `id`', () => {
+      const res = comp.postTrackBy(0, Data.Prismic.getPost());
+
+      expect(res).toBe(Data.Prismic.getPost().id);
+    });
+  });
+
   describe('`getPosts`', () => {
     it('should call PrismicService `getPosts` with `onInit` arg', () => {
       comp.getPosts(false);
