@@ -3,7 +3,7 @@
 <section id="news-list" [@listAnimation]="posts.length">
   <a
     class="post"
-    *ngFor="let post of posts"
+    *ngFor="let post of posts; trackBy: postTrackBy"
     [routerLink]="['/news/', post?.uid]"
     [attr.aria-label]="richText.asText(post?.data?.title)"
   >

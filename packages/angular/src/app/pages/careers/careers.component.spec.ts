@@ -67,6 +67,14 @@ describe('CareersComponent', () => {
     });
   });
 
+  describe('`careerTrackBy`', () => {
+    it('should return `id`', () => {
+      const res = comp.careerTrackBy(0, Data.Api.getCareers('Career 1'));
+
+      expect(res).toBe(Data.Api.getCareers('Career 1').id);
+    });
+  });
+
   describe('Template', () => {
     it('should display title', () => {
       expect(page.title).toBeTruthy();

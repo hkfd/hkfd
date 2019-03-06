@@ -22,6 +22,10 @@ export class CareersComponent implements OnInit, OnDestroy {
     private apiService: ApiService
   ) {}
 
+  careerTrackBy(_index: number, { id }: Career) {
+    return id;
+  }
+
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Careers', url: 'careers' });
 

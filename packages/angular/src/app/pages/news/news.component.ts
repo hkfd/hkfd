@@ -25,6 +25,10 @@ export class NewsComponent implements OnInit, OnDestroy {
     private metaService: MetaService
   ) {}
 
+  postTrackBy(_index: number, { id }: Post) {
+    return id;
+  }
+
   getPosts(onInit?: boolean) {
     this.post$ = this.prismicService
       .getPosts(onInit)

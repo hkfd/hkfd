@@ -46,7 +46,7 @@
 <section id="careers">
   <a
     class="career"
-    *ngFor="let career of careers"
+    *ngFor="let career of careers; trackBy: careerTrackBy"
     [routerLink]="career?.id"
     [attr.aria-label]="career?.title"
   >
