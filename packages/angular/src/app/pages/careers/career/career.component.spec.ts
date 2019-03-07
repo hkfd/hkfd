@@ -58,11 +58,17 @@ describe('CareerComponent', () => {
   });
 
   describe('`ngOnDestroy`', () => {
-    it('should call `career$` `unsubscribe`', () => {
-      jest.spyOn(comp.career$, 'unsubscribe');
+    it('should call `career$` `unsubscribe` if has `career$`', () => {
+      comp.career$ = { unsubscribe: jest.fn() } as any;
       comp.ngOnDestroy();
 
-      expect(comp.career$.unsubscribe).toHaveBeenCalled();
+      expect((comp.career$ as any).unsubscribe).toHaveBeenCalled();
+    });
+
+    it('should not throw if no `career$`', () => {
+      comp.career$ = undefined;
+
+      expect(() => comp.ngOnDestroy()).not.toThrow();
     });
   });
 

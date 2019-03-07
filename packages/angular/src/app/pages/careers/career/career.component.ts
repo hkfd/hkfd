@@ -18,7 +18,7 @@ import { Career } from 'api';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CareerComponent implements OnInit, OnDestroy {
-  career$!: Subscription;
+  career$: Subscription | undefined;
   career: Career | undefined;
 
   constructor(
@@ -34,6 +34,6 @@ export class CareerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.career$.unsubscribe();
+    this.career$ && this.career$.unsubscribe();
   }
 }

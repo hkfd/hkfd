@@ -39,90 +39,109 @@ describe('TextComponent', () => {
   });
 
   describe('Template', () => {
-    describe('URL', () => {
-      beforeEach(() => {
-        compHost.text = Data.Api.getSentence('url');
-        fixture.detectChanges();
+    describe('Has `text`', () => {
+      describe('URL', () => {
+        beforeEach(() => {
+          compHost.text = Data.Api.getSentence('url');
+          fixture.detectChanges();
+        });
+
+        it('should display a element', () => {
+          expect(page.a).toBeTruthy();
+        });
+
+        it('should display text', () => {
+          expect((page.a.textContent as string).trim()).toBe(
+            Data.Api.getSentence('url').text
+          );
+        });
+
+        it('should set href', () => {
+          expect(page.a.href).toBe(Data.Api.getSentence('url').url as any);
+        });
+
+        it('should set target as `_blank`', () => {
+          expect(page.a.target).toBe('_blank');
+        });
+
+        it('should set rel as `nofollow noopener`', () => {
+          expect(page.a.rel).toBe('nofollow noopener');
+        });
       });
 
-      it('should display a element', () => {
-        expect(page.a).toBeTruthy();
+      describe('Heading', () => {
+        beforeEach(() => {
+          compHost.text = Data.Api.getSentence('heading');
+          fixture.detectChanges();
+        });
+
+        it('should display h3 element', () => {
+          expect(page.h3).toBeTruthy();
+        });
+
+        it('should display text', () => {
+          expect(page.h3.textContent).toBe(
+            Data.Api.getSentence('heading').text
+          );
+        });
       });
 
-      it('should display text', () => {
-        expect((page.a.textContent as string).trim()).toBe(
-          Data.Api.getSentence('url').text
-        );
+      describe('Bold', () => {
+        beforeEach(() => {
+          compHost.text = Data.Api.getSentence('bold');
+          fixture.detectChanges();
+        });
+
+        it('should display b element', () => {
+          expect(page.b).toBeTruthy();
+        });
+
+        it('should display text', () => {
+          expect(page.b.textContent).toBe(Data.Api.getSentence('bold').text);
+        });
       });
 
-      it('should set href', () => {
-        expect(page.a.href).toBe(Data.Api.getSentence('url').url as any);
+      describe('Italic', () => {
+        beforeEach(() => {
+          compHost.text = Data.Api.getSentence('italic');
+          fixture.detectChanges();
+        });
+
+        it('should display i element', () => {
+          expect(page.i).toBeTruthy();
+        });
+
+        it('should display text', () => {
+          expect(page.i.textContent).toBe(Data.Api.getSentence('italic').text);
+        });
       });
 
-      it('should set target as `_blank`', () => {
-        expect(page.a.target).toBe('_blank');
-      });
+      describe('Normal', () => {
+        beforeEach(() => {
+          compHost.text = Data.Api.getSentence('normal');
+          fixture.detectChanges();
+        });
 
-      it('should set rel as `nofollow noopener`', () => {
-        expect(page.a.rel).toBe('nofollow noopener');
+        it('should display text', () => {
+          expect(fixture.nativeElement.textContent).toBe(
+            Data.Api.getSentence('normal').text
+          );
+        });
       });
     });
 
-    describe('Heading', () => {
+    describe('No `text`', () => {
       beforeEach(() => {
-        compHost.text = Data.Api.getSentence('heading');
+        compHost.text = undefined;
         fixture.detectChanges();
       });
 
-      it('should display h3 element', () => {
-        expect(page.h3).toBeTruthy();
-      });
-
-      it('should display text', () => {
-        expect(page.h3.textContent).toBe(Data.Api.getSentence('heading').text);
-      });
-    });
-
-    describe('Bold', () => {
-      beforeEach(() => {
-        compHost.text = Data.Api.getSentence('bold');
-        fixture.detectChanges();
-      });
-
-      it('should display b element', () => {
-        expect(page.b).toBeTruthy();
-      });
-
-      it('should display text', () => {
-        expect(page.b.textContent).toBe(Data.Api.getSentence('bold').text);
-      });
-    });
-
-    describe('Italic', () => {
-      beforeEach(() => {
-        compHost.text = Data.Api.getSentence('italic');
-        fixture.detectChanges();
-      });
-
-      it('should display i element', () => {
-        expect(page.i).toBeTruthy();
-      });
-
-      it('should display text', () => {
-        expect(page.i.textContent).toBe(Data.Api.getSentence('italic').text);
-      });
-    });
-
-    describe('Normal', () => {
-      beforeEach(() => {
-        compHost.text = Data.Api.getSentence('normal');
-        fixture.detectChanges();
-      });
-
-      it('should display text', () => {
-        expect(fixture.nativeElement.textContent).toBe(
-          Data.Api.getSentence('normal').text
-        );
+      it('should not be displayed', () => {
+        expect(page.a).toBeFalsy();
+        expect(page.h3).toBeFalsy();
+        expect(page.b).toBeFalsy();
+        expect(page.i).toBeFalsy();
+        expect(fixture.nativeElement.textContent).toBeFalsy();
       });
     });
   });

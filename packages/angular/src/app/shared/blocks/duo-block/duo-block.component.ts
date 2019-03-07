@@ -10,5 +10,5 @@ import { Image } from 'generic';
 })
 export class DuoBlockComponent {
   @Input()
-  data!: Image[];
+  data: Image[] | undefined;
 }

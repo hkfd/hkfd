@@ -17,7 +17,7 @@ export class TextBlockComponent {
   richText = RichText;
 
   @Input()
-  data!: Text[];
+  data: Text[] | undefined;
 
   linkResolver({ type, uid }: Post) {
     if (type === 'news') return `/news/${uid}`;

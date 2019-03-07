@@ -40,12 +40,30 @@ describe('AudioBlockComponent', () => {
   });
 
   describe('Template', () => {
-    it('should display audio', () => {
-      expect(page.audio).toBeTruthy();
+    describe('Has `data`', () => {
+      beforeEach(() => {
+        compHost.data = Data.Generic.getAudio();
+        fixture.detectChanges();
+      });
+
+      it('should display audio', () => {
+        expect(page.audio).toBeTruthy();
+      });
+
+      it('should set src as `url`', () => {
+        expect(page.audio.src).toBe(Data.Generic.getAudio().url);
+      });
     });
 
-    it('should set src as `url`', () => {
-      expect(page.audio.src).toBe(Data.Generic.getAudio().url);
+    describe('No `data`', () => {
+      beforeEach(() => {
+        compHost.data = undefined;
+        fixture.detectChanges();
+      });
+
+      it('should not display audio', () => {
+        expect(page.audio).toBeFalsy();
+      });
     });
   });
 });

@@ -41,12 +41,30 @@ describe('ImageBlockComponent', () => {
   });
 
   describe('Template', () => {
-    it('should display image', () => {
-      expect(page.image).toBeTruthy();
+    describe('Has `data`', () => {
+      beforeEach(() => {
+        compHost.data = Data.Generic.getImage();
+        fixture.detectChanges();
+      });
+
+      it('should display image', () => {
+        expect(page.image).toBeTruthy();
+      });
+
+      it('should set `ImageComponent` `image` as `data`', () => {
+        expect(page.imageComponent.image).toEqual(Data.Generic.getImage());
+      });
     });
 
-    it('should set `ImageComponent` `image` as `data`', () => {
-      expect(page.imageComponent.image).toEqual(Data.Generic.getImage());
+    describe('No `data`', () => {
+      beforeEach(() => {
+        compHost.data = undefined;
+        fixture.detectChanges();
+      });
+
+      it('should not display image', () => {
+        expect(page.image).toBeFalsy();
+      });
     });
   });
 });

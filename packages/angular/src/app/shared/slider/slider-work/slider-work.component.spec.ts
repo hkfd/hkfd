@@ -131,82 +131,110 @@ describe('SliderWorkComponent', () => {
       });
     });
 
-    describe('Slides', () => {
-      it('should be displayed', () => {
-        expect(page.slides.length).toBe(Data.Api.getCaseStudies<void>().length);
+    describe('Container', () => {
+      describe('No `caseStudies`', () => {
+        beforeEach(() => {
+          (comp as any)._caseStudies = undefined;
+          changeDetectorRef.markForCheck();
+          fixture.detectChanges();
+        });
+
+        it('should not be displayed', () => {
+          expect(page.slideContainer).toBeFalsy();
+        });
       });
 
-      it('should set style transform as `currentIndex` translate', () => {
-        comp.currentIndex = 5;
-        changeDetectorRef.markForCheck();
-        fixture.detectChanges();
+      describe('Has `caseStudies`', () => {
+        beforeEach(() => {
+          compHost.caseStudies = Data.Api.getCaseStudies<void>();
+          fixture.detectChanges();
+        });
 
-        expect(page.slideContainer.style.transform).toBe(
-          `translateX(${5 * -100}%)`
-        );
-      });
+        it('should be displayed', () => {
+          expect(page.slideContainer).toBeTruthy();
+        });
 
-      describe('Slide', () => {
-        describe('Title', () => {
+        it('should set style transform as `currentIndex` translate', () => {
+          comp.currentIndex = 5;
+          changeDetectorRef.markForCheck();
+          fixture.detectChanges();
+
+          expect(page.slideContainer.style.transform).toBe(
+            `translateX(${5 * -100}%)`
+          );
+        });
+
+        describe('Slides', () => {
           it('should be displayed', () => {
-            expect((page.slideTitle.textContent as string).trim()).toBe(
-              Data.Api.getCaseStudies('Case Study 1').title
+            expect(page.slides.length).toBe(
+              Data.Api.getCaseStudies<void>().length
             );
           });
 
-          it('should set href', () => {
-            expect(page.slideTitle.href).toBe(
-              `http://localhost/work/${
-                Data.Api.getCaseStudies('Case Study 1').id
-              }`
-            );
+          describe('Slide', () => {
+            describe('Title', () => {
+              it('should be displayed', () => {
+                expect((page.slideTitle.textContent as string).trim()).toBe(
+                  Data.Api.getCaseStudies('Case Study 1').title
+                );
+              });
+
+              it('should set href', () => {
+                expect(page.slideTitle.href).toBe(
+                  `http://localhost/work/${
+                    Data.Api.getCaseStudies('Case Study 1').id
+                  }`
+                );
+              });
+            });
+
+            it('should display sector', () => {
+              expect(page.slideSector.textContent).toBe(Data.Api.getCaseStudies(
+                'Case Study 1'
+              ).sector as any);
+            });
+
+            describe('See more', () => {
+              it('should be displayed', () => {
+                expect(page.slideButton).toBeTruthy();
+              });
+
+              it('should set href', () => {
+                expect(page.slideButton.href).toBe(
+                  `http://localhost/work/${
+                    Data.Api.getCaseStudies('Case Study 1').id
+                  }`
+                );
+              });
+            });
+
+            describe('Thumbnail', () => {
+              it('should be displayed', () => {
+                expect(page.slideThumbnail).toBeTruthy();
+              });
+
+              it('should set `ImageComponent` `image` as transformed `thumbnail`', () => {
+                expect(page.imageComponent.image).toEqual({
+                  'mock-api-pipe': Data.Api.getCaseStudies('Case Study 1')
+                    .thumbnail
+                } as any);
+              });
+
+              it('should set `ImageComponent` `full-height` attribute', () => {
+                expect(
+                  page.slideThumbnail.hasAttribute('full-height')
+                ).toBeTruthy();
+              });
+            });
+
+            it('should set class as `colour`', () => {
+              expect(
+                page.slides[0].classList.contains(
+                  Data.Api.getCaseStudies('Case Study 1').colour
+                )
+              ).toBeTruthy();
+            });
           });
-        });
-
-        it('should display sector', () => {
-          expect(page.slideSector.textContent).toBe(Data.Api.getCaseStudies(
-            'Case Study 1'
-          ).sector as any);
-        });
-
-        describe('See more', () => {
-          it('should be displayed', () => {
-            expect(page.slideButton).toBeTruthy();
-          });
-
-          it('should set href', () => {
-            expect(page.slideButton.href).toBe(
-              `http://localhost/work/${
-                Data.Api.getCaseStudies('Case Study 1').id
-              }`
-            );
-          });
-        });
-
-        describe('Thumbnail', () => {
-          it('should be displayed', () => {
-            expect(page.slideThumbnail).toBeTruthy();
-          });
-
-          it('should set `ImageComponent` `image` as transformed `thumbnail`', () => {
-            expect(page.imageComponent.image).toEqual({
-              'mock-api-pipe': Data.Api.getCaseStudies('Case Study 1').thumbnail
-            } as any);
-          });
-
-          it('should set `ImageComponent` `full-height` attribute', () => {
-            expect(
-              page.slideThumbnail.hasAttribute('full-height')
-            ).toBeTruthy();
-          });
-        });
-
-        it('should set class as `colour`', () => {
-          expect(
-            page.slides[0].classList.contains(
-              Data.Api.getCaseStudies('Case Study 1').colour
-            )
-          ).toBeTruthy();
         });
       });
     });

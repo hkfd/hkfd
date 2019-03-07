@@ -10,5 +10,5 @@ import { Audio } from 'generic';
 })
 export class AudioBlockComponent {
   @Input()
-  data!: Audio;
+  data: Audio | undefined;
 }

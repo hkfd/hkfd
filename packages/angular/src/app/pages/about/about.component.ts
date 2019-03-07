@@ -13,7 +13,7 @@ import { AboutImages } from './about.images';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent implements OnInit {
-  team$!: Observable<Team[]>;
+  team$: Observable<Team[]> | undefined;
 
   images = AboutImages;
 

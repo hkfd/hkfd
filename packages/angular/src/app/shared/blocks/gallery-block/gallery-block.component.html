@@ -1,5 +1,7 @@
-<image-component
-  *ngFor="let image of data"
-  [image]="image"
-  gallery
-></image-component>
+<ng-container *ngIf="data">
+  <image-component
+    *ngFor="let image of data"
+    [image]="image"
+    gallery
+  ></image-component>
+</ng-container>

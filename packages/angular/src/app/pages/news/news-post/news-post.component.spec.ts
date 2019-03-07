@@ -72,11 +72,17 @@ describe('NewsPostComponent', () => {
   });
 
   describe('`ngOnDestroy`', () => {
-    it('should call `post$` `unsubscribe`', () => {
-      jest.spyOn(comp.post$, 'unsubscribe');
+    it('should call `post$` `unsubscribe` if has `post$`', () => {
+      comp.post$ = { unsubscribe: jest.fn() } as any;
       comp.ngOnDestroy();
 
-      expect(comp.post$.unsubscribe).toHaveBeenCalled();
+      expect((comp.post$ as any).unsubscribe).toHaveBeenCalled();
+    });
+
+    it('should not throw if no `post$`', () => {
+      comp.post$ = undefined;
+
+      expect(() => comp.ngOnDestroy()).not.toThrow();
     });
   });
 

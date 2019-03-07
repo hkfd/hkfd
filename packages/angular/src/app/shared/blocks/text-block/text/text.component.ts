@@ -9,5 +9,5 @@ import { Sentence } from 'api';
 })
 export class TextComponent {
   @Input()
-  text!: Sentence;
+  text: Sentence | undefined;
 }

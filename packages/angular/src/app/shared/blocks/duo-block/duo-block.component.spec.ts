@@ -42,25 +42,43 @@ describe('DuoBlockComponent', () => {
   });
 
   describe('Template', () => {
-    it('should call `SlicePipe` with `images` and `0:2` args', () => {
-      expect(SlicePipe.prototype.transform).toHaveBeenCalledWith(
-        Data.Generic.getDuo(),
-        0,
-        2
-      );
-    });
-
-    it('should display images', () => {
-      expect(page.images.length).toBe(Data.Generic.getDuo().length);
-    });
-
-    describe('Image', () => {
-      it('should set `ImageComponent` `image` as `data`', () => {
-        expect(page.imageComponent.image).toEqual(Data.Generic.getDuo()[0]);
+    describe('Has `data`', () => {
+      beforeEach(() => {
+        compHost.data = Data.Generic.getDuo();
+        fixture.detectChanges();
       });
 
-      it('should set `ImageComponent` `full-height` attribute', () => {
-        expect(page.images[0].hasAttribute('full-height')).toBeTruthy();
+      it('should display images', () => {
+        expect(page.images.length).toBe(Data.Generic.getDuo().length);
+      });
+
+      it('should call `SlicePipe` with `images` and `0:2` args', () => {
+        expect(SlicePipe.prototype.transform).toHaveBeenCalledWith(
+          Data.Generic.getDuo(),
+          0,
+          2
+        );
+      });
+
+      describe('Image', () => {
+        it('should set `ImageComponent` `image` as `data`', () => {
+          expect(page.imageComponent.image).toEqual(Data.Generic.getDuo()[0]);
+        });
+
+        it('should set `ImageComponent` `full-height` attribute', () => {
+          expect(page.images[0].hasAttribute('full-height')).toBeTruthy();
+        });
+      });
+    });
+
+    describe('No `data`', () => {
+      beforeEach(() => {
+        compHost.data = undefined;
+        fixture.detectChanges();
+      });
+
+      it('should not display images', () => {
+        expect(page.images.length).toBeFalsy();
       });
     });
   });
