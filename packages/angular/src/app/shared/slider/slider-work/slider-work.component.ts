@@ -19,7 +19,7 @@ import { CaseStudy } from 'api';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SliderWorkComponent extends SliderComponent {
-  private _caseStudies!: CaseStudy[];
+  private _caseStudies: CaseStudy[] | undefined;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -31,7 +31,7 @@ export class SliderWorkComponent extends SliderComponent {
   }
 
   @Input()
-  set caseStudies(caseStudies: CaseStudy[]) {
+  set caseStudies(caseStudies: CaseStudy[] | undefined) {
     if (!caseStudies) return;
 
     this._caseStudies = caseStudies.map(caseStudy => ({

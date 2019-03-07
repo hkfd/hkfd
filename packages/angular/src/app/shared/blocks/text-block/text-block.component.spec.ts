@@ -40,53 +40,69 @@ describe('TextBlockComponent', () => {
   });
 
   describe('Template', () => {
-    describe('Paragraph', () => {
-      beforeEach(() => {
-        compHost.data = Data.Api.getTextBlocks('text');
-        fixture.detectChanges();
+    describe('Has `data`', () => {
+      describe('Paragraph', () => {
+        beforeEach(() => {
+          compHost.data = Data.Api.getTextBlocks('text');
+          fixture.detectChanges();
+        });
+
+        it('should display paragraphs', () => {
+          expect(page.p.length).toBe(2);
+        });
+
+        it('should display sentences', () => {
+          expect(page.text.length).toBe(5);
+        });
+
+        it('should set `TextComponent` `text` as `text`', () => {
+          expect(page.textComponent.text).toEqual(
+            (Data.Api.getTextBlocks('text').data[0].paragraph as Sentence[])[0]
+          );
+        });
+
+        it('should not display list', () => {
+          expect(page.ul.length).toBeFalsy();
+        });
       });
 
-      it('should display paragraphs', () => {
-        expect(page.p.length).toBe(2);
-      });
+      describe('List', () => {
+        beforeEach(() => {
+          compHost.data = Data.Api.getTextBlocks('list');
+          fixture.detectChanges();
+        });
 
-      it('should display sentences', () => {
-        expect(page.text.length).toBe(5);
-      });
+        it('should display lists', () => {
+          expect(page.ul.length).toBe(2);
+        });
 
-      it('should set `TextComponent` `text` as `text`', () => {
-        expect(page.textComponent.text).toEqual(
-          (Data.Api.getTextBlocks('text').data[0].paragraph as Sentence[])[0]
-        );
-      });
+        it('should display list items', () => {
+          expect(page.text.length).toBe(5);
+        });
 
-      it('should not display list', () => {
-        expect(page.ul.length).toBeFalsy();
+        it('should set `TextComponent` `text` as `text`', () => {
+          expect(page.textComponent.text).toEqual(
+            (Data.Api.getTextBlocks('list').data[0].list as Sentence[])[0]
+          );
+        });
+
+        it('should not display paragraph', () => {
+          expect(page.p.length).toBeFalsy();
+        });
       });
     });
 
-    describe('List', () => {
+    describe('No `data`', () => {
       beforeEach(() => {
-        compHost.data = Data.Api.getTextBlocks('list');
+        compHost.data = undefined;
         fixture.detectChanges();
       });
 
-      it('should display lists', () => {
-        expect(page.ul.length).toBe(2);
-      });
-
-      it('should display list items', () => {
-        expect(page.text.length).toBe(5);
-      });
-
-      it('should set `TextComponent` `text` as `text`', () => {
-        expect(page.textComponent.text).toEqual(
-          (Data.Api.getTextBlocks('list').data[0].list as Sentence[])[0]
-        );
-      });
-
-      it('should not display paragraph', () => {
+      it('should not be displayed', () => {
         expect(page.p.length).toBeFalsy();
+        expect(page.text.length).toBeFalsy();
+        expect(page.ul.length).toBeFalsy();
+        expect(fixture.nativeElement.textContent).toBeFalsy();
       });
     });
   });

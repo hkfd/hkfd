@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="true">
+<ng-container *ngIf="text" [ngSwitch]="true">
   <ng-template [ngSwitchCase]="!!text.url">
     <a
       href="{{ text?.url }}"

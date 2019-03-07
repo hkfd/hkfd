@@ -97,11 +97,17 @@ describe('HomeComponent', () => {
   });
 
   describe('`ngOnDestroy`', () => {
-    it('should call `caseStudies$` `unsubscribe`', () => {
-      jest.spyOn(comp.caseStudies$, 'unsubscribe');
+    it('should call `caseStudies$` `unsubscribe` if has `caseStudies$`', () => {
+      comp.caseStudies$ = { unsubscribe: jest.fn() } as any;
       comp.ngOnDestroy();
 
-      expect(comp.caseStudies$.unsubscribe).toHaveBeenCalled();
+      expect((comp.caseStudies$ as any).unsubscribe).toHaveBeenCalled();
+    });
+
+    it('should not throw if no `caseStudies$`', () => {
+      comp.caseStudies$ = undefined;
+
+      expect(() => comp.ngOnDestroy()).not.toThrow();
     });
   });
 

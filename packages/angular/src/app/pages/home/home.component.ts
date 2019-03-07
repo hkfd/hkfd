@@ -19,9 +19,9 @@ import { HomeImages } from './home.images';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  services$!: Observable<Service[]>;
-  clients$!: Observable<Client[]>;
-  caseStudies$!: Subscription;
+  services$: Observable<Service[]> | undefined;
+  clients$: Observable<Client[]> | undefined;
+  caseStudies$: Subscription | undefined;
   caseStudies: CaseStudy[] | undefined;
 
   images = HomeImages;
@@ -49,6 +49,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.caseStudies$.unsubscribe();
+    this.caseStudies$ && this.caseStudies$.unsubscribe();
   }
 }

@@ -20,7 +20,7 @@ import { WorkAnimations } from './work.animations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkComponent implements OnInit, OnDestroy {
-  caseStudies$!: Subscription;
+  caseStudies$: Subscription | undefined;
   caseStudies: Visible<CaseStudy>[] | undefined;
 
   constructor(
@@ -49,6 +49,6 @@ export class WorkComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.caseStudies$.unsubscribe();
+    this.caseStudies$ && this.caseStudies$.unsubscribe();
   }
 }

@@ -501,35 +501,62 @@ describe('SliderComponent', () => {
       });
     });
 
-    describe('Slides', () => {
-      it('should be displayed', () => {
-        expect(page.slides.length).toBe(Data.Generic.getImages().length);
+    describe('Container', () => {
+      describe('No `images`', () => {
+        beforeEach(() => {
+          (comp as any)._images = undefined;
+          changeDetectorRef.markForCheck();
+          fixture.detectChanges();
+        });
+
+        it('should not be displayed', () => {
+          expect(page.slideContainer).toBeFalsy();
+        });
       });
 
-      it('should set style transform as `currentIndex` translate', () => {
-        comp.currentIndex = 5;
-        changeDetectorRef.markForCheck();
-        fixture.detectChanges();
+      describe('Has `images`', () => {
+        beforeEach(() => {
+          compHost.images = Data.Generic.getImages();
+          fixture.detectChanges();
+        });
 
-        expect(page.slideContainer.style.transform).toBe(
-          `translateX(${5 * -100}%)`
-        );
-      });
+        it('should be displayed', () => {
+          expect(page.slideContainer).toBeTruthy();
+        });
 
-      describe('Slide', () => {
-        describe('Image', () => {
+        it('should set style transform as `currentIndex` translate', () => {
+          comp.currentIndex = 5;
+          changeDetectorRef.markForCheck();
+          fixture.detectChanges();
+
+          expect(page.slideContainer.style.transform).toBe(
+            `translateX(${5 * -100}%)`
+          );
+        });
+
+        describe('Slides', () => {
           it('should be displayed', () => {
-            expect(page.slideImage).toBeTruthy();
+            expect(page.slides.length).toBe(Data.Generic.getImages().length);
           });
 
-          it('should set `ImageComponent` `image` as `image`', () => {
-            expect(page.imageComponent.image).toEqual(
-              Data.Generic.getImages()[0]
-            );
-          });
+          describe('Slide', () => {
+            describe('Image', () => {
+              it('should be displayed', () => {
+                expect(page.slideImage).toBeTruthy();
+              });
 
-          it('should set `ImageComponent` `full-height` attribute', () => {
-            expect(page.slideImage.hasAttribute('full-height')).toBeTruthy();
+              it('should set `ImageComponent` `image` as `image`', () => {
+                expect(page.imageComponent.image).toEqual(
+                  Data.Generic.getImages()[0]
+                );
+              });
+
+              it('should set `ImageComponent` `full-height` attribute', () => {
+                expect(
+                  page.slideImage.hasAttribute('full-height')
+                ).toBeTruthy();
+              });
+            });
           });
         });
       });

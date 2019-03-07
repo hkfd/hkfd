@@ -21,6 +21,7 @@
 
 <div
   class="slide-container"
+  *ngIf="images"
   [style.transform]="'translateX(' + this.currentIndex * -100 + '%)'"
 >
   <div class="slide" *ngFor="let image of images">

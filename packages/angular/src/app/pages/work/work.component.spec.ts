@@ -81,11 +81,17 @@ describe('WorkComponent', () => {
   });
 
   describe('`ngOnDestroy`', () => {
-    it('should call `caseStudies$` `unsubscribe`', () => {
-      const spy = jest.spyOn(comp.caseStudies$, 'unsubscribe');
+    it('should call `caseStudies$` `unsubscribe` if has `caseStudies$`', () => {
+      comp.caseStudies$ = { unsubscribe: jest.fn() } as any;
       comp.ngOnDestroy();
 
-      expect(spy).toHaveBeenCalled();
+      expect((comp.caseStudies$ as any).unsubscribe).toHaveBeenCalled();
+    });
+
+    it('should not throw if no `caseStudies$`', () => {
+      comp.caseStudies$ = undefined;
+
+      expect(() => comp.ngOnDestroy()).not.toThrow();
     });
   });
 

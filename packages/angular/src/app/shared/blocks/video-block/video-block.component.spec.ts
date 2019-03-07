@@ -58,13 +58,23 @@ describe('VideoBlockComponent', () => {
   });
 
   describe('`handleVisible`', () => {
-    beforeEach(() => {
-      comp.data = { src: 'src' };
-      comp.handleVisible();
+    describe('Has `data`', () => {
+      beforeEach(() => {
+        comp.data = { src: 'src' };
+        comp.handleVisible();
+      });
+
+      it('should call `setVideoSrc` with `data.src` arg', () => {
+        expect(comp.setVideoSrc).toHaveBeenCalledWith('src');
+      });
     });
 
-    it('should call `setVideoSrc` with `data.src` arg', () => {
-      expect(comp.setVideoSrc).toHaveBeenCalledWith('src');
+    describe('No `data`', () => {
+      beforeEach(() => (comp.data = undefined));
+
+      it('should throw error', () => {
+        expect(() => comp.handleVisible()).toThrowError('No `data`');
+      });
     });
   });
 

@@ -21,7 +21,7 @@ import { Post } from 'prismic';
 export class NewsPostComponent implements OnInit, OnDestroy {
   richText = RichText;
 
-  post$!: Subscription;
+  post$: Subscription | undefined;
   post: Post | undefined;
 
   constructor(
@@ -37,6 +37,6 @@ export class NewsPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.post$.unsubscribe();
+    this.post$ && this.post$.unsubscribe();
   }
 }
