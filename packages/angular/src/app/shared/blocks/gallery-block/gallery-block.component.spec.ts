@@ -45,17 +45,37 @@ describe('GalleryBlockComponent', () => {
   });
 
   describe('Template', () => {
-    it('should display images', () => {
-      expect(page.images.length).toBe(Data.Generic.getImages().length);
-    });
-
-    describe('Image', () => {
-      it('should set `ImageComponent` `image` as `data`', () => {
-        expect(page.imageComponent.image).toEqual(Data.Generic.getImages()[0]);
+    describe('Has `data`', () => {
+      beforeEach(() => {
+        compHost.data = Data.Generic.getImages();
+        fixture.detectChanges();
       });
 
-      it('should set `ImageComponent` `gallery` attribute', () => {
-        expect(page.images[0].hasAttribute('gallery')).toBeTruthy();
+      it('should display images', () => {
+        expect(page.images.length).toBe(Data.Generic.getImages().length);
+      });
+
+      describe('Image', () => {
+        it('should set `ImageComponent` `image` as `data`', () => {
+          expect(page.imageComponent.image).toEqual(
+            Data.Generic.getImages()[0]
+          );
+        });
+
+        it('should set `ImageComponent` `gallery` attribute', () => {
+          expect(page.images[0].hasAttribute('gallery')).toBeTruthy();
+        });
+      });
+    });
+
+    describe('No `data`', () => {
+      beforeEach(() => {
+        compHost.data = undefined;
+        fixture.detectChanges();
+      });
+
+      it('should not display images', () => {
+        expect(page.images.length).toBeFalsy();
       });
     });
   });

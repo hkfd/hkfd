@@ -21,7 +21,7 @@ import { CaseStudy } from 'api';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit, OnDestroy {
-  post$!: Subscription;
+  post$: Subscription | undefined;
   private _post: Post | undefined;
   set post(post: Post | undefined) {
     if (!post) return;
@@ -35,7 +35,7 @@ export class PostComponent implements OnInit, OnDestroy {
   overview: PickFlat<CaseStudy, 'overview'> | undefined;
 
   @HostBinding('class')
-  layout!: string;
+  layout: string | undefined;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -55,6 +55,6 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.post$.unsubscribe();
+    this.post$ && this.post$.unsubscribe();
   }
 }

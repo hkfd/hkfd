@@ -10,5 +10,5 @@ import { TextBlock } from 'api';
 })
 export class TextBlockComponent {
   @Input()
-  data!: TextBlock;
+  data: TextBlock | undefined;
 }

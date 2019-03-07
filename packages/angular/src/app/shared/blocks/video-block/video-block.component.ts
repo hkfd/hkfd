@@ -11,7 +11,7 @@ import { Video } from 'generic';
 })
 export class VideoBlockComponent {
   @Input()
-  data!: Video;
+  data: Video | undefined;
   videoSrc: SafeResourceUrl | undefined;
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -21,6 +21,8 @@ export class VideoBlockComponent {
   }
 
   handleVisible() {
+    if (!this.data) throw new Error('No `data`');
+
     this.setVideoSrc(this.data.src);
   }
 }

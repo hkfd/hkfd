@@ -1,17 +1,21 @@
-<ng-container *ngFor="let content of data?.data">
-  <ng-container [ngSwitch]="true">
-    <ng-template [ngSwitchCase]="!!content.list">
-      <ul>
-        <li *ngFor="let text of content?.list"><text [text]="text"></text></li>
-      </ul>
-    </ng-template>
+<ng-container *ngIf="data">
+  <ng-container *ngFor="let content of data?.data">
+    <ng-container [ngSwitch]="true">
+      <ng-template [ngSwitchCase]="!!content.list">
+        <ul>
+          <li *ngFor="let text of content?.list">
+            <text [text]="text"></text>
+          </li>
+        </ul>
+      </ng-template>
 
-    <ng-template ngSwitchDefault>
-      <p>
-        <ng-container *ngFor="let text of content?.paragraph">
-          <text [text]="text"></text>
-        </ng-container>
-      </p>
-    </ng-template>
+      <ng-template ngSwitchDefault>
+        <p>
+          <ng-container *ngFor="let text of content?.paragraph">
+            <text [text]="text"></text>
+          </ng-container>
+        </p>
+      </ng-template>
+    </ng-container>
   </ng-container>
 </ng-container>

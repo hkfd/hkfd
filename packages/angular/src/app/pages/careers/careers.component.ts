@@ -13,7 +13,7 @@ import { CareersImages } from './careers.images';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CareersComponent implements OnInit {
-  careers$!: Observable<Career[]>;
+  careers$: Observable<Career[]> | undefined;
 
   images = CareersImages;
 

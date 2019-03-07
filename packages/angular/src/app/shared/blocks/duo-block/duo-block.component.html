@@ -1,3 +1,7 @@
-<ng-container *ngFor="let image of (data | slice: 0:2)">
-  <image-component [image]="image" full-height></image-component>
+<ng-container *ngIf="data">
+  <image-component
+    *ngFor="let image of (data | slice: 0:2)"
+    [image]="image"
+    full-height
+  ></image-component>
 </ng-container>

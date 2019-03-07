@@ -10,5 +10,5 @@ import { Image } from 'generic';
 })
 export class ImageBlockComponent {
   @Input()
-  data!: Image;
+  data: Image | undefined;
 }

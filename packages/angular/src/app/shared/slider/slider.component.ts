@@ -21,7 +21,7 @@ import { Image } from 'generic';
 })
 export class SliderComponent implements OnDestroy {
   private timer: number | undefined;
-  private _images!: Image[];
+  private _images: Image[] | undefined;
   slidesCount: number | undefined;
   currentIndex = 0;
 
