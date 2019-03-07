@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.6"></a>
+## [1.3.6](https://github.com/hkfd/hkfd/compare/v1.3.5...v1.3.6) (2019-03-07)
+
+
+### Performance Improvements
+
+* **angular:** use `OnPush` change detection strategy ([f253494](https://github.com/hkfd/hkfd/commit/f253494))
+* **angular:** use `trackBy` ([5adfbcc](https://github.com/hkfd/hkfd/commit/5adfbcc))
+
+
+
+
+
 <a name="1.3.5"></a>
 ## [1.3.5](https://github.com/hkfd/hkfd/compare/v1.3.4...v1.3.5) (2019-03-06)
 
