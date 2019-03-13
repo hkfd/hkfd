@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
-import { RavenErrorHandler } from './raven';
+import { GlobalErrorHandler } from './shared/errors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +22,7 @@ import { RavenErrorHandler } from './raven';
     SharedModule,
     RoutingModule
   ],
-  providers: [Title, { provide: ErrorHandler, useClass: RavenErrorHandler }],
+  providers: [Title, { provide: ErrorHandler, useClass: GlobalErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

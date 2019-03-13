@@ -4,7 +4,7 @@ import Raven from 'raven-js';
 
 import { environment } from 'environment';
 
-export class RavenErrorHandler implements ErrorHandler {
+export class GlobalErrorHandler implements ErrorHandler {
   constructor() {
     if (!environment.production) return;
 
