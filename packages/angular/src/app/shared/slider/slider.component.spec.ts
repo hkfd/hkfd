@@ -8,6 +8,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { StubImageComponent, Data } from 'testing';
+import { InteractionError } from 'shared';
 import { SliderComponent } from './slider.component';
 
 let compHost: TestHostComponent;
@@ -346,7 +347,10 @@ describe('SliderComponent', () => {
       beforeEach(() => (comp.slidesCount = undefined));
 
       it('should throw error', () => {
-        expect(() => comp.changeImage()).toThrowError('No `slidesCount`');
+        expect(() => comp.changeImage()).toThrowError(
+          InteractionError,
+          'No `slidesCount`'
+        );
       });
     });
 
