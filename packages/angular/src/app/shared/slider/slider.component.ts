@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
+import { InteractionError } from 'shared';
 import { Image } from 'generic';
 
 @Component({
@@ -59,7 +60,7 @@ export class SliderComponent implements OnDestroy {
   ) {}
 
   changeImage(offset = 1) {
-    if (!this.slidesCount) throw new Error('No `slidesCount`');
+    if (!this.slidesCount) throw new InteractionError('No `slidesCount`');
 
     this.changeDetectorRef.markForCheck();
     const index = this.currentIndex + offset;
