@@ -13,3 +13,5 @@ export * from './lazy.directive';
 
 export * from 'email';
 export * from './meta';
+
+export * from './errors';
