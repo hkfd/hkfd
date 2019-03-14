@@ -112,19 +112,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
-          apiService.getServices().subscribe(response => (res = response));
-          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+          error = new ErrorEvent('err');
+          apiService
+            .getServices()
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne(url).error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `[]`', () => {
-          expect(res).toEqual([]);
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
@@ -202,19 +209,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
-          apiService.getCareers().subscribe(response => (res = response));
-          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+          error = new ErrorEvent('err');
+          apiService
+            .getCareers()
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne(url).error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `[]`', () => {
-          expect(res).toEqual([]);
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
@@ -304,21 +318,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
+          error = new ErrorEvent('err');
           apiService
             .getCareer('career-2')
-            .subscribe(response => (res = response));
-          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne(url).error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `undefined`', () => {
-          expect(res).toBeUndefined();
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
@@ -438,21 +457,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
+          error = new ErrorEvent('err');
           apiService
             .getPost('service', 'service-1')
-            .subscribe(response => (res = response));
-          mockHttp.expectOne('/getPostUrl').error(new ErrorEvent('err'));
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne('/getPostUrl').error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `undefined`', () => {
-          expect(res).toBeUndefined();
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
@@ -532,19 +556,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
-          apiService.getCaseStudies().subscribe(response => (res = response));
-          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+          error = new ErrorEvent('err');
+          apiService
+            .getCaseStudies()
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne(url).error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `[]`', () => {
-          expect(res).toEqual([]);
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
@@ -622,19 +653,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
-          apiService.getTeam().subscribe(response => (res = response));
-          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+          error = new ErrorEvent('err');
+          apiService
+            .getTeam()
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne(url).error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `[]`', () => {
-          expect(res).toEqual([]);
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
@@ -703,19 +741,26 @@ describe('ApiService', () => {
       });
 
       describe('Error', () => {
-        let res: any = 'fail';
+        let error: ErrorEvent;
+        let err: any;
 
         beforeEach(() => {
-          apiService.getClients().subscribe(request => (res = request));
-          mockHttp.expectOne(url).error(new ErrorEvent('err'));
+          error = new ErrorEvent('err');
+          apiService
+            .getClients()
+            .subscribe(
+              response => fail(response),
+              errorRes => (err = errorRes)
+            );
+          mockHttp.expectOne(url).error(error);
         });
 
         it('should not call `TransferState` `set`', () => {
           expect(transferState.set).not.toHaveBeenCalled();
         });
 
-        it('should return `[]`', () => {
-          expect(res).toEqual([]);
+        it('should return error', () => {
+          expect(err.error).toEqual(new ErrorEvent('err'));
         });
       });
     });
