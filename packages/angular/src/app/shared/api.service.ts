@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 import { Observable, of } from 'rxjs';
-import { catchError, tap, flatMap, find } from 'rxjs/operators';
+import { tap, flatMap, find } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
@@ -52,8 +52,7 @@ export class ApiService {
 
     return this.http.get<Service[]>(SERVICES).pipe(
       tap(services => this.logger.log('getServices', services)),
-      tap(services => this.state.set(SERVICES_KEY, services)),
-      catchError(this.handleError<Service[]>('getServices', []))
+      tap(services => this.state.set(SERVICES_KEY, services))
     );
   }
 
@@ -67,8 +66,7 @@ export class ApiService {
 
     return this.http.get<Career[]>(CAREERS).pipe(
       tap(careers => this.logger.log('getCareers', careers)),
-      tap(careers => this.state.set(CAREERS_KEY, careers)),
-      catchError(this.handleError<Career[]>('getCareers', []))
+      tap(careers => this.state.set(CAREERS_KEY, careers))
     );
   }
 
@@ -84,8 +82,7 @@ export class ApiService {
       flatMap(careers => careers),
       find(career => career.id === id),
       tap(career => this.logger.log('getCareer', career)),
-      tap(career => this.state.set(CAREER_KEY, career)),
-      catchError(this.handleError<Career>('getCareer'))
+      tap(career => this.state.set(CAREER_KEY, career))
     );
   }
 
@@ -106,8 +103,7 @@ export class ApiService {
       flatMap(posts => posts),
       find(post => post.id === id),
       tap(post => this.logger.log('getPost', post)),
-      tap(post => this.state.set(POST_KEY, post)),
-      catchError(this.handleError<getPost<T>>('getPost'))
+      tap(post => this.state.set(POST_KEY, post))
     );
   }
 
@@ -123,8 +119,7 @@ export class ApiService {
 
     return this.http.get<CaseStudy[]>(CASE_STUDIES).pipe(
       tap(caseStudies => this.logger.log('getCaseStudies', caseStudies)),
-      tap(caseStudies => this.state.set(CASE_STUDIES_KEY, caseStudies)),
-      catchError(this.handleError<CaseStudy[]>('getCaseStudies', []))
+      tap(caseStudies => this.state.set(CASE_STUDIES_KEY, caseStudies))
     );
   }
 
@@ -138,8 +133,7 @@ export class ApiService {
 
     return this.http.get<Team[]>(TEAM).pipe(
       tap(team => this.logger.log('getTeam', team)),
-      tap(team => this.state.set(TEAM_KEY, team)),
-      catchError(this.handleError<Team[]>('getTeam', []))
+      tap(team => this.state.set(TEAM_KEY, team))
     );
   }
 
@@ -153,15 +147,7 @@ export class ApiService {
 
     return this.http.get<Client[]>(CLIENTS).pipe(
       tap(clients => this.logger.log('getClients', clients)),
-      tap(clients => this.state.set(CLIENTS_KEY, clients)),
-      catchError(this.handleError<Client[]>('getClients', []))
+      tap(clients => this.state.set(CLIENTS_KEY, clients))
     );
-  }
-
-  private handleError<T>(operation: string, result?: T) {
-    return (error: any): Observable<T> => {
-      this.logger.error(operation, error);
-      return of(result as T);
-    };
   }
 }

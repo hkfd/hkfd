@@ -5,12 +5,12 @@ import {
   BrowserTransferStateModule
 } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { SharedModule } from './shared/shared.module';
-import { GlobalErrorHandler } from './shared/errors';
+import { GlobalErrorHandler, ErrorInterceptor } from './shared/errors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +22,11 @@ import { GlobalErrorHandler } from './shared/errors';
     SharedModule,
     RoutingModule
   ],
-  providers: [Title, { provide: ErrorHandler, useClass: GlobalErrorHandler }],
+  providers: [
+    Title,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -92,21 +92,26 @@ describe('PrismicService', () => {
 
       describe('Response', () => {
         describe('Error', () => {
-          let res: any = 'fail';
+          let error: ErrorEvent;
+          let err: any;
 
           beforeEach(() => {
-            prismicService.getRef().subscribe(response => (res = response));
-            mockHttp
-              .expectOne(environment.prismic.endpoint)
-              .error(new ErrorEvent(''));
+            error = new ErrorEvent('err');
+            prismicService
+              .getRef()
+              .subscribe(
+                response => fail(response),
+                errorRes => (err = errorRes)
+              );
+            mockHttp.expectOne(environment.prismic.endpoint).error(error);
           });
 
           it('should not call `TransferState` `set`', () => {
             expect(transferState.set).not.toHaveBeenCalled();
           });
 
-          it('should return `undefined`', () => {
-            expect(res).toBeUndefined();
+          it('should return error', () => {
+            expect(err.error).toEqual(new ErrorEvent('err'));
           });
         });
 
@@ -200,19 +205,22 @@ describe('PrismicService', () => {
 
       describe('Response', () => {
         describe('Error', () => {
-          let res: any = 'fail';
+          let error: ErrorEvent;
+          let err: any;
 
           beforeEach(() => {
+            error = new ErrorEvent('err');
             prismicService
               .getPosts(true)
-              .subscribe(response => (res = response));
-            mockHttp
-              .expectOne(req => req.url === URL)
-              .error(new ErrorEvent(''));
+              .subscribe(
+                response => fail(response),
+                errorRes => (err = errorRes)
+              );
+            mockHttp.expectOne(req => req.url === URL).error(error);
           });
 
-          it('should return `undefined`', () => {
-            expect(res).toBeUndefined();
+          it('should return error', () => {
+            expect(err.error).toEqual(new ErrorEvent('err'));
           });
         });
 
@@ -310,23 +318,26 @@ describe('PrismicService', () => {
 
       describe('Response', () => {
         describe('Error', () => {
-          let res: any = 'fail';
+          let error: ErrorEvent;
+          let err: any;
 
           beforeEach(() => {
+            error = new ErrorEvent('err');
             prismicService
               .getPost('post-1')
-              .subscribe(response => (res = response));
-            mockHttp
-              .expectOne(req => req.url === URL)
-              .error(new ErrorEvent(''));
+              .subscribe(
+                response => fail(response),
+                errorRes => (err = errorRes)
+              );
+            mockHttp.expectOne(req => req.url === URL).error(error);
           });
 
           it('should not call `TransferState` `set`', () => {
             expect(transferState.set).not.toHaveBeenCalled();
           });
 
-          it('should return `undefined`', () => {
-            expect(res).toBeUndefined();
+          it('should return error', () => {
+            expect(err.error).toEqual(new ErrorEvent('err'));
           });
         });
 
