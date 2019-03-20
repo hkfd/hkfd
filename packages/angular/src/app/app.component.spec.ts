@@ -3,16 +3,18 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, PLATFORM_ID } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Router, RouterTestingModule } from 'testing';
+import { Router, RouterTestingModule, MockNotificationService } from 'testing';
 import { Subscription } from 'rxjs';
 
 import { environment } from 'environment';
+import { NotificationService } from 'shared';
 import { AppComponent } from './app.component';
 
 let comp: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
 let page: Page;
 let router: Router;
+let notificationService: NotificationService;
 let mockPlatformId: 'browser' | 'server';
 
 @Component({
@@ -86,6 +88,13 @@ describe('AppComponent', () => {
                 'send',
                 'pageview'
               )
+            ));
+
+        it('should call `NotificationService` `dismissMessage`', () =>
+          router
+            .navigateByUrl('page-2')
+            .then(_ =>
+              expect(notificationService.dismissMessage).toHaveBeenCalled()
             ));
 
         it('should not call `ga` with `set`, `page`, and redirected url args', () =>
@@ -194,7 +203,11 @@ function setupTest() {
       NoopAnimationsModule
     ],
     declarations: [AppComponent, Page1Component, Page2Component],
-    providers: [Location, { provide: PLATFORM_ID, useValue: mockPlatformId }]
+    providers: [
+      Location,
+      { provide: PLATFORM_ID, useValue: mockPlatformId },
+      { provide: NotificationService, useClass: MockNotificationService }
+    ]
   }).compileComponents();
 }
 
@@ -223,6 +236,9 @@ function createComponent() {
   comp = fixture.componentInstance;
   (global as any).ga = jest.fn();
   router = fixture.debugElement.injector.get<Router>(Router);
+  notificationService = fixture.debugElement.injector.get<NotificationService>(
+    NotificationService
+  );
   jest.spyOn(router.events, 'subscribe');
   page = new Page();
 

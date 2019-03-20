@@ -3,11 +3,13 @@ export * from './prismic.service.mock';
 export * from './email.service.mock';
 export * from './meta.service.mock';
 export * from './logger.service.mock';
+export * from './notification.service.mock';
 export * from './api.pipe.mock';
 export * from './prismic.pipe.mock';
 export * from './router';
 export * from './state';
 export * from './sanitizer';
+export * from './material';
 
 export * from './directives';
 export * from './components';

@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
+import { MaterialModule } from './material.module';
 import { SharedModule } from './shared/shared.module';
 import { GlobalErrorHandler, ErrorInterceptor } from './shared/errors';
 
@@ -19,6 +20,7 @@ import { GlobalErrorHandler, ErrorInterceptor } from './shared/errors';
     BrowserTransferStateModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MaterialModule,
     SharedModule,
     RoutingModule
   ],

@@ -7,8 +7,8 @@ import {
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { StubImageComponent, Data } from 'testing';
-import { InteractionError } from 'shared';
+import { StubImageComponent, Data, MockNotificationService } from 'testing';
+import { InteractionError, NotificationService } from 'shared';
 import { SliderComponent } from './slider.component';
 
 let compHost: TestHostComponent;
@@ -17,6 +17,7 @@ let fixture: ComponentFixture<TestHostComponent>;
 let changeDetectorRef: ChangeDetectorRef;
 let mockPlatformId: 'browser' | 'server';
 let ngZone: NgZone;
+let notificationService: NotificationService;
 let page: Page;
 
 @Component({
@@ -346,6 +347,22 @@ describe('SliderComponent', () => {
     describe('No `slidesCount`', () => {
       beforeEach(() => (comp.slidesCount = undefined));
 
+      it('should call `NotificationService` `displayMessage` with previous on `1` arg', () => {
+        expect(() => comp.changeImage(1)).toThrow();
+
+        expect(notificationService.displayMessage).toHaveBeenCalledWith(
+          `Can't slide to next image`
+        );
+      });
+
+      it('should call `NotificationService` `displayMessage` with previous on `-1` arg', () => {
+        expect(() => comp.changeImage(-1)).toThrow();
+
+        expect(notificationService.displayMessage).toHaveBeenCalledWith(
+          `Can't slide to previous image`
+        );
+      });
+
       it('should throw error', () => {
         expect(() => comp.changeImage()).toThrowError(
           InteractionError,
@@ -616,7 +633,10 @@ class Page {
 function setupTest() {
   TestBed.configureTestingModule({
     declarations: [TestHostComponent, SliderComponent, StubImageComponent],
-    providers: [{ provide: PLATFORM_ID, useValue: mockPlatformId }]
+    providers: [
+      { provide: PLATFORM_ID, useValue: mockPlatformId },
+      { provide: NotificationService, useClass: MockNotificationService }
+    ]
   }).compileComponents();
 }
 
@@ -626,6 +646,7 @@ function createComponent() {
   const el = fixture.debugElement.query(By.directive(SliderComponent));
   comp = el.componentInstance;
   changeDetectorRef = (comp as any).changeDetectorRef;
+  notificationService = (comp as any).notificationService;
   global.clearInterval = jest.fn();
   jest.spyOn(global, 'setInterval').mockImplementation(() => 'setInterval');
   ngZone = fixture.debugElement.injector.get<NgZone>(NgZone);

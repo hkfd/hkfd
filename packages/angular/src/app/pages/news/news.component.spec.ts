@@ -1,4 +1,10 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  async,
+  fakeAsync,
+  tick
+} from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
@@ -7,14 +13,15 @@ import {
   RouterTestingModule,
   MockMetaService,
   MockPrismicService,
+  MockNotificationService,
   MockPrismicPipe,
   StubImageComponent,
   Data
 } from 'testing';
-import { of, Subscription } from 'rxjs';
+import { of, Subscription, throwError } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
-import { MetaService, PrismicService } from 'shared';
+import { MetaService, PrismicService, NotificationService } from 'shared';
 import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;
@@ -22,6 +29,7 @@ let fixture: ComponentFixture<NewsComponent>;
 let changeDetectorRef: ChangeDetectorRef;
 let metaService: MetaService;
 let prismicService: PrismicService;
+let notificationService: NotificationService;
 let page: Page;
 
 beforeEach(jest.clearAllMocks);
@@ -33,7 +41,8 @@ describe('NewsComponent', () => {
       declarations: [NewsComponent, StubImageComponent, MockPrismicPipe],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
-        { provide: PrismicService, useClass: MockPrismicService }
+        { provide: PrismicService, useClass: MockPrismicService },
+        { provide: NotificationService, useClass: MockNotificationService }
       ]
     }).compileComponents()));
 
@@ -67,6 +76,21 @@ describe('NewsComponent', () => {
         expect((comp.post$ as any).unsubscribe).toHaveBeenCalled();
       });
     });
+
+    describe('`notificationSub`', () => {
+      it('should call `notificationSub` `unsubscribe` if has `notificationSub`', () => {
+        comp.notificationSub = { unsubscribe: jest.fn() } as any;
+        comp.ngOnDestroy();
+
+        expect((comp.notificationSub as any).unsubscribe).toHaveBeenCalled();
+      });
+
+      it('should not throw if no `notificationSub`', () => {
+        comp.notificationSub = undefined;
+
+        expect(() => comp.ngOnDestroy()).not.toThrow();
+      });
+    });
   });
 
   describe('`postTrackBy`', () => {
@@ -91,45 +115,87 @@ describe('NewsComponent', () => {
       expect(comp.post$).toBeDefined();
     });
 
-    it('should set `posts`', () => {
-      comp.posts = [];
-      comp.getPosts();
-
-      expect(comp.posts).toEqual(Data.Prismic.getPostsResponse().results);
-    });
-
-    it('should not overwrite existing `posts`', () => {
-      (comp.posts as any) = ['post'];
-      comp.getPosts();
-
-      expect(comp.posts).toEqual([
-        'post',
-        ...Data.Prismic.getPostsResponse().results
-      ] as any);
-    });
-
-    it('should set `hasNextPage` as true if `next_page`', () => {
-      (prismicService.getPosts as jest.Mock).mockReturnValue(
-        of({ results: null, next_page: 'page2' })
+    describe('Response', () => {
+      beforeEach(() =>
+        (prismicService.getPosts as jest.Mock).mockReturnValue(
+          of(Data.Prismic.getPostsResponse())
+        )
       );
 
-      comp.getPosts();
-      expect(comp.hasNextPage).toBe(true);
+      it('should set `posts`', () => {
+        comp.posts = [];
+        comp.getPosts();
+
+        expect(comp.posts).toEqual(Data.Prismic.getPostsResponse().results);
+      });
+
+      it('should not overwrite existing `posts`', () => {
+        (comp.posts as any) = ['post'];
+        comp.getPosts();
+
+        expect(comp.posts).toEqual([
+          'post',
+          ...Data.Prismic.getPostsResponse().results
+        ] as any);
+      });
+
+      it('should set `hasNextPage` as true if `next_page`', () => {
+        (prismicService.getPosts as jest.Mock).mockReturnValue(
+          of({ results: null, next_page: 'page2' })
+        );
+
+        comp.getPosts();
+        expect(comp.hasNextPage).toBe(true);
+      });
+
+      it('should set `hasNextPage` as false if no `next_page`', () => {
+        (prismicService.getPosts as jest.Mock).mockReturnValue(
+          of({ results: null, next_page: null })
+        );
+
+        comp.getPosts();
+        expect(comp.hasNextPage).toBe(false);
+      });
+
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        comp.getPosts();
+
+        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+      });
     });
 
-    it('should set `hasNextPage` as false if no `next_page`', () => {
-      (prismicService.getPosts as jest.Mock).mockReturnValue(
-        of({ results: null, next_page: null })
+    describe('Error', () => {
+      beforeEach(() =>
+        (prismicService.getPosts as jest.Mock).mockReturnValue(
+          throwError('error')
+        )
       );
 
-      comp.getPosts();
-      expect(comp.hasNextPage).toBe(false);
-    });
+      it('should set `notificationSub`', async(() => {
+        comp.notificationSub = undefined;
+        comp.getPosts();
 
-    it('should call `ChangeDetectorRef` `markForCheck`', () => {
-      comp.getPosts();
+        expect(comp.notificationSub).toBeDefined();
+      }));
 
-      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+      it('should call `NotificationService` `displayMessage` with args', async(() => {
+        comp.getPosts();
+
+        expect(notificationService.displayMessage).toHaveBeenCalledWith(
+          `Couldn't load more posts`,
+          { action: 'Retry' }
+        );
+      }));
+
+      it('should call `getPosts`', async(() => {
+        (notificationService.displayMessage as jest.Mock).mockReturnValue(of());
+        (notificationService.displayMessage as jest.Mock).mockReturnValueOnce(
+          of(undefined)
+        );
+        comp.getPosts();
+
+        expect(comp.getPosts).toHaveBeenCalledTimes(3);
+      }));
     });
   });
 
@@ -292,6 +358,9 @@ function createComponent() {
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
+  );
+  notificationService = fixture.debugElement.injector.get<NotificationService>(
+    NotificationService
   );
   jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
