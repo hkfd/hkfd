@@ -2,16 +2,22 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ChangeDetectorRef } from '@angular/core';
 
-import { LoggerService, MockLoggerService, MockEmailService } from 'testing';
+import {
+  LoggerService,
+  MockLoggerService,
+  MockEmailService,
+  MockNotificationService
+} from 'testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
-import { EmailService } from 'shared';
+import { EmailService, NotificationService } from 'shared';
 import { FormComponent } from './form.component';
 
 let comp: FormComponent;
 let fixture: ComponentFixture<FormComponent>;
 let changeDetectorRef: ChangeDetectorRef;
 let emailService: EmailService;
+let notificationService: NotificationService;
 let page: Page;
 
 beforeEach(jest.clearAllMocks);
@@ -24,7 +30,8 @@ describe('FormComponent', () => {
       providers: [
         FormBuilder,
         { provide: LoggerService, useClass: MockLoggerService },
-        { provide: EmailService, useClass: MockEmailService }
+        { provide: EmailService, useClass: MockEmailService },
+        { provide: NotificationService, useClass: MockNotificationService }
       ]
     }).compileComponents()));
 
@@ -40,6 +47,23 @@ describe('FormComponent', () => {
 
   it('should not set `formSent`', () => {
     expect(comp.formSent).toBeUndefined();
+  });
+
+  describe('`ngOnDestroy`', () => {
+    describe('`notificationSub`', () => {
+      it('should call `notificationSub` `unsubscribe` if has `notificationSub`', () => {
+        comp.notificationSub = { unsubscribe: jest.fn() } as any;
+        comp.ngOnDestroy();
+
+        expect((comp.notificationSub as any).unsubscribe).toHaveBeenCalled();
+      });
+
+      it('should not throw if no `notificationSub`', () => {
+        comp.notificationSub = undefined;
+
+        expect(() => comp.ngOnDestroy()).not.toThrow();
+      });
+    });
   });
 
   describe('`submitForm`', () => {
@@ -84,20 +108,35 @@ describe('FormComponent', () => {
     });
 
     describe('Reject', () => {
-      beforeEach(() => {
-        (emailService.sendEmail as jest.Mock).mockReturnValue(Promise.reject());
-        comp.submitForm();
-      });
+      beforeEach(() =>
+        (emailService.sendEmail as jest.Mock).mockRejectedValueOnce(undefined)
+      );
 
-      it('should set `formSent` as `false`', () => {
+      it('should set `notificationSub`', () => {
+        comp.notificationSub = undefined;
+        comp.submitForm();
+
         return fixture.whenStable().then(_ => {
-          expect(comp.formSent).toBe(false);
+          expect(comp.notificationSub).toBeDefined();
         });
       });
 
-      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      it('should call `NotificationService` `displayMessage` with args', () => {
+        comp.submitForm();
+
         return fixture.whenStable().then(_ => {
-          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+          expect(notificationService.displayMessage).toHaveBeenCalledWith(
+            `Couldn't send form`,
+            { action: 'Retry' }
+          );
+        });
+      });
+
+      it('should call `submitForm`', () => {
+        comp.submitForm();
+
+        return fixture.whenStable().then(_ => {
+          expect(comp.submitForm).toHaveBeenCalledTimes(2);
         });
       });
     });
@@ -433,6 +472,9 @@ function createComponent() {
   changeDetectorRef = (comp as any).changeDetectorRef;
   (global as any).ga = jest.fn();
   emailService = fixture.debugElement.injector.get<EmailService>(EmailService);
+  notificationService = fixture.debugElement.injector.get<NotificationService>(
+    NotificationService
+  );
   page = new Page();
 
   jest.spyOn(changeDetectorRef, 'markForCheck');

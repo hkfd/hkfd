@@ -1,11 +1,14 @@
 import {
   Component,
+  OnDestroy,
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { LoggerService, EmailService } from 'shared';
+import { Subscription } from 'rxjs';
+
+import { LoggerService, EmailService, NotificationService } from 'shared';
 import { FormAnimations } from './form.animations';
 
 @Component({
@@ -15,9 +18,10 @@ import { FormAnimations } from './form.animations';
   animations: FormAnimations,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormComponent {
+export class FormComponent implements OnDestroy {
   form: FormGroup;
   formSent: boolean | undefined;
+  notificationSub: Subscription | undefined;
 
   get name() {
     return this.form.get('name');
@@ -33,7 +37,8 @@ export class FormComponent {
     private changeDetectorRef: ChangeDetectorRef,
     private logger: LoggerService,
     private emailService: EmailService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService
   ) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
@@ -51,11 +56,15 @@ export class FormComponent {
         ga('send', 'event', 'Contact Form', 'sent');
         this.changeDetectorRef.markForCheck();
       },
-      err => {
-        this.logger.error('submitForm', err);
-        this.formSent = false;
-        this.changeDetectorRef.markForCheck();
+      _ => {
+        this.notificationSub = this.notificationService
+          .displayMessage(`Couldn't send form`, { action: 'Retry' })
+          .subscribe(this.submitForm.bind(this));
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.notificationSub && this.notificationSub.unsubscribe();
   }
 }

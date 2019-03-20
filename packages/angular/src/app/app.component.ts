@@ -14,6 +14,7 @@ import { filter } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { AppAnimations } from './app.animations';
+import { NotificationService } from 'shared/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private notificationService: NotificationService
   ) {}
 
   getState({ activatedRouteData: { state } }: RouterOutlet) {
@@ -55,6 +57,8 @@ export class AppComponent implements OnInit, OnDestroy {
         ga('set', 'title', 'Heckford');
         ga('set', 'page', urlAfterRedirects);
         ga('send', 'pageview');
+
+        this.notificationService.dismissMessage();
       });
   }
 

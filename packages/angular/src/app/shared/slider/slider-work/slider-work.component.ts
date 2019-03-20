@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { SliderComponent } from '../slider.component';
-import { ApiPipe } from 'shared';
+import { ApiPipe, NotificationService } from 'shared';
 import { CaseStudy } from 'api';
 
 @Component({
@@ -25,9 +25,10 @@ export class SliderWorkComponent extends SliderComponent {
     changeDetectorRef: ChangeDetectorRef,
     zone: NgZone,
     @Inject(PLATFORM_ID) platformId: Object,
+    notificationService: NotificationService,
     private apiPipe: ApiPipe
   ) {
-    super(changeDetectorRef, zone, platformId);
+    super(changeDetectorRef, zone, platformId, notificationService);
   }
 
   @Input()

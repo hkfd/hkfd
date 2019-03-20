@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 
-import { InteractionError } from 'shared';
+import { NotificationService, InteractionError } from 'shared';
 import { Image } from 'generic';
 
 @Component({
@@ -56,11 +56,17 @@ export class SliderComponent implements OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private zone: NgZone,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private notificationService: NotificationService
   ) {}
 
   changeImage(offset = 1) {
-    if (!this.slidesCount) throw new InteractionError('No `slidesCount`');
+    if (!this.slidesCount) {
+      this.notificationService.displayMessage(
+        `Can't slide to ${offset === 1 ? 'next' : 'previous'} image`
+      );
+      throw new InteractionError('No `slidesCount`');
+    }
 
     this.changeDetectorRef.markForCheck();
     const index = this.currentIndex + offset;

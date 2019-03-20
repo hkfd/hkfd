@@ -6,9 +6,10 @@ import {
   RouterTestingModule,
   MockApiPipe,
   StubImageComponent,
-  Data
+  Data,
+  MockNotificationService
 } from 'testing';
-import { ApiPipe } from 'shared';
+import { ApiPipe, NotificationService } from 'shared';
 import { SliderWorkComponent } from './slider-work.component';
 
 let compHost: TestHostComponent;
@@ -34,7 +35,10 @@ describe('SliderWorkComponent', () => {
         SliderWorkComponent,
         StubImageComponent
       ],
-      providers: [{ provide: ApiPipe, useClass: MockApiPipe }]
+      providers: [
+        { provide: ApiPipe, useClass: MockApiPipe },
+        { provide: NotificationService, useClass: MockNotificationService }
+      ]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));

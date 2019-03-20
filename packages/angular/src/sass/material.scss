@@ -1,0 +1,29 @@
+@import '~@angular/material/theming';
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Montserrat Regular, sans-serif',
+  $body-1: mat-typography-level(1em, 24px),
+  $button: mat-typography-level(16px, 24px, 700)
+);
+
+@include mat-core($custom-typography);
+
+@mixin hkfd-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .mat-snack-bar-container {
+    background-color: mat-color($primary) !important;
+    color: #fff !important;
+  }
+
+  .mat-button {
+    text-transform: uppercase;
+  }
+}
+
+$hkfd-primary: mat-palette($mat-blue-grey, 700);
+$hkfd-accent: mat-palette($mat-light-blue, A100);
+$hkfd-theme: mat-light-theme($hkfd-primary, $hkfd-accent);
+
+@include angular-material-theme($hkfd-theme);
+@include hkfd-theme($hkfd-theme);

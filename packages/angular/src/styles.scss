@@ -19,6 +19,7 @@
 }
 
 @import 'sass/reset', 'sass/grid', 'sass/mixins';
+@import 'sass/material';
 
 body {
   @extend %font-body;
