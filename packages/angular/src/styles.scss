@@ -19,7 +19,8 @@
 }
 
 @import 'sass/reset', 'sass/grid', 'sass/mixins';
-@import 'sass/material';
+@import '~@angular/material/theming';
+@import 'sass/banner', 'sass/material';
 
 body {
   @extend %font-body;
