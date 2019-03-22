@@ -986,6 +986,15 @@ export const SERVICES: Service[] = [
                 alt: 'Wainhomes Google advertisements'
               }
             }
+          },
+          {
+            type: 'image',
+            data: {
+              image: {
+                name: 'service-ppc-adwords2',
+                alt: 'Google Partner'
+              }
+            }
           }
         ]
       }
