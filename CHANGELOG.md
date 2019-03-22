@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/hkfd/hkfd/compare/v1.3.7...v1.4.0) (2019-03-22)
+
+
+### Features
+
+* **api:** add google partner certification ([c21ce41](https://github.com/hkfd/hkfd/commit/c21ce41))
+
+
+
+
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/hkfd/hkfd/compare/v1.3.6...v1.3.7) (2019-03-11)
 
