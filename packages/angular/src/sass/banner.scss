@@ -1,0 +1,59 @@
+@import 'material';
+
+$primary: map-get($hkfd-theme, primary);
+$button-margin: 1em;
+
+#banner {
+  overflow: hidden;
+  background: white;
+  position: sticky;
+  top: 0;
+  max-height: 0;
+  visibility: hidden;
+  transition: max-height 1.3s ease-out;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+
+  #banner-container {
+    @extend %container-full;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0.5em 0;
+    @include mat-typography-level-to-styles($custom-typography, body-1);
+
+    #banner-message {
+      margin: 0.25em 0;
+    }
+
+    #banner-actions {
+      flex-grow: 2;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      margin: 0.25em 0;
+      margin-right: -$button-margin;
+
+      a,
+      button {
+        display: block;
+        margin: 0 1em;
+        @include mat-typography-level-to-styles($custom-typography, button);
+        background: none;
+        color: mat-color($primary, 900);
+        text-transform: uppercase;
+      }
+
+      #action-home {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+body.error {
+  #banner {
+    max-height: 20vh;
+    visibility: visible !important;
+  }
+}
