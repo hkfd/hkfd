@@ -6,6 +6,7 @@ import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { MetaService, ApiService } from 'shared';
 import { Career } from 'api';
+import { createMetaTags } from './career-resolver.helpers';
 
 @Injectable()
 export class CareerResolver implements Resolve<Career> {
@@ -22,12 +23,7 @@ export class CareerResolver implements Resolve<Career> {
       take(1),
       tap(career =>
         career
-          ? this.metaService.setMetaTags({
-              type: 'article',
-              title: career.title,
-              description: career.salary,
-              url: `careers/${career.id}`
-            })
+          ? this.metaService.setMetaTags(createMetaTags(career))
           : undefined
       ),
       mergeMap(career => {

@@ -13,6 +13,7 @@ import { timeout } from 'rxjs/operators';
 
 import { MetaService, ApiService } from 'shared';
 import { Career } from 'api';
+import { createMetaTags } from './career-resolver.helpers';
 import { CareerResolver } from './career-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
@@ -20,6 +21,12 @@ let careerResolver: CareerResolver;
 let metaService: MetaService;
 let apiService: ApiService;
 let router: Router;
+
+jest.mock('./career-resolver.helpers', () => ({
+  createMetaTags: jest.fn().mockReturnValue('createMetaTagsReturn')
+}));
+
+beforeEach(jest.clearAllMocks);
 
 describe('CareerResolver', () => {
   beforeEach(async(() => {
@@ -58,18 +65,27 @@ describe('CareerResolver', () => {
   describe('Has `career`', () => {
     beforeEach(() => (activatedRoute.testParamMap = { id: 'career-1' }));
 
-    it('should call `MetaService` `setMetaTags` with career args', () => {
+    it('should call `createMetaTags` with `career` arg', () => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
         Career
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
-          expect(metaService.setMetaTags).toHaveBeenCalledWith({
-            type: 'article',
-            title: 'Career 1',
-            description: '£0',
-            url: 'careers/career-1'
-          })
+          expect(createMetaTags).toHaveBeenCalledWith(
+            Data.Api.getCareers('Career 1')
+          )
+        );
+    });
+
+    it('should call `MetaService` `setMetaTags` with `createMetaTags` return args', () => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Career
+      >)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith(
+            'createMetaTagsReturn'
+          )
         );
     });
 
@@ -94,6 +110,17 @@ describe('CareerResolver', () => {
 
   describe('No `career`', () => {
     beforeEach(() => (activatedRoute.testParamMap = { id: 'no-career' }));
+
+    it('should not call `createMetaTags`', fakeAsync(() => {
+      (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Career
+      >)
+        .pipe(timeout(100))
+        .subscribe();
+
+      tick(100);
+      expect(createMetaTags).not.toHaveBeenCalled();
+    }));
 
     it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
       (careerResolver.resolve(activatedRoute.snapshot as any) as Observable<

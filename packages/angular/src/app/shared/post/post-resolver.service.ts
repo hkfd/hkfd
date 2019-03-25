@@ -4,11 +4,10 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
 
-import { environment } from 'environment';
 import { Post } from 'shared';
 import { MetaService } from '../meta.service';
 import { ApiService } from '../api.service';
-import { isKnownPostType } from './post-resolver.helpers';
+import { isKnownPostType, createMetaTags } from './post-resolver.helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -37,17 +36,7 @@ export class PostResolver implements Resolve<Post> {
       take(1),
       tap(post =>
         post
-          ? this.metaService.setMetaTags({
-              type: 'article',
-              title: post.title,
-              description: post.intro[0],
-              url: `${type}/${id}`,
-              image: `https://res.cloudinary.com/${
-                environment.cloudinaryName
-              }/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/${
-                post.thumbnail.image.name
-              }`
-            })
+          ? this.metaService.setMetaTags(createMetaTags(type, id, post))
           : undefined
       ),
       mergeMap(post => {
