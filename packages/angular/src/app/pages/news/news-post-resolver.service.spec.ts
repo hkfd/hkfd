@@ -7,17 +7,24 @@ import {
   Data
 } from 'testing';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 
 import { MetaService, PrismicService } from 'shared';
 import { Post } from 'prismic';
+import { createMetaTags } from './news-post-resolver.helpers';
 import { NewsPostResolver } from './news-post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
 let newsPostResolver: NewsPostResolver;
 let metaService: MetaService;
 let prismicService: PrismicService;
+
+jest.mock('./news-post-resolver.helpers', () => ({
+  createMetaTags: jest.fn().mockReturnValue('createMetaTagsReturn')
+}));
+
+beforeEach(jest.clearAllMocks);
 
 describe('NewsPostResolver', () => {
   beforeEach(async(() => {
@@ -56,82 +63,27 @@ describe('NewsPostResolver', () => {
   describe('has post', () => {
     beforeEach(() => (activatedRoute.testParamMap = { uid: 'post-1' }));
 
-    it('should call `MetaService` `setMetaTags` with post args', () => {
+    it('should call `createMetaTags` with `post` arg', () => {
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
         Post
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
-          expect(metaService.setMetaTags).toHaveBeenCalledWith({
-            type: 'article',
-            title: 'Post 1',
-            description: 'Post 1 description',
-            url: 'news/post-1',
-            image: 'post-1'
-          })
+          expect(createMetaTags).toHaveBeenCalledWith(
+            Data.Prismic.getPosts('post-1')
+          )
         );
     });
 
-    it('should not call `MetaService` `setMetaTags` with `meta.title` arg if no `title`', () => {
-      const post: Post = {
-        ...Data.Prismic.getPost(),
-        data: { ...Data.Prismic.getPost().data, title: null as any }
-      };
-      (prismicService.getPost as jest.Mock).mockReturnValue(of(post));
-
+    it('should call `MetaService` `setMetaTags` with `createMetaTags` return arg', () => {
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
         Post
       >)
         .pipe(timeout(100))
         .subscribe(_ =>
-          expect(metaService.setMetaTags).toHaveBeenCalledWith({
-            type: 'article',
-            description: 'Post 1 description',
-            url: 'news/post-1',
-            image: 'post-1'
-          })
-        );
-    });
-
-    it('should not call `MetaService` `setMetaTags` with `meta.description` arg if no `description`', () => {
-      const post: Post = {
-        ...Data.Prismic.getPost(),
-        data: { ...Data.Prismic.getPost().data, description: null as any }
-      };
-      (prismicService.getPost as jest.Mock).mockReturnValue(of(post));
-
-      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Post
-      >)
-        .pipe(timeout(100))
-        .subscribe(_ =>
-          expect(metaService.setMetaTags).toHaveBeenCalledWith({
-            type: 'article',
-            title: 'Post 1',
-            url: 'news/post-1',
-            image: 'post-1'
-          })
-        );
-    });
-
-    it('should not call `MetaService` `setMetaTags` with `meta.image` arg if no `image`', () => {
-      const post: Post = {
-        ...Data.Prismic.getPost(),
-        data: { ...Data.Prismic.getPost().data, image: null as any }
-      };
-      (prismicService.getPost as jest.Mock).mockReturnValue(of(post));
-
-      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
-        Post
-      >)
-        .pipe(timeout(100))
-        .subscribe(_ =>
-          expect(metaService.setMetaTags).toHaveBeenCalledWith({
-            type: 'article',
-            title: 'Post 1',
-            description: 'Post 1 description',
-            url: 'news/post-1'
-          })
+          expect(metaService.setMetaTags).toHaveBeenCalledWith(
+            'createMetaTagsReturn'
+          )
         );
     });
 
@@ -148,6 +100,17 @@ describe('NewsPostResolver', () => {
 
   describe('no post', () => {
     beforeEach(() => (activatedRoute.testParamMap = { uid: 'no-post' }));
+
+    it('should not call `createMetaTags`', fakeAsync(() => {
+      (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<
+        Post
+      >)
+        .pipe(timeout(100))
+        .subscribe();
+
+      tick(100);
+      expect(createMetaTags).not.toHaveBeenCalled();
+    }));
 
     it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
       (newsPostResolver.resolve(activatedRoute.snapshot as any) as Observable<

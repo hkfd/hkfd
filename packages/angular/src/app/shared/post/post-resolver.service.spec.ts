@@ -11,8 +11,7 @@ import {
   Data
 } from 'testing';
 import { MetaService, ApiService, Post } from 'shared';
-import * as Helpers from './post-resolver.helpers';
-import { isKnownPostType } from './post-resolver.helpers';
+import { isKnownPostType, createMetaTags } from './post-resolver.helpers';
 import { PostResolver } from './post-resolver.service';
 
 let activatedRoute: ActivatedRouteStub;
@@ -21,7 +20,12 @@ let metaService: MetaService;
 let apiService: ApiService;
 let router: Router;
 
-jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(true);
+jest.mock('./post-resolver.helpers', () => ({
+  isKnownPostType: jest.fn().mockReturnValue(true),
+  createMetaTags: jest.fn().mockReturnValue('createMetaTagsReturn')
+}));
+
+beforeEach(jest.clearAllMocks);
 
 describe('PostResolver', () => {
   beforeEach(async(() => {
@@ -61,7 +65,7 @@ describe('PostResolver', () => {
     describe('Exists', () => {
       describe('Is `PostType`', () => {
         beforeEach(() =>
-          jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(true)
+          ((isKnownPostType as any) as jest.Mock).mockReturnValue(true)
         );
 
         describe('has `ActivatedRouteSnapshot` `paramMap.type`', () => {
@@ -95,7 +99,7 @@ describe('PostResolver', () => {
 
       describe('Is not `PostType`', () => {
         beforeEach(() =>
-          jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(false)
+          ((isKnownPostType as any) as jest.Mock).mockReturnValue(false)
         );
 
         it('should call `Router` `navigate` with route arg', fakeAsync(() => {
@@ -135,7 +139,7 @@ describe('PostResolver', () => {
 
   describe('`id`', () => {
     beforeEach(() =>
-      jest.spyOn(Helpers, 'isKnownPostType').mockReturnValue(true)
+      ((isKnownPostType as any) as jest.Mock).mockReturnValue(true)
     );
 
     it('should call `ApiService` `getPost` with `id` arg if `id`', () => {
@@ -167,24 +171,25 @@ describe('PostResolver', () => {
       () => (activatedRoute.testParamMap = { type: 'service', id: 'service-1' })
     );
 
-    it('should call `MetaService` `setMetaTags`', () => {
-      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
-        .pipe(timeout(100))
-        .subscribe(_ => expect(metaService.setMetaTags).toHaveBeenCalled());
-    });
-
-    it('should call `MetaService` `setMetaTags` with args', () => {
+    it('should call `createMetaTags` with `type`, `id`, and `post` args', () => {
       (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe(_ =>
-          expect(metaService.setMetaTags).toHaveBeenCalledWith({
-            type: 'article',
-            title: 'Service 1',
-            description: 'Service 1 intro',
-            url: 'service/service-1',
-            image:
-              'https://res.cloudinary.com/dv8oeiozq/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/service-1'
-          })
+          expect(createMetaTags).toHaveBeenCalledWith(
+            'service',
+            'service-1',
+            Data.Api.getServices('Service 1')
+          )
+        );
+    });
+
+    it('should call `MetaService` `setMetaTags` with `createMetaTags` return arg', () => {
+      (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
+        .pipe(timeout(100))
+        .subscribe(_ =>
+          expect(metaService.setMetaTags).toHaveBeenCalledWith(
+            'createMetaTagsReturn'
+          )
         );
     });
 
@@ -208,13 +213,13 @@ describe('PostResolver', () => {
       () => (activatedRoute.testParamMap = { type: 'test', id: 'test' })
     );
 
-    it('should not call `MetaService` `setMetaTags`', fakeAsync(() => {
+    it('should not call `createMetaTags`', fakeAsync(() => {
       (postResolver.resolve(activatedRoute.snapshot as any) as Observable<Post>)
         .pipe(timeout(100))
         .subscribe();
 
       tick(100);
-      expect(metaService.setMetaTags).not.toHaveBeenCalled();
+      expect(createMetaTags).not.toHaveBeenCalled();
     }));
 
     it('should call `Router` `navigate` with `/` arg', fakeAsync(() => {
