@@ -7,7 +7,6 @@ export * from './notification.service.mock';
 export * from './api.pipe.mock';
 export * from './prismic.pipe.mock';
 export * from './router';
-export * from './state';
 export * from './sanitizer';
 export * from './material';
 

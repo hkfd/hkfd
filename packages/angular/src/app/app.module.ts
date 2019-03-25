@@ -1,11 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import {
-  BrowserModule,
-  Title,
-  BrowserTransferStateModule
-} from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
@@ -17,7 +14,7 @@ import { GlobalErrorHandler, ErrorInterceptor } from './shared/errors';
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'hkfd' }),
-    BrowserTransferStateModule,
+    TransferHttpCacheModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
