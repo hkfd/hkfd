@@ -13,7 +13,10 @@ const routes: Routes = [
   {
     path: ':uid',
     component: NewsPostComponent,
-    resolve: { post: NewsPostResolver }
+    resolve: { post: NewsPostResolver },
+    data: {
+      state: 'post'
+    }
   }
 ];
 
