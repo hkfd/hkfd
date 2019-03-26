@@ -4,15 +4,41 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
-import { LoggerService, MockLoggerService, Data } from 'testing';
-import { ApiService } from 'shared';
-import * as ApiHelpers from './api.helpers';
-import { getPostUrl } from './api.helpers';
+import {
+  LoggerService,
+  MockLoggerService,
+  MockMetaService,
+  Data
+} from 'testing';
+import { ApiService, MetaService } from 'shared';
+import {
+  getPostUrl,
+  createCareerMetaTags,
+  createPostMetaTags
+} from './api.helpers';
 
 let mockHttp: HttpTestingController;
+let metaService: MetaService;
 let apiService: ApiService;
 
-jest.spyOn(ApiHelpers, 'getPostUrl').mockReturnValue('/getPostUrl');
+jest.mock('./api.helpers', () => {
+  const { SERVICES, CASE_STUDIES } = (jest as any).requireActual(
+    './api.helpers'
+  );
+
+  return {
+    SERVICES,
+    CASE_STUDIES,
+    isKnownPostType: jest.fn().mockReturnValue(true),
+    getPostUrl: jest.fn().mockReturnValue('/getPostUrl'),
+    createCareerMetaTags: jest
+      .fn()
+      .mockReturnValue('createCareerMetaTagsReturn'),
+    createPostMetaTags: jest.fn().mockReturnValue('createPostMetaTagsReturn')
+  };
+});
+
+beforeEach(jest.clearAllMocks);
 
 describe('ApiService', () => {
   beforeEach(async(() =>
@@ -20,7 +46,8 @@ describe('ApiService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         ApiService,
-        { provide: LoggerService, useClass: MockLoggerService }
+        { provide: LoggerService, useClass: MockLoggerService },
+        { provide: MetaService, useClass: MockMetaService }
       ]
     }).compileComponents()));
 
@@ -140,17 +167,65 @@ describe('ApiService', () => {
       });
 
       describe('No error', () => {
-        let res: any;
-
-        beforeEach(() => {
+        it('should return career', async(() => {
           apiService
             .getCareer('career-3')
-            .subscribe(response => (res = response));
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getCareers('Career 3'))
+            );
           mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+
+          expect(createCareerMetaTags).toHaveBeenCalledWith(
+            Data.Api.getCareers('Career 3')
+          );
+        }));
+
+        describe('Has `career`', () => {
+          it('should call `createCareerMetaTags` with `career` arg', async(() => {
+            apiService
+              .getCareer('career-3')
+              .subscribe(_ =>
+                expect(createCareerMetaTags).toHaveBeenCalledWith(
+                  Data.Api.getCareers('Career 3')
+                )
+              );
+
+            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+          }));
+
+          it('should call `MetaService` `setMetaTags` with `createCareerMetaTags` return', async(() => {
+            apiService
+              .getCareer('career-3')
+              .subscribe(_ =>
+                expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                  'createCareerMetaTagsReturn'
+                )
+              );
+
+            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+          }));
         });
 
-        it('should return `career`', () => {
-          expect(res).toEqual(Data.Api.getCareers('Career 3'));
+        describe('No `career`', () => {
+          it('should not call `createCareerMetaTags`', async(() => {
+            apiService
+              .getCareer('no')
+              .subscribe(_ =>
+                expect(createCareerMetaTags).not.toHaveBeenCalled()
+              );
+
+            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+          }));
+
+          it('should not call `MetaService` `setMetaTags`', async(() => {
+            apiService
+              .getCareer('no')
+              .subscribe(_ =>
+                expect(metaService.setMetaTags).not.toHaveBeenCalled()
+              );
+
+            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+          }));
         });
       });
 
@@ -195,17 +270,72 @@ describe('ApiService', () => {
       });
 
       describe('No error', () => {
-        let res: any;
-
-        beforeEach(() => {
+        it('should return `post`', async(() => {
           apiService
             .getPost('service', 'service-3')
-            .subscribe(response => (res = response));
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getServices('Service 3'))
+            );
+
           mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
+        }));
+
+        describe('Has `post`', () => {
+          it('should call `createPostMetaTags` with `type` `id` and `post` args', async(() => {
+            apiService
+              .getPost('service', 'service-3')
+              .subscribe(_ =>
+                expect(createPostMetaTags).toHaveBeenCalledWith(
+                  'service',
+                  'service-3',
+                  Data.Api.getServices('Service 3')
+                )
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
+          it('should call `MetaService` `setMetaTags` with `createPostMetaTags` return', async(() => {
+            apiService
+              .getPost('service', 'service-3')
+              .subscribe(_ =>
+                expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                  'createPostMetaTagsReturn'
+                )
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
         });
 
-        it('should return `post`', () => {
-          expect(res).toEqual(Data.Api.getServices('Service 3'));
+        describe('No `post`', () => {
+          it('should not call `createPostMetaTags`', async(() => {
+            apiService
+              .getPost('service', 'no-service')
+              .subscribe(_ =>
+                expect(createPostMetaTags).not.toHaveBeenCalled()
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
+          it('should not call `MetaService` `setMetaTags`', async(() => {
+            apiService
+              .getPost('service', 'no-service')
+              .subscribe(_ =>
+                expect(metaService.setMetaTags).not.toHaveBeenCalled()
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
         });
       });
 
@@ -372,4 +502,5 @@ describe('ApiService', () => {
 function createService() {
   mockHttp = TestBed.get(HttpTestingController);
   apiService = TestBed.get(ApiService);
+  metaService = TestBed.get(MetaService);
 }

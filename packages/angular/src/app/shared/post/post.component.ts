@@ -6,12 +6,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Subscription, EMPTY } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
-import { Post } from 'shared';
-import { isCaseStudy } from 'shared/api.helpers';
+import { ApiService, Post } from 'shared';
+import { isCaseStudy, isKnownPostType } from 'shared/api.helpers';
 import { CaseStudy } from 'api';
 
 @Component({
@@ -39,14 +40,26 @@ export class PostComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) {}
 
   ngOnInit() {
-    this.post$ = this.route.data.subscribe(({ post }) => {
-      this.post = post;
-      this.changeDetectorRef.markForCheck();
-    });
+    this.post$ = this.route.paramMap
+      .pipe(
+        switchMap((params: ParamMap) => {
+          const type = params.get('type');
+          const id = params.get('id');
+
+          if (!type || !id || !isKnownPostType(type)) return EMPTY;
+
+          return this.apiService.getPost(type, id);
+        })
+      )
+      .subscribe(post => {
+        this.post = post;
+        this.changeDetectorRef.markForCheck();
+      });
 
     const randomInt = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min + 1) + min);

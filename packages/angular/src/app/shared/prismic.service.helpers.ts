@@ -1,7 +1,7 @@
 import { MetaTags } from 'shared';
 import { Post } from 'prismic';
 
-export const createMetaTags = ({
+export const createNewsPostMetaTags = ({
   uid,
   data: { title, description, image }
 }: Post): Partial<MetaTags> => ({

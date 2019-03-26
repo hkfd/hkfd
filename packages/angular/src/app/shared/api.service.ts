@@ -6,8 +6,15 @@ import { tap, flatMap, find } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
+import { MetaService } from './meta.service';
 import { Service, Career, CaseStudy, Team, Client } from 'api';
-import { SERVICES, CASE_STUDIES, getPostUrl } from './api.helpers';
+import {
+  SERVICES,
+  CASE_STUDIES,
+  getPostUrl,
+  createCareerMetaTags,
+  createPostMetaTags
+} from './api.helpers';
 
 const TEAM = `${environment.api.url}team.json`;
 const CAREERS = `${environment.api.url}careers.json`;
@@ -27,7 +34,11 @@ type getPost<T> = T extends any
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient, private logger: LoggerService) {}
+  constructor(
+    private http: HttpClient,
+    private logger: LoggerService,
+    private metaService: MetaService
+  ) {}
 
   getServices(): Observable<Service[]> {
     return this.http
@@ -45,7 +56,10 @@ export class ApiService {
     return this.http.get<Career[]>(CAREERS).pipe(
       flatMap(careers => careers),
       find(career => career.id === id),
-      tap(career => this.logger.log('getCareer', career))
+      tap(career => {
+        this.logger.log('getCareer', career);
+        career && this.metaService.setMetaTags(createCareerMetaTags(career));
+      })
     );
   }
 
@@ -58,7 +72,11 @@ export class ApiService {
     return this.http.get<Array<getPost<T>>>(url).pipe(
       flatMap(posts => posts),
       find(post => post.id === id),
-      tap(post => this.logger.log('getPost', post))
+      tap(post => {
+        this.logger.log('getPost', post);
+        post &&
+          this.metaService.setMetaTags(createPostMetaTags(type, id, post));
+      })
     );
   }
 

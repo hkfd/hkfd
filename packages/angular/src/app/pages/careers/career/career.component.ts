@@ -1,14 +1,10 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
-} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
+import { ApiService } from 'shared';
 import { Career } from 'api';
 
 @Component({
@@ -17,23 +13,16 @@ import { Career } from 'api';
   styleUrls: ['./career.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CareerComponent implements OnInit, OnDestroy {
-  career$: Subscription | undefined;
-  career: Career | undefined;
+export class CareerComponent implements OnInit {
+  career$: Observable<Career | undefined> | undefined;
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.career$ = this.route.data.subscribe(({ career }) => {
-      this.career = career;
-      this.changeDetectorRef.markForCheck();
-    });
-  }
-
-  ngOnDestroy() {
-    this.career$ && this.career$.unsubscribe();
+    this.career$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.apiService.getCareer(params.get('id') || '')
+      )
+    );
   }
 }

@@ -1,10 +1,10 @@
 import { Data } from 'testing';
 
-import { createMetaTags } from './news-post-resolver.helpers';
+import { createNewsPostMetaTags } from './prismic.service.helpers';
 
-describe('`createMetaTags`', () => {
+describe('`createNewsPostMetaTags`', () => {
   it('should return partial `MetaTags`', () => {
-    const res = createMetaTags(Data.Prismic.getPost());
+    const res = createNewsPostMetaTags(Data.Prismic.getPost());
 
     expect(res).toEqual({
       type: 'article',
@@ -16,7 +16,7 @@ describe('`createMetaTags`', () => {
   });
 
   it('should not return `title` if not passed `data.title`', () => {
-    const res = createMetaTags({
+    const res = createNewsPostMetaTags({
       ...Data.Prismic.getPost(),
       data: { ...Data.Prismic.getPost().data, title: null as any }
     });
@@ -30,7 +30,7 @@ describe('`createMetaTags`', () => {
   });
 
   it('should not return `description` if not passed `data.description`', () => {
-    const res = createMetaTags({
+    const res = createNewsPostMetaTags({
       ...Data.Prismic.getPost(),
       data: { ...Data.Prismic.getPost().data, description: null as any }
     });
@@ -44,7 +44,7 @@ describe('`createMetaTags`', () => {
   });
 
   it('should not return `image` if not passed `data.image`', () => {
-    const res = createMetaTags({
+    const res = createNewsPostMetaTags({
       ...Data.Prismic.getPost(),
       data: { ...Data.Prismic.getPost().data, image: null as any }
     });

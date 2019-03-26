@@ -3,21 +3,37 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
-import { LoggerService, MockLoggerService, Data } from 'testing';
+import {
+  LoggerService,
+  MockLoggerService,
+  MockMetaService,
+  Data
+} from 'testing';
 
 import { of } from 'rxjs';
 
 import { environment } from 'environment';
+import { MetaService } from './meta.service';
+import { createNewsPostMetaTags } from './prismic.service.helpers';
 import { getNewPage, getNewPageSize } from './prismic.helpers';
 import { PrismicService, URL } from './prismic.service';
 
 let mockHttp: HttpTestingController;
+let metaService: MetaService;
 let prismicService: PrismicService;
+
+jest.mock('./prismic.service.helpers', () => ({
+  createNewsPostMetaTags: jest
+    .fn()
+    .mockReturnValue('createNewsPostMetaTagsReturn')
+}));
 
 jest.mock('./prismic.helpers', () => ({
   getNewPageSize: jest.fn().mockReturnValue('getNewPageSizeReturn'),
   getNewPage: jest.fn().mockReturnValue('getNewPageReturn')
 }));
+
+beforeEach(jest.clearAllMocks);
 
 describe('PrismicService', () => {
   beforeEach(async(() =>
@@ -25,7 +41,8 @@ describe('PrismicService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         PrismicService,
-        { provide: LoggerService, useClass: MockLoggerService }
+        { provide: LoggerService, useClass: MockLoggerService },
+        { provide: MetaService, useClass: MockMetaService }
       ]
     }).compileComponents()));
 
@@ -230,19 +247,88 @@ describe('PrismicService', () => {
         });
 
         describe('No error', () => {
-          let res: any;
-
-          beforeEach(() => {
+          it('should return `post`', async(() => {
             prismicService
               .getPost('post-1')
-              .subscribe(response => (res = response));
+              .subscribe(res =>
+                expect(res).toEqual(Data.Prismic.getPosts('post-1'))
+              );
+
             mockHttp
               .expectOne(req => req.url === URL)
               .flush(Data.Prismic.getPostsResponse());
+          }));
+
+          describe('Has `post`', () => {
+            it('should call `createNewsPostMetaTags` with `post` args', async(() => {
+              prismicService
+                .getPost('post-1')
+                .subscribe(_ =>
+                  expect(createNewsPostMetaTags).toHaveBeenCalledWith(
+                    Data.Prismic.getPosts('post-1')
+                  )
+                );
+
+              mockHttp
+                .expectOne(
+                  req =>
+                    req.url ===
+                    `${environment.prismic.endpoint}/documents/search`
+                )
+                .flush(Data.Prismic.getPostsResponse());
+            }));
+
+            it('should call `MetaService` `setMetaTags` with `createNewsPostMetaTags` return', async(() => {
+              prismicService
+                .getPost('post-1')
+                .subscribe(_ =>
+                  expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                    'createNewsPostMetaTagsReturn'
+                  )
+                );
+
+              mockHttp
+                .expectOne(
+                  req =>
+                    req.url ===
+                    `${environment.prismic.endpoint}/documents/search`
+                )
+                .flush(Data.Prismic.getPostsResponse());
+            }));
           });
 
-          it('should return `post`', () => {
-            expect(res).toEqual(Data.Prismic.getPosts('post-1'));
+          describe('No `post`', () => {
+            it('should not call `createNewsPostMetaTags`', async(() => {
+              prismicService
+                .getPost('post-1')
+                .subscribe(_ =>
+                  expect(createNewsPostMetaTags).not.toHaveBeenCalled()
+                );
+
+              mockHttp
+                .expectOne(
+                  req =>
+                    req.url ===
+                    `${environment.prismic.endpoint}/documents/search`
+                )
+                .flush({ results: [] });
+            }));
+
+            it('should not call `MetaService` `setMetaTags`', async(() => {
+              prismicService
+                .getPost('post-1')
+                .subscribe(_ =>
+                  expect(metaService.setMetaTags).not.toHaveBeenCalled()
+                );
+
+              mockHttp
+                .expectOne(
+                  req =>
+                    req.url ===
+                    `${environment.prismic.endpoint}/documents/search`
+                )
+                .flush({ results: [] });
+            }));
           });
         });
       });
@@ -255,4 +341,5 @@ describe('PrismicService', () => {
 function createService() {
   mockHttp = TestBed.get(HttpTestingController);
   prismicService = TestBed.get(PrismicService);
+  metaService = TestBed.get(MetaService);
 }

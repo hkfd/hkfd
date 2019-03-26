@@ -9,7 +9,9 @@ describe('NewsPost', () => {
     page
       .getPostTitle()
       .getAttribute('textContent')
-      .then(title => expect(page.getTitle()).toBe(`Heckford – ${title}`));
+      .then(title =>
+        expect(page.getTitle()).toBe(`Heckford – ${title.trim()}`)
+      );
   });
 
   describe('Post', () => {

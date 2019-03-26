@@ -44,6 +44,13 @@ const routes: Routes = [
       state: 'home'
     }
   },
+  {
+    path: '',
+    loadChildren: 'app/shared/post/post.module#PostModule',
+    data: {
+      state: 'post'
+    }
+  },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 

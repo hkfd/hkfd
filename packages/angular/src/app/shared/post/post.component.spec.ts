@@ -4,6 +4,7 @@ import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
+  MockApiService,
   MockApiPipe,
   ActivatedRoute,
   ActivatedRouteStub,
@@ -16,26 +17,29 @@ import {
   Data
 } from 'testing';
 
-import { Post } from 'shared';
+import { Post, ApiService } from 'shared';
 import { ImageBlock } from 'api';
 import { PostComponent } from './post.component';
-import * as ApiHelpers from 'shared/api.helpers';
-import { isCaseStudy } from 'shared/api.helpers';
+import { isCaseStudy, isKnownPostType } from 'shared/api.helpers';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
 let changeDetectorRef: ChangeDetectorRef;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
+let apiService: ApiService;
 
-jest.spyOn(ApiHelpers, 'isCaseStudy').mockReturnValue(true);
+jest.mock('shared/api.helpers', () => ({
+  isCaseStudy: jest.fn().mockReturnValue(true),
+  isKnownPostType: jest.fn().mockReturnValue(true)
+}));
 
 describe('PostComponent', () => {
   beforeEach(jest.clearAllMocks);
 
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
-    activatedRoute.testData = { post: Data.Api.getCaseStudies('Case Study 1') };
+    activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -49,7 +53,10 @@ describe('PostComponent', () => {
         StubAudioBlockComponent,
         MockApiPipe
       ],
-      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }]
+      providers: [
+        { provide: ActivatedRoute, useValue: activatedRoute },
+        { provide: ApiService, useClass: MockApiService }
+      ]
     }).compileComponents();
   }));
 
@@ -92,8 +99,40 @@ describe('PostComponent', () => {
       expect(comp.post$).toBeDefined();
     });
 
-    it('should subscribe to `ActivatedRoute` `data`', () => {
-      expect(activatedRoute.data.subscribe).toHaveBeenCalled();
+    describe('Params', () => {
+      it('should call `isKnownPostType` with `type` arg', () => {
+        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+        expect(isKnownPostType).toHaveBeenCalledWith('type');
+      });
+
+      it('should call `ApiService` `getPost` with `type` and `id` args if has params', () => {
+        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+        expect(apiService.getPost).toHaveBeenCalledWith('type', 'id');
+      });
+
+      it('should not call `ApiService` `getPost` if no `type` param', () => {
+        jest.clearAllMocks();
+        activatedRoute.testParamMap = { type: undefined, id: 'id' };
+
+        expect(apiService.getPost).not.toHaveBeenCalled();
+      });
+
+      it('should not call `ApiService` `getPost` if `isKnownPostType` returns `false`', () => {
+        jest.clearAllMocks();
+        ((isKnownPostType as any) as jest.Mock).mockReturnValueOnce(false);
+        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+        expect(apiService.getPost).not.toHaveBeenCalled();
+      });
+
+      it('should not call `ApiService` `getPost` if no `id` param', () => {
+        jest.clearAllMocks();
+        activatedRoute.testParamMap = { type: 'service', id: undefined };
+
+        expect(apiService.getPost).not.toHaveBeenCalled();
+      });
     });
 
     it('should set `post`', () => {
@@ -491,6 +530,7 @@ function createComponent() {
   comp = fixture.componentInstance;
   changeDetectorRef = (comp as any).changeDetectorRef;
   page = new Page();
+  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockApiPipe.prototype, 'transform');
 
