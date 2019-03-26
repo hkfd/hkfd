@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 import { map, flatMap, tap } from 'rxjs/operators';
 
 import { LoggerService } from './logger.service';
+import { MetaService } from './meta.service';
 import { Post, RefResponse, PostsResponse } from 'prismic';
 import { environment } from 'environment';
+import { createNewsPostMetaTags } from './prismic.service.helpers';
 import { getNewPage, getNewPageSize } from './prismic.helpers';
 
 export const URL = `${environment.prismic.endpoint}/documents/search`;
@@ -17,7 +19,11 @@ export const URL = `${environment.prismic.endpoint}/documents/search`;
 export class PrismicService {
   private postPage = 1;
 
-  constructor(private http: HttpClient, private logger: LoggerService) {}
+  constructor(
+    private http: HttpClient,
+    private logger: LoggerService,
+    private metaService: MetaService
+  ) {}
 
   getRef(): Observable<string> {
     return this.http.get<RefResponse>(environment.prismic.endpoint).pipe(
@@ -57,7 +63,10 @@ export class PrismicService {
         return this.http.get<PostsResponse>(URL, { params });
       }),
       map(({ results }) => results[0]),
-      tap(post => this.logger.log('getPost', post))
+      tap(post => {
+        this.logger.log('getPost', post);
+        post && this.metaService.setMetaTags(createNewsPostMetaTags(post));
+      })
     );
   }
 }

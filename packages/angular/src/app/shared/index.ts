@@ -1,6 +1,3 @@
-export * from './post/post.component';
-
-export * from './post/post-resolver.service';
 export * from './api.service';
 export * from './prismic.service';
 export * from './email.service';
