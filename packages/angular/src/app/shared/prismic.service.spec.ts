@@ -247,19 +247,19 @@ describe('PrismicService', () => {
         });
 
         describe('No error', () => {
-          it('should return `post`', async(() => {
-            prismicService
-              .getPost('post-1')
-              .subscribe(res =>
-                expect(res).toEqual(Data.Prismic.getPosts('post-1'))
-              );
-
-            mockHttp
-              .expectOne(req => req.url === URL)
-              .flush(Data.Prismic.getPostsResponse());
-          }));
-
           describe('Has `post`', () => {
+            it('should return `post`', async(() => {
+              prismicService
+                .getPost('post-1')
+                .subscribe(res =>
+                  expect(res).toEqual(Data.Prismic.getPosts('post-1'))
+                );
+
+              mockHttp
+                .expectOne(req => req.url === URL)
+                .flush(Data.Prismic.getPostsResponse());
+            }));
+
             it('should call `createNewsPostMetaTags` with `post` args', async(() => {
               prismicService
                 .getPost('post-1')
@@ -298,6 +298,20 @@ describe('PrismicService', () => {
           });
 
           describe('No `post`', () => {
+            it('should return `null`', async(() => {
+              prismicService
+                .getPost('post-1')
+                .subscribe(res => expect(res).toBe(null));
+
+              mockHttp
+                .expectOne(
+                  req =>
+                    req.url ===
+                    `${environment.prismic.endpoint}/documents/search`
+                )
+                .flush({ results: [] });
+            }));
+
             it('should not call `createNewsPostMetaTags`', async(() => {
               prismicService
                 .getPost('post-1')

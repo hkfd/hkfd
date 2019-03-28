@@ -23,12 +23,10 @@ import { CaseStudy } from 'api';
 })
 export class PostComponent implements OnInit, OnDestroy {
   post$: Subscription | undefined;
-  private _post: Post | undefined;
-  set post(post: Post | undefined) {
-    if (!post) return;
-
+  private _post: Post | null | undefined;
+  set post(post: Post | null | undefined) {
     this._post = post;
-    if (isCaseStudy(post)) this.overview = post.overview;
+    if (post && isCaseStudy(post)) this.overview = post.overview;
   }
   get post() {
     return this._post;

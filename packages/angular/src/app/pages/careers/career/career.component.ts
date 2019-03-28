@@ -14,7 +14,7 @@ import { Career } from 'api';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CareerComponent implements OnInit {
-  career$: Observable<Career | undefined> | undefined;
+  career$: Observable<Career | null> | undefined;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
