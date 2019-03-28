@@ -69,6 +69,18 @@ describe('PostComponent', () => {
   describe('`post`', () => {
     beforeEach(() => (comp.overview = undefined));
 
+    it('should set `post` if passed `Post`', () => {
+      comp.post = Data.Api.getCaseStudies('Case Study 1');
+
+      expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
+    });
+
+    it('should set `post` if passed `null`', () => {
+      comp.post = null;
+
+      expect(comp.post).toBe(null);
+    });
+
     it('should call `isCaseStudy` with `post` arg', () => {
       comp.post = Data.Api.getCaseStudies('Case Study 1');
 

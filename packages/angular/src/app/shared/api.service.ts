@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { tap, flatMap, find } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
@@ -52,10 +52,9 @@ export class ApiService {
       .pipe(tap(careers => this.logger.log('getCareers', careers)));
   }
 
-  getCareer(id: string): Observable<Career | undefined> {
+  getCareer(id: string): Observable<Career | null> {
     return this.http.get<Career[]>(CAREERS).pipe(
-      flatMap(careers => careers),
-      find(career => career.id === id),
+      map(careers => careers.find(career => career.id === id) || null),
       tap(career => {
         this.logger.log('getCareer', career);
         career && this.metaService.setMetaTags(createCareerMetaTags(career));
@@ -66,12 +65,11 @@ export class ApiService {
   getPost<T extends PostType>(
     type: T,
     id: string
-  ): Observable<getPost<T> | undefined> {
+  ): Observable<getPost<T> | null> {
     const url = getPostUrl(type);
 
     return this.http.get<Array<getPost<T>>>(url).pipe(
-      flatMap(posts => posts),
-      find(post => post.id === id),
+      map(posts => posts.find(post => post.id === id) || null),
       tap(post => {
         this.logger.log('getPost', post);
         post &&

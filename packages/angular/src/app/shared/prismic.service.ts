@@ -51,7 +51,7 @@ export class PrismicService {
     );
   }
 
-  getPost(uid: string): Observable<Post> {
+  getPost(uid: string): Observable<Post | null> {
     this.logger.log(`getPost ${uid}`);
 
     return this.getRef().pipe(
@@ -62,7 +62,7 @@ export class PrismicService {
 
         return this.http.get<PostsResponse>(URL, { params });
       }),
-      map(({ results }) => results[0]),
+      map(({ results }) => results[0] || null),
       tap(post => {
         this.logger.log('getPost', post);
         post && this.metaService.setMetaTags(createNewsPostMetaTags(post));

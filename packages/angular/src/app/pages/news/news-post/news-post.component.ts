@@ -17,7 +17,7 @@ import { Post } from 'prismic';
 export class NewsPostComponent implements OnInit {
   richText = RichText;
 
-  post$: Observable<Post> | undefined;
+  post$: Observable<Post | null> | undefined;
   post: Post | undefined;
 
   constructor(

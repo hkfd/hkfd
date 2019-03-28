@@ -167,20 +167,16 @@ describe('ApiService', () => {
       });
 
       describe('No error', () => {
-        it('should return career', async(() => {
-          apiService
-            .getCareer('career-3')
-            .subscribe(res =>
-              expect(res).toEqual(Data.Api.getCareers('Career 3'))
-            );
-          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-
-          expect(createCareerMetaTags).toHaveBeenCalledWith(
-            Data.Api.getCareers('Career 3')
-          );
-        }));
-
         describe('Has `career`', () => {
+          it('should return `career`', async(() => {
+            apiService
+              .getCareer('career-3')
+              .subscribe(res =>
+                expect(res).toEqual(Data.Api.getCareers('Career 3'))
+              );
+            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+          }));
+
           it('should call `createCareerMetaTags` with `career` arg', async(() => {
             apiService
               .getCareer('career-3')
@@ -207,6 +203,12 @@ describe('ApiService', () => {
         });
 
         describe('No `career`', () => {
+          it('should return `null`', async(() => {
+            apiService.getCareer('no').subscribe(res => expect(res).toBe(null));
+
+            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+          }));
+
           it('should not call `createCareerMetaTags`', async(() => {
             apiService
               .getCareer('no')
@@ -270,17 +272,19 @@ describe('ApiService', () => {
       });
 
       describe('No error', () => {
-        it('should return `post`', async(() => {
-          apiService
-            .getPost('service', 'service-3')
-            .subscribe(res =>
-              expect(res).toEqual(Data.Api.getServices('Service 3'))
-            );
-
-          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
-        }));
-
         describe('Has `post`', () => {
+          it('should return `post`', async(() => {
+            apiService
+              .getPost('service', 'service-3')
+              .subscribe(res =>
+                expect(res).toEqual(Data.Api.getServices('Service 3'))
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
           it('should call `createPostMetaTags` with `type` `id` and `post` args', async(() => {
             apiService
               .getPost('service', 'service-3')
@@ -313,6 +317,16 @@ describe('ApiService', () => {
         });
 
         describe('No `post`', () => {
+          it('should return `null`', async(() => {
+            apiService
+              .getPost('service', 'no-service')
+              .subscribe(res => expect(res).toBe(null));
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
           it('should not call `createPostMetaTags`', async(() => {
             apiService
               .getPost('service', 'no-service')
