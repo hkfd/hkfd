@@ -7,13 +7,18 @@ import {
 } from 'protractor';
 
 export class PostPage {
-  constructor() {
-    this.navigateTo('/work/wainhomes');
+  constructor(url?: string) {
+    url ? browser.get(url) : this.navigateTo('/work/wainhomes');
   }
 
   isVisible(el: ElementFinder) {
     const isVisible = ExpectedConditions.visibilityOf(el);
     return browser.wait(isVisible, 3000);
+  }
+
+  isClickable(el: ElementFinder) {
+    const isClickable = ExpectedConditions.elementToBeClickable(el);
+    return browser.wait(isClickable, 3000);
   }
 
   getUrl() {
@@ -26,6 +31,18 @@ export class PostPage {
 
   navigateTo(url: string) {
     return browser.get(url).then(_ => this.isVisible(this.getPageIntro()));
+  }
+
+  getPost() {
+    return element(by.css('app-post'));
+  }
+
+  getError() {
+    return this.getPost().element(by.css('error'));
+  }
+
+  getErrorLink() {
+    return this.getPost().element(by.css('a'));
   }
 
   getPageTitle() {

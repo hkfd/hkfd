@@ -1,4 +1,6 @@
-<ng-container *ngIf="(post$ | async) as post">
+<error *ngIf="post === null"></error>
+
+<ng-container *ngIf="post">
   <section id="intro">
     <div id="intro-info">
       <span id="info-date">

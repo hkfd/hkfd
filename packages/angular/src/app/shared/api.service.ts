@@ -57,7 +57,7 @@ export class ApiService {
       map(careers => careers.find(career => career.id === id) || null),
       tap(career => {
         this.logger.log('getCareer', career);
-        career && this.metaService.setMetaTags(createCareerMetaTags(career));
+        this.metaService.setMetaTags(createCareerMetaTags(career));
       })
     );
   }
@@ -72,8 +72,7 @@ export class ApiService {
       map(posts => posts.find(post => post.id === id) || null),
       tap(post => {
         this.logger.log('getPost', post);
-        post &&
-          this.metaService.setMetaTags(createPostMetaTags(type, id, post));
+        this.metaService.setMetaTags(createPostMetaTags(type, id, post));
       })
     );
   }

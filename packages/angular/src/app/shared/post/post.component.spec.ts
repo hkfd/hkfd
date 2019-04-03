@@ -14,6 +14,7 @@ import {
   StubGalleryBlockComponent,
   StubVideoBlockComponent,
   StubAudioBlockComponent,
+  StubErrorComponent,
   Data
 } from 'testing';
 
@@ -51,6 +52,7 @@ describe('PostComponent', () => {
         StubGalleryBlockComponent,
         StubVideoBlockComponent,
         StubAudioBlockComponent,
+        StubErrorComponent,
         MockApiPipe
       ],
       providers: [
@@ -112,47 +114,80 @@ describe('PostComponent', () => {
     });
 
     describe('Params', () => {
-      it('should call `isKnownPostType` with `type` arg', () => {
+      it('should call `isKnownPostType` with `type` arg if has `type` and `id` params', () => {
+        jest.clearAllMocks();
         activatedRoute.testParamMap = { type: 'type', id: 'id' };
 
         expect(isKnownPostType).toHaveBeenCalledWith('type');
       });
 
-      it('should call `ApiService` `getPost` with `type` and `id` args if has params', () => {
-        activatedRoute.testParamMap = { type: 'type', id: 'id' };
-
-        expect(apiService.getPost).toHaveBeenCalledWith('type', 'id');
-      });
-
-      it('should not call `ApiService` `getPost` if no `type` param', () => {
+      it('should not call `isKnownPostType` if no `type` param but has `id` param', () => {
         jest.clearAllMocks();
-        activatedRoute.testParamMap = { type: undefined, id: 'id' };
+        activatedRoute.testParamMap = { type: null, id: 'id' };
 
-        expect(apiService.getPost).not.toHaveBeenCalled();
+        expect(isKnownPostType).not.toHaveBeenCalled();
       });
 
-      it('should not call `ApiService` `getPost` if `isKnownPostType` returns `false`', () => {
+      it('should not call `isKnownPostType` if no `id` param but has `type` param', () => {
         jest.clearAllMocks();
-        ((isKnownPostType as any) as jest.Mock).mockReturnValueOnce(false);
-        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+        activatedRoute.testParamMap = { type: 'type', id: null };
 
-        expect(apiService.getPost).not.toHaveBeenCalled();
+        expect(isKnownPostType).not.toHaveBeenCalled();
       });
 
-      it('should not call `ApiService` `getPost` if no `id` param', () => {
-        jest.clearAllMocks();
-        activatedRoute.testParamMap = { type: 'service', id: undefined };
+      describe('`isKnownPostType` returns `true`', () => {
+        beforeEach(() =>
+          ((isKnownPostType as any) as jest.Mock).mockReturnValueOnce(true)
+        );
 
-        expect(apiService.getPost).not.toHaveBeenCalled();
+        it('should call `ApiService` `getPost` with `type` and `id` args', () => {
+          jest.clearAllMocks();
+          activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+          expect(apiService.getPost).toHaveBeenCalledWith('type', 'id');
+        });
+
+        it('should set `post`', () => {
+          jest.clearAllMocks();
+          activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
+
+          expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
+        });
+
+        it('should call `ChangeDetectorRef` `markForCheck`', () => {
+          jest.clearAllMocks();
+          activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+        });
       });
-    });
 
-    it('should set `post`', () => {
-      expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
-    });
+      describe('`isKnownPostType` returns `false`', () => {
+        beforeEach(() =>
+          ((isKnownPostType as any) as jest.Mock).mockReturnValueOnce(false)
+        );
 
-    it('should call `ChangeDetectorRef` `markForCheck`', () => {
-      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+        it('should not call `ApiService` `getPost`', () => {
+          jest.clearAllMocks();
+          activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+          expect(apiService.getPost).not.toHaveBeenCalled();
+        });
+
+        it('should set `post` as `null`', () => {
+          jest.clearAllMocks();
+          activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+          expect(comp.post).toBe(null);
+        });
+
+        it('should call `ChangeDetectorRef` `markForCheck`', () => {
+          jest.clearAllMocks();
+          activatedRoute.testParamMap = { type: 'type', id: 'id' };
+
+          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+        });
+      });
     });
 
     describe('`layout`', () => {
@@ -182,263 +217,311 @@ describe('PostComponent', () => {
   });
 
   describe('Template', () => {
-    describe('Intro', () => {
-      it('should display title', () => {
-        expect(page.title.textContent).toBe(
-          Data.Api.getCaseStudies('Case Study 1').title
-        );
+    describe('`post` is `undefined`', () => {
+      beforeEach(() => {
+        comp.post = undefined;
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
       });
 
-      describe('Texts', () => {
-        it('should be displayed', () => {
-          expect(page.introText.length).toBe(
-            Data.Api.getCaseStudies('Case Study 1').intro.length
-          );
-        });
-
-        describe('Text', () => {
-          it('should display text', () => {
-            expect(page.introText[0].textContent).toBe(
-              Data.Api.getCaseStudies('Case Study 1').intro[0]
-            );
-          });
-        });
+      it('should not display `ErrorComponent`', () => {
+        expect(page.error).toBeFalsy();
       });
 
-      describe('Overview', () => {
-        describe('Has `overview`', () => {
-          beforeEach(() => {
-            comp.overview = Data.Api.getCaseStudies('Case Study 1').overview;
-            changeDetectorRef.markForCheck();
-            fixture.detectChanges();
-          });
-
-          it('should be displayed', () => {
-            expect(page.introOverview.textContent).toContain(
-              Data.Api.getCaseStudies('Case Study 1').title
-            );
-          });
-
-          describe('Services', () => {
-            it('should be displayed', () => {
-              expect(page.introOverviewServices.length).toBe(
-                Data.Api.getCaseStudies('Case Study 1').overview.length
-              );
-            });
-
-            describe('Service', () => {
-              it('should display title', () => {
-                expect(page.introOverviewServices[0].textContent).toBe(
-                  Data.Api.getCaseStudies('Case Study 1').overview[0]
-                );
-              });
-            });
-          });
-        });
-
-        describe('No `overview`', () => {
-          beforeEach(() => {
-            comp.overview = undefined;
-            changeDetectorRef.markForCheck();
-            fixture.detectChanges();
-          });
-
-          it('should not be displayed', () => {
-            expect(page.introOverview).toBeFalsy();
-          });
+      describe('Intro', () => {
+        it('should not display title', () => {
+          expect(page.title).toBeFalsy();
         });
       });
     });
 
-    describe('Content', () => {
-      describe('Title', () => {
-        describe('Has `title`', () => {
-          beforeEach(() => {
-            (comp.post as Post).content[0].title = 'Title';
-            changeDetectorRef.markForCheck();
-            fixture.detectChanges();
-          });
+    describe('`post` is `null`', () => {
+      beforeEach(() => {
+        comp.post = null;
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+      });
 
+      it('should display `ErrorComponent`', () => {
+        expect(page.error).toBeTruthy();
+      });
+
+      describe('Intro', () => {
+        it('should not display title', () => {
+          expect(page.title).toBeFalsy();
+        });
+      });
+    });
+
+    describe('Has `post`', () => {
+      beforeEach(() => {
+        comp.post = Data.Api.getCaseStudies('Case Study 1');
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+      });
+
+      it('should not display `ErrorComponent`', () => {
+        expect(page.error).toBeFalsy();
+      });
+
+      describe('Intro', () => {
+        it('should display title', () => {
+          expect(page.title.textContent).toBe(
+            Data.Api.getCaseStudies('Case Study 1').title
+          );
+        });
+
+        describe('Texts', () => {
           it('should be displayed', () => {
-            expect(page.sectionTitle.textContent).toBe('Title');
+            expect(page.introText.length).toBe(
+              Data.Api.getCaseStudies('Case Study 1').intro.length
+            );
+          });
+
+          describe('Text', () => {
+            it('should display text', () => {
+              expect(page.introText[0].textContent).toBe(
+                Data.Api.getCaseStudies('Case Study 1').intro[0]
+              );
+            });
           });
         });
 
-        describe('No `title`', () => {
+        describe('Overview', () => {
+          describe('Has `overview`', () => {
+            beforeEach(() => {
+              comp.overview = Data.Api.getCaseStudies('Case Study 1').overview;
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.introOverview.textContent).toContain(
+                Data.Api.getCaseStudies('Case Study 1').title
+              );
+            });
+
+            describe('Services', () => {
+              it('should be displayed', () => {
+                expect(page.introOverviewServices.length).toBe(
+                  Data.Api.getCaseStudies('Case Study 1').overview.length
+                );
+              });
+
+              describe('Service', () => {
+                it('should display title', () => {
+                  expect(page.introOverviewServices[0].textContent).toBe(
+                    Data.Api.getCaseStudies('Case Study 1').overview[0]
+                  );
+                });
+              });
+            });
+          });
+
+          describe('No `overview`', () => {
+            beforeEach(() => {
+              comp.overview = undefined;
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.introOverview).toBeFalsy();
+            });
+          });
+        });
+      });
+
+      describe('Content', () => {
+        describe('Title', () => {
+          describe('Has `title`', () => {
+            beforeEach(() => {
+              (comp.post as Post).content[0].title = 'Title';
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.sectionTitle.textContent).toBe('Title');
+            });
+          });
+
+          describe('No `title`', () => {
+            beforeEach(() => {
+              (comp.post as Post).content[0].title = undefined;
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.sectionTitle).toBeFalsy();
+            });
+          });
+        });
+
+        describe('Text', () => {
           beforeEach(() => {
-            (comp.post as Post).content[0].title = undefined;
+            comp.post = Data.Api.getCaseStudies('Case Study 1');
             changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
-          it('should not be displayed', () => {
-            expect(page.sectionTitle).toBeFalsy();
+          it('should display `TextBlockComponent`', () => {
+            expect(page.textBlock).toBeTruthy();
+          });
+
+          it('should not call `ApiPipe`', () => {
+            expect(MockApiPipe.prototype.transform).not.toHaveBeenCalled();
+          });
+
+          it('should set `TextBlockComponent` `data` as `content.data`', () => {
+            expect(page.textBlockComponent.data).toEqual(
+              Data.Api.getCaseStudies('Case Study 1').content[0].data[0] as any
+            );
           });
         });
-      });
 
-      describe('Text', () => {
-        beforeEach(() => {
-          comp.post = Data.Api.getCaseStudies('Case Study 1');
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
+        describe('Image', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getCaseStudies('Case Study 2');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should display `ImageBlockComponent`', () => {
+            expect(page.imageBlock).toBeTruthy();
+          });
+
+          it('should call `ApiPipe` with `content.data.data`', () => {
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Api.getCaseStudies('Case Study 2').content[0].data[0].data
+            );
+          });
+
+          it('should set `ImageBlockComponent` `data` as transformed `content.data.data`', () => {
+            expect(page.imageBlockComponent.data).toEqual({
+              'mock-api-pipe': Data.Api.getCaseStudies('Case Study 2')
+                .content[0].data[0].data
+            } as any);
+          });
+
+          it('should set `ImageBlockComponent` `full-bleed` attribute if `content.data.fullBleed`', () => {
+            ((comp.post as Post).content[0]
+              .data[0] as ImageBlock).fullBleed = true;
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+
+            expect(page.imageBlock.getAttribute('full-bleed')).toBeTruthy();
+          });
+
+          it('should not set `ImageBlockComponent` `full-bleed` attribute if no `content.data.fullBleed`', () => {
+            ((comp.post as Post).content[0]
+              .data[0] as ImageBlock).fullBleed = undefined;
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+
+            expect(page.imageBlock.getAttribute('full-bleed')).toBeFalsy();
+          });
         });
 
-        it('should display `TextBlockComponent`', () => {
-          expect(page.textBlock).toBeTruthy();
+        describe('Gallery', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getCaseStudies('Case Study 3');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should display `GalleryBlockComponent`', () => {
+            expect(page.galleryBlock).toBeTruthy();
+          });
+
+          it('should call `ApiPipe` with `content.data.data`', () => {
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Api.getCaseStudies('Case Study 3').content[0].data[0].data
+            );
+          });
+
+          it('should set `GalleryBlockComponent` `data` as transformed `content.data.data`', () => {
+            expect(page.galleryBlockComponent.data).toEqual({
+              'mock-api-pipe': Data.Api.getCaseStudies('Case Study 3')
+                .content[0].data[0].data
+            } as any);
+          });
         });
 
-        it('should not call `ApiPipe`', () => {
-          expect(MockApiPipe.prototype.transform).not.toHaveBeenCalled();
+        describe('Duo', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getServices('Service 1');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should display `DuoBlockComponent`', () => {
+            expect(page.duoBlock).toBeTruthy();
+          });
+
+          it('should call `ApiPipe` with `content.data.data`', () => {
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Api.getServices('Service 1').content[0].data[0].data
+            );
+          });
+
+          it('should set `DuoBlockComponent` `data` as transformed `content.data.data`', () => {
+            expect(page.duoBlockComponent.data).toEqual({
+              'mock-api-pipe': Data.Api.getServices('Service 1').content[0]
+                .data[0].data
+            } as any);
+          });
         });
 
-        it('should set `TextBlockComponent` `data` as `content.data`', () => {
-          expect(page.textBlockComponent.data).toEqual(Data.Api.getCaseStudies(
-            'Case Study 1'
-          ).content[0].data[0] as any);
-        });
-      });
+        describe('Video', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getServices('Service 2');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
 
-      describe('Image', () => {
-        beforeEach(() => {
-          comp.post = Data.Api.getCaseStudies('Case Study 2');
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-        });
+          it('should display `VideoBlockComponent`', () => {
+            expect(page.videoBlock).toBeTruthy();
+          });
 
-        it('should display `ImageBlockComponent`', () => {
-          expect(page.imageBlock).toBeTruthy();
-        });
+          it('should call `ApiPipe` with `content.data.data`', () => {
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Api.getServices('Service 2').content[0].data[0].data
+            );
+          });
 
-        it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Api.getCaseStudies('Case Study 2').content[0].data[0].data
-          );
-        });
-
-        it('should set `ImageBlockComponent` `data` as transformed `content.data.data`', () => {
-          expect(page.imageBlockComponent.data).toEqual({
-            'mock-api-pipe': Data.Api.getCaseStudies('Case Study 2').content[0]
-              .data[0].data
-          } as any);
+          it('should set `VideoBlockComponent` `data` as transformed `content.data.data`', () => {
+            expect(page.videoBlockComponent.data).toEqual({
+              'mock-api-pipe': Data.Api.getServices('Service 2').content[0]
+                .data[0].data
+            } as any);
+          });
         });
 
-        it('should set `ImageBlockComponent` `full-bleed` attribute if `content.data.fullBleed`', () => {
-          ((comp.post as Post).content[0]
-            .data[0] as ImageBlock).fullBleed = true;
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
+        describe('Audio', () => {
+          beforeEach(() => {
+            comp.post = Data.Api.getServices('Service 3');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
 
-          expect(page.imageBlock.getAttribute('full-bleed')).toBeTruthy();
-        });
+          it('should display `AudioBlockComponent`', () => {
+            expect(page.audioBlock).toBeTruthy();
+          });
 
-        it('should not set `ImageBlockComponent` `full-bleed` attribute if no `content.data.fullBleed`', () => {
-          ((comp.post as Post).content[0]
-            .data[0] as ImageBlock).fullBleed = undefined;
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
+          it('should call `ApiPipe` with `content.data.data`', () => {
+            expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Api.getServices('Service 3').content[0].data[0].data
+            );
+          });
 
-          expect(page.imageBlock.getAttribute('full-bleed')).toBeFalsy();
-        });
-      });
-
-      describe('Gallery', () => {
-        beforeEach(() => {
-          comp.post = Data.Api.getCaseStudies('Case Study 3');
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-        });
-
-        it('should display `GalleryBlockComponent`', () => {
-          expect(page.galleryBlock).toBeTruthy();
-        });
-
-        it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Api.getCaseStudies('Case Study 3').content[0].data[0].data
-          );
-        });
-
-        it('should set `GalleryBlockComponent` `data` as transformed `content.data.data`', () => {
-          expect(page.galleryBlockComponent.data).toEqual({
-            'mock-api-pipe': Data.Api.getCaseStudies('Case Study 3').content[0]
-              .data[0].data
-          } as any);
-        });
-      });
-
-      describe('Duo', () => {
-        beforeEach(() => {
-          comp.post = Data.Api.getServices('Service 1');
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-        });
-
-        it('should display `DuoBlockComponent`', () => {
-          expect(page.duoBlock).toBeTruthy();
-        });
-
-        it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Api.getServices('Service 1').content[0].data[0].data
-          );
-        });
-
-        it('should set `DuoBlockComponent` `data` as transformed `content.data.data`', () => {
-          expect(page.duoBlockComponent.data).toEqual({
-            'mock-api-pipe': Data.Api.getServices('Service 1').content[0]
-              .data[0].data
-          } as any);
-        });
-      });
-
-      describe('Video', () => {
-        beforeEach(() => {
-          comp.post = Data.Api.getServices('Service 2');
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-        });
-
-        it('should display `VideoBlockComponent`', () => {
-          expect(page.videoBlock).toBeTruthy();
-        });
-
-        it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Api.getServices('Service 2').content[0].data[0].data
-          );
-        });
-
-        it('should set `VideoBlockComponent` `data` as transformed `content.data.data`', () => {
-          expect(page.videoBlockComponent.data).toEqual({
-            'mock-api-pipe': Data.Api.getServices('Service 2').content[0]
-              .data[0].data
-          } as any);
-        });
-      });
-
-      describe('Audio', () => {
-        beforeEach(() => {
-          comp.post = Data.Api.getServices('Service 3');
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-        });
-
-        it('should display `AudioBlockComponent`', () => {
-          expect(page.audioBlock).toBeTruthy();
-        });
-
-        it('should call `ApiPipe` with `content.data.data`', () => {
-          expect(MockApiPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Api.getServices('Service 3').content[0].data[0].data
-          );
-        });
-
-        it('should set `VideoBlockComponent` `data` as transformed `content.data.data`', () => {
-          expect(page.audioBlockComponent.data).toEqual({
-            'mock-api-pipe': Data.Api.getServices('Service 3').content[0]
-              .data[0].data
-          } as any);
+          it('should set `VideoBlockComponent` `data` as transformed `content.data.data`', () => {
+            expect(page.audioBlockComponent.data).toEqual({
+              'mock-api-pipe': Data.Api.getServices('Service 3').content[0]
+                .data[0].data
+            } as any);
+          });
         });
       });
     });
@@ -478,6 +561,9 @@ class Page {
   }
   get audioBlock() {
     return this.query<HTMLElement>('audio-block');
+  }
+  get error() {
+    return this.query<HTMLElement>('error');
   }
 
   get textBlockComponent() {

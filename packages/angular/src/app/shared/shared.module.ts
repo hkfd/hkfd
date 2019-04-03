@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { MaterialModule } from './material.module';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
@@ -19,9 +21,10 @@ import { AudioBlockComponent } from './blocks/audio-block/audio-block.component'
 import { ApiPipe } from './pipes/api.pipe';
 import { PrismicPipe } from './pipes/prismic.pipe';
 import { LazyDirective } from './lazy.directive';
+import { ErrorComponent } from './errors/error/error.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, MaterialModule, RouterModule],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -34,6 +37,7 @@ import { LazyDirective } from './lazy.directive';
     GalleryBlockComponent,
     VideoBlockComponent,
     AudioBlockComponent,
+    ErrorComponent,
     ImageComponent,
     FormComponent,
     LazyDirective,
@@ -53,6 +57,7 @@ import { LazyDirective } from './lazy.directive';
     AudioBlockComponent,
     ImageComponent,
     FormComponent,
+    ErrorComponent,
     LazyDirective,
     ApiPipe,
     PrismicPipe

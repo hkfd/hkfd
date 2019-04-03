@@ -65,7 +65,7 @@ export class PrismicService {
       map(({ results }) => results[0] || null),
       tap(post => {
         this.logger.log('getPost', post);
-        post && this.metaService.setMetaTags(createNewsPostMetaTags(post));
+        this.metaService.setMetaTags(createNewsPostMetaTags(post));
       })
     );
   }

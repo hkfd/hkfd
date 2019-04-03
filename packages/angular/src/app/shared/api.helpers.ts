@@ -21,33 +21,43 @@ export const getPostUrl = (type: PostType): string => {
   }
 };
 
-export const createCareerMetaTags = ({
-  title,
-  salary,
-  id
-}: Career): Partial<MetaTags> => ({
-  type: 'article',
-  title,
-  description: salary,
-  url: `careers/${id}`
-});
+export const createCareerMetaTags = (
+  career: Career | null
+): Partial<MetaTags> => {
+  if (!career) return { title: 'Page not found' };
+
+  const { title, salary, id } = career;
+
+  return {
+    type: 'article',
+    title,
+    description: salary,
+    url: `careers/${id}`
+  };
+};
 
 export const createPostMetaTags = (
   type: PostType,
   id: string,
-  {
+  post: Post | null
+): Partial<MetaTags> => {
+  if (!post) return { title: 'Page not found' };
+
+  const {
     title,
     intro,
     thumbnail: {
       image: { name }
     }
-  }: Post
-): MetaTags => ({
-  type: 'article',
-  title,
-  description: intro[0],
-  url: `${type}/${id}`,
-  image: `https://res.cloudinary.com/${
-    environment.cloudinaryName
-  }/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/${name}`
-});
+  } = post;
+
+  return {
+    type: 'article',
+    title,
+    description: intro[0],
+    url: `${type}/${id}`,
+    image: `https://res.cloudinary.com/${
+      environment.cloudinaryName
+    }/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/${name}`
+  };
+};
