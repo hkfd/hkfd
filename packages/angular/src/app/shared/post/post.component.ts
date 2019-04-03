@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription, EMPTY } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Subscription, of } from 'rxjs';
+import { switchMap, map, filter } from 'rxjs/operators';
 
 import { ApiService, Post } from 'shared';
 import { isCaseStudy, isKnownPostType } from 'shared/api.helpers';
@@ -45,11 +45,16 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.post$ = this.route.paramMap
       .pipe(
-        switchMap((params: ParamMap) => {
-          const type = params.get('type');
-          const id = params.get('id');
-
-          if (!type || !id || !isKnownPostType(type)) return EMPTY;
+        map((params: ParamMap) => ({
+          type: params.get('type'),
+          id: params.get('id')
+        })),
+        filter(
+          (res): res is { type: string; id: string } =>
+            res.type !== null && res.id !== null
+        ),
+        switchMap(({ type, id }) => {
+          if (!isKnownPostType(type)) return of(null);
 
           return this.apiService.getPost(type, id);
         })

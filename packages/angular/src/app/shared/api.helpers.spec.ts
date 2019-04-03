@@ -58,7 +58,7 @@ describe('`isKnownPostType`', () => {
 });
 
 describe('`createCareerMetaTags`', () => {
-  it('should return partial `MetaTags`', () => {
+  it('should return partial `MetaTags` if has `career` arg', () => {
     const res = createCareerMetaTags(Data.Api.getCareers('Career 1'));
 
     expect(res).toEqual({
@@ -68,10 +68,18 @@ describe('`createCareerMetaTags`', () => {
       url: 'careers/career-1'
     });
   });
+
+  it('should return not found `MetaTags` if no `career` arg', () => {
+    const res = createCareerMetaTags(null);
+
+    expect(res).toEqual({
+      title: 'Page not found'
+    });
+  });
 });
 
 describe('`createPostMetaTags`', () => {
-  it('should return `MetaTags`', () => {
+  it('should return `MetaTags` if has `post` arg', () => {
     const res = createPostMetaTags(
       'type' as any,
       'id',
@@ -85,6 +93,14 @@ describe('`createPostMetaTags`', () => {
       url: 'type/id',
       image:
         'https://res.cloudinary.com/dv8oeiozq/image/upload/w_2400,h_ih,c_limit,q_auto,f_auto/service-1'
+    });
+  });
+
+  it('should return not found `MetaTags` if no `post` arg', () => {
+    const res = createPostMetaTags('type' as any, 'id', null);
+
+    expect(res).toEqual({
+      title: 'Page not found'
     });
   });
 });

@@ -122,3 +122,9 @@ export class StubTextBlockComponent {
   @Input()
   data!: ApiTextBlock;
 }
+
+@Component({
+  selector: 'error',
+  template: ''
+})
+export class StubErrorComponent {}

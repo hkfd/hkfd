@@ -1,0 +1,25 @@
+@import '../../../../sass/grid';
+
+#container {
+  overflow: hidden;
+  @extend %container-full;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  #message,
+  #actions {
+    display: flex;
+    align-items: center;
+  }
+
+  #message {
+    margin: 1em 0;
+  }
+
+  #actions {
+    flex-grow: 2;
+    justify-content: flex-end;
+    margin: 0.25em 0;
+  }
+}

@@ -277,73 +277,54 @@ describe('PrismicService', () => {
                 )
                 .flush(Data.Prismic.getPostsResponse());
             }));
-
-            it('should call `MetaService` `setMetaTags` with `createNewsPostMetaTags` return', async(() => {
-              prismicService
-                .getPost('post-1')
-                .subscribe(_ =>
-                  expect(metaService.setMetaTags).toHaveBeenCalledWith(
-                    'createNewsPostMetaTagsReturn'
-                  )
-                );
-
-              mockHttp
-                .expectOne(
-                  req =>
-                    req.url ===
-                    `${environment.prismic.endpoint}/documents/search`
-                )
-                .flush(Data.Prismic.getPostsResponse());
-            }));
           });
 
-          describe('No `post`', () => {
-            it('should return `null`', async(() => {
-              prismicService
-                .getPost('post-1')
-                .subscribe(res => expect(res).toBe(null));
+          it('should return `null` if no `post`', async(() => {
+            prismicService
+              .getPost('post-1')
+              .subscribe(res => expect(res).toBe(null));
 
-              mockHttp
-                .expectOne(
-                  req =>
-                    req.url ===
-                    `${environment.prismic.endpoint}/documents/search`
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .flush({ results: [] });
+          }));
+
+          it('should call `createNewsPostMetaTags` with `post` args', async(() => {
+            prismicService
+              .getPost('post-1')
+              .subscribe(_ =>
+                expect(createNewsPostMetaTags).toHaveBeenCalledWith(
+                  Data.Prismic.getPosts('post-1')
                 )
-                .flush({ results: [] });
-            }));
+              );
 
-            it('should not call `createNewsPostMetaTags`', async(() => {
-              prismicService
-                .getPost('post-1')
-                .subscribe(_ =>
-                  expect(createNewsPostMetaTags).not.toHaveBeenCalled()
-                );
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .flush(Data.Prismic.getPostsResponse());
+          }));
 
-              mockHttp
-                .expectOne(
-                  req =>
-                    req.url ===
-                    `${environment.prismic.endpoint}/documents/search`
+          it('should call `MetaService` `setMetaTags` with `createNewsPostMetaTags` return', async(() => {
+            prismicService
+              .getPost('post-1')
+              .subscribe(_ =>
+                expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                  'createNewsPostMetaTagsReturn'
                 )
-                .flush({ results: [] });
-            }));
+              );
 
-            it('should not call `MetaService` `setMetaTags`', async(() => {
-              prismicService
-                .getPost('post-1')
-                .subscribe(_ =>
-                  expect(metaService.setMetaTags).not.toHaveBeenCalled()
-                );
-
-              mockHttp
-                .expectOne(
-                  req =>
-                    req.url ===
-                    `${environment.prismic.endpoint}/documents/search`
-                )
-                .flush({ results: [] });
-            }));
-          });
+            mockHttp
+              .expectOne(
+                req =>
+                  req.url === `${environment.prismic.endpoint}/documents/search`
+              )
+              .flush(Data.Prismic.getPostsResponse());
+          }));
         });
       });
     });

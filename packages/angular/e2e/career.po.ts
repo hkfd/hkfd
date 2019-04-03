@@ -7,8 +7,8 @@ import {
 } from 'protractor';
 
 export class CareerPage {
-  constructor() {
-    this.navigateTo();
+  constructor(url?: string) {
+    url ? browser.get(url) : this.navigateTo();
   }
 
   isVisible(el: ElementFinder) {
@@ -23,6 +23,10 @@ export class CareerPage {
 
   getTitle() {
     return browser.getTitle();
+  }
+
+  getUrl() {
+    return browser.getCurrentUrl();
   }
 
   navigateTo() {
@@ -41,6 +45,14 @@ export class CareerPage {
 
   getCareer() {
     return element(by.css('app-career'));
+  }
+
+  getError() {
+    return this.getCareer().element(by.css('error'));
+  }
+
+  getErrorLink() {
+    return this.getError().element(by.css('a'));
   }
 
   getPageTitle() {

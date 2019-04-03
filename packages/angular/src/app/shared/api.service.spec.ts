@@ -167,68 +167,44 @@ describe('ApiService', () => {
       });
 
       describe('No error', () => {
-        describe('Has `career`', () => {
-          it('should return `career`', async(() => {
-            apiService
-              .getCareer('career-3')
-              .subscribe(res =>
-                expect(res).toEqual(Data.Api.getCareers('Career 3'))
-              );
-            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-          }));
+        it('should return `career` if has `career`', async(() => {
+          apiService
+            .getCareer('career-3')
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getCareers('Career 3'))
+            );
+          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+        }));
 
-          it('should call `createCareerMetaTags` with `career` arg', async(() => {
-            apiService
-              .getCareer('career-3')
-              .subscribe(_ =>
-                expect(createCareerMetaTags).toHaveBeenCalledWith(
-                  Data.Api.getCareers('Career 3')
-                )
-              );
+        it('should return `null` if no `career`', async(() => {
+          apiService.getCareer('no').subscribe(res => expect(res).toBe(null));
 
-            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-          }));
+          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+        }));
 
-          it('should call `MetaService` `setMetaTags` with `createCareerMetaTags` return', async(() => {
-            apiService
-              .getCareer('career-3')
-              .subscribe(_ =>
-                expect(metaService.setMetaTags).toHaveBeenCalledWith(
-                  'createCareerMetaTagsReturn'
-                )
-              );
+        it('should call `createCareerMetaTags` with `career` arg', async(() => {
+          apiService
+            .getCareer('career-3')
+            .subscribe(_ =>
+              expect(createCareerMetaTags).toHaveBeenCalledWith(
+                Data.Api.getCareers('Career 3')
+              )
+            );
 
-            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-          }));
-        });
+          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+        }));
 
-        describe('No `career`', () => {
-          it('should return `null`', async(() => {
-            apiService.getCareer('no').subscribe(res => expect(res).toBe(null));
+        it('should call `MetaService` `setMetaTags` with `createCareerMetaTags` return', async(() => {
+          apiService
+            .getCareer('career-3')
+            .subscribe(_ =>
+              expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                'createCareerMetaTagsReturn'
+              )
+            );
 
-            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-          }));
-
-          it('should not call `createCareerMetaTags`', async(() => {
-            apiService
-              .getCareer('no')
-              .subscribe(_ =>
-                expect(createCareerMetaTags).not.toHaveBeenCalled()
-              );
-
-            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-          }));
-
-          it('should not call `MetaService` `setMetaTags`', async(() => {
-            apiService
-              .getCareer('no')
-              .subscribe(_ =>
-                expect(metaService.setMetaTags).not.toHaveBeenCalled()
-              );
-
-            mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-          }));
-        });
+          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
+        }));
       });
 
       describe('Error', () => {
@@ -272,85 +248,49 @@ describe('ApiService', () => {
       });
 
       describe('No error', () => {
-        describe('Has `post`', () => {
-          it('should return `post`', async(() => {
-            apiService
-              .getPost('service', 'service-3')
-              .subscribe(res =>
-                expect(res).toEqual(Data.Api.getServices('Service 3'))
-              );
+        it('should return `post` if has `post`', async(() => {
+          apiService
+            .getPost('service', 'service-3')
+            .subscribe(res =>
+              expect(res).toEqual(Data.Api.getServices('Service 3'))
+            );
 
-            mockHttp
-              .expectOne('/getPostUrl')
-              .flush(Data.Api.getServices<void>());
-          }));
+          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
+        }));
 
-          it('should call `createPostMetaTags` with `type` `id` and `post` args', async(() => {
-            apiService
-              .getPost('service', 'service-3')
-              .subscribe(_ =>
-                expect(createPostMetaTags).toHaveBeenCalledWith(
-                  'service',
-                  'service-3',
-                  Data.Api.getServices('Service 3')
-                )
-              );
+        it('should return `null` if no `post`', async(() => {
+          apiService
+            .getPost('service', 'no-service')
+            .subscribe(res => expect(res).toBe(null));
 
-            mockHttp
-              .expectOne('/getPostUrl')
-              .flush(Data.Api.getServices<void>());
-          }));
+          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
+        }));
 
-          it('should call `MetaService` `setMetaTags` with `createPostMetaTags` return', async(() => {
-            apiService
-              .getPost('service', 'service-3')
-              .subscribe(_ =>
-                expect(metaService.setMetaTags).toHaveBeenCalledWith(
-                  'createPostMetaTagsReturn'
-                )
-              );
+        it('should call `createPostMetaTags` with `type` `id` and `post` args', async(() => {
+          apiService
+            .getPost('service', 'service-3')
+            .subscribe(_ =>
+              expect(createPostMetaTags).toHaveBeenCalledWith(
+                'service',
+                'service-3',
+                Data.Api.getServices('Service 3')
+              )
+            );
 
-            mockHttp
-              .expectOne('/getPostUrl')
-              .flush(Data.Api.getServices<void>());
-          }));
-        });
+          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
+        }));
 
-        describe('No `post`', () => {
-          it('should return `null`', async(() => {
-            apiService
-              .getPost('service', 'no-service')
-              .subscribe(res => expect(res).toBe(null));
+        it('should call `MetaService` `setMetaTags` with `createPostMetaTags` return', async(() => {
+          apiService
+            .getPost('service', 'service-3')
+            .subscribe(_ =>
+              expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                'createPostMetaTagsReturn'
+              )
+            );
 
-            mockHttp
-              .expectOne('/getPostUrl')
-              .flush(Data.Api.getServices<void>());
-          }));
-
-          it('should not call `createPostMetaTags`', async(() => {
-            apiService
-              .getPost('service', 'no-service')
-              .subscribe(_ =>
-                expect(createPostMetaTags).not.toHaveBeenCalled()
-              );
-
-            mockHttp
-              .expectOne('/getPostUrl')
-              .flush(Data.Api.getServices<void>());
-          }));
-
-          it('should not call `MetaService` `setMetaTags`', async(() => {
-            apiService
-              .getPost('service', 'no-service')
-              .subscribe(_ =>
-                expect(metaService.setMetaTags).not.toHaveBeenCalled()
-              );
-
-            mockHttp
-              .expectOne('/getPostUrl')
-              .flush(Data.Api.getServices<void>());
-          }));
-        });
+          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
+        }));
       });
 
       describe('Error', () => {

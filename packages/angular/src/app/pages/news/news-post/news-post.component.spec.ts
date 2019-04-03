@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -13,10 +14,10 @@ import {
   StubGalleryBlockComponent,
   StubVideoBlockComponent,
   StubImageComponent,
+  StubErrorComponent,
   Data
 } from 'testing';
 import { RichText } from 'prismic-dom';
-import { of } from 'rxjs';
 
 import { PrismicService } from 'shared';
 import { NewsPostComponent } from './news-post.component';
@@ -24,8 +25,11 @@ import { NewsPostComponent } from './news-post.component';
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
+let changeDetectorRef: ChangeDetectorRef;
 let prismicService: PrismicService;
 let page: Page;
+
+beforeEach(jest.clearAllMocks);
 
 describe('NewsPostComponent', () => {
   beforeEach(async(() => {
@@ -42,7 +46,8 @@ describe('NewsPostComponent', () => {
         StubDuoBlockComponent,
         StubGalleryBlockComponent,
         StubVideoBlockComponent,
-        StubImageComponent
+        StubImageComponent,
+        StubErrorComponent
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
@@ -58,73 +63,140 @@ describe('NewsPostComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should set `post$`', () => {
-      expect(comp.post$).toBeDefined();
+    it('should set `postSub`', () => {
+      expect(comp.postSub).toBeDefined();
     });
 
-    it('should call `PrismicService` `getPost` with `uid` param arg if param exists', () => {
+    it('should call `PrismicService` `getPost` with `uid` param arg if `uid` param exists', () => {
+      jest.clearAllMocks();
       activatedRoute.testParamMap = { uid: 'uid' };
 
       expect(prismicService.getPost).toHaveBeenCalledWith('uid');
     });
 
-    it('should call `PrismicService` `getPost` with empty string arg if param does not exist', () => {
+    it('should not call `PrismicService` `getPost` if `uid` param does not exist', () => {
+      jest.clearAllMocks();
       activatedRoute.testParamMap = { uid: undefined };
 
-      expect(prismicService.getPost).toHaveBeenCalledWith('');
+      expect(prismicService.getPost).not.toHaveBeenCalled();
+    });
+
+    it('should set `post`', () => {
+      expect(comp.post).toEqual(Data.Prismic.getPosts('post-1'));
+    });
+
+    it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
+    });
+  });
+
+  describe('`ngOnDestroy`', () => {
+    it('should call `postSub` `unsubscribe` if has `postSub', () => {
+      comp.postSub = { unsubscribe: jest.fn() } as any;
+      comp.ngOnDestroy();
+
+      expect((comp.postSub as any).unsubscribe).toHaveBeenCalled();
+    });
+
+    it('should not throw if no `postSub`', () => {
+      comp.postSub = undefined;
+
+      expect(() => comp.ngOnDestroy()).not.toThrow();
     });
   });
 
   describe('Template', () => {
-    describe('Intro', () => {
-      it('should display date', () => {
-        expect((page.date.textContent as string).trim()).toBe('01 January');
+    describe('`post` is `undefined`', () => {
+      beforeEach(() => {
+        comp.post = undefined;
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
       });
 
-      describe('Title', () => {
-        describe('has `title`', () => {
-          beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of(Data.Prismic.getPost())
-            );
-            activatedRoute.testParamMap = { id: undefined };
-            fixture.detectChanges();
-          });
+      it('should not display `ErrorComponent`', () => {
+        expect(page.error).toBeFalsy();
+      });
 
-          it('should be displayed', () => {
-            expect(page.title.innerHTML.trim()).toBe('Post 1');
-          });
+      describe('Intro', () => {
+        it('should not display date', () => {
+          expect(page.date).toBeFalsy();
+        });
+      });
+    });
 
-          it('should call `RichText` `asText` with `title`', () => {
-            expect(RichText.asText).toHaveBeenCalledWith(
-              Data.Prismic.getPost().data.title
-            );
-          });
+    describe('`post` is `null`', () => {
+      beforeEach(() => {
+        comp.post = null;
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+      });
+
+      it('should display `ErrorComponent`', () => {
+        expect(page.error).toBeTruthy();
+      });
+
+      describe('Intro', () => {
+        it('should not display date', () => {
+          expect(page.date).toBeFalsy();
+        });
+      });
+    });
+
+    describe('Has `post`', () => {
+      beforeEach(() => {
+        comp.post = Data.Prismic.getPosts('post-1');
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+      });
+
+      it('should not display `ErrorComponent`', () => {
+        expect(page.error).toBeFalsy();
+      });
+
+      describe('Intro', () => {
+        it('should display date', () => {
+          expect((page.date.textContent as string).trim()).toBe('01 January');
         });
 
-        describe('no `title`', () => {
-          beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of({
+        describe('Title', () => {
+          describe('has `title`', () => {
+            beforeEach(() => {
+              comp.post = Data.Prismic.getPost();
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.title.innerHTML.trim()).toBe('Post 1');
+            });
+
+            it('should call `RichText` `asText` with `title`', () => {
+              expect(RichText.asText).toHaveBeenCalledWith(
+                Data.Prismic.getPost().data.title
+              );
+            });
+          });
+
+          describe('no `title`', () => {
+            beforeEach(() => {
+              comp.post = {
                 ...Data.Prismic.getPost(),
                 data: { ...Data.Prismic.getPost().data, title: undefined }
-              })
-            );
-            activatedRoute.testParamMap = { id: undefined };
-            fixture.detectChanges();
-          });
+              } as any;
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
 
-          it('should not be displayed', () => {
-            expect(page.title).toBeFalsy();
+            it('should not be displayed', () => {
+              expect(page.title).toBeFalsy();
+            });
           });
         });
-      });
 
-      describe('Thumbnail', () => {
-        describe('has `image.proxy.url`', () => {
-          beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of({
+        describe('Thumbnail', () => {
+          describe('has `image.proxy.url`', () => {
+            beforeEach(() => {
+              comp.post = {
                 ...Data.Prismic.getPost(),
                 data: {
                   ...Data.Prismic.getPost().data,
@@ -136,32 +208,17 @@ describe('NewsPostComponent', () => {
                     }
                   }
                 }
-              })
-            );
-            activatedRoute.testParamMap = { id: undefined };
-            fixture.detectChanges();
-          });
-
-          it('should be displayed', () => {
-            expect(page.thumbnail).toBeTruthy();
-          });
-
-          it('should call `PrismicPipe` with `data`', () => {
-            expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith({
-              ...Data.Prismic.getPost().data,
-              image: {
-                ...Data.Prismic.getPost().data.image,
-                proxy: {
-                  ...Data.Prismic.getPost().data.image.proxy,
-                  url: 'test.jpg'
-                }
-              }
+              } as any;
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
             });
-          });
 
-          it('should set `ImageComponent` `image` as transformed `data`', () => {
-            expect(page.imageComponent.image).toEqual({
-              'mock-prismic-pipe': {
+            it('should be displayed', () => {
+              expect(page.thumbnail).toBeTruthy();
+            });
+
+            it('should call `PrismicPipe` with `data`', () => {
+              expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith({
                 ...Data.Prismic.getPost().data,
                 image: {
                   ...Data.Prismic.getPost().data.image,
@@ -170,19 +227,32 @@ describe('NewsPostComponent', () => {
                     url: 'test.jpg'
                   }
                 }
-              } as any
+              });
+            });
+
+            it('should set `ImageComponent` `image` as transformed `data`', () => {
+              expect(page.imageComponent.image).toEqual({
+                'mock-prismic-pipe': {
+                  ...Data.Prismic.getPost().data,
+                  image: {
+                    ...Data.Prismic.getPost().data.image,
+                    proxy: {
+                      ...Data.Prismic.getPost().data.image.proxy,
+                      url: 'test.jpg'
+                    }
+                  }
+                } as any
+              });
+            });
+
+            it('should set `ImageComponent` `full-height` attribute', () => {
+              expect(page.thumbnail.hasAttribute('full-height')).toBeTruthy();
             });
           });
 
-          it('should set `ImageComponent` `full-height` attribute', () => {
-            expect(page.thumbnail.hasAttribute('full-height')).toBeTruthy();
-          });
-        });
-
-        describe('no `image.proxy.url`', () => {
-          beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of({
+          describe('no `image.proxy.url`', () => {
+            beforeEach(() => {
+              comp.post = {
                 ...Data.Prismic.getPost(),
                 data: {
                   ...Data.Prismic.getPost().data,
@@ -194,151 +264,143 @@ describe('NewsPostComponent', () => {
                     }
                   }
                 }
-              })
-            );
-            activatedRoute.testParamMap = { id: undefined };
+              } as any;
+              changeDetectorRef.markForCheck();
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.thumbnail).toBeFalsy();
+            });
+          });
+        });
+      });
+
+      describe('Content', () => {
+        describe('Text', () => {
+          beforeEach(() => {
+            comp.post = Data.Prismic.getPosts('post-2');
+            changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
 
-          it('should not be displayed', () => {
-            expect(page.thumbnail).toBeFalsy();
+          it('should display Prismic `TextBlockComponent`', () => {
+            expect(page.textBlock).toBeTruthy();
+          });
+
+          it('should not call `PrismicPipe` with `primary`', () => {
+            expect(
+              MockPrismicPipe.prototype.transform
+            ).not.toHaveBeenCalledWith(
+              Data.Prismic.getPosts('post-2').data.body[0].primary
+            );
+          });
+
+          it('should set `TextBlockComponent` `data` as `primary.text`', () => {
+            expect(page.textBlockComponent.data).toEqual(
+              Data.Prismic.getPosts('post-2').data.body[0].primary.text
+            );
           });
         });
-      });
-    });
 
-    describe('Content', () => {
-      describe('Text', () => {
-        beforeEach(() => {
-          (prismicService.getPost as jest.Mock).mockReturnValue(
-            of(Data.Prismic.getPosts('post-2'))
-          );
-          activatedRoute.testParamMap = { id: undefined };
-          fixture.detectChanges();
-        });
+        describe('Image', () => {
+          beforeEach(() => {
+            comp.post = Data.Prismic.getPosts('post-3');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
 
-        it('should display Prismic `TextBlockComponent`', () => {
-          expect(page.textBlock).toBeTruthy();
-        });
+          it('should display `ImageBlockComponent`', () => {
+            expect(page.imageBlock).toBeTruthy();
+          });
 
-        it('should not call `PrismicPipe` with `primary`', () => {
-          expect(MockPrismicPipe.prototype.transform).not.toHaveBeenCalledWith(
-            Data.Prismic.getPosts('post-2').data.body[0].primary
-          );
-        });
+          it('should call `PrismicPipe` with `primary`', () => {
+            expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Prismic.getPosts('post-3').data.body[0].primary
+            );
+          });
 
-        it('should set `TextBlockComponent` `data` as `primary.text`', () => {
-          expect(page.textBlockComponent.data).toEqual(
-            Data.Prismic.getPosts('post-2').data.body[0].primary.text
-          );
-        });
-      });
-
-      describe('Image', () => {
-        beforeEach(() => {
-          (prismicService.getPost as jest.Mock).mockReturnValue(
-            of(Data.Prismic.getPosts('post-3'))
-          );
-          activatedRoute.testParamMap = { id: undefined };
-          fixture.detectChanges();
-        });
-
-        it('should display `ImageBlockComponent`', () => {
-          expect(page.imageBlock).toBeTruthy();
-        });
-
-        it('should call `PrismicPipe` with `primary`', () => {
-          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Prismic.getPosts('post-3').data.body[0].primary
-          );
-        });
-
-        it('should set `ImageBlockComponent` `data` as transformed`primary`', () => {
-          expect(page.imageBlockComponent.data).toEqual({
-            'mock-prismic-pipe': Data.Prismic.getPosts('post-3').data.body[0]
-              .primary
+          it('should set `ImageBlockComponent` `data` as transformed`primary`', () => {
+            expect(page.imageBlockComponent.data).toEqual({
+              'mock-prismic-pipe': Data.Prismic.getPosts('post-3').data.body[0]
+                .primary
+            });
           });
         });
-      });
 
-      describe('Duo', () => {
-        beforeEach(() => {
-          (prismicService.getPost as jest.Mock).mockReturnValue(
-            of(Data.Prismic.getPosts('post-4'))
-          );
-          activatedRoute.testParamMap = { id: undefined };
-          fixture.detectChanges();
+        describe('Duo', () => {
+          beforeEach(() => {
+            comp.post = Data.Prismic.getPosts('post-4');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should display `DuoBlockComponent`', () => {
+            expect(page.duoBlock).toBeTruthy();
+          });
+
+          it('should call `PrismicPipe` with `items`', () => {
+            expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Prismic.getPosts('post-4').data.body[0].items
+            );
+          });
+
+          it('should set `DuoBlockComponent` `data` as transformed `items`', () => {
+            expect(page.duoBlockComponent.data).toEqual({
+              'mock-prismic-pipe': Data.Prismic.getPosts('post-4').data.body[0]
+                .items
+            } as any);
+          });
         });
 
-        it('should display `DuoBlockComponent`', () => {
-          expect(page.duoBlock).toBeTruthy();
+        describe('Gallery', () => {
+          beforeEach(() => {
+            comp.post = Data.Prismic.getPosts('post-5');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should display `GalleryBlockComponent`', () => {
+            expect(page.galleryBlock).toBeTruthy();
+          });
+
+          it('should call `PrismicPipe` with `items`', () => {
+            expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Prismic.getPosts('post-5').data.body[0].items
+            );
+          });
+
+          it('should set `GalleryBlockComponent` `data` as transformed `items`', () => {
+            expect(page.galleryBlockComponent.data).toEqual({
+              'mock-prismic-pipe': Data.Prismic.getPosts('post-5').data.body[0]
+                .items
+            } as any);
+          });
         });
 
-        it('should call `PrismicPipe` with `items`', () => {
-          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Prismic.getPosts('post-4').data.body[0].items
-          );
-        });
+        describe('Video', () => {
+          beforeEach(() => {
+            comp.post = Data.Prismic.getPosts('post-6');
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
 
-        it('should set `DuoBlockComponent` `data` as transformed `items`', () => {
-          expect(page.duoBlockComponent.data).toEqual({
-            'mock-prismic-pipe': Data.Prismic.getPosts('post-4').data.body[0]
-              .items
-          } as any);
-        });
-      });
+          it('should display `VideoBlockComponent`', () => {
+            expect(page.videoBlock).toBeTruthy();
+          });
 
-      describe('Gallery', () => {
-        beforeEach(() => {
-          (prismicService.getPost as jest.Mock).mockReturnValue(
-            of(Data.Prismic.getPosts('post-5'))
-          );
-          activatedRoute.testParamMap = { id: undefined };
-          fixture.detectChanges();
-        });
+          it('should call `PrismicPipe` with `primary`', () => {
+            expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
+              Data.Prismic.getPosts('post-6').data.body[0].primary
+            );
+          });
 
-        it('should display `GalleryBlockComponent`', () => {
-          expect(page.galleryBlock).toBeTruthy();
-        });
-
-        it('should call `PrismicPipe` with `items`', () => {
-          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Prismic.getPosts('post-5').data.body[0].items
-          );
-        });
-
-        it('should set `GalleryBlockComponent` `data` as transformed `items`', () => {
-          expect(page.galleryBlockComponent.data).toEqual({
-            'mock-prismic-pipe': Data.Prismic.getPosts('post-5').data.body[0]
-              .items
-          } as any);
-        });
-      });
-
-      describe('Video', () => {
-        beforeEach(() => {
-          (prismicService.getPost as jest.Mock).mockReturnValue(
-            of(Data.Prismic.getPosts('post-6'))
-          );
-          activatedRoute.testParamMap = { id: undefined };
-          fixture.detectChanges();
-        });
-
-        it('should display `VideoBlockComponent`', () => {
-          expect(page.videoBlock).toBeTruthy();
-        });
-
-        it('should call `PrismicPipe` with `primary`', () => {
-          expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-            Data.Prismic.getPosts('post-6').data.body[0].primary
-          );
-        });
-
-        it('should set `VideoBlockComponent` `data` as transformed `primary`', () => {
-          expect(page.videoBlockComponent.data).toEqual({
-            'mock-prismic-pipe': Data.Prismic.getPosts('post-6').data.body[0]
-              .primary
-          } as any);
+          it('should set `VideoBlockComponent` `data` as transformed `primary`', () => {
+            expect(page.videoBlockComponent.data).toEqual({
+              'mock-prismic-pipe': Data.Prismic.getPosts('post-6').data.body[0]
+                .primary
+            } as any);
+          });
         });
       });
     });
@@ -369,6 +431,9 @@ class Page {
   }
   get videoBlock() {
     return this.query<HTMLElement>('video-block');
+  }
+  get error() {
+    return this.query<HTMLElement>('error');
   }
 
   get imageComponent() {
@@ -426,9 +491,11 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
+  changeDetectorRef = (comp as any).changeDetectorRef;
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );
+  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
   jest.spyOn(RichText, 'asText');
   page = new Page();

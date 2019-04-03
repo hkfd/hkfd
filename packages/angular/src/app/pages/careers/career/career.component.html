@@ -1,4 +1,6 @@
-<ng-container *ngIf="(career$ | async) as career">
+<error *ngIf="career === null"></error>
+
+<ng-container *ngIf="career">
   <section id="intro">
     <div id="intro-info">
       <h1>{{ career?.title }}</h1>

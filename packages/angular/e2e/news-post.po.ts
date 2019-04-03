@@ -7,8 +7,8 @@ import {
 } from 'protractor';
 
 export class NewsPostPage {
-  constructor() {
-    this.navigateTo();
+  constructor(url?: string) {
+    url ? browser.get(url) : this.navigateTo();
   }
 
   isVisible(el: ElementFinder) {
@@ -45,6 +45,14 @@ export class NewsPostPage {
 
   getPost() {
     return element(by.css('app-news-post'));
+  }
+
+  getError() {
+    return this.getPost().element(by.css('error'));
+  }
+
+  getErrorLink() {
+    return this.getPost().element(by.css('a'));
   }
 
   getPostDate() {
