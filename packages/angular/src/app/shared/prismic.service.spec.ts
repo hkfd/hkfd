@@ -7,19 +7,23 @@ import {
   LoggerService,
   MockLoggerService,
   MockMetaService,
-  Data
+  Data,
+  MockNotificationService
 } from 'testing';
 
 import { of } from 'rxjs';
 
 import { environment } from 'environment';
+import { catchNetworkError } from 'shared';
 import { MetaService } from './meta.service';
+import { NotificationService } from './notification.service';
 import { createNewsPostMetaTags } from './prismic.service.helpers';
 import { getNewPage, getNewPageSize } from './prismic.helpers';
 import { PrismicService, URL } from './prismic.service';
 
 let mockHttp: HttpTestingController;
 let metaService: MetaService;
+let notificationService: NotificationService;
 let prismicService: PrismicService;
 
 jest.mock('./prismic.service.helpers', () => ({
@@ -33,6 +37,12 @@ jest.mock('./prismic.helpers', () => ({
   getNewPage: jest.fn().mockReturnValue('getNewPageReturn')
 }));
 
+jest.mock('shared/errors/operators', () => {
+  const { pipe } = require('rxjs');
+
+  return { catchNetworkError: jest.fn().mockReturnValue(pipe()) };
+});
+
 beforeEach(jest.clearAllMocks);
 
 describe('PrismicService', () => {
@@ -42,7 +52,8 @@ describe('PrismicService', () => {
       providers: [
         PrismicService,
         { provide: LoggerService, useClass: MockLoggerService },
-        { provide: MetaService, useClass: MockMetaService }
+        { provide: MetaService, useClass: MockMetaService },
+        { provide: NotificationService, useClass: MockNotificationService }
       ]
     }).compileComponents()));
 
@@ -135,6 +146,24 @@ describe('PrismicService', () => {
         expect(method).toBe('GET');
       });
 
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        prismicService.getPosts(true).subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load posts`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(req => req.url === URL);
+      });
+
       it('should call `getNewPageSize` with `firstLoad` and `postPage` args', () => {
         prismicService.getPosts(true).subscribe();
         mockHttp.expectOne(req => req.url === URL);
@@ -223,6 +252,24 @@ describe('PrismicService', () => {
         } = mockHttp.expectOne(req => req.url === URL);
 
         expect(params.get('q')).toContain('post-1');
+      });
+
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        prismicService.getPost('post-1').subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load post`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(req => req.url === URL);
       });
 
       describe('Response', () => {
@@ -337,4 +384,5 @@ function createService() {
   mockHttp = TestBed.get(HttpTestingController);
   prismicService = TestBed.get(PrismicService);
   metaService = TestBed.get(MetaService);
+  notificationService = TestBed.get(NotificationService);
 }

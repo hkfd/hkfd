@@ -55,28 +55,28 @@ describe('HomeComponent', () => {
       expect(metaService.setMetaTags).toHaveBeenCalledWith({});
     });
 
-    it('should set `services$`', () => {
-      expect(comp.services$).toBeDefined();
+    it('should set `dataSub`', () => {
+      expect(comp.dataSub).toBeDefined();
     });
 
     it('should call `ApiService` `getServices`', () => {
       expect(apiService.getServices).toHaveBeenCalled();
     });
 
-    it('should set `clients$`', () => {
-      expect(comp.clients$).toBeDefined();
+    it('should call `ApiService` `getCaseStudies`', () => {
+      expect(apiService.getCaseStudies).toHaveBeenCalled();
     });
 
     it('should call `ApiService` `getClients`', () => {
       expect(apiService.getClients).toHaveBeenCalled();
     });
 
-    it('should set `caseStudies$`', () => {
-      expect(comp.caseStudies$).toBeDefined();
+    it('should set `services`', () => {
+      expect(comp.services).toEqual(Data.Api.getServices<void>());
     });
 
-    it('should call `ApiService` `getCaseStudies`', () => {
-      expect(apiService.getCaseStudies).toHaveBeenCalled();
+    it('should set `clients`', () => {
+      expect(comp.clients).toEqual(Data.Api.getClients());
     });
 
     describe('`caseStudies`', () => {
@@ -89,23 +89,23 @@ describe('HomeComponent', () => {
           expect(caseStudy.featured).toBe(true)
         );
       });
+    });
 
-      it('should call `ChangeDetectorRef` `markForCheck`', () => {
-        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
-      });
+    it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
     });
   });
 
   describe('`ngOnDestroy`', () => {
-    it('should call `caseStudies$` `unsubscribe` if has `caseStudies$`', () => {
-      comp.caseStudies$ = { unsubscribe: jest.fn() } as any;
+    it('should call `dataSub` `unsubscribe` if has `dataSub`', () => {
+      comp.dataSub = { unsubscribe: jest.fn() } as any;
       comp.ngOnDestroy();
 
-      expect((comp.caseStudies$ as any).unsubscribe).toHaveBeenCalled();
+      expect((comp.dataSub as any).unsubscribe).toHaveBeenCalled();
     });
 
-    it('should not throw if no `caseStudies$`', () => {
-      comp.caseStudies$ = undefined;
+    it('should not throw if no `dataSub`', () => {
+      comp.dataSub = undefined;
 
       expect(() => comp.ngOnDestroy()).not.toThrow();
     });

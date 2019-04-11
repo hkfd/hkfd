@@ -1,10 +1,4 @@
-import {
-  ComponentFixture,
-  TestBed,
-  async,
-  fakeAsync,
-  tick
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
@@ -13,15 +7,14 @@ import {
   RouterTestingModule,
   MockMetaService,
   MockPrismicService,
-  MockNotificationService,
   MockPrismicPipe,
   StubImageComponent,
   Data
 } from 'testing';
-import { of, Subscription, throwError } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
-import { MetaService, PrismicService, NotificationService } from 'shared';
+import { MetaService, PrismicService } from 'shared';
 import { NewsComponent } from './news.component';
 
 let comp: NewsComponent;
@@ -29,7 +22,6 @@ let fixture: ComponentFixture<NewsComponent>;
 let changeDetectorRef: ChangeDetectorRef;
 let metaService: MetaService;
 let prismicService: PrismicService;
-let notificationService: NotificationService;
 let page: Page;
 
 beforeEach(jest.clearAllMocks);
@@ -41,8 +33,7 @@ describe('NewsComponent', () => {
       declarations: [NewsComponent, StubImageComponent, MockPrismicPipe],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
-        { provide: PrismicService, useClass: MockPrismicService },
-        { provide: NotificationService, useClass: MockNotificationService }
+        { provide: PrismicService, useClass: MockPrismicService }
       ]
     }).compileComponents()));
 
@@ -74,21 +65,6 @@ describe('NewsComponent', () => {
         comp.ngOnDestroy();
 
         expect((comp.post$ as any).unsubscribe).toHaveBeenCalled();
-      });
-    });
-
-    describe('`notificationSub`', () => {
-      it('should call `notificationSub` `unsubscribe` if has `notificationSub`', () => {
-        comp.notificationSub = { unsubscribe: jest.fn() } as any;
-        comp.ngOnDestroy();
-
-        expect((comp.notificationSub as any).unsubscribe).toHaveBeenCalled();
-      });
-
-      it('should not throw if no `notificationSub`', () => {
-        comp.notificationSub = undefined;
-
-        expect(() => comp.ngOnDestroy()).not.toThrow();
       });
     });
   });
@@ -162,40 +138,6 @@ describe('NewsComponent', () => {
 
         expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
       });
-    });
-
-    describe('Error', () => {
-      beforeEach(() =>
-        (prismicService.getPosts as jest.Mock).mockReturnValue(
-          throwError('error')
-        )
-      );
-
-      it('should set `notificationSub`', async(() => {
-        comp.notificationSub = undefined;
-        comp.getPosts();
-
-        expect(comp.notificationSub).toBeDefined();
-      }));
-
-      it('should call `NotificationService` `displayMessage` with args', async(() => {
-        comp.getPosts();
-
-        expect(notificationService.displayMessage).toHaveBeenCalledWith(
-          `Couldn't load more posts`,
-          { action: 'Retry' }
-        );
-      }));
-
-      it('should call `getPosts`', async(() => {
-        (notificationService.displayMessage as jest.Mock).mockReturnValue(of());
-        (notificationService.displayMessage as jest.Mock).mockReturnValueOnce(
-          of(undefined)
-        );
-        comp.getPosts();
-
-        expect(comp.getPosts).toHaveBeenCalledTimes(3);
-      }));
     });
   });
 
@@ -358,9 +300,6 @@ function createComponent() {
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
-  );
-  notificationService = fixture.debugElement.injector.get<NotificationService>(
-    NotificationService
   );
   jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');

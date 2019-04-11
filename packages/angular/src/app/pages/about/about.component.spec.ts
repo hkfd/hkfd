@@ -21,6 +21,8 @@ let page: Page;
 let metaService: MetaService;
 let apiService: ApiService;
 
+beforeEach(jest.clearAllMocks);
+
 describe('AboutComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
