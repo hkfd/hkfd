@@ -6,7 +6,8 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { concatMapTo, tap, map } from 'rxjs/operators';
 
 import { MetaService, ApiService } from 'shared';
 import { Service, Client, CaseStudy } from 'api';
@@ -19,10 +20,10 @@ import { HomeImages } from './home.images';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  services$: Observable<Service[]> | undefined;
-  clients$: Observable<Client[]> | undefined;
-  caseStudies$: Subscription | undefined;
+  dataSub: Subscription | undefined;
+  services: Service[] | undefined;
   caseStudies: CaseStudy[] | undefined;
+  clients: Client[] | undefined;
 
   images = HomeImages;
 
@@ -35,20 +36,30 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.metaService.setMetaTags({});
 
-    this.services$ = this.apiService.getServices();
-    this.clients$ = this.apiService.getClients();
-
-    this.caseStudies$ = this.apiService
-      .getCaseStudies()
-      .subscribe(caseStudies => {
-        this.caseStudies = caseStudies.filter(
-          ({ featured }) => featured === true
-        );
+    this.dataSub = this.apiService
+      .getServices()
+      .pipe(
+        tap(services => {
+          this.services = services;
+          this.changeDetectorRef.markForCheck();
+        }),
+        concatMapTo(this.apiService.getCaseStudies()),
+        map(caseStudies =>
+          caseStudies.filter(({ featured }) => featured === true)
+        ),
+        tap(caseStudies => {
+          this.caseStudies = caseStudies;
+          this.changeDetectorRef.markForCheck();
+        }),
+        concatMapTo(this.apiService.getClients())
+      )
+      .subscribe(clients => {
+        this.clients = clients;
         this.changeDetectorRef.markForCheck();
       });
   }
 
   ngOnDestroy() {
-    this.caseStudies$ && this.caseStudies$.unsubscribe();
+    this.dataSub && this.dataSub.unsubscribe();
   }
 }

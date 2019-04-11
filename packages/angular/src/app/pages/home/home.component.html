@@ -40,7 +40,7 @@
   <div id="services-list">
     <a
       class="service"
-      *ngFor="let service of (services$ | async)"
+      *ngFor="let service of services"
       [routerLink]="['service', service?.id]"
       [attr.aria-label]="service?.title"
     >
@@ -73,7 +73,7 @@
   </div>
 
   <ul id="client-list">
-    <li class="client" *ngFor="let client of (clients$ | async)">
+    <li class="client" *ngFor="let client of clients">
       {{ client?.sector }}
       :
       <ul class="client-list">

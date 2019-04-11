@@ -8,9 +8,15 @@ import {
   LoggerService,
   MockLoggerService,
   MockMetaService,
-  Data
+  Data,
+  MockNotificationService
 } from 'testing';
-import { ApiService, MetaService } from 'shared';
+import {
+  ApiService,
+  MetaService,
+  NotificationService,
+  catchNetworkError
+} from 'shared';
 import {
   getPostUrl,
   createCareerMetaTags,
@@ -19,7 +25,14 @@ import {
 
 let mockHttp: HttpTestingController;
 let metaService: MetaService;
+let notificationService: NotificationService;
 let apiService: ApiService;
+
+jest.mock('shared/errors/operators', () => {
+  const { pipe } = require('rxjs');
+
+  return { catchNetworkError: jest.fn().mockReturnValue(pipe()) };
+});
 
 jest.mock('./api.helpers', () => {
   const { SERVICES, CASE_STUDIES } = (jest as any).requireActual(
@@ -47,7 +60,8 @@ describe('ApiService', () => {
       providers: [
         ApiService,
         { provide: LoggerService, useClass: MockLoggerService },
-        { provide: MetaService, useClass: MockMetaService }
+        { provide: MetaService, useClass: MockMetaService },
+        { provide: NotificationService, useClass: MockNotificationService }
       ]
     }).compileComponents()));
 
@@ -68,6 +82,24 @@ describe('ApiService', () => {
         } = mockHttp.expectOne(url);
 
         expect(method).toBe('GET');
+      });
+
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getServices().subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load services`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(url);
       });
 
       describe('No error', () => {
@@ -118,6 +150,24 @@ describe('ApiService', () => {
         expect(method).toBe('GET');
       });
 
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getCareers().subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load careers`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(url);
+      });
+
       describe('No error', () => {
         let res: any;
 
@@ -164,6 +214,24 @@ describe('ApiService', () => {
         } = mockHttp.expectOne(url);
 
         expect(method).toBe('GET');
+      });
+
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getCareer('career-1').subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load career`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(url);
       });
 
       describe('No error', () => {
@@ -247,6 +315,24 @@ describe('ApiService', () => {
         expect(method).toBe('GET');
       });
 
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getPost('service', 'service-1').subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load post`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne('/getPostUrl');
+      });
+
       describe('No error', () => {
         it('should return `post` if has `post`', async(() => {
           apiService
@@ -328,6 +414,24 @@ describe('ApiService', () => {
         expect(method).toBe('GET');
       });
 
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getCaseStudies().subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load case studies`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(url);
+      });
+
       describe('No error', () => {
         let res: any;
 
@@ -376,6 +480,24 @@ describe('ApiService', () => {
         expect(method).toBe('GET');
       });
 
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getTeam().subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load team`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(url);
+      });
+
       describe('No error', () => {
         let res: any;
 
@@ -415,6 +537,24 @@ describe('ApiService', () => {
     const url = 'https://api.testing/clients.json';
 
     describe('Request', () => {
+      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+        (notificationService.displayMessage as jest.Mock).mockImplementation(
+          (...args: any[]) => args
+        );
+        apiService.getClients().subscribe();
+        const [
+          [catchNetworkErrorFunctionArgs]
+        ] = (catchNetworkError as jest.Mock).mock.calls;
+
+        expect(catchNetworkErrorFunctionArgs()).toEqual([
+          `Couldn't load clients`,
+          {
+            action: 'Retry'
+          }
+        ]);
+        mockHttp.expectOne(url);
+      });
+
       describe('No error', () => {
         let res: any;
 
@@ -457,4 +597,5 @@ function createService() {
   mockHttp = TestBed.get(HttpTestingController);
   apiService = TestBed.get(ApiService);
   metaService = TestBed.get(MetaService);
+  notificationService = TestBed.get(NotificationService);
 }

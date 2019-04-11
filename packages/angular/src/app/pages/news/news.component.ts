@@ -9,7 +9,7 @@ import {
 import { Subscription } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
-import { MetaService, PrismicService, NotificationService } from 'shared';
+import { MetaService, PrismicService } from 'shared';
 import { Post } from 'prismic';
 import { NewsAnimations } from './news.animations';
 
@@ -27,13 +27,10 @@ export class NewsComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   hasNextPage: boolean | undefined;
 
-  notificationSub: Subscription | undefined;
-
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private prismicService: PrismicService,
-    private metaService: MetaService,
-    private notificationService: NotificationService
+    private metaService: MetaService
   ) {}
 
   postTrackBy(_index: number, { id }: Post) {
@@ -41,17 +38,13 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   getPosts(onInit?: boolean) {
-    this.post$ = this.prismicService.getPosts(onInit).subscribe(
-      ({ results, next_page }) => {
+    this.post$ = this.prismicService
+      .getPosts(onInit)
+      .subscribe(({ results, next_page }) => {
         this.posts = this.posts.concat(results);
         this.hasNextPage = !!next_page;
         this.changeDetectorRef.markForCheck();
-      },
-      _ =>
-        (this.notificationSub = this.notificationService
-          .displayMessage(`Couldn't load more posts`, { action: 'Retry' })
-          .subscribe(this.getPosts.bind(this)))
-    );
+      });
   }
 
   ngOnInit() {
@@ -62,6 +55,5 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.post$) this.post$.unsubscribe();
-    this.notificationSub && this.notificationSub.unsubscribe();
   }
 }

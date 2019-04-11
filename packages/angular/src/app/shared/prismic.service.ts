@@ -6,6 +6,8 @@ import { map, flatMap, tap } from 'rxjs/operators';
 
 import { LoggerService } from './logger.service';
 import { MetaService } from './meta.service';
+import { NotificationService } from './notification.service';
+import { catchNetworkError } from './errors';
 import { Post, RefResponse, PostsResponse } from 'prismic';
 import { environment } from 'environment';
 import { createNewsPostMetaTags } from './prismic.service.helpers';
@@ -22,7 +24,8 @@ export class PrismicService {
   constructor(
     private http: HttpClient,
     private logger: LoggerService,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private notificationService: NotificationService
   ) {}
 
   getRef(): Observable<string> {
@@ -47,6 +50,11 @@ export class PrismicService {
 
         return this.http.get<PostsResponse>(URL, { params });
       }),
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load posts`, {
+          action: 'Retry'
+        })
+      ),
       tap(postsRes => this.logger.log('getPosts', postsRes))
     );
   }
@@ -62,6 +70,11 @@ export class PrismicService {
 
         return this.http.get<PostsResponse>(URL, { params });
       }),
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load post`, {
+          action: 'Retry'
+        })
+      ),
       map(({ results }) => results[0] || null),
       tap(post => {
         this.logger.log('getPost', post);

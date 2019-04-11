@@ -7,6 +7,8 @@ import { tap, map } from 'rxjs/operators';
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 import { MetaService } from './meta.service';
+import { NotificationService } from './notification.service';
+import { catchNetworkError } from './errors';
 import { Service, Career, CaseStudy, Team, Client } from 'api';
 import {
   SERVICES,
@@ -37,23 +39,39 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private logger: LoggerService,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private notificationService: NotificationService
   ) {}
 
   getServices(): Observable<Service[]> {
-    return this.http
-      .get<Service[]>(SERVICES)
-      .pipe(tap(services => this.logger.log('getServices', services)));
+    return this.http.get<Service[]>(SERVICES).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load services`, {
+          action: 'Retry'
+        })
+      ),
+      tap(services => this.logger.log('getServices', services))
+    );
   }
 
   getCareers(): Observable<Career[]> {
-    return this.http
-      .get<Career[]>(CAREERS)
-      .pipe(tap(careers => this.logger.log('getCareers', careers)));
+    return this.http.get<Career[]>(CAREERS).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load careers`, {
+          action: 'Retry'
+        })
+      ),
+      tap(careers => this.logger.log('getCareers', careers))
+    );
   }
 
   getCareer(id: string): Observable<Career | null> {
     return this.http.get<Career[]>(CAREERS).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load career`, {
+          action: 'Retry'
+        })
+      ),
       map(careers => careers.find(career => career.id === id) || null),
       tap(career => {
         this.logger.log('getCareer', career);
@@ -69,6 +87,11 @@ export class ApiService {
     const url = getPostUrl(type);
 
     return this.http.get<Array<getPost<T>>>(url).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load post`, {
+          action: 'Retry'
+        })
+      ),
       map(posts => posts.find(post => post.id === id) || null),
       tap(post => {
         this.logger.log('getPost', post);
@@ -78,20 +101,35 @@ export class ApiService {
   }
 
   getCaseStudies(): Observable<CaseStudy[]> {
-    return this.http
-      .get<CaseStudy[]>(CASE_STUDIES)
-      .pipe(tap(caseStudies => this.logger.log('getCaseStudies', caseStudies)));
+    return this.http.get<CaseStudy[]>(CASE_STUDIES).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load case studies`, {
+          action: 'Retry'
+        })
+      ),
+      tap(caseStudies => this.logger.log('getCaseStudies', caseStudies))
+    );
   }
 
   getTeam(): Observable<Team[]> {
-    return this.http
-      .get<Team[]>(TEAM)
-      .pipe(tap(team => this.logger.log('getTeam', team)));
+    return this.http.get<Team[]>(TEAM).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load team`, {
+          action: 'Retry'
+        })
+      ),
+      tap(team => this.logger.log('getTeam', team))
+    );
   }
 
   getClients(): Observable<Client[]> {
-    return this.http
-      .get<Client[]>(CLIENTS)
-      .pipe(tap(clients => this.logger.log('getClients', clients)));
+    return this.http.get<Client[]>(CLIENTS).pipe(
+      catchNetworkError(() =>
+        this.notificationService.displayMessage(`Couldn't load clients`, {
+          action: 'Retry'
+        })
+      ),
+      tap(clients => this.logger.log('getClients', clients))
+    );
   }
 }
