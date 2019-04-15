@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/hkfd/hkfd/compare/v1.4.0...v1.5.0) (2019-04-15)
+
+
+### Bug Fixes
+
+* **angular:** call Sentry in production only ([7402f81](https://github.com/hkfd/hkfd/commit/7402f81))
+* **angular:** enable routing animation from news -> news post ([9e1d6f4](https://github.com/hkfd/hkfd/commit/9e1d6f4))
+
+
+### Features
+
+* **angular:** add `InteractionError` ([ffeca04](https://github.com/hkfd/hkfd/commit/ffeca04))
+* **angular:** display global error ([aa5c0e5](https://github.com/hkfd/hkfd/commit/aa5c0e5))
+* **angular:** display notification errors ([e85965e](https://github.com/hkfd/hkfd/commit/e85965e))
+* **angular:** display page not found error ([e0b1a7b](https://github.com/hkfd/hkfd/commit/e0b1a7b))
+* **angular:** handle network errors ([faf8d6a](https://github.com/hkfd/hkfd/commit/faf8d6a))
+
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/hkfd/hkfd/compare/v1.3.7...v1.4.0) (2019-03-22)
 
