@@ -103,57 +103,53 @@ describe('SliderWorkComponent', () => {
   });
 
   describe('Template', () => {
-    beforeEach(() => {
-      compHost.caseStudies = Data.Api.getCaseStudies<void>();
-      changeDetectorRef.markForCheck();
-      fixture.detectChanges();
-    });
-
-    describe('Nav', () => {
-      describe('Prev', () => {
-        it('should be displayed', () => {
-          expect(page.sliderPrev).toBeTruthy();
-        });
-
-        it('should call `changeImage` on click with `-1` arg', () => {
-          page.sliderPrev.click();
-
-          expect(comp.changeImage).toHaveBeenCalledWith(-1);
-        });
+    describe('No `caseStudies`', () => {
+      beforeEach(() => {
+        (comp as any)._caseStudies = undefined;
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
       });
 
-      describe('Next', () => {
-        it('should be displayed', () => {
-          expect(page.sliderNext).toBeTruthy();
-        });
-
-        it('should call `changeImage` on click with `1` arg', () => {
-          page.sliderNext.click();
-
-          expect(comp.changeImage).toHaveBeenCalledWith(1);
-        });
+      it('should not be displayed', () => {
+        expect(page.sliderPrev).toBeFalsy();
+        expect(page.sliderNext).toBeFalsy();
+        expect(page.slideContainer).toBeFalsy();
       });
     });
 
-    describe('Container', () => {
-      describe('No `caseStudies`', () => {
-        beforeEach(() => {
-          (comp as any)._caseStudies = undefined;
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
+    describe('Has `caseStudies`', () => {
+      beforeEach(() => {
+        compHost.caseStudies = Data.Api.getCaseStudies<void>();
+        fixture.detectChanges();
+      });
+
+      describe('Nav', () => {
+        describe('Prev', () => {
+          it('should be displayed', () => {
+            expect(page.sliderPrev).toBeTruthy();
+          });
+
+          it('should call `changeImage` on click with `-1` arg', () => {
+            page.sliderPrev.click();
+
+            expect(comp.changeImage).toHaveBeenCalledWith(-1);
+          });
         });
 
-        it('should not be displayed', () => {
-          expect(page.slideContainer).toBeFalsy();
+        describe('Next', () => {
+          it('should be displayed', () => {
+            expect(page.sliderNext).toBeTruthy();
+          });
+
+          it('should call `changeImage` on click with `1` arg', () => {
+            page.sliderNext.click();
+
+            expect(comp.changeImage).toHaveBeenCalledWith(1);
+          });
         });
       });
 
-      describe('Has `caseStudies`', () => {
-        beforeEach(() => {
-          compHost.caseStudies = Data.Api.getCaseStudies<void>();
-          fixture.detectChanges();
-        });
-
+      describe('Container', () => {
         it('should be displayed', () => {
           expect(page.slideContainer).toBeTruthy();
         });
