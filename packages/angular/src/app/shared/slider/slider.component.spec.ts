@@ -485,62 +485,60 @@ describe('SliderComponent', () => {
   describe('Template', () => {
     beforeEach(async(() => setupTest()));
     beforeEach(async(() => createComponent()));
-    beforeEach(() => {
-      compHost.images = Data.Generic.getImages();
-      fixture.detectChanges();
+
+    describe('No `images`', () => {
+      beforeEach(() => {
+        (comp as any)._images = undefined;
+        changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+      });
+
+      it('should not be displayed', () => {
+        expect(page.sliderPrev).toBeFalsy();
+        expect(page.sliderNext).toBeFalsy();
+        expect(page.slideContainer).toBeFalsy();
+      });
     });
 
-    describe('Nav', () => {
-      describe('Prev', () => {
+    describe('Has `images`', () => {
+      beforeEach(() => {
+        compHost.images = Data.Generic.getImages();
+        fixture.detectChanges();
+      });
+
+      describe('Nav', () => {
+        describe('Prev', () => {
+          it('should be displayed', () => {
+            expect(page.sliderPrev).toBeTruthy();
+          });
+
+          it('should call `changeImage` on click with `-1` arg', () => {
+            page.sliderPrev.click();
+
+            expect(comp.changeImage).toHaveBeenCalledWith(-1);
+          });
+        });
+
+        describe('Next', () => {
+          it('should be displayed', () => {
+            expect(page.sliderNext).toBeTruthy();
+          });
+
+          it('should call `changeImage` on click with `1` arg', () => {
+            page.sliderNext.click();
+
+            expect(comp.changeImage).toHaveBeenCalledWith(1);
+          });
+        });
+      });
+
+      describe('Projected content', () => {
         it('should be displayed', () => {
-          expect(page.sliderPrev).toBeTruthy();
-        });
-
-        it('should call `changeImage` on click with `-1` arg', () => {
-          page.sliderPrev.click();
-
-          expect(comp.changeImage).toHaveBeenCalledWith(-1);
+          expect(page.projectedContent.textContent).toBe('Content');
         });
       });
 
-      describe('Next', () => {
-        it('should be displayed', () => {
-          expect(page.sliderNext).toBeTruthy();
-        });
-
-        it('should call `changeImage` on click with `1` arg', () => {
-          page.sliderNext.click();
-
-          expect(comp.changeImage).toHaveBeenCalledWith(1);
-        });
-      });
-    });
-
-    describe('Projected content', () => {
-      it('should be displayed', () => {
-        expect(page.projectedContent.textContent).toBe('Content');
-      });
-    });
-
-    describe('Container', () => {
-      describe('No `images`', () => {
-        beforeEach(() => {
-          (comp as any)._images = undefined;
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-        });
-
-        it('should not be displayed', () => {
-          expect(page.slideContainer).toBeFalsy();
-        });
-      });
-
-      describe('Has `images`', () => {
-        beforeEach(() => {
-          compHost.images = Data.Generic.getImages();
-          fixture.detectChanges();
-        });
-
+      describe('Container', () => {
         it('should be displayed', () => {
           expect(page.slideContainer).toBeTruthy();
         });

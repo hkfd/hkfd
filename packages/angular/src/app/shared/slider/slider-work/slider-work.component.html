@@ -1,55 +1,56 @@
-<div class="slider-nav">
-  <button
-    class="slider-prev"
-    type="button"
-    (click)="changeImage(-1)"
-    aria-label="Previous"
-  >
-    <span class="arrow left"></span>
-  </button>
-  <button
-    class="slider-next"
-    type="button"
-    (click)="changeImage(1)"
-    aria-label="Next"
-  >
-    <span class="arrow right"></span>
-  </button>
-</div>
-
-<div
-  class="slide-container"
-  *ngIf="caseStudies"
-  [style.transform]="'translateX(' + this.currentIndex * -100 + '%)'"
->
-  <div
-    class="slide {{ caseStudy?.colour }}"
-    *ngFor="let caseStudy of caseStudies"
-  >
-    <div class="slide-info">
-      <div class="info-meta">
-        <a
-          [routerLink]="['/work', caseStudy?.id]"
-          [attr.aria-label]="caseStudy?.title"
-        >
-          {{ caseStudy?.title }}
-        </a>
-        <span>{{ caseStudy?.sector }}</span>
-      </div>
-
-      <div class="info-more">
-        <a
-          class="button"
-          [routerLink]="['/work', caseStudy?.id]"
-          [attr.aria-label]="'Read More'"
-        >
-          SEE THE CASE STUDY
-        </a>
-      </div>
-    </div>
-    <image-component
-      [image]="caseStudy?.thumbnail"
-      full-height
-    ></image-component>
+<ng-container *ngIf="caseStudies">
+  <div class="slider-nav">
+    <button
+      class="slider-prev"
+      type="button"
+      (click)="changeImage(-1)"
+      aria-label="Previous"
+    >
+      <span class="arrow left"></span>
+    </button>
+    <button
+      class="slider-next"
+      type="button"
+      (click)="changeImage(1)"
+      aria-label="Next"
+    >
+      <span class="arrow right"></span>
+    </button>
   </div>
-</div>
+
+  <div
+    class="slide-container"
+    [style.transform]="'translateX(' + this.currentIndex * -100 + '%)'"
+  >
+    <div
+      class="slide {{ caseStudy?.colour }}"
+      *ngFor="let caseStudy of caseStudies"
+    >
+      <div class="slide-info">
+        <div class="info-meta">
+          <a
+            [routerLink]="['/work', caseStudy?.id]"
+            [attr.aria-label]="caseStudy?.title"
+          >
+            {{ caseStudy?.title }}
+          </a>
+          <span>{{ caseStudy?.sector }}</span>
+        </div>
+
+        <div class="info-more">
+          <a
+            class="button"
+            [routerLink]="['/work', caseStudy?.id]"
+            [attr.aria-label]="'Read More'"
+          >
+            SEE THE CASE STUDY
+          </a>
+        </div>
+      </div>
+      <image-component
+        [image]="caseStudy?.thumbnail"
+        full-height
+      ></image-component>
+    </div>
+  </div>
+</ng-container>
