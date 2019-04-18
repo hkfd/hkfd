@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map, flatMap, tap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { catchNetworkError } from './errors';
 import { Post, RefResponse, PostsResponse } from 'prismic';
 import { environment } from 'environment';
 import { createNewsPostMetaTags } from './prismic.service.helpers';
-import { getNewPage, getNewPageSize } from './prismic.helpers';
+import { getMasterRef, getPostsParams, getPostParams } from './prismic.helpers';
 
 export const URL = `${environment.prismic.endpoint}/documents/search`;
 
@@ -30,8 +30,7 @@ export class PrismicService {
 
   getRef(): Observable<string> {
     return this.http.get<RefResponse>(environment.prismic.endpoint).pipe(
-      map(({ refs }) => refs.find(ref => ref.isMasterRef)),
-      map(ref => (ref ? ref.ref : '')),
+      map(getMasterRef),
       tap(ref => this.logger.log('getRef', ref))
     );
   }
@@ -40,16 +39,11 @@ export class PrismicService {
     if (!firstLoad) this.postPage++;
 
     return this.getRef().pipe(
-      flatMap(ref => {
-        const params = new HttpParams()
-          .append('ref', ref)
-          .append('q', '[[at(document.type,"news")]]')
-          .append('orderings', '[document.first_publication_date desc]')
-          .append('pageSize', `${getNewPageSize(firstLoad, this.postPage)}`)
-          .append('page', `${getNewPage(firstLoad, this.postPage)}`);
-
-        return this.http.get<PostsResponse>(URL, { params });
-      }),
+      flatMap(ref =>
+        this.http.get<PostsResponse>(URL, {
+          params: getPostsParams({ ref, firstLoad, postPage: this.postPage })
+        })
+      ),
       catchNetworkError(() =>
         this.notificationService.displayMessage(`Couldn't load posts`, {
           action: 'Retry'
@@ -63,13 +57,11 @@ export class PrismicService {
     this.logger.log(`getPost ${uid}`);
 
     return this.getRef().pipe(
-      flatMap(ref => {
-        const params = new HttpParams()
-          .append('ref', ref)
-          .append('q', `[[at(my.news.uid,"${uid}")]]`);
-
-        return this.http.get<PostsResponse>(URL, { params });
-      }),
+      flatMap(ref =>
+        this.http.get<PostsResponse>(URL, {
+          params: getPostParams({ ref, uid })
+        })
+      ),
       catchNetworkError(() =>
         this.notificationService.displayMessage(`Couldn't load post`, {
           action: 'Retry'
