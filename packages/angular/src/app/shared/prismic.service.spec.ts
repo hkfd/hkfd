@@ -18,8 +18,15 @@ import { catchNetworkError } from 'shared';
 import { MetaService } from './meta.service';
 import { NotificationService } from './notification.service';
 import { createNewsPostMetaTags } from './prismic.service.helpers';
-import { getNewPage, getNewPageSize } from './prismic.helpers';
+import {
+  getNewPage,
+  getNewPageSize,
+  getMasterRef,
+  getPostsParams,
+  getPostParams
+} from './prismic.helpers';
 import { PrismicService, URL } from './prismic.service';
+import { HttpParams } from '@angular/common/http';
 
 let mockHttp: HttpTestingController;
 let metaService: MetaService;
@@ -33,8 +40,9 @@ jest.mock('./prismic.service.helpers', () => ({
 }));
 
 jest.mock('./prismic.helpers', () => ({
-  getNewPageSize: jest.fn().mockReturnValue('getNewPageSizeReturn'),
-  getNewPage: jest.fn().mockReturnValue('getNewPageReturn')
+  getMasterRef: jest.fn().mockReturnValue('getMasterRefReturn'),
+  getPostsParams: jest.fn().mockReturnValue(['getPostsParamsReturn']),
+  getPostParams: jest.fn().mockReturnValue(['getPostParamsReturn'])
 }));
 
 jest.mock('shared/errors/operators', () => {
@@ -96,35 +104,27 @@ describe('PrismicService', () => {
         });
 
         describe('No error', () => {
-          describe('No `isMasterRef`', () => {
-            it('should return ``', () => {
-              prismicService.getRef().subscribe(res => expect(res).toBe(''));
+          it('should call `getMasterRef` with `res`', () => {
+            prismicService
+              .getRef()
+              .subscribe(_ =>
+                expect(getMasterRef).toHaveBeenCalledWith(
+                  Data.Prismic.getRefResponse(),
+                  jasmine.anything()
+                )
+              );
 
-              mockHttp.expectOne(environment.prismic.endpoint).flush({
-                refs: [
-                  {
-                    ...Data.Prismic.getRefResponse().refs[0],
-                    isMasterRef: false
-                  },
-                  { ...Data.Prismic.getRefResponse().refs[1] },
-                  { ...Data.Prismic.getRefResponse().refs[2] }
-                ]
-              });
-            });
+            mockHttp
+              .expectOne(environment.prismic.endpoint)
+              .flush(Data.Prismic.getRefResponse());
           });
 
-          describe('Has `isMasterRef`', () => {
-            it('should return `ref`', () => {
-              prismicService
-                .getRef()
-                .subscribe(res =>
-                  expect(res).toEqual(Data.Prismic.getRefResponse().refs[0].ref)
-                );
+          it('should return `getMasterRef` return', () => {
+            prismicService
+              .getRef()
+              .subscribe(res => expect(res).toBe('getMasterRefReturn'));
 
-              mockHttp
-                .expectOne(environment.prismic.endpoint)
-                .flush(Data.Prismic.getRefResponse());
-            });
+            mockHttp.expectOne(environment.prismic.endpoint).flush({});
           });
         });
       });
@@ -137,13 +137,27 @@ describe('PrismicService', () => {
     );
 
     describe('Request', () => {
-      it('should call `HttpClient` `get`', () => {
+      it('should call `getPostsParams` with args', () => {
+        (prismicService as any).postPage = 'postPage';
+        prismicService.getPosts('firstLoad' as any).subscribe(_ =>
+          expect(getPostsParams).toHaveBeenCalledWith({
+            ref: 'abc',
+            firstLoad: 'firstLoad',
+            postPage: 'postPage'
+          })
+        );
+
+        mockHttp.expectOne(req => req.url === URL);
+      });
+
+      it('should call `HttpClient` `get` with `params` as `getPostsParams` return', () => {
         prismicService.getPosts(true).subscribe();
         const {
-          request: { method }
+          request: { method, params }
         } = mockHttp.expectOne(req => req.url === URL);
 
         expect(method).toBe('GET');
+        expect(params.toString()).toBe('0=getPostsParamsReturn');
       });
 
       it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
@@ -162,31 +176,6 @@ describe('PrismicService', () => {
           }
         ]);
         mockHttp.expectOne(req => req.url === URL);
-      });
-
-      it('should call `getNewPageSize` with `firstLoad` and `postPage` args', () => {
-        prismicService.getPosts(true).subscribe();
-        mockHttp.expectOne(req => req.url === URL);
-
-        expect(getNewPageSize).toHaveBeenCalledWith(true, 1);
-      });
-
-      it('should call `getNewPage` with `firstLoad` and `postPage` args', () => {
-        prismicService.getPosts(true).subscribe();
-        mockHttp.expectOne(req => req.url === URL);
-
-        expect(getNewPage).toHaveBeenCalledWith(true, 1);
-      });
-
-      it('should call `HttpClient` `get` with `params`', () => {
-        prismicService.getPosts(true).subscribe();
-        const {
-          request: { params }
-        } = mockHttp.expectOne(req => req.url === URL);
-
-        expect(params.get('ref')).toBe('abc');
-        expect(params.get('pageSize')).toBe('getNewPageSizeReturn');
-        expect(params.get('page')).toBe('getNewPageReturn');
       });
 
       describe('Response', () => {
@@ -236,22 +225,26 @@ describe('PrismicService', () => {
     );
 
     describe('Request', () => {
-      it('should call `HttpClient` `get`', () => {
+      it('should call `getPostParams` with args', () => {
+        (prismicService as any).postPage = 'postPage';
+        prismicService.getPost('uid').subscribe(_ =>
+          expect(getPostParams).toHaveBeenCalledWith({
+            ref: 'abc',
+            uid: 'uid'
+          })
+        );
+
+        mockHttp.expectOne(req => req.url === URL);
+      });
+
+      it('should call `HttpClient` `get` with `params` as `getPostParams` return', () => {
         prismicService.getPost('post-1').subscribe();
         const {
-          request: { method }
+          request: { method, params }
         } = mockHttp.expectOne(req => req.url === URL);
 
         expect(method).toBe('GET');
-      });
-
-      it('should call `HttpClient` `get` with `q` param as `uid`', () => {
-        prismicService.getPost('post-1').subscribe();
-        const {
-          request: { params }
-        } = mockHttp.expectOne(req => req.url === URL);
-
-        expect(params.get('q')).toContain('post-1');
+        expect(params.toString()).toBe('0=getPostParamsReturn');
       });
 
       it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
