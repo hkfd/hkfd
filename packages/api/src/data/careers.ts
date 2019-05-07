@@ -336,5 +336,105 @@ export const CAREERS: Career[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'receptionist',
+    title: 'Receptionist/General Office Administrator',
+    salary: 'DOE',
+    content: [
+      {
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'Full time Monday to Friday 8.45 - 5.30 (although finish time may be flexible for the right candidate)'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Tasks and responsibilities (not limited to):',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                list: [
+                  {
+                    text:
+                      'First point of telephone contact for clients and visitors, general office organisation'
+                  },
+                  {
+                    text:
+                      'Ensuring all visitors are acknowledged promptly with excellent customer service which exceeds customer expectations'
+                  },
+                  {
+                    text:
+                      'Deal with any correspondence and feedback ensuring it is correctly documented, reported and followed up accordingly'
+                  },
+                  {
+                    text:
+                      'Must be computer literate, proficient in Microsoft Office'
+                  },
+                  {
+                    text:
+                      'Maintain databases, general office administration including updating and maintaining the sales order processing systems'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Skills',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'As the ideal candidate for this role, you will have worked in a similar role and be:'
+                  }
+                ]
+              },
+              {
+                list: [
+                  {
+                    text: 'A proactive individual'
+                  },
+                  {
+                    text: 'Excellent communication skills'
+                  },
+                  {
+                    text: 'A good, clear speaking voice'
+                  },
+                  {
+                    text:
+                      'Dependable, reliable and have a willingness to learn and take responsibility for your own work'
+                  },
+                  {
+                    text:
+                      'Ability to work on your own as well as part of a team'
+                  },
+                  {
+                    text: 'Have GCSE English and Mathematics'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
