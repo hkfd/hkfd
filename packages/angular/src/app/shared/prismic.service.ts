@@ -19,8 +19,6 @@ export const URL = `${environment.prismic.endpoint}/documents/search`;
   providedIn: 'root'
 })
 export class PrismicService {
-  private postPage = 1;
-
   constructor(
     private http: HttpClient,
     private logger: LoggerService,
@@ -35,13 +33,11 @@ export class PrismicService {
     );
   }
 
-  getPosts(firstLoad: boolean = false): Observable<PostsResponse> {
-    if (!firstLoad) this.postPage++;
-
+  getPosts(page: string): Observable<PostsResponse> {
     return this.getRef().pipe(
       flatMap(ref =>
         this.http.get<PostsResponse>(URL, {
-          params: getPostsParams({ ref, firstLoad, postPage: this.postPage })
+          params: getPostsParams({ ref, page })
         })
       ),
       catchNetworkError(() =>

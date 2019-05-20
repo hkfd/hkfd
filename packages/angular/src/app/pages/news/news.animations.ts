@@ -14,9 +14,9 @@ export const NewsAnimations = [
         ':enter',
         [
           style({ transform: 'translateY(20%)' }),
-          stagger(100, [
+          stagger(50, [
             animate(
-              '0.6s cubic-bezier(0.075, 0.82, 0.165, 1)',
+              '0.4s cubic-bezier(0.075, 0.82, 0.165, 1)',
               style({ transform: 'translateY(0)' })
             )
           ])

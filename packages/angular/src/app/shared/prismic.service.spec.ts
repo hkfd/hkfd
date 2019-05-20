@@ -18,15 +18,8 @@ import { catchNetworkError } from 'shared';
 import { MetaService } from './meta.service';
 import { NotificationService } from './notification.service';
 import { createNewsPostMetaTags } from './prismic.service.helpers';
-import {
-  getNewPage,
-  getNewPageSize,
-  getMasterRef,
-  getPostsParams,
-  getPostParams
-} from './prismic.helpers';
+import { getMasterRef, getPostsParams, getPostParams } from './prismic.helpers';
 import { PrismicService, URL } from './prismic.service';
-import { HttpParams } from '@angular/common/http';
 
 let mockHttp: HttpTestingController;
 let metaService: MetaService;
@@ -138,12 +131,10 @@ describe('PrismicService', () => {
 
     describe('Request', () => {
       it('should call `getPostsParams` with args', () => {
-        (prismicService as any).postPage = 'postPage';
-        prismicService.getPosts('firstLoad' as any).subscribe(_ =>
+        prismicService.getPosts('page').subscribe(_ =>
           expect(getPostsParams).toHaveBeenCalledWith({
             ref: 'abc',
-            firstLoad: 'firstLoad',
-            postPage: 'postPage'
+            page: 'page'
           })
         );
 
@@ -151,7 +142,7 @@ describe('PrismicService', () => {
       });
 
       it('should call `HttpClient` `get` with `params` as `getPostsParams` return', () => {
-        prismicService.getPosts(true).subscribe();
+        prismicService.getPosts('page').subscribe();
         const {
           request: { method, params }
         } = mockHttp.expectOne(req => req.url === URL);
@@ -164,7 +155,7 @@ describe('PrismicService', () => {
         (notificationService.displayMessage as jest.Mock).mockImplementation(
           (...args: any[]) => args
         );
-        prismicService.getPosts(true).subscribe();
+        prismicService.getPosts('page').subscribe();
         const [
           [catchNetworkErrorFunctionArgs]
         ] = (catchNetworkError as jest.Mock).mock.calls;
@@ -186,7 +177,7 @@ describe('PrismicService', () => {
           beforeEach(() => {
             error = new ErrorEvent('err');
             prismicService
-              .getPosts(true)
+              .getPosts('page')
               .subscribe(
                 response => fail(response),
                 errorRes => (err = errorRes)
@@ -204,7 +195,7 @@ describe('PrismicService', () => {
 
           beforeEach(() => {
             prismicService
-              .getPosts(true)
+              .getPosts('page')
               .subscribe(response => (res = response));
             mockHttp
               .expectOne(req => req.url === URL)
