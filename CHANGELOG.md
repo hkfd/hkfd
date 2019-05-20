@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/hkfd/hkfd/compare/v1.6.0...v1.6.1) (2019-05-20)
+
+
+### Bug Fixes
+
+* **angular:** handle network errors loading more news posts ([965d22c](https://github.com/hkfd/hkfd/commit/965d22c))
+
+
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/hkfd/hkfd/compare/v1.5.1...v1.6.0) (2019-05-07)
 
