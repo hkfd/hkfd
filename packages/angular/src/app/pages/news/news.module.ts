@@ -9,6 +9,7 @@ import { TextBlockComponent } from './news-post/text-block/text-block.component'
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
+  { path: 'page/:page', component: NewsComponent },
   {
     path: ':uid',
     component: NewsPostComponent,

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
-import { ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -9,38 +9,71 @@ import {
   MockPrismicService,
   MockPrismicPipe,
   StubImageComponent,
-  Data
+  Data,
+  ActivatedRoute,
+  ActivatedRouteStub
 } from 'testing';
-import { of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
+import { PostsResponse } from 'prismic';
 import { NewsComponent } from './news.component';
 
+let activatedRoute: ActivatedRouteStub;
 let comp: NewsComponent;
 let fixture: ComponentFixture<NewsComponent>;
-let changeDetectorRef: ChangeDetectorRef;
 let metaService: MetaService;
 let prismicService: PrismicService;
 let page: Page;
 
+@Component({
+  selector: 'app-host',
+  template: '<app-news>{{ data }}</app-news>'
+})
+class TestHostComponent {
+  data: any;
+}
+
+jest.mock('./news.helpers', () => ({
+  getPaginationUrl: jest
+    .fn()
+    .mockImplementation(
+      (_, direction) => `/getPaginationUrlReturn/${direction}`
+    )
+}));
+
 beforeEach(jest.clearAllMocks);
 
 describe('NewsComponent', () => {
-  beforeEach(async(() =>
+  beforeEach(async(() => {
+    activatedRoute = new ActivatedRouteStub();
+    activatedRoute.testParamMap = { page: 'page' };
+
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, NoopAnimationsModule],
-      declarations: [NewsComponent, StubImageComponent, MockPrismicPipe],
+      declarations: [
+        TestHostComponent,
+        NewsComponent,
+        StubImageComponent,
+        MockPrismicPipe
+      ],
       providers: [
+        { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: MetaService, useClass: MockMetaService },
         { provide: PrismicService, useClass: MockPrismicService }
       ]
-    }).compileComponents()));
+    }).compileComponents();
+  }));
 
   beforeEach(async(() => createComponent()));
 
   it('should create component', () => {
     expect(comp).toBeTruthy();
+  });
+
+  it('should set `getPaginationUrl`', () => {
+    expect(comp.getPaginationUrl).toBeDefined();
   });
 
   describe('`ngOnInit`', () => {
@@ -51,20 +84,32 @@ describe('NewsComponent', () => {
       });
     });
 
-    it('should call `getPosts` with `true` arg', () => {
-      expect(comp.getPosts).toHaveBeenCalledWith(true);
-    });
-  });
+    describe('`posts$`', () => {
+      it('should be set', () => {
+        expect(comp.posts$).toBeDefined();
+      });
 
-  describe('`ngOnDestroy`', () => {
-    describe('Has `post$`', () => {
-      beforeEach(() => (comp.post$ = new Subscription()));
+      describe('Has `page` param', () => {
+        it('should call `PrismicService` `getPosts` with `page` param', () => {
+          activatedRoute.testParamMap = { page: 'page' };
 
-      it('should call `post$` `unsubscribe`', () => {
-        jest.spyOn(comp.post$ as any, 'unsubscribe');
-        comp.ngOnDestroy();
+          expect(prismicService.getPosts).toHaveBeenCalledWith('page');
+        });
 
-        expect((comp.post$ as any).unsubscribe).toHaveBeenCalled();
+        it('should call `PrismicService` `getPosts` with `page` param again on param change', () => {
+          activatedRoute.testParamMap = { page: 'page1' };
+          expect(prismicService.getPosts).toHaveBeenCalledWith('page1');
+          activatedRoute.testParamMap = { page: 'page2' };
+          expect(prismicService.getPosts).toHaveBeenCalledWith('page2');
+        });
+      });
+
+      describe('No `page` param', () => {
+        it('should call `PrismicService` `getPosts` with `1` param', () => {
+          activatedRoute.testParamMap = { page: null };
+
+          expect(prismicService.getPosts).toHaveBeenCalledWith('1');
+        });
       });
     });
   });
@@ -77,178 +122,216 @@ describe('NewsComponent', () => {
     });
   });
 
-  describe('`getPosts`', () => {
-    it('should call PrismicService `getPosts` with `onInit` arg', () => {
-      comp.getPosts(false);
-
-      expect(prismicService.getPosts).toHaveBeenCalledWith(false);
-    });
-
-    it('should set `posts$`', () => {
-      comp.post$ = undefined;
-      comp.getPosts();
-
-      expect(comp.post$).toBeDefined();
-    });
-
-    describe('Response', () => {
-      beforeEach(() =>
-        (prismicService.getPosts as jest.Mock).mockReturnValue(
-          of(Data.Prismic.getPostsResponse())
-        )
-      );
-
-      it('should set `posts`', () => {
-        comp.posts = [];
-        comp.getPosts();
-
-        expect(comp.posts).toEqual(Data.Prismic.getPostsResponse().results);
-      });
-
-      it('should not overwrite existing `posts`', () => {
-        (comp.posts as any) = ['post'];
-        comp.getPosts();
-
-        expect(comp.posts).toEqual([
-          'post',
-          ...Data.Prismic.getPostsResponse().results
-        ] as any);
-      });
-
-      it('should set `hasNextPage` as true if `next_page`', () => {
-        (prismicService.getPosts as jest.Mock).mockReturnValue(
-          of({ results: null, next_page: 'page2' })
-        );
-
-        comp.getPosts();
-        expect(comp.hasNextPage).toBe(true);
-      });
-
-      it('should set `hasNextPage` as false if no `next_page`', () => {
-        (prismicService.getPosts as jest.Mock).mockReturnValue(
-          of({ results: null, next_page: null })
-        );
-
-        comp.getPosts();
-        expect(comp.hasNextPage).toBe(false);
-      });
-
-      it('should call `ChangeDetectorRef` `markForCheck`', () => {
-        comp.getPosts();
-
-        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
-      });
-    });
-  });
-
   describe('Template', () => {
     it('should display title', () => {
       expect(page.title.textContent).toBeTruthy();
     });
 
-    describe('Posts', () => {
-      it('should be displayed', () => {
-        expect(page.posts.length).toBe(
-          Data.Prismic.getPostsResponse().results.length
-        );
-      });
+    describe('News', () => {
+      describe('Has `posts$`', () => {
+        beforeEach(() => {
+          comp.posts$ = of('') as any;
+          fixture.detectChanges();
+        });
 
-      describe('Post', () => {
-        describe('Thumbnail', () => {
-          describe('has `image.proxy.url`', () => {
+        it('should be displayed', () => {
+          expect(page.news).toBeTruthy();
+        });
+
+        describe('Prev button', () => {
+          describe('Has `posts.prev_page`', () => {
             beforeEach(() => {
-              comp.posts = Data.Prismic.getPosts<void>();
-              changeDetectorRef.markForCheck();
+              comp.posts$ = of(({ prev_page: 'true' } as Partial<
+                PostsResponse
+              >) as PostsResponse);
+              activatedRoute.testParamMap = { page: null };
               fixture.detectChanges();
             });
 
-            it('should be displayed`', () => {
-              expect(page.postThumbnail).toBeTruthy();
+            it('should be displayed', () => {
+              expect(page.prevButton).toBeTruthy();
             });
 
-            it('should set `ImageComponent` `image` as transformed `data`', () => {
-              expect(page.imageComponent.image).toEqual({
-                'mock-prismic-pipe': Data.Prismic.getPosts('post-1').data
-              } as any);
-            });
-
-            it('should set `ImageComponent` `full-height` attribute', () => {
-              expect(
-                page.postThumbnail.hasAttribute('full-height')
-              ).toBeTruthy();
-            });
-
-            it('should call `PrismicPipe` with `data`', () => {
-              expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-                Data.Prismic.getPosts('post-1').data
+            it('should call `getPaginationUrl` with `posts` and prev args', () => {
+              expect(comp.getPaginationUrl).toHaveBeenCalledWith(
+                { prev_page: 'true' },
+                'prev'
               );
+            });
+
+            it('should set href as `getPaginationUrl` return', () => {
+              fixture.detectChanges();
+
+              expect(
+                page.prevButton.getAttribute('ng-reflect-router-link')
+              ).toBe('/getPaginationUrlReturn/prev');
             });
           });
 
-          describe('no `image.proxy.url`', () => {
+          describe('No `posts.prev_page`', () => {
             beforeEach(() => {
-              (comp.posts[0].data.image.proxy.url as any) = undefined;
-              changeDetectorRef.markForCheck();
+              comp.posts$ = of(({ prev_page: undefined } as Partial<
+                PostsResponse
+              >) as PostsResponse);
+              activatedRoute.testParamMap = { page: null };
               fixture.detectChanges();
             });
 
             it('should not be displayed', () => {
-              expect(page.postThumbnail).toBeFalsy();
+              expect(page.prevButton).toBeFalsy();
             });
           });
         });
 
-        it('should display date', () => {
-          expect((page.postDate.textContent as string).trim()).toBe('01/01');
+        describe('Posts', () => {
+          it('should be displayed', () => {
+            expect(page.posts.length).toBe(
+              Data.Prismic.getPostsResponse().results.length
+            );
+          });
+
+          describe('Post', () => {
+            it('should set href', () => {
+              expect(page.posts[0].href).toBe(
+                `http://localhost/news/${Data.Prismic.getPosts('post-1').uid}`
+              );
+            });
+
+            describe('Thumbnail', () => {
+              describe('has `image.proxy.url`', () => {
+                beforeEach(() => {
+                  comp.posts$ = of(({
+                    results: [Data.Prismic.getPosts('post-1')]
+                  } as Partial<PostsResponse>) as PostsResponse);
+                  activatedRoute.testParamMap = { page: null };
+                  fixture.detectChanges();
+                });
+
+                it('should be displayed`', () => {
+                  expect(page.postThumbnail).toBeTruthy();
+                });
+
+                it('should set `ImageComponent` `image` as transformed `data`', () => {
+                  expect(page.imageComponent.image).toEqual({
+                    'mock-prismic-pipe': Data.Prismic.getPosts('post-1').data
+                  } as any);
+                });
+
+                it('should set `ImageComponent` `full-height` attribute', () => {
+                  expect(
+                    page.postThumbnail.hasAttribute('full-height')
+                  ).toBeTruthy();
+                });
+
+                it('should call `PrismicPipe` with `data`', () => {
+                  expect(
+                    MockPrismicPipe.prototype.transform
+                  ).toHaveBeenCalledWith(Data.Prismic.getPosts('post-1').data);
+                });
+              });
+
+              describe('no `image.proxy.url`', () => {
+                beforeEach(() => {
+                  comp.posts$ = of(({
+                    results: [
+                      {
+                        ...Data.Prismic.getPosts('post-1'),
+                        data: {
+                          ...Data.Prismic.getPosts('post-1').data,
+                          image: {
+                            ...Data.Prismic.getPosts('post-1').data.image,
+                            proxy: {
+                              ...Data.Prismic.getPosts('post-1').data.image
+                                .proxy,
+                              url: ''
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  } as Partial<PostsResponse>) as PostsResponse);
+                  activatedRoute.testParamMap = { page: null };
+                  fixture.detectChanges();
+                });
+
+                it('should not be displayed', () => {
+                  expect(page.postThumbnail).toBeFalsy();
+                });
+              });
+            });
+
+            it('should display date', () => {
+              expect((page.postDate.textContent as string).trim()).toBe(
+                '01/01'
+              );
+            });
+
+            it('should display title', () => {
+              expect(page.postTitle.innerHTML).toBe('Post 1');
+            });
+
+            it('should call RichText `asText` with `title`', () => {
+              expect(RichText.asText).toHaveBeenCalledWith(
+                Data.Prismic.getPosts('post-1').data.title
+              );
+            });
+          });
         });
 
-        it('should display title', () => {
-          expect(page.postTitle.innerHTML).toBe('Post 1');
+        describe('Next button', () => {
+          describe('Has `posts.next_page`', () => {
+            beforeEach(() => {
+              comp.posts$ = of(({ next_page: 'true' } as Partial<
+                PostsResponse
+              >) as PostsResponse);
+              activatedRoute.testParamMap = { page: null };
+              fixture.detectChanges();
+            });
+
+            it('should be displayed', () => {
+              expect(page.nextButton).toBeTruthy();
+            });
+
+            it('should call `getPaginationUrl` with `posts` and next args', () => {
+              expect(comp.getPaginationUrl).toHaveBeenCalledWith(
+                { next_page: 'true' },
+                'next'
+              );
+            });
+
+            it('should set href as `getPaginationUrl` return', () => {
+              expect(
+                page.nextButton.getAttribute('ng-reflect-router-link')
+              ).toBe('/getPaginationUrlReturn/next');
+            });
+          });
+
+          describe('No `posts.next_page`', () => {
+            beforeEach(() => {
+              comp.posts$ = of(({ next_page: undefined } as Partial<
+                PostsResponse
+              >) as PostsResponse);
+              activatedRoute.testParamMap = { page: null };
+              fixture.detectChanges();
+            });
+
+            it('should not be displayed', () => {
+              expect(page.nextButton).toBeFalsy();
+            });
+          });
+        });
+      });
+
+      describe('No `posts$`', () => {
+        beforeEach(() => {
+          comp.posts$ = undefined;
+          activatedRoute.testParamMap = { page: null };
+          fixture.detectChanges();
         });
 
-        it('should call RichText `asText` with `title`', () => {
-          expect(RichText.asText).toHaveBeenCalledWith(
-            Data.Prismic.getPosts('post-1').data.title
-          );
+        it('should be displayed', () => {
+          expect(page.news).toBeFalsy();
         });
-
-        it('should set href', () => {
-          expect(page.posts[0].href).toBe(
-            `http://localhost/news/${Data.Prismic.getPosts('post-1').uid}`
-          );
-        });
-      });
-    });
-  });
-
-  describe('Load more', () => {
-    describe('`hasNextPage` is `true`', () => {
-      beforeEach(() => {
-        comp.hasNextPage = true;
-        changeDetectorRef.markForCheck();
-        fixture.detectChanges();
-      });
-
-      it('should be displayed', () => {
-        expect(page.loadMore).toBeTruthy();
-      });
-
-      it('should call `getPosts` on click', () => {
-        page.loadMore.click();
-
-        expect(comp.getPosts).toHaveBeenCalled();
-      });
-    });
-
-    describe('`hasNextPage` is `false`', () => {
-      beforeEach(() => {
-        comp.hasNextPage = false;
-        changeDetectorRef.markForCheck();
-        fixture.detectChanges();
-      });
-
-      it('should not be displayed', () => {
-        expect(page.loadMore).toBeFalsy();
       });
     });
   });
@@ -257,6 +340,12 @@ describe('NewsComponent', () => {
 class Page {
   get title() {
     return this.query<HTMLHeadingElement>('h1');
+  }
+  get prevButton() {
+    return this.query<HTMLButtonElement>('#prev');
+  }
+  get news() {
+    return this.query<HTMLElement>('#news');
   }
   get posts() {
     return this.queryAll<HTMLAnchorElement>('.post');
@@ -270,8 +359,8 @@ class Page {
   get postTitle() {
     return this.query<HTMLHeadingElement>('.post:first-of-type h2');
   }
-  get loadMore() {
-    return this.query<HTMLButtonElement>('#load-more');
+  get nextButton() {
+    return this.query<HTMLButtonElement>('#next');
   }
 
   get imageComponent() {
@@ -279,10 +368,6 @@ class Page {
       By.directive(StubImageComponent)
     );
     return directiveEl.injector.get<StubImageComponent>(StubImageComponent);
-  }
-
-  constructor() {
-    jest.spyOn(comp, 'getPosts');
   }
 
   private query<T>(selector: string): T {
@@ -296,12 +381,10 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsComponent);
   comp = fixture.componentInstance;
-  changeDetectorRef = (comp as any).changeDetectorRef;
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );
-  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
   jest.spyOn(RichText, 'asText');
   page = new Page();

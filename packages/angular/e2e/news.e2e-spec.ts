@@ -18,6 +18,15 @@ describe('News', () => {
       expect(page.getPosts().count()).toBe(9);
     });
 
+    it('should load more posts on next page', () => {
+      const el = page.getNextButton();
+
+      page
+        .isClickable(el)
+        .then(() => el.click())
+        .then(() => page.hasLoadedPosts());
+    });
+
     describe('Post', () => {
       it('should be displayed', () => {
         expect(page.getPost().isDisplayed()).toBeTruthy();
@@ -46,47 +55,26 @@ describe('News', () => {
       });
     });
 
-    describe('Load More', () => {
-      it('should be displayed', () => {
-        expect(page.getLoadMoreButton().isDisplayed()).toBeTruthy();
-      });
+    describe('Navigation', () => {
+      it('should display previous and next buttons', () => {
+        const prevEl = page.getPrevButton();
+        const nextEl = page.getNextButton();
 
-      it('should load more posts on click', () => {
-        const el = page.getLoadMoreButton();
-
+        expect(nextEl.isDisplayed()).toBeTruthy();
+        expect(prevEl.isPresent()).toBeFalsy();
         page
-          .isClickable(el)
-          .then(() => el.click())
+          .isClickable(nextEl)
+          .then(() => nextEl.click())
           .then(() => page.hasLoadedPosts())
-          .then(_ => expect(page.getPosts().count()).toBeGreaterThan(9));
-      });
-
-      it('should retain initial posts on route', () => {
-        const el = page.getPost();
-
-        page
-          .isClickable(el)
-          .then(() => el.click())
-          .then(() => page.isNotVisible(el))
-          .then(() => page.navigateBack())
-          .then(() => page.isVisible(page.getPosts().last()))
-          .then(_ => expect(page.getPosts().count()).toBe(9));
-      });
-
-      it('should retain loaded posts on route', () => {
-        const postEl = page.getPost();
-        const buttonEl = page.getLoadMoreButton();
-
-        page
-          .isClickable(buttonEl)
-          .then(() => buttonEl.click())
+          .then(() =>
+            expect(page.getUrl()).toBe('http://localhost:4000/news/page/2')
+          )
+          .then(() => expect(prevEl.isDisplayed()).toBeTruthy())
+          .then(() => expect(nextEl.isPresent()).toBeFalsy())
+          .then(() => page.isClickable(prevEl))
+          .then(() => prevEl.click())
           .then(() => page.hasLoadedPosts())
-          .then(() => page.isClickable(postEl))
-          .then(() => postEl.click())
-          .then(() => page.isNotVisible(postEl))
-          .then(() => page.navigateBack())
-          .then(() => page.isVisible(page.getPosts().last()))
-          .then(_ => expect(page.getPosts().count()).toBeGreaterThan(9));
+          .then(() => expect(page.getUrl()).toBe('http://localhost:4000/news'));
       });
     });
   });

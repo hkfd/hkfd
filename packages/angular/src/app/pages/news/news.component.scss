@@ -5,63 +5,65 @@
   overflow: hidden;
 }
 
-#news-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 5vh (-$gutter / 2);
-  @extend %padding;
+#news {
+  #news-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5vh (-$gutter / 2);
+    @extend %padding;
 
-  .post {
-    overflow: hidden;
-    display: block;
-    position: relative;
-    @include width($xs: 12, $sm: 6, $md: 6, $lg: 4);
-    margin: ($gutter / 2) 0;
-    background: #fff;
-    background-clip: content-box;
-    color: inherit;
-    opacity: 1;
-
-    &:hover,
-    &:active {
-      transform: scale(0.99);
-      transition: transform 200ms ease;
-    }
-
-    image-component {
+    .post {
       overflow: hidden;
-      height: 25vh;
-      align-self: flex-start;
-    }
+      display: block;
+      position: relative;
+      @include width($xs: 12, $sm: 6, $md: 6, $lg: 4);
+      margin: ($gutter / 2) 0;
+      background: #fff;
+      background-clip: content-box;
+      color: inherit;
+      opacity: 1;
 
-    .post-info {
-      overflow: hidden;
-      margin: 0.5em 1em 3em;
-      @extend %font-body;
-
-      .post-date {
-        font-size: 0.8rem;
-        color: $grey;
+      &:hover,
+      &:active {
+        transform: scale(0.99);
+        transition: transform 200ms ease;
       }
 
-      h2 {
-        @extend %font-medium;
-        margin: 0.5em 0;
+      image-component {
+        overflow: hidden;
+        height: 25vh;
+        align-self: flex-start;
       }
-    }
 
-    .post-more {
-      position: absolute;
-      bottom: 1em;
-      left: 1em;
-      height: 1.5em;
-      margin: 0;
+      .post-info {
+        overflow: hidden;
+        margin: 0.5em 1em 3em;
+        @extend %font-body;
+
+        .post-date {
+          font-size: 0.8rem;
+          color: $grey;
+        }
+
+        h2 {
+          @extend %font-medium;
+          margin: 0.5em 0;
+        }
+      }
+
+      .post-more {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        height: 1.5em;
+        margin: 0;
+      }
     }
   }
-}
 
-#load-more {
-  display: block;
-  margin: 5vh auto;
-  @extend %font-medium;
+  .load-more {
+    display: block;
+    margin: 5vh auto;
+    @extend %font-medium;
+  }
 }

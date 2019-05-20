@@ -1,33 +1,45 @@
 <section id="page-intro"><h1>NEWS</h1></section>
 
-<section id="news-list" [@listAnimation]="posts.length">
-  <a
-    class="post"
-    *ngFor="let post of posts; trackBy: postTrackBy"
-    [routerLink]="['/news/', post?.uid]"
-    [attr.aria-label]="richText.asText(post?.data?.title)"
+<section id="news" *ngIf="(posts$ | async) as posts">
+  <button
+    id="prev"
+    class="button load-more"
+    *ngIf="posts?.prev_page"
+    [routerLink]="getPaginationUrl(posts, 'prev')"
+    aria-label="Previous posts"
   >
-    <image-component
-      *ngIf="post?.data?.image?.proxy?.url"
-      [image]="post?.data | prismic"
-      full-height
-    ></image-component>
-    <div class="post-info">
-      <span class="post-date">
-        {{ post?.first_publication_date | date: 'dd/MM' }}
-      </span>
-      <h2>{{ richText.asText(post?.data?.title) }}</h2>
-    </div>
-    <span class="post-more button">READ MORE</span>
-  </a>
-</section>
+    Previous posts
+  </button>
 
-<button
-  class="button"
-  id="load-more"
-  *ngIf="hasNextPage"
-  (click)="getPosts()"
-  aria-label="See More"
->
-  SEE MORE
-</button>
+  <div id="news-list" [@listAnimation]="posts?.results">
+    <a
+      class="post"
+      *ngFor="let post of posts?.results; trackBy: postTrackBy"
+      [routerLink]="['/news/', post?.uid]"
+      [attr.aria-label]="richText.asText(post?.data?.title)"
+    >
+      <image-component
+        *ngIf="post?.data?.image?.proxy?.url"
+        [image]="post?.data | prismic"
+        full-height
+      ></image-component>
+      <div class="post-info">
+        <span class="post-date">
+          {{ post?.first_publication_date | date: 'dd/MM' }}
+        </span>
+        <h2>{{ richText.asText(post?.data?.title) }}</h2>
+      </div>
+      <span class="post-more button">READ MORE</span>
+    </a>
+  </div>
+
+  <button
+    id="next"
+    class="button load-more"
+    *ngIf="posts?.next_page"
+    [routerLink]="getPaginationUrl(posts, 'next')"
+    aria-label="Next posts"
+  >
+    Next posts
+  </button>
+</section>

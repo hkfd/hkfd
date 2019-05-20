@@ -30,7 +30,7 @@ export class NewsPage {
     const hasLoadedPosts = () =>
       this.getPosts()
         .count()
-        .then(count => count > 9);
+        .then(count => count > 1);
 
     return browser.wait(hasLoadedPosts, 5000);
   }
@@ -77,7 +77,11 @@ export class NewsPage {
     return this.getPost().element(by.css('h2'));
   }
 
-  getLoadMoreButton() {
-    return element(by.css('#load-more'));
+  getPrevButton() {
+    return element(by.css('#prev'));
+  }
+
+  getNextButton() {
+    return element(by.css('#next'));
   }
 }

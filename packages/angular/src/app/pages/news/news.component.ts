@@ -1,16 +1,13 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
-import { Post } from 'prismic';
+import { Post, PostsResponse } from 'prismic';
+import { getPaginationUrl } from './news.helpers';
 import { NewsAnimations } from './news.animations';
 
 @Component({
@@ -20,15 +17,14 @@ import { NewsAnimations } from './news.animations';
   animations: NewsAnimations,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NewsComponent implements OnInit, OnDestroy {
+export class NewsComponent implements OnInit {
   richText = RichText;
+  getPaginationUrl = getPaginationUrl;
 
-  post$: Subscription | undefined;
-  posts: Post[] = [];
-  hasNextPage: boolean | undefined;
+  posts$: Observable<PostsResponse> | undefined;
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
+    private route: ActivatedRoute,
     private prismicService: PrismicService,
     private metaService: MetaService
   ) {}
@@ -37,23 +33,12 @@ export class NewsComponent implements OnInit, OnDestroy {
     return id;
   }
 
-  getPosts(onInit?: boolean) {
-    this.post$ = this.prismicService
-      .getPosts(onInit)
-      .subscribe(({ results, next_page }) => {
-        this.posts = this.posts.concat(results);
-        this.hasNextPage = !!next_page;
-        this.changeDetectorRef.markForCheck();
-      });
-  }
-
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'News', url: 'news' });
 
-    this.getPosts(true);
-  }
-
-  ngOnDestroy() {
-    if (this.post$) this.post$.unsubscribe();
+    this.posts$ = this.route.paramMap.pipe(
+      map((params: ParamMap) => params.get('page') || '1'),
+      switchMap(page => this.prismicService.getPosts(page))
+    );
   }
 }
