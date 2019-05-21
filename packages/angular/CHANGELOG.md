@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/hkfd/hkfd/compare/v1.6.1...v1.6.2) (2019-05-21)
+
+**Note:** Version bump only for package angular
+
+
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/hkfd/hkfd/compare/v1.6.0...v1.6.1) (2019-05-20)
 
