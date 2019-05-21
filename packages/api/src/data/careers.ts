@@ -336,5 +336,72 @@ export const CAREERS: Career[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'digital-account-manager',
+    title: 'Digital Account Manager',
+    salary: '£25,000 - £35,000',
+    content: [
+      {
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                paragraph: [
+                  {
+                    text:
+                      'We are currently seeking a Digital Account Manager to join the talented team at our Preston office. The ideal candidate will have at least 2 - 3 years digital sales experience as well experience in planning, building, optimising and reporting on pay per click and social media campaigns.'
+                  }
+                ]
+              },
+              {
+                paragraph: [
+                  {
+                    text:
+                      'As well as a fantastic career opportunity, you would be joining a friendly, relaxed but exceptionally hard working agency with growth and customer service at the forefront of the business.'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Requirements',
+        data: [
+          {
+            type: 'text',
+            data: [
+              {
+                list: [
+                  {
+                    text: 'Proven digital sales and account management experience'
+                  },
+                  {
+                    text: 'Proven track record of developing strong client relationships'
+                  },
+                  {
+                    text: 'Experience in presenting work and document writing'
+                  },
+                  {
+                    text: 'Digital marketing knowledge across all digital marketing channels'
+                  },
+                  {
+                    text: 'Ability to manage and lead a team to ensure all projects are completed with efficiency and on budget'
+                  },
+                  {
+                    text: 'Effective oral and written communication skills'
+                  },
+                  {
+                    text: 'Experience in building and reporting on multiple PPC/social media campaigns'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
