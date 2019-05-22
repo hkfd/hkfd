@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "main": "src/index.ts",
   "scripts": {
     "serve": "yarn build && yarn firebase use staging && yarn firebase serve --port 3000",
