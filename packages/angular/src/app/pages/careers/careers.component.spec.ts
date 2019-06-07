@@ -1,17 +1,21 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 import { of } from 'rxjs';
+import { RichText } from 'prismic-dom';
+
 import {
   RouterTestingModule,
   MockMetaService,
-  MockApiService,
+  MockPrismicService,
   MockApiPipe,
   StubImageComponent,
   Data
 } from 'testing';
 
-import { MetaService, ApiService } from 'shared';
+import { MetaService, PrismicService } from 'shared';
+import { CareerPost } from 'prismic';
 import { CareersImages } from './careers.images';
 import { CareersComponent } from './careers.component';
 
@@ -19,7 +23,9 @@ let comp: CareersComponent;
 let fixture: ComponentFixture<CareersComponent>;
 let page: Page;
 let metaService: MetaService;
-let apiService: ApiService;
+let prismicService: PrismicService;
+
+jest.spyOn(RichText, 'asText');
 
 beforeEach(jest.clearAllMocks);
 
@@ -30,9 +36,13 @@ describe('CareersComponent', () => {
       declarations: [CareersComponent, StubImageComponent, MockApiPipe],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
-        { provide: ApiService, useClass: MockApiService }
+        { provide: PrismicService, useClass: MockPrismicService }
       ]
-    }).compileComponents()));
+    })
+      .overrideComponent(CareersComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default }
+      })
+      .compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
@@ -48,24 +58,28 @@ describe('CareersComponent', () => {
       });
     });
 
-    it('should set `careers$` as `ApiService` `getCareers`', () => {
-      const returnValue = of('getCareers');
-      (apiService.getCareers as jest.Mock).mockReturnValue(returnValue);
+    it('should set `careers$` as `PrismicService` `getPosts`', () => {
+      (prismicService.getPosts as jest.Mock).mockReturnValue(of('getPosts'));
       comp.ngOnInit();
 
-      expect(comp.careers$).toBe(returnValue);
+      expect(comp.careers$).toEqual(prismicService.getPosts('career'));
     });
   });
 
   describe('`careerTrackBy`', () => {
     it('should return `id`', () => {
-      const res = comp.careerTrackBy(0, Data.Api.getCareers('Career 1'));
+      const res = comp.careerTrackBy(0, { id: 'id' } as CareerPost);
 
-      expect(res).toBe(Data.Api.getCareers('Career 1').id);
+      expect(res).toBe('id');
     });
   });
 
   describe('Template', () => {
+    beforeEach(() => {
+      comp.careers$ = of(Data.Prismic.getCareerPostsResponse());
+      fixture.detectChanges();
+    });
+
     it('should display title', () => {
       expect(page.title).toBeTruthy();
     });
@@ -119,25 +133,29 @@ describe('CareersComponent', () => {
 
       describe('Careers', () => {
         it('should be displayed', () => {
-          expect(page.careers.length).toBe(Data.Api.getCareers<void>().length);
+          expect(page.careers.length).toBe(
+            Data.Prismic.getCareerPosts<void>().length
+          );
         });
 
         describe('Career', () => {
-          it('should display title', () => {
-            expect(page.careerTitle.textContent).toBe(
-              Data.Api.getCareers('Career 1').title
+          it('should call `RichText` `asText` with `career.data.title`', () => {
+            expect(RichText.asText).toHaveBeenCalledWith(
+              Data.Prismic.getCareerPosts('post-1').data.title
             );
           });
 
+          it('should display title', () => {
+            expect(page.careerTitle.textContent).toBe('Post 1');
+          });
+
           it('should display salary', () => {
-            expect(page.careerSalary.textContent).toBe(
-              Data.Api.getCareers('Career 1').salary
-            );
+            expect(page.careerSalary.textContent).toBe('Post 1 salary');
           });
 
           it('should set href', () => {
             expect(page.careers[0].href).toBe(
-              `http://localhost/${Data.Api.getCareers('Career 1').id}`
+              'http://localhost/careers/post-1'
             );
           });
         });
@@ -163,7 +181,7 @@ class Page {
     return this.query<HTMLHeadingElement>('.career h3');
   }
   get careerSalary() {
-    return this.query<HTMLHeadingElement>('.career span');
+    return this.query<HTMLSpanElement>('.career span');
   }
 
   get imageComponents() {
@@ -188,7 +206,9 @@ function createComponent() {
   comp = fixture.componentInstance;
   page = new Page();
   metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
-  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
+  prismicService = fixture.debugElement.injector.get<PrismicService>(
+    PrismicService
+  );
   jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();

@@ -12,7 +12,7 @@ import { switchMap, map, filter } from 'rxjs/operators';
 import { RichText } from 'prismic-dom';
 
 import { PrismicService } from 'shared';
-import { Post } from 'prismic';
+import { NewsPost } from 'prismic';
 
 @Component({
   selector: 'app-news-post',
@@ -24,7 +24,7 @@ export class NewsPostComponent implements OnInit, OnDestroy {
   richText = RichText;
 
   postSub: Subscription | undefined;
-  post: Post | null | undefined;
+  post: NewsPost | null | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +37,7 @@ export class NewsPostComponent implements OnInit, OnDestroy {
       .pipe(
         map((params: ParamMap) => params.get('uid')),
         filter((uid): uid is string => Boolean(uid)),
-        switchMap(uid => this.prismicService.getPost(uid))
+        switchMap(uid => this.prismicService.getPost('news', uid))
       )
       .subscribe(post => {
         this.post = post;

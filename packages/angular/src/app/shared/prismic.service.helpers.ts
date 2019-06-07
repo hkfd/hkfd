@@ -1,27 +1,62 @@
 import { MetaTags } from 'shared';
-import { Post } from 'prismic';
+import { NewsPost, CareerPost } from 'prismic';
 
-export const createNewsPostMetaTags = (
-  post: Post | null
+export type PostReturn<T> = T extends 'news'
+  ? NewsPost
+  : T extends 'career'
+  ? CareerPost
+  : never;
+
+export type getPostsArgs<T> = T extends 'news'
+  ? { page: string }
+  : T extends 'career'
+  ? never
+  : never;
+
+export const createNewsPostMetaTags = ({
+  uid,
+  data: { title, description, image }
+}: NewsPost): Partial<MetaTags> => ({
+  type: 'article',
+  ...(title &&
+    title[0] &&
+    title[0].text && {
+      title: title[0].text
+    }),
+  ...(description && {
+    description
+  }),
+  url: `news/${uid}`,
+  ...(image && image.lg && image.lg.url && { image: image.lg.url })
+});
+
+export const createCareerPostMetaTags = ({
+  uid,
+  data: { title, salary }
+}: CareerPost): Partial<MetaTags> => ({
+  type: 'article',
+  ...(title &&
+    title[0] &&
+    title[0].text && {
+      title: title[0].text
+    }),
+  ...(salary && {
+    description: salary
+  }),
+  url: `careers/${uid}`
+});
+
+export const createPostMetaTags = (
+  post: NewsPost | CareerPost | null
 ): Partial<MetaTags> => {
   if (!post) return { title: 'Page not found' };
 
-  const {
-    uid,
-    data: { title, description, image }
-  } = post;
-
-  return {
-    type: 'article',
-    ...(title &&
-      title[0] &&
-      title[0].text && {
-        title: title[0].text
-      }),
-    ...(description && {
-      description
-    }),
-    url: `news/${uid}`,
-    ...(image && image.lg && image.lg.url && { image: image.lg.url })
-  };
+  switch (post.type) {
+    case 'news':
+      return createNewsPostMetaTags(post);
+    case 'career':
+      return createCareerPostMetaTags(post);
+    default:
+      throw new Error('Unsupported `type`');
+  }
 };

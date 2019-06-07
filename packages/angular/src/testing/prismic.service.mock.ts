@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 import { find, catchError, flatMap } from 'rxjs/operators';
 
 import { Data } from './';
-import { PostsResponse, Post } from 'prismic';
+import { PostsResponse, NewsPost } from 'prismic';
 
 export class MockPrismicService {
   constructor() {
@@ -15,12 +15,12 @@ export class MockPrismicService {
     return of('abc');
   }
 
-  getPosts(): Observable<PostsResponse> {
-    return of(Data.Prismic.getPostsResponse());
+  getPosts(): Observable<PostsResponse<NewsPost>> {
+    return of(Data.Prismic.getNewsPostsResponse());
   }
 
-  getPost(uid: string): Observable<Post | undefined> {
-    return of(Data.Prismic.getPosts<void>()).pipe(
+  getPost(uid: string): Observable<NewsPost | undefined> {
+    return of(Data.Prismic.getNewsPosts<void>()).pipe(
       flatMap(posts => posts),
       find(post => post.uid === uid),
       catchError(_ => of(undefined))

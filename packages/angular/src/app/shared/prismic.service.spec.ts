@@ -17,8 +17,8 @@ import { environment } from 'environment';
 import { catchNetworkError } from 'shared';
 import { MetaService } from './meta.service';
 import { NotificationService } from './notification.service';
-import { createNewsPostMetaTags } from './prismic.service.helpers';
-import { getMasterRef, getPostsParams, getPostParams } from './prismic.helpers';
+import { createPostMetaTags } from './prismic.service.helpers';
+import { getMasterRef, getPostParams, getPostsParams } from './prismic.helpers';
 import { PrismicService, URL } from './prismic.service';
 
 let mockHttp: HttpTestingController;
@@ -27,9 +27,7 @@ let notificationService: NotificationService;
 let prismicService: PrismicService;
 
 jest.mock('./prismic.service.helpers', () => ({
-  createNewsPostMetaTags: jest
-    .fn()
-    .mockReturnValue('createNewsPostMetaTagsReturn')
+  createPostMetaTags: jest.fn().mockReturnValue('createPostMetaTagsReturn')
 }));
 
 jest.mock('./prismic.helpers', () => ({
@@ -130,9 +128,10 @@ describe('PrismicService', () => {
     );
 
     describe('Request', () => {
-      it('should call `getPostsParams` with args', () => {
-        prismicService.getPosts('page').subscribe(_ =>
+      it('should call `getPostsParams` with `type`, `ref`, and `page` as `page` args if passed `page` arg', () => {
+        prismicService.getPosts('type' as any, { page: 'page' }).subscribe(_ =>
           expect(getPostsParams).toHaveBeenCalledWith({
+            type: 'type',
             ref: 'abc',
             page: 'page'
           })
@@ -141,8 +140,20 @@ describe('PrismicService', () => {
         mockHttp.expectOne(req => req.url === URL);
       });
 
+      it('should call `getPostsParams` with `type`, `ref`, and `page` as `undefined` args if not passed `page` arg', () => {
+        prismicService.getPosts('type' as any).subscribe(_ =>
+          expect(getPostsParams).toHaveBeenCalledWith({
+            type: 'type',
+            ref: 'abc',
+            page: undefined
+          })
+        );
+
+        mockHttp.expectOne(req => req.url === URL);
+      });
+
       it('should call `HttpClient` `get` with `params` as `getPostsParams` return', () => {
-        prismicService.getPosts('page').subscribe();
+        prismicService.getPosts('type' as any).subscribe();
         const {
           request: { method, params }
         } = mockHttp.expectOne(req => req.url === URL);
@@ -155,7 +166,7 @@ describe('PrismicService', () => {
         (notificationService.displayMessage as jest.Mock).mockImplementation(
           (...args: any[]) => args
         );
-        prismicService.getPosts('page').subscribe();
+        prismicService.getPosts('type' as any).subscribe();
         const [
           [catchNetworkErrorFunctionArgs]
         ] = (catchNetworkError as jest.Mock).mock.calls;
@@ -177,7 +188,7 @@ describe('PrismicService', () => {
           beforeEach(() => {
             error = new ErrorEvent('err');
             prismicService
-              .getPosts('page')
+              .getPosts('type' as any)
               .subscribe(
                 response => fail(response),
                 errorRes => (err = errorRes)
@@ -195,15 +206,15 @@ describe('PrismicService', () => {
 
           beforeEach(() => {
             prismicService
-              .getPosts('page')
+              .getPosts('type' as any)
               .subscribe(response => (res = response));
             mockHttp
               .expectOne(req => req.url === URL)
-              .flush(Data.Prismic.getPostsResponse());
+              .flush(Data.Prismic.getNewsPostsResponse());
           });
 
           it('should return `postsRes`', () => {
-            expect(res).toEqual(Data.Prismic.getPostsResponse());
+            expect(res).toEqual(Data.Prismic.getNewsPostsResponse());
           });
         });
       });
@@ -218,8 +229,9 @@ describe('PrismicService', () => {
     describe('Request', () => {
       it('should call `getPostParams` with args', () => {
         (prismicService as any).postPage = 'postPage';
-        prismicService.getPost('uid').subscribe(_ =>
+        prismicService.getPost('type' as any, 'uid').subscribe(_ =>
           expect(getPostParams).toHaveBeenCalledWith({
+            type: 'type',
             ref: 'abc',
             uid: 'uid'
           })
@@ -229,7 +241,7 @@ describe('PrismicService', () => {
       });
 
       it('should call `HttpClient` `get` with `params` as `getPostParams` return', () => {
-        prismicService.getPost('post-1').subscribe();
+        prismicService.getPost('type' as any, 'uid').subscribe();
         const {
           request: { method, params }
         } = mockHttp.expectOne(req => req.url === URL);
@@ -242,7 +254,7 @@ describe('PrismicService', () => {
         (notificationService.displayMessage as jest.Mock).mockImplementation(
           (...args: any[]) => args
         );
-        prismicService.getPost('post-1').subscribe();
+        prismicService.getPost('type' as any, 'uid').subscribe();
         const [
           [catchNetworkErrorFunctionArgs]
         ] = (catchNetworkError as jest.Mock).mock.calls;
@@ -264,7 +276,7 @@ describe('PrismicService', () => {
           beforeEach(() => {
             error = new ErrorEvent('err');
             prismicService
-              .getPost('post-1')
+              .getPost('type' as any, 'uid')
               .subscribe(
                 response => fail(response),
                 errorRes => (err = errorRes)
@@ -281,22 +293,22 @@ describe('PrismicService', () => {
           describe('Has `post`', () => {
             it('should return `post`', async(() => {
               prismicService
-                .getPost('post-1')
+                .getPost('type' as any, 'uid')
                 .subscribe(res =>
-                  expect(res).toEqual(Data.Prismic.getPosts('post-1'))
+                  expect(res).toEqual(Data.Prismic.getNewsPosts('post-1'))
                 );
 
               mockHttp
                 .expectOne(req => req.url === URL)
-                .flush(Data.Prismic.getPostsResponse());
+                .flush(Data.Prismic.getNewsPostsResponse());
             }));
 
-            it('should call `createNewsPostMetaTags` with `post` args', async(() => {
+            it('should call `createPostMetaTags` with `post` args', async(() => {
               prismicService
-                .getPost('post-1')
+                .getPost('type' as any, 'uid')
                 .subscribe(_ =>
-                  expect(createNewsPostMetaTags).toHaveBeenCalledWith(
-                    Data.Prismic.getPosts('post-1')
+                  expect(createPostMetaTags).toHaveBeenCalledWith(
+                    Data.Prismic.getNewsPosts('post-1')
                   )
                 );
 
@@ -306,13 +318,13 @@ describe('PrismicService', () => {
                     req.url ===
                     `${environment.prismic.endpoint}/documents/search`
                 )
-                .flush(Data.Prismic.getPostsResponse());
+                .flush(Data.Prismic.getNewsPostsResponse());
             }));
           });
 
           it('should return `null` if no `post`', async(() => {
             prismicService
-              .getPost('post-1')
+              .getPost('type' as any, 'uid')
               .subscribe(res => expect(res).toBe(null));
 
             mockHttp
@@ -323,12 +335,12 @@ describe('PrismicService', () => {
               .flush({ results: [] });
           }));
 
-          it('should call `createNewsPostMetaTags` with `post` args', async(() => {
+          it('should call `createPostMetaTags` with `post` args', async(() => {
             prismicService
-              .getPost('post-1')
+              .getPost('type' as any, 'uid')
               .subscribe(_ =>
-                expect(createNewsPostMetaTags).toHaveBeenCalledWith(
-                  Data.Prismic.getPosts('post-1')
+                expect(createPostMetaTags).toHaveBeenCalledWith(
+                  Data.Prismic.getNewsPosts('post-1')
                 )
               );
 
@@ -337,15 +349,15 @@ describe('PrismicService', () => {
                 req =>
                   req.url === `${environment.prismic.endpoint}/documents/search`
               )
-              .flush(Data.Prismic.getPostsResponse());
+              .flush(Data.Prismic.getNewsPostsResponse());
           }));
 
-          it('should call `MetaService` `setMetaTags` with `createNewsPostMetaTags` return', async(() => {
+          it('should call `MetaService` `setMetaTags` with `createPostMetaTags` return', async(() => {
             prismicService
-              .getPost('post-1')
+              .getPost('type' as any, 'uid')
               .subscribe(_ =>
                 expect(metaService.setMetaTags).toHaveBeenCalledWith(
-                  'createNewsPostMetaTagsReturn'
+                  'createPostMetaTagsReturn'
                 )
               );
 
@@ -354,7 +366,7 @@ describe('PrismicService', () => {
                 req =>
                   req.url === `${environment.prismic.endpoint}/documents/search`
               )
-              .flush(Data.Prismic.getPostsResponse());
+              .flush(Data.Prismic.getNewsPostsResponse());
           }));
         });
       });

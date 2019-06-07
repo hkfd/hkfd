@@ -6,7 +6,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
-import { Post, PostsResponse } from 'prismic';
+import { PostsResponse, NewsPost } from 'prismic';
 import { getPaginationUrl } from './news.helpers';
 import { NewsAnimations } from './news.animations';
 
@@ -21,7 +21,7 @@ export class NewsComponent implements OnInit {
   richText = RichText;
   getPaginationUrl = getPaginationUrl;
 
-  posts$: Observable<PostsResponse> | undefined;
+  posts$: Observable<PostsResponse<NewsPost>> | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class NewsComponent implements OnInit {
     private metaService: MetaService
   ) {}
 
-  postTrackBy(_index: number, { id }: Post) {
+  postTrackBy(_index: number, { id }: NewsPost) {
     return id;
   }
 
@@ -38,7 +38,7 @@ export class NewsComponent implements OnInit {
 
     this.posts$ = this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('page') || '1'),
-      switchMap(page => this.prismicService.getPosts(page))
+      switchMap(page => this.prismicService.getPosts('news', { page }))
     );
   }
 }

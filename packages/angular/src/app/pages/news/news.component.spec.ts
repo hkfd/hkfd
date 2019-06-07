@@ -17,7 +17,7 @@ import { of } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
-import { PostsResponse } from 'prismic';
+import { PostsResponse, NewsPost } from 'prismic';
 import { NewsComponent } from './news.component';
 
 let activatedRoute: ActivatedRouteStub;
@@ -90,25 +90,33 @@ describe('NewsComponent', () => {
       });
 
       describe('Has `page` param', () => {
-        it('should call `PrismicService` `getPosts` with `page` param', () => {
+        it('should call `PrismicService` `getPosts` with `news` and `page` param', () => {
           activatedRoute.testParamMap = { page: 'page' };
 
-          expect(prismicService.getPosts).toHaveBeenCalledWith('page');
+          expect(prismicService.getPosts).toHaveBeenCalledWith('news', {
+            page: 'page'
+          });
         });
 
-        it('should call `PrismicService` `getPosts` with `page` param again on param change', () => {
+        it('should call `PrismicService` `getPosts` with `news` and `page` param again on param change', () => {
           activatedRoute.testParamMap = { page: 'page1' };
-          expect(prismicService.getPosts).toHaveBeenCalledWith('page1');
+          expect(prismicService.getPosts).toHaveBeenCalledWith('news', {
+            page: 'page1'
+          });
           activatedRoute.testParamMap = { page: 'page2' };
-          expect(prismicService.getPosts).toHaveBeenCalledWith('page2');
+          expect(prismicService.getPosts).toHaveBeenCalledWith('news', {
+            page: 'page2'
+          });
         });
       });
 
       describe('No `page` param', () => {
-        it('should call `PrismicService` `getPosts` with `1` param', () => {
+        it('should call `PrismicService` `getPosts` with `news` and `1` param', () => {
           activatedRoute.testParamMap = { page: null };
 
-          expect(prismicService.getPosts).toHaveBeenCalledWith('1');
+          expect(prismicService.getPosts).toHaveBeenCalledWith('news', {
+            page: '1'
+          });
         });
       });
     });
@@ -116,9 +124,9 @@ describe('NewsComponent', () => {
 
   describe('`postTrackBy`', () => {
     it('should return `id`', () => {
-      const res = comp.postTrackBy(0, Data.Prismic.getPost());
+      const res = comp.postTrackBy(0, { id: 'id' } as NewsPost);
 
-      expect(res).toBe(Data.Prismic.getPost().id);
+      expect(res).toBe('id');
     });
   });
 
@@ -142,8 +150,8 @@ describe('NewsComponent', () => {
           describe('Has `posts.prev_page`', () => {
             beforeEach(() => {
               comp.posts$ = of(({ prev_page: 'true' } as Partial<
-                PostsResponse
-              >) as PostsResponse);
+                PostsResponse<NewsPost>
+              >) as PostsResponse<NewsPost>);
               activatedRoute.testParamMap = { page: null };
               fixture.detectChanges();
             });
@@ -171,8 +179,8 @@ describe('NewsComponent', () => {
           describe('No `posts.prev_page`', () => {
             beforeEach(() => {
               comp.posts$ = of(({ prev_page: undefined } as Partial<
-                PostsResponse
-              >) as PostsResponse);
+                PostsResponse<NewsPost>
+              >) as PostsResponse<NewsPost>);
               activatedRoute.testParamMap = { page: null };
               fixture.detectChanges();
             });
@@ -186,14 +194,16 @@ describe('NewsComponent', () => {
         describe('Posts', () => {
           it('should be displayed', () => {
             expect(page.posts.length).toBe(
-              Data.Prismic.getPostsResponse().results.length
+              Data.Prismic.getNewsPostsResponse().results.length
             );
           });
 
           describe('Post', () => {
             it('should set href', () => {
               expect(page.posts[0].href).toBe(
-                `http://localhost/news/${Data.Prismic.getPosts('post-1').uid}`
+                `http://localhost/news/${
+                  Data.Prismic.getNewsPosts('post-1').uid
+                }`
               );
             });
 
@@ -201,8 +211,8 @@ describe('NewsComponent', () => {
               describe('has `image.proxy.url`', () => {
                 beforeEach(() => {
                   comp.posts$ = of(({
-                    results: [Data.Prismic.getPosts('post-1')]
-                  } as Partial<PostsResponse>) as PostsResponse);
+                    results: [Data.Prismic.getNewsPosts('post-1')]
+                  } as Partial<PostsResponse<NewsPost>>) as PostsResponse<NewsPost>);
                   activatedRoute.testParamMap = { page: null };
                   fixture.detectChanges();
                 });
@@ -213,7 +223,8 @@ describe('NewsComponent', () => {
 
                 it('should set `ImageComponent` `image` as transformed `data`', () => {
                   expect(page.imageComponent.image).toEqual({
-                    'mock-prismic-pipe': Data.Prismic.getPosts('post-1').data
+                    'mock-prismic-pipe': Data.Prismic.getNewsPosts('post-1')
+                      .data
                   } as any);
                 });
 
@@ -226,7 +237,9 @@ describe('NewsComponent', () => {
                 it('should call `PrismicPipe` with `data`', () => {
                   expect(
                     MockPrismicPipe.prototype.transform
-                  ).toHaveBeenCalledWith(Data.Prismic.getPosts('post-1').data);
+                  ).toHaveBeenCalledWith(
+                    Data.Prismic.getNewsPosts('post-1').data
+                  );
                 });
               });
 
@@ -235,13 +248,13 @@ describe('NewsComponent', () => {
                   comp.posts$ = of(({
                     results: [
                       {
-                        ...Data.Prismic.getPosts('post-1'),
+                        ...Data.Prismic.getNewsPosts('post-1'),
                         data: {
-                          ...Data.Prismic.getPosts('post-1').data,
+                          ...Data.Prismic.getNewsPosts('post-1').data,
                           image: {
-                            ...Data.Prismic.getPosts('post-1').data.image,
+                            ...Data.Prismic.getNewsPosts('post-1').data.image,
                             proxy: {
-                              ...Data.Prismic.getPosts('post-1').data.image
+                              ...Data.Prismic.getNewsPosts('post-1').data.image
                                 .proxy,
                               url: ''
                             }
@@ -249,7 +262,7 @@ describe('NewsComponent', () => {
                         }
                       }
                     ]
-                  } as Partial<PostsResponse>) as PostsResponse);
+                  } as Partial<PostsResponse<NewsPost>>) as PostsResponse<NewsPost>);
                   activatedRoute.testParamMap = { page: null };
                   fixture.detectChanges();
                 });
@@ -272,7 +285,7 @@ describe('NewsComponent', () => {
 
             it('should call RichText `asText` with `title`', () => {
               expect(RichText.asText).toHaveBeenCalledWith(
-                Data.Prismic.getPosts('post-1').data.title
+                Data.Prismic.getNewsPosts('post-1').data.title
               );
             });
           });
@@ -282,8 +295,8 @@ describe('NewsComponent', () => {
           describe('Has `posts.next_page`', () => {
             beforeEach(() => {
               comp.posts$ = of(({ next_page: 'true' } as Partial<
-                PostsResponse
-              >) as PostsResponse);
+                PostsResponse<NewsPost>
+              >) as PostsResponse<NewsPost>);
               activatedRoute.testParamMap = { page: null };
               fixture.detectChanges();
             });
@@ -309,8 +322,8 @@ describe('NewsComponent', () => {
           describe('No `posts.next_page`', () => {
             beforeEach(() => {
               comp.posts$ = of(({ next_page: undefined } as Partial<
-                PostsResponse
-              >) as PostsResponse);
+                PostsResponse<NewsPost>
+              >) as PostsResponse<NewsPost>);
               activatedRoute.testParamMap = { page: null };
               fixture.detectChanges();
             });

@@ -4,7 +4,6 @@ import {
   getPostUrl,
   isCaseStudy,
   SERVICES,
-  createCareerMetaTags,
   isKnownPostType,
   createPostMetaTags
 } from './api.helpers';
@@ -54,27 +53,6 @@ describe('`isKnownPostType`', () => {
     const res = isKnownPostType('type');
 
     expect(res).toBe(false);
-  });
-});
-
-describe('`createCareerMetaTags`', () => {
-  it('should return partial `MetaTags` if has `career` arg', () => {
-    const res = createCareerMetaTags(Data.Api.getCareers('Career 1'));
-
-    expect(res).toEqual({
-      type: 'article',
-      title: 'Career 1',
-      description: '£0',
-      url: 'careers/career-1'
-    });
-  });
-
-  it('should return not found `MetaTags` if no `career` arg', () => {
-    const res = createCareerMetaTags(null);
-
-    expect(res).toEqual({
-      title: 'Page not found'
-    });
   });
 });
 

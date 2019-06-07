@@ -6,13 +6,17 @@ import {
   RouterTestingModule,
   ActivatedRoute,
   ActivatedRouteStub,
-  MockApiService,
-  StubTextBlockComponent,
+  MockPrismicService,
+  StubPrismicTextBlockComponent,
   StubErrorComponent,
   Data
 } from 'testing';
 
-import { ApiService } from 'shared';
+import { of } from 'rxjs';
+import { RichText } from 'prismic-dom';
+
+import { PrismicService } from 'shared';
+import { CareerPost } from 'prismic';
 import { CareerComponent } from './career.component';
 
 let comp: CareerComponent;
@@ -20,7 +24,9 @@ let fixture: ComponentFixture<CareerComponent>;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
 let changeDetectorRef: ChangeDetectorRef;
-let apiService: ApiService;
+let prismicService: PrismicService;
+
+jest.spyOn(RichText, 'asText');
 
 beforeEach(jest.clearAllMocks);
 
@@ -33,12 +39,12 @@ describe('CareerComponent', () => {
       imports: [RouterTestingModule],
       declarations: [
         CareerComponent,
-        StubTextBlockComponent,
+        StubPrismicTextBlockComponent,
         StubErrorComponent
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: ApiService, useClass: MockApiService }
+        { provide: PrismicService, useClass: MockPrismicService }
       ]
     }).compileComponents();
   }));
@@ -54,25 +60,30 @@ describe('CareerComponent', () => {
       expect(comp.careerSub).toBeDefined();
     });
 
-    it('should call `ApiService` `getCareer` with `id` param arg if `id` param exists', () => {
+    it('should call `PrismicService` `getPost` with `career` and `uid` param args if `uid` param exists', () => {
       jest.clearAllMocks();
-      activatedRoute.testParamMap = { id: 'id' };
+      activatedRoute.testParamMap = { uid: 'uid' };
 
-      expect(apiService.getCareer).toHaveBeenCalledWith('id');
+      expect(prismicService.getPost).toHaveBeenCalledWith('career', 'uid');
     });
 
-    it('should not call `ApiService` `getCareer` if `id` param does not exist', () => {
+    it('should not call `PrismicService` `getPost` if `uid` param does not exist', () => {
       jest.clearAllMocks();
-      activatedRoute.testParamMap = { id: undefined };
+      activatedRoute.testParamMap = { uid: undefined };
 
-      expect(apiService.getCareer).not.toHaveBeenCalled();
+      expect(prismicService.getPost).not.toHaveBeenCalled();
     });
 
     it('should set `career`', () => {
-      expect(comp.career).toEqual(Data.Api.getCareers('Career 1'));
+      prismicService.getPost = jest.fn().mockReturnValue(of('getPostReturn'));
+      activatedRoute.testParamMap = { uid: 'uid' };
+
+      expect(comp.career).toBe('getPostReturn');
     });
 
     it('should call `ChangeDetectorRef` `markForCheck`', () => {
+      activatedRoute.testParamMap = { uid: 'uid' };
+
       expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
     });
   });
@@ -127,7 +138,7 @@ describe('CareerComponent', () => {
 
     describe('Has `career`', () => {
       beforeEach(() => {
-        comp.career = Data.Api.getCareers('Career 1');
+        comp.career = Data.Prismic.getCareerPost();
         changeDetectorRef.markForCheck();
         fixture.detectChanges();
       });
@@ -136,41 +147,69 @@ describe('CareerComponent', () => {
         expect(page.error).toBeFalsy();
       });
 
-      it('should display title', () => {
-        expect(page.title.textContent).toEqual('Career 1');
+      describe('Title', () => {
+        describe('Has `career.data.title`', () => {
+          beforeEach(() => {
+            comp.career = ({
+              data: { title: [{ spans: [], text: 'Title', type: 'h1' }] }
+            } as any) as CareerPost;
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should call `RichText` `asText` with `career.data.title` arg', () => {
+            expect(RichText.asText).toHaveBeenCalledWith([
+              { spans: [], text: 'Title', type: 'h1' }
+            ]);
+          });
+
+          it('should display title', () => {
+            expect((page.title.textContent as string).trim()).toBe('Title');
+          });
+        });
+
+        describe('No `career.data.title`', () => {
+          beforeEach(() => {
+            comp.career = ({
+              data: { title: undefined }
+            } as any) as CareerPost;
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
+
+          it('should not display title', () => {
+            expect(page.title).toBeFalsy();
+          });
+        });
       });
 
       describe('Section', () => {
-        it('should display title if `title`', () => {
-          comp.career = {
-            ...Data.Api.getCareers('Career 1'),
-            content: [{ title: 'Section Title' }]
-          } as any;
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
+        describe('Text', () => {
+          beforeEach(() => {
+            comp.career = Data.Prismic.getNewsPosts('post-2') as any;
+            changeDetectorRef.markForCheck();
+            fixture.detectChanges();
+          });
 
-          expect(page.sectionTitle.textContent).toEqual('Section Title');
+          it('should display `PrismicTextBlockComponent`', () => {
+            expect(page.textBlock).toBeTruthy();
+          });
+
+          it('should set `PrismicTextBlockComponent` `data` as `primary.text`', () => {
+            expect(page.prismicTextBlockComponent.data).toEqual(
+              Data.Prismic.getNewsPosts('post-2').data.body[0].primary.text
+            );
+          });
+        });
+      });
+
+      describe('Apply button', () => {
+        it('should be displayed', () => {
+          expect(page.applyButton).toBeTruthy();
         });
 
-        it('should not display title if no `title`', () => {
-          comp.career = {
-            ...Data.Api.getCareers('Career 1'),
-            content: [{ title: undefined }]
-          } as any;
-          changeDetectorRef.markForCheck();
-          fixture.detectChanges();
-
-          expect(page.sectionTitle).toBeFalsy();
-        });
-
-        it('should display `TextBlockComponent`', () => {
-          expect(page.textBlock).toBeTruthy();
-        });
-
-        it('should set `TextBlockComponent` `data` as `data`', () => {
-          expect(page.textBlockComponent.data).toEqual(Data.Api.getCareers(
-            'Career 1'
-          ).content[0].data[0] as any);
+        it('should set `href` as `career.data.contact`', () => {
+          expect(page.applyButton.href).toBe('mailto:post@contact');
         });
       });
     });
@@ -181,22 +220,22 @@ class Page {
   get title() {
     return this.query<HTMLHeadingElement>('h1');
   }
-  get sectionTitle() {
-    return this.query<HTMLHeadingElement>('section:nth-of-type(2) h2');
-  }
   get textBlock() {
-    return this.query<HTMLElement>('text-block');
+    return this.query<HTMLElement>('prismic-text-block');
+  }
+  get applyButton() {
+    return this.query<HTMLAnchorElement>('a');
   }
   get error() {
     return this.query<HTMLElement>('error');
   }
 
-  get textBlockComponent() {
+  get prismicTextBlockComponent() {
     const directiveEl = fixture.debugElement.query(
-      By.directive(StubTextBlockComponent)
+      By.directive(StubPrismicTextBlockComponent)
     );
-    return directiveEl.injector.get<StubTextBlockComponent>(
-      StubTextBlockComponent
+    return directiveEl.injector.get<StubPrismicTextBlockComponent>(
+      StubPrismicTextBlockComponent
     );
   }
 
@@ -209,7 +248,9 @@ function createComponent() {
   fixture = TestBed.createComponent(CareerComponent);
   comp = fixture.componentInstance;
   changeDetectorRef = (comp as any).changeDetectorRef;
-  apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
+  prismicService = fixture.debugElement.injector.get<PrismicService>(
+    PrismicService
+  );
   page = new Page();
 
   jest.spyOn(changeDetectorRef, 'markForCheck');

@@ -9,17 +9,15 @@ import { LoggerService } from './logger.service';
 import { MetaService } from './meta.service';
 import { NotificationService } from './notification.service';
 import { catchNetworkError } from './errors';
-import { Service, Career, CaseStudy, Team, Client } from 'api';
+import { Service, CaseStudy, Team, Client } from 'api';
 import {
   SERVICES,
   CASE_STUDIES,
   getPostUrl,
-  createCareerMetaTags,
   createPostMetaTags
 } from './api.helpers';
 
 const TEAM = `${environment.api.url}team.json`;
-const CAREERS = `${environment.api.url}careers.json`;
 const CLIENTS = `${environment.api.url}clients.json`;
 
 export type Post = CaseStudy | Service;
@@ -51,32 +49,6 @@ export class ApiService {
         })
       ),
       tap(services => this.logger.log('getServices', services))
-    );
-  }
-
-  getCareers(): Observable<Career[]> {
-    return this.http.get<Career[]>(CAREERS).pipe(
-      catchNetworkError(() =>
-        this.notificationService.displayMessage(`Couldn't load careers`, {
-          action: 'Retry'
-        })
-      ),
-      tap(careers => this.logger.log('getCareers', careers))
-    );
-  }
-
-  getCareer(id: string): Observable<Career | null> {
-    return this.http.get<Career[]>(CAREERS).pipe(
-      catchNetworkError(() =>
-        this.notificationService.displayMessage(`Couldn't load career`, {
-          action: 'Retry'
-        })
-      ),
-      map(careers => careers.find(career => career.id === id) || null),
-      tap(career => {
-        this.logger.log('getCareer', career);
-        this.metaService.setMetaTags(createCareerMetaTags(career));
-      })
     );
   }
 

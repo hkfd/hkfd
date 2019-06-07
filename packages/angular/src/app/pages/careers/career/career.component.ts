@@ -9,9 +9,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { switchMap, map, filter } from 'rxjs/operators';
+import { RichText } from 'prismic-dom';
 
-import { ApiService } from 'shared';
-import { Career } from 'api';
+import { PrismicService } from 'shared';
+import { CareerPost } from 'prismic';
 
 @Component({
   selector: 'app-career',
@@ -21,20 +22,22 @@ import { Career } from 'api';
 })
 export class CareerComponent implements OnInit, OnDestroy {
   careerSub: Subscription | undefined;
-  career: Career | null | undefined;
+  career: CareerPost | null | undefined;
+
+  richText = RichText;
 
   constructor(
     private route: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
-    private apiService: ApiService
+    private prismicService: PrismicService
   ) {}
 
   ngOnInit() {
     this.careerSub = this.route.paramMap
       .pipe(
-        map((params: ParamMap) => params.get('id')),
-        filter((id): id is string => Boolean(id)),
-        switchMap(id => this.apiService.getCareer(id))
+        map((params: ParamMap) => params.get('uid')),
+        filter((uid): uid is string => Boolean(uid)),
+        switchMap(uid => this.prismicService.getPost('career', uid))
       )
       .subscribe(career => {
         this.career = career;

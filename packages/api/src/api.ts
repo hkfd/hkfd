@@ -84,13 +84,6 @@ export interface Client {
   list: string[];
 }
 
-export interface Career {
-  id: string;
-  title: string;
-  salary: string;
-  content: Content[];
-}
-
 export interface Team {
   name: string;
   position: string;

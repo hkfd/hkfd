@@ -17,11 +17,7 @@ import {
   NotificationService,
   catchNetworkError
 } from 'shared';
-import {
-  getPostUrl,
-  createCareerMetaTags,
-  createPostMetaTags
-} from './api.helpers';
+import { getPostUrl, createPostMetaTags } from './api.helpers';
 
 let mockHttp: HttpTestingController;
 let metaService: MetaService;
@@ -44,9 +40,6 @@ jest.mock('./api.helpers', () => {
     CASE_STUDIES,
     isKnownPostType: jest.fn().mockReturnValue(true),
     getPostUrl: jest.fn().mockReturnValue('/getPostUrl'),
-    createCareerMetaTags: jest
-      .fn()
-      .mockReturnValue('createCareerMetaTagsReturn'),
     createPostMetaTags: jest.fn().mockReturnValue('createPostMetaTagsReturn')
   };
 });
@@ -123,166 +116,6 @@ describe('ApiService', () => {
           error = new ErrorEvent('err');
           apiService
             .getServices()
-            .subscribe(
-              response => fail(response),
-              errorRes => (err = errorRes)
-            );
-          mockHttp.expectOne(url).error(error);
-        });
-
-        it('should return error', () => {
-          expect(err.error).toEqual(new ErrorEvent('err'));
-        });
-      });
-    });
-  });
-
-  describe('`getCareers`', () => {
-    const url = 'https://api.testing/careers.json';
-
-    describe('Request', () => {
-      it('should call `HttpClient` `get`', () => {
-        apiService.getCareers().subscribe();
-        const {
-          request: { method }
-        } = mockHttp.expectOne(url);
-
-        expect(method).toBe('GET');
-      });
-
-      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
-        (notificationService.displayMessage as jest.Mock).mockImplementation(
-          (...args: any[]) => args
-        );
-        apiService.getCareers().subscribe();
-        const [
-          [catchNetworkErrorFunctionArgs]
-        ] = (catchNetworkError as jest.Mock).mock.calls;
-
-        expect(catchNetworkErrorFunctionArgs()).toEqual([
-          `Couldn't load careers`,
-          {
-            action: 'Retry'
-          }
-        ]);
-        mockHttp.expectOne(url);
-      });
-
-      describe('No error', () => {
-        let res: any;
-
-        beforeEach(() => {
-          apiService.getCareers().subscribe(response => (res = response));
-          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-        });
-
-        it('should return `careers`', () => {
-          expect(res).toEqual(Data.Api.getCareers<void>());
-        });
-      });
-
-      describe('Error', () => {
-        let error: ErrorEvent;
-        let err: any;
-
-        beforeEach(() => {
-          error = new ErrorEvent('err');
-          apiService
-            .getCareers()
-            .subscribe(
-              response => fail(response),
-              errorRes => (err = errorRes)
-            );
-          mockHttp.expectOne(url).error(error);
-        });
-
-        it('should return error', () => {
-          expect(err.error).toEqual(new ErrorEvent('err'));
-        });
-      });
-    });
-  });
-
-  describe('`getCareer`', () => {
-    const url = 'https://api.testing/careers.json';
-
-    describe('Request', () => {
-      it('should call `HttpClient` `get`', () => {
-        apiService.getCareer('career-1').subscribe();
-        const {
-          request: { method }
-        } = mockHttp.expectOne(url);
-
-        expect(method).toBe('GET');
-      });
-
-      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
-        (notificationService.displayMessage as jest.Mock).mockImplementation(
-          (...args: any[]) => args
-        );
-        apiService.getCareer('career-1').subscribe();
-        const [
-          [catchNetworkErrorFunctionArgs]
-        ] = (catchNetworkError as jest.Mock).mock.calls;
-
-        expect(catchNetworkErrorFunctionArgs()).toEqual([
-          `Couldn't load career`,
-          {
-            action: 'Retry'
-          }
-        ]);
-        mockHttp.expectOne(url);
-      });
-
-      describe('No error', () => {
-        it('should return `career` if has `career`', async(() => {
-          apiService
-            .getCareer('career-3')
-            .subscribe(res =>
-              expect(res).toEqual(Data.Api.getCareers('Career 3'))
-            );
-          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-        }));
-
-        it('should return `null` if no `career`', async(() => {
-          apiService.getCareer('no').subscribe(res => expect(res).toBe(null));
-
-          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-        }));
-
-        it('should call `createCareerMetaTags` with `career` arg', async(() => {
-          apiService
-            .getCareer('career-3')
-            .subscribe(_ =>
-              expect(createCareerMetaTags).toHaveBeenCalledWith(
-                Data.Api.getCareers('Career 3')
-              )
-            );
-
-          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-        }));
-
-        it('should call `MetaService` `setMetaTags` with `createCareerMetaTags` return', async(() => {
-          apiService
-            .getCareer('career-3')
-            .subscribe(_ =>
-              expect(metaService.setMetaTags).toHaveBeenCalledWith(
-                'createCareerMetaTagsReturn'
-              )
-            );
-
-          mockHttp.expectOne(url).flush(Data.Api.getCareers<void>());
-        }));
-      });
-
-      describe('Error', () => {
-        let error: ErrorEvent;
-        let err: any;
-
-        beforeEach(() => {
-          error = new ErrorEvent('err');
-          apiService
-            .getCareer('career-2')
             .subscribe(
               response => fail(response),
               errorRes => (err = errorRes)

@@ -12,6 +12,7 @@ import { SliderWorkComponent } from './slider/slider-work/slider-work.component'
 import { ImageComponent } from './image/image.component';
 import { FormComponent } from './form/form.component';
 import { TextBlockComponent } from './blocks/text-block/text-block.component';
+import { PrismicTextBlockComponent } from './blocks/prismic-text-block/prismic-text-block.component';
 import { TextComponent } from './blocks/text-block/text/text.component';
 import { ImageBlockComponent } from './blocks/image-block/image-block.component';
 import { DuoBlockComponent } from './blocks/duo-block/duo-block.component';
@@ -31,6 +32,7 @@ import { ErrorComponent } from './errors/error/error.component';
     SliderComponent,
     SliderWorkComponent,
     TextBlockComponent,
+    PrismicTextBlockComponent,
     TextComponent,
     ImageBlockComponent,
     DuoBlockComponent,
@@ -50,6 +52,7 @@ import { ErrorComponent } from './errors/error/error.component';
     SliderComponent,
     SliderWorkComponent,
     TextBlockComponent,
+    PrismicTextBlockComponent,
     ImageBlockComponent,
     DuoBlockComponent,
     GalleryBlockComponent,

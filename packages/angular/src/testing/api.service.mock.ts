@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 import { flatMap, find, catchError } from 'rxjs/operators';
 
 import { Post } from 'shared';
-import { Service, Career, CaseStudy, Team, Client } from 'api';
+import { Service, CaseStudy, Team, Client } from 'api';
 import { Data } from './';
 
 export class MockApiService {
@@ -10,8 +10,6 @@ export class MockApiService {
     jest.spyOn(this, 'getServices');
     jest.spyOn(this, 'getCaseStudies');
     jest.spyOn(this, 'getClients');
-    jest.spyOn(this, 'getCareers');
-    jest.spyOn(this, 'getCareer');
     jest.spyOn(this, 'getTeam');
     jest.spyOn(this, 'getPost');
   }
@@ -26,18 +24,6 @@ export class MockApiService {
 
   getClients(): Observable<Client[]> {
     return of(Data.Api.getClients());
-  }
-
-  getCareers(): Observable<Career[]> {
-    return of(Data.Api.getCareers<void>());
-  }
-
-  getCareer(id: string): Observable<Career | undefined> {
-    return of(Data.Api.getCareers<void>()).pipe(
-      flatMap((careers: Career[]) => careers),
-      find((career: Career) => career.id === id),
-      catchError(_ => of(undefined))
-    );
   }
 
   getTeam(): Observable<Team[]> {
