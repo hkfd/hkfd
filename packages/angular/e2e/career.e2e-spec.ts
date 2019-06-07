@@ -31,7 +31,9 @@ describe('Career', () => {
       page
         .getPageTitle()
         .getAttribute('textContent')
-        .then(title => expect(page.getTitle()).toBe(`Heckford – ${title}`));
+        .then(title =>
+          expect(page.getTitle()).toBe(`Heckford – ${title.trim()}`)
+        );
     });
 
     it('should display page title', () => {
@@ -75,12 +77,6 @@ describe('Career', () => {
 
       it('should be clickable', () => {
         expect(page.isClickable(page.getApplyButton())).toBeTruthy();
-      });
-
-      it('should have href mailto', () => {
-        expect(page.getApplyButton().getAttribute('href')).toBe(
-          'mailto:hello@heckford-advertising.co.uk'
-        );
       });
     });
   });

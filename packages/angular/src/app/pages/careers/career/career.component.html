@@ -3,17 +3,20 @@
 <ng-container *ngIf="career">
   <section id="intro">
     <div id="intro-info">
-      <h1>{{ career?.title }}</h1>
+      <h1 *ngIf="career?.data?.title">
+        {{ richText.asText(career?.data?.title) }}
+      </h1>
     </div>
   </section>
 
-  <section *ngFor="let section of career?.content">
-    <h2 *ngIf="section?.title">{{ section?.title }}</h2>
-
-    <ng-container *ngFor="let block of section?.data">
-      <text-block [data]="block"></text-block>
+  <ng-container *ngFor="let slice of career?.data?.body">
+    <ng-container [ngSwitch]="slice?.slice_type">
+      <prismic-text-block
+        *ngSwitchCase="'text'"
+        [data]="slice?.primary?.text"
+      ></prismic-text-block>
     </ng-container>
-  </section>
+  </ng-container>
 
   <section>
     <div class="text">
@@ -38,7 +41,7 @@
 
   <a
     class="button black"
-    href="mailto:hello@heckford-advertising.co.uk"
+    href="mailto:{{ career?.data?.contact }}"
     [attr.aria-label]="'Apply Now'"
   >
     APPLY NOW

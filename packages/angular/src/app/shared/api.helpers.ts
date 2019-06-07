@@ -1,4 +1,4 @@
-import { CaseStudy, Career } from 'api';
+import { CaseStudy } from 'api';
 import { environment } from 'environment';
 import { Post, PostType } from './api.service';
 import { MetaTags } from './meta';
@@ -19,21 +19,6 @@ export const getPostUrl = (type: PostType): string => {
     case 'work':
       return CASE_STUDIES;
   }
-};
-
-export const createCareerMetaTags = (
-  career: Career | null
-): Partial<MetaTags> => {
-  if (!career) return { title: 'Page not found' };
-
-  const { title, salary, id } = career;
-
-  return {
-    type: 'article',
-    title,
-    description: salary,
-    url: `careers/${id}`
-  };
 };
 
 export const createPostMetaTags = (

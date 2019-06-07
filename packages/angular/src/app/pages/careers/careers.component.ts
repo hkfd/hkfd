@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { RichText } from 'prismic-dom';
 
-import { MetaService, ApiService } from 'shared';
-import { Career } from 'api';
+import { MetaService, PrismicService } from 'shared';
+import { PostsResponse, CareerPost } from 'prismic';
 import { CareersImages } from './careers.images';
 
 @Component({
@@ -13,22 +14,22 @@ import { CareersImages } from './careers.images';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CareersComponent implements OnInit {
-  careers$: Observable<Career[]> | undefined;
-
+  careers$: Observable<PostsResponse<CareerPost>> | undefined;
+  richText = RichText;
   images = CareersImages;
 
   constructor(
     private metaService: MetaService,
-    private apiService: ApiService
+    private prismicService: PrismicService
   ) {}
 
-  careerTrackBy(_index: number, { id }: Career) {
+  careerTrackBy(_index: number, { id }: CareerPost) {
     return id;
   }
 
   ngOnInit() {
     this.metaService.setMetaTags({ title: 'Careers', url: 'careers' });
 
-    this.careers$ = this.apiService.getCareers();
+    this.careers$ = this.prismicService.getPosts('career');
   }
 }

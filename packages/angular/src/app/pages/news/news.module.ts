@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'shared/shared.module';
 import { NewsComponent } from './news.component';
 import { NewsPostComponent } from './news-post/news-post.component';
-import { TextBlockComponent } from './news-post/text-block/text-block.component';
 
 const routes: Routes = [
   { path: '', component: NewsComponent },
@@ -21,6 +20,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
-  declarations: [NewsComponent, NewsPostComponent, TextBlockComponent]
+  declarations: [NewsComponent, NewsPostComponent]
 })
 export class NewsModule {}

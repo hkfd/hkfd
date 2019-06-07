@@ -1,7 +1,7 @@
-import { PostsResponse } from 'prismic';
+import { PostsResponse, NewsPost } from 'prismic';
 
 export const getPaginationUrl = (
-  { page }: PostsResponse,
+  { page }: PostsResponse<NewsPost>,
   direction: 'prev' | 'next'
 ): string => {
   switch (direction) {

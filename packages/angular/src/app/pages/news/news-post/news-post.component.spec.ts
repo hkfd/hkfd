@@ -17,6 +17,7 @@ import {
   StubErrorComponent,
   Data
 } from 'testing';
+import { of } from 'rxjs';
 import { RichText } from 'prismic-dom';
 
 import { PrismicService } from 'shared';
@@ -67,11 +68,11 @@ describe('NewsPostComponent', () => {
       expect(comp.postSub).toBeDefined();
     });
 
-    it('should call `PrismicService` `getPost` with `uid` param arg if `uid` param exists', () => {
+    it('should call `PrismicService` `getPost` with `news` and `uid` param arg if `uid` param exists', () => {
       jest.clearAllMocks();
       activatedRoute.testParamMap = { uid: 'uid' };
 
-      expect(prismicService.getPost).toHaveBeenCalledWith('uid');
+      expect(prismicService.getPost).toHaveBeenCalledWith('news', 'uid');
     });
 
     it('should not call `PrismicService` `getPost` if `uid` param does not exist', () => {
@@ -82,7 +83,10 @@ describe('NewsPostComponent', () => {
     });
 
     it('should set `post`', () => {
-      expect(comp.post).toEqual(Data.Prismic.getPosts('post-1'));
+      prismicService.getPost = jest.fn().mockReturnValue(of('getPostReturn'));
+      activatedRoute.testParamMap = { uid: 'uid' };
+
+      expect(comp.post).toBe('getPostReturn');
     });
 
     it('should call `ChangeDetectorRef` `markForCheck`', () => {
@@ -144,7 +148,7 @@ describe('NewsPostComponent', () => {
 
     describe('Has `post`', () => {
       beforeEach(() => {
-        comp.post = Data.Prismic.getPosts('post-1');
+        comp.post = Data.Prismic.getNewsPosts('post-1');
         changeDetectorRef.markForCheck();
         fixture.detectChanges();
       });
@@ -161,7 +165,7 @@ describe('NewsPostComponent', () => {
         describe('Title', () => {
           describe('has `title`', () => {
             beforeEach(() => {
-              comp.post = Data.Prismic.getPost();
+              comp.post = Data.Prismic.getNewsPost();
               changeDetectorRef.markForCheck();
               fixture.detectChanges();
             });
@@ -172,7 +176,7 @@ describe('NewsPostComponent', () => {
 
             it('should call `RichText` `asText` with `title`', () => {
               expect(RichText.asText).toHaveBeenCalledWith(
-                Data.Prismic.getPost().data.title
+                Data.Prismic.getNewsPost().data.title
               );
             });
           });
@@ -180,8 +184,8 @@ describe('NewsPostComponent', () => {
           describe('no `title`', () => {
             beforeEach(() => {
               comp.post = {
-                ...Data.Prismic.getPost(),
-                data: { ...Data.Prismic.getPost().data, title: undefined }
+                ...Data.Prismic.getNewsPost(),
+                data: { ...Data.Prismic.getNewsPost().data, title: undefined }
               } as any;
               changeDetectorRef.markForCheck();
               fixture.detectChanges();
@@ -197,13 +201,13 @@ describe('NewsPostComponent', () => {
           describe('has `image.proxy.url`', () => {
             beforeEach(() => {
               comp.post = {
-                ...Data.Prismic.getPost(),
+                ...Data.Prismic.getNewsPost(),
                 data: {
-                  ...Data.Prismic.getPost().data,
+                  ...Data.Prismic.getNewsPost().data,
                   image: {
-                    ...Data.Prismic.getPost().data.image,
+                    ...Data.Prismic.getNewsPost().data.image,
                     proxy: {
-                      ...Data.Prismic.getPost().data.image.proxy,
+                      ...Data.Prismic.getNewsPost().data.image.proxy,
                       url: 'test.jpg'
                     }
                   }
@@ -219,11 +223,11 @@ describe('NewsPostComponent', () => {
 
             it('should call `PrismicPipe` with `data`', () => {
               expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith({
-                ...Data.Prismic.getPost().data,
+                ...Data.Prismic.getNewsPost().data,
                 image: {
-                  ...Data.Prismic.getPost().data.image,
+                  ...Data.Prismic.getNewsPost().data.image,
                   proxy: {
-                    ...Data.Prismic.getPost().data.image.proxy,
+                    ...Data.Prismic.getNewsPost().data.image.proxy,
                     url: 'test.jpg'
                   }
                 }
@@ -233,11 +237,11 @@ describe('NewsPostComponent', () => {
             it('should set `ImageComponent` `image` as transformed `data`', () => {
               expect(page.imageComponent.image).toEqual({
                 'mock-prismic-pipe': {
-                  ...Data.Prismic.getPost().data,
+                  ...Data.Prismic.getNewsPost().data,
                   image: {
-                    ...Data.Prismic.getPost().data.image,
+                    ...Data.Prismic.getNewsPost().data.image,
                     proxy: {
-                      ...Data.Prismic.getPost().data.image.proxy,
+                      ...Data.Prismic.getNewsPost().data.image.proxy,
                       url: 'test.jpg'
                     }
                   }
@@ -253,13 +257,13 @@ describe('NewsPostComponent', () => {
           describe('no `image.proxy.url`', () => {
             beforeEach(() => {
               comp.post = {
-                ...Data.Prismic.getPost(),
+                ...Data.Prismic.getNewsPost(),
                 data: {
-                  ...Data.Prismic.getPost().data,
+                  ...Data.Prismic.getNewsPost().data,
                   image: {
-                    ...Data.Prismic.getPost().data.image,
+                    ...Data.Prismic.getNewsPost().data.image,
                     proxy: {
-                      ...Data.Prismic.getPost().data.image.proxy,
+                      ...Data.Prismic.getNewsPost().data.image.proxy,
                       url: undefined
                     }
                   }
@@ -279,7 +283,7 @@ describe('NewsPostComponent', () => {
       describe('Content', () => {
         describe('Text', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getPosts('post-2');
+            comp.post = Data.Prismic.getNewsPosts('post-2');
             changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
@@ -292,20 +296,20 @@ describe('NewsPostComponent', () => {
             expect(
               MockPrismicPipe.prototype.transform
             ).not.toHaveBeenCalledWith(
-              Data.Prismic.getPosts('post-2').data.body[0].primary
+              Data.Prismic.getNewsPosts('post-2').data.body[0].primary
             );
           });
 
           it('should set `TextBlockComponent` `data` as `primary.text`', () => {
             expect(page.textBlockComponent.data).toEqual(
-              Data.Prismic.getPosts('post-2').data.body[0].primary.text
+              Data.Prismic.getNewsPosts('post-2').data.body[0].primary.text
             );
           });
         });
 
         describe('Image', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getPosts('post-3');
+            comp.post = Data.Prismic.getNewsPosts('post-3');
             changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
@@ -316,21 +320,21 @@ describe('NewsPostComponent', () => {
 
           it('should call `PrismicPipe` with `primary`', () => {
             expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-              Data.Prismic.getPosts('post-3').data.body[0].primary
+              Data.Prismic.getNewsPosts('post-3').data.body[0].primary
             );
           });
 
           it('should set `ImageBlockComponent` `data` as transformed`primary`', () => {
             expect(page.imageBlockComponent.data).toEqual({
-              'mock-prismic-pipe': Data.Prismic.getPosts('post-3').data.body[0]
-                .primary
+              'mock-prismic-pipe': Data.Prismic.getNewsPosts('post-3').data
+                .body[0].primary
             });
           });
         });
 
         describe('Duo', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getPosts('post-4');
+            comp.post = Data.Prismic.getNewsPosts('post-4');
             changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
@@ -341,21 +345,21 @@ describe('NewsPostComponent', () => {
 
           it('should call `PrismicPipe` with `items`', () => {
             expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-              Data.Prismic.getPosts('post-4').data.body[0].items
+              Data.Prismic.getNewsPosts('post-4').data.body[0].items
             );
           });
 
           it('should set `DuoBlockComponent` `data` as transformed `items`', () => {
             expect(page.duoBlockComponent.data).toEqual({
-              'mock-prismic-pipe': Data.Prismic.getPosts('post-4').data.body[0]
-                .items
+              'mock-prismic-pipe': Data.Prismic.getNewsPosts('post-4').data
+                .body[0].items
             } as any);
           });
         });
 
         describe('Gallery', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getPosts('post-5');
+            comp.post = Data.Prismic.getNewsPosts('post-5');
             changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
@@ -366,21 +370,21 @@ describe('NewsPostComponent', () => {
 
           it('should call `PrismicPipe` with `items`', () => {
             expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-              Data.Prismic.getPosts('post-5').data.body[0].items
+              Data.Prismic.getNewsPosts('post-5').data.body[0].items
             );
           });
 
           it('should set `GalleryBlockComponent` `data` as transformed `items`', () => {
             expect(page.galleryBlockComponent.data).toEqual({
-              'mock-prismic-pipe': Data.Prismic.getPosts('post-5').data.body[0]
-                .items
+              'mock-prismic-pipe': Data.Prismic.getNewsPosts('post-5').data
+                .body[0].items
             } as any);
           });
         });
 
         describe('Video', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getPosts('post-6');
+            comp.post = Data.Prismic.getNewsPosts('post-6');
             changeDetectorRef.markForCheck();
             fixture.detectChanges();
           });
@@ -391,14 +395,14 @@ describe('NewsPostComponent', () => {
 
           it('should call `PrismicPipe` with `primary`', () => {
             expect(MockPrismicPipe.prototype.transform).toHaveBeenCalledWith(
-              Data.Prismic.getPosts('post-6').data.body[0].primary
+              Data.Prismic.getNewsPosts('post-6').data.body[0].primary
             );
           });
 
           it('should set `VideoBlockComponent` `data` as transformed `primary`', () => {
             expect(page.videoBlockComponent.data).toEqual({
-              'mock-prismic-pipe': Data.Prismic.getPosts('post-6').data.body[0]
-                .primary
+              'mock-prismic-pipe': Data.Prismic.getNewsPosts('post-6').data
+                .body[0].primary
             } as any);
           });
         });

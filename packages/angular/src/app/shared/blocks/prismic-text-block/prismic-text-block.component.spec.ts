@@ -4,11 +4,11 @@ import { Data } from 'testing';
 
 import { RichText } from 'prismic-dom';
 
-import { TextBlockComponent } from './text-block.component';
+import { PrismicTextBlockComponent } from './prismic-text-block.component';
 import { By } from '@angular/platform-browser';
 
 let compHost: TestHostComponent;
-let comp: TextBlockComponent;
+let comp: PrismicTextBlockComponent;
 let fixture: ComponentFixture<TestHostComponent>;
 let page: Page;
 
@@ -23,7 +23,7 @@ export class TestHostComponent {
 describe('TextBlockComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, TextBlockComponent]
+      declarations: [TestHostComponent, PrismicTextBlockComponent]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
@@ -49,6 +49,15 @@ describe('TextBlockComponent', () => {
       } as any);
 
       expect(res).toBe('/news/post');
+    });
+
+    it('should return `/careers/$uid` if `type` arg is `career`', () => {
+      const res = comp.linkResolver({
+        type: 'career',
+        uid: 'post'
+      } as any);
+
+      expect(res).toBe('/careers/post');
     });
 
     it('should return `/` by default', () => {
@@ -105,8 +114,10 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(TestHostComponent);
   compHost = fixture.componentInstance;
-  const el = fixture.debugElement.query(By.directive(TextBlockComponent));
-  comp = el.injector.get<TextBlockComponent>(TextBlockComponent);
+  const el = fixture.debugElement.query(
+    By.directive(PrismicTextBlockComponent)
+  );
+  comp = el.injector.get<PrismicTextBlockComponent>(PrismicTextBlockComponent);
   jest.spyOn(RichText, 'asHtml');
   page = new Page();
 

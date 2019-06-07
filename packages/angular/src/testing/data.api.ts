@@ -8,7 +8,6 @@ import {
   Service,
   CaseStudy,
   Client,
-  Career,
   Team,
   Image,
   Sentence,
@@ -232,63 +231,6 @@ export namespace Api {
     ];
 
     return clients;
-  };
-
-  export const getCareers = <
-    T extends void | 'Career 1' | 'Career 2' | 'Career 3'
-  >(
-    title?: T
-  ): T extends string ? Career : Career[] => {
-    const careers: Career[] = [
-      {
-        id: 'career-1',
-        title: 'Career 1',
-        salary: '£0',
-        content: [
-          {
-            title: 'TextBlock',
-            data: <TextBlock[]>[
-              {
-                type: 'text'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'career-2',
-        title: 'Career 2',
-        salary: '£0',
-        content: [
-          {
-            data: <TextBlock[]>[
-              {
-                type: 'text'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'career-3',
-        title: 'Career 3',
-        salary: '£0',
-        content: [
-          {
-            data: <TextBlock[]>[
-              {
-                type: 'text'
-              }
-            ]
-          }
-        ]
-      }
-    ];
-
-    if (!title) return careers as any;
-
-    const foundCareer = careers.find(career => career.title === title);
-    return foundCareer as any;
   };
 
   export const getTeam = <

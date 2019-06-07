@@ -96,9 +96,16 @@ export interface News {
   body: Block[];
 }
 
-export interface Post {
+export interface Career {
+  title: Text[];
+  salary: string;
+  contact: string;
+  body: TextBlock[];
+}
+
+interface Post {
   alternate_languages: string[];
-  data: News;
+  data: News | Career;
   first_publication_date: Date | null;
   href: string;
   id: string;
@@ -107,16 +114,26 @@ export interface Post {
   linked_documents?: any[];
   slugs: string[];
   tags: string[];
-  type: string;
+  type: PostTypes;
   uid?: string;
 }
 
-export interface PostsResponse {
+export interface NewsPost extends Post {
+  data: News;
+  type: 'news';
+}
+
+export interface CareerPost extends Post {
+  data: Career;
+  type: 'career';
+}
+
+export interface PostsResponse<T extends NewsPost | CareerPost> {
   license: string;
   next_page: string | null;
   page: number;
   prev_page: string | null;
-  results: Post[];
+  results: T[];
   results_per_page: number;
   results_size: number;
   total_pages: number;
@@ -143,3 +160,5 @@ export interface RefResponse {
   types: {};
   version: string;
 }
+
+export type PostTypes = 'news' | 'career';

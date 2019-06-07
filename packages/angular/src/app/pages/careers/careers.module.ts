@@ -15,7 +15,7 @@ const routes: Routes = [
     }
   },
   {
-    path: ':id',
+    path: ':uid',
     component: CareerComponent,
     data: {
       state: 'career'

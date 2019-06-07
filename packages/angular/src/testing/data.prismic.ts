@@ -1,5 +1,4 @@
 import {
-  Post,
   PostsResponse,
   RefResponse,
   Image,
@@ -8,12 +7,14 @@ import {
   ImageBlockData,
   VideoBlockData,
   DuoBlockData,
-  GalleryBlockData
+  GalleryBlockData,
+  NewsPost,
+  CareerPost
 } from 'prismic';
 
 export namespace Prismic {
-  export const getPost = () => {
-    const post: Post = {
+  export const getNewsPost = () => {
+    const post: NewsPost = {
       alternate_languages: [],
       data: {
         title: [{ spans: [], text: 'Post 1', type: 'h1' }],
@@ -68,15 +69,37 @@ export namespace Prismic {
       last_publication_date: null,
       slugs: [],
       tags: [],
-      type: '',
+      type: 'news',
       uid: 'post-1'
     };
 
     return post;
   };
 
-  export const getPostsResponse = () => {
-    const postsResponse: PostsResponse = {
+  export const getCareerPost = () => {
+    const post: CareerPost = {
+      alternate_languages: [],
+      data: {
+        title: [{ spans: [], text: 'Post', type: 'h1' }],
+        salary: 'Post salary',
+        contact: 'post@contact',
+        body: []
+      },
+      first_publication_date: null,
+      href: '',
+      id: '',
+      last_publication_date: null,
+      slugs: [],
+      tags: [],
+      type: 'career',
+      uid: 'post'
+    };
+
+    return post;
+  };
+
+  export const getNewsPostsResponse = () => {
+    const postsResponse: PostsResponse<NewsPost> = {
       license: '',
       next_page: null,
       page: 1,
@@ -137,7 +160,7 @@ export namespace Prismic {
           last_publication_date: null,
           slugs: [],
           tags: [],
-          type: '',
+          type: 'news',
           uid: 'post-1'
         },
         {
@@ -195,7 +218,7 @@ export namespace Prismic {
           last_publication_date: null,
           slugs: [],
           tags: [],
-          type: '',
+          type: 'news',
           uid: 'post-2'
         },
         {
@@ -253,7 +276,7 @@ export namespace Prismic {
           last_publication_date: null,
           slugs: [],
           tags: [],
-          type: '',
+          type: 'news',
           uid: 'post-3'
         }
       ],
@@ -267,7 +290,128 @@ export namespace Prismic {
     return postsResponse;
   };
 
-  export const getPosts = <
+  export const getCareerPosts = <
+    T extends void | 'post-1' | 'post-2' | 'post-3'
+  >(
+    uid?: T
+  ): T extends string ? CareerPost : CareerPost[] => {
+    const posts: CareerPost[] = [
+      {
+        alternate_languages: [],
+        data: {
+          title: [{ spans: [], text: 'Post 1', type: 'h1' }],
+          salary: 'Post 1 salary',
+          contact: 'post1@contact',
+          body: [
+            {
+              slice_type: 'text',
+              primary: {
+                text: [
+                  {
+                    spans: [],
+                    text: 'Post 1 sentence.',
+                    type: 'paragraph'
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        first_publication_date: null,
+        href: '',
+        id: '',
+        last_publication_date: null,
+        slugs: [],
+        tags: [],
+        type: 'career',
+        uid: 'post-1'
+      },
+      {
+        alternate_languages: [],
+        data: {
+          title: [{ spans: [], text: 'Post 2', type: 'h1' }],
+          salary: 'Post 2 salary',
+          contact: 'post2@contact',
+          body: [
+            {
+              slice_type: 'text',
+              primary: {
+                text: [
+                  {
+                    spans: [],
+                    text: 'Post 2 sentence.',
+                    type: 'paragraph'
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        first_publication_date: null,
+        href: '',
+        id: '',
+        last_publication_date: null,
+        slugs: [],
+        tags: [],
+        type: 'career',
+        uid: 'post-2'
+      },
+      {
+        alternate_languages: [],
+        data: {
+          title: [{ spans: [], text: 'Post 3', type: 'h1' }],
+          salary: 'Post 3 salary',
+          contact: 'post3@contact',
+          body: [
+            {
+              slice_type: 'text',
+              primary: {
+                text: [
+                  {
+                    spans: [],
+                    text: 'Post 3 sentence.',
+                    type: 'paragraph'
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        first_publication_date: null,
+        href: '',
+        id: '',
+        last_publication_date: null,
+        slugs: [],
+        tags: [],
+        type: 'career',
+        uid: 'post-3'
+      }
+    ];
+
+    if (!uid) return posts as any;
+
+    const foundPost = posts.find(post => post.uid === uid);
+    return foundPost as any;
+  };
+
+  export const getCareerPostsResponse = () => {
+    const postsResponse: PostsResponse<CareerPost> = {
+      license: '',
+      next_page: null,
+      page: 1,
+      prev_page: null,
+      results: getCareerPosts<void>(),
+      results_per_page: 0,
+      results_size: 0,
+      total_pages: 0,
+      total_results_size: 0,
+      version: ''
+    };
+
+    return postsResponse;
+  };
+
+  export const getNewsPosts = <
     T extends
       | void
       | 'post-1'
@@ -278,8 +422,8 @@ export namespace Prismic {
       | 'post-6'
   >(
     uid?: T
-  ): T extends string ? Post : Post[] => {
-    const posts: Post[] = [
+  ): T extends string ? NewsPost : NewsPost[] => {
+    const posts: NewsPost[] = [
       {
         alternate_languages: [],
         data: {
@@ -335,7 +479,7 @@ export namespace Prismic {
         last_publication_date: null,
         slugs: [],
         tags: [],
-        type: '',
+        type: 'news',
         uid: 'post-1'
       },
       {
@@ -365,7 +509,7 @@ export namespace Prismic {
         last_publication_date: null,
         slugs: [],
         tags: [],
-        type: '',
+        type: 'news',
         uid: 'post-2'
       },
       {
@@ -397,7 +541,7 @@ export namespace Prismic {
         last_publication_date: null,
         slugs: [],
         tags: [],
-        type: '',
+        type: 'news',
         uid: 'post-3'
       },
       {
@@ -442,7 +586,7 @@ export namespace Prismic {
         last_publication_date: null,
         slugs: [],
         tags: [],
-        type: '',
+        type: 'news',
         uid: 'post-4'
       },
       {
@@ -498,7 +642,7 @@ export namespace Prismic {
         last_publication_date: null,
         slugs: [],
         tags: [],
-        type: '',
+        type: 'news',
         uid: 'post-5'
       },
       {
@@ -525,7 +669,7 @@ export namespace Prismic {
         last_publication_date: null,
         slugs: [],
         tags: [],
-        type: '',
+        type: 'news',
         uid: 'post-6'
       }
     ];
