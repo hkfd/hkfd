@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/hkfd/hkfd/compare/v1.7.0...v1.8.0) (2019-06-07)
+
+
+### Features
+
+* move careers to prismic ([ddffa93](https://github.com/hkfd/hkfd/commit/ddffa93))
+
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/hkfd/hkfd/compare/v1.6.3...v1.7.0) (2019-05-22)
 
