@@ -9,7 +9,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { switchMap, map, filter } from 'rxjs/operators';
-import { RichText } from 'prismic-dom';
 
 import { PrismicService } from 'shared';
 import { NewsPost } from 'prismic';
@@ -21,8 +20,6 @@ import { NewsPost } from 'prismic';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsPostComponent implements OnInit, OnDestroy {
-  richText = RichText;
-
   postSub: Subscription | undefined;
   post: NewsPost | null | undefined;
 

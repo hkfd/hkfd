@@ -1,1 +1,1 @@
-<div *ngIf="data" [innerHTML]="richText.asHtml(data, linkResolver)"></div>
+<div *ngIf="data" [innerHTML]="data | prismicText: 'asHtml'"></div>

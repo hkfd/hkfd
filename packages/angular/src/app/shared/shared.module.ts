@@ -21,6 +21,7 @@ import { VideoBlockComponent } from './blocks/video-block/video-block.component'
 import { AudioBlockComponent } from './blocks/audio-block/audio-block.component';
 import { ApiPipe } from './pipes/api.pipe';
 import { PrismicPipe } from './pipes/prismic.pipe';
+import { PrismicTextPipe } from './pipes/prismic-text.pipe';
 import { LazyDirective } from './lazy.directive';
 import { ErrorComponent } from './errors/error/error.component';
 
@@ -44,7 +45,8 @@ import { ErrorComponent } from './errors/error/error.component';
     FormComponent,
     LazyDirective,
     ApiPipe,
-    PrismicPipe
+    PrismicPipe,
+    PrismicTextPipe
   ],
   exports: [
     HeaderComponent,
@@ -63,7 +65,8 @@ import { ErrorComponent } from './errors/error/error.component';
     ErrorComponent,
     LazyDirective,
     ApiPipe,
-    PrismicPipe
+    PrismicPipe,
+    PrismicTextPipe
   ],
   providers: [ApiPipe]
 })

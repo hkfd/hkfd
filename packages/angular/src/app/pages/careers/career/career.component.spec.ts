@@ -9,11 +9,11 @@ import {
   MockPrismicService,
   StubPrismicTextBlockComponent,
   StubErrorComponent,
+  MockPrismicTextPipe,
   Data
 } from 'testing';
 
 import { of } from 'rxjs';
-import { RichText } from 'prismic-dom';
 
 import { PrismicService } from 'shared';
 import { CareerPost } from 'prismic';
@@ -25,8 +25,6 @@ let page: Page;
 let activatedRoute: ActivatedRouteStub;
 let changeDetectorRef: ChangeDetectorRef;
 let prismicService: PrismicService;
-
-jest.spyOn(RichText, 'asText');
 
 beforeEach(jest.clearAllMocks);
 
@@ -40,7 +38,8 @@ describe('CareerComponent', () => {
       declarations: [
         CareerComponent,
         StubPrismicTextBlockComponent,
-        StubErrorComponent
+        StubErrorComponent,
+        MockPrismicTextPipe
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
@@ -157,14 +156,17 @@ describe('CareerComponent', () => {
             fixture.detectChanges();
           });
 
-          it('should call `RichText` `asText` with `career.data.title` arg', () => {
-            expect(RichText.asText).toHaveBeenCalledWith([
-              { spans: [], text: 'Title', type: 'h1' }
-            ]);
+          it('should be displayed', () => {
+            expect(page.title.textContent).toBeTruthy();
           });
 
-          it('should display title', () => {
-            expect((page.title.textContent as string).trim()).toBe('Title');
+          it('should call `PrismicTextPipe` with `career.data.title` arg', () => {
+            expect(
+              MockPrismicTextPipe.prototype.transform
+            ).toHaveBeenCalledWith(
+              [{ spans: [], text: 'Title', type: 'h1' }],
+              'asText'
+            );
           });
         });
 
@@ -253,6 +255,7 @@ function createComponent() {
   );
   page = new Page();
 
+  jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
   jest.spyOn(changeDetectorRef, 'markForCheck');
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());

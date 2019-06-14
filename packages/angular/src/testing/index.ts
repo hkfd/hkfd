@@ -9,6 +9,7 @@ export * from './prismic.pipe.mock';
 export * from './router';
 export * from './sanitizer';
 export * from './material';
+export * from './prismic-text.pipe.mock';
 
 export * from './directives';
 export * from './components';

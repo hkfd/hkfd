@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
 import { PostsResponse, CareerPost } from 'prismic';
@@ -15,7 +14,6 @@ import { CareersImages } from './careers.images';
 })
 export class CareersComponent implements OnInit {
   careers$: Observable<PostsResponse<CareerPost>> | undefined;
-  richText = RichText;
   images = CareersImages;
 
   constructor(

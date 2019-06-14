@@ -16,7 +16,7 @@
       class="post"
       *ngFor="let post of posts?.results; trackBy: postTrackBy"
       [routerLink]="['/news/', post?.uid]"
-      [attr.aria-label]="richText.asText(post?.data?.title)"
+      [attr.aria-label]="post?.data?.title | prismicText: 'asText'"
     >
       <image-component
         *ngIf="post?.data?.image?.proxy?.url"
@@ -27,7 +27,7 @@
         <span class="post-date">
           {{ post?.first_publication_date | date: 'dd/MM' }}
         </span>
-        <h2>{{ richText.asText(post?.data?.title) }}</h2>
+        <h2>{{ post?.data?.title | prismicText: 'asText' }}</h2>
       </div>
       <span class="post-more button">READ MORE</span>
     </a>

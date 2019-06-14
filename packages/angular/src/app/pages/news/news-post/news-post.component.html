@@ -7,7 +7,7 @@
         {{ post?.first_publication_date | date: 'dd LLLL' }}
       </span>
       <h1 *ngIf="post?.data?.title">
-        {{ richText.asText(post?.data?.title) }}
+        {{ post?.data?.title | prismicText: 'asText' }}
       </h1>
     </div>
     <image-component

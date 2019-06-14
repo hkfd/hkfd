@@ -4,7 +4,7 @@
   <section id="intro">
     <div id="intro-info">
       <h1 *ngIf="career?.data?.title">
-        {{ richText.asText(career?.data?.title) }}
+        {{ career?.data?.title | prismicText: 'asText' }}
       </h1>
     </div>
   </section>

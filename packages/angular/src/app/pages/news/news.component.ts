@@ -3,7 +3,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
 import { PostsResponse, NewsPost } from 'prismic';
@@ -18,7 +17,6 @@ import { NewsAnimations } from './news.animations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsComponent implements OnInit {
-  richText = RichText;
   getPaginationUrl = getPaginationUrl;
 
   posts$: Observable<PostsResponse<NewsPost>> | undefined;

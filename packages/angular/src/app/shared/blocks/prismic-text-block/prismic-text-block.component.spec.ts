@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { Data } from 'testing';
-
-import { RichText } from 'prismic-dom';
+import { Data, MockPrismicTextPipe } from 'testing';
 
 import { PrismicTextBlockComponent } from './prismic-text-block.component';
 import { By } from '@angular/platform-browser';
@@ -23,7 +21,11 @@ export class TestHostComponent {
 describe('TextBlockComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, PrismicTextBlockComponent]
+      declarations: [
+        TestHostComponent,
+        PrismicTextBlockComponent,
+        MockPrismicTextPipe
+      ]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
@@ -41,32 +43,6 @@ describe('TextBlockComponent', () => {
     expect(comp.data).toEqual(Data.Prismic.getText());
   });
 
-  describe('`linkResolver`', () => {
-    it('should return `/news/$uid` if `type` arg is `news`', () => {
-      const res = comp.linkResolver({
-        type: 'news',
-        uid: 'post'
-      } as any);
-
-      expect(res).toBe('/news/post');
-    });
-
-    it('should return `/careers/$uid` if `type` arg is `career`', () => {
-      const res = comp.linkResolver({
-        type: 'career',
-        uid: 'post'
-      } as any);
-
-      expect(res).toBe('/careers/post');
-    });
-
-    it('should return `/` by default', () => {
-      const res = comp.linkResolver({} as any);
-
-      expect(res).toBe('/');
-    });
-  });
-
   describe('Template', () => {
     describe('Has `data`', () => {
       beforeEach(() => {
@@ -75,15 +51,13 @@ describe('TextBlockComponent', () => {
       });
 
       it('should be displayed', () => {
-        expect(page.text.innerHTML).toBe(
-          '<p>This is a sentence.</p><p><strong>This is a bold sentence.</strong></p>'
-        );
+        expect(page.text.innerHTML).toBeTruthy();
       });
 
-      it('should call RichText `asHtml` with `data` and `linkResolver` args', () => {
-        expect(RichText.asHtml).toHaveBeenCalledWith(
+      it('should call `PrismicTextPipe` with `data` arg', () => {
+        expect(MockPrismicTextPipe.prototype.transform).toHaveBeenCalledWith(
           comp.data,
-          comp.linkResolver
+          'asHtml'
         );
       });
     });
@@ -118,7 +92,7 @@ function createComponent() {
     By.directive(PrismicTextBlockComponent)
   );
   comp = el.injector.get<PrismicTextBlockComponent>(PrismicTextBlockComponent);
-  jest.spyOn(RichText, 'asHtml');
+  jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
   page = new Page();
 
   fixture.detectChanges();

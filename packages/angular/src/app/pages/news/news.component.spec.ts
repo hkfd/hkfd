@@ -11,10 +11,10 @@ import {
   StubImageComponent,
   Data,
   ActivatedRoute,
-  ActivatedRouteStub
+  ActivatedRouteStub,
+  MockPrismicTextPipe
 } from 'testing';
 import { of } from 'rxjs';
-import { RichText } from 'prismic-dom';
 
 import { MetaService, PrismicService } from 'shared';
 import { PostsResponse, NewsPost } from 'prismic';
@@ -56,7 +56,8 @@ describe('NewsComponent', () => {
         TestHostComponent,
         NewsComponent,
         StubImageComponent,
-        MockPrismicPipe
+        MockPrismicPipe,
+        MockPrismicTextPipe
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
@@ -280,12 +281,15 @@ describe('NewsComponent', () => {
             });
 
             it('should display title', () => {
-              expect(page.postTitle.innerHTML).toBe('Post 1');
+              expect(page.postTitle.innerHTML).toBeTruthy();
             });
 
-            it('should call RichText `asText` with `title`', () => {
-              expect(RichText.asText).toHaveBeenCalledWith(
-                Data.Prismic.getNewsPosts('post-1').data.title
+            it('should call `PrismicTextPipe` with `title`', () => {
+              expect(
+                MockPrismicTextPipe.prototype.transform
+              ).toHaveBeenCalledWith(
+                Data.Prismic.getNewsPosts('post-1').data.title,
+                'asText'
               );
             });
           });
@@ -399,7 +403,7 @@ function createComponent() {
     PrismicService
   );
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
-  jest.spyOn(RichText, 'asText');
+  jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
   page = new Page();
 
   fixture.detectChanges();

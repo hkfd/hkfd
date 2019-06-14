@@ -3,7 +3,6 @@ import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 import { of } from 'rxjs';
-import { RichText } from 'prismic-dom';
 
 import {
   RouterTestingModule,
@@ -11,7 +10,8 @@ import {
   MockPrismicService,
   MockApiPipe,
   StubImageComponent,
-  Data
+  Data,
+  MockPrismicTextPipe
 } from 'testing';
 
 import { MetaService, PrismicService } from 'shared';
@@ -25,15 +25,18 @@ let page: Page;
 let metaService: MetaService;
 let prismicService: PrismicService;
 
-jest.spyOn(RichText, 'asText');
-
 beforeEach(jest.clearAllMocks);
 
 describe('CareersComponent', () => {
   beforeEach(async(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [CareersComponent, StubImageComponent, MockApiPipe],
+      declarations: [
+        CareersComponent,
+        StubImageComponent,
+        MockApiPipe,
+        MockPrismicTextPipe
+      ],
       providers: [
         { provide: MetaService, useClass: MockMetaService },
         { provide: PrismicService, useClass: MockPrismicService }
@@ -139,14 +142,17 @@ describe('CareersComponent', () => {
         });
 
         describe('Career', () => {
-          it('should call `RichText` `asText` with `career.data.title`', () => {
-            expect(RichText.asText).toHaveBeenCalledWith(
-              Data.Prismic.getCareerPosts('post-1').data.title
+          it('should call `PrismicTextPipe` with `career.data.title`', () => {
+            expect(
+              MockPrismicTextPipe.prototype.transform
+            ).toHaveBeenCalledWith(
+              Data.Prismic.getCareerPosts('post-1').data.title,
+              'asText'
             );
           });
 
           it('should display title', () => {
-            expect(page.careerTitle.textContent).toBe('Post 1');
+            expect(page.careerTitle.textContent).toBeTruthy();
           });
 
           it('should display salary', () => {
@@ -210,6 +216,7 @@ function createComponent() {
     PrismicService
   );
   jest.spyOn(MockApiPipe.prototype, 'transform');
+  jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
 
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());
