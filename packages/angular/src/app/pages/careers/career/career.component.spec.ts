@@ -185,6 +185,10 @@ describe('CareerComponent', () => {
         });
       });
 
+      it('should display salary', () => {
+        expect(page.salary.textContent).toBe('Post salary');
+      });
+
       describe('Section', () => {
         describe('Text', () => {
           beforeEach(() => {
@@ -221,6 +225,9 @@ describe('CareerComponent', () => {
 class Page {
   get title() {
     return this.query<HTMLHeadingElement>('h1');
+  }
+  get salary() {
+    return this.query<HTMLHeadingElement>('h2');
   }
   get textBlock() {
     return this.query<HTMLElement>('prismic-text-block');
