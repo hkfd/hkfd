@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/hkfd/hkfd/compare/v1.8.0...v1.8.1) (2019-06-14)
+
+
+### Performance Improvements
+
+* **angular:** use prismic text pipe instead of component binding ([4926c77](https://github.com/hkfd/hkfd/commit/4926c77))
+
+
+
+
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/hkfd/hkfd/compare/v1.7.0...v1.8.0) (2019-06-07)
 
