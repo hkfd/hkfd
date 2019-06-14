@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/hkfd/hkfd/compare/v1.8.1...v1.9.0) (2019-06-14)
+
+
+### Features
+
+* **angular:** display salary on career page ([6a84249](https://github.com/hkfd/hkfd/commit/6a84249))
+
+
+
+
+
 <a name="1.8.1"></a>
 ## [1.8.1](https://github.com/hkfd/hkfd/compare/v1.8.0...v1.8.1) (2019-06-14)
 
