@@ -15,10 +15,10 @@ import {
   StubVideoBlockComponent,
   StubImageComponent,
   StubErrorComponent,
-  Data
+  Data,
+  MockPrismicTextPipe
 } from 'testing';
 import { of } from 'rxjs';
-import { RichText } from 'prismic-dom';
 
 import { PrismicService } from 'shared';
 import { NewsPostComponent } from './news-post.component';
@@ -48,7 +48,8 @@ describe('NewsPostComponent', () => {
         StubGalleryBlockComponent,
         StubVideoBlockComponent,
         StubImageComponent,
-        StubErrorComponent
+        StubErrorComponent,
+        MockPrismicTextPipe
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
@@ -171,12 +172,15 @@ describe('NewsPostComponent', () => {
             });
 
             it('should be displayed', () => {
-              expect(page.title.innerHTML.trim()).toBe('Post 1');
+              expect(page.title.innerHTML).toBeTruthy();
             });
 
-            it('should call `RichText` `asText` with `title`', () => {
-              expect(RichText.asText).toHaveBeenCalledWith(
-                Data.Prismic.getNewsPost().data.title
+            it('should call `PrismicTextPipe` with `title`', () => {
+              expect(
+                MockPrismicTextPipe.prototype.transform
+              ).toHaveBeenCalledWith(
+                Data.Prismic.getNewsPost().data.title,
+                'asText'
               );
             });
           });
@@ -501,7 +505,7 @@ function createComponent() {
   );
   jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
-  jest.spyOn(RichText, 'asText');
+  jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
   page = new Page();
 
   fixture.detectChanges();

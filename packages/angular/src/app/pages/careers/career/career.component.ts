@@ -9,7 +9,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { switchMap, map, filter } from 'rxjs/operators';
-import { RichText } from 'prismic-dom';
 
 import { PrismicService } from 'shared';
 import { CareerPost } from 'prismic';
@@ -23,8 +22,6 @@ import { CareerPost } from 'prismic';
 export class CareerComponent implements OnInit, OnDestroy {
   careerSub: Subscription | undefined;
   career: CareerPost | null | undefined;
-
-  richText = RichText;
 
   constructor(
     private route: ActivatedRoute,

@@ -48,10 +48,10 @@
     class="career"
     *ngFor="let career of (careers$ | async)?.results; trackBy: careerTrackBy"
     [routerLink]="['/careers/', career?.uid]"
-    [attr.aria-label]="richText.asText(career?.data?.title)"
+    [attr.aria-label]="career?.data?.title | prismicText: 'asText'"
   >
     <div class="career-info">
-      <h3>{{ richText.asText(career?.data?.title) }}</h3>
+      <h3>{{ career?.data?.title | prismicText: 'asText' }}</h3>
       <span>{{ career?.data?.salary }}</span>
     </div>
   </a>
