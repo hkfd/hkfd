@@ -1,17 +1,10 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap, map, filter } from 'rxjs/operators';
 
-import { PrismicService } from 'shared';
-import { CareerPost } from 'prismic';
+import { PrismicService, PostReturn } from 'shared';
 
 @Component({
   selector: 'app-career',
@@ -19,30 +12,19 @@ import { CareerPost } from 'prismic';
   styleUrls: ['./career.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CareerComponent implements OnInit, OnDestroy {
-  careerSub: Subscription | undefined;
-  career: CareerPost | null | undefined;
+export class CareerComponent implements OnInit {
+  career$: Observable<PostReturn<'career'>> | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef,
     private prismicService: PrismicService
   ) {}
 
   ngOnInit() {
-    this.careerSub = this.route.paramMap
-      .pipe(
-        map((params: ParamMap) => params.get('uid')),
-        filter((uid): uid is string => Boolean(uid)),
-        switchMap(uid => this.prismicService.getPost('career', uid))
-      )
-      .subscribe(career => {
-        this.career = career;
-        this.changeDetectorRef.markForCheck();
-      });
-  }
-
-  ngOnDestroy() {
-    this.careerSub && this.careerSub.unsubscribe();
+    this.career$ = this.route.paramMap.pipe(
+      map((params: ParamMap) => params.get('uid')),
+      filter((uid): uid is string => Boolean(uid)),
+      switchMap(uid => this.prismicService.getPost('career', uid))
+    );
   }
 }

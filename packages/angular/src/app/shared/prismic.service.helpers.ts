@@ -1,7 +1,12 @@
 import { MetaTags } from 'shared';
-import { NewsPost, CareerPost } from 'prismic';
+import { NewsPost, CareerPost, PostsResponse } from 'prismic';
 
-export type PostReturn<T> = T extends 'news'
+export type PostsReturn<T> = PostsResponse<PostTypeReturn<T>>;
+export interface PostReturn<T> {
+  post: PostTypeReturn<T> | null;
+}
+
+export type PostTypeReturn<T> = T extends 'news'
   ? NewsPost
   : T extends 'career'
   ? CareerPost

@@ -1,50 +1,52 @@
-<error *ngIf="career === null"></error>
+<ng-container *ngIf="(career$ | async) as career">
+  <ng-template #noCareer><error></error></ng-template>
 
-<ng-container *ngIf="career">
-  <section id="intro">
-    <div id="intro-info">
-      <h1 *ngIf="career?.data?.title">
-        {{ career?.data?.title | prismicText: 'asText' }}
-      </h1>
-      <h2>{{ career?.data?.salary }}</h2>
-    </div>
-  </section>
+  <ng-container *ngIf="career?.post; else: noCareer">
+    <section id="intro">
+      <div id="intro-info">
+        <h1 *ngIf="career?.post?.data?.title">
+          {{ career?.post?.data?.title | prismicText: 'asText' }}
+        </h1>
+        <h2>{{ career?.post?.data?.salary }}</h2>
+      </div>
+    </section>
 
-  <ng-container *ngFor="let slice of career?.data?.body">
-    <ng-container [ngSwitch]="slice?.slice_type">
-      <prismic-text-block
-        *ngSwitchCase="'text'"
-        [data]="slice?.primary?.text"
-      ></prismic-text-block>
+    <ng-container *ngFor="let slice of career?.post?.data?.body">
+      <ng-container [ngSwitch]="slice?.slice_type">
+        <prismic-text-block
+          *ngSwitchCase="'text'"
+          [data]="slice?.primary?.text"
+        ></prismic-text-block>
+      </ng-container>
     </ng-container>
+
+    <section>
+      <div class="text">
+        <h2>Benefits</h2>
+        <ul>
+          <li>Excellent and competitive rates of pay</li>
+          <li>
+            20 days holiday a year plus bank holidays, rising to 25 days plus
+            bank holidays after first year
+          </li>
+          <li>Full time job within a creative &amp; vibrant team</li>
+          <li>Opportunities for professional career development</li>
+          <li>Childcare vouchers and contributory pension scheme</li>
+          <li>
+            A great opportunity to work for a leading and established creative
+            agency
+          </li>
+          <li>Free on-site car parking</li>
+        </ul>
+      </div>
+    </section>
+
+    <a
+      class="button black"
+      href="mailto:{{ career?.post?.data?.contact }}"
+      [attr.aria-label]="'Apply Now'"
+    >
+      APPLY NOW
+    </a>
   </ng-container>
-
-  <section>
-    <div class="text">
-      <h2>Benefits</h2>
-      <ul>
-        <li>Excellent and competitive rates of pay</li>
-        <li>
-          20 days holiday a year plus bank holidays, rising to 25 days plus bank
-          holidays after first year
-        </li>
-        <li>Full time job within a creative &amp; vibrant team</li>
-        <li>Opportunities for professional career development</li>
-        <li>Childcare vouchers and contributory pension scheme</li>
-        <li>
-          A great opportunity to work for a leading and established creative
-          agency
-        </li>
-        <li>Free on-site car parking</li>
-      </ul>
-    </div>
-  </section>
-
-  <a
-    class="button black"
-    href="mailto:{{ career?.data?.contact }}"
-    [attr.aria-label]="'Apply Now'"
-  >
-    APPLY NOW
-  </a>
 </ng-container>

@@ -290,42 +290,22 @@ describe('PrismicService', () => {
         });
 
         describe('No error', () => {
-          describe('Has `post`', () => {
-            it('should return `post`', async(() => {
-              prismicService
-                .getPost('type' as any, 'uid')
-                .subscribe(res =>
-                  expect(res).toEqual(Data.Prismic.getNewsPosts('post-1'))
-                );
+          it('should return `post` as first `results` if exists', async(() => {
+            prismicService.getPost('type' as any, 'uid').subscribe(res =>
+              expect(res).toEqual({
+                post: Data.Prismic.getNewsPosts('post-1')
+              })
+            );
 
-              mockHttp
-                .expectOne(req => req.url === URL)
-                .flush(Data.Prismic.getNewsPostsResponse());
-            }));
+            mockHttp
+              .expectOne(req => req.url === URL)
+              .flush(Data.Prismic.getNewsPostsResponse());
+          }));
 
-            it('should call `createPostMetaTags` with `post` args', async(() => {
-              prismicService
-                .getPost('type' as any, 'uid')
-                .subscribe(_ =>
-                  expect(createPostMetaTags).toHaveBeenCalledWith(
-                    Data.Prismic.getNewsPosts('post-1')
-                  )
-                );
-
-              mockHttp
-                .expectOne(
-                  req =>
-                    req.url ===
-                    `${environment.prismic.endpoint}/documents/search`
-                )
-                .flush(Data.Prismic.getNewsPostsResponse());
-            }));
-          });
-
-          it('should return `null` if no `post`', async(() => {
+          it('should return `post` as `null` if `results` does not exist', async(() => {
             prismicService
               .getPost('type' as any, 'uid')
-              .subscribe(res => expect(res).toBe(null));
+              .subscribe(res => expect(res).toEqual({ post: null }));
 
             mockHttp
               .expectOne(
@@ -335,7 +315,7 @@ describe('PrismicService', () => {
               .flush({ results: [] });
           }));
 
-          it('should call `createPostMetaTags` with `post` args', async(() => {
+          it('should call `createPostMetaTags` with `res.post` args', async(() => {
             prismicService
               .getPost('type' as any, 'uid')
               .subscribe(_ =>

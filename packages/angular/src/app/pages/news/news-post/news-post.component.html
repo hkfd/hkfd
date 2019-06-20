@@ -1,44 +1,46 @@
-<error *ngIf="post === null"></error>
+<ng-container *ngIf="(news$ | async) as news">
+  <ng-template #noNews><error></error></ng-template>
 
-<ng-container *ngIf="post">
-  <section id="intro">
-    <div id="intro-info">
-      <span id="info-date">
-        {{ post?.first_publication_date | date: 'dd LLLL' }}
-      </span>
-      <h1 *ngIf="post?.data?.title">
-        {{ post?.data?.title | prismicText: 'asText' }}
-      </h1>
-    </div>
-    <image-component
-      *ngIf="post?.data?.image?.proxy?.url"
-      [image]="post?.data | prismic"
-      full-height
-    ></image-component>
-  </section>
+  <ng-container *ngIf="news?.post; else: noNews">
+    <section id="intro">
+      <div id="intro-info">
+        <span id="info-date">
+          {{ news?.post?.first_publication_date | date: 'dd LLLL' }}
+        </span>
+        <h1 *ngIf="news?.post?.data?.title">
+          {{ news?.post?.data?.title | prismicText: 'asText' }}
+        </h1>
+      </div>
+      <image-component
+        *ngIf="news?.post?.data?.image?.proxy?.url"
+        [image]="news?.post?.data | prismic"
+        full-height
+      ></image-component>
+    </section>
 
-  <ng-container *ngFor="let slice of post?.data?.body">
-    <ng-container [ngSwitch]="slice?.slice_type">
-      <prismic-text-block
-        *ngSwitchCase="'text'"
-        [data]="slice?.primary?.text"
-      ></prismic-text-block>
-      <image-block
-        *ngSwitchCase="'image'"
-        [data]="slice?.primary | prismic"
-      ></image-block>
-      <duo-block
-        *ngSwitchCase="'duo'"
-        [data]="slice?.items | prismic"
-      ></duo-block>
-      <gallery-block
-        *ngSwitchCase="'gallery'"
-        [data]="slice?.items | prismic"
-      ></gallery-block>
-      <video-block
-        *ngSwitchCase="'video'"
-        [data]="slice?.primary | prismic"
-      ></video-block>
+    <ng-container *ngFor="let slice of news?.post?.data?.body">
+      <ng-container [ngSwitch]="slice?.slice_type">
+        <prismic-text-block
+          *ngSwitchCase="'text'"
+          [data]="slice?.primary?.text"
+        ></prismic-text-block>
+        <image-block
+          *ngSwitchCase="'image'"
+          [data]="slice?.primary | prismic"
+        ></image-block>
+        <duo-block
+          *ngSwitchCase="'duo'"
+          [data]="slice?.items | prismic"
+        ></duo-block>
+        <gallery-block
+          *ngSwitchCase="'gallery'"
+          [data]="slice?.items | prismic"
+        ></gallery-block>
+        <video-block
+          *ngSwitchCase="'video'"
+          [data]="slice?.primary | prismic"
+        ></video-block>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-container>

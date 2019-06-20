@@ -1,17 +1,10 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap, map, filter } from 'rxjs/operators';
 
-import { PrismicService } from 'shared';
-import { NewsPost } from 'prismic';
+import { PrismicService, PostReturn } from 'shared';
 
 @Component({
   selector: 'app-news-post',
@@ -19,30 +12,19 @@ import { NewsPost } from 'prismic';
   styleUrls: ['./news-post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NewsPostComponent implements OnInit, OnDestroy {
-  postSub: Subscription | undefined;
-  post: NewsPost | null | undefined;
+export class NewsPostComponent implements OnInit {
+  news$: Observable<PostReturn<'news'>> | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef,
     private prismicService: PrismicService
   ) {}
 
   ngOnInit() {
-    this.postSub = this.route.paramMap
-      .pipe(
-        map((params: ParamMap) => params.get('uid')),
-        filter((uid): uid is string => Boolean(uid)),
-        switchMap(uid => this.prismicService.getPost('news', uid))
-      )
-      .subscribe(post => {
-        this.post = post;
-        this.changeDetectorRef.markForCheck();
-      });
-  }
-
-  ngOnDestroy() {
-    this.postSub && this.postSub.unsubscribe();
+    this.news$ = this.route.paramMap.pipe(
+      map((params: ParamMap) => params.get('uid')),
+      filter((uid): uid is string => Boolean(uid)),
+      switchMap(uid => this.prismicService.getPost('news', uid))
+    );
   }
 }

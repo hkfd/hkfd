@@ -1,5 +1,6 @@
 export * from './api.service';
 export * from './prismic.service';
+export { PostReturn, PostsReturn } from './prismic.service.helpers';
 export * from './email.service';
 export * from './meta.service';
 export * from './logger.service';

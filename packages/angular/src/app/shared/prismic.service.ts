@@ -12,8 +12,10 @@ import { RefResponse, PostsResponse, PostTypes } from 'prismic';
 import { environment } from 'environment';
 import {
   createPostMetaTags,
+  getPostsArgs,
+  PostsReturn,
   PostReturn,
-  getPostsArgs
+  PostTypeReturn
 } from './prismic.service.helpers';
 import { getMasterRef, getPostParams, getPostsParams } from './prismic.helpers';
 
@@ -37,20 +39,18 @@ export class PrismicService {
     );
   }
 
-  getPosts<T extends 'career'>(
-    type: T
-  ): Observable<PostsResponse<PostReturn<T>>>;
+  getPosts<T extends 'career'>(type: T): Observable<PostsReturn<T>>;
   getPosts<T extends 'news'>(
     type: T,
     temp: getPostsArgs<T>
-  ): Observable<PostsResponse<PostReturn<T>>>;
+  ): Observable<PostsReturn<T>>;
   getPosts<T extends PostTypes>(
     type: T,
     args?: getPostsArgs<T>
-  ): Observable<PostsResponse<PostReturn<T>>> {
+  ): Observable<PostsReturn<T>> {
     return this.getRef().pipe(
       flatMap(ref =>
-        this.http.get<PostsResponse<PostReturn<T>>>(URL, {
+        this.http.get<PostsResponse<PostTypeReturn<T>>>(URL, {
           params: getPostsParams({ type, ref, page: args && args.page })
         })
       ),
@@ -60,16 +60,16 @@ export class PrismicService {
         })
       ),
       tap(postsRes => this.logger.log('getPosts', postsRes))
-    ) as Observable<PostsResponse<PostReturn<T>>>;
+    ) as Observable<PostsReturn<T>>;
   }
 
   getPost<T extends PostTypes>(
     type: T,
     uid: string
-  ): Observable<PostReturn<T> | null> {
+  ): Observable<PostReturn<T>> {
     return this.getRef().pipe(
       flatMap(ref =>
-        this.http.get<PostsResponse<PostReturn<T>>>(URL, {
+        this.http.get<PostsResponse<PostTypeReturn<T>>>(URL, {
           params: getPostParams({ type, ref, uid })
         })
       ),
@@ -78,11 +78,11 @@ export class PrismicService {
           action: 'Retry'
         })
       ),
-      map(({ results }) => results[0] || null),
-      tap(post => {
+      map(({ results }) => ({ post: results[0] || null })),
+      tap(({ post }) => {
         this.logger.log('getPost', post);
         this.metaService.setMetaTags(createPostMetaTags(post));
       })
-    ) as Observable<PostReturn<T> | null>;
+    ) as Observable<PostReturn<T>>;
   }
 }
