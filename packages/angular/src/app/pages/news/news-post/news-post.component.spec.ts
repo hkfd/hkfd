@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -26,7 +25,6 @@ import { NewsPostComponent } from './news-post.component';
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsPostComponent;
 let fixture: ComponentFixture<NewsPostComponent>;
-let changeDetectorRef: ChangeDetectorRef;
 let prismicService: PrismicService;
 let page: Page;
 
@@ -65,8 +63,8 @@ describe('NewsPostComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should set `postSub`', () => {
-      expect(comp.postSub).toBeDefined();
+    it('should set `news$`', () => {
+      expect(comp.news$).toBeDefined();
     });
 
     it('should call `PrismicService` `getPost` with `news` and `uid` param arg if `uid` param exists', () => {
@@ -82,57 +80,15 @@ describe('NewsPostComponent', () => {
 
       expect(prismicService.getPost).not.toHaveBeenCalled();
     });
-
-    it('should set `post`', () => {
-      prismicService.getPost = jest.fn().mockReturnValue(of('getPostReturn'));
-      activatedRoute.testParamMap = { uid: 'uid' };
-
-      expect(comp.post).toBe('getPostReturn');
-    });
-
-    it('should call `ChangeDetectorRef` `markForCheck`', () => {
-      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
-    });
-  });
-
-  describe('`ngOnDestroy`', () => {
-    it('should call `postSub` `unsubscribe` if has `postSub', () => {
-      comp.postSub = { unsubscribe: jest.fn() } as any;
-      comp.ngOnDestroy();
-
-      expect((comp.postSub as any).unsubscribe).toHaveBeenCalled();
-    });
-
-    it('should not throw if no `postSub`', () => {
-      comp.postSub = undefined;
-
-      expect(() => comp.ngOnDestroy()).not.toThrow();
-    });
   });
 
   describe('Template', () => {
-    describe('`post` is `undefined`', () => {
+    describe('`news.post` is `null`', () => {
       beforeEach(() => {
-        comp.post = undefined;
-        changeDetectorRef.markForCheck();
-        fixture.detectChanges();
-      });
-
-      it('should not display `ErrorComponent`', () => {
-        expect(page.error).toBeFalsy();
-      });
-
-      describe('Intro', () => {
-        it('should not display date', () => {
-          expect(page.date).toBeFalsy();
-        });
-      });
-    });
-
-    describe('`post` is `null`', () => {
-      beforeEach(() => {
-        comp.post = null;
-        changeDetectorRef.markForCheck();
+        (prismicService.getPost as jest.Mock).mockReturnValue(
+          of({ post: null })
+        );
+        activatedRoute.testParamMap = { uid: 'uid' };
         fixture.detectChanges();
       });
 
@@ -147,10 +103,12 @@ describe('NewsPostComponent', () => {
       });
     });
 
-    describe('Has `post`', () => {
+    describe('Has `news.post`', () => {
       beforeEach(() => {
-        comp.post = Data.Prismic.getNewsPosts('post-1');
-        changeDetectorRef.markForCheck();
+        (prismicService.getPost as jest.Mock).mockReturnValue(
+          of({ post: Data.Prismic.getNewsPosts('post-1') })
+        );
+        activatedRoute.testParamMap = { uid: 'uid' };
         fixture.detectChanges();
       });
 
@@ -166,8 +124,10 @@ describe('NewsPostComponent', () => {
         describe('Title', () => {
           describe('has `title`', () => {
             beforeEach(() => {
-              comp.post = Data.Prismic.getNewsPost();
-              changeDetectorRef.markForCheck();
+              (prismicService.getPost as jest.Mock).mockReturnValue(
+                of({ post: Data.Prismic.getNewsPost() })
+              );
+              activatedRoute.testParamMap = { uid: 'uid' };
               fixture.detectChanges();
             });
 
@@ -187,11 +147,18 @@ describe('NewsPostComponent', () => {
 
           describe('no `title`', () => {
             beforeEach(() => {
-              comp.post = {
-                ...Data.Prismic.getNewsPost(),
-                data: { ...Data.Prismic.getNewsPost().data, title: undefined }
-              } as any;
-              changeDetectorRef.markForCheck();
+              (prismicService.getPost as jest.Mock).mockReturnValue(
+                of({
+                  post: {
+                    ...Data.Prismic.getNewsPost(),
+                    data: {
+                      ...Data.Prismic.getNewsPost().data,
+                      title: undefined
+                    }
+                  } as any
+                })
+              );
+              activatedRoute.testParamMap = { uid: 'uid' };
               fixture.detectChanges();
             });
 
@@ -204,20 +171,24 @@ describe('NewsPostComponent', () => {
         describe('Thumbnail', () => {
           describe('has `image.proxy.url`', () => {
             beforeEach(() => {
-              comp.post = {
-                ...Data.Prismic.getNewsPost(),
-                data: {
-                  ...Data.Prismic.getNewsPost().data,
-                  image: {
-                    ...Data.Prismic.getNewsPost().data.image,
-                    proxy: {
-                      ...Data.Prismic.getNewsPost().data.image.proxy,
-                      url: 'test.jpg'
+              (prismicService.getPost as jest.Mock).mockReturnValue(
+                of({
+                  post: {
+                    ...Data.Prismic.getNewsPost(),
+                    data: {
+                      ...Data.Prismic.getNewsPost().data,
+                      image: {
+                        ...Data.Prismic.getNewsPost().data.image,
+                        proxy: {
+                          ...Data.Prismic.getNewsPost().data.image.proxy,
+                          url: 'test.jpg'
+                        }
+                      }
                     }
-                  }
-                }
-              } as any;
-              changeDetectorRef.markForCheck();
+                  } as any
+                })
+              );
+              activatedRoute.testParamMap = { uid: 'uid' };
               fixture.detectChanges();
             });
 
@@ -260,20 +231,24 @@ describe('NewsPostComponent', () => {
 
           describe('no `image.proxy.url`', () => {
             beforeEach(() => {
-              comp.post = {
-                ...Data.Prismic.getNewsPost(),
-                data: {
-                  ...Data.Prismic.getNewsPost().data,
-                  image: {
-                    ...Data.Prismic.getNewsPost().data.image,
-                    proxy: {
-                      ...Data.Prismic.getNewsPost().data.image.proxy,
-                      url: undefined
+              (prismicService.getPost as jest.Mock).mockReturnValue(
+                of({
+                  post: {
+                    ...Data.Prismic.getNewsPost(),
+                    data: {
+                      ...Data.Prismic.getNewsPost().data,
+                      image: {
+                        ...Data.Prismic.getNewsPost().data.image,
+                        proxy: {
+                          ...Data.Prismic.getNewsPost().data.image.proxy,
+                          url: undefined
+                        }
+                      }
                     }
-                  }
-                }
-              } as any;
-              changeDetectorRef.markForCheck();
+                  } as any
+                })
+              );
+              activatedRoute.testParamMap = { uid: 'uid' };
               fixture.detectChanges();
             });
 
@@ -287,8 +262,10 @@ describe('NewsPostComponent', () => {
       describe('Content', () => {
         describe('Text', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getNewsPosts('post-2');
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({ post: Data.Prismic.getNewsPosts('post-2') })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -313,8 +290,10 @@ describe('NewsPostComponent', () => {
 
         describe('Image', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getNewsPosts('post-3');
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({ post: Data.Prismic.getNewsPosts('post-3') })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -338,8 +317,10 @@ describe('NewsPostComponent', () => {
 
         describe('Duo', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getNewsPosts('post-4');
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({ post: Data.Prismic.getNewsPosts('post-4') })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -363,8 +344,10 @@ describe('NewsPostComponent', () => {
 
         describe('Gallery', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getNewsPosts('post-5');
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({ post: Data.Prismic.getNewsPosts('post-5') })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -388,8 +371,10 @@ describe('NewsPostComponent', () => {
 
         describe('Video', () => {
           beforeEach(() => {
-            comp.post = Data.Prismic.getNewsPosts('post-6');
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({ post: Data.Prismic.getNewsPosts('post-6') })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -499,11 +484,9 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsPostComponent);
   comp = fixture.componentInstance;
-  changeDetectorRef = (comp as any).changeDetectorRef;
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );
-  jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockPrismicPipe.prototype, 'transform');
   jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
   page = new Page();

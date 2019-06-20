@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -23,7 +22,6 @@ let comp: CareerComponent;
 let fixture: ComponentFixture<CareerComponent>;
 let page: Page;
 let activatedRoute: ActivatedRouteStub;
-let changeDetectorRef: ChangeDetectorRef;
 let prismicService: PrismicService;
 
 beforeEach(jest.clearAllMocks);
@@ -55,8 +53,8 @@ describe('CareerComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should set `careerSub`', () => {
-      expect(comp.careerSub).toBeDefined();
+    it('should set `career$`', () => {
+      expect(comp.career$).toBeDefined();
     });
 
     it('should call `PrismicService` `getPost` with `career` and `uid` param args if `uid` param exists', () => {
@@ -72,57 +70,15 @@ describe('CareerComponent', () => {
 
       expect(prismicService.getPost).not.toHaveBeenCalled();
     });
-
-    it('should set `career`', () => {
-      prismicService.getPost = jest.fn().mockReturnValue(of('getPostReturn'));
-      activatedRoute.testParamMap = { uid: 'uid' };
-
-      expect(comp.career).toBe('getPostReturn');
-    });
-
-    it('should call `ChangeDetectorRef` `markForCheck`', () => {
-      activatedRoute.testParamMap = { uid: 'uid' };
-
-      expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
-    });
-  });
-
-  describe('`ngOnDestroy`', () => {
-    it('should call `careerSub` `unsubscribe` if has `careerSub', () => {
-      comp.careerSub = { unsubscribe: jest.fn() } as any;
-      comp.ngOnDestroy();
-
-      expect((comp.careerSub as any).unsubscribe).toHaveBeenCalled();
-    });
-
-    it('should not throw if no `careerSub`', () => {
-      comp.careerSub = undefined;
-
-      expect(() => comp.ngOnDestroy()).not.toThrow();
-    });
   });
 
   describe('Template', () => {
-    describe('`career` is `undefined`', () => {
+    describe('`career.post` is `null`', () => {
       beforeEach(() => {
-        comp.career = undefined;
-        changeDetectorRef.markForCheck();
-        fixture.detectChanges();
-      });
-
-      it('should not display `ErrorComponent`', () => {
-        expect(page.error).toBeFalsy();
-      });
-
-      it('should not display title', () => {
-        expect(page.title).toBeFalsy();
-      });
-    });
-
-    describe('`career` is `null`', () => {
-      beforeEach(() => {
-        comp.career = null;
-        changeDetectorRef.markForCheck();
+        (prismicService.getPost as jest.Mock).mockReturnValue(
+          of({ post: null })
+        );
+        activatedRoute.testParamMap = { uid: 'uid' };
         fixture.detectChanges();
       });
 
@@ -135,10 +91,12 @@ describe('CareerComponent', () => {
       });
     });
 
-    describe('Has `career`', () => {
+    describe('Has `career.post`', () => {
       beforeEach(() => {
-        comp.career = Data.Prismic.getCareerPost();
-        changeDetectorRef.markForCheck();
+        (prismicService.getPost as jest.Mock).mockReturnValue(
+          of({ post: Data.Prismic.getCareerPost() })
+        );
+        activatedRoute.testParamMap = { uid: 'uid' };
         fixture.detectChanges();
       });
 
@@ -147,12 +105,16 @@ describe('CareerComponent', () => {
       });
 
       describe('Title', () => {
-        describe('Has `career.data.title`', () => {
+        describe('Has `career.post.data.title`', () => {
           beforeEach(() => {
-            comp.career = ({
-              data: { title: [{ spans: [], text: 'Title', type: 'h1' }] }
-            } as any) as CareerPost;
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({
+                post: ({
+                  data: { title: [{ spans: [], text: 'Title', type: 'h1' }] }
+                } as any) as CareerPost
+              })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -160,7 +122,7 @@ describe('CareerComponent', () => {
             expect(page.title.textContent).toBeTruthy();
           });
 
-          it('should call `PrismicTextPipe` with `career.data.title` arg', () => {
+          it('should call `PrismicTextPipe` with `career.post.data.title` arg', () => {
             expect(
               MockPrismicTextPipe.prototype.transform
             ).toHaveBeenCalledWith(
@@ -170,12 +132,16 @@ describe('CareerComponent', () => {
           });
         });
 
-        describe('No `career.data.title`', () => {
+        describe('No `career.post.data.title`', () => {
           beforeEach(() => {
-            comp.career = ({
-              data: { title: undefined }
-            } as any) as CareerPost;
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({
+                post: ({
+                  data: { title: undefined }
+                } as any) as CareerPost
+              })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -192,8 +158,10 @@ describe('CareerComponent', () => {
       describe('Section', () => {
         describe('Text', () => {
           beforeEach(() => {
-            comp.career = Data.Prismic.getNewsPosts('post-2') as any;
-            changeDetectorRef.markForCheck();
+            (prismicService.getPost as jest.Mock).mockReturnValue(
+              of({ post: Data.Prismic.getNewsPosts('post-2') as any })
+            );
+            activatedRoute.testParamMap = { uid: 'uid' };
             fixture.detectChanges();
           });
 
@@ -214,7 +182,7 @@ describe('CareerComponent', () => {
           expect(page.applyButton).toBeTruthy();
         });
 
-        it('should set `href` as `career.data.contact`', () => {
+        it('should set `href` as `career.post.data.contact`', () => {
           expect(page.applyButton.href).toBe('mailto:post@contact');
         });
       });
@@ -256,14 +224,12 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(CareerComponent);
   comp = fixture.componentInstance;
-  changeDetectorRef = (comp as any).changeDetectorRef;
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );
   page = new Page();
 
   jest.spyOn(MockPrismicTextPipe.prototype, 'transform');
-  jest.spyOn(changeDetectorRef, 'markForCheck');
   fixture.detectChanges();
   return fixture.whenStable().then(_ => fixture.detectChanges());
 }
