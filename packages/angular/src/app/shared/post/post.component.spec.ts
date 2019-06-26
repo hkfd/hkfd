@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
 
+import { of } from 'rxjs';
+
 import {
   RouterTestingModule,
   MockApiService,
@@ -21,7 +23,7 @@ import {
 import { Post, ApiService } from 'shared';
 import { ImageBlock } from 'api';
 import { PostComponent } from './post.component';
-import { isCaseStudy, isKnownPostType } from 'shared/api.helpers';
+import { isCaseStudy } from 'shared/api.helpers';
 
 let comp: PostComponent;
 let fixture: ComponentFixture<PostComponent>;
@@ -109,84 +111,59 @@ describe('PostComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should set `post$`', () => {
-      expect(comp.post$).toBeDefined();
+    describe('No `type` and has `id`', () => {
+      beforeEach(
+        () => (activatedRoute.testParamMap = { type: undefined, id: 'id' })
+      );
+
+      it('should throw error', () => {
+        expect(() => comp.ngOnInit()).toThrowError('No param');
+      });
     });
 
-    describe('Params', () => {
-      it('should call `isKnownPostType` with `type` arg if has `type` and `id` params', () => {
+    describe('Has `type` and no `id`', () => {
+      beforeEach(
+        () => (activatedRoute.testParamMap = { type: 'type', id: undefined })
+      );
+
+      it('should throw error', () => {
+        expect(() => comp.ngOnInit()).toThrowError('No param');
+      });
+    });
+
+    describe('Has `type` and has `id`', () => {
+      it('should set `post$`', () => {
         jest.clearAllMocks();
         activatedRoute.testParamMap = { type: 'type', id: 'id' };
+        comp.ngOnInit();
 
-        expect(isKnownPostType).toHaveBeenCalledWith('type');
+        expect(comp.post$).toBeDefined();
       });
 
-      it('should not call `isKnownPostType` if no `type` param but has `id` param', () => {
+      it('should call `ApiService` `getPost` with `type` and `id` args', () => {
         jest.clearAllMocks();
-        activatedRoute.testParamMap = { type: null, id: 'id' };
+        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+        comp.ngOnInit();
 
-        expect(isKnownPostType).not.toHaveBeenCalled();
+        expect(apiService.getPost).toHaveBeenCalledWith('type', 'id');
       });
 
-      it('should not call `isKnownPostType` if no `id` param but has `type` param', () => {
+      it('should set `post` as `ApiService` `getPost` return', () => {
         jest.clearAllMocks();
-        activatedRoute.testParamMap = { type: 'type', id: null };
+        comp.post = undefined;
+        (apiService.getPost as jest.Mock).mockReturnValue(of('post'));
+        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+        comp.ngOnInit();
 
-        expect(isKnownPostType).not.toHaveBeenCalled();
+        expect(comp.post).toBe('post');
       });
 
-      describe('`isKnownPostType` returns `true`', () => {
-        beforeEach(() =>
-          ((isKnownPostType as any) as jest.Mock).mockReturnValueOnce(true)
-        );
+      it('should call `ChangeDetectorRef` `markForCheck`', () => {
+        jest.clearAllMocks();
+        activatedRoute.testParamMap = { type: 'type', id: 'id' };
+        comp.ngOnInit();
 
-        it('should call `ApiService` `getPost` with `type` and `id` args', () => {
-          jest.clearAllMocks();
-          activatedRoute.testParamMap = { type: 'type', id: 'id' };
-
-          expect(apiService.getPost).toHaveBeenCalledWith('type', 'id');
-        });
-
-        it('should set `post`', () => {
-          jest.clearAllMocks();
-          activatedRoute.testParamMap = { type: 'work', id: 'case-study-1' };
-
-          expect(comp.post).toEqual(Data.Api.getCaseStudies('Case Study 1'));
-        });
-
-        it('should call `ChangeDetectorRef` `markForCheck`', () => {
-          jest.clearAllMocks();
-          activatedRoute.testParamMap = { type: 'type', id: 'id' };
-
-          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
-        });
-      });
-
-      describe('`isKnownPostType` returns `false`', () => {
-        beforeEach(() =>
-          ((isKnownPostType as any) as jest.Mock).mockReturnValueOnce(false)
-        );
-
-        it('should not call `ApiService` `getPost`', () => {
-          jest.clearAllMocks();
-          activatedRoute.testParamMap = { type: 'type', id: 'id' };
-
-          expect(apiService.getPost).not.toHaveBeenCalled();
-        });
-
-        it('should set `post` as `null`', () => {
-          jest.clearAllMocks();
-          activatedRoute.testParamMap = { type: 'type', id: 'id' };
-
-          expect(comp.post).toBe(null);
-        });
-
-        it('should call `ChangeDetectorRef` `markForCheck`', () => {
-          jest.clearAllMocks();
-          activatedRoute.testParamMap = { type: 'type', id: 'id' };
-
-          expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
-        });
+        expect(changeDetectorRef.markForCheck).toHaveBeenCalled();
       });
     });
 

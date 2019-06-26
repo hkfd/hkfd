@@ -6,13 +6,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Subscription, of } from 'rxjs';
-import { switchMap, map, filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
-import { ApiService, Post } from 'shared';
-import { isCaseStudy, isKnownPostType } from 'shared/api.helpers';
+import { ApiService, Post, PostType } from 'shared';
+import { isCaseStudy } from 'shared/api.helpers';
 import { CaseStudy } from 'api';
 
 @Component({
@@ -43,22 +42,12 @@ export class PostComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.post$ = this.route.paramMap
-      .pipe(
-        map((params: ParamMap) => ({
-          type: params.get('type'),
-          id: params.get('id')
-        })),
-        filter(
-          (res): res is { type: string; id: string } =>
-            res.type !== null && res.id !== null
-        ),
-        switchMap(({ type, id }) => {
-          if (!isKnownPostType(type)) return of(null);
+    const type = this.route.snapshot.paramMap.get('type');
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!type || !id) throw new Error('No param');
 
-          return this.apiService.getPost(type, id);
-        })
-      )
+    this.post$ = this.apiService
+      .getPost(type as PostType, id)
       .subscribe(post => {
         this.post = post;
         this.changeDetectorRef.markForCheck();
