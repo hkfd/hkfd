@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 import {
   RouterTestingModule,
@@ -29,7 +30,7 @@ beforeEach(jest.clearAllMocks);
 describe('CareerComponent', () => {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
-    activatedRoute.testParamMap = { id: 'career-1' };
+    activatedRoute.testParamMap = { uid: 'career-1' };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -43,7 +44,11 @@ describe('CareerComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: PrismicService, useClass: MockPrismicService }
       ]
-    }).compileComponents();
+    })
+      .overrideComponent(CareerComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default }
+      })
+      .compileComponents();
   }));
 
   beforeEach(async(() => createComponent()));
@@ -60,25 +65,23 @@ describe('CareerComponent', () => {
     it('should call `PrismicService` `getPost` with `career` and `uid` param args if `uid` param exists', () => {
       jest.clearAllMocks();
       activatedRoute.testParamMap = { uid: 'uid' };
+      comp.ngOnInit();
 
       expect(prismicService.getPost).toHaveBeenCalledWith('career', 'uid');
     });
 
-    it('should not call `PrismicService` `getPost` if `uid` param does not exist', () => {
+    it('should throw if `uid` param does not exist', () => {
       jest.clearAllMocks();
       activatedRoute.testParamMap = { uid: undefined };
 
-      expect(prismicService.getPost).not.toHaveBeenCalled();
+      expect(() => comp.ngOnInit()).toThrowError('No `uid`');
     });
   });
 
   describe('Template', () => {
     describe('`career.post` is `null`', () => {
       beforeEach(() => {
-        (prismicService.getPost as jest.Mock).mockReturnValue(
-          of({ post: null })
-        );
-        activatedRoute.testParamMap = { uid: 'uid' };
+        comp.career$ = of({ post: null });
         fixture.detectChanges();
       });
 
@@ -93,10 +96,7 @@ describe('CareerComponent', () => {
 
     describe('Has `career.post`', () => {
       beforeEach(() => {
-        (prismicService.getPost as jest.Mock).mockReturnValue(
-          of({ post: Data.Prismic.getCareerPost() })
-        );
-        activatedRoute.testParamMap = { uid: 'uid' };
+        comp.career$ = of({ post: Data.Prismic.getCareerPost() });
         fixture.detectChanges();
       });
 
@@ -107,14 +107,11 @@ describe('CareerComponent', () => {
       describe('Title', () => {
         describe('Has `career.post.data.title`', () => {
           beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of({
-                post: ({
-                  data: { title: [{ spans: [], text: 'Title', type: 'h1' }] }
-                } as any) as CareerPost
-              })
-            );
-            activatedRoute.testParamMap = { uid: 'uid' };
+            comp.career$ = of({
+              post: ({
+                data: { title: [{ spans: [], text: 'Title', type: 'h1' }] }
+              } as any) as CareerPost
+            });
             fixture.detectChanges();
           });
 
@@ -134,14 +131,11 @@ describe('CareerComponent', () => {
 
         describe('No `career.post.data.title`', () => {
           beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of({
-                post: ({
-                  data: { title: undefined }
-                } as any) as CareerPost
-              })
-            );
-            activatedRoute.testParamMap = { uid: 'uid' };
+            comp.career$ = of({
+              post: ({
+                data: { title: undefined }
+              } as any) as CareerPost
+            });
             fixture.detectChanges();
           });
 
@@ -158,10 +152,9 @@ describe('CareerComponent', () => {
       describe('Section', () => {
         describe('Text', () => {
           beforeEach(() => {
-            (prismicService.getPost as jest.Mock).mockReturnValue(
-              of({ post: Data.Prismic.getNewsPosts('post-2') as any })
-            );
-            activatedRoute.testParamMap = { uid: 'uid' };
+            comp.career$ = of({
+              post: Data.Prismic.getNewsPosts('post-2') as any
+            });
             fixture.detectChanges();
           });
 

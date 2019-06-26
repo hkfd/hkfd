@@ -17,7 +17,7 @@ import {
   NotificationService,
   catchNetworkError
 } from 'shared';
-import { getPostUrl, createPostMetaTags } from './api.helpers';
+import { getPostUrl, createPostMetaTags, isKnownPostType } from './api.helpers';
 
 let mockHttp: HttpTestingController;
 let metaService: MetaService;
@@ -131,104 +131,143 @@ describe('ApiService', () => {
   });
 
   describe('`getPost`', () => {
-    it('should call `getPostUrl` with `type` arg', () => {
+    it('should call `isKnownPostType` with `type` arg', () => {
       apiService.getPost('type' as any, 'id').subscribe();
       mockHttp.expectOne('/getPostUrl');
 
-      expect(getPostUrl).toHaveBeenCalledWith('type');
+      expect(isKnownPostType).toHaveBeenCalledWith('type');
     });
 
-    describe('Request', () => {
-      it('should call `HttpClient` `get` with `getPostUrl` return', () => {
-        apiService.getPost('service', 'service-1').subscribe();
-        const {
-          request: { method }
-        } = mockHttp.expectOne('/getPostUrl');
+    describe('`isKnownPostType` returns `false`', () => {
+      beforeEach(() =>
+        ((isKnownPostType as any) as jest.Mock).mockReturnValue(false)
+      );
 
-        expect(method).toBe('GET');
+      it('should not call `getPostUrl`', () => {
+        apiService.getPost('type' as any, 'id').subscribe();
+
+        expect(getPostUrl).not.toHaveBeenCalled();
       });
 
-      it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
-        (notificationService.displayMessage as jest.Mock).mockImplementation(
-          (...args: any[]) => args
-        );
-        apiService.getPost('service', 'service-1').subscribe();
-        const [
-          [catchNetworkErrorFunctionArgs]
-        ] = (catchNetworkError as jest.Mock).mock.calls;
+      it('should return `null`', async(() => {
+        apiService
+          .getPost('type' as any, 'id')
+          .subscribe(res => expect(res).toBe(null));
+      }));
+    });
 
-        expect(catchNetworkErrorFunctionArgs()).toEqual([
-          `Couldn't load post`,
-          {
-            action: 'Retry'
-          }
-        ]);
+    describe('`isKnownPostType` returns `true`', () => {
+      beforeEach(() =>
+        ((isKnownPostType as any) as jest.Mock).mockReturnValue(true)
+      );
+
+      it('should call `getPostUrl` with `type` arg', () => {
+        apiService.getPost('type' as any, 'id').subscribe();
         mockHttp.expectOne('/getPostUrl');
+
+        expect(getPostUrl).toHaveBeenCalledWith('type');
       });
 
-      describe('No error', () => {
-        it('should return `post` if has `post`', async(() => {
-          apiService
-            .getPost('service', 'service-3')
-            .subscribe(res =>
-              expect(res).toEqual(Data.Api.getServices('Service 3'))
-            );
+      describe('Request', () => {
+        it('should call `HttpClient` `get` with `getPostUrl` return', () => {
+          apiService.getPost('service', 'service-1').subscribe();
+          const {
+            request: { method }
+          } = mockHttp.expectOne('/getPostUrl');
 
-          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
-        }));
-
-        it('should return `null` if no `post`', async(() => {
-          apiService
-            .getPost('service', 'no-service')
-            .subscribe(res => expect(res).toBe(null));
-
-          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
-        }));
-
-        it('should call `createPostMetaTags` with `type` `id` and `post` args', async(() => {
-          apiService
-            .getPost('service', 'service-3')
-            .subscribe(_ =>
-              expect(createPostMetaTags).toHaveBeenCalledWith(
-                'service',
-                'service-3',
-                Data.Api.getServices('Service 3')
-              )
-            );
-
-          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
-        }));
-
-        it('should call `MetaService` `setMetaTags` with `createPostMetaTags` return', async(() => {
-          apiService
-            .getPost('service', 'service-3')
-            .subscribe(_ =>
-              expect(metaService.setMetaTags).toHaveBeenCalledWith(
-                'createPostMetaTagsReturn'
-              )
-            );
-
-          mockHttp.expectOne('/getPostUrl').flush(Data.Api.getServices<void>());
-        }));
-      });
-
-      describe('Error', () => {
-        let error: ErrorEvent;
-        let err: any;
-
-        beforeEach(() => {
-          error = new ErrorEvent('err');
-          apiService
-            .getPost('service', 'service-1')
-            .subscribe(
-              response => fail(response),
-              errorRes => (err = errorRes)
-            );
-          mockHttp.expectOne('/getPostUrl').error(error);
+          expect(method).toBe('GET');
         });
 
-        it('should return error', () => {
-          expect(err.error).toEqual(new ErrorEvent('err'));
+        it('should call `catchNetworkError` with `NotificationService` `displayMessage` function `arg`', () => {
+          (notificationService.displayMessage as jest.Mock).mockImplementation(
+            (...args: any[]) => args
+          );
+          apiService.getPost('service', 'service-1').subscribe();
+          const [
+            [catchNetworkErrorFunctionArgs]
+          ] = (catchNetworkError as jest.Mock).mock.calls;
+
+          expect(catchNetworkErrorFunctionArgs()).toEqual([
+            `Couldn't load post`,
+            {
+              action: 'Retry'
+            }
+          ]);
+          mockHttp.expectOne('/getPostUrl');
+        });
+
+        describe('No error', () => {
+          it('should return `post` if has `post`', async(() => {
+            apiService
+              .getPost('service', 'service-3')
+              .subscribe(res =>
+                expect(res).toEqual(Data.Api.getServices('Service 3'))
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
+          it('should return `null` if no `post`', async(() => {
+            apiService
+              .getPost('service', 'no-service')
+              .subscribe(res => expect(res).toBe(null));
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
+          it('should call `createPostMetaTags` with `type` `id` and `post` args', async(() => {
+            apiService
+              .getPost('service', 'service-3')
+              .subscribe(_ =>
+                expect(createPostMetaTags).toHaveBeenCalledWith(
+                  'service',
+                  'service-3',
+                  Data.Api.getServices('Service 3')
+                )
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+
+          it('should call `MetaService` `setMetaTags` with `createPostMetaTags` return', async(() => {
+            apiService
+              .getPost('service', 'service-3')
+              .subscribe(_ =>
+                expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                  'createPostMetaTagsReturn'
+                )
+              );
+
+            mockHttp
+              .expectOne('/getPostUrl')
+              .flush(Data.Api.getServices<void>());
+          }));
+        });
+
+        describe('Error', () => {
+          let error: ErrorEvent;
+          let err: any;
+
+          beforeEach(() => {
+            error = new ErrorEvent('err');
+            apiService
+              .getPost('service', 'service-1')
+              .subscribe(
+                response => fail(response),
+                errorRes => (err = errorRes)
+              );
+            mockHttp.expectOne('/getPostUrl').error(error);
+          });
+
+          it('should return error', () => {
+            expect(err.error).toEqual(new ErrorEvent('err'));
+          });
         });
       });
     });

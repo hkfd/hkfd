@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
 import { environment } from 'environment';
@@ -14,7 +14,8 @@ import {
   SERVICES,
   CASE_STUDIES,
   getPostUrl,
-  createPostMetaTags
+  createPostMetaTags,
+  isKnownPostType
 } from './api.helpers';
 
 const TEAM = `${environment.api.url}team.json`;
@@ -52,10 +53,12 @@ export class ApiService {
     );
   }
 
-  getPost<T extends PostType>(
+  getPost<T extends PostType | string>(
     type: T,
     id: string
   ): Observable<getPost<T> | null> {
+    if (!isKnownPostType(type)) return of(null);
+
     const url = getPostUrl(type);
 
     return this.http.get<Array<getPost<T>>>(url).pipe(

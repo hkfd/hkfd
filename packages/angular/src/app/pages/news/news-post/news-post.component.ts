@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { switchMap, map, filter } from 'rxjs/operators';
 
 import { PrismicService, PostReturn } from 'shared';
 
@@ -21,10 +20,9 @@ export class NewsPostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.news$ = this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('uid')),
-      filter((uid): uid is string => Boolean(uid)),
-      switchMap(uid => this.prismicService.getPost('news', uid))
-    );
+    const uid = this.route.snapshot.paramMap.get('uid');
+    if (!uid) throw new Error('No `uid`');
+
+    this.news$ = this.prismicService.getPost('news', uid);
   }
 }
