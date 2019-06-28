@@ -2,11 +2,16 @@ import { TestBed, async } from '@angular/core/testing';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { LoggerService, MockLoggerService } from 'testing';
+import { createTitle } from './meta.service.helpers';
 import { MetaService } from './meta.service';
 
 let metaService: MetaService;
 let meta: Meta;
 let title: Title;
+
+jest.mock('./meta.service.helpers', () => ({
+  createTitle: jest.fn().mockReturnValue('createTitleReturn')
+}));
 
 describe('MetaService', () => {
   beforeEach(async(() =>
@@ -46,12 +51,20 @@ describe('MetaService', () => {
       });
 
       describe('`title`', () => {
+        it('should call `createTitle` with `tags` arg', () => {
+          metaService.setMetaTags('tags' as any);
+
+          expect(createTitle).toHaveBeenCalledWith('tags');
+        });
+
+        it('should call `Title` `setTitle` with `createTitle` return arg', () => {
+          metaService.setMetaTags('tags' as any);
+
+          expect(title.setTitle).toHaveBeenCalledWith('createTitleReturn');
+        });
+
         describe('Is passed', () => {
           beforeEach(() => metaService.setMetaTags({ title: 'Title' }));
-
-          it('should call `Title` `setTitle` with `Heckford – {title}` arg', () => {
-            expect(title.setTitle).toHaveBeenCalledWith('Heckford – Title');
-          });
 
           it('should call `Meta` `updateTag` with `og:title` and `title` args', () => {
             expect(meta.updateTag).toHaveBeenCalledWith({
@@ -63,10 +76,6 @@ describe('MetaService', () => {
 
         describe('Is not passed', () => {
           beforeEach(() => metaService.setMetaTags({}));
-
-          it('should call `Title` `setTitle` with `Heckford` arg', () => {
-            expect(title.setTitle).toHaveBeenCalledWith('Heckford');
-          });
 
           it('should call `Meta` `updateTag` with `og:title` and `Heckford` arg', () => {
             metaService.setMetaTags({});
