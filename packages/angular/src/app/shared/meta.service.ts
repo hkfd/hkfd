@@ -4,6 +4,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'environment';
 import { LoggerService } from './logger.service';
 import { MetaTags } from 'shared';
+import { createTitle } from './meta.service.helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class MetaService {
   ) {}
 
   setMetaTags(tags: Partial<MetaTags>) {
+    this.title.setTitle(createTitle(tags));
+
     const metaTags: MetaTags = {
       type: 'website',
       title: 'Heckford',
@@ -26,8 +29,6 @@ export class MetaService {
     };
 
     this.logger.log('setMetaTags', metaTags);
-
-    this.title.setTitle(`Heckford${tags.title ? ` – ${tags.title}` : ''}`);
 
     this.meta.updateTag({
       name: 'description',
