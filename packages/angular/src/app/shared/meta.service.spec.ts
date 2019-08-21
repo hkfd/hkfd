@@ -32,59 +32,73 @@ describe('MetaService', () => {
   });
 
   describe('`setMetaTags`', () => {
-    beforeEach(() => metaService.setMetaTags('tags' as any));
+    describe('`tags` is `undefined`', () => {
+      beforeEach(() => metaService.setMetaTags(undefined));
 
-    it('should call `createTitle` with `tags` arg', () => {
-      expect(createTitle).toHaveBeenCalledWith('tags');
-    });
+      it('should not call `createTitle`', () => {
+        expect(createTitle).not.toHaveBeenCalled();
+      });
 
-    it('should call `Title` `setTitle` with `createTitle` return arg', () => {
-      expect(title.setTitle).toHaveBeenCalledWith('createTitleReturn');
-    });
-
-    it('should call `createMetaTags` with `tags` arg', () => {
-      expect(createMetaTags).toHaveBeenCalledWith('tags');
-    });
-
-    it('should call `Meta` `updateTag` with `description` and `createMetaTags` `description` return args', () => {
-      expect(meta.updateTag).toHaveBeenCalledWith({
-        name: 'description',
-        content: 'description'
+      it('should not call `createMetaTags`', () => {
+        expect(createMetaTags).not.toHaveBeenCalled();
       });
     });
 
-    it('should call `Meta` `updateTag` with `og:type` and `createMetaTags` `type` return args', () => {
-      expect(meta.updateTag).toHaveBeenCalledWith({
-        property: 'og:type',
-        content: 'type'
-      });
-    });
+    describe('`tags` is `MetaTags`', () => {
+      beforeEach(() => metaService.setMetaTags('tags' as any));
 
-    it('should call `Meta` `updateTag` with `og:title` and `createMetaTags` `title` return args', () => {
-      expect(meta.updateTag).toHaveBeenCalledWith({
-        property: 'og:title',
-        content: 'title'
+      it('should call `createTitle` with `tags` arg', () => {
+        expect(createTitle).toHaveBeenCalledWith('tags');
       });
-    });
 
-    it('should call `Meta` `updateTag` with `og:description` and `createMetaTags` `description` return args', () => {
-      expect(meta.updateTag).toHaveBeenCalledWith({
-        property: 'og:description',
-        content: 'description'
+      it('should call `Title` `setTitle` with `createTitle` return arg', () => {
+        expect(title.setTitle).toHaveBeenCalledWith('createTitleReturn');
       });
-    });
 
-    it('should call `Meta` `updateTag` with `og:image` and `createMetaTags` `image` return args', () => {
-      expect(meta.updateTag).toHaveBeenCalledWith({
-        property: 'og:image',
-        content: 'image'
+      it('should call `createMetaTags` with `tags` arg', () => {
+        expect(createMetaTags).toHaveBeenCalledWith('tags');
       });
-    });
 
-    it('should call `Meta` `updateTag` with `og:url` and `createMetaTags` `url` return args', () => {
-      expect(meta.updateTag).toHaveBeenCalledWith({
-        property: 'og:url',
-        content: 'url'
+      it('should call `Meta` `updateTag` with `description` and `createMetaTags` `description` return args', () => {
+        expect(meta.updateTag).toHaveBeenCalledWith({
+          name: 'description',
+          content: 'description'
+        });
+      });
+
+      it('should call `Meta` `updateTag` with `og:type` and `createMetaTags` `type` return args', () => {
+        expect(meta.updateTag).toHaveBeenCalledWith({
+          property: 'og:type',
+          content: 'type'
+        });
+      });
+
+      it('should call `Meta` `updateTag` with `og:title` and `createMetaTags` `title` return args', () => {
+        expect(meta.updateTag).toHaveBeenCalledWith({
+          property: 'og:title',
+          content: 'title'
+        });
+      });
+
+      it('should call `Meta` `updateTag` with `og:description` and `createMetaTags` `description` return args', () => {
+        expect(meta.updateTag).toHaveBeenCalledWith({
+          property: 'og:description',
+          content: 'description'
+        });
+      });
+
+      it('should call `Meta` `updateTag` with `og:image` and `createMetaTags` `image` return args', () => {
+        expect(meta.updateTag).toHaveBeenCalledWith({
+          property: 'og:image',
+          content: 'image'
+        });
+      });
+
+      it('should call `Meta` `updateTag` with `og:url` and `createMetaTags` `url` return args', () => {
+        expect(meta.updateTag).toHaveBeenCalledWith({
+          property: 'og:url',
+          content: 'url'
+        });
       });
     });
   });
