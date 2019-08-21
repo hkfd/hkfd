@@ -10,7 +10,9 @@ import { createTitle, createMetaTags } from './meta.service.helpers';
 export class MetaService {
   constructor(private meta: Meta, private title: Title) {}
 
-  setMetaTags(tags: Partial<MetaTags>) {
+  setMetaTags(tags: Partial<MetaTags> | undefined) {
+    if (!tags) return;
+
     this.title.setTitle(createTitle(tags));
 
     const { type, title, description, image, url } = createMetaTags(tags);
