@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 
 import {
   RouterTestingModule,
-  MockMetaService,
   MockPrismicService,
   MockApiPipe,
   StubImageComponent,
@@ -14,7 +13,7 @@ import {
   MockPrismicTextPipe
 } from 'testing';
 
-import { MetaService, PrismicService } from 'shared';
+import { PrismicService } from 'shared';
 import { CareerPost } from 'prismic';
 import { CareersImages } from './careers.images';
 import { CareersComponent } from './careers.component';
@@ -22,7 +21,6 @@ import { CareersComponent } from './careers.component';
 let comp: CareersComponent;
 let fixture: ComponentFixture<CareersComponent>;
 let page: Page;
-let metaService: MetaService;
 let prismicService: PrismicService;
 
 beforeEach(jest.clearAllMocks);
@@ -37,10 +35,7 @@ describe('CareersComponent', () => {
         MockApiPipe,
         MockPrismicTextPipe
       ],
-      providers: [
-        { provide: MetaService, useClass: MockMetaService },
-        { provide: PrismicService, useClass: MockPrismicService }
-      ]
+      providers: [{ provide: PrismicService, useClass: MockPrismicService }]
     })
       .overrideComponent(CareersComponent, {
         set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -54,13 +49,6 @@ describe('CareersComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should call `MetaService` `setMetaTags` with `title` and `url` args', () => {
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        title: 'Careers',
-        url: 'careers'
-      });
-    });
-
     it('should set `careers$` as `PrismicService` `getPosts`', () => {
       (prismicService.getPosts as jest.Mock).mockReturnValue(of('getPosts'));
       comp.ngOnInit();
@@ -211,7 +199,6 @@ function createComponent() {
   fixture = TestBed.createComponent(CareersComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );

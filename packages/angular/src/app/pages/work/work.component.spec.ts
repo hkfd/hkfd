@@ -5,7 +5,6 @@ import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
-  MockMetaService,
   MockApiService,
   MockApiPipe,
   StubImageComponent,
@@ -13,14 +12,13 @@ import {
   Data
 } from 'testing';
 
-import { MetaService, ApiService, ApiPipe } from 'shared';
+import { ApiService, ApiPipe } from 'shared';
 import { CaseStudy } from 'api';
 import { WorkComponent } from './work.component';
 
 let comp: WorkComponent;
 let fixture: ComponentFixture<WorkComponent>;
 let changeDetectorRef: ChangeDetectorRef;
-let metaService: MetaService;
 let apiService: ApiService;
 let apiPipe: ApiPipe;
 let page: Page;
@@ -33,7 +31,6 @@ describe('WorkComponent', () => {
       imports: [RouterTestingModule, NoopAnimationsModule],
       declarations: [WorkComponent, StubImageComponent, StubLazyDirective],
       providers: [
-        { provide: MetaService, useClass: MockMetaService },
         { provide: ApiService, useClass: MockApiService },
         { provide: ApiPipe, useClass: MockApiPipe }
       ]
@@ -46,13 +43,6 @@ describe('WorkComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should call `MetaService` `setMetaTags` with `title` and `url` args', () => {
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        title: 'Our Work',
-        url: 'work'
-      });
-    });
-
     describe('Case Studies', () => {
       it('should set `caseStudies$`', () => {
         expect(comp.caseStudies$).toBeDefined();
@@ -203,7 +193,6 @@ function createComponent() {
   fixture = TestBed.createComponent(WorkComponent);
   comp = fixture.componentInstance;
   changeDetectorRef = (comp as any).changeDetectorRef;
-  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   apiPipe = fixture.debugElement.injector.get(ApiPipe);
   jest.spyOn(changeDetectorRef, 'markForCheck');

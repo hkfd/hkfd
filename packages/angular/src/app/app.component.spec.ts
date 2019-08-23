@@ -3,11 +3,17 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, PLATFORM_ID } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Router, RouterTestingModule, MockNotificationService } from 'testing';
+import {
+  Router,
+  RouterTestingModule,
+  MockNotificationService,
+  MockMetaService
+} from 'testing';
 import { Subscription } from 'rxjs';
 
 import { environment } from 'environment';
-import { NotificationService } from 'shared';
+import { NotificationService, MetaService } from 'shared';
+import { createMetaTags } from './app.component.helpers';
 import { AppComponent } from './app.component';
 
 let comp: AppComponent;
@@ -15,7 +21,12 @@ let fixture: ComponentFixture<AppComponent>;
 let page: Page;
 let router: Router;
 let notificationService: NotificationService;
+let metaService: MetaService;
 let mockPlatformId: 'browser' | 'server';
+
+jest.mock('./app.component.helpers', () => ({
+  createMetaTags: jest.fn().mockReturnValue('createMetaTagsReturn')
+}));
 
 @Component({
   template: 'Page 1'
@@ -58,6 +69,20 @@ describe('AppComponent', () => {
       });
 
       describe('Routing', () => {
+        it('should call `createMetaTags` with `urlAfterRedirects` arg', () =>
+          router
+            .navigateByUrl('page-1')
+            .then(_ => expect(createMetaTags).toHaveBeenCalledWith('/page-1')));
+
+        it('should call `MetaService` `setMetaTags` with `createMetaTags` return arg', () =>
+          router
+            .navigateByUrl('page-1')
+            .then(_ =>
+              expect(metaService.setMetaTags).toHaveBeenCalledWith(
+                'createMetaTagsReturn'
+              )
+            ));
+
         it('should call `ga` with `set`, `title`, and `Heckford` args', () =>
           router
             .navigateByUrl('page-1')
@@ -206,7 +231,8 @@ function setupTest() {
     providers: [
       Location,
       { provide: PLATFORM_ID, useValue: mockPlatformId },
-      { provide: NotificationService, useClass: MockNotificationService }
+      { provide: NotificationService, useClass: MockNotificationService },
+      { provide: MetaService, useClass: MockMetaService }
     ]
   }).compileComponents();
 }
@@ -239,6 +265,7 @@ function createComponent() {
   notificationService = fixture.debugElement.injector.get<NotificationService>(
     NotificationService
   );
+  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   jest.spyOn(router.events, 'subscribe');
   page = new Page();
 

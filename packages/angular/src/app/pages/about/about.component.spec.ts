@@ -4,21 +4,19 @@ import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import {
   RouterTestingModule,
-  MockMetaService,
   MockApiService,
   MockApiPipe,
   StubImageComponent,
   Data
 } from 'testing';
 
-import { MetaService, ApiService } from 'shared';
+import { ApiService } from 'shared';
 import { AboutImages } from './about.images';
 import { AboutComponent } from './about.component';
 
 let comp: AboutComponent;
 let fixture: ComponentFixture<AboutComponent>;
 let page: Page;
-let metaService: MetaService;
 let apiService: ApiService;
 
 beforeEach(jest.clearAllMocks);
@@ -28,10 +26,7 @@ describe('AboutComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AboutComponent, StubImageComponent, MockApiPipe],
-      providers: [
-        { provide: MetaService, useClass: MockMetaService },
-        { provide: ApiService, useClass: MockApiService }
-      ]
+      providers: [{ provide: ApiService, useClass: MockApiService }]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
@@ -41,13 +36,6 @@ describe('AboutComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should call MetaService `setMetaTags` with `title` and `url` args', () => {
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        title: 'About',
-        url: 'about'
-      });
-    });
-
     it('should set `team$` as `ApiService` `getTeam`', () => {
       const returnValue = of('getTeam');
       (apiService.getTeam as jest.Mock).mockReturnValue(returnValue);
@@ -180,7 +168,6 @@ function createComponent() {
   fixture = TestBed.createComponent(AboutComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   jest.spyOn(MockApiPipe.prototype, 'transform');
 

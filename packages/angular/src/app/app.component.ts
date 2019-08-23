@@ -15,6 +15,8 @@ import { filter } from 'rxjs/operators';
 import { environment } from 'environment';
 import { AppAnimations } from './app.animations';
 import { NotificationService } from 'shared/notification.service';
+import { MetaService } from 'shared/meta.service';
+import { createMetaTags } from './app.component.helpers';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +36,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private metaService: MetaService
   ) {}
 
   getState({ activatedRouteData: { state } }: RouterOutlet) {
@@ -46,7 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ga('create', environment.analyticsId, 'auto');
 
-    // TODO: replace individual component calls to MetaService and get data from route https://github.com/angular/angular/issues/15004
     this.router$ = this.router.events
       .pipe(
         filter(
@@ -54,6 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe(({ urlAfterRedirects }) => {
+        this.metaService.setMetaTags(createMetaTags(urlAfterRedirects));
+
         ga('set', 'title', 'Heckford');
         ga('set', 'page', urlAfterRedirects);
         ga('send', 'pageview');

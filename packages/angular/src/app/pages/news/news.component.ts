@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
-import { MetaService, PrismicService } from 'shared';
+import { PrismicService } from 'shared';
 import { PostsResponse, NewsPost } from 'prismic';
 import { getPaginationUrl } from './news.helpers';
 import { NewsAnimations } from './news.animations';
@@ -23,8 +23,7 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private prismicService: PrismicService,
-    private metaService: MetaService
+    private prismicService: PrismicService
   ) {}
 
   postTrackBy(_index: number, { id }: NewsPost) {
@@ -32,8 +31,6 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.metaService.setMetaTags({ title: 'News', url: 'news' });
-
     this.posts$ = this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('page') || '1'),
       switchMap(page => this.prismicService.getPosts('news', { page }))
