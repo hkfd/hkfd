@@ -8,7 +8,7 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { MetaService, ApiService, ApiPipe } from 'shared';
+import { ApiService, ApiPipe } from 'shared';
 import { CaseStudy } from 'api';
 import { WorkAnimations } from './work.animations';
 
@@ -25,7 +25,6 @@ export class WorkComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private metaService: MetaService,
     private apiService: ApiService,
     private apiPipe: ApiPipe
   ) {}
@@ -35,8 +34,6 @@ export class WorkComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.metaService.setMetaTags({ title: 'Our Work', url: 'work' });
-
     this.caseStudies$ = this.apiService
       .getCaseStudies()
       .subscribe(caseStudies => {

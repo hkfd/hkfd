@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { MetaService } from 'shared';
 import { ContactImages } from './contact.images';
 
 @Component({
@@ -9,12 +8,6 @@ import { ContactImages } from './contact.images';
   styleUrls: ['./contact.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent {
   images = ContactImages;
-
-  constructor(private metaService: MetaService) {}
-
-  ngOnInit() {
-    this.metaService.setMetaTags({ title: 'Contact', url: 'contact' });
-  }
 }

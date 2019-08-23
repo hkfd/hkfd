@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { MetaService, PrismicService } from 'shared';
+import { PrismicService } from 'shared';
 import { PostsResponse, CareerPost } from 'prismic';
 import { CareersImages } from './careers.images';
 
@@ -16,18 +16,13 @@ export class CareersComponent implements OnInit {
   careers$: Observable<PostsResponse<CareerPost>> | undefined;
   images = CareersImages;
 
-  constructor(
-    private metaService: MetaService,
-    private prismicService: PrismicService
-  ) {}
+  constructor(private prismicService: PrismicService) {}
 
   careerTrackBy(_index: number, { id }: CareerPost) {
     return id;
   }
 
   ngOnInit() {
-    this.metaService.setMetaTags({ title: 'Careers', url: 'careers' });
-
     this.careers$ = this.prismicService.getPosts('career');
   }
 }

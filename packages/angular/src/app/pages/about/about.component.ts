@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { MetaService, ApiService } from 'shared';
+import { ApiService } from 'shared';
 import { Team } from 'api';
 import { AboutImages } from './about.images';
 
@@ -17,14 +17,9 @@ export class AboutComponent implements OnInit {
 
   images = AboutImages;
 
-  constructor(
-    private metaService: MetaService,
-    private apiService: ApiService
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.metaService.setMetaTags({ title: 'About', url: 'about' });
-
     this.team$ = this.apiService.getTeam();
   }
 }

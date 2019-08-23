@@ -4,7 +4,6 @@ import { ChangeDetectorRef } from '@angular/core';
 
 import {
   RouterTestingModule,
-  MockMetaService,
   MockApiService,
   MockApiPipe,
   StubImageComponent,
@@ -13,7 +12,7 @@ import {
   Data
 } from 'testing';
 
-import { MetaService, ApiService } from 'shared';
+import { ApiService } from 'shared';
 import { CaseStudy } from 'api';
 import { HomeImages } from './home.images';
 import { HomeComponent } from './home.component';
@@ -22,7 +21,6 @@ let comp: HomeComponent;
 let fixture: ComponentFixture<HomeComponent>;
 let page: Page;
 let changeDetectorRef: ChangeDetectorRef;
-let metaService: MetaService;
 let apiService: ApiService;
 
 beforeEach(jest.clearAllMocks);
@@ -38,10 +36,7 @@ describe('HomeComponent', () => {
         StubSliderWorkComponent,
         MockApiPipe
       ],
-      providers: [
-        { provide: MetaService, useClass: MockMetaService },
-        { provide: ApiService, useClass: MockApiService }
-      ]
+      providers: [{ provide: ApiService, useClass: MockApiService }]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
@@ -51,10 +46,6 @@ describe('HomeComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should call `MetaService` `setMetaTags` with `{}` arg', () => {
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({});
-    });
-
     it('should set `dataSub`', () => {
       expect(comp.dataSub).toBeDefined();
     });
@@ -296,7 +287,6 @@ function createComponent() {
   comp = fixture.componentInstance;
   page = new Page();
   changeDetectorRef = (comp as any).changeDetectorRef;
-  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   apiService = fixture.debugElement.injector.get<ApiService>(ApiService);
   jest.spyOn(changeDetectorRef, 'markForCheck');
   jest.spyOn(MockApiPipe.prototype, 'transform');

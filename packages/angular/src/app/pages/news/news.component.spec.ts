@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
 
 import {
   RouterTestingModule,
-  MockMetaService,
   MockPrismicService,
   MockPrismicPipe,
   StubImageComponent,
@@ -16,14 +15,13 @@ import {
 } from 'testing';
 import { of } from 'rxjs';
 
-import { MetaService, PrismicService } from 'shared';
+import { PrismicService } from 'shared';
 import { PostsResponse, NewsPost } from 'prismic';
 import { NewsComponent } from './news.component';
 
 let activatedRoute: ActivatedRouteStub;
 let comp: NewsComponent;
 let fixture: ComponentFixture<NewsComponent>;
-let metaService: MetaService;
 let prismicService: PrismicService;
 let page: Page;
 
@@ -61,7 +59,6 @@ describe('NewsComponent', () => {
       ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: MetaService, useClass: MockMetaService },
         { provide: PrismicService, useClass: MockPrismicService }
       ]
     }).compileComponents();
@@ -78,13 +75,6 @@ describe('NewsComponent', () => {
   });
 
   describe('`ngOnInit`', () => {
-    it('should call `MetaService` `setMetaTags` with `title` and `url` args', () => {
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        title: 'News',
-        url: 'news'
-      });
-    });
-
     describe('`posts$`', () => {
       it('should be set', () => {
         expect(comp.posts$).toBeDefined();
@@ -398,7 +388,6 @@ class Page {
 function createComponent() {
   fixture = TestBed.createComponent(NewsComponent);
   comp = fixture.componentInstance;
-  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   prismicService = fixture.debugElement.injector.get<PrismicService>(
     PrismicService
   );

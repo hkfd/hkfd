@@ -3,20 +3,17 @@ import { By } from '@angular/platform-browser';
 
 import {
   RouterTestingModule,
-  MockMetaService,
   MockApiPipe,
   StubFormComponent,
   StubImageComponent
 } from 'testing';
 
-import { MetaService } from 'shared';
 import { ContactImages } from './contact.images';
 import { ContactComponent } from './contact.component';
 
 let comp: ContactComponent;
 let fixture: ComponentFixture<ContactComponent>;
 let page: Page;
-let metaService: MetaService;
 
 describe('ContactComponent', () => {
   beforeEach(async(() =>
@@ -27,23 +24,13 @@ describe('ContactComponent', () => {
         StubFormComponent,
         StubImageComponent,
         MockApiPipe
-      ],
-      providers: [{ provide: MetaService, useClass: MockMetaService }]
+      ]
     }).compileComponents()));
 
   beforeEach(async(() => createComponent()));
 
   it('should create component', () => {
     expect(comp).toBeTruthy();
-  });
-
-  describe('`ngOnInit`', () => {
-    it('should call `MetaService` `setMetaTags` with `title` and `url` args', () => {
-      expect(metaService.setMetaTags).toHaveBeenCalledWith({
-        title: 'Contact',
-        url: 'contact'
-      });
-    });
   });
 
   describe('Template', () => {
@@ -108,7 +95,6 @@ function createComponent() {
   fixture = TestBed.createComponent(ContactComponent);
   comp = fixture.componentInstance;
   page = new Page();
-  metaService = fixture.debugElement.injector.get<MetaService>(MetaService);
   jest.spyOn(MockApiPipe.prototype, 'transform');
 
   fixture.detectChanges();

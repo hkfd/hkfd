@@ -9,7 +9,7 @@ import {
 import { Subscription } from 'rxjs';
 import { concatMapTo, tap, map } from 'rxjs/operators';
 
-import { MetaService, ApiService } from 'shared';
+import { ApiService } from 'shared';
 import { Service, Client, CaseStudy } from 'api';
 import { HomeImages } from './home.images';
 
@@ -29,13 +29,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private metaService: MetaService,
     private apiService: ApiService
   ) {}
 
   ngOnInit() {
-    this.metaService.setMetaTags({});
-
     this.dataSub = this.apiService
       .getServices()
       .pipe(
