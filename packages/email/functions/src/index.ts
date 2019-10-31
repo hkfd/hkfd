@@ -4,16 +4,16 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import ajv from 'ajv';
-import { setApiKey, send } from '@sendgrid/mail';
 import { config, requestHandler, errorHandler } from 'raven';
+import { Message } from 'postmark';
 
 import { Email } from './schema';
 import schemaJson from './schema.json';
+import { client } from './postmark';
 
 const app = express();
 const validate = new ajv({ allErrors: true }).compile(schemaJson);
 
-setApiKey(functions.config().sendgrid.key);
 config(functions.config().sentry.dsn, {
   environment: process.env.GCLOUD_PROJECT
 }).install();
@@ -45,19 +45,21 @@ app.post(
   '*',
   validateRequest,
   ({ body: { name, email, message } }: { body: Email }, res, next) => {
-    const data = {
-      to: functions.config().email.to,
-      from: functions.config().email.from,
-      replyTo: {
-        name,
-        email
-      },
-      subject: functions.config().email.subject,
-      text: message
+    const data: Message = {
+      To: functions.config().email.to,
+      From: `${name} ${functions.config().email.from}`,
+      ReplyTo: email,
+      Subject: functions.config().email.subject,
+      TextBody: message
     };
 
-    send(data)
-      .then(_ => res.status(200).json('OK'))
+    client
+      .sendEmail(data)
+      .then(({ ErrorCode, Message }) => {
+        if (ErrorCode !== 0) throw new Error(Message);
+
+        return res.status(200).json('OK');
+      })
       .catch(next);
   }
 );
