@@ -1,7 +1,7 @@
 import Firebase from 'firebase-functions-test';
 import supertest from 'supertest';
-import { setApiKey, send } from '@sendgrid/mail';
-import { config, errorHandler } from 'raven';
+import { errorHandler, config } from 'raven';
+import { client } from '../src/postmark';
 
 const firebase = Firebase();
 firebase.mockConfig({
@@ -10,22 +10,20 @@ firebase.mockConfig({
     from: 'email.from',
     subject: 'email.subject'
   },
-  sendgrid: { key: 'sendgrid.key' },
   sentry: { dsn: 'sentry.dsn' }
 });
 
 import { email } from '../src';
+
+jest.mock('../src/postmark', () => ({
+  client: {
+    sendEmail: jest.fn()
+  }
+}));
+
 const request = supertest(email);
 
-describe('setup', () => {
-  test('should call SendGrid setApiKey', () => {
-    expect(setApiKey).toHaveBeenCalled();
-  });
-
-  test('should call SendGrid setApiKey with environment `sendgrid.key` arg', () => {
-    expect(setApiKey).toHaveBeenCalledWith('sendgrid.key');
-  });
-
+describe('config', () => {
   test('should call Sentry config', () => {
     expect(config).toHaveBeenCalled();
   });
@@ -40,7 +38,10 @@ describe('setup', () => {
 describe('routes', () => {
   describe('POST', () => {
     test('should return status code `200`', () => {
-      (send as jest.Mock).mockResolvedValue(null);
+      (client.sendEmail as jest.Mock).mockResolvedValue({
+        ErrorCode: 0,
+        Message: 'message'
+      });
 
       return request
         .post('/')
@@ -53,7 +54,10 @@ describe('routes', () => {
     });
 
     test('should return success text', () => {
-      (send as jest.Mock).mockResolvedValue(null);
+      (client.sendEmail as jest.Mock).mockResolvedValue({
+        ErrorCode: 0,
+        Message: 'message'
+      });
 
       return request
         .post('/')
@@ -111,10 +115,12 @@ describe('routes', () => {
 
 describe('send email', () => {
   describe('invalid', () => {
-    test('should not call SendGrid send', () => {
-      (send as jest.Mock).mockClear();
+    test('should not call `sendEmail`', () => {
+      (client.sendEmail as jest.Mock).mockClear();
 
-      return request.post('/').then(_ => expect(send).not.toHaveBeenCalled());
+      return request
+        .post('/')
+        .then(_ => expect(client.sendEmail).not.toHaveBeenCalled());
     });
 
     test('should not call Sentry errorHandler', () => {
@@ -229,7 +235,9 @@ describe('send email', () => {
   });
 
   describe('valid', () => {
-    test('should call SendGrid send', () => {
+    test('should call `sendEmail`', () => {
+      (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+
       return request
         .post('/')
         .send({
@@ -237,10 +245,12 @@ describe('send email', () => {
           email: 'example@example.com',
           message: 'Message'
         })
-        .then(_ => expect(send).toHaveBeenCalled());
+        .then(_ => expect(client.sendEmail).toHaveBeenCalled());
     });
 
-    test('should call SendGrid send with request body data arg', () => {
+    test('should call `sendEmail` with request body data arg', () => {
+      (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+
       return request
         .post('/')
         .send({
@@ -249,18 +259,21 @@ describe('send email', () => {
           message: 'Hello'
         })
         .then(_ =>
-          expect(send).toHaveBeenCalledWith({
-            to: 'email.to',
-            from: 'email.from',
-            replyTo: { name: 'Name Surname', email: 'example@example.com' },
-            subject: 'email.subject',
-            text: 'Hello'
+          expect(client.sendEmail).toHaveBeenCalledWith({
+            To: 'email.to',
+            From: 'Name Surname email.from',
+            ReplyTo: 'example@example.com',
+            Subject: 'email.subject',
+            TextBody: 'Hello'
           })
         );
     });
 
-    test('should return status code `200` on SendGrid send resolve', () => {
-      (send as jest.Mock).mockResolvedValue(null);
+    test('should return status code `200` on `sendEmail` resolve', () => {
+      (client.sendEmail as jest.Mock).mockResolvedValue({
+        ErrorCode: 0,
+        Message: 'message'
+      });
 
       return request
         .post('/')
@@ -272,8 +285,32 @@ describe('send email', () => {
         .expect(200);
     });
 
-    test('should call Sentry errorHandler on SendGrid send reject', () => {
-      (send as jest.Mock).mockRejectedValue(new Error());
+    test('should error correctly if `sendEmail` `ErrorCode` is not `0`', () => {
+      (client.sendEmail as jest.Mock).mockResolvedValue({
+        ErrorCode: 1,
+        Message: 'message'
+      });
+
+      return request
+        .post('/')
+        .send({
+          name: 'Name',
+          email: 'example@example.com',
+          message: 'Message'
+        })
+        .expect(500)
+        .then(_ =>
+          expect(errorHandler()).toHaveBeenCalledWith(
+            new Error('message'),
+            jasmine.anything(),
+            jasmine.anything(),
+            jasmine.anything()
+          )
+        );
+    });
+
+    test('should call Sentry errorHandler on `sendEmail` reject', () => {
+      (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
 
       return request
         .post('/')
@@ -285,8 +322,8 @@ describe('send email', () => {
         .then(_ => expect(errorHandler()).toHaveBeenCalled());
     });
 
-    test('should call Sentry errorHandler on SendGrid send reject with error arg', () => {
-      (send as jest.Mock).mockRejectedValue(new Error('Test'));
+    test('should call Sentry errorHandler on `sendEmail` reject with error arg', () => {
+      (client.sendEmail as jest.Mock).mockRejectedValue(new Error('Test'));
 
       return request
         .post('/')
@@ -305,8 +342,8 @@ describe('send email', () => {
         );
     });
 
-    test('should return status code `500` on SendGrid send reject', () => {
-      (send as jest.Mock).mockRejectedValue(new Error());
+    test('should return status code `500` on `sendEmail` reject', () => {
+      (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
 
       return request
         .post('/')
@@ -318,8 +355,8 @@ describe('send email', () => {
         .expect(500);
     });
 
-    test('should return error html on SendGrid send reject', () => {
-      (send as jest.Mock).mockRejectedValue(new Error());
+    test('should return error html on `sendEmail` reject', () => {
+      (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
 
       return request
         .post('/')
