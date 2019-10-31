@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.4"></a>
+## [1.9.4](https://github.com/hkfd/hkfd/compare/v1.9.3...v1.9.4) (2019-10-31)
+
+
+### Bug Fixes
+
+* **angular:** allow images from prismic subdomain ([5416bc0](https://github.com/hkfd/hkfd/commit/5416bc0))
+
+
+
+
+
 <a name="1.9.3"></a>
 ## [1.9.3](https://github.com/hkfd/hkfd/compare/v1.9.2...v1.9.3) (2019-08-27)
 
