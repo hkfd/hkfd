@@ -45,7 +45,7 @@ app.use(
       imgSrc: [
         `'self'`,
         'https://res.cloudinary.com',
-        'https://hkfd.cdn.prismic.io',
+        'https://*.prismic.io',
         'https://www.google-analytics.com',
         'https://www.google.com',
         'https://www.google.co.uk',
