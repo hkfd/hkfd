@@ -1,6 +1,6 @@
 {
   "name": "email",
-  "version": "1.3.1",
+  "version": "1.9.5",
   "license": "MIT",
   "scripts": {
     "serve": "yarn firebase use staging && yarn --silent firebase functions:config:get > functions/.runtimeconfig.json && yarn --cwd functions build && yarn firebase serve --port 5000",
@@ -13,6 +13,6 @@
     "firebase-tools": "^4.2.1"
   },
   "dependencies": {
-    "email-functions": "^1.3.1"
+    "email-functions": "^1.9.5"
   }
 }
