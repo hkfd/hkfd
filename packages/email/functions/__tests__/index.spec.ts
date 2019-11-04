@@ -1,15 +1,11 @@
 import Firebase from 'firebase-functions-test';
 import supertest from 'supertest';
 import { errorHandler, config } from 'raven';
-import { client } from '../src/postmark';
+
+import { client, createMessage } from '../src/postmark';
 
 const firebase = Firebase();
 firebase.mockConfig({
-  email: {
-    to: 'email.to',
-    from: 'email.from',
-    subject: 'email.subject'
-  },
   sentry: { dsn: 'sentry.dsn' }
 });
 
@@ -18,7 +14,8 @@ import { email } from '../src';
 jest.mock('../src/postmark', () => ({
   client: {
     sendEmail: jest.fn()
-  }
+  },
+  createMessage: jest.fn().mockReturnValue('createMessageReturn')
 }));
 
 const request = supertest(email);
@@ -115,6 +112,14 @@ describe('routes', () => {
 
 describe('send email', () => {
   describe('invalid', () => {
+    test('should not call `createMessage`', () => {
+      (createMessage as jest.Mock).mockClear();
+
+      return request
+        .post('/')
+        .then(_ => expect(createMessage).not.toHaveBeenCalled());
+    });
+
     test('should not call `sendEmail`', () => {
       (client.sendEmail as jest.Mock).mockClear();
 
@@ -235,6 +240,25 @@ describe('send email', () => {
   });
 
   describe('valid', () => {
+    test('should call `createMessage` with `body` arg', () => {
+      (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+
+      return request
+        .post('/')
+        .send({
+          name: 'Name',
+          email: 'example@example.com',
+          message: 'Message'
+        })
+        .then(_ =>
+          expect(createMessage).toHaveBeenCalledWith({
+            name: 'Name',
+            email: 'example@example.com',
+            message: 'Message'
+          })
+        );
+    });
+
     test('should call `sendEmail`', () => {
       (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
 
@@ -248,7 +272,7 @@ describe('send email', () => {
         .then(_ => expect(client.sendEmail).toHaveBeenCalled());
     });
 
-    test('should call `sendEmail` with request body data arg', () => {
+    test('should call `sendEmail` with `createMessage` return arg', () => {
       (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
 
       return request
@@ -259,13 +283,7 @@ describe('send email', () => {
           message: 'Hello'
         })
         .then(_ =>
-          expect(client.sendEmail).toHaveBeenCalledWith({
-            To: 'email.to',
-            From: 'Name Surname email.from',
-            ReplyTo: 'example@example.com',
-            Subject: 'email.subject',
-            TextBody: 'Hello'
-          })
+          expect(client.sendEmail).toHaveBeenCalledWith('createMessageReturn')
         );
     });
 

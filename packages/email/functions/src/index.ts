@@ -5,11 +5,10 @@ import compression from 'compression';
 import helmet from 'helmet';
 import ajv from 'ajv';
 import { config, requestHandler, errorHandler } from 'raven';
-import { Message } from 'postmark';
 
 import { Email } from './schema';
 import schemaJson from './schema.json';
-import { client } from './postmark';
+import { client, createMessage } from './postmark';
 
 const app = express();
 const validate = new ajv({ allErrors: true }).compile(schemaJson);
@@ -41,28 +40,18 @@ const validateRequest: express.RequestHandler = (req, res, next) => {
     .end();
 };
 
-app.post(
-  '*',
-  validateRequest,
-  ({ body: { name, email, message } }: { body: Email }, res, next) => {
-    const data: Message = {
-      To: functions.config().email.to,
-      From: `${name} ${functions.config().email.from}`,
-      ReplyTo: email,
-      Subject: functions.config().email.subject,
-      TextBody: message
-    };
+app.post('*', validateRequest, ({ body }: { body: Email }, res, next) => {
+  const data = createMessage(body);
 
-    client
-      .sendEmail(data)
-      .then(({ ErrorCode, Message }) => {
-        if (ErrorCode !== 0) throw new Error(Message);
+  client
+    .sendEmail(data)
+    .then(({ ErrorCode, Message }) => {
+      if (ErrorCode !== 0) throw new Error(Message);
 
-        return res.status(200).json('OK');
-      })
-      .catch(next);
-  }
-);
+      return res.status(200).json('OK');
+    })
+    .catch(next);
+});
 
 app.all('*', (_, res) => res.sendStatus(404));
 
