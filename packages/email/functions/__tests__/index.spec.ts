@@ -2,7 +2,7 @@ import Firebase from 'firebase-functions-test';
 import supertest from 'supertest';
 import { errorHandler, config } from 'raven';
 
-import { client, createMessage } from '../src/postmark';
+import { client, createMessage, responseHasErrors } from '../src/postmark';
 
 const firebase = Firebase();
 firebase.mockConfig({
@@ -15,7 +15,8 @@ jest.mock('../src/postmark', () => ({
   client: {
     sendEmail: jest.fn()
   },
-  createMessage: jest.fn().mockReturnValue('createMessageReturn')
+  createMessage: jest.fn().mockReturnValue('createMessageReturn'),
+  responseHasErrors: jest.fn()
 }));
 
 const request = supertest(email);
@@ -303,11 +304,29 @@ describe('send email', () => {
         .expect(200);
     });
 
-    test('should error correctly if `sendEmail` `ErrorCode` is not `0`', () => {
+    test('should call `responseHasErrors` with `ErrorCode` on `sendEmail` resolve', () => {
       (client.sendEmail as jest.Mock).mockResolvedValue({
-        ErrorCode: 1,
+        ErrorCode: 'ErrorCode',
         Message: 'message'
       });
+
+      return request
+        .post('/')
+        .send({
+          name: 'Name',
+          email: 'example@example.com',
+          message: 'Message'
+        })
+        .then(_ => expect(responseHasErrors).toHaveBeenCalledWith('ErrorCode'));
+    });
+
+    test('should error if `responseHasErrors` returns `true`', () => {
+      (errorHandler() as jest.Mock).mockClear();
+      (client.sendEmail as jest.Mock).mockResolvedValue({
+        ErrorCode: 'ErrorCode',
+        Message: 'message'
+      });
+      (responseHasErrors as jest.Mock).mockReturnValue(true);
 
       return request
         .post('/')
@@ -325,6 +344,25 @@ describe('send email', () => {
             jasmine.anything()
           )
         );
+    });
+
+    test('should not error if `responseHasErrors` returns `false`', () => {
+      (errorHandler() as jest.Mock).mockClear();
+      (client.sendEmail as jest.Mock).mockResolvedValue({
+        ErrorCode: 'ErrorCode',
+        Message: 'message'
+      });
+      (responseHasErrors as jest.Mock).mockReturnValue(false);
+
+      return request
+        .post('/')
+        .send({
+          name: 'Name',
+          email: 'example@example.com',
+          message: 'Message'
+        })
+        .expect(200)
+        .then(_ => expect(errorHandler()).not.toHaveBeenCalled());
     });
 
     test('should call Sentry errorHandler on `sendEmail` reject', () => {

@@ -11,7 +11,7 @@ firebase.mockConfig({
   }
 });
 
-import { client, createMessage } from '../src/postmark';
+import { client, createMessage, responseHasErrors } from '../src/postmark';
 
 jest.mock('postmark', () => ({
   ServerClient: jest.fn().mockImplementation(() => ({
@@ -49,5 +49,19 @@ describe('`createMessage`', () => {
       Subject: 'email.subject',
       TextBody: 'Hello'
     });
+  });
+});
+
+describe('`responseHasErrors`', () => {
+  test('should return `true` if `code` is not `0`', () => {
+    const res = responseHasErrors(1);
+
+    expect(res).toBe(true);
+  });
+
+  test('should return `false` if `code` is `0`', () => {
+    const res = responseHasErrors(0);
+
+    expect(res).toBe(false);
   });
 });

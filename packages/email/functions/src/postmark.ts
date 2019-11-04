@@ -12,3 +12,5 @@ export const createMessage = ({ name, email, message }: Email): Message => ({
   Subject: functions.config().email.subject,
   TextBody: message
 });
+
+export const responseHasErrors = (code: number): boolean => code !== 0;

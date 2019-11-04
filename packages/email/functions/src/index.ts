@@ -8,7 +8,7 @@ import { config, requestHandler, errorHandler } from 'raven';
 
 import { Email } from './schema';
 import schemaJson from './schema.json';
-import { client, createMessage } from './postmark';
+import { client, createMessage, responseHasErrors } from './postmark';
 
 const app = express();
 const validate = new ajv({ allErrors: true }).compile(schemaJson);
@@ -46,7 +46,7 @@ app.post('*', validateRequest, ({ body }: { body: Email }, res, next) => {
   client
     .sendEmail(data)
     .then(({ ErrorCode, Message }) => {
-      if (ErrorCode !== 0) throw new Error(Message);
+      if (responseHasErrors(ErrorCode)) throw new Error(Message);
 
       return res.status(200).json('OK');
     })
