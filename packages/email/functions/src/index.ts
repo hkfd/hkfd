@@ -3,15 +3,13 @@ import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
-import ajv from 'ajv';
 import { config, requestHandler, errorHandler } from 'raven';
 
 import { Email } from './schema';
-import schemaJson from './schema.json';
 import { client, createMessage, responseHasErrors } from './postmark';
+import { validateRequest } from './validation';
 
 const app = express();
-const validate = new ajv({ allErrors: true }).compile(schemaJson);
 
 config(functions.config().sentry.dsn, {
   environment: process.env.GCLOUD_PROJECT
@@ -29,16 +27,6 @@ app.use(
     }
   })
 );
-
-const validateRequest: express.RequestHandler = (req, res, next) => {
-  const valid = validate(req.body);
-  if (valid) return next();
-
-  return res
-    .status(400)
-    .json(validate.errors)
-    .end();
-};
 
 app.post('*', validateRequest, ({ body }: { body: Email }, res, next) => {
   const data = createMessage(body);

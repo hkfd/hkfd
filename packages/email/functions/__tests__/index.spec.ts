@@ -18,6 +18,9 @@ jest.mock('../src/postmark', () => ({
   createMessage: jest.fn().mockReturnValue('createMessageReturn'),
   responseHasErrors: jest.fn()
 }));
+jest.mock('../src/validation', () => ({
+  validateRequest: jest.fn().mockImplementation((_req, _res, next) => next())
+}));
 
 const request = supertest(email);
 
@@ -112,316 +115,186 @@ describe('routes', () => {
 });
 
 describe('send email', () => {
-  describe('invalid', () => {
-    test('should not call `createMessage`', () => {
-      (createMessage as jest.Mock).mockClear();
+  test('should call `createMessage` with `body` arg', () => {
+    (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
 
-      return request
-        .post('/')
-        .then(_ => expect(createMessage).not.toHaveBeenCalled());
-    });
-
-    test('should not call `sendEmail`', () => {
-      (client.sendEmail as jest.Mock).mockClear();
-
-      return request
-        .post('/')
-        .then(_ => expect(client.sendEmail).not.toHaveBeenCalled());
-    });
-
-    test('should not call Sentry errorHandler', () => {
-      return request
-        .post('/')
-        .then(_ => expect(errorHandler()).not.toHaveBeenCalled());
-    });
-
-    describe('missing', () => {
-      describe('name', () => {
-        test('should return status code `400`', () => {
-          return request
-            .post('/')
-            .send({ email: 'example@example.com', message: 'Message' })
-            .expect(400);
-        });
-
-        test('should return `required` error', () => {
-          return request
-            .post('/')
-            .send({ email: 'example@example.com', message: 'Message' })
-            .then(res =>
-              res.body.map((err: any) =>
-                expect(err).toEqual(
-                  jasmine.objectContaining({
-                    keyword: 'required',
-                    params: { missingProperty: 'name' }
-                  })
-                )
-              )
-            );
-        });
-      });
-
-      describe('email', () => {
-        test('should return status code `400`', () => {
-          return request
-            .post('/')
-            .send({ name: 'Name', message: 'Message' })
-            .expect(400);
-        });
-
-        test('should return `required` error', () => {
-          return request
-            .post('/')
-            .send({ name: 'Name', message: 'Message' })
-            .then(res =>
-              res.body.map((err: any) =>
-                expect(err).toEqual(
-                  jasmine.objectContaining({
-                    keyword: 'required',
-                    params: { missingProperty: 'email' }
-                  })
-                )
-              )
-            );
-        });
-      });
-
-      describe('message', () => {
-        test('should return status code `400`', () => {
-          return request
-            .post('/')
-            .send({ name: 'Name', email: 'example@example.com' })
-            .expect(400);
-        });
-
-        test('should return `required` error', () => {
-          return request
-            .post('/')
-            .send({ name: 'Name', email: 'example@example.com' })
-            .then(res =>
-              res.body.map((err: any) =>
-                expect(err).toEqual(
-                  jasmine.objectContaining({
-                    keyword: 'required',
-                    params: { missingProperty: 'message' }
-                  })
-                )
-              )
-            );
-        });
-      });
-    });
-
-    describe('wrong format', () => {
-      describe('email', () => {
-        test('should return status code `400`', () => {
-          return request
-            .post('/')
-            .send({ name: 'Name', email: 'invalid', message: 'Message' })
-            .expect(400);
-        });
-
-        test('should return `format` error', () => {
-          return request
-            .post('/')
-            .send({ name: 'Name', email: 'invalid', message: 'Message' })
-            .then(res =>
-              res.body.map((err: any) =>
-                expect(err).toEqual(
-                  jasmine.objectContaining({
-                    keyword: 'format',
-                    params: { format: 'email' }
-                  })
-                )
-              )
-            );
-        });
-      });
-    });
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .then(_ =>
+        expect(createMessage).toHaveBeenCalledWith({
+          name: 'Name',
+          email: 'example@example.com',
+          message: 'Message'
+        })
+      );
   });
 
-  describe('valid', () => {
-    test('should call `createMessage` with `body` arg', () => {
-      (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+  test('should call `sendEmail`', () => {
+    (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .then(_ =>
-          expect(createMessage).toHaveBeenCalledWith({
-            name: 'Name',
-            email: 'example@example.com',
-            message: 'Message'
-          })
-        );
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .then(_ => expect(client.sendEmail).toHaveBeenCalled());
+  });
+
+  test('should call `sendEmail` with `createMessage` return arg', () => {
+    (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+
+    return request
+      .post('/')
+      .send({
+        name: 'Name Surname',
+        email: 'example@example.com',
+        message: 'Hello'
+      })
+      .then(_ =>
+        expect(client.sendEmail).toHaveBeenCalledWith('createMessageReturn')
+      );
+  });
+
+  test('should return status code `200` on `sendEmail` resolve', () => {
+    (client.sendEmail as jest.Mock).mockResolvedValue({
+      ErrorCode: 0,
+      Message: 'message'
     });
 
-    test('should call `sendEmail`', () => {
-      (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .expect(200);
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .then(_ => expect(client.sendEmail).toHaveBeenCalled());
+  test('should call `responseHasErrors` with `ErrorCode` on `sendEmail` resolve', () => {
+    (client.sendEmail as jest.Mock).mockResolvedValue({
+      ErrorCode: 'ErrorCode',
+      Message: 'message'
     });
 
-    test('should call `sendEmail` with `createMessage` return arg', () => {
-      (client.sendEmail as jest.Mock).mockResolvedValue(undefined);
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .then(_ => expect(responseHasErrors).toHaveBeenCalledWith('ErrorCode'));
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name Surname',
-          email: 'example@example.com',
-          message: 'Hello'
-        })
-        .then(_ =>
-          expect(client.sendEmail).toHaveBeenCalledWith('createMessageReturn')
-        );
+  test('should error if `responseHasErrors` returns `true`', () => {
+    (errorHandler() as jest.Mock).mockClear();
+    (client.sendEmail as jest.Mock).mockResolvedValue({
+      ErrorCode: 'ErrorCode',
+      Message: 'message'
     });
+    (responseHasErrors as jest.Mock).mockReturnValue(true);
 
-    test('should return status code `200` on `sendEmail` resolve', () => {
-      (client.sendEmail as jest.Mock).mockResolvedValue({
-        ErrorCode: 0,
-        Message: 'message'
-      });
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .expect(500)
+      .then(_ =>
+        expect(errorHandler()).toHaveBeenCalledWith(
+          new Error('message'),
+          jasmine.anything(),
+          jasmine.anything(),
+          jasmine.anything()
+        )
+      );
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .expect(200);
+  test('should not error if `responseHasErrors` returns `false`', () => {
+    (errorHandler() as jest.Mock).mockClear();
+    (client.sendEmail as jest.Mock).mockResolvedValue({
+      ErrorCode: 'ErrorCode',
+      Message: 'message'
     });
+    (responseHasErrors as jest.Mock).mockReturnValue(false);
 
-    test('should call `responseHasErrors` with `ErrorCode` on `sendEmail` resolve', () => {
-      (client.sendEmail as jest.Mock).mockResolvedValue({
-        ErrorCode: 'ErrorCode',
-        Message: 'message'
-      });
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .expect(200)
+      .then(_ => expect(errorHandler()).not.toHaveBeenCalled());
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .then(_ => expect(responseHasErrors).toHaveBeenCalledWith('ErrorCode'));
-    });
+  test('should call Sentry errorHandler on `sendEmail` reject', () => {
+    (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
 
-    test('should error if `responseHasErrors` returns `true`', () => {
-      (errorHandler() as jest.Mock).mockClear();
-      (client.sendEmail as jest.Mock).mockResolvedValue({
-        ErrorCode: 'ErrorCode',
-        Message: 'message'
-      });
-      (responseHasErrors as jest.Mock).mockReturnValue(true);
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .then(_ => expect(errorHandler()).toHaveBeenCalled());
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .expect(500)
-        .then(_ =>
-          expect(errorHandler()).toHaveBeenCalledWith(
-            new Error('message'),
-            jasmine.anything(),
-            jasmine.anything(),
-            jasmine.anything()
-          )
-        );
-    });
+  test('should call Sentry errorHandler on `sendEmail` reject with error arg', () => {
+    (client.sendEmail as jest.Mock).mockRejectedValue(new Error('Test'));
 
-    test('should not error if `responseHasErrors` returns `false`', () => {
-      (errorHandler() as jest.Mock).mockClear();
-      (client.sendEmail as jest.Mock).mockResolvedValue({
-        ErrorCode: 'ErrorCode',
-        Message: 'message'
-      });
-      (responseHasErrors as jest.Mock).mockReturnValue(false);
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .then(_ =>
+        expect(errorHandler()).toHaveBeenCalledWith(
+          new Error('Test'),
+          jasmine.anything(),
+          jasmine.anything(),
+          jasmine.anything()
+        )
+      );
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .expect(200)
-        .then(_ => expect(errorHandler()).not.toHaveBeenCalled());
-    });
+  test('should return status code `500` on `sendEmail` reject', () => {
+    (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
 
-    test('should call Sentry errorHandler on `sendEmail` reject', () => {
-      (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .expect(500);
+  });
 
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .then(_ => expect(errorHandler()).toHaveBeenCalled());
-    });
+  test('should return error html on `sendEmail` reject', () => {
+    (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
 
-    test('should call Sentry errorHandler on `sendEmail` reject with error arg', () => {
-      (client.sendEmail as jest.Mock).mockRejectedValue(new Error('Test'));
-
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .then(_ =>
-          expect(errorHandler()).toHaveBeenCalledWith(
-            new Error('Test'),
-            jasmine.anything(),
-            jasmine.anything(),
-            jasmine.anything()
-          )
-        );
-    });
-
-    test('should return status code `500` on `sendEmail` reject', () => {
-      (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
-
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .expect(500);
-    });
-
-    test('should return error html on `sendEmail` reject', () => {
-      (client.sendEmail as jest.Mock).mockRejectedValue(new Error());
-
-      return request
-        .post('/')
-        .send({
-          name: 'Name',
-          email: 'example@example.com',
-          message: 'Message'
-        })
-        .then(res => expect(res.text).toBeTruthy());
-    });
+    return request
+      .post('/')
+      .send({
+        name: 'Name',
+        email: 'example@example.com',
+        message: 'Message'
+      })
+      .then(res => expect(res.text).toBeTruthy());
   });
 });
