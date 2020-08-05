@@ -4,51 +4,39 @@ export const HomeImages: { intro: { image: Image }[] } = {
   intro: [
     {
       image: {
-        name: 'heckford-building',
-        alt: 'Heckford – Preston'
-      }
+        name: 'heckford-office-15',
+        alt: 'Heckford Reception',
+      },
     },
     {
       image: {
-        name: 'heckford-reception1',
-        alt: 'Heckford reception'
-      }
+        name: 'heckford-office-41',
+        alt: 'Heckford Studio',
+      },
     },
     {
       image: {
-        name: 'heckford-reception3',
-        alt: 'Heckford reception'
-      }
+        name: 'heckford-office-17',
+        alt: 'Heckford Reception',
+      },
     },
     {
       image: {
-        name: 'heckford-accounts',
-        alt: 'Heckford accounts'
-      }
+        name: 'heckford-office-45',
+        alt: 'Heckford Studio',
+      },
     },
     {
       image: {
         name: 'heckford-print1',
-        alt: 'Heckford printing'
-      }
+        alt: 'Heckford printing',
+      },
     },
     {
       image: {
-        name: 'heckford-reception2',
-        alt: 'Heckford reception'
-      }
+        name: 'heckford-office-25',
+        alt: 'Heckford Sales Office',
+      },
     },
-    {
-      image: {
-        name: 'heckford-studio',
-        alt: 'Heckford studio'
-      }
-    },
-    {
-      image: {
-        name: 'heckford-boardroom',
-        alt: 'Heckford boardroom'
-      }
-    }
-  ]
+  ],
 };
