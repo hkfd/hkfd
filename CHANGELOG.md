@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.6"></a>
+## [1.9.6](https://github.com/hkfd/hkfd/compare/v1.9.5...v1.9.6) (2020-08-05)
+
+**Note:** Version bump only for package hkfd
+
+
+
+
+
 <a name="1.9.5"></a>
 ## [1.9.5](https://github.com/hkfd/hkfd/compare/v1.9.4...v1.9.5) (2019-11-01)
 
